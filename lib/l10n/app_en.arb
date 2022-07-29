@@ -1,0 +1,15 @@
+{
+    "appName": "Bailbooks",
+    "@helloWorld": {
+      "description": "Mobile application name"
+    },
+
+    "notFound":"No {dataType} found",
+    "@notFound": {
+      "placeholder":{
+        "dataType":"String"
+      }
+    },
+
+    "loginTitle":"Login"
+}
