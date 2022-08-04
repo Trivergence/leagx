@@ -1,15 +1,23 @@
+import 'package:bailbooks_defendant/ui/screens/authentication/signup_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/login.dart';
+import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
   Routes();
   static const String login = '/login';
   static const String dashboard = '/dashboard';
+  static const String onboarding='/onboarding';
+  static const String signup ='/signup';
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case login:
         return generateRoute(routeSettings.name!, const LoginScreen());
+      case onboarding:
+        return generateRoute(routeSettings.name!, OnBoardingScreen());
+      case signup:
+        return generateRoute(routeSettings.name!, const SignupScreen()); 
 
       default:
         return generateRoute(

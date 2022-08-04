@@ -14,8 +14,8 @@ class TextWidget extends StatelessWidget {
   const TextWidget({
     Key? key,
     required this.text,
-    this.textSize = Dimens.textMedium,
-    this.color = AppColors.colorPrimary,
+    this.textSize = Dimens.textRegular,
+    this.color = AppColors.colorWhite,
     this.fontWeight = FontWeight.normal,
     this.textAlign = TextAlign.left,
     this.isRich = false,
@@ -45,7 +45,7 @@ class TextWidget extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontSize: textSize,
-              fontWeight: fontWeight,
+              fontWeight: fontWeight
             ),
             textAlign: textAlign,
             overflow: overflow,

@@ -1,4 +1,4 @@
-import 'package:bailbooks_defendant/ui/widgets/button_widget.dart';
+import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -26,10 +26,14 @@ class _LoginState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ButtonWidget(
-          buttonText: AppLocalizations.of(context)!.loginTitle,
-          onPressed: () {},
+        child: Padding(
+          padding:EdgeInsets.symmetric(horizontal: 20.0),
+          child: MainButton(
+            text:AppLocalizations.of(context)!.loginTitle,
+            onPressed:(){}
+          ),
         ),
+        
       ),
     );
   }

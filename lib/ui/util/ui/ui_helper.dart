@@ -9,6 +9,7 @@ class UIHelper {
       SizedBox(height: Dimens.verticalSpaceMedium);
   static const Widget verticalSpaceLarge =
       SizedBox(height: Dimens.verticalSpaceLarge);
+  static const Widget verticalSpaceXL = SizedBox(height:Dimens.verticalSpaceXL);    
   static Widget verticalSpace(double height) => SizedBox(height: height);
 
   static const Widget horizontalSpaceSmall =

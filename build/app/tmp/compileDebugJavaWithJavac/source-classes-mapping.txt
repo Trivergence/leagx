@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/example/bailbooks_defendant/BuildConfig.java
+ com.example.bailbooks_defendant.BuildConfig

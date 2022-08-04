@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:bailbooks_defendant/core/network/config/environment.dart';
-import 'package:bailbooks_defendant/ui/screens/bailbooks.dart';
+import 'package:bailbooks_defendant/ui/screens/betting.dart';
+import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +17,16 @@ void main() async {
     await setPreferredOrientations();
     final prefs = await SharedPreferences.getInstance();
 
-    runApp(Bailbooks(prefs: prefs));
+    runApp(
+      LayoutBuilder(
+        builder: (context, constraints) => OrientationBuilder(
+          builder: (context, orientation) {
+            SizeConfig().init(constraints, orientation);
+            return Betting(prefs: prefs);
+          },
+        ),
+      ),
+    );
   }, (error, stack) async {
     //
   });

@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
+  static const Color colorBackground = Color(0xFF111820);
+  static const Color colorWhite = Colors.white;
+  static const Color colorYellow = Color(0xFFFFC56E);
+
   static const Color colorPrimary = Color(0xFF4DACFF);
   static const Color primaryColorDark = Color(0xFF0066C0);
   static const Color colorPrimaryLight = Color(0xFF86C4FA);
@@ -24,4 +28,14 @@ class AppColors {
     800: Color(0xFF007EEC),
     900: Color(0xFF0066C0)
   };
+
+  static const Gradient pinkishGradient =LinearGradient(colors: [
+            Color(0xFFF67599),
+            Color(0xFFF36995),
+            Color(0xFFEB3F86),
+            Color(0xFFE5267C),
+            Color(0xFFE31C79),
+            Color(0xFF8F2291),
+            Color(0xFF5F259F),
+          ]);
 }
