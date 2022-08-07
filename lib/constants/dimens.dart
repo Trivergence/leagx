@@ -2,8 +2,8 @@ class Dimens {
   Dimens._();
 
   //for all screens
-  static const double horizontalPadding = 16.0;
-  static const double verticalPadding = 16.0;
+  static const double horizontalPadding = 20.0;
+  static const double verticalPadding = 20.0;
 
   // Vertical spacing constants
   static const double verticalSpaceSmall = 10.0;

@@ -1,23 +1,31 @@
-import 'package:bailbooks_defendant/ui/screens/authentication/signup_screen.dart';
-import 'package:bailbooks_defendant/ui/screens/login.dart';
+import 'package:bailbooks_defendant/ui/screens/authentication/forgot_password.dart';
+import 'package:bailbooks_defendant/ui/screens/authentication/reset_password.dart';
+import 'package:bailbooks_defendant/ui/screens/authentication/signin.dart';
+import 'package:bailbooks_defendant/ui/screens/authentication/signup.dart';
 import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
   Routes();
-  static const String login = '/login';
+  static const String signin = '/signin';
   static const String dashboard = '/dashboard';
   static const String onboarding='/onboarding';
   static const String signup ='/signup';
+  static const String forgotPassword = '/forgotPassword';
+  static const String resetPassword ='/resetPassword';
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case login:
-        return generateRoute(routeSettings.name!, const LoginScreen());
       case onboarding:
         return generateRoute(routeSettings.name!, OnBoardingScreen());
       case signup:
-        return generateRoute(routeSettings.name!, const SignupScreen()); 
+        return generateRoute(routeSettings.name!,  SignupScreen());
+      case signin:
+        return generateRoute(routeSettings.name!, SigninScreen());
+      case forgotPassword:
+        return generateRoute(routeSettings.name!, ForgotPasswordScreen());
+      case resetPassword:
+        return generateRoute(routeSettings.name!, ResetPasswordScreen());
 
       default:
         return generateRoute(

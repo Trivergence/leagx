@@ -9,6 +9,7 @@ final ThemeData themeLight = ThemeData(
   fontFamily: FontFamily.openSans,
   scaffoldBackgroundColor: AppColors.colorBackground,
   appBarTheme: const AppBarTheme(color: AppColors.colorBackground),
+iconTheme: const IconThemeData(color: AppColors.colorWhite,)
   
 );
 
