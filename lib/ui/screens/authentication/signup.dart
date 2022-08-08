@@ -7,6 +7,7 @@ import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
+import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/textfield/password_textfield.dart';
 import 'package:bailbooks_defendant/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,9 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   SignupScreen({Key? key}) : super(key: key);
 
   @override
@@ -25,9 +28,12 @@ class SignupScreen extends StatelessWidget {
       appBar: AppBarWidget(
         title: 'Signup',
       ),
+
       body: SingleChildScrollView(
-        padding:
-            const EdgeInsets.symmetric(horizontal: Dimens.horizontalPadding,vertical: Dimens.verticalPadding,),
+        padding: const EdgeInsets.symmetric(
+          horizontal: Dimens.horizontalPadding,
+          vertical: Dimens.verticalPadding,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

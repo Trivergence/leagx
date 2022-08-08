@@ -3,6 +3,7 @@ import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/components/have_account_button.dart';
+import 'package:bailbooks_defendant/ui/screens/drawer/drawer_screen.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
@@ -25,6 +26,10 @@ class SigninScreen extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
         title: 'Sign In',
+        isDrawer: true,
+      ),
+      drawer: DrawerScreen(
+
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -53,9 +58,11 @@ class SigninScreen extends StatelessWidget {
             UIHelper.verticalSpaceMedium,
             Align(
               alignment: Alignment.centerRight,
-              child: TextButtonWidget(text: 'Forgot Password ?', onPressed: () {
-                Navigator.pushNamed(context, Routes.forgotPassword);
-              }),
+              child: TextButtonWidget(
+                  text: 'Forgot Password ?',
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.forgotPassword);
+                  }),
             ),
             UIHelper.verticalSpaceLarge,
             MainButton(
