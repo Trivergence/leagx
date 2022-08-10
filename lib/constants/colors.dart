@@ -8,6 +8,7 @@ class AppColors {
   static const Color colorYellow = Color(0xFFFFC56E);
   static const Color textFieldColor = Color(0xFF1B1F2A);
   static const Color colorGrey = Color(0xFFC7D1E7);
+  static const Color colorGreen = Color(0xFF4CD964);
 
   static const Color colorPrimary = Color(0xFF4DACFF);
   static const Color primaryColorDark = Color(0xFF0066C0);
@@ -31,13 +32,38 @@ class AppColors {
     900: Color(0xFF0066C0)
   };
 
-  static const Gradient pinkishGradient =LinearGradient(colors: [
-            Color(0xFFF67599),
-            Color(0xFFF36995),
-            Color(0xFFEB3F86),
-            Color(0xFFE5267C),
-            Color(0xFFE31C79),
-            Color(0xFF8F2291),
-            Color(0xFF5F259F),
-          ]);
+  static const Gradient pinkishGradient = LinearGradient(colors: [
+    Color(0xFFF67599),
+    Color(0xFFF36995),
+    Color(0xFFEB3F86),
+    Color(0xFFE5267C),
+    Color(0xFFE31C79),
+    Color(0xFF8F2291),
+    Color(0xFF5F259F),
+  ]);
+  static const Gradient orangishGradient = LinearGradient(
+    colors: [
+      Color(0xFFFFC56E),
+      Color(0xFFFFB36E),
+      Color(0xFFFF8D6D),
+      Color(0xFFF8485E),
+    ],
+  );
+  static const Gradient blueishGradient = LinearGradient(
+    colors: [
+      Color(0xFFA7E6D7),
+      Color(0xFF71DBD4),
+      Color(0xFF4BA3BE),
+      Color(0xFF1554A0),
+      Color(0xFF003594),
+    ],
+  );
+
+  static Gradient blackishGradient = LinearGradient(
+    colors: [
+      const Color(0xFF1B1F2A),
+      const Color(0xFF232836),
+      const Color(0xFF1B1F2A).withOpacity(.76),
+    ],
+  );
 }

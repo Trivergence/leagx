@@ -3,6 +3,7 @@ import 'package:bailbooks_defendant/ui/screens/authentication/reset_password.dar
 import 'package:bailbooks_defendant/ui/screens/authentication/signin.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/signup.dart';
 import 'package:bailbooks_defendant/ui/screens/faq/faqs_screen.dart';
+import 'package:bailbooks_defendant/ui/screens/home/home.dart';
 import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/terms_service/terms_service_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class Routes {
   static const String resetPassword ='/resetPassword';
   static const String termsService = '/termsService';
   static const String faqs= '/faqs';
+  static const String home = '/home';
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -34,6 +36,8 @@ class Routes {
         return generateRoute(routeSettings.name!, const TermsServiceScreen());
       case faqs:
         return generateRoute(routeSettings.name!, const FaqsScreen());
+      case home:
+        return generateRoute(routeSettings.name!, const HomeScreen());  
 
       default:
         return generateRoute(
