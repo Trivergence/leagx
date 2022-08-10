@@ -4,12 +4,14 @@ import 'package:bailbooks_defendant/providers/session_provider.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/base_widget.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard.dart';
-import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'fixtureDetails/fixture_details_screen.dart';
+import 'fixtureDetails/fixture_details_screen.dart';
 
 class Betting extends StatelessWidget {
   final SharedPreferences prefs;
@@ -46,7 +48,7 @@ class Betting extends StatelessWidget {
                 case LoginStatus.none:
                 case LoginStatus.loggingIn:
                 case LoginStatus.error:
-                  return  OnBoardingScreen();
+                  return  FixtureDetails();
                 case LoginStatus.loggedIn:
                   return const DashboardScreen();
               }

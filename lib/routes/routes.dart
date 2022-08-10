@@ -17,6 +17,7 @@ class Routes {
   static const String resetPassword ='/resetPassword';
   static const String termsService = '/termsService';
   static const String faqs= '/faqs';
+  static const String matchDetails= '/matchDetails';
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -34,7 +35,8 @@ class Routes {
         return generateRoute(routeSettings.name!, const TermsServiceScreen());
       case faqs:
         return generateRoute(routeSettings.name!, const FaqsScreen());
-
+      case matchDetails:
+        return generateRoute(routeSettings.name!, const FaqsScreen());
       default:
         return generateRoute(
           routeSettings.name!,
