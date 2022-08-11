@@ -43,8 +43,8 @@ class AnalyticsWidget extends StatelessWidget {
                     isCircular: true,
                   ),
                   UIHelper.verticalSpaceSmall,
-                  const TextWidget(
-                      text: 'Predictions', textSize: Dimens.textSmall),
+                   TextWidget(
+                      text: 'Predictions', textSize: Dimens.textSmall,color:AppColors.colorWhite.withOpacity(0.6)),
                 ],
               ),
               Column(
@@ -58,8 +58,8 @@ class AnalyticsWidget extends StatelessWidget {
                     isCircular: true,
                   ),
                   UIHelper.verticalSpaceSmall,
-                  const TextWidget(
-                      text: 'Winning Ratio', textSize: Dimens.textSmall),
+                   TextWidget(
+                      text: 'Winning Ratio', textSize: Dimens.textSmall,color:AppColors.colorWhite.withOpacity(0.6)),
                 ],
               ),
               Column(
@@ -73,8 +73,8 @@ class AnalyticsWidget extends StatelessWidget {
                     isCircular: true,
                   ),
                   UIHelper.verticalSpaceSmall,
-                  const TextWidget(
-                      text: 'Coin Earned', textSize: Dimens.textSmall),
+                   TextWidget(
+                      text: 'Coin Earned', textSize: Dimens.textSmall,color:AppColors.colorWhite.withOpacity(0.6)),
                 ],
               ),
             ],

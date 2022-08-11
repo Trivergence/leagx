@@ -20,17 +20,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(
-        isIcon: true,
-        isDrawer: true,
-        trailing: IconButton(
-          icon: const IconWidget(
-            iconData: Icons.notifications_outlined,
-          ),
-          onPressed: () {},
-        ),
-      ),
-      drawer: const DrawerScreen(),
       body: Container(
         width: SizeConfig.width * 100,
         height: SizeConfig.height * 100,
@@ -86,13 +75,13 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const AnalyticsWidget(
+                  children: const [
+                     AnalyticsWidget(
                       prediction: 5.5,
                       winnigRatio: 70.1,
                       earnedCoin: 400,
                     ),
-                    const TextWidget(
+                     TextWidget(
                       text: 'Upcoming Matches',
                       fontWeight: FontWeight.w700,
                     ),
@@ -102,7 +91,31 @@ class HomeScreen extends StatelessWidget {
                       teamOneName: 'UFC',
                       teamTwoFlag: Assets.arsFlag,
                       teamTwoName: 'ARS',
-                      isLive: true,
+                      scheduledTime: 'Today, 20:00',
+                    ),
+                    FixtureWidget(
+                      leagueName: 'UEFA Champion League',
+                      teamOneFlag: Assets.ufcFlag,
+                      teamOneName: 'UFC',
+                      teamTwoFlag: Assets.arsFlag,
+                      teamTwoName: 'ARS',
+                      scheduledTime: 'Today, 20:00',
+                    ),
+                    FixtureWidget(
+                      leagueName: 'UEFA Champion League',
+                      teamOneFlag: Assets.ufcFlag,
+                      teamOneName: 'UFC',
+                      teamTwoFlag: Assets.arsFlag,
+                      teamTwoName: 'ARS',
+                      scheduledTime: 'Today, 20:00',
+                    ),
+                    FixtureWidget(
+                      leagueName: 'UEFA Champion League',
+                      teamOneFlag: Assets.ufcFlag,
+                      teamOneName: 'UFC',
+                      teamTwoFlag: Assets.arsFlag,
+                      teamTwoName: 'ARS',
+                      scheduledTime: 'Today, 20:00',
                     ),
                   ],
                 ),

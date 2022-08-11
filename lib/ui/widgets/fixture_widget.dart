@@ -76,32 +76,64 @@ class FixtureWidget extends StatelessWidget {
             color: AppColors.colorWhite.withOpacity(0.7),
           ),
           Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: const [
-                    ImageWidget(
-                      imageUrl: '',
-                      placeholder: Assets.ufcFlag,
-                    ),
-                    TextWidget(text: 'UFC'),
-                  ],
-                ),
-                Image.asset(Assets.vs),
-                Row(
-                  children: const [
-                    ImageWidget(
-                      imageUrl: '',
-                      placeholder: Assets.arsFlag,
-                    ),
-                    TextWidget(text: 'ARS'),
-                  ],
-                ),
-              ],
-            ),
-          ),
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          ImageWidget(
+                            imageUrl: teamOneFlag,
+                            placeholder: Assets.ufcFlag,
+                          ),
+                          TextWidget(text: teamOneName),
+                        ],
+                      ),
+                      isLive
+                          ? Column(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 5.0),
+                                  decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(4.0)),
+                                      gradient: LinearGradient(colors: [
+                                        Color(0xFF2A3041),
+                                        Color(0xFF2B344D),
+                                        Color(0xFF2A3041),
+                                      ])),
+                                  child: Row(
+                                    children: [
+                                      TextWidget(text: teamOneScore.toString()),
+                                      UIHelper.horizontalSpace(10.0),
+                                      const TextWidget(text: '-'),
+                                      UIHelper.horizontalSpace(10.0),
+                                      TextWidget(text: teamTwoScore.toString()),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Image.asset(Assets.vs),
+                      Row(
+                        children: [
+                          ImageWidget(
+                            imageUrl: teamTwoFlag,
+                            placeholder: Assets.arsFlag,
+                          ),
+                          TextWidget(text: teamTwoName),
+                        ],
+                      ),
+                    ],
+                  ),
+                  isLive? TextWidget(
+                      text: liveTime!,
+                      color: AppColors.colorWhite.withOpacity(0.6)):const SizedBox(),
+                ],
+              )),
         ],
       ),
     );
