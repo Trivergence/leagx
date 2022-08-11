@@ -6,7 +6,7 @@ class DividerWidget extends StatelessWidget {
   const DividerWidget({
     Key? key, this.height = 1,
   }) : super(key: key);
-  final height;
+  final double height;
   @override
   Widget build(BuildContext context) {
     return Divider(

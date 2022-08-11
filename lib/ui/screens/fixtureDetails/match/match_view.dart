@@ -9,6 +9,7 @@ import '../../../widgets/icon_container.dart';
 import '../../../widgets/text_widget.dart';
 import '../components/score_chip.dart';
 import 'components/live_match_widget.dart';
+import 'components/offline_match_widget.dart';
 
 class MatchView extends StatelessWidget {
   const MatchView({
@@ -51,7 +52,7 @@ class MatchView extends StatelessWidget {
                  ),
                  Column(
                    children:[
-                     Image.asset(Assets.flagImage),
+                     Image.asset(Assets.flagImage2),
                      const TextWidget(text: "Man. United"),
                      UIHelper.verticalSpaceSmall,
                      const TextWidget(text: "Top 2 Group B",
@@ -62,8 +63,8 @@ class MatchView extends StatelessWidget {
                 ],)
              ),
             IconContainer(height: SizeConfig.height * 7 , title: "Real Time Match Preview",),
-            LiveMatchWidget()
-            //OfflineMatchWidget()
+            //LiveMatchWidget()
+            OfflineMatchWidget()
           ],
         ),
       ),

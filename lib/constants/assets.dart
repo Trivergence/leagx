@@ -19,6 +19,7 @@ class Assets {
   static const String onBoard3 = "assets/images/onBoard3.png";
 
   static const String flagImage = "assets/images/flagImage.png";
+  static const String flagImage2 = "assets/images/flagImage2.png";
   static const String stadiumImage = "assets/images/stadiumImage.png";
 
   
