@@ -50,6 +50,9 @@ class OfflineMatchWidget extends StatelessWidget {
   void _showSheet() {
     showModalBottomSheet(context: _context,
     backgroundColor: AppColors.colorBackground,
+    shape: RoundedRectangleBorder(
+     borderRadius: BorderRadius.circular(20.0),
+  ),
      builder: (context) {
       return const PredictionSheetWidget();
     });
