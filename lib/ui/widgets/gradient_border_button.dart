@@ -9,12 +9,15 @@ class GradientBorderButton extends StatelessWidget {
   final double? height;
   final String text;
   final VoidCallback onPressed;
+  final double fontSize;
+  final FontWeight fontWeight;
   const GradientBorderButton({
     Key? key,
     this.width,
     this.height,
     required this.text,
-    required this.onPressed,
+    required this.onPressed, this.fontSize = Dimens.buttonTextSizeMedium, this.fontWeight = FontWeight.w600,
+    
   }) : super(key: key);
 
   @override
@@ -33,8 +36,8 @@ class GradientBorderButton extends StatelessWidget {
             text,
             style: TextStyle(
               color: AppColors.colorWhite,
-              fontSize: Dimens.buttonTextSizeMedium,
-              fontWeight: FontWeight.w600,
+              fontSize: fontSize,
+              fontWeight: fontWeight,
               fontFamily: FontFamily.raleway,
             ),
           ),
