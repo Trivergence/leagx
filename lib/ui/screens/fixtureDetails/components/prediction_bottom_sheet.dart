@@ -65,7 +65,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
               print(score);
             },)
           ],),
-          UIHelper.verticalSpace(48),
+          UIHelper.verticalSpace(20),
           Row(
             children: [
             CheckBoxWidget(onPressed: (value) {
