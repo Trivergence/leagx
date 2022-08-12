@@ -62,6 +62,17 @@ class AppColors {
       Color(0xFF003594),
     ],
   );
+  static const Gradient blueishBottomTopGradient = LinearGradient(
+    begin: Alignment.bottomCenter,
+    end: Alignment.topCenter,
+    colors: [
+      Color(0xFFA7E6D7),
+      Color(0xFF71DBD4),
+      Color(0xFF1554A0),
+      Color(0xFF003594),
+      Color(0xFF003594),
+    ],
+  );
 
   static Gradient blackishGradient = LinearGradient(
     colors: [

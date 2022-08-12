@@ -17,7 +17,7 @@ List<SubscriptionPlan> listOfPlans = [
     "5 full club profiles"
   ],
    price: 5.00,
-   gradient: AppColors.pinkishGradient,
+   gradient: AppColors.blueishBottomTopGradient,
   ),
   SubscriptionPlan(title: "Gold",
    desc: [
@@ -26,7 +26,7 @@ List<SubscriptionPlan> listOfPlans = [
     "unlimited club profiles"
   ],
    price: 10.00,
-   gradient: AppColors.pinkishGradient,
+   gradient: AppColors.orangishGradient,
   ),
   SubscriptionPlan(title: "Platinum",
    desc: [
@@ -44,6 +44,6 @@ List<SubscriptionPlan> listOfPlans = [
     "You earn a profit share"
   ],
    price: 5.00,
-   gradient: AppColors.pinkishGradient,
+   gradient: AppColors.blueishGradient,
   )
 ];
