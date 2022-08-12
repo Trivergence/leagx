@@ -86,8 +86,8 @@ class FixtureScreen extends StatelessWidget {
                   teamTwoFlag: Assets.arsFlag,
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
-                  onTap: (){
-                    Navigator.pushNamed(context, Routes.predictions);
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.matchDetails);
                   },
                 ),
                 FixtureWidget(
@@ -100,6 +100,9 @@ class FixtureScreen extends StatelessWidget {
                   teamTwoScore: 5,
                   isLive: true,
                   liveTime: '00:45:35',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.matchDetails);
+                  },
                 ),
                 FixtureWidget(
                   leagueName: 'UEFA Champion League',
@@ -108,6 +111,9 @@ class FixtureScreen extends StatelessWidget {
                   teamTwoFlag: Assets.arsFlag,
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.matchDetails);
+                  },
                 ),
                 FixtureWidget(
                   leagueName: 'UEFA Champion League',
@@ -116,6 +122,9 @@ class FixtureScreen extends StatelessWidget {
                   teamTwoFlag: Assets.arsFlag,
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.matchDetails);
+                  },
                 ),
               ],
             ),

@@ -7,7 +7,12 @@ class Assets {
   static const String icSoccer = "assets/icons/ic_soccer.png";
   static const String icPlayerAvatar = "assets/icons/ic_playerAvatar.png";
   static const String icCrown = "assets/icons/ic_crown.png";
-  
+  static const String icDrawerPredictions =
+      "assets/icons/ic_drawer_predictions.png";
+  static const String icDrawerTermsAndService =
+      "assets/icons/ic_drawer_terms.png";
+  static const String icDrawerAdmin = "assets/icons/ic_drawer_admin.png";
+
   static const String vs = "assets/icons/ic_vs.png";
 
   // splash screen assets

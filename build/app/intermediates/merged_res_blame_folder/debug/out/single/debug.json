@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\FlutterProjectss\\betting-app\\build\\app\\intermediates\\res\\merged\\debug\\drawable-v21_launch_background.xml.flat",
-        "source": "D:\\FlutterProjectss\\betting-app\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
-    },
-    {
         "merged": "D:\\FlutterProjectss\\betting-app\\build\\app\\intermediates\\res\\merged\\debug\\drawable-xhdpi_android12splash.png.flat",
         "source": "D:\\FlutterProjectss\\betting-app\\android\\app\\src\\main\\res\\drawable-xhdpi\\android12splash.png"
+    },
+    {
+        "merged": "D:\\FlutterProjectss\\betting-app\\build\\app\\intermediates\\res\\merged\\debug\\drawable-v21_launch_background.xml.flat",
+        "source": "D:\\FlutterProjectss\\betting-app\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
     },
     {
         "merged": "D:\\FlutterProjectss\\betting-app\\build\\app\\intermediates\\res\\merged\\debug\\drawable-night-mdpi_android12splash.png.flat",

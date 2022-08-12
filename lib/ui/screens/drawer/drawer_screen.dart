@@ -46,14 +46,18 @@ class DrawerScreen extends StatelessWidget {
             onTap: () {},
           ),
           DrawerTile(
-            icon: Icons.question_mark,
+            imageAsset: Assets.icDrawerPredictions,
             title: 'My Predictions',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.predictions);
+            },
           ),
           DrawerTile(
             icon: Icons.help_outline,
             title: 'FAQs',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.faqs);
+            },
           ),
           DrawerTile(
             icon: Icons.gpp_good_outlined,
@@ -61,14 +65,14 @@ class DrawerScreen extends StatelessWidget {
             onTap: () {},
           ),
           DrawerTile(
-            icon: Icons.receipt_outlined,
+            imageAsset: Assets.icDrawerTermsAndService,
             title: 'Terms of Services',
             onTap: () {
               Navigator.pushNamed(context, Routes.termsService);
             },
           ),
           DrawerTile(
-            icon: Icons.question_mark,
+            imageAsset: Assets.icDrawerAdmin,
             title: 'Admin',
             onTap: () {},
           ),
