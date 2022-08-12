@@ -24,11 +24,7 @@ class ChooseLeagueScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: 'Choose a League', trailing: const Padding(
-        padding:  EdgeInsets.only(right: 15),
-        child: Icon(Icons.notifications_outlined, color: AppColors.colorWhite,),
-      ),
-     ),
+      appBar: AppBarWidget(title: 'Choose a League',),
      body: Padding(
        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
        child: Column(children: [

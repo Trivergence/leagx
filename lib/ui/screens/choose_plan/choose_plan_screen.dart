@@ -13,11 +13,7 @@ class ChoosePlanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: 'Choose a Plan', trailing: const Padding(
-        padding:  EdgeInsets.only(right: 15),
-        child: Icon(Icons.notifications_outlined, color: AppColors.colorWhite,),
-      ),
-     ),
+      appBar: AppBarWidget(title: 'Choose a Plan'),
      body: SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 10),
        child: Center(
