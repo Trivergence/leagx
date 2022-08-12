@@ -6,6 +6,7 @@ import 'package:bailbooks_defendant/ui/screens/authentication/components/have_ac
 import 'package:bailbooks_defendant/ui/screens/authentication/components/social_media_widget.dart';
 import 'package:bailbooks_defendant/ui/screens/drawer/drawer_screen.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
+import 'package:bailbooks_defendant/ui/util/validation/validation_utils.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
@@ -43,7 +44,11 @@ class SigninScreen extends StatelessWidget {
             TextFieldWidget(
               textController: _emailController,
               hint: 'Email',
-              validator: () {},
+              validator: (value) {
+                if(!ValidationUtils.isValid(value)){
+                  return "required*";
+                }
+              },
               prefix: const IconWidget(
                 iconData: Icons.drafts_outlined,
               ),
@@ -51,6 +56,7 @@ class SigninScreen extends StatelessWidget {
             UIHelper.verticalSpaceMedium,
             PasswordTextField(
               controller: _passwordController,
+              
               hint: 'Password',
             ),
             UIHelper.verticalSpaceMedium,
@@ -66,7 +72,7 @@ class SigninScreen extends StatelessWidget {
             MainButton(
               text: 'Sign In',
               onPressed: () {
-                Navigator.pushNamed(context, Routes.home);
+                Navigator.pushNamed(context, Routes.dashboard);
               },
             ),
             UIHelper.verticalSpaceXL,
@@ -80,8 +86,8 @@ class SigninScreen extends StatelessWidget {
               children: const [
                 SocialMediaWidget(iconData: FontAwesomeIcons.apple),
                 UIHelper.horizontalSpaceMedium,
-                SocialMediaWidget(iconData: FontAwesomeIcons.facebookF),
-                UIHelper.horizontalSpaceMedium,
+                // SocialMediaWidget(iconData: FontAwesomeIcons.facebookF),
+                // UIHelper.horizontalSpaceMedium,
                 SocialMediaWidget(iconData: FontAwesomeIcons.twitter),
               ],
             ),

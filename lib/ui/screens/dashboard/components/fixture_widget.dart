@@ -42,7 +42,7 @@ class FixtureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(Routes.fixtureDetails),
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5.0),
         padding: const EdgeInsets.symmetric(vertical: 5.0),

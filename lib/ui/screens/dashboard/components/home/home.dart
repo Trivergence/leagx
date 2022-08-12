@@ -1,5 +1,6 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/components/analytics_widget.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
@@ -13,97 +14,108 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                  gradient: AppColors.blackishGradient,
-                 ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const TextWidget(
-                      text: 'Leaders', fontWeight: FontWeight.w700),
-                  UIHelper.verticalSpaceSmall,
-                  SizedBox(
-                    height: 40.0,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: GradientBorderWidget(
-                            width: 40.0,
-                            height: 40.0,
-                            isCircular: true,
-                            imageUrl: 'https://i.pravatar.cc/300',
-                            onPressed: () {},
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              gradient: AppColors.blackishGradient,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                   AnalyticsWidget(
-                    prediction: 5.5,
-                    winnigRatio: 70.1,
-                    earnedCoin: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const TextWidget(text: 'Leaders', fontWeight: FontWeight.w700),
+                UIHelper.verticalSpaceSmall,
+                SizedBox(
+                  height: 40.0,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: GradientBorderWidget(
+                          width: 40.0,
+                          height: 40.0,
+                          isCircular: true,
+                          imageUrl: 'https://i.pravatar.cc/300',
+                          onPressed: () {},
+                        ),
+                      );
+                    },
                   ),
-                   TextWidget(
-                    text: 'Upcoming Matches',
-                    fontWeight: FontWeight.w700,
-                  ),
-                  UIHelper.verticalSpaceSmall,
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AnalyticsWidget(
+                  prediction: 5.5,
+                  winnigRatio: 70.1,
+                  earnedCoin: 400,
+                ),
+                TextWidget(
+                  text: 'Upcoming Matches',
+                  fontWeight: FontWeight.w700,
+                ),
+                UIHelper.verticalSpaceSmall,
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
+import 'package:bailbooks_defendant/ui/util/validation/validation_utils.dart';
 import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +19,14 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFieldWidget(
-      
       textController: widget.controller,
       isObscure: isObscure,
       hint: widget.hint,
-      validator: () {},
+      validator: (value) {
+        if (!ValidationUtils.isValid(value)) {
+          return "required*";
+        }
+      },
       prefix: const IconWidget(
         iconData: Icons.lock_outline,
       ),

@@ -11,6 +11,12 @@ class Assets {
 
   
   
+  static const String icDrawerPredictions =
+      "assets/icons/ic_drawer_predictions.png";
+  static const String icDrawerTermsAndService =
+      "assets/icons/ic_drawer_terms.png";
+  static const String icDrawerAdmin = "assets/icons/ic_drawer_admin.png";
+
   static const String vs = "assets/icons/ic_vs.png";
 
   // splash screen assets

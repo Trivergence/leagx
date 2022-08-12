@@ -4,6 +4,7 @@ import 'package:bailbooks_defendant/ui/screens/authentication/signin.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/signup.dart';
 import 'package:bailbooks_defendant/ui/screens/choose_league/choose_league_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/home.dart';
+import 'package:bailbooks_defendant/ui/screens/dashboard/dashbard.dart';
 import 'package:bailbooks_defendant/ui/screens/faq/faqs_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/prediciton_s/prediction_s_screen.dart';
@@ -55,6 +56,8 @@ class Routes {
         return generateRoute(routeSettings.name!, const HomeScreen());  
       case predictions:
       return generateRoute(routeSettings.name!, const PredicitonsScreen());  
+      case dashboard:
+        return generateRoute(routeSettings.name!,  DashBoardScreen());  
 
 
       default:

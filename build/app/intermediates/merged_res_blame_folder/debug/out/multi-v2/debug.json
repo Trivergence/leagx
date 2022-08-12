@@ -31,10 +31,10 @@
             ]
         },
         {
-            "outputFile": "D:\\FlutterProjectss\\betting-app\\build\\app\\intermediates\\res\\merged\\debug\\values-da_values-da.arsc.flat",
+            "outputFile": "D:\\FlutterProjectss\\betting-app\\build\\app\\intermediates\\res\\merged\\debug\\values-es_values-es.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\LENOVO\\.gradle\\caches\\transforms-2\\files-2.1\\122df2e57d294d1a53db26bbc3b813c1\\core-1.6.0\\res\\values-da\\values-da.xml",
+                    "source": "C:\\Users\\LENOVO\\.gradle\\caches\\transforms-2\\files-2.1\\122df2e57d294d1a53db26bbc3b813c1\\core-1.6.0\\res\\values-es\\values-es.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -61,10 +61,10 @@
             ]
         },
         {
-            "outputFile": "D:\\FlutterProjectss\\betting-app\\build\\app\\intermediates\\res\\merged\\debug\\values-es_values-es.arsc.flat",
+            "outputFile": "D:\\FlutterProjectss\\betting-app\\build\\app\\intermediates\\res\\merged\\debug\\values-da_values-da.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\LENOVO\\.gradle\\caches\\transforms-2\\files-2.1\\122df2e57d294d1a53db26bbc3b813c1\\core-1.6.0\\res\\values-es\\values-es.xml",
+                    "source": "C:\\Users\\LENOVO\\.gradle\\caches\\transforms-2\\files-2.1\\122df2e57d294d1a53db26bbc3b813c1\\core-1.6.0\\res\\values-da\\values-da.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -1188,12 +1188,12 @@
                 {
                     "source": "D:\\FlutterProjectss\\betting-app\\android\\app\\src\\main\\res\\values-v31\\styles.xml",
                     "from": {
-                        "startLines": "3,-1",
-                        "startColumns": "4,-1",
-                        "startOffsets": "173,-1",
-                        "endLines": "8,-1",
-                        "endColumns": "12,-1",
-                        "endOffsets": "543,-1"
+                        "startLines": "3,15",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,894",
+                        "endLines": "8,17",
+                        "endColumns": "12,12",
+                        "endOffsets": "543,1058"
                     },
                     "to": {
                         "startLines": "2,8",
