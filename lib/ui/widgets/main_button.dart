@@ -22,7 +22,7 @@ class MainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeConfig.width * 100,
+      width: width?? SizeConfig.width * 100,
       height: height ?? 48.0,
       decoration: const BoxDecoration(
           gradient: AppColors.pinkishGradient,

@@ -3,7 +3,7 @@ import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_button.dart';
+import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
 import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
@@ -76,7 +76,7 @@ Morbi non dui dui. Donec elementum neque blandit, pulvinar leo ut, placerat tort
                 ),
                 UIHelper.horizontalSpaceMedium,
                 Flexible(
-                  child: GradientBorderButton(
+                  child: GradientBorderWidget(
                     text: 'Deny',
                     onPressed: (){},
                   ),

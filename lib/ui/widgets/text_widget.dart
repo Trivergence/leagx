@@ -10,6 +10,7 @@ class TextWidget extends StatelessWidget {
   final TextAlign textAlign;
   final bool isRich;
   final TextOverflow? overflow;
+  final String? fontFamily;
 
   const TextWidget({
     Key? key,
@@ -20,6 +21,7 @@ class TextWidget extends StatelessWidget {
     this.textAlign = TextAlign.left,
     this.isRich = false,
     this.overflow = TextOverflow.visible,
+    this.fontFamily,
   }) : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class TextWidget extends StatelessWidget {
                   color: color,
                   fontWeight: fontWeight,
                   fontSize: textSize,
+                  fontFamily: fontFamily
                 ),
                 text: text,
               ),
