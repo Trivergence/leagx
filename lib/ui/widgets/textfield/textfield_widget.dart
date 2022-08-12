@@ -32,6 +32,7 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: AutovalidateMode.always,
       controller: textController,
       focusNode: focusNode,
       onFieldSubmitted: onFieldSubmitted,

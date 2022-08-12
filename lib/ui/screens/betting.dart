@@ -46,7 +46,7 @@ class Betting extends StatelessWidget {
                 case LoginStatus.none:
                 case LoginStatus.loggingIn:
                 case LoginStatus.error:
-                  return  DashBoardScreen();//OnBoardingScreen();
+                  return  OnBoardingScreen();
                 case LoginStatus.loggedIn:
                   return  DashBoardScreen();
               }

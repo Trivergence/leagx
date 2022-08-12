@@ -4,6 +4,7 @@ import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/components/have_account_button.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
+import 'package:bailbooks_defendant/ui/util/validation/validation_utils.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
@@ -43,7 +44,11 @@ class SignupScreen extends StatelessWidget {
             TextFieldWidget(
               textController: _nameController,
               hint: 'Name',
-              validator: () {},
+              validator: (value) {
+                if(!ValidationUtils.isValid(value)){
+                  return "required*";
+                }
+              },
               prefix: const IconWidget(
                 iconData: Icons.account_circle_outlined,
               ),
@@ -52,7 +57,11 @@ class SignupScreen extends StatelessWidget {
             TextFieldWidget(
               textController: _emailController,
               hint: 'Email',
-              validator: () {},
+              validator: (value) {
+                if(!ValidationUtils.isValid(value)){
+                  return "required*";
+                }
+              },
               prefix: const IconWidget(
                 iconData: Icons.drafts_outlined,
               ),
