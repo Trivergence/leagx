@@ -10,6 +10,7 @@ import 'package:bailbooks_defendant/ui/screens/prediciton_s/prediction_s_screen.
 import 'package:bailbooks_defendant/ui/screens/terms_service/terms_service_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../ui/screens/choose_plan/choose_plan_screen.dart';
 import '../ui/screens/fixtureDetails/fixture_details_screen.dart';
 
 class Routes {
@@ -49,7 +50,7 @@ class Routes {
       case chooseLeague:
         return generateRoute(routeSettings.name!, ChooseLeagueScreen());
         case choosePlan:
-        return generateRoute(routeSettings.name!, ChooseLeagueScreen());
+        return generateRoute(routeSettings.name!, const ChoosePlanScreen());
       case home:
         return generateRoute(routeSettings.name!, const HomeScreen());  
       case predictions:
