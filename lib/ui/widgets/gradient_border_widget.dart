@@ -1,4 +1,5 @@
 import 'package:bailbooks_defendant/constants/colors.dart';
+import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/constants/font_family.dart';
 import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
 import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
@@ -10,23 +11,30 @@ class GradientBorderWidget extends StatelessWidget {
   final double? width;
   final double? height;
   final String? text;
-  final VoidCallback onPressed;
+  final double? textSize;
+  final VoidCallback? onPressed;
   final bool isCircular;
   final Gradient gradient;
   final IconData? iconData;
   final double? iconSize;
   final String? imageUrl;
+  final String? imageAsset;
+  final EdgeInsetsGeometry? padding;
   const GradientBorderWidget({
     Key? key,
     this.width,
     this.height,
      this.text,
-    required this.onPressed,
+     this.textSize,
+     this.onPressed,
     this.isCircular = false,
     this.gradient = AppColors.pinkishGradient,
     this.iconData,
     this.iconSize,
     this.imageUrl,
+    this.imageAsset,
+    this.padding,
+
   }) : super(key: key);
 
   @override
@@ -42,6 +50,7 @@ class GradientBorderWidget extends StatelessWidget {
             shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
             borderRadius:isCircular?null: const BorderRadius.all(Radius.circular(5.0))),
         child: Container(
+          padding: padding,
           decoration: BoxDecoration(
             color: AppColors.colorBackground,
             shape: isCircular? BoxShape.circle:BoxShape.rectangle,
@@ -65,8 +74,9 @@ class GradientBorderWidget extends StatelessWidget {
                         text: text!,
                         fontWeight: FontWeight.w600,
                         fontFamily: FontFamily.raleway,
+                        textSize: textSize?? Dimens.textRegular,
                       ),
-                    ):const SizedBox(),
+                    ):imageAsset!=null? Image.asset(imageAsset!): const SizedBox(),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/components/have_account_button.dart';
+import 'package:bailbooks_defendant/ui/screens/authentication/components/social_media_widget.dart';
 import 'package:bailbooks_defendant/ui/screens/drawer/drawer_screen.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
@@ -26,11 +27,8 @@ class SigninScreen extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
         title: 'Sign In',
-        isDrawer: true,
       ),
-      drawer: DrawerScreen(
-
-      ),
+      
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
           horizontal: Dimens.horizontalPadding,
@@ -67,7 +65,9 @@ class SigninScreen extends StatelessWidget {
             UIHelper.verticalSpaceLarge,
             MainButton(
               text: 'Sign In',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.home);
+              },
             ),
             UIHelper.verticalSpaceXL,
             const TextWidget(
@@ -77,68 +77,12 @@ class SigninScreen extends StatelessWidget {
             UIHelper.verticalSpaceMedium,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: 44.0,
-                    width: 44.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [
-                          Color(0xFF0085FF),
-                          Color(0xFF00417C),
-                        ],
-                      ),
-                    ),
-                    child: const IconWidget(
-                      iconData: FontAwesomeIcons.apple,
-                      // color: Colors.white,
-                    ),
-                  ),
-                ),
+              children: const [
+                SocialMediaWidget(iconData: FontAwesomeIcons.apple),
                 UIHelper.horizontalSpaceMedium,
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: 44.0,
-                    width: 44.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [
-                          Color(0xFF3B5998),
-                          Color(0xFF2C61CF),
-                        ],
-                      ),
-                    ),
-                    child: const IconWidget(
-                      iconData: FontAwesomeIcons.facebookF,
-                      // color: Colors.white,
-                    ),
-                  ),
-                ),
+                SocialMediaWidget(iconData: FontAwesomeIcons.facebookF),
                 UIHelper.horizontalSpaceMedium,
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: 44.0,
-                    width: 44.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [
-                          Color(0xFF1DA1F2),
-                          Color(0xFF006DAF),
-                        ],
-                      ),
-                    ),
-                    child: const IconWidget(iconData: FontAwesomeIcons.twitter
-                        // color: Colors.white,
-                        ),
-                  ),
-                ),
+                SocialMediaWidget(iconData: FontAwesomeIcons.twitter),
               ],
             ),
             UIHelper.verticalSpace(100.0),

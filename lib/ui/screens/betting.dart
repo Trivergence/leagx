@@ -3,7 +3,7 @@ import 'package:bailbooks_defendant/constants/strings.dart';
 import 'package:bailbooks_defendant/providers/session_provider.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/base_widget.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard.dart';
+import 'package:bailbooks_defendant/ui/screens/dashboard/dashbard.dart';
 import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -46,9 +46,9 @@ class Betting extends StatelessWidget {
                 case LoginStatus.none:
                 case LoginStatus.loggingIn:
                 case LoginStatus.error:
-                  return  OnBoardingScreen();
+                  return  DashBoardScreen();//OnBoardingScreen();
                 case LoginStatus.loggedIn:
-                  return const DashboardScreen();
+                  return  DashBoardScreen();
               }
             },
           ),
