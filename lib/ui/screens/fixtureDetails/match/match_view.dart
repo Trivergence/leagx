@@ -63,8 +63,8 @@ class MatchView extends StatelessWidget {
                 ],)
              ),
             IconContainer(height: SizeConfig.height * 7 , title: "Real Time Match Preview",),
-            //LiveMatchWidget()
-            OfflineMatchWidget()
+            LiveMatchWidget()
+            //OfflineMatchWidget()
           ],
         ),
       ),
