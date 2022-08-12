@@ -1,6 +1,7 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/dot_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
@@ -41,7 +42,7 @@ class FixtureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => Navigator.of(context).pushNamed(Routes.fixtureDetails),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5.0),
         padding: const EdgeInsets.symmetric(vertical: 5.0),

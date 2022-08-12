@@ -22,7 +22,7 @@ class Routes {
   static const String resetPassword ='/resetPassword';
   static const String termsService = '/termsService';
   static const String faqs= '/faqs';
-  static const String matchDetails = '/matchDetails';
+  static const String fixtureDetails = '/fixtureDetails';
   static const String chooseLeague = '/chooseLeague';
   static const String choosePlan= '/choosePlan';
   static const String home = '/home';
@@ -44,7 +44,7 @@ class Routes {
         return generateRoute(routeSettings.name!, const TermsServiceScreen());
       case faqs:
         return generateRoute(routeSettings.name!, const FaqsScreen());
-      case matchDetails:
+      case fixtureDetails:
         return generateRoute(routeSettings.name!, const FixtureDetails());
       case chooseLeague:
         return generateRoute(routeSettings.name!, ChooseLeagueScreen());
