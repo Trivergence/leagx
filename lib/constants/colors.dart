@@ -66,4 +66,11 @@ class AppColors {
       const Color(0xFF1B1F2A).withOpacity(.76),
     ],
   );
+  static Gradient grayishGradient = LinearGradient(
+    colors: [
+      const Color(0xFF2A3041).withOpacity(.97),
+      const Color(0xFF2B344D),
+      const Color(0xFF2A3041)
+    ]
+  ); 
 }

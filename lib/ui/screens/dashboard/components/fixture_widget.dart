@@ -21,6 +21,7 @@ class FixtureWidget extends StatelessWidget {
   final String? liveTime;
   final bool isLive;
   final bool withText;
+  final VoidCallback? onTap;
   const FixtureWidget({
     Key? key,
     required this.leagueName,
@@ -34,58 +35,62 @@ class FixtureWidget extends StatelessWidget {
     this.liveTime,
     this.isLive = false,
     this.withText = true,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      decoration: BoxDecoration(
-          gradient: AppColors.blackishGradient,
-          borderRadius: const BorderRadius.all(Radius.circular(8.0))),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextWidget(text: leagueName, textSize: Dimens.textSmall),
-                isLive
-                    ? const LiveWidget()
-                    : withText
-                        ? Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const GradientWidget(
-                                  child: Icon(Icons.access_time_outlined)),
-                              UIHelper.horizontalSpace(4.0),
-                              const TextWidget(
-                                  text: 'Today, 20:00',
-                                  textSize: Dimens.textSmall),
-                            ],
-                          )
-                        : const DotWidget(
-                            color: AppColors.colorGrey,
-                          )
-              ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 5.0),
+        padding: const EdgeInsets.symmetric(vertical: 5.0),
+        decoration: BoxDecoration(
+            gradient: AppColors.blackishGradient,
+            borderRadius: const BorderRadius.all(Radius.circular(8.0))),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextWidget(text: leagueName, textSize: Dimens.textSmall),
+                  isLive
+                      ? const LiveWidget()
+                      : withText
+                          ? Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const GradientWidget(
+                                    child: Icon(Icons.access_time_outlined)),
+                                UIHelper.horizontalSpace(4.0),
+                                TextWidget(
+                                    text: scheduledTime!,
+                                    textSize: Dimens.textSmall),
+                              ],
+                            )
+                          : const DotWidget(
+                              color: AppColors.colorGrey,
+                            )
+                ],
+              ),
             ),
-          ),
-          Divider(
-            color: AppColors.colorWhite.withOpacity(0.7),
-          ),
-          Padding(
-              padding: const EdgeInsets.all(20.0),
+            Divider(
+              color: AppColors.colorWhite.withOpacity(0.07),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 children: [
+                  UIHelper.verticalSpace(15.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
                           ImageWidget(
-                            imageUrl: teamOneFlag,
+                            imageAsset: teamOneFlag,
                             placeholder: Assets.ufcFlag,
                           ),
                           TextWidget(text: teamOneName),
@@ -107,11 +112,17 @@ class FixtureWidget extends StatelessWidget {
                                       ])),
                                   child: Row(
                                     children: [
-                                      TextWidget(text: teamOneScore.toString()),
+                                      TextWidget(
+                                        text: teamOneScore.toString(),
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       UIHelper.horizontalSpace(10.0),
                                       const TextWidget(text: '-'),
                                       UIHelper.horizontalSpace(10.0),
-                                      TextWidget(text: teamTwoScore.toString()),
+                                      TextWidget(
+                                        text: teamTwoScore.toString(),
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -121,7 +132,7 @@ class FixtureWidget extends StatelessWidget {
                       Row(
                         children: [
                           ImageWidget(
-                            imageUrl: teamTwoFlag,
+                            imageAsset: teamTwoFlag,
                             placeholder: Assets.arsFlag,
                           ),
                           TextWidget(text: teamTwoName),
@@ -129,12 +140,17 @@ class FixtureWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  isLive? TextWidget(
-                      text: liveTime!,
-                      color: AppColors.colorWhite.withOpacity(0.6)):const SizedBox(),
+                  isLive
+                      ? TextWidget(
+                          text: liveTime!,
+                          color: AppColors.colorWhite.withOpacity(0.6))
+                      : const SizedBox(),
+                      isLive? UIHelper.verticalSpace(8.0): UIHelper.verticalSpace(20.0)
                 ],
-              )),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
