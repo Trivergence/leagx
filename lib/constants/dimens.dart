@@ -32,9 +32,12 @@ class Dimens {
   //Text Size
   static const double textXL = 30.0;
   static const double textLarge = 24.0;
-   static const double textMedium = 20.0;
+  static const double textXM= 22.0;
+  static const double textMedium = 20.0;
+  static const double textSM = 18.0;
   static const double textRegular = 16.0;
   static const double textSmall = 14.0;
+  static const double textXS = 12.0;
 
   //Progress bar
   static const double progressBarHeight = 20.0;

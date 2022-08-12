@@ -2,12 +2,15 @@ import 'package:bailbooks_defendant/ui/screens/authentication/forgot_password.da
 import 'package:bailbooks_defendant/ui/screens/authentication/reset_password.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/signin.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/signup.dart';
+import 'package:bailbooks_defendant/ui/screens/choose_league/choose_league_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/home.dart';
 import 'package:bailbooks_defendant/ui/screens/faq/faqs_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/prediciton_s/prediction_s_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/terms_service/terms_service_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../ui/screens/fixtureDetails/fixture_details_screen.dart';
 
 class Routes {
   Routes();
@@ -19,6 +22,9 @@ class Routes {
   static const String resetPassword ='/resetPassword';
   static const String termsService = '/termsService';
   static const String faqs= '/faqs';
+  static const String matchDetails = '/matchDetails';
+  static const String chooseLeague = '/chooseLeague';
+  static const String choosePlan= '/choosePlan';
   static const String home = '/home';
   static const String predictions = '/predicitons';
 
@@ -38,6 +44,12 @@ class Routes {
         return generateRoute(routeSettings.name!, const TermsServiceScreen());
       case faqs:
         return generateRoute(routeSettings.name!, const FaqsScreen());
+      case matchDetails:
+        return generateRoute(routeSettings.name!, const FixtureDetails());
+      case chooseLeague:
+        return generateRoute(routeSettings.name!, ChooseLeagueScreen());
+        case choosePlan:
+        return generateRoute(routeSettings.name!, ChooseLeagueScreen());
       case home:
         return generateRoute(routeSettings.name!, const HomeScreen());  
       case predictions:
