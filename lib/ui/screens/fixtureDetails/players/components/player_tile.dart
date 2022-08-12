@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../util/ui/ui_helper.dart';
+import '../../../../widgets/gradient_border_widget.dart';
 import '../../../../widgets/text_widget.dart';
 
 class PlayerTile extends StatelessWidget {
@@ -20,7 +21,14 @@ class PlayerTile extends StatelessWidget {
       children: [
       Row(
         children: [
-        Image.asset(Assets.icPlayerAvatar),
+        GradientBorderWidget(
+            width: 44.0,
+            height: 44.0,
+            isCircular: true,
+            imageUrl: 'https://i.pravatar.cc/300',
+            onPressed: () {},
+            gradient: AppColors.orangishGradient,
+          ),
         UIHelper.horizontalSpaceSmall,
         TextWidget(text: "Messi", color: AppColors.colorYellow,),
       ],),
@@ -29,7 +37,14 @@ class PlayerTile extends StatelessWidget {
         children: [
         TextWidget(text: "Messi", color: AppColors.colorRed,),
         UIHelper.horizontalSpaceSmall,
-        Image.asset(Assets.icPlayerAvatar),
+        GradientBorderWidget(
+            width: 44.0,
+            height: 44.0,
+            isCircular: true,
+            imageUrl: 'https://i.pravatar.cc/300',
+            onPressed: () {},
+            gradient: AppColors.orangishGradient,
+          ),
       ],),
     ],)
     ,);

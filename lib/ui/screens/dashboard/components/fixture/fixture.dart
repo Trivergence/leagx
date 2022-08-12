@@ -58,7 +58,7 @@ class FixtureScreen extends StatelessWidget {
                         height: 40.0,
                         isCircular: true,
                         iconData: Icons.add,
-                        onPressed: () {},
+                        onPressed: () => Navigator.of(context).pushNamed(Routes.chooseLeague),
                       ),
                     ),
                   ],
@@ -87,7 +87,7 @@ class FixtureScreen extends StatelessWidget {
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.matchDetails);
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
                 FixtureWidget(
@@ -101,7 +101,7 @@ class FixtureScreen extends StatelessWidget {
                   isLive: true,
                   liveTime: '00:45:35',
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.matchDetails);
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
                 FixtureWidget(
@@ -112,7 +112,7 @@ class FixtureScreen extends StatelessWidget {
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.matchDetails);
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
                 FixtureWidget(
@@ -123,7 +123,7 @@ class FixtureScreen extends StatelessWidget {
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.matchDetails);
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
               ],

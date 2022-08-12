@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.matchDetails);
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
                 FixtureWidget(
@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.matchDetails);
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
                 FixtureWidget(
@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.matchDetails);
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
                 FixtureWidget(
@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                   teamTwoName: 'ARS',
                   scheduledTime: 'Today, 20:00',
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.matchDetails);
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
               ],

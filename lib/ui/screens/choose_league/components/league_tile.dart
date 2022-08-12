@@ -1,3 +1,4 @@
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
@@ -35,7 +36,7 @@ class LeagueTile extends StatelessWidget {
             child: listOfLeagues[index].hasSubscribed! ? MainButton(text: "Subscribed", onPressed: (){},
             fontWeight: FontWeight.w400,
             fontSize: 10,)
-            : GradientBorderButton(text: "Subscribe", onPressed: (){}, fontWeight: FontWeight.w400,
+            : GradientBorderButton(text: "Subscribe", onPressed: () => Navigator.of(context).pushNamed(Routes.choosePlan), fontWeight: FontWeight.w400,
             fontSize: 10,)),
       ),
     );
