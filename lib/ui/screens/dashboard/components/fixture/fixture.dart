@@ -58,7 +58,7 @@ class FixtureScreen extends StatelessWidget {
                         height: 40.0,
                         isCircular: true,
                         iconData: Icons.add,
-                        onPressed: () {},
+                        onPressed: () => Navigator.of(context).pushNamed(Routes.chooseLeague),
                       ),
                     ),
                   ],
