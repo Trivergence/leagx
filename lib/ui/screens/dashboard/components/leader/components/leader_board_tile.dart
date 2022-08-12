@@ -1,3 +1,4 @@
+import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
@@ -17,13 +18,14 @@ class LeaderBoardTile extends StatelessWidget {
       required this.imageUrl,
       required this.title,
       required this.numberOfPrediciton,
-      required this.successRate})
+      required this.successRate,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 24.0),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(8.0),
@@ -61,24 +63,24 @@ class LeaderBoardTile extends StatelessWidget {
                   children:  [
                     TextWidget(text: title),
                     TextWidget(
-                      text: successRate,
+                      text: '$successRate%',
                       color: AppColors.colorGreen,
-                      textSize: 18.0,
+                      textSize: Dimens.textXM,
                     ),
                   ],
                 ),
-                UIHelper.verticalSpace(10.0),
+                UIHelper.verticalSpace(5.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextWidget(
                       text: '$numberOfPrediciton predictions',
-                      textSize: 14.0,
+                      textSize: Dimens.textSmall,
                       color: AppColors.colorWhite.withOpacity(0.5),
                     ),
                     const TextWidget(
                       text: 'Success',
-                      textSize: 18.0,
+                      textSize: Dimens.textSmall,
                     ),
                   ],
                 ),
