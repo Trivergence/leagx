@@ -1,6 +1,3 @@
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/assets.dart';
@@ -52,7 +49,7 @@ class OfflineMatchWidget extends StatelessWidget {
     backgroundColor: AppColors.colorBackground,
     shape: RoundedRectangleBorder(
      borderRadius: BorderRadius.circular(20.0),
-  ),
+    ),
      builder: (context) {
       return const PredictionSheetWidget();
     });

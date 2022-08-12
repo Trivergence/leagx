@@ -19,6 +19,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFieldWidget(
+      
       textController: widget.controller,
       isObscure: isObscure,
       hint: widget.hint,

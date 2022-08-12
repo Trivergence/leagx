@@ -20,8 +20,9 @@ class Routes {
   static const String resetPassword ='/resetPassword';
   static const String termsService = '/termsService';
   static const String faqs= '/faqs';
-  static const String matchDetails= '/matchDetails';
-  static const String chooseLeague= '/chooseLeague';
+  static const String matchDetails = '/matchDetails';
+  static const String chooseLeague = '/chooseLeague';
+  static const String choosePlan= '/choosePlan';
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -42,6 +43,8 @@ class Routes {
       case matchDetails:
         return generateRoute(routeSettings.name!, const FixtureDetails());
       case chooseLeague:
+        return generateRoute(routeSettings.name!, ChooseLeagueScreen());
+        case choosePlan:
         return generateRoute(routeSettings.name!, ChooseLeagueScreen());
       default:
         return generateRoute(

@@ -6,10 +6,8 @@ class Assets {
   static const String icPlayer = "assets/icons/ic_player.png";
   static const String icSoccer = "assets/icons/ic_soccer.png";
   static const String icPlayerAvatar = "assets/icons/ic_playerAvatar.png";
+  static const String icCrown = "assets/icons/ic_crown.png";
   
-  
-
-
   // splash screen assets
   static const String splashIcon = "assets/icons/ic_splash.png";
   
