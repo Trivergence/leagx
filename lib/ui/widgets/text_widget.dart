@@ -11,6 +11,7 @@ class TextWidget extends StatelessWidget {
   final bool isRich;
   final TextOverflow? overflow;
   final String? fontFamily;
+  final int? maxLines;
 
   const TextWidget({
     Key? key,
@@ -22,6 +23,7 @@ class TextWidget extends StatelessWidget {
     this.isRich = false,
     this.overflow = TextOverflow.visible,
     this.fontFamily,
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -52,6 +54,7 @@ class TextWidget extends StatelessWidget {
             ),
             textAlign: textAlign,
             overflow: overflow,
+            maxLines: maxLines,
           );
   }
 }
