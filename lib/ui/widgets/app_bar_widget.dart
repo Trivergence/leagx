@@ -1,49 +1,60 @@
+import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
+import 'package:bailbooks_defendant/ui/util/validation/validation_utils.dart';
+import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
-  final String title;
-  final List<Widget>? actions;
-  final Color? backgroundColor;
-  final Color? backColor;
-  final VoidCallback? onBackPressed;
+  final String? title;
+  final bool isIcon;
+  final Widget? trailing;
+  final bool isDrawer;
 
   AppBarWidget({
     Key? key,
-    required this.title,
-    this.actions,
-    this.backgroundColor = AppColors.colorPrimary,
-    this.backColor = Colors.white,
-    this.onBackPressed,
+    this.title,
+    this.trailing,
+    this.isDrawer = false,
+    this.isIcon = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: backgroundColor,
-      elevation: 0.0,
       centerTitle: true,
-      title: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back,
-          color: backColor,
-        ),
-        onPressed: () {
-          if (onBackPressed == null) {
-            Navigator.of(context).pop();
-          } else {
-            onBackPressed!();
-          }
-        },
-      ),
-      actions: actions,
+      elevation: 0.0,
+      automaticallyImplyLeading: false,
+      leading: isDrawer
+          ? IconButton(
+              icon: const Icon(
+                Icons.notes,
+                color: AppColors.colorWhite,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            )
+          : IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: AppColors.colorWhite,
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+      title: isIcon
+          ? Image.asset(
+              Assets.appLogo,
+              width: 32.0,
+              height: 32.0,
+            )
+          : title != null
+              ? TextWidget(
+                  text: title!,
+                )
+              : const SizedBox(),
+      actions: [
+        trailing ?? const SizedBox(),
+      ],
     );
   }
 

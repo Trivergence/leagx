@@ -10,16 +10,20 @@ class TextWidget extends StatelessWidget {
   final TextAlign textAlign;
   final bool isRich;
   final TextOverflow? overflow;
+  final String? fontFamily;
+  final int? maxLines;
 
   const TextWidget({
     Key? key,
     required this.text,
-    this.textSize = Dimens.textMedium,
-    this.color = AppColors.colorPrimary,
+    this.textSize = Dimens.textRegular,
+    this.color = AppColors.colorWhite,
     this.fontWeight = FontWeight.normal,
     this.textAlign = TextAlign.left,
     this.isRich = false,
     this.overflow = TextOverflow.visible,
+    this.fontFamily,
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -34,6 +38,7 @@ class TextWidget extends StatelessWidget {
                   color: color,
                   fontWeight: fontWeight,
                   fontSize: textSize,
+                  fontFamily: fontFamily
                 ),
                 text: text,
               ),
@@ -45,10 +50,11 @@ class TextWidget extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontSize: textSize,
-              fontWeight: fontWeight,
+              fontWeight: fontWeight
             ),
             textAlign: textAlign,
             overflow: overflow,
+            maxLines: maxLines,
           );
   }
 }
