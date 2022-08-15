@@ -1,5 +1,6 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
+import 'package:bailbooks_defendant/constants/enums.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/fixture/fixture.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/home.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/leader/leader.dart';
@@ -23,7 +24,7 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int _selectedIndex = 0;
-  static  List<Widget> _widgetOptions = <Widget>[HomeScreen(), FixtureScreen(),LeaderScreen(), NewsScreen(),SettingScreen()];
+  static  List<Widget> _widgetOptions = <Widget>[HomeScreen(), FixtureScreen(),LeaderScreen(), NewsScreen(userType: UserType.admin,),SettingScreen()];
 
   void _onItemTapped(int index) {
     setState(() {

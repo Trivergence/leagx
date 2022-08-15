@@ -4,6 +4,7 @@ import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/divider_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
+import 'package:bailbooks_defendant/ui/widgets/header_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
 import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -46,50 +47,15 @@ class _FixtureDetailsState extends State<FixtureDetails> {
     ),
     body: Column(
       children: [
-        SizedBox(
-          height: 50,
-          child: GridView.count(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          crossAxisCount: 3,
-          crossAxisSpacing: 2,
-          padding: EdgeInsets.zero,
-          children: listOfTabs.map((tabButton) => Column(
-          children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  index = tabButton.index!;
-                });
-              },
-              child: Container(
-              width: double.infinity,
-              color: AppColors.textFieldColor,
-              child: Center(
-                child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: tabButton.index == index ? GradientWidget(
-                child: TextWidget(text: tabButton.title!,
-                color: AppColors.colorGrey,
-                fontWeight: FontWeight.w600,),)
-                : TextWidget(text: tabButton.title!,
-                color: AppColors.colorGrey,
-                fontWeight: FontWeight.w600,)
-              )),),
-            ),
-            Container(
-              decoration: BoxDecoration(
-              gradient: tabButton.index == index 
-              ? AppColors.pinkishGradient
-              : null,
-              color: tabButton.index == index 
-              ? null
-              : AppColors.textFieldColor),
-              height: 2,
-             )
-          ],),).toList(),
-          ),
-        ),
+        HeaderWidget(totalTabs: 3,
+        selectedIndex: index,
+        listOfTabs: listOfTabs,
+        onTabChanged: (selectedIndex) {
+          setState(() {
+            index = selectedIndex!;
+          });
+        }),
+        
        index == 0 ? MatchView()
        : index == 1 ? PlayersView() : SizedBox.shrink(),
     ],),
