@@ -32,8 +32,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     NewsScreen(
       userType: UserType.admin,
     ),
-    ProfileSettingsScreen(),
-    //SettingScreen(),
+    SettingScreen(),
   ];
 
   void _onItemTapped(int index) {

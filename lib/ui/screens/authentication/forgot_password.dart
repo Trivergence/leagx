@@ -48,7 +48,6 @@ class ForgotPasswordScreen extends StatelessWidget {
             TextFieldWidget(
               textController: _emailController,
               hint: 'Email or Phone Number',
-              validator: () {},
               prefix: const IconWidget(
                 iconData: Icons.drafts_outlined,
               ),

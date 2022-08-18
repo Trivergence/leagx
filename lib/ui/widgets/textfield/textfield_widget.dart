@@ -20,7 +20,7 @@ class TextFieldWidget extends StatelessWidget {
   final ValueChanged? onChanged;
   final bool autoFocus;
   final TextInputAction? inputAction;
-  final Function validator;
+  final String? Function(String?)? validator;
   final Function? onEditingComplete;
   final Widget? suffix;
   final Widget? prefix;
@@ -39,7 +39,7 @@ class TextFieldWidget extends StatelessWidget {
       onEditingComplete: () => onEditingComplete!(),
       onChanged: onChanged,
       autofocus: autoFocus,
-      validator: (text) => validator(text),
+      validator:validator,
       textInputAction: inputAction,
       obscureText: isObscure,
       maxLines: maxLines,
@@ -111,7 +111,7 @@ class TextFieldWidget extends StatelessWidget {
     this.onChanged,
     this.autoFocus = false,
     this.inputAction,
-    required this.validator,
+    this.validator,
     this.onEditingComplete,
     this.suffix,
     this.prefix,

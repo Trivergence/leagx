@@ -2,10 +2,12 @@ import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/constants/font_family.dart';
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
+import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
 import 'package:bailbooks_defendant/ui/widgets/settings_tile.dart';
 import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
@@ -20,10 +22,13 @@ class ProfileSettingsScreen extends StatelessWidget {
       appBar: AppBarWidget(
         title: "Profile Settings",
         trailing: IconButton(
-          icon: const Icon(
-            Icons.border_color_outlined,
+          icon: const IconWidget(
+            iconData:Icons.border_color_outlined,
           ),
-          onPressed: () {},
+          onPressed: () {
+            print('on pressed called');
+            Navigator.pushNamed(context, Routes.profileInfoUpdate);
+          },
         ),
       ),
       body: Container(
@@ -93,20 +98,20 @@ class ProfileSettingsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Center(
-                    child: Positioned(
-                      top: 0.0,
-                      child: GradientBorderWidget(
-                        onPressed: () {},
-                        gradient: AppColors.orangishGradient,
-                        imageUrl: "https://pravatar.cc/",
-                        height: 80.0,
-                        width: 80.0,
-                        isCircular: true,
+                  // Center(
+                  //   child: Positioned(
+                  //     top: 0.0,
+                  //     child: GradientBorderWidget(
+                  //       onPressed: () {},
+                  //       gradient: AppColors.orangishGradient,
+                  //       imageUrl: "https://pravatar.cc/",
+                  //       height: 80.0,
+                  //       width: 80.0,
+                  //       isCircular: true,
                         
-                      ),
-                    ),
-                  ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
               UIHelper.verticalSpace(30.0),
@@ -124,13 +129,13 @@ class ProfileSettingsScreen extends StatelessWidget {
               UIHelper.verticalSpace(15.0),
               SettingsTile(
                 text: '+1234567890',
-                iconData: Icons.phone,
+                iconData: Icons.smartphone,
                 onTap: (){},
               ),
               UIHelper.verticalSpace(15.0),
               SettingsTile(
                 text: 'Male',
-                iconData: Icons.smartphone,
+                iconData: Icons.perm_contact_cal,
                 onTap: (){},
               ),
 

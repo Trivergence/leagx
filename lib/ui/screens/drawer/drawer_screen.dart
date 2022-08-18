@@ -74,7 +74,9 @@ class DrawerScreen extends StatelessWidget {
           DrawerTile(
             imageAsset: Assets.icDrawerAdmin,
             title: 'Admin',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.admin);
+            },
           ),
           UIHelper.verticalSpaceXL,
           GestureDetector(

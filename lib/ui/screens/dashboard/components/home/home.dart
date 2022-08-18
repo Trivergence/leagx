@@ -56,13 +56,17 @@ class HomeScreen extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AnalyticsWidget(
-                  prediction: 5.5,
-                  winnigRatio: 70.1,
-                  earnedCoin: 400,
+              children:  [
+                const AnalyticsWidget(
+                  firstLabel: 'Predictions',
+                  firstValue: '5.5',
+                  secondLabel: 'Winning Ratio',
+                  secondValue: '70.1',
+                  thirdLabel: 'Earned Coin',
+                  thirdValue: '400',
+
                 ),
-                TextWidget(
+                const TextWidget(
                   text: 'Upcoming Matches',
                   fontWeight: FontWeight.w700,
                 ),

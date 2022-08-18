@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 class SettingsTile extends StatelessWidget {
   final IconData? iconData;
   final String? imageAsset;
+  final Widget? trailing;
   final String text;
   final VoidCallback onTap;
-  const SettingsTile({Key? key, this.iconData, this.imageAsset,required this.onTap,required this.text})
+  const SettingsTile({Key? key, this.iconData, this.imageAsset,required this.onTap,required this.text,this.trailing})
       : super(key: key);
 
   @override
@@ -46,7 +47,7 @@ class SettingsTile extends StatelessWidget {
                     text: text,
                     textSize: Dimens.textSmall,
                   ),
-                  const IconWidget(iconData:Icons.arrow_forward_ios,size: 16.0,),
+                  trailing!=null? trailing!: const IconWidget(iconData:Icons.arrow_forward_ios,size: 16.0,),
                   
                 ],
               ),
