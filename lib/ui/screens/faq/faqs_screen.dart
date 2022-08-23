@@ -35,8 +35,8 @@ class FaqsScreen extends StatelessWidget {
           ),
         ),
         child: Column(
-          children: const [
-            GradientWidget(
+          children: [
+            const GradientWidget(
               child: TextWidget(
                 text: 'How Lorem ipsum dolor  ',
                 fontWeight: FontWeight.w600,
@@ -44,10 +44,27 @@ class FaqsScreen extends StatelessWidget {
               ),
             ),
             UIHelper.verticalSpaceMedium,
-            FaqTile(title: 'Lorem ipsum dolor sit amet?',),
-            FaqTile(title: ' Vestibulum ex odio, vehicula eu?',subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',),
-
-
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return const FaqTile(
+                    title: ' Vestibulum ex odio, vehicula eu?',
+                    subtitle:
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
+                  );
+                },
+              ),
+            ),
+            // FaqTile(
+            //   title: 'Lorem ipsum dolor sit amet?',
+            // ),
+            // FaqTile(
+            //   title: ' Vestibulum ex odio, vehicula eu?',
+            //   subtitle:
+            //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
+            // ),
           ],
         ),
       ),
