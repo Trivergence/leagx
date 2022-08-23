@@ -15,7 +15,7 @@ class Feed extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             itemBuilder: (_, index) {
             return  NewsTile(
-              imageUrl: Strings.placeHolderUrl,
+              imageUrl: Strings().placeHolderUrl,
               postedBy: 'James FC',
               when: '1 min ago',
               desc: 'FIFA’s iconic competitions inspire billions of football fans and provide opportunities to have a wider positive social and environmental impact. By the global nature of the tournaments it ...',

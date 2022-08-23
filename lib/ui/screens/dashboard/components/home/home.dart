@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                           width: 40.0,
                           height: 40.0,
                           isCircular: true,
-                          imageUrl: Strings.placeHolderUrl,
+                          imageUrl: Strings().placeHolderUrl,
                           onPressed: () {},
                         ),
                       );

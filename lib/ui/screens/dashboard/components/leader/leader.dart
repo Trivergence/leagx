@@ -18,12 +18,12 @@ class LeaderScreen extends StatelessWidget {
       itemCount: 10,
       itemBuilder: (context, index) {
       return index != 0 ? LeaderBoardTile(number: index + 1,
-        imageUrl: Strings.placeHolderUrl,
+        imageUrl: Strings().placeHolderUrl,
         title: "David J.P",
         numberOfPrediciton: 20,
         successRate: '90.5')
         :  ExpandedLeaderTile(
-            imageUrl: Strings.placeHolderUrl,
+            imageUrl: Strings().placeHolderUrl,
             title: "Martin Braithwaite",
             numberOfPrediciton: 20,
             successRate: '99.9',
