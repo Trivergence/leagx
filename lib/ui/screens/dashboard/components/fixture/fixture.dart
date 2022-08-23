@@ -43,7 +43,7 @@ class FixtureScreen extends StatelessWidget {
                               height: 40.0,
                               padding: const EdgeInsets.all(5.0),
                               isCircular: true,
-                              // imageUrl: 'https://i.pravatar.cc/300',
+                              // imageUrl: Strings.placeHolderUrl,
                               imageAsset: Assets.arsFlag,
                               onPressed: () {},
                             ),

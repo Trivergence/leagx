@@ -1,5 +1,6 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
+import 'package:bailbooks_defendant/constants/strings.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/components/analytics_widget.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
@@ -40,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                           width: 40.0,
                           height: 40.0,
                           isCircular: true,
-                          imageUrl: 'https://i.pravatar.cc/300',
+                          imageUrl: Strings.placeHolderUrl,
                           onPressed: () {},
                         ),
                       );

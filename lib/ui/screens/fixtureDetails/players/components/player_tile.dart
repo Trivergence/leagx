@@ -1,3 +1,4 @@
+import 'package:bailbooks_defendant/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/assets.dart';
@@ -25,7 +26,7 @@ class PlayerTile extends StatelessWidget {
             width: 44.0,
             height: 44.0,
             isCircular: true,
-            imageUrl: 'https://i.pravatar.cc/300',
+            imageUrl: Strings.placeHolderUrl,
             onPressed: () {},
             gradient: AppColors.orangishGradient,
           ),
@@ -41,7 +42,7 @@ class PlayerTile extends StatelessWidget {
             width: 44.0,
             height: 44.0,
             isCircular: true,
-            imageUrl: 'https://i.pravatar.cc/300',
+            imageUrl: Strings.placeHolderUrl,
             onPressed: () {},
             gradient: AppColors.orangishGradient,
           ),
