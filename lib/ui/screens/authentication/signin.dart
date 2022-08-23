@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SigninScreen extends StatelessWidget {
-  final GlobalKey<FormFieldState> _formKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   SigninScreen({Key? key}) : super(key: key);
