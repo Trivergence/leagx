@@ -4,7 +4,6 @@ import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/components/have_account_button.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/components/social_media_widget.dart';
-import 'package:bailbooks_defendant/ui/screens/drawer/drawer_screen.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/util/validation/validation_utils.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
@@ -18,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SigninScreen extends StatelessWidget {
+  final GlobalKey<FormFieldState> _formKey = GlobalKey<FormFieldState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   SigninScreen({Key? key}) : super(key: key);
@@ -29,7 +29,6 @@ class SigninScreen extends StatelessWidget {
       appBar: AppBarWidget(
         title: 'Sign In',
       ),
-      
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
           horizontal: Dimens.horizontalPadding,
@@ -41,23 +40,30 @@ class SigninScreen extends StatelessWidget {
             UIHelper.verticalSpaceLarge,
             Image.asset(Assets.appLogo),
             UIHelper.verticalSpaceXL,
-            TextFieldWidget(
-              textController: _emailController,
-              hint: 'Email',
-              validator: (value) {
-                if(!ValidationUtils.isValid(value)){
-                  return "required*";
-                }
-              },
-              prefix: const IconWidget(
-                iconData: Icons.drafts_outlined,
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFieldWidget(
+                    textController: _emailController,
+                    hint: 'Email',
+                    validator: (value) {
+                      if (!ValidationUtils.isValid(value)) {
+                        return "required*";
+                      }
+                      return null;
+                    },
+                    prefix: const IconWidget(
+                      iconData: Icons.drafts_outlined,
+                    ),
+                  ),
+                  UIHelper.verticalSpaceMedium,
+                  PasswordTextField(
+                    controller: _passwordController,
+                    hint: 'Password',
+                  ),
+                ],
               ),
-            ),
-            UIHelper.verticalSpaceMedium,
-            PasswordTextField(
-              controller: _passwordController,
-              
-              hint: 'Password',
             ),
             UIHelper.verticalSpaceMedium,
             Align(
@@ -72,7 +78,9 @@ class SigninScreen extends StatelessWidget {
             MainButton(
               text: 'Sign In',
               onPressed: () {
-                Navigator.pushNamed(context, Routes.dashboard);
+                if (_formKey.currentState!.validate()) {
+                  Navigator.pushNamed(context, Routes.dashboard);
+                }
               },
             ),
             UIHelper.verticalSpaceXL,

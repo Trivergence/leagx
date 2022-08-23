@@ -72,7 +72,7 @@ class OnBoardingScreen extends StatelessWidget {
             child: MainButton(
               text: 'Get Started',
               onPressed: () {
-                Navigator.pushReplacementNamed(context, Routes.signin);
+                Navigator.pushNamed(context, Routes.signin);
               },
             ),
           );
