@@ -28,7 +28,7 @@ class _SettingScreenState extends State<SettingScreen> {
           UIHelper.verticalSpace(30.0),
           SettingsTile(
             onTap: () {
-              Navigator.pushNamed(context, Routes.profileSettings);
+              Navigator.pushNamed(context, Routes.profileInfoUpdate);
             },
             text: 'Profile',
             iconData: Icons.account_circle_outlined,
