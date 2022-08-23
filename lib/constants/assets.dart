@@ -13,6 +13,7 @@ class Assets {
 
   
   static const String imgAvatar = "assets/images/img_avatar.png";
+  static const String imgChart = "assets/images/img_chart.png";
   static const String icDrawerPredictions =
       "assets/icons/ic_drawer_predictions.png";
   static const String icDrawerTermsAndService =

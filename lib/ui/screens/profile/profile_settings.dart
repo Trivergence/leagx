@@ -26,7 +26,6 @@ class ProfileSettingsScreen extends StatelessWidget {
             iconData:Icons.border_color_outlined,
           ),
           onPressed: () {
-            print('on pressed called');
             Navigator.pushNamed(context, Routes.profileInfoUpdate);
           },
         ),

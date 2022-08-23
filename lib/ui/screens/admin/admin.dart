@@ -1,3 +1,4 @@
+import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/components/analytics_widget.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
@@ -120,7 +121,7 @@ class AdminScreen extends StatelessWidget {
           ),
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(15.0),
               child: Column(
                 children: [
                   const AnalyticsWidget(
@@ -134,7 +135,8 @@ class AdminScreen extends StatelessWidget {
                   UIHelper.verticalSpace(45.0),
                   SizedBox(
                     height: 200,
-                    child: charts.BarChart(series, animate: true),
+                    child: Image.asset(Assets.imgChart),
+                    // child: charts.BarChart(series, animate: true),
                   ),
                   UIHelper.verticalSpace(90.0),
                   Row(
