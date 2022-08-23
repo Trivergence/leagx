@@ -3,7 +3,6 @@ import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/ui/screens/prediciton_s/components/prediction_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/components/fixture_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -16,16 +15,9 @@ class PredicitonsScreen extends StatelessWidget {
       backgroundColor: AppColors.colorBackground,
       appBar: AppBarWidget(
         title: 'Predictions',
-        isDrawer: true,
-        trailing: IconButton(
-          icon: const IconWidget(
-            iconData: Icons.notifications_outlined,
-          ),
-          onPressed: () {},
-        ),
       ),
       body: ListView.builder(
-        itemCount: 10,
+        itemCount: 20,
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(
             horizontal: Dimens.horizontalPadding,

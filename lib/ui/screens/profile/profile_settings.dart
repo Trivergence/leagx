@@ -89,7 +89,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                         MainButton(
                           width: 90.0,
                           height: 26.0,
-                          text: 'Withraw',
+                          text: 'Withdraw',
                           fontSize: 14.0,
                           onPressed: () {},
                         ),

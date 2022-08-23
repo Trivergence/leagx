@@ -17,17 +17,11 @@ class ProfileInfoUpdateScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.colorBackground,
       appBar: AppBarWidget(
-        isIcon: true,
-        isDrawer: true,
-        trailing: IconButton(
-          icon: const IconWidget(
-            iconData: Icons.notifications_outlined,
-          ),
-          onPressed: () {},
-        ),
+        title: 'Edit Profile',
+
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           children: [
             UIHelper.verticalSpace(40.0),

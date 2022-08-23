@@ -8,7 +8,18 @@ import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
-class AdminScreen extends StatelessWidget {
+class AdminScreen extends StatefulWidget {
+
+  AdminScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AdminScreen> createState() => _AdminScreenState();
+}
+
+class _AdminScreenState extends State<AdminScreen> {
+  bool isTodayTapped = true;
+  bool isWeeklyTapped = false;
+  bool isMonthlyTapped = false;
   final List<SubscriberSeries> data = [
     SubscriberSeries(
       year: "2008",
@@ -51,7 +62,6 @@ class AdminScreen extends StatelessWidget {
       barColor: charts.ColorUtil.fromDartColor(Colors.pink),
     ),
   ];
-  AdminScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +71,7 @@ class AdminScreen extends StatelessWidget {
           data: data,
           domainFn: (SubscriberSeries series, _) => series.year,
           measureFn: (SubscriberSeries series, _) => series.subscribers,
-          colorFn: (SubscriberSeries series, _) => series.barColor
-      )
+          colorFn: (SubscriberSeries series, _) => series.barColor)
     ];
     return Scaffold(
       appBar: AppBarWidget(
@@ -79,10 +88,18 @@ class AdminScreen extends StatelessWidget {
                     gradient: AppColors.blackishGradient,
                   ),
                   child: Center(
-                    child: TextWidget(
-                      text: 'TODAY',
-                      color: AppColors.colorWhite.withOpacity(0.5),
-                      textSize: 14.0,
+                    child: Container(
+                      margin: const  EdgeInsets.symmetric(
+                          horizontal: 14.0, vertical: 8.0),
+                      decoration:  BoxDecoration(
+                        color:isTodayTapped? AppColors.colorBackground : Colors.transparent,
+                        borderRadius: const BorderRadius.all(Radius.circular(14.0)),
+                      ),
+                      child: TextWidget(
+                        text: 'TODAY',
+                        color: AppColors.colorWhite.withOpacity(0.5),
+                        textSize: 14.0,
+                      ),
                     ),
                   ),
                 ),
@@ -179,10 +196,5 @@ class SubscriberSeries {
   final charts.Color barColor;
 
   SubscriberSeries(
-      {
-        required this.year,
-        required this.subscribers,
-        required this.barColor
-      }
-      );
+      {required this.year, required this.subscribers, required this.barColor});
 }

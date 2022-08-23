@@ -10,6 +10,7 @@ import 'package:bailbooks_defendant/ui/screens/dashboard/dashbard.dart';
 import 'package:bailbooks_defendant/ui/screens/faq/faqs_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/prediciton_s/prediction_s_screen.dart';
+import 'package:bailbooks_defendant/ui/screens/privacy_policy/privacy_policy_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/profile/profile_info_update.dart';
 import 'package:bailbooks_defendant/ui/screens/profile/profile_settings.dart';
 import 'package:bailbooks_defendant/ui/screens/terms_service/terms_service_screen.dart';
@@ -37,6 +38,7 @@ class Routes {
   static const String profileSettings = '/profileSettings';
   static const String profileInfoUpdate = '/profileInfoUpdate';
   static const String admin = "/admin";
+  static const String privacyPolicy = "/privacyPolicy";
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -75,6 +77,8 @@ class Routes {
         return generateRoute(routeSettings.name!, ProfileInfoUpdateScreen());
       case admin:
         return generateRoute(routeSettings.name!, AdminScreen());
+      case privacyPolicy:
+        return generateRoute(routeSettings.name!, const PrivacyPolicyScreen());
 
       default:
         return generateRoute(

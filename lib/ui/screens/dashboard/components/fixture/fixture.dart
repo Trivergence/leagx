@@ -33,7 +33,7 @@ class FixtureScreen extends StatelessWidget {
                       height: 40.0,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: 3,
+                        itemCount: 15,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Padding(

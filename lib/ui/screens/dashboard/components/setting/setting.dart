@@ -57,7 +57,9 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           UIHelper.verticalSpace(15.0),
           SettingsTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.resetPassword);
+            },
             text: 'Password',
             iconData: Icons.lock_outline,
           ),
@@ -69,7 +71,9 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           UIHelper.verticalSpace(15.0),
           SettingsTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.admin);
+            },
             text: 'Admin',
             imageAsset: Assets.icDrawerAdmin,
           ),
