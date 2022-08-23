@@ -2,6 +2,7 @@ import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/constants/font_family.dart';
+import 'package:bailbooks_defendant/constants/strings.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
@@ -97,20 +98,20 @@ class ProfileSettingsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Center(
-                  //   child: Positioned(
-                  //     top: 0.0,
-                  //     child: GradientBorderWidget(
-                  //       onPressed: () {},
-                  //       gradient: AppColors.orangishGradient,
-                  //       imageUrl: "https://pravatar.cc/",
-                  //       height: 80.0,
-                  //       width: 80.0,
-                  //       isCircular: true,
+                  Center(
+                    child: Positioned(
+                      top: 0.0,
+                      child: GradientBorderWidget(
+                        onPressed: () {},
+                        gradient: AppColors.orangishGradient,
+                        imageUrl: Strings().placeHolderUrl,
+                        height: 80.0,
+                        width: 80.0,
+                        isCircular: true,
                         
-                  //     ),
-                  //   ),
-                  // ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               UIHelper.verticalSpace(30.0),
