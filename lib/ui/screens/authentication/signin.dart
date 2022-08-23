@@ -83,7 +83,7 @@ class SigninScreen extends StatelessWidget {
                 }
               },
             ),
-            UIHelper.verticalSpaceXL,
+            UIHelper.verticalSpaceMedium,
             const TextWidget(
               text: 'Or by social accounts',
               color: AppColors.colorGrey,
@@ -99,7 +99,7 @@ class SigninScreen extends StatelessWidget {
                 SocialMediaWidget(iconData: FontAwesomeIcons.twitter),
               ],
             ),
-            UIHelper.verticalSpace(100.0),
+            UIHelper.verticalSpaceMedium,
             HaveAccountButton(
               subText: 'Sign Up',
               onTap: () {

@@ -57,13 +57,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Navigator.pushNamed(context, Routes.resetPassword);
               },
             ),
-            UIHelper.verticalSpace(150.0),
+            /*UIHelper.verticalSpaceMedium,
             HaveAccountButton(
               subText: 'Sign Up',
               onTap: () {
                 Navigator.pushNamed(context, Routes.signup);
               },
-            ),
+            ),*/
           ],
         ),
       ),

@@ -82,12 +82,12 @@ class SignupScreen extends StatelessWidget {
                 ],
               ),
             ),
-            UIHelper.verticalSpaceLarge,
+            UIHelper.verticalSpaceMedium,
             MainButton(
               text: 'Sign Up',
               onPressed: () {},
             ),
-            UIHelper.verticalSpace(100.0),
+            UIHelper.verticalSpaceMedium,
             HaveAccountButton(
               subText: 'Sign In',
               onTap: () {

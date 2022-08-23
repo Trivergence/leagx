@@ -2,7 +2,7 @@
     package="com.example.bailbooks_defendant">
    <application
         android:label="bailbooks_defendant"
-        android:name="${applicationName}"
+        android:name="Betting App"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
