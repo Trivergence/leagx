@@ -65,7 +65,7 @@ class SigninScreen extends StatelessWidget {
                 ],
               ),
             ),
-            UIHelper.verticalSpaceMedium,
+            UIHelper.verticalSpaceSmall,
             Align(
               alignment: Alignment.centerRight,
               child: TextButtonWidget(
@@ -74,7 +74,7 @@ class SigninScreen extends StatelessWidget {
                     Navigator.pushNamed(context, Routes.forgotPassword);
                   }),
             ),
-            UIHelper.verticalSpaceLarge,
+            UIHelper.verticalSpaceMedium,
             MainButton(
               text: 'Sign In',
               onPressed: () {

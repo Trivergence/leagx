@@ -155,7 +155,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     child: Image.asset(Assets.imgChart),
                     // child: charts.BarChart(series, animate: true),
                   ),
-                  UIHelper.verticalSpace(90.0),
+                  UIHelper.verticalSpaceMedium,
                   Row(
                     children: [
                       Flexible(

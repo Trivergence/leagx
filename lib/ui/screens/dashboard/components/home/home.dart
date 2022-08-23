@@ -115,6 +115,72 @@ class HomeScreen extends StatelessWidget {
                     Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
               ],
             ),
           ),

@@ -87,7 +87,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                         ),
                         UIHelper.verticalSpace(16.0),
                         MainButton(
-                          width: 90.0,
+                          width: 110.0,
                           height: 26.0,
                           text: 'Withdraw',
                           fontSize: 14.0,
