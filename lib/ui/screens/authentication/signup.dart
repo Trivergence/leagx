@@ -28,7 +28,6 @@ class SignupScreen extends StatelessWidget {
       appBar: AppBarWidget(
         title: 'Signup',
       ),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
           horizontal: Dimens.horizontalPadding,
@@ -48,7 +47,7 @@ class SignupScreen extends StatelessWidget {
                     textController: _nameController,
                     hint: 'Name',
                     validator: (value) {
-                      if(!ValidationUtils.isValid(value)){
+                      if (!ValidationUtils.isValid(value)) {
                         return "required*";
                       }
                     },
@@ -61,7 +60,7 @@ class SignupScreen extends StatelessWidget {
                     textController: _emailController,
                     hint: 'Email',
                     validator: (value) {
-                      if(!ValidationUtils.isValid(value)){
+                      if (!ValidationUtils.isValid(value)) {
                         return "required*";
                       }
                     },
@@ -85,17 +84,15 @@ class SignupScreen extends StatelessWidget {
             UIHelper.verticalSpaceLarge,
             MainButton(
               text: 'Sign Up',
-              onPressed: () {},
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {}
+              },
             ),
             UIHelper.verticalSpace(100.0),
             HaveAccountButton(
               subText: 'Sign In',
               onTap: () {
-                if(_formKey.currentState!.validate()){
-                  Navigator.pushNamed(context, Routes.signin);
-                }
-
-
+                Navigator.pushNamed(context, Routes.signin);
               },
             ),
           ],

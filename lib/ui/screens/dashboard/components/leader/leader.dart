@@ -1,5 +1,6 @@
 
 import 'package:bailbooks_defendant/constants/dimens.dart';
+import 'package:bailbooks_defendant/constants/strings.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/leader/components/leader_board_tile.dart';
 import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,12 @@ class LeaderScreen extends StatelessWidget {
       itemCount: 10,
       itemBuilder: (context, index) {
       return index != 0 ? LeaderBoardTile(number: index + 1,
-        imageUrl: 'https://i.pravatar.cc/300',
+        imageUrl: Strings.placeHolderUrl,
         title: "David J.P",
         numberOfPrediciton: 20,
         successRate: '90.5')
-        : const ExpandedLeaderTile(
-            imageUrl: 'https://i.pravatar.cc/300',
+        :  ExpandedLeaderTile(
+            imageUrl: Strings.placeHolderUrl,
             title: "Martin Braithwaite",
             numberOfPrediciton: 20,
             successRate: '99.9',
