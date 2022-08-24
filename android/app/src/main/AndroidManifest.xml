@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bailbooks_defendant">
    <application
-        android:label="bailbooks_defendant"
-        android:name="Betting App"
+        android:label="Betting App"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

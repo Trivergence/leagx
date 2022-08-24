@@ -30,7 +30,7 @@ class _FaqTileState extends State<FaqTile> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextWidget(text: widget.title),
+              TextWidget(text: widget.title,overflow: TextOverflow.ellipsis,),
               isShow
                   ? const GradientWidget(
                       child: Icon(

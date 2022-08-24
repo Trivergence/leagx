@@ -51,7 +51,7 @@ class OfflineMatchWidget extends StatelessWidget {
      borderRadius: BorderRadius.circular(20.0),
     ),
      builder: (context) {
-      return const PredictionSheetWidget();
+      return PredictionSheetWidget(onSubmit: (context) => Navigator.of(context).pop(),);
     });
   }
 }

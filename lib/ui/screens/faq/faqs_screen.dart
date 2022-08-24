@@ -58,23 +58,23 @@ class FaqsScreen extends StatelessWidget {
                     ),
                     FaqTile(
                       title:
-                      'Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.',
+                      'Nunc sem ex, mattis sit amet nisi ut,',
                       subtitle:
                       'Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
                     ),
                     FaqTile(
-                      title: 'Phasellus efficitur in lorem nec molestie',
+                      title: 'Phasellus efficitur in lorem',
                       subtitle:
                       'Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.',
                     ),
                     FaqTile(
                       title:
-                      'Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.',
+                      'Nunc sem ex, mattis sit amet nisi.',
                       subtitle:
                       'Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
                     ),
                     FaqTile(
-                      title: 'Phasellus efficitur in lorem nec molestie',
+                      title: 'Phasellus efficitur in lorem nec',
                       subtitle:
                       'Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.',
                     ),

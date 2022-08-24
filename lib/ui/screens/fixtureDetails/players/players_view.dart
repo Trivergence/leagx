@@ -79,7 +79,7 @@ class PlayersView extends StatelessWidget {
     showModalBottomSheet(context: _context!,
     backgroundColor: AppColors.colorBackground,
      builder: (context) {
-      return const PredictionSheetWidget();
+      return PredictionSheetWidget(onSubmit: (mycontext) => Navigator.of(context).pop(),);
     });
   }
 }
