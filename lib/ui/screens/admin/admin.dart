@@ -1,5 +1,6 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/components/admin_tab_bar.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/components/analytics_widget.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
@@ -79,62 +80,10 @@ class _AdminScreenState extends State<AdminScreen> {
       ),
       body: Column(
         children: [
-          Row(
-            children: [
-              Flexible(
-                child: Container(
-                  height: 44.0,
-                  decoration: BoxDecoration(
-                    gradient: AppColors.blackishGradient,
-                  ),
-                  child: Center(
-                    child: Container(
-                      margin: const  EdgeInsets.symmetric(
-                          horizontal: 14.0, vertical: 8.0),
-                      decoration:  BoxDecoration(
-                        color:isTodayTapped? AppColors.colorBackground : Colors.transparent,
-                        borderRadius: const BorderRadius.all(Radius.circular(14.0)),
-                      ),
-                      child: TextWidget(
-                        text: 'TODAY',
-                        color: AppColors.colorWhite.withOpacity(0.5),
-                        textSize: 14.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Flexible(
-                child: Container(
-                  height: 44.0,
-                  decoration: BoxDecoration(
-                    gradient: AppColors.blackishGradient,
-                  ),
-                  child: Center(
-                    child: TextWidget(
-                      text: 'WEEKLY',
-                      color: AppColors.colorWhite.withOpacity(0.5),
-                      textSize: 14.0,
-                    ),
-                  ),
-                ),
-              ),
-              Flexible(
-                child: Container(
-                  height: 44.0,
-                  decoration: BoxDecoration(
-                    gradient: AppColors.blackishGradient,
-                  ),
-                  child: Center(
-                    child: TextWidget(
-                      text: 'MONTHLY',
-                      color: AppColors.colorWhite.withOpacity(0.5),
-                      textSize: 14.0,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          AdminTabBar(
+            onTodayTap: (){},
+            onWeeklyTap: (){},
+            onMonthlyTap: (){},
           ),
           Expanded(
             child: SingleChildScrollView(

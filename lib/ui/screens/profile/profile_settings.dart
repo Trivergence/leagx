@@ -24,7 +24,7 @@ class ProfileSettingsScreen extends StatelessWidget {
         title: "Profile Settings",
         trailing: IconButton(
           icon: const IconWidget(
-            iconData:Icons.border_color_outlined,
+            iconData: Icons.border_color_outlined,
           ),
           onPressed: () {
             Navigator.pushNamed(context, Routes.profileInfoUpdate);
@@ -53,7 +53,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                 children: [
                   Container(
                     width: SizeConfig.width * 100,
-                    margin:const  EdgeInsets.only(top: 40.0),
+                    margin: const EdgeInsets.only(top: 40.0),
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(
                         Radius.circular(8.0),
@@ -108,7 +108,6 @@ class ProfileSettingsScreen extends StatelessWidget {
                         height: 80.0,
                         width: 80.0,
                         isCircular: true,
-                        
                       ),
                     ),
                   ),
@@ -118,27 +117,26 @@ class ProfileSettingsScreen extends StatelessWidget {
               SettingsTile(
                 text: 'John Smith',
                 iconData: Icons.account_circle_outlined,
-                onTap: (){},
+                onTap: () {},
               ),
               UIHelper.verticalSpace(15.0),
               SettingsTile(
                 text: 'abc@xyz.com',
                 iconData: Icons.drafts_outlined,
-                onTap: (){},
+                onTap: () {},
               ),
               UIHelper.verticalSpace(15.0),
               SettingsTile(
                 text: '+1234567890',
                 iconData: Icons.smartphone,
-                onTap: (){},
+                onTap: () {},
               ),
               UIHelper.verticalSpace(15.0),
               SettingsTile(
                 text: 'Male',
                 iconData: Icons.perm_contact_cal,
-                onTap: (){},
+                onTap: () {},
               ),
-
             ],
           ),
         ),

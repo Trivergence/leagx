@@ -15,28 +15,35 @@ class AdminTabBarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Flexible(
+    return Flexible(
+      child: GestureDetector(
+        onTap: onTap,
         child: Container(
           height: 44.0,
           decoration: BoxDecoration(
             gradient: AppColors.blackishGradient,
           ),
           child: Center(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
-              decoration: BoxDecoration(
-                color: isTapped ? AppColors.colorBackground : Colors.transparent,
-                borderRadius: const BorderRadius.all(Radius.circular(14.0)),
-              ),
-              child: TextWidget(
-                text: title.toUpperCase(),
-                color: AppColors.colorWhite.withOpacity(0.5),
-                textSize: 14.0,
-              ),
-            ),
-          ),
+                  child: isTapped
+              ? Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 14.0, vertical: 8.0),
+                  decoration: const BoxDecoration(
+                    color: AppColors.colorBackground,
+                    borderRadius: BorderRadius.all(Radius.circular(14.0)),
+                  ),
+                  child: TextWidget(
+                    text: title.toUpperCase(),
+                    color: AppColors.colorWhite,
+                    textSize: 14.0,
+                  ),
+                )
+              : TextWidget(
+                    text: title.toUpperCase(),
+                    color: AppColors.colorWhite.withOpacity(0.5),
+                    textSize: 14.0,
+                  ),
+                ),
         ),
       ),
     );

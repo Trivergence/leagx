@@ -2,7 +2,10 @@ import 'package:bailbooks_defendant/ui/screens/admin/components/admin_tabbar_but
 import 'package:flutter/material.dart';
 
 class AdminTabBar extends StatefulWidget {
-  const AdminTabBar({Key? key}) : super(key: key);
+  final VoidCallback onTodayTap;
+  final VoidCallback onWeeklyTap;
+  final VoidCallback onMonthlyTap;
+  const AdminTabBar({Key? key,required this.onTodayTap,required this.onWeeklyTap,required this.onMonthlyTap}) : super(key: key);
 
   @override
   State<AdminTabBar> createState() => _AdminTabBarState();
@@ -25,6 +28,7 @@ class _AdminTabBarState extends State<AdminTabBar> {
               isWeeklyTapped=false;
               isMonthlyTapped=false;
             });
+            widget.onTodayTap.call();
           },
         ),
         AdminTabBarButton(
@@ -36,6 +40,7 @@ class _AdminTabBarState extends State<AdminTabBar> {
               isWeeklyTapped=true;
               isMonthlyTapped=false;
             });
+            widget.onWeeklyTap.call();
           },
         ),
         AdminTabBarButton(
@@ -47,6 +52,7 @@ class _AdminTabBarState extends State<AdminTabBar> {
               isWeeklyTapped=false;
               isMonthlyTapped=true;
             });
+            widget.onMonthlyTap.call();
           },
         ),
       ],
