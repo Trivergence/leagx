@@ -1,5 +1,6 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/admin/components/admin_tab_bar.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/components/analytics_widget.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
@@ -110,7 +111,9 @@ class _AdminScreenState extends State<AdminScreen> {
                       Flexible(
                         child: MainButton(
                           text: 'Fixtures',
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.adminFixtureDetail);
+                          },
                           gradient: AppColors.orangishGradient,
                         ),
                       ),
@@ -118,7 +121,9 @@ class _AdminScreenState extends State<AdminScreen> {
                       Flexible(
                         child: MainButton(
                           text: 'Announce',
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.adminAnnounce);
+                          },
                         ),
                       )
                     ],
