@@ -1,3 +1,4 @@
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,7 @@ class LiveMatchWidget extends StatelessWidget {
     showModalBottomSheet(context: _context!,
     backgroundColor: AppColors.colorBackground,
      builder: (context) {
-      return PredictionSheetWidget(onSubmit: (context) => Navigator.of(context).pop(),);
+      return PredictionSheetWidget(onSubmit: (context) => Navigator.pushNamed(context, Routes.chooseAnExpert));
     });
   }
 }

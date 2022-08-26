@@ -1,6 +1,7 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/constants/enums.dart';
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/fixture/fixture.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/home.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/leader/leader.dart';
@@ -51,7 +52,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           icon: const IconWidget(
             iconData: Icons.notifications_outlined,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.notification);
+          },
         ),
       ),
       drawer: const DrawerScreen(),

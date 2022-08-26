@@ -1,3 +1,4 @@
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/assets.dart';
@@ -51,7 +52,7 @@ class OfflineMatchWidget extends StatelessWidget {
      borderRadius: BorderRadius.circular(20.0),
     ),
      builder: (context) {
-      return PredictionSheetWidget(onSubmit: (context) => Navigator.of(context).pop(),);
+      return PredictionSheetWidget(onSubmit: (context) => Navigator.pushNamed(context, Routes.chooseAnExpert));
     });
   }
 }
