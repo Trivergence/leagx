@@ -2,6 +2,7 @@ import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/admin/components/admin_tab_bar.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/components/legend_widget.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/components/analytics_widget.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
@@ -106,6 +107,8 @@ class _AdminScreenState extends State<AdminScreen> {
                     // child: Image.asset(Assets.imgChart),
                     child: charts.BarChart(seriesList, animate: true,),
                   ),
+                  UIHelper.verticalSpaceSmall,
+                  LegendWidget(),
                   UIHelper.verticalSpaceMedium,
                   Row(
                     children: [
