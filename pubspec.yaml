@@ -22,6 +22,7 @@ dependencies:
   shared_preferences: ^2.0.13
   smooth_page_indicator: ^1.0.0+2
   carousel_slider: ^4.1.1
+  charts_flutter: ^0.12.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0

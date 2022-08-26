@@ -20,8 +20,8 @@ class TextFieldWidget extends StatelessWidget {
   final ValueChanged? onChanged;
   final bool autoFocus;
   final TextInputAction? inputAction;
-  final Function validator;
-  final Function? onEditingComplete;
+  final String? Function(String?)? validator;
+  final VoidCallback? onEditingComplete;
   final Widget? suffix;
   final Widget? prefix;
   final bool? enabled;
@@ -32,14 +32,13 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autovalidateMode: AutovalidateMode.always,
       controller: textController,
       focusNode: focusNode,
       onFieldSubmitted: onFieldSubmitted,
-      onEditingComplete: () => onEditingComplete!(),
+      onEditingComplete: onEditingComplete,
       onChanged: onChanged,
       autofocus: autoFocus,
-      validator: (text) => validator(text),
+      validator:validator,
       textInputAction: inputAction,
       obscureText: isObscure,
       maxLines: maxLines,
@@ -70,6 +69,7 @@ class TextFieldWidget extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
           errorStyle: const TextStyle(color: Colors.red),
+          border: InputBorder.none,
           enabledBorder: enabledBorder,
           disabledBorder: disabledBorder,
           focusedBorder: focusedBorder,
@@ -111,7 +111,7 @@ class TextFieldWidget extends StatelessWidget {
     this.onChanged,
     this.autoFocus = false,
     this.inputAction,
-    required this.validator,
+    this.validator,
     this.onEditingComplete,
     this.suffix,
     this.prefix,

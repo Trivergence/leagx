@@ -33,7 +33,7 @@ class FixtureScreen extends StatelessWidget {
                       height: 40.0,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: 3,
+                        itemCount: 4,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Padding(
@@ -43,7 +43,7 @@ class FixtureScreen extends StatelessWidget {
                               height: 40.0,
                               padding: const EdgeInsets.all(5.0),
                               isCircular: true,
-                              // imageUrl: 'https://i.pravatar.cc/300',
+                              // imageUrl: Strings().placeHolderUrl,
                               imageAsset: Assets.arsFlag,
                               onPressed: () {},
                             ),
@@ -126,6 +126,51 @@ class FixtureScreen extends StatelessWidget {
                     Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                ),
+                FixtureWidget(
+                  leagueName: 'UEFA Champion League',
+                  teamOneFlag: Assets.ufcFlag,
+                  teamOneName: 'UFC',
+                  teamTwoFlag: Assets.arsFlag,
+                  teamTwoName: 'ARS',
+                  scheduledTime: 'Today, 20:00',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.fixtureDetails);
+                  },
+                )
+                
               ],
             ),
           ),

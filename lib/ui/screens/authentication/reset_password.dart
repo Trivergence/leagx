@@ -58,13 +58,13 @@ class ResetPasswordScreen extends StatelessWidget {
 
                 },
               ),
-              UIHelper.verticalSpace(100.0),
+              /*UIHelper.verticalSpace(100.0),
               HaveAccountButton(
                 subText: 'Sign Up',
                 onTap: () {
                   Navigator.pushNamed(context, Routes.signup);
                 },
-              ),
+              ),*/
             ],
           ),
         ),

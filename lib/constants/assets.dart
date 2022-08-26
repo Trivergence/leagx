@@ -8,9 +8,12 @@ class Assets {
   static const String icPlayerAvatar = "assets/icons/ic_playerAvatar.png";
   static const String icCrown = "assets/icons/ic_crown.png";
   static const String icSmallCrown = "assets/icons/ic_small_crown.png";
+  static const String icNotification = "assets/icons/ic_notification.png";
+  static const String icSwitch = "assets/icons/ic_switch.png";
 
   
-  
+  static const String imgAvatar = "assets/images/img_avatar.png";
+  static const String imgChart = "assets/images/img_chart.png";
   static const String icDrawerPredictions =
       "assets/icons/ic_drawer_predictions.png";
   static const String icDrawerTermsAndService =

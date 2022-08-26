@@ -1,3 +1,4 @@
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/assets.dart';
@@ -79,7 +80,7 @@ class PlayersView extends StatelessWidget {
     showModalBottomSheet(context: _context!,
     backgroundColor: AppColors.colorBackground,
      builder: (context) {
-      return const PredictionSheetWidget();
+      return PredictionSheetWidget(onSubmit: (mycontext) => Navigator.pushNamed(context, Routes.chooseAnExpert));
     });
   }
 }

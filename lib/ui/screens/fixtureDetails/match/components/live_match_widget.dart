@@ -1,19 +1,25 @@
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
+import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../widgets/icon_container.dart';
+import '../../../../widgets/main_button.dart';
 import '../../components/detail_tile.dart';
 import '../../components/match_prediction_tile.dart';
+import '../../components/prediction_bottom_sheet.dart';
 
 class LiveMatchWidget extends StatelessWidget {
-  const LiveMatchWidget({
+   LiveMatchWidget({
     Key? key,
   }) : super(key: key);
-
+  
+  BuildContext? _context;
   @override
   Widget build(BuildContext context) {
+    _context = context;
     return Column(
       children: [
         Image.asset(Assets.stadiumImage,
@@ -66,8 +72,19 @@ class LiveMatchWidget extends StatelessWidget {
             ),
           ],
         ),
-        MatchPredictionTile(),
+        const MatchPredictionTile(),
+        SizedBox(
+            width: SizeConfig.width * 90,
+            child: MainButton(text: "Predict", onPressed: _showSheet)),
+        UIHelper.verticalSpaceMedium
       ],
     );
+  }
+  void _showSheet() {
+    showModalBottomSheet(context: _context!,
+    backgroundColor: AppColors.colorBackground,
+     builder: (context) {
+      return PredictionSheetWidget(onSubmit: (context) => Navigator.pushNamed(context, Routes.chooseAnExpert));
+    });
   }
 }

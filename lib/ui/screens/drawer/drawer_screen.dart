@@ -43,7 +43,9 @@ class DrawerScreen extends StatelessWidget {
           DrawerTile(
             icon: Icons.account_circle_outlined,
             title: 'Profile',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.profileSettings);
+            },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerPredictions,
@@ -62,7 +64,9 @@ class DrawerScreen extends StatelessWidget {
           DrawerTile(
             icon: Icons.gpp_good_outlined,
             title: 'Privacy Policy',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.privacyPolicy);
+            },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerTermsAndService,
@@ -74,10 +78,13 @@ class DrawerScreen extends StatelessWidget {
           DrawerTile(
             imageAsset: Assets.icDrawerAdmin,
             title: 'Admin',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.admin);
+            },
           ),
           UIHelper.verticalSpaceXL,
           GestureDetector(
+            onTap: (){Navigator.pushNamedAndRemoveUntil(context, Routes.onboarding, (route) => false);},
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: Row(
