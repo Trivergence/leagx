@@ -18,36 +18,38 @@ class AddNewsScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(title: 'Add News'),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const TextWidget(
-              text: 'Title',
-              textSize: 16.0,
-            ),
-            UIHelper.verticalSpace(8.0),
-            TextFieldWidget(
-              textController: _titleController,
-            ),
-            UIHelper.verticalSpace(15.0),
-            const TextWidget(
-              text: 'Details',
-              textSize: 16.0,
-            ),
-            UIHelper.verticalSpace(8.0),
-            TextFieldWidget(textController: _messageController,inputAction: TextInputAction.newline,maxLines: 6,),
-            UIHelper.verticalSpace(15.0),
-            const TextWidget(
-              text: 'Choose a Fixture',
-              textSize: 16.0,
-            ),
-            UIHelper.verticalSpace(8.0),
-            SearchTextField(textController: _searchController, hint: 'Search',),
-            UIHelper.verticalSpaceXL,
-            MainButton(text: 'Submit', onPressed: (){},),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const TextWidget(
+                text: 'Title',
+                textSize: 16.0,
+              ),
+              UIHelper.verticalSpace(8.0),
+              TextFieldWidget(
+                textController: _titleController,
+              ),
+              UIHelper.verticalSpace(15.0),
+              const TextWidget(
+                text: 'Details',
+                textSize: 16.0,
+              ),
+              UIHelper.verticalSpace(8.0),
+              TextFieldWidget(textController: _messageController,inputAction: TextInputAction.newline,maxLines: 6,),
+              UIHelper.verticalSpace(15.0),
+              const TextWidget(
+                text: 'Choose a Fixture',
+                textSize: 16.0,
+              ),
+              UIHelper.verticalSpace(8.0),
+              SearchTextField(textController: _searchController, hint: 'Search', isDisabled: true,),
+              UIHelper.verticalSpaceXL,
+              MainButton(text: 'Submit', onPressed: (){},),
+            ],
+          ),
         ),
       ),
     );
