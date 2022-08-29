@@ -16,7 +16,8 @@ class FixtureDetailTabbarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
+    return Expanded(
+      flex: 1,
       child: GestureDetector(
         onTap: onTap,
         child: Container(
@@ -25,25 +26,23 @@ class FixtureDetailTabbarButton extends StatelessWidget {
             gradient: AppColors.blackishGradient,
           ),
           child: isTapped
-              ? Expanded(
-                  child: GradientWidget(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                          width: 2.0,
-                        )),
-                      ),
-                      child: Center(
-                        child: TextWidget(
-                          text: title.toUpperCase(),
-                          color: AppColors.colorWhite,
-                          textSize: 16.0,
-                        ),
-                      ),
+              ? GradientWidget(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                      width: 2.0,
+                    )),
+                  ),
+                  child: Center(
+                    child: TextWidget(
+                      text: title.toUpperCase(),
+                      color: AppColors.colorWhite,
+                      textSize: 16.0,
                     ),
                   ),
-                )
+                ),
+              )
               : Center(
                   child: TextWidget(
                     text: title.toUpperCase(),
