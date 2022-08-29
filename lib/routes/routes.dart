@@ -23,6 +23,7 @@ import 'package:bailbooks_defendant/ui/screens/user/user.dart';
 import 'package:flutter/material.dart';
 
 import '../ui/screens/choose_plan/choose_plan_screen.dart';
+import '../ui/screens/dashboard/components/news/add_news.dart';
 import '../ui/screens/fixtureDetails/fixture_details_screen.dart';
 
 class Routes {
@@ -51,6 +52,7 @@ class Routes {
   static const String user = "/user";
   static const String notification = "/notification";
   static const String chooseAnExpert = "/chooseAnExpert";
+  static const String addNews = "/addNews";
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -102,7 +104,9 @@ class Routes {
       case notification:
         return generateRoute(routeSettings.name!, NotificationScreen());  
       case chooseAnExpert:
-        return generateRoute(routeSettings.name!, ChooseAnExpertScreen());  
+        return generateRoute(routeSettings.name!, ChooseAnExpertScreen());
+      case addNews:
+        return generateRoute(routeSettings.name!, AddNewsScreen());   
 
       default:
         return generateRoute(
