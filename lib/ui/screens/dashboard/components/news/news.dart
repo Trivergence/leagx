@@ -1,4 +1,5 @@
 import 'package:bailbooks_defendant/constants/enums.dart';
+import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/news/components/approvals.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/news/components/feed.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/news/components/my_feed.dart';
@@ -50,7 +51,7 @@ class _NewsScreenState extends State<NewsScreen> {
             : const Feed()
           ],
         ),
-        if (widget.userType != UserType.user) const AddNewsWidget()
+        if (widget.userType != UserType.user) AddNewsWidget(onAddPressed: () => Navigator.of(context).pushNamed(Routes.addNews),)
     ],);
   }
 }

@@ -31,25 +31,26 @@ class ProfileSettingsScreen extends StatelessWidget {
           },
         ),
       ),
-      body: Container(
-        width: SizeConfig.width * 100,
-        height: SizeConfig.height * 100,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-        decoration: BoxDecoration(
-          image: const DecorationImage(
-              image: AssetImage(
-                Assets.homeBackground,
-              ),
-              fit: BoxFit.fill),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(8.0),
+      body: SingleChildScrollView(
+        child: Container(
+          width: SizeConfig.width * 100,
+          height: SizeConfig.height * 100,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+          decoration: BoxDecoration(
+            image: const DecorationImage(
+                image: AssetImage(
+                  Assets.homeBackground,
+                ),
+                fit: BoxFit.fill),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8.0),
+            ),
+            gradient: AppColors.blackishGradient,
           ),
-          gradient: AppColors.blackishGradient,
-        ),
-        child: SingleChildScrollView(
           child: Column(
             children: [
               Stack(
+                alignment: Alignment.center,
                 children: [
                   Container(
                     width: SizeConfig.width * 100,
@@ -98,17 +99,15 @@ class ProfileSettingsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Center(
-                    child: Positioned(
-                      top: 0.0,
-                      child: GradientBorderWidget(
-                        onPressed: () {},
-                        gradient: AppColors.orangishGradient,
-                        imageUrl: Strings().placeHolderUrl,
-                        height: 80.0,
-                        width: 80.0,
-                        isCircular: true,
-                      ),
+                  Positioned(
+                    top: 0.0,
+                    child: GradientBorderWidget(
+                      onPressed: () {},
+                      gradient: AppColors.orangishGradient,
+                      imageUrl: Strings().placeHolderUrl,
+                      height: 80.0,
+                      width: 80.0,
+                      isCircular: true,
                     ),
                   ),
                 ],

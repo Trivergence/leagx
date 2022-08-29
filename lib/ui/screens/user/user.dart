@@ -96,26 +96,24 @@ class UserScreen extends StatelessWidget {
           borderRadius: BorderRadius.horizontal(
               left: Radius.circular(24.0), right: Radius.circular(24.0))),
       builder: (context) {
-        return Flexible(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                UIHelper.verticalSpace(23.0),
-                const GradientWidget(
-                  child: TextWidget(
-                    text: 'User Role Setting',
-                    textSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                  ),
+        return Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              UIHelper.verticalSpace(23.0),
+              const GradientWidget(
+                child: TextWidget(
+                  text: 'User Role Setting',
+                  textSize: 18.0,
+                  fontWeight: FontWeight.w600,
                 ),
-                UIHelper.verticalSpace(36.0),
-                child,
-                UIHelper.verticalSpaceXL,
-              ],
-            ),
+              ),
+              UIHelper.verticalSpace(36.0),
+              child,
+              UIHelper.verticalSpaceXL,
+            ],
           ),
         );
       },

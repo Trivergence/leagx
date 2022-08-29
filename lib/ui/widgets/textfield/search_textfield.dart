@@ -16,6 +16,7 @@ class SearchTextField extends StatelessWidget {
   final Color iconColor;
   final ValueChanged? onFieldSubmitted;
   final TextInputAction? inputAction;
+  final bool isDisabled;
   final VoidCallback? onTap;
 
   @override
@@ -24,6 +25,7 @@ class SearchTextField extends StatelessWidget {
       controller: textController,
       onFieldSubmitted: onFieldSubmitted,
       textInputAction: inputAction,
+      readOnly: isDisabled,
       onTap: onTap,
       keyboardType: inputType,
       style: Theme.of(context)
@@ -77,7 +79,7 @@ class SearchTextField extends StatelessWidget {
     this.iconColor = Colors.grey,
     this.onFieldSubmitted,
     this.inputAction,
-    this.onTap,
+    this.onTap, this.isDisabled = false,
   }) : super(key: key);
 
   //Styles
