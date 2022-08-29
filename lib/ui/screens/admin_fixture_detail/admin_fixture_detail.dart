@@ -36,9 +36,8 @@ class _FixtureDetailScreenState extends State<AdminFixtureDetailScreen> {
               });
             },
           ),
-          Expanded(
-            child: isCoins? FixtureDetailCoinsScreen(): FixtureDetailPredictionScreen(),
-          ),
+          isCoins ? FixtureDetailCoinsScreen(): FixtureDetailPredictionScreen()
+          
         ],
       ),
     );

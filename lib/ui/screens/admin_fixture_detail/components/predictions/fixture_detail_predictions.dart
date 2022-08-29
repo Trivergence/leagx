@@ -7,18 +7,20 @@ class FixtureDetailPredictionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 15,
-      shrinkWrap: true,
-      padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 10.0),
-      itemBuilder: (context, index) {
-        return PredictionsTile(
-          imageUrl: Strings().placeHolderUrl,
-          title: 'Smith Little',
-          teamOneDetails: 'ufc - 3',
-          teamTwoDetails: 'ars - 5',
-        );
-      },
+    return Expanded(
+      child: ListView.builder(
+        itemCount: 15,
+        shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 10.0),
+        itemBuilder: (context, index) {
+          return PredictionsTile(
+            imageUrl: Strings().placeHolderUrl,
+            title: 'Smith Little',
+            teamOneDetails: 'ufc - 3',
+            teamTwoDetails: 'ars - 5',
+          );
+        },
+      ),
     );
   }
 }
