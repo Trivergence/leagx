@@ -4,7 +4,10 @@ import '../../../util/ui_model/subscription_plan.dart';
 import 'plan_widget.dart';
 
 class PlanListing extends StatefulWidget {
+  final bool isAdmin;
+
   const PlanListing({
+    required this.isAdmin,
     Key? key,
   }) : super(key: key);
 
@@ -22,7 +25,7 @@ class _PlanListingState extends State<PlanListing> {
       shrinkWrap: true,
       itemCount: listOfPlans.length,
       itemBuilder: (context, index) {
-        return PlanWidget(index: index, isSelected: index == selectedIndex, onPlanSelected: () {
+        return PlanWidget(isAdmin:widget.isAdmin,index: index, isSelected: index == selectedIndex, onPlanSelected: () {
           setState(() {
             selectedIndex = index;
           });
