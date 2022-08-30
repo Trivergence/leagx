@@ -36,7 +36,7 @@ class LeagueTile extends StatelessWidget {
             child: listOfLeagues[index].hasSubscribed! ? MainButton(text: "Subscribed", onPressed: (){},
             fontWeight: FontWeight.w400,
             fontSize: 10,)
-            : GradientBorderButton(text: "Subscribe", onPressed: () => Navigator.of(context).pushNamed(Routes.choosePlan), fontWeight: FontWeight.w400,
+            : GradientBorderButton(text: "Subscribe", onPressed: () => Navigator.of(context).pushNamed(Routes.choosePlan,arguments: true), fontWeight: FontWeight.w400,
             fontSize: 10,)),
       ),
     );

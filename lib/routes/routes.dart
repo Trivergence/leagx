@@ -7,6 +7,7 @@ import 'package:bailbooks_defendant/ui/screens/authentication/signin.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/signup.dart';
 import 'package:bailbooks_defendant/ui/screens/choose_an_expert/choose_an_expert.dart';
 import 'package:bailbooks_defendant/ui/screens/choose_league/choose_league_screen.dart';
+import 'package:bailbooks_defendant/ui/screens/choose_plan/edit_choose_plan.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/home.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/setting/setting.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/dashbard.dart';
@@ -53,6 +54,7 @@ class Routes {
   static const String notification = "/notification";
   static const String chooseAnExpert = "/chooseAnExpert";
   static const String addNews = "/addNews";
+  static const String editChoosePlan = "/editChoosePlan";
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -81,7 +83,7 @@ class Routes {
       case chooseLeague:
         return generateRoute(routeSettings.name!, ChooseLeagueScreen());
       case choosePlan:
-        return generateRoute(routeSettings.name!, const ChoosePlanScreen());
+        return generateRoute(routeSettings.name!,  ChoosePlanScreen(isAdmin: routeSettings.arguments as bool,),);
       case home:
         return generateRoute(routeSettings.name!, const HomeScreen());
       case predictions:
@@ -106,7 +108,9 @@ class Routes {
       case chooseAnExpert:
         return generateRoute(routeSettings.name!, ChooseAnExpertScreen());
       case addNews:
-        return generateRoute(routeSettings.name!, AddNewsScreen());   
+        return generateRoute(routeSettings.name!, AddNewsScreen());
+      case editChoosePlan:
+        return generateRoute(routeSettings.name!, EditChoosePlanScreen());     
 
       default:
         return generateRoute(
