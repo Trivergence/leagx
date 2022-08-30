@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 
 class ProfileInfoUpdateScreen extends StatelessWidget {
   TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _genderController = TextEditingController();
   ProfileInfoUpdateScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,7 +21,6 @@ class ProfileInfoUpdateScreen extends StatelessWidget {
       backgroundColor: AppColors.colorBackground,
       appBar: AppBarWidget(
         title: 'Edit Profile',
-
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -32,11 +34,10 @@ class ProfileInfoUpdateScreen extends StatelessWidget {
                   height: 96.0,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(
-                        Assets.imgAvatar,
-                      ),
-                      fit: BoxFit.fill
-                    ),
+                        image: AssetImage(
+                          Assets.imgAvatar,
+                        ),
+                        fit: BoxFit.fill),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -58,19 +59,20 @@ class ProfileInfoUpdateScreen extends StatelessWidget {
             ),
             UIHelper.verticalSpace(15.0),
             TextFieldWidget(
-              textController: _nameController,
+              textController: _emailController,
               hint: 'abc@xyz.com',
               prefix: const IconWidget(iconData: Icons.drafts_outlined),
             ),
             UIHelper.verticalSpace(15.0),
             TextFieldWidget(
-              textController: _nameController,
+              textController: _phoneController,
               hint: '1234567890',
+              enabled: false,
               prefix: const IconWidget(iconData: Icons.smartphone),
             ),
             UIHelper.verticalSpace(15.0),
             TextFieldWidget(
-              textController: _nameController,
+              textController: _genderController,
               hint: 'Male',
               prefix: IconWidget(iconData: Icons.perm_contact_cal),
               suffix: IconWidget(
