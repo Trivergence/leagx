@@ -28,7 +28,7 @@ class _SettingScreenState extends State<SettingScreen> {
           UIHelper.verticalSpace(30.0),
           SettingsTile(
             onTap: () {
-              Navigator.pushNamed(context, Routes.profileInfoUpdate);
+              Navigator.pushNamed(context, Routes.profileSettings);
             },
             text: 'Profile',
             iconData: Icons.account_circle_outlined,
@@ -46,8 +46,12 @@ class _SettingScreenState extends State<SettingScreen> {
             imageAsset: Assets.icNotification,
             trailing: Switch(
               value: _switchValue,
-              activeThumbImage: AssetImage(Assets.icSwitch,),
-              inactiveThumbImage: AssetImage(Assets.icSwitch,),
+              activeThumbImage: AssetImage(
+                Assets.icSwitch,
+              ),
+              inactiveThumbImage: AssetImage(
+                Assets.icSwitch,
+              ),
               onChanged: (value) {
                 setState(() {
                   _switchValue = value;
