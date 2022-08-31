@@ -1,6 +1,5 @@
-import 'package:bailbooks_defendant/ui/screens/admin_fixture_detail/components/fixture_detail_tabbar_button.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/fixture_detail_tabbar_button.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FixtureDetailTabbar extends StatefulWidget {
   final VoidCallback onCoinsTapped;

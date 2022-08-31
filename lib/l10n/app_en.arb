@@ -1,5 +1,5 @@
 {
-    "appName": "Bailbooks",
+    "appName": "LeagX",
     "@helloWorld": {
       "description": "Mobile application name"
     },
@@ -11,5 +11,5 @@
       }
     },
 
-    "loginTitle":"Login"
+    "loginTitle":"Login",
 }

@@ -9,6 +9,7 @@ import 'package:bailbooks_defendant/ui/screens/dashboard/components/news/news.da
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/setting/setting.dart';
 import 'package:bailbooks_defendant/ui/screens/drawer/drawer_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/profile/profile_settings.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
@@ -44,6 +45,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Localization.init(context);
     return Scaffold(
       appBar: AppBarWidget(
         isIcon: true,

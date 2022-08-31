@@ -1,5 +1,5 @@
 import 'package:bailbooks_defendant/constants/strings.dart';
-import 'package:bailbooks_defendant/ui/screens/admin_fixture_detail/components/predictions/components/predictions_tile.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/predictions/components/predictions_tile.dart';
 import 'package:flutter/material.dart';
 
 class FixtureDetailPredictionScreen extends StatelessWidget {

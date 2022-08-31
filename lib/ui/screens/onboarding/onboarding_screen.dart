@@ -2,6 +2,7 @@ import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/onboarding/components/onboarding_widget.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -12,6 +13,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Localization.init(context);
     return Scaffold(
       body: Column(
         children: [

@@ -1,5 +1,5 @@
 import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/screens/admin_fixture_detail/components/coins/components/coins_textfield.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/coins/components/coins_textfield.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/checkbox/check_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';

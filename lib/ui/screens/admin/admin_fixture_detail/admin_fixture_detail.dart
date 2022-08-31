@@ -1,7 +1,7 @@
 
-import 'package:bailbooks_defendant/ui/screens/admin_fixture_detail/components/coins/fixture_detail_coins.dart';
-import 'package:bailbooks_defendant/ui/screens/admin_fixture_detail/components/fixture_detail_tabbar.dart';
-import 'package:bailbooks_defendant/ui/screens/admin_fixture_detail/components/predictions/fixture_detail_predictions.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/coins/fixture_detail_coins.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/fixture_detail_tabbar.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/predictions/fixture_detail_predictions.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 
 import 'package:flutter/material.dart';
