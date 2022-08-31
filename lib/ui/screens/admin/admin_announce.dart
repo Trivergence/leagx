@@ -1,3 +1,4 @@
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
@@ -15,14 +16,14 @@ class AdmiinAnnounceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBarWidget(title: 'Announce'),
+      appBar: AppBarWidget(title: loc.adminAnnounceTxtAnnounce),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextWidget(
-              text: 'Title',
+             TextWidget(
+              text: loc.adminAnnounceTxtTitle,
               textSize: 16.0,
             ),
             UIHelper.verticalSpace(8.0),
@@ -30,14 +31,14 @@ class AdmiinAnnounceScreen extends StatelessWidget {
               textController: _titleController,
             ),
             UIHelper.verticalSpace(15.0),
-            const TextWidget(
-              text: 'Message',
+             TextWidget(
+              text: loc.adminAnnounceTxtMessage,
               textSize: 16.0,
             ),
             UIHelper.verticalSpace(8.0),
             TextFieldWidget(textController: _messageController,inputAction: TextInputAction.newline,maxLines: 6,),
             const Spacer(),
-            MainButton(text: 'Announce', onPressed: (){},),
+            MainButton(text: loc.adminAnnounceBtnAnnounce, onPressed: (){},),
           ],
         ),
       ),

@@ -1,4 +1,3 @@
-import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';

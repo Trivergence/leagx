@@ -1,7 +1,6 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/screens/authentication/components/have_account_button.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
@@ -20,7 +19,7 @@ class ResetPasswordScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
-        title: 'Reset Password',
+        title: loc.authResetPasswordTxtResetPassword,
       ),
       body: SizedBox(
         child: SingleChildScrollView(
@@ -34,26 +33,26 @@ class ResetPasswordScreen extends StatelessWidget {
               UIHelper.verticalSpaceLarge,
               Image.asset(Assets.appLogo),
               UIHelper.verticalSpaceXL,
-              const Padding(
-                padding: EdgeInsets.symmetric(
+               Padding(
+                padding:const EdgeInsets.symmetric(
                     horizontal: Dimens.horizontalSpaceMedium),
                 child: TextWidget(
                   text:
-                      'Check your email or phone number to retrieve your password.',
+                      loc.authResetPasswordTxtCheckEmailDes,
                   textAlign: TextAlign.center,
                 ),
               ),
               UIHelper.verticalSpaceLarge,
               PasswordTextField(
-                  controller: _passwordController, hint: 'Password'),
+                  controller: _passwordController, hint: loc.authResetPasswordTxtPassword),
               UIHelper.verticalSpaceMedium,
               PasswordTextField(
                 controller: _confirmPasswordController,
-                hint: 'Confirm Password',
+                hint: loc.authResetPasswordTxtConfirmPassword,
               ),
               UIHelper.verticalSpaceLarge,
               MainButton(
-                text: 'Reset Password',
+                text: loc.authResetPasswordBtnResetPassword,
                 onPressed: () {
 
                 },

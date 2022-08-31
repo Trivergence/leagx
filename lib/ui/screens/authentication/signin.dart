@@ -4,6 +4,7 @@ import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/components/have_account_button.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/components/social_media_widget.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/util/validation/validation_utils.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
@@ -27,7 +28,7 @@ class SigninScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
-        title: 'Sign In',
+        title: loc.authSigninTxtSignin,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -46,10 +47,10 @@ class SigninScreen extends StatelessWidget {
                 children: [
                   TextFieldWidget(
                     textController: _emailController,
-                    hint: 'Email',
+                    hint: loc.authSigninTxtEmail,
                     validator: (value) {
                       if (!ValidationUtils.isValid(value)) {
-                        return "required*";
+                        return loc.authSigninTxtRequired;
                       }
                       return null;
                     },
@@ -60,7 +61,7 @@ class SigninScreen extends StatelessWidget {
                   UIHelper.verticalSpaceMedium,
                   PasswordTextField(
                     controller: _passwordController,
-                    hint: 'Password',
+                    hint: loc.authSigninTxtPassword,
                   ),
                 ],
               ),
@@ -69,14 +70,14 @@ class SigninScreen extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: TextButtonWidget(
-                  text: 'Forgot Password ?',
+                  text: loc.authSigninBtnForgotPassword,
                   onPressed: () {
                     Navigator.pushNamed(context, Routes.forgotPassword);
                   }),
             ),
             UIHelper.verticalSpaceMedium,
             MainButton(
-              text: 'Sign In',
+              text: loc.authSigninBtnSignin,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   Navigator.pushNamed(context, Routes.dashboard);
@@ -84,8 +85,8 @@ class SigninScreen extends StatelessWidget {
               },
             ),
             UIHelper.verticalSpaceMedium,
-            const TextWidget(
-              text: 'Or by social accounts',
+             TextWidget(
+              text: loc.authSigninTxtSocialAccounts,
               color: AppColors.colorGrey,
             ),
             UIHelper.verticalSpaceMedium,
@@ -101,7 +102,7 @@ class SigninScreen extends StatelessWidget {
             ),
             UIHelper.verticalSpaceMedium,
             HaveAccountButton(
-              subText: 'Sign Up',
+              subText: loc.authSigninBtnSignup,
               onTap: () {
                 Navigator.pushNamed(context, Routes.signup);
               },

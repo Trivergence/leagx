@@ -1,6 +1,7 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/fixture_widget.dart';
@@ -15,7 +16,7 @@ class AdminFixtureScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: 'Fixtures',),
+      appBar: AppBarWidget(title: loc.adminFixtureTxtFixtures,),
       body: SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
@@ -29,7 +30,7 @@ class AdminFixtureScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const TextWidget(text: 'Leagues', fontWeight: FontWeight.w700),
+                 TextWidget(text: loc.adminFixtureTxtLeagues, fontWeight: FontWeight.w700),
                 UIHelper.verticalSpaceSmall,
                 SizedBox(
                   height: 40.0,
@@ -65,8 +66,8 @@ class AdminFixtureScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:  [
-                const TextWidget(
-                  text: 'Upcoming Matches',
+                 TextWidget(
+                  text: loc.adminFixtureTxtUpcomingMatches,
                   fontWeight: FontWeight.w700,
                 ),
                 UIHelper.verticalSpaceSmall,

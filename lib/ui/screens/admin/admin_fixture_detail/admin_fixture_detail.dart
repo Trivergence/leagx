@@ -15,7 +15,7 @@ class AdminFixtureDetailScreen extends StatefulWidget {
 
 class _FixtureDetailScreenState extends State<AdminFixtureDetailScreen> {
   bool isCoins=true;
-  bool isPredictions=true;
+  bool isPredictions=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

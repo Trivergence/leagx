@@ -28,7 +28,7 @@ class _AdminScreenState extends State<AdminHomeScreen> {
     List<charts.Series<dynamic, String>> seriesList = _createSampleData();
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'Admin',
+        title: loc.adminHomeTxtAdmin,
       ),
       body: Column(
         children: [
@@ -42,12 +42,12 @@ class _AdminScreenState extends State<AdminHomeScreen> {
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 children: [
-                  const AnalyticsWidget(
-                    firstLabel: 'Predictions',
+                   AnalyticsWidget(
+                    firstLabel: loc.adminHomeTxtPredictions,
                     firstValue: '40',
-                    secondLabel: 'Purchases',
+                    secondLabel: loc.adminHomeTxtPurchases,
                     secondValue: '30',
-                    thirdLabel: 'Withraw',
+                    thirdLabel: loc.adminHomeTxtWithdraw,
                     thirdValue: '10',
                   ),
                   UIHelper.verticalSpace(45.0),
@@ -63,7 +63,7 @@ class _AdminScreenState extends State<AdminHomeScreen> {
                     children: [
                       Flexible(
                         child: MainButton(
-                          text: 'Fixtures',
+                          text: loc.adminHomeBtnFixtures,
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.adminFixture);
                           },
@@ -73,7 +73,7 @@ class _AdminScreenState extends State<AdminHomeScreen> {
                       UIHelper.horizontalSpaceMedium,
                       Flexible(
                         child: MainButton(
-                          text: 'Announce',
+                          text: loc.adminHomeBtnAnnounce,
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.adminAnnounce);
                           },
@@ -83,7 +83,7 @@ class _AdminScreenState extends State<AdminHomeScreen> {
                   ),
                   UIHelper.verticalSpaceMedium,
                   MainButton(
-                    text: 'Users',
+                    text: loc.adminHomeBtnUsers,
                     onPressed: () {
                       Navigator.pushNamed(context, Routes.user);
                     },
