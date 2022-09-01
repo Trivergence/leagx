@@ -1,5 +1,6 @@
 import 'package:bailbooks_defendant/constants/strings.dart';
 import 'package:bailbooks_defendant/ui/screens/choose_an_expert/components/choose_an_expert_tile.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class ChooseAnExpertScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'Choose an Expert',
+        title: loc.chooseAnExpertTxtChooseAnExpert,
       ),
       body: ListView.builder(
         itemCount: 15,

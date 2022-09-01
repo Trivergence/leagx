@@ -1,4 +1,5 @@
 import 'package:bailbooks_defendant/routes/routes.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
@@ -33,10 +34,10 @@ class LeagueTile extends StatelessWidget {
           trailing: SizedBox(
             height: 26,
             width: 88,
-            child: listOfLeagues[index].hasSubscribed! ? MainButton(text: "Subscribed", onPressed: (){},
+            child: listOfLeagues[index].hasSubscribed! ? MainButton(text:loc.chooseLeagueBtnSubscribed, onPressed: (){},
             fontWeight: FontWeight.w400,
             fontSize: 10,)
-            : GradientBorderButton(text: "Subscribe", onPressed: () => Navigator.of(context).pushNamed(Routes.choosePlan,arguments: true), fontWeight: FontWeight.w400,
+            : GradientBorderButton(text: loc.chooseLeagueBtnSubscribe, onPressed: () => Navigator.of(context).pushNamed(Routes.choosePlan,arguments: true), fontWeight: FontWeight.w400,
             fontSize: 10,)),
       ),
     );

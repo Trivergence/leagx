@@ -1,4 +1,5 @@
 import 'package:bailbooks_defendant/constants/colors.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
@@ -19,53 +20,53 @@ class EditChoosePlanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'Edit Plan',
+        title: loc.editChoosePlanTxtEditPlan,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextWidget(
-              text: 'Name',
+             TextWidget(
+              text: loc.editChoosePlanTxtName,
             ),
             UIHelper.verticalSpace(8.0),
             TextFieldWidget(
               textController: _nameController,
-              hint: 'Plan Name',
+              hint: loc.editChoosePlanTxtPlanName,
               readOnly: true,
               hintColor: AppColors.colorWhite.withOpacity(0.3),
             ),
             UIHelper.verticalSpaceSmall,
-            const TextWidget(
-              text: 'Price',
+             TextWidget(
+              text: loc.editChoosePlanTxtPrice,
             ),
             UIHelper.verticalSpace(8.0),
             TextFieldWidget(
               textController: _priceController,
-              hint: 'Price',
+              hint: loc.editChoosePlanTxtPrice,
             ),
-            const TextWidget(
-              text: 'Feature',
+             TextWidget(
+              text: loc.editChoosePlanTxtFeature,
             ),
             UIHelper.verticalSpace(8.0),
             TextFieldWidget(
               textController: _feature1Controller,
-              hint: '1-Feature',
+              hint: loc.editChoosePlanTxt1Feature,
             ),
             UIHelper.verticalSpaceSmall,
             TextFieldWidget(
               textController: _feature2Controller,
-              hint: '2-Feature',
+              hint: loc.editChoosePlanTxt2Feature,
             ),
             UIHelper.verticalSpaceSmall,
             TextFieldWidget(
               textController: _feature3Controller,
-              hint: '3-Feature',
+              hint: loc.editChoosePlanTxt3Feature,
             ),
             UIHelper.verticalSpaceXL,
             MainButton(
-              text: 'Save',
+              text: loc.editChoosePlanBtnSave,
               onPressed: () {},
             ),
           ],

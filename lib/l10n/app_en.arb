@@ -60,5 +60,28 @@
     "authResetPasswordTxtConfirmPassword":"Confirm Password",
     "authResetPasswordBtnResetPassword":"Reset Password",
     "authTxtDontHaveAccount": "Don't have an account? ",
+    "chooseAnExpertTxtChooseAnExpert":"Choose an Expert",
+    "chooseAnExpertTxtPredictions":"predictions",
+    "chooseAnExpertTxtSuccess":"Success",
+    "chooseLeagueTxtChooseALeague":"Choose a League",
+    "chooseLeagueTxtSearch":"Search",
+    "chooseLeagueBtnSubscribed":"Subscribed",
+    "chooseLeagueBtnSubscribe":"Subscribe",
+    "choosePlanTxtChooseAPlan":"Choose a Plan",
+    "editChoosePlanTxtEditPlan":"Edit Plan",
+    "editChoosePlanTxtName":"Name",
+    "editChoosePlanTxtPlanName":"Plan Name",
+    "editChoosePlanTxtPrice":"Price",
+    "editChoosePlanTxtFeature":"Feature",
+    "editChoosePlanTxt1Feature":"1-Feature",
+    "editChoosePlanTxt2Feature":"2-Feature",
+    "editChoosePlanTxt3Feature":"3-Feature",
+    "editChoosePlanBtnSave":"Save",
+    "dashboardBtnHome":"Home",
+    "dashboardBtnFixture":"Fixture",
+    "dashboardBtnLeader":"Leader",
+    "dashboardBtnNews":"News",
+    "dashboardBtnSetting":"Setting"
+
 
 }

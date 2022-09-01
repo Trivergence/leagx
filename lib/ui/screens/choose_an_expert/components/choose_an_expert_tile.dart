@@ -1,4 +1,5 @@
 import 'package:bailbooks_defendant/constants/dimens.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
@@ -74,12 +75,12 @@ class ChooseAnExpertTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextWidget(
-                      text: '$numberOfPrediciton predictions',
+                      text: '$numberOfPrediciton ${loc.chooseAnExpertTxtPredictions}',
                       textSize: Dimens.textSmall,
                       color: AppColors.colorWhite.withOpacity(0.5),
                     ),
-                    const TextWidget(
-                      text: 'Success',
+                     TextWidget(
+                      text: loc.chooseAnExpertTxtSuccess,
                       textSize: Dimens.textSmall,
                     ),
                   ],

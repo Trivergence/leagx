@@ -8,7 +8,6 @@ import 'package:bailbooks_defendant/ui/screens/dashboard/components/leader/leade
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/news/news.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/setting/setting.dart';
 import 'package:bailbooks_defendant/ui/screens/drawer/drawer_screen.dart';
-import 'package:bailbooks_defendant/ui/screens/profile/profile_settings.dart';
 import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
@@ -77,13 +76,24 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         backgroundColor: AppColors.colorBackground,
         type: BottomNavigationBarType.fixed,
         items: [
-          _bettingNavBarItem(title: 'Home', iconData: Icons.home_outlined),
           _bettingNavBarItem(
-              title: 'Fixture', iconData: Icons.format_list_bulleted),
-          _bettingNavBarItem(title: 'Leader', iconData: Icons.leaderboard),
-          _bettingNavBarItem(title: 'News', iconData: Icons.rss_feed),
+            title: loc.dashboardBtnHome,
+            iconData: Icons.home_outlined,
+          ),
           _bettingNavBarItem(
-            title: 'Setting',
+            title: loc.dashboardBtnFixture,
+            iconData: Icons.format_list_bulleted,
+          ),
+          _bettingNavBarItem(
+            title: loc.dashboardBtnLeader,
+            iconData: Icons.leaderboard,
+          ),
+          _bettingNavBarItem(
+            title: loc.dashboardBtnNews,
+            iconData: Icons.rss_feed,
+          ),
+          _bettingNavBarItem(
+            title: loc.dashboardBtnSetting,
             iconData: Icons.settings,
           ),
         ],
