@@ -1,6 +1,7 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
 import 'package:leagx/ui/widgets/gradient_border_widget.dart';
@@ -25,7 +26,10 @@ class FixtureScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const TextWidget(text: 'Leagues', fontWeight: FontWeight.w700),
+                TextWidget(
+                  text: loc.dashboardFixtureTxtLeagues,
+                  fontWeight: FontWeight.w700,
+                ),
                 UIHelper.verticalSpaceSmall,
                 Row(
                   children: [
@@ -75,8 +79,8 @@ class FixtureScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const TextWidget(
-                  text: 'Upcoming Matches',
+                 TextWidget(
+                  text: loc.dashboardFixtureTxtUpcomingMatches,
                   fontWeight: FontWeight.w700,
                 ),
                 UIHelper.verticalSpaceSmall,

@@ -1,5 +1,6 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 
 import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/dimens.dart';
@@ -53,12 +54,12 @@ class ExpandedLeaderTile extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
             TextWidget(
-              text: "$numberOfPrediciton predictions",
+              text: "$numberOfPrediciton ${loc.dashboardLeaderTxtPredictions}",
               textSize: Dimens.textSmall,
               color: AppColors.colorWhite.withOpacity(0.5),
             ),
             TextWidget(
-                text: "Win $successRate%",
+                text: "${loc.dashboardLeaderTxtWin} $successRate%",
                 color: AppColors.colorGreen,
                 textSize: Dimens.textSmall),
           ],

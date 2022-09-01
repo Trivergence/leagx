@@ -81,7 +81,24 @@
     "dashboardBtnFixture":"Fixture",
     "dashboardBtnLeader":"Leader",
     "dashboardBtnNews":"News",
-    "dashboardBtnSetting":"Setting"
+    "dashboardBtnSetting":"Setting",
+    "dashboardFixtureTxtLeagues":"Leagues",
+    "dashboardFixtureTxtUpcomingMatches":"Upcoming Matches",
+    "dashboardHomeTxtLeaders":"Leaders",
+    "dashboardLeaderTxtPredictions":"predictions",
+    "dashboardLeaderTxtWin":"Win",
+    "dashboardLeaderTxtSuccess":"Success",
+    "dashboardNewsTxtFeed":"FEED",
+    "dashboardNewsTxtMyFeed":"MY FEED",
+    "dashboardNewsTxtApprovals":"APPROVALS",
+    "dashboardNewsAddNewsTxtAddNews":"Add News",
+    "dashboardNewsAddNewsTxtTitle":"Title",
+    "dashboardNewsAddNewsTxtDetails":"Details",
+    "dashboardNewsAddNewsTxtChooseFixture":"Choose a Fixture",
+    "dashboardNewsAddNewsTxtSearch":"Search",
+    "dashboardNewsAddNewsBtnSubmit":"Submit"
+
+
 
 
 }
