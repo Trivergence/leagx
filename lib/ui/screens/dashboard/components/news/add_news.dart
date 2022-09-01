@@ -1,9 +1,9 @@
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/textfield/search_textfield.dart';
-import 'package:bailbooks_defendant/ui/widgets/textfield/textfield_widget.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
+import 'package:leagx/ui/widgets/textfield/search_textfield.dart';
+import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 
 class AddNewsScreen extends StatelessWidget {
@@ -38,16 +38,27 @@ class AddNewsScreen extends StatelessWidget {
                 textSize: 16.0,
               ),
               UIHelper.verticalSpace(8.0),
-              TextFieldWidget(textController: _messageController,inputAction: TextInputAction.newline,maxLines: 6,),
+              TextFieldWidget(
+                textController: _messageController,
+                inputAction: TextInputAction.newline,
+                maxLines: 6,
+              ),
               UIHelper.verticalSpace(15.0),
               const TextWidget(
                 text: 'Choose a Fixture',
                 textSize: 16.0,
               ),
               UIHelper.verticalSpace(8.0),
-              SearchTextField(textController: _searchController, hint: 'Search', isDisabled: true,),
+              SearchTextField(
+                textController: _searchController,
+                hint: 'Search',
+                isDisabled: true,
+              ),
               UIHelper.verticalSpaceXL,
-              MainButton(text: 'Submit', onPressed: (){},),
+              MainButton(
+                text: 'Submit',
+                onPressed: () {},
+              ),
             ],
           ),
         ),

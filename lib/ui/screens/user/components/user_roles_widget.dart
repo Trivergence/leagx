@@ -1,4 +1,4 @@
-import 'package:bailbooks_defendant/ui/screens/user/components/user_role_button.dart';
+import 'package:leagx/ui/screens/user/components/user_role_button.dart';
 import 'package:flutter/material.dart';
 
 class UserRolesWidget extends StatefulWidget {

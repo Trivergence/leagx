@@ -1,4 +1,4 @@
-import 'package:bailbooks_defendant/constants/strings.dart';
+import 'package:leagx/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/assets.dart';
@@ -15,39 +15,51 @@ class PlayerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-    child: 
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-      Row(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-        GradientBorderWidget(
-            width: 44.0,
-            height: 44.0,
-            isCircular: true,
-            imageUrl: Strings().placeHolderUrl,
-            onPressed: () {},
-            gradient: AppColors.orangishGradient,
+          Row(
+            children: [
+              GradientBorderWidget(
+                width: 44.0,
+                height: 44.0,
+                isCircular: true,
+                imageUrl: Strings().placeHolderUrl,
+                onPressed: () {},
+                gradient: AppColors.orangishGradient,
+              ),
+              UIHelper.horizontalSpaceSmall,
+              TextWidget(
+                text: "Messi",
+                color: AppColors.colorYellow,
+              ),
+            ],
           ),
-        UIHelper.horizontalSpaceSmall,
-        TextWidget(text: "Messi", color: AppColors.colorYellow,),
-      ],),
-      Container(height: 3,width: 15,color: AppColors.colorWhite,),
-      Row(
-        children: [
-        TextWidget(text: "Messi", color: AppColors.colorRed,),
-        UIHelper.horizontalSpaceSmall,
-        GradientBorderWidget(
-            width: 44.0,
-            height: 44.0,
-            isCircular: true,
-            imageUrl: Strings().placeHolderUrl,
-            onPressed: () {},
-            gradient: AppColors.orangishGradient,
+          Container(
+            height: 3,
+            width: 15,
+            color: AppColors.colorWhite,
           ),
-      ],),
-    ],)
-    ,);
+          Row(
+            children: [
+              TextWidget(
+                text: "Messi",
+                color: AppColors.colorRed,
+              ),
+              UIHelper.horizontalSpaceSmall,
+              GradientBorderWidget(
+                width: 44.0,
+                height: 44.0,
+                isCircular: true,
+                imageUrl: Strings().placeHolderUrl,
+                onPressed: () {},
+                gradient: AppColors.orangishGradient,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

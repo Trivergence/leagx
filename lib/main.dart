@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:bailbooks_defendant/core/network/config/environment.dart';
-import 'package:bailbooks_defendant/ui/screens/betting.dart';
-import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
+import 'package:leagx/core/network/config/environment.dart';
+import 'package:leagx/ui/screens/betting.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';

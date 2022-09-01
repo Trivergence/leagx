@@ -1,5 +1,5 @@
-import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
+import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
@@ -9,10 +9,10 @@ import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 
 class LeagueTile extends StatelessWidget {
-  
   const LeagueTile({
     Key? key,
-    required this.listOfLeagues,required  this.index,
+    required this.listOfLeagues,
+    required this.index,
   }) : super(key: key);
 
   final List<ChooseLeague> listOfLeagues;
@@ -24,21 +24,31 @@ class LeagueTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: ListTile(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        contentPadding: const EdgeInsets.symmetric(horizontal:20, vertical: 16),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         tileColor: AppColors.textFieldColor,
         leading: CircleAvatar(
-            backgroundImage: AssetImage(listOfLeagues[index].leagueImage!),
-            radius: 25,
-          ),
-          title: TextWidget(text: listOfLeagues[index].leagueName!),
-          trailing: SizedBox(
+          backgroundImage: AssetImage(listOfLeagues[index].leagueImage!),
+          radius: 25,
+        ),
+        title: TextWidget(text: listOfLeagues[index].leagueName!),
+        trailing: SizedBox(
             height: 26,
             width: 88,
-            child: listOfLeagues[index].hasSubscribed! ? MainButton(text:loc.chooseLeagueBtnSubscribed, onPressed: (){},
-            fontWeight: FontWeight.w400,
-            fontSize: 10,)
-            : GradientBorderButton(text: loc.chooseLeagueBtnSubscribe, onPressed: () => Navigator.of(context).pushNamed(Routes.choosePlan,arguments: true), fontWeight: FontWeight.w400,
-            fontSize: 10,)),
+            child: listOfLeagues[index].hasSubscribed!
+                ? MainButton(
+                    text: loc.chooseLeagueBtnSubscribed,
+                    onPressed: () {},
+                    fontWeight: FontWeight.w400,
+                    fontSize: 10,
+                  )
+                : GradientBorderButton(
+                    text: loc.chooseLeagueBtnSubscribe,
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(Routes.choosePlan, arguments: true),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 10,
+                  )),
       ),
     );
   }

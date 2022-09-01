@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/constants/font_family.dart';
-
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/constants/font_family.dart';
 
 class CoinsTextField extends StatelessWidget {
   final IconData? icon;
@@ -39,7 +38,7 @@ class CoinsTextField extends StatelessWidget {
         onEditingComplete: onEditingComplete,
         onChanged: onChanged,
         autofocus: autoFocus,
-        validator:validator,
+        validator: validator,
         textInputAction: inputAction,
         obscureText: isObscure,
         maxLines: maxLines,
@@ -48,14 +47,14 @@ class CoinsTextField extends StatelessWidget {
         readOnly: readOnly!,
         keyboardType: inputType,
         textAlignVertical: TextAlignVertical.center,
-        style: Theme.of(context)
-            .textTheme
-            .bodyText1!
-            .copyWith(color: AppColors.colorWhite,fontFamily: FontFamily.openSans,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 30.0,),
+        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              color: AppColors.colorWhite,
+              fontFamily: FontFamily.openSans,
+              fontWeight: FontWeight.w400,
+              fontSize: 30.0,
+            ),
         decoration: InputDecoration(
-          isCollapsed: true,
+            isCollapsed: true,
             fillColor: AppColors.textFieldColor,
             filled: true,
             hintText: hint,

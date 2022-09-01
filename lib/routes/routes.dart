@@ -1,26 +1,26 @@
-import 'package:bailbooks_defendant/ui/screens/admin/admin_announce.dart';
-import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture.dart';
-import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/admin_fixture_detail.dart';
-import 'package:bailbooks_defendant/ui/screens/admin/admin_home.dart';
-import 'package:bailbooks_defendant/ui/screens/authentication/forgot_password.dart';
-import 'package:bailbooks_defendant/ui/screens/authentication/reset_password.dart';
-import 'package:bailbooks_defendant/ui/screens/authentication/signin.dart';
-import 'package:bailbooks_defendant/ui/screens/authentication/signup.dart';
-import 'package:bailbooks_defendant/ui/screens/choose_an_expert/choose_an_expert.dart';
-import 'package:bailbooks_defendant/ui/screens/choose_league/choose_league_screen.dart';
-import 'package:bailbooks_defendant/ui/screens/choose_plan/edit_choose_plan.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/home.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/components/setting/setting.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/dashbard.dart';
-import 'package:bailbooks_defendant/ui/screens/faq/faqs_screen.dart';
-import 'package:bailbooks_defendant/ui/screens/notification/notification.dart';
-import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
-import 'package:bailbooks_defendant/ui/screens/prediciton_s/prediction_s_screen.dart';
-import 'package:bailbooks_defendant/ui/screens/privacy_policy/privacy_policy_screen.dart';
-import 'package:bailbooks_defendant/ui/screens/profile/profile_info_update.dart';
-import 'package:bailbooks_defendant/ui/screens/profile/profile_settings.dart';
-import 'package:bailbooks_defendant/ui/screens/terms_service/terms_service_screen.dart';
-import 'package:bailbooks_defendant/ui/screens/user/user.dart';
+import 'package:leagx/ui/screens/admin/admin_announce.dart';
+import 'package:leagx/ui/screens/admin/admin_fixture.dart';
+import 'package:leagx/ui/screens/admin/admin_fixture_detail/admin_fixture_detail.dart';
+import 'package:leagx/ui/screens/admin/admin_home.dart';
+import 'package:leagx/ui/screens/authentication/forgot_password.dart';
+import 'package:leagx/ui/screens/authentication/reset_password.dart';
+import 'package:leagx/ui/screens/authentication/signin.dart';
+import 'package:leagx/ui/screens/authentication/signup.dart';
+import 'package:leagx/ui/screens/choose_an_expert/choose_an_expert.dart';
+import 'package:leagx/ui/screens/choose_league/choose_league_screen.dart';
+import 'package:leagx/ui/screens/choose_plan/edit_choose_plan.dart';
+import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
+import 'package:leagx/ui/screens/dashboard/components/setting/setting.dart';
+import 'package:leagx/ui/screens/dashboard/dashbard.dart';
+import 'package:leagx/ui/screens/faq/faqs_screen.dart';
+import 'package:leagx/ui/screens/notification/notification.dart';
+import 'package:leagx/ui/screens/onboarding/onboarding_screen.dart';
+import 'package:leagx/ui/screens/prediciton_s/prediction_s_screen.dart';
+import 'package:leagx/ui/screens/privacy_policy/privacy_policy_screen.dart';
+import 'package:leagx/ui/screens/profile/profile_info_update.dart';
+import 'package:leagx/ui/screens/profile/profile_settings.dart';
+import 'package:leagx/ui/screens/terms_service/terms_service_screen.dart';
+import 'package:leagx/ui/screens/user/user.dart';
 import 'package:flutter/material.dart';
 
 import '../ui/screens/choose_plan/choose_plan_screen.dart';
@@ -75,7 +75,7 @@ class Routes {
       case fixtureDetails:
         return generateRoute(routeSettings.name!, const FixtureDetails());
       case adminFixture:
-        return generateRoute(routeSettings.name!, AdminFixtureScreen());  
+        return generateRoute(routeSettings.name!, AdminFixtureScreen());
       case adminFixtureDetail:
         return generateRoute(routeSettings.name!, AdminFixtureDetailScreen());
       case adminAnnounce:
@@ -83,7 +83,12 @@ class Routes {
       case chooseLeague:
         return generateRoute(routeSettings.name!, ChooseLeagueScreen());
       case choosePlan:
-        return generateRoute(routeSettings.name!,  ChoosePlanScreen(isAdmin: routeSettings.arguments as bool,),);
+        return generateRoute(
+          routeSettings.name!,
+          ChoosePlanScreen(
+            isAdmin: routeSettings.arguments as bool,
+          ),
+        );
       case home:
         return generateRoute(routeSettings.name!, const HomeScreen());
       case predictions:
@@ -104,13 +109,13 @@ class Routes {
       case user:
         return generateRoute(routeSettings.name!, UserScreen());
       case notification:
-        return generateRoute(routeSettings.name!, NotificationScreen());  
+        return generateRoute(routeSettings.name!, NotificationScreen());
       case chooseAnExpert:
         return generateRoute(routeSettings.name!, ChooseAnExpertScreen());
       case addNews:
         return generateRoute(routeSettings.name!, AddNewsScreen());
       case editChoosePlan:
-        return generateRoute(routeSettings.name!, EditChoosePlanScreen());     
+        return generateRoute(routeSettings.name!, EditChoosePlanScreen());
 
       default:
         return generateRoute(

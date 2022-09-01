@@ -1,10 +1,10 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/ui/screens/faq/components/faqs_tile.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/screens/faq/components/faqs_tile.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class FaqsScreen extends StatelessWidget {
@@ -35,7 +35,7 @@ class FaqsScreen extends StatelessWidget {
           ),
         ),
         child: Column(
-          children:  [
+          children: [
             const GradientWidget(
               child: TextWidget(
                 text: 'Frequently Asked Questions',
@@ -54,34 +54,32 @@ class FaqsScreen extends StatelessWidget {
                     FaqTile(
                       title: ' Vestibulum ex odio, vehicula eu?',
                       subtitle:
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
                     ),
                     FaqTile(
-                      title:
-                      'Nunc sem ex, mattis sit amet nisi ut,',
+                      title: 'Nunc sem ex, mattis sit amet nisi ut,',
                       subtitle:
-                      'Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
+                          'Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
                     ),
                     FaqTile(
                       title: 'Phasellus efficitur in lorem',
                       subtitle:
-                      'Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.',
+                          'Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.',
                     ),
                     FaqTile(
-                      title:
-                      'Nunc sem ex, mattis sit amet nisi.',
+                      title: 'Nunc sem ex, mattis sit amet nisi.',
                       subtitle:
-                      'Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
+                          'Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. ',
                     ),
                     FaqTile(
                       title: 'Phasellus efficitur in lorem nec',
                       subtitle:
-                      'Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.',
+                          'Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa.',
                     ),
                     FaqTile(
                       title: 'Ut varius sagittis arcu et sollicitudin?',
                       subtitle:
-                      'Phasellus efficitur in lorem nec molestie. Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.',
+                          'Phasellus efficitur in lorem nec molestie. Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.Nunc sem ex, mattis sit amet nisi ut, laoreet scelerisque sem.',
                     ),
                   ],
                 ),

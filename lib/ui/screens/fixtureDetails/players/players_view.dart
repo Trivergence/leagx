@@ -1,4 +1,4 @@
-import 'package:bailbooks_defendant/routes/routes.dart';
+import 'package:leagx/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/assets.dart';
@@ -30,46 +30,58 @@ class PlayersView extends StatelessWidget {
         child: Column(
           children: [
             Container(
-               width: double.infinity,
-               color: AppColors.textFieldColor,
-               margin: const EdgeInsets.only(bottom: 10, top: 5),
-               padding: const EdgeInsets.all(20),
+                width: double.infinity,
+                color: AppColors.textFieldColor,
+                margin: const EdgeInsets.only(bottom: 10, top: 5),
+                padding: const EdgeInsets.all(20),
                 child: Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [
-                 const TeamVsWidget(teamName: 'Barcelona', groupPosition: 'Top 1 group A',image: Assets.flagImage,),
-                 Column(
-                   children: const [
-                     ScoreChip(),
-                     UIHelper.verticalSpaceSmall,
-                     TextWidget(text: "00:38:25",
-                     color: AppColors.colorGrey,
-                     textSize: Dimens.textSmall,
-                     )
-                   ],
-                 ),
-                 const TeamVsWidget(teamName: 'Man. United', groupPosition: 'Top 2 Group B',image: Assets.flagImage2,),
-                ],)
-             ),
-            IconContainer(height: SizeConfig.height * 7 , title: "Team Players",),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const TeamVsWidget(
+                      teamName: 'Barcelona',
+                      groupPosition: 'Top 1 group A',
+                      image: Assets.flagImage,
+                    ),
+                    Column(
+                      children: const [
+                        ScoreChip(),
+                        UIHelper.verticalSpaceSmall,
+                        TextWidget(
+                          text: "00:38:25",
+                          color: AppColors.colorGrey,
+                          textSize: Dimens.textSmall,
+                        )
+                      ],
+                    ),
+                    const TeamVsWidget(
+                      teamName: 'Man. United',
+                      groupPosition: 'Top 2 Group B',
+                      image: Assets.flagImage2,
+                    ),
+                  ],
+                )),
+            IconContainer(
+              height: SizeConfig.height * 7,
+              title: "Team Players",
+            ),
             Column(
-            children:  const [
-              PlayerTile(),
-              PlayerTile(),
-              PlayerTile(),
-              PlayerTile(),
-              PlayerTile(),
-              PlayerTile(),
-              PlayerTile(),
-              PlayerTile(),
-              PlayerTile(),
-              PlayerTile(),
+              children: const [
+                PlayerTile(),
+                PlayerTile(),
+                PlayerTile(),
+                PlayerTile(),
+                PlayerTile(),
+                PlayerTile(),
+                PlayerTile(),
+                PlayerTile(),
+                PlayerTile(),
+                PlayerTile(),
               ],
             ),
-          UIHelper.verticalSpaceMedium,
-          SizedBox(
-            width: SizeConfig.width * 90,
-            child: MainButton(text: "Predict", onPressed: _showSheet))
+            UIHelper.verticalSpaceMedium,
+            SizedBox(
+                width: SizeConfig.width * 90,
+                child: MainButton(text: "Predict", onPressed: _showSheet))
           ],
         ),
       ),
@@ -77,11 +89,13 @@ class PlayersView extends StatelessWidget {
   }
 
   void _showSheet() {
-    showModalBottomSheet(context: _context!,
-    backgroundColor: AppColors.colorBackground,
-     builder: (context) {
-      return PredictionSheetWidget(onSubmit: (mycontext) => Navigator.pushNamed(context, Routes.chooseAnExpert));
-    });
+    showModalBottomSheet(
+        context: _context!,
+        backgroundColor: AppColors.colorBackground,
+        builder: (context) {
+          return PredictionSheetWidget(
+              onSubmit: (mycontext) =>
+                  Navigator.pushNamed(context, Routes.chooseAnExpert));
+        });
   }
 }
-

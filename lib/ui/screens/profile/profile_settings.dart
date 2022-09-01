@@ -1,17 +1,17 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/constants/font_family.dart';
-import 'package:bailbooks_defendant/constants/strings.dart';
-import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/settings_tile.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/assets.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/constants/font_family.dart';
+import 'package:leagx/constants/strings.dart';
+import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/ui/widgets/settings_tile.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProfileSettingsScreen extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class FixtureDetailTabbarButton extends StatelessWidget {
@@ -27,22 +27,22 @@ class FixtureDetailTabbarButton extends StatelessWidget {
           ),
           child: isTapped
               ? GradientWidget(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                      width: 2.0,
-                    )),
-                  ),
-                  child: Center(
-                    child: TextWidget(
-                      text: title.toUpperCase(),
-                      color: AppColors.colorWhite,
-                      textSize: 16.0,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                        width: 2.0,
+                      )),
+                    ),
+                    child: Center(
+                      child: TextWidget(
+                        text: title.toUpperCase(),
+                        color: AppColors.colorWhite,
+                        textSize: 16.0,
+                      ),
                     ),
                   ),
-                ),
-              )
+                )
               : Center(
                   child: TextWidget(
                     text: title.toUpperCase(),

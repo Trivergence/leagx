@@ -1,7 +1,7 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/constants/font_family.dart';
-import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/constants/font_family.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 
 class GradientBorderButton extends StatelessWidget {
@@ -16,8 +16,9 @@ class GradientBorderButton extends StatelessWidget {
     this.width,
     this.height,
     required this.text,
-    required this.onPressed, this.fontSize = Dimens.buttonTextSizeMedium, this.fontWeight = FontWeight.w600,
-    
+    required this.onPressed,
+    this.fontSize = Dimens.buttonTextSizeMedium,
+    this.fontWeight = FontWeight.w600,
   }) : super(key: key);
 
   @override
@@ -48,7 +49,6 @@ class GradientBorderButton extends StatelessWidget {
           ),
           onPressed: onPressed,
         ),
-
       ),
     );
   }

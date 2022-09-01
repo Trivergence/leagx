@@ -1,18 +1,18 @@
-import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 
 class UserTile extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String? role;
   final VoidCallback onIconPressed;
-  String _userRole =' ' ;
+  String _userRole = ' ';
 
-   UserTile({
+  UserTile({
     Key? key,
     required this.imageUrl,
     required this.title,
@@ -22,7 +22,7 @@ class UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _userRole=role!=null? "($role)":"";
+    _userRole = role != null ? "($role)" : "";
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 18.0),
       margin: const EdgeInsets.symmetric(vertical: 5.0),

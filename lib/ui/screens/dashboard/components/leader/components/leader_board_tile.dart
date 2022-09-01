@@ -1,9 +1,9 @@
-import 'package:bailbooks_defendant/constants/dimens.dart';
+import 'package:leagx/constants/dimens.dart';
 import 'package:flutter/material.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 
 class LeaderBoardTile extends StatelessWidget {
   final int number;
@@ -12,14 +12,14 @@ class LeaderBoardTile extends StatelessWidget {
   final int numberOfPrediciton;
   final String successRate;
 
-  const LeaderBoardTile(
-      {Key? key,
-      required this.number,
-      required this.imageUrl,
-      required this.title,
-      required this.numberOfPrediciton,
-      required this.successRate,})
-      : super(key: key);
+  const LeaderBoardTile({
+    Key? key,
+    required this.number,
+    required this.imageUrl,
+    required this.title,
+    required this.numberOfPrediciton,
+    required this.successRate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class LeaderBoardTile extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:  [
+                  children: [
                     TextWidget(text: title),
                     TextWidget(
                       text: '$successRate%',

@@ -1,6 +1,6 @@
-import 'package:bailbooks_defendant/core/network/config/base_config.dart';
-import 'package:bailbooks_defendant/core/network/config/dev_config.dart';
-import 'package:bailbooks_defendant/core/network/config/prod_config.dart';
+import 'package:leagx/core/network/config/base_config.dart';
+import 'package:leagx/core/network/config/dev_config.dart';
+import 'package:leagx/core/network/config/prod_config.dart';
 
 class Environment {
   factory Environment() {

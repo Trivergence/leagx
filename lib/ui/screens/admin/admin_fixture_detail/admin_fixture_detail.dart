@@ -1,8 +1,7 @@
-
-import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/coins/fixture_detail_coins.dart';
-import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/fixture_detail_tabbar.dart';
-import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/predictions/fixture_detail_predictions.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/screens/admin/admin_fixture_detail/components/coins/fixture_detail_coins.dart';
+import 'package:leagx/ui/screens/admin/admin_fixture_detail/components/fixture_detail_tabbar.dart';
+import 'package:leagx/ui/screens/admin/admin_fixture_detail/components/predictions/fixture_detail_predictions.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,8 +13,8 @@ class AdminFixtureDetailScreen extends StatefulWidget {
 }
 
 class _FixtureDetailScreenState extends State<AdminFixtureDetailScreen> {
-  bool isCoins=true;
-  bool isPredictions=false;
+  bool isCoins = true;
+  bool isPredictions = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,19 +24,18 @@ class _FixtureDetailScreenState extends State<AdminFixtureDetailScreen> {
           FixtureDetailTabbar(
             onCoinsTapped: () {
               setState(() {
-                isCoins=true;
-                isPredictions=false;
+                isCoins = true;
+                isPredictions = false;
               });
             },
             onPredictionsTapped: () {
               setState(() {
-                isCoins=false;
-                isPredictions=true;
+                isCoins = false;
+                isPredictions = true;
               });
             },
           ),
-          isCoins ? FixtureDetailCoinsScreen(): FixtureDetailPredictionScreen()
-          
+          isCoins ? FixtureDetailCoinsScreen() : FixtureDetailPredictionScreen()
         ],
       ),
     );

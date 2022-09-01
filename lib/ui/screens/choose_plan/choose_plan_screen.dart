@@ -1,7 +1,7 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/assets.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/app_bar_widget.dart';

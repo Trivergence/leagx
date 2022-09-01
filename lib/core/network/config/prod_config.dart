@@ -1,5 +1,5 @@
-import 'package:bailbooks_defendant/core/network/config/app_urls.dart';
-import 'package:bailbooks_defendant/core/network/config/base_config.dart';
+import 'package:leagx/core/network/config/app_urls.dart';
+import 'package:leagx/core/network/config/base_config.dart';
 
 class ProdConfig implements BaseConfig {
   @override

@@ -1,5 +1,5 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
 import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {
@@ -35,11 +35,10 @@ class TextWidget extends StatelessWidget {
               strutStyle: StrutStyle(fontSize: textSize),
               text: TextSpan(
                 style: TextStyle(
-                  color: color,
-                  fontWeight: fontWeight,
-                  fontSize: textSize,
-                  fontFamily: fontFamily
-                ),
+                    color: color,
+                    fontWeight: fontWeight,
+                    fontSize: textSize,
+                    fontFamily: fontFamily),
                 text: text,
               ),
               textAlign: textAlign,
@@ -48,10 +47,7 @@ class TextWidget extends StatelessWidget {
         : Text(
             text,
             style: TextStyle(
-              color: color,
-              fontSize: textSize,
-              fontWeight: fontWeight
-            ),
+                color: color, fontSize: textSize, fontWeight: fontWeight),
             textAlign: textAlign,
             overflow: overflow,
             maxLines: maxLines,

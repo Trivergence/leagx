@@ -1,9 +1,9 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/image_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/assets.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/image_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class PredictionWidget extends StatelessWidget {
@@ -87,12 +87,13 @@ class PredictionWidget extends StatelessWidget {
                   ),
                   isPending
                       ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const IconWidget(
-                                iconData: Icons.campaign_outlined,
-                                color: AppColors.colorYellow,
-                                size: 18,),
+                              iconData: Icons.campaign_outlined,
+                              color: AppColors.colorYellow,
+                              size: 18,
+                            ),
                             UIHelper.horizontalSpace(6.0),
                             const TextWidget(
                               text: 'Pending',

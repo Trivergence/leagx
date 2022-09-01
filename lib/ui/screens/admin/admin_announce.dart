@@ -1,9 +1,9 @@
-import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/textfield/textfield_widget.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
+import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 
 class AdmiinAnnounceScreen extends StatelessWidget {
@@ -22,7 +22,7 @@ class AdmiinAnnounceScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             TextWidget(
+            TextWidget(
               text: loc.adminAnnounceTxtTitle,
               textSize: 16.0,
             ),
@@ -31,14 +31,21 @@ class AdmiinAnnounceScreen extends StatelessWidget {
               textController: _titleController,
             ),
             UIHelper.verticalSpace(15.0),
-             TextWidget(
+            TextWidget(
               text: loc.adminAnnounceTxtMessage,
               textSize: 16.0,
             ),
             UIHelper.verticalSpace(8.0),
-            TextFieldWidget(textController: _messageController,inputAction: TextInputAction.newline,maxLines: 6,),
+            TextFieldWidget(
+              textController: _messageController,
+              inputAction: TextInputAction.newline,
+              maxLines: 6,
+            ),
             const Spacer(),
-            MainButton(text: loc.adminAnnounceBtnAnnounce, onPressed: (){},),
+            MainButton(
+              text: loc.adminAnnounceBtnAnnounce,
+              onPressed: () {},
+            ),
           ],
         ),
       ),

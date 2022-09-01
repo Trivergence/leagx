@@ -1,11 +1,11 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
@@ -51,7 +51,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                       UIHelper.verticalSpaceMedium,
                       TextWidget(
                         text:
-                        """Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. Donec leo dolor, interdum id eleifend non, gravida nec. Donec sed justo eget tellus condimentum efficitur ac quis nisi. Aliquam ut tristique lectus, varius vulputate metus. Cras in tincidunt ipsum. Integer sollicitudin ullamcorper. Cras a urna ultricies nisl ultricies viverra. Fusce eros turpis, eleifend interdum imperdiet eget, maximus eget nulla.
+                            """Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat turpis, congue eu interdum non, rhoncus quis massa. Donec leo dolor, interdum id eleifend non, gravida nec. Donec sed justo eget tellus condimentum efficitur ac quis nisi. Aliquam ut tristique lectus, varius vulputate metus. Cras in tincidunt ipsum. Integer sollicitudin ullamcorper. Cras a urna ultricies nisl ultricies viverra. Fusce eros turpis, eleifend interdum imperdiet eget, maximus eget nulla.
 
 Morbi non dui dui. Donec elementum neque blandit, pulvinar leo ut, placerat tortor. Vitae ipsum id elit efficitur tempor. Cras enim augue,  ullamcorper enim in, efficitur rhoncus felis. Cras id suscipit leo. Integer egestas massa sit amet ullamcorper pharetra. Praesent sed nunc libero. Nunc volutpat hendrerit diam. Duis venenatis cursus urna, sit amet suscipit massa vulputate nec.
                   """,
@@ -68,16 +68,14 @@ Morbi non dui dui. Donec elementum neque blandit, pulvinar leo ut, placerat tort
                 Flexible(
                   child: MainButton(
                     text: 'Agree',
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                   ),
                 ),
                 UIHelper.horizontalSpaceMedium,
                 Flexible(
                   child: GradientBorderWidget(
                     text: 'Deny',
-                    onPressed: (){},
+                    onPressed: () {},
                   ),
                 ),
               ],

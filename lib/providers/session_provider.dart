@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bailbooks_defendant/core/sharedpref/shared_preference_helper.dart';
-import 'package:bailbooks_defendant/ui/util/validation/validation_utils.dart';
+import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
+import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,4 +1,4 @@
-package com.example.bailbooks_defendant
+package com.app.leagx
 
 import io.flutter.embedding.android.FlutterActivity
 

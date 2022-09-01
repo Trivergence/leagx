@@ -1,5 +1,5 @@
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class UIHelper {
@@ -9,7 +9,8 @@ class UIHelper {
       SizedBox(height: Dimens.verticalSpaceMedium);
   static const Widget verticalSpaceLarge =
       SizedBox(height: Dimens.verticalSpaceLarge);
-  static const Widget verticalSpaceXL = SizedBox(height:Dimens.verticalSpaceXL);    
+  static const Widget verticalSpaceXL =
+      SizedBox(height: Dimens.verticalSpaceXL);
   static Widget verticalSpace(double height) => SizedBox(height: height);
 
   static const Widget horizontalSpaceSmall =

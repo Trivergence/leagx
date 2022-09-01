@@ -1,11 +1,11 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/textfield/password_textfield.dart';
+import 'package:leagx/constants/assets.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
+import 'package:leagx/ui/widgets/textfield/password_textfield.dart';
 import 'package:flutter/material.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
@@ -33,18 +33,18 @@ class ResetPasswordScreen extends StatelessWidget {
               UIHelper.verticalSpaceLarge,
               Image.asset(Assets.appLogo),
               UIHelper.verticalSpaceXL,
-               Padding(
-                padding:const EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                     horizontal: Dimens.horizontalSpaceMedium),
                 child: TextWidget(
-                  text:
-                      loc.authResetPasswordTxtCheckEmailDes,
+                  text: loc.authResetPasswordTxtCheckEmailDes,
                   textAlign: TextAlign.center,
                 ),
               ),
               UIHelper.verticalSpaceLarge,
               PasswordTextField(
-                  controller: _passwordController, hint: loc.authResetPasswordTxtPassword),
+                  controller: _passwordController,
+                  hint: loc.authResetPasswordTxtPassword),
               UIHelper.verticalSpaceMedium,
               PasswordTextField(
                 controller: _confirmPasswordController,
@@ -53,9 +53,7 @@ class ResetPasswordScreen extends StatelessWidget {
               UIHelper.verticalSpaceLarge,
               MainButton(
                 text: loc.authResetPasswordBtnResetPassword,
-                onPressed: () {
-
-                },
+                onPressed: () {},
               ),
               /*UIHelper.verticalSpace(100.0),
               HaveAccountButton(
