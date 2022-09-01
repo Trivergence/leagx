@@ -1,9 +1,9 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class AnalyticsWidget extends StatelessWidget {
@@ -15,15 +15,20 @@ class AnalyticsWidget extends StatelessWidget {
   final String thirdValue;
 
   const AnalyticsWidget({
-    Key? key, required this.firstLabel, required this.secondLabel, required this.thirdLabel, required this.firstValue, required this.secondValue, required this.thirdValue,
-
+    Key? key,
+    required this.firstLabel,
+    required this.secondLabel,
+    required this.thirdLabel,
+    required this.firstValue,
+    required this.secondValue,
+    required this.thirdValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: Dimens.verticalPadding),
-      padding: const EdgeInsets.symmetric( vertical: 20.0),
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
       decoration: BoxDecoration(
           gradient: AppColors.blackishGradient,
           borderRadius: const BorderRadius.all(Radius.circular(8.0))),
@@ -50,7 +55,7 @@ class AnalyticsWidget extends StatelessWidget {
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
                       text: firstLabel,
-                      textSize: SizeConfig.width*3.5,
+                      textSize: SizeConfig.width * 3.5,
                       color: AppColors.colorWhite.withOpacity(0.6)),
                 ],
               ),
@@ -67,7 +72,7 @@ class AnalyticsWidget extends StatelessWidget {
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
                       text: secondLabel,
-                      textSize: SizeConfig.width*3.5,
+                      textSize: SizeConfig.width * 3.5,
                       color: AppColors.colorWhite.withOpacity(0.6)),
                 ],
               ),
@@ -84,7 +89,7 @@ class AnalyticsWidget extends StatelessWidget {
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
                       text: thirdLabel,
-                      textSize: SizeConfig.width*3.5,
+                      textSize: SizeConfig.width * 3.5,
                       color: AppColors.colorWhite.withOpacity(0.6)),
                 ],
               ),

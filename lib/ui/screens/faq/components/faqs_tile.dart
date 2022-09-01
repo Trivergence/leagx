@@ -1,7 +1,7 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class FaqTile extends StatefulWidget {
@@ -30,7 +30,10 @@ class _FaqTileState extends State<FaqTile> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextWidget(text: widget.title,overflow: TextOverflow.ellipsis,),
+              TextWidget(
+                text: widget.title,
+                overflow: TextOverflow.ellipsis,
+              ),
               isShow
                   ? const GradientWidget(
                       child: Icon(

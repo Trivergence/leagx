@@ -1,6 +1,6 @@
-import 'package:bailbooks_defendant/ui/util/validation/validation_utils.dart';
-import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/textfield/textfield_widget.dart';
+import 'package:leagx/ui/util/validation/validation_utils.dart';
+import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 
 class PasswordTextField extends StatefulWidget {

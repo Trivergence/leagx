@@ -1,4 +1,4 @@
-import 'package:bailbooks_defendant/constants/dimens.dart';
+import 'package:leagx/constants/dimens.dart';
 import 'package:flutter/material.dart';
 
 import '../../../util/ui/ui_helper.dart';
@@ -10,7 +10,9 @@ class DescWidget extends StatelessWidget {
   final String text;
   final int index;
   const DescWidget({
-    Key? key, required this.text,required this.index,
+    Key? key,
+    required this.text,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -20,10 +22,17 @@ class DescWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         GradientWidget(
-        gradient: listOfPlans[index].gradient!,
-        child: const Icon(Icons.done, size: 14,)),
-      UIHelper.horizontalSpace(8),
-      TextWidget(text: text, textSize: Dimens.textSmall,)
-    ],);
+            gradient: listOfPlans[index].gradient!,
+            child: const Icon(
+              Icons.done,
+              size: 14,
+            )),
+        UIHelper.horizontalSpace(8),
+        TextWidget(
+          text: text,
+          textSize: Dimens.textSmall,
+        )
+      ],
+    );
   }
 }

@@ -1,9 +1,9 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTile extends StatelessWidget {
@@ -12,7 +12,13 @@ class SettingsTile extends StatelessWidget {
   final Widget? trailing;
   final String text;
   final VoidCallback onTap;
-  const SettingsTile({Key? key, this.iconData, this.imageAsset,required this.onTap,required this.text,this.trailing})
+  const SettingsTile(
+      {Key? key,
+      this.iconData,
+      this.imageAsset,
+      required this.onTap,
+      required this.text,
+      this.trailing})
       : super(key: key);
 
   @override
@@ -31,24 +37,27 @@ class SettingsTile extends StatelessWidget {
         child: Row(
           children: [
             iconData != null
-                      ? Icon(
-                          iconData!,
-                        )
-                      : imageAsset != null
-                          ? Image.asset(imageAsset!)
-                          : const SizedBox(),
-            
+                ? Icon(
+                    iconData!,
+                  )
+                : imageAsset != null
+                    ? Image.asset(imageAsset!)
+                    : const SizedBox(),
             UIHelper.horizontalSpace(18.0),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   TextWidget(
+                  TextWidget(
                     text: text,
                     textSize: Dimens.textSmall,
                   ),
-                  trailing!=null? trailing!: const IconWidget(iconData:Icons.arrow_forward_ios,size: 16.0,),
-                  
+                  trailing != null
+                      ? trailing!
+                      : const IconWidget(
+                          iconData: Icons.arrow_forward_ios,
+                          size: 16.0,
+                        ),
                 ],
               ),
             ),

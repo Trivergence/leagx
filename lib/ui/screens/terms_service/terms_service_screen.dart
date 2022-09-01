@@ -1,11 +1,11 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class TermsServiceScreen extends StatelessWidget {
@@ -68,16 +68,14 @@ Morbi non dui dui. Donec elementum neque blandit, pulvinar leo ut, placerat tort
                 Flexible(
                   child: MainButton(
                     text: 'Agree',
-                    onPressed: () {
-                      
-                    },
+                    onPressed: () {},
                   ),
                 ),
                 UIHelper.horizontalSpaceMedium,
                 Flexible(
                   child: GradientBorderWidget(
                     text: 'Deny',
-                    onPressed: (){},
+                    onPressed: () {},
                   ),
                 ),
               ],

@@ -1,4 +1,4 @@
-import 'package:bailbooks_defendant/routes/routes.dart';
+import 'package:leagx/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/assets.dart';
@@ -52,18 +52,22 @@ class PlanWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GradientWidget(
-                          gradient: listOfPlans[index].gradient!,
-                          child: TextWidget(
-                            text: listOfPlans[index].title!,
-                            fontWeight: FontWeight.w700,
-                            textSize: Dimens.textMedium,
-                          ),),
-                          isAdmin?GestureDetector(
-                            onTap:(){
-                              Navigator.pushNamed(context, Routes.editChoosePlan);
-                            },
-                            child: Image.asset(Assets.icEdit),
-                          ):const SizedBox(),
+                            gradient: listOfPlans[index].gradient!,
+                            child: TextWidget(
+                              text: listOfPlans[index].title!,
+                              fontWeight: FontWeight.w700,
+                              textSize: Dimens.textMedium,
+                            ),
+                          ),
+                          isAdmin
+                              ? GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, Routes.editChoosePlan);
+                                  },
+                                  child: Image.asset(Assets.icEdit),
+                                )
+                              : const SizedBox(),
                         ],
                       ),
                       UIHelper.verticalSpace(13),

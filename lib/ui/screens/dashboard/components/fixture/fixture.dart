@@ -1,10 +1,10 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/components/fixture_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/assets.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
+import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class FixtureScreen extends StatelessWidget {
@@ -19,8 +19,8 @@ class FixtureScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-                gradient: AppColors.blackishGradient,
-                ),
+              gradient: AppColors.blackishGradient,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +58,8 @@ class FixtureScreen extends StatelessWidget {
                         height: 40.0,
                         isCircular: true,
                         iconData: Icons.add,
-                        onPressed: () => Navigator.of(context).pushNamed(Routes.chooseLeague),
+                        onPressed: () => Navigator.of(context)
+                            .pushNamed(Routes.chooseLeague),
                       ),
                     ),
                   ],
@@ -73,7 +74,7 @@ class FixtureScreen extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:  [
+              children: [
                 const TextWidget(
                   text: 'Upcoming Matches',
                   fontWeight: FontWeight.w700,
@@ -170,7 +171,6 @@ class FixtureScreen extends StatelessWidget {
                     Navigator.pushNamed(context, Routes.fixtureDetails);
                   },
                 )
-                
               ],
             ),
           ),

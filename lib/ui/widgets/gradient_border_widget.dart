@@ -1,9 +1,9 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/constants/font_family.dart';
-import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
-import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/constants/font_family.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -24,9 +24,9 @@ class GradientBorderWidget extends StatelessWidget {
     Key? key,
     this.width,
     this.height,
-     this.text,
-     this.textSize,
-     this.onPressed,
+    this.text,
+    this.textSize,
+    this.onPressed,
     this.isCircular = false,
     this.gradient = AppColors.pinkishGradient,
     this.iconData,
@@ -34,7 +34,6 @@ class GradientBorderWidget extends StatelessWidget {
     this.imageUrl,
     this.imageAsset,
     this.padding,
-
   }) : super(key: key);
 
   @override
@@ -42,20 +41,22 @@ class GradientBorderWidget extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        width: width?? SizeConfig.width * 100,
+        width: width ?? SizeConfig.width * 100,
         height: height ?? 48.0,
         padding: const EdgeInsets.all(2.0),
         decoration: BoxDecoration(
             gradient: gradient,
             shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
-            borderRadius:isCircular?null: const BorderRadius.all(Radius.circular(5.0))),
+            borderRadius: isCircular
+                ? null
+                : const BorderRadius.all(Radius.circular(5.0))),
         child: Container(
           padding: padding,
           decoration: BoxDecoration(
             color: AppColors.colorBackground,
-            shape: isCircular? BoxShape.circle:BoxShape.rectangle,
+            shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
           ),
-          clipBehavior:Clip.antiAliasWithSaveLayer,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
           child: iconData != null
               ? IconWidget(
                   iconData: iconData!,
@@ -66,17 +67,20 @@ class GradientBorderWidget extends StatelessWidget {
                       imageUrl: imageUrl!,
                       fit: BoxFit.fill,
                       height: height,
-                      width:width,
-                      
+                      width: width,
                     )
-                  : text!=null?Center(
-                      child: TextWidget(
-                        text: text!,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: FontFamily.raleway,
-                        textSize: textSize?? Dimens.textRegular,
-                      ),
-                    ):imageAsset!=null? Image.asset(imageAsset!): const SizedBox(),
+                  : text != null
+                      ? Center(
+                          child: TextWidget(
+                            text: text!,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: FontFamily.raleway,
+                            textSize: textSize ?? Dimens.textRegular,
+                          ),
+                        )
+                      : imageAsset != null
+                          ? Image.asset(imageAsset!)
+                          : const SizedBox(),
         ),
       ),
     );

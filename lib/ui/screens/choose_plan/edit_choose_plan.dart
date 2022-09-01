@@ -1,10 +1,10 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/textfield/textfield_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
+import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 
 class EditChoosePlanScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class EditChoosePlanScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             TextWidget(
+            TextWidget(
               text: loc.editChoosePlanTxtName,
             ),
             UIHelper.verticalSpace(8.0),
@@ -38,7 +38,7 @@ class EditChoosePlanScreen extends StatelessWidget {
               hintColor: AppColors.colorWhite.withOpacity(0.3),
             ),
             UIHelper.verticalSpaceSmall,
-             TextWidget(
+            TextWidget(
               text: loc.editChoosePlanTxtPrice,
             ),
             UIHelper.verticalSpace(8.0),
@@ -46,7 +46,7 @@ class EditChoosePlanScreen extends StatelessWidget {
               textController: _priceController,
               hint: loc.editChoosePlanTxtPrice,
             ),
-             TextWidget(
+            TextWidget(
               text: loc.editChoosePlanTxtFeature,
             ),
             UIHelper.verticalSpace(8.0),

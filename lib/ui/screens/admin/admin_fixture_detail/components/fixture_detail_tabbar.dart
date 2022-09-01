@@ -1,5 +1,5 @@
-import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/fixture_detail_tabbar_button.dart';
-import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
+import 'package:leagx/ui/screens/admin/admin_fixture_detail/components/fixture_detail_tabbar_button.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
 
 class FixtureDetailTabbar extends StatefulWidget {
@@ -28,8 +28,8 @@ class _FixtureDetailTabbarState extends State<FixtureDetailTabbar> {
           onTap: () {
             setState(() {
               isCoinsTapped = true;
-            isPredictionsTapped = false;
-            widget.onCoinsTapped.call();
+              isPredictionsTapped = false;
+              widget.onCoinsTapped.call();
             });
           },
         ),
@@ -39,8 +39,8 @@ class _FixtureDetailTabbarState extends State<FixtureDetailTabbar> {
           onTap: () {
             setState(() {
               isCoinsTapped = false;
-            isPredictionsTapped = true;
-            widget.onPredictionsTapped.call();
+              isPredictionsTapped = true;
+              widget.onPredictionsTapped.call();
             });
           },
         ),

@@ -1,11 +1,11 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/coins/components/coins_textfield.dart';
-import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/checkbox/check_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/screens/admin/admin_fixture_detail/components/coins/components/coins_textfield.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/checkbox/check_widget.dart';
+import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class FixtureDetailCoinsScreen extends StatelessWidget {
@@ -19,10 +19,10 @@ class FixtureDetailCoinsScreen extends StatelessWidget {
       child: Column(
         children: [
           UIHelper.verticalSpace(45.0),
-           Padding(
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextWidget(
-              text:loc.adminFixtureDetailCoinTxtSelectCoinDesc,
+              text: loc.adminFixtureDetailCoinTxtSelectCoinDesc,
               textSize: 16.0,
               textAlign: TextAlign.center,
             ),
@@ -57,7 +57,7 @@ class FixtureDetailCoinsScreen extends StatelessWidget {
             ),
           ),
           UIHelper.verticalSpace(8.0),
-           GradientWidget(
+          GradientWidget(
             child: TextWidget(
               text: loc.adminFixtureDetailCoinTxtCoins,
               textSize: 20.0,
@@ -70,7 +70,7 @@ class FixtureDetailCoinsScreen extends StatelessWidget {
                 onChanged: (value) {},
               ),
               UIHelper.horizontalSpace(8.0),
-               TextWidget(
+              TextWidget(
                 text: loc.adminFixtureDetailCoinTxtPrimaryMatch,
                 textSize: 16.0,
               ),

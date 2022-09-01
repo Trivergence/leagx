@@ -1,10 +1,10 @@
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_border_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 
 class ChooseAnExpertTile extends StatelessWidget {
   final int number;
@@ -13,14 +13,14 @@ class ChooseAnExpertTile extends StatelessWidget {
   final int numberOfPrediciton;
   final String successRate;
 
-  const ChooseAnExpertTile(
-      {Key? key,
-      required this.number,
-      required this.imageUrl,
-      required this.title,
-      required this.numberOfPrediciton,
-      required this.successRate,})
-      : super(key: key);
+  const ChooseAnExpertTile({
+    Key? key,
+    required this.number,
+    required this.imageUrl,
+    required this.title,
+    required this.numberOfPrediciton,
+    required this.successRate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class ChooseAnExpertTile extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:  [
+                  children: [
                     TextWidget(text: title),
                     TextWidget(
                       text: '$successRate%',
@@ -75,11 +75,12 @@ class ChooseAnExpertTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextWidget(
-                      text: '$numberOfPrediciton ${loc.chooseAnExpertTxtPredictions}',
+                      text:
+                          '$numberOfPrediciton ${loc.chooseAnExpertTxtPredictions}',
                       textSize: Dimens.textSmall,
                       color: AppColors.colorWhite.withOpacity(0.5),
                     ),
-                     TextWidget(
+                    TextWidget(
                       text: loc.chooseAnExpertTxtSuccess,
                       textSize: Dimens.textSmall,
                     ),

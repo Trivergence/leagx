@@ -1,6 +1,6 @@
-import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
+import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/assets.dart';
@@ -12,60 +12,72 @@ import '../../components/match_prediction_tile.dart';
 import '../../components/prediction_bottom_sheet.dart';
 
 class LiveMatchWidget extends StatelessWidget {
-   LiveMatchWidget({
+  LiveMatchWidget({
     Key? key,
   }) : super(key: key);
-  
+
   BuildContext? _context;
   @override
   Widget build(BuildContext context) {
     _context = context;
     return Column(
       children: [
-        Image.asset(Assets.stadiumImage,
+        Image.asset(
+          Assets.stadiumImage,
           width: SizeConfig.width * 100,
           height: SizeConfig.height * 25,
-          fit: BoxFit.cover,),
-        IconContainer(height: SizeConfig.height * 7,
-          title: "Match Details",),
+          fit: BoxFit.cover,
+        ),
+        IconContainer(
+          height: SizeConfig.height * 7,
+          title: "Match Details",
+        ),
         Column(
           children: const [
-              DetailTile(title: 'Shooting',
+            DetailTile(
+              title: 'Shooting',
               tileColor: AppColors.colorBackground,
               leftValue: 8,
               rightValue: 10,
             ),
-            DetailTile(title: 'Attacks',
+            DetailTile(
+              title: 'Attacks',
               tileColor: AppColors.textFieldColor,
               leftValue: 8,
               rightValue: 10,
             ),
-            DetailTile(title: 'Possession %',
+            DetailTile(
+              title: 'Possession %',
               tileColor: AppColors.colorBackground,
               leftValue: 8,
               rightValue: 10,
             ),
-            DetailTile(title: 'Red cards',
+            DetailTile(
+              title: 'Red cards',
               tileColor: AppColors.textFieldColor,
               leftValue: 8,
               rightValue: 10,
             ),
-            DetailTile(title: 'Yellow cards',
+            DetailTile(
+              title: 'Yellow cards',
               tileColor: AppColors.colorBackground,
               leftValue: 8,
               rightValue: 10,
             ),
-            DetailTile(title: 'Corners',
+            DetailTile(
+              title: 'Corners',
               tileColor: AppColors.textFieldColor,
               leftValue: 8,
               rightValue: 10,
             ),
-            DetailTile(title: 'Offsides',
+            DetailTile(
+              title: 'Offsides',
               tileColor: AppColors.colorBackground,
               leftValue: 8,
               rightValue: 10,
             ),
-            DetailTile(title: 'Passes',
+            DetailTile(
+              title: 'Passes',
               tileColor: AppColors.textFieldColor,
               leftValue: 200,
               rightValue: 100,
@@ -80,11 +92,15 @@ class LiveMatchWidget extends StatelessWidget {
       ],
     );
   }
+
   void _showSheet() {
-    showModalBottomSheet(context: _context!,
-    backgroundColor: AppColors.colorBackground,
-     builder: (context) {
-      return PredictionSheetWidget(onSubmit: (context) => Navigator.pushNamed(context, Routes.chooseAnExpert));
-    });
+    showModalBottomSheet(
+        context: _context!,
+        backgroundColor: AppColors.colorBackground,
+        builder: (context) {
+          return PredictionSheetWidget(
+              onSubmit: (context) =>
+                  Navigator.pushNamed(context, Routes.chooseAnExpert));
+        });
   }
 }

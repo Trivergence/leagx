@@ -1,7 +1,7 @@
-import 'package:bailbooks_defendant/constants/strings.dart';
-import 'package:bailbooks_defendant/ui/screens/choose_an_expert/components/choose_an_expert_tile.dart';
-import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/constants/strings.dart';
+import 'package:leagx/ui/screens/choose_an_expert/components/choose_an_expert_tile.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class ChooseAnExpertScreen extends StatelessWidget {
@@ -18,7 +18,7 @@ class ChooseAnExpertScreen extends StatelessWidget {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return ChooseAnExpertTile(
-            number: index+1,
+            number: index + 1,
             imageUrl: Strings().placeHolderUrl,
             title: "David J.P",
             numberOfPrediciton: 20,

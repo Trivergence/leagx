@@ -1,11 +1,16 @@
-import 'package:bailbooks_defendant/ui/screens/admin/components/admin_tabbar_button.dart';
+import 'package:leagx/ui/screens/admin/components/admin_tabbar_button.dart';
 import 'package:flutter/material.dart';
 
 class AdminTabBar extends StatefulWidget {
   final VoidCallback onTodayTap;
   final VoidCallback onWeeklyTap;
   final VoidCallback onMonthlyTap;
-  const AdminTabBar({Key? key,required this.onTodayTap,required this.onWeeklyTap,required this.onMonthlyTap}) : super(key: key);
+  const AdminTabBar(
+      {Key? key,
+      required this.onTodayTap,
+      required this.onWeeklyTap,
+      required this.onMonthlyTap})
+      : super(key: key);
 
   @override
   State<AdminTabBar> createState() => _AdminTabBarState();
@@ -25,8 +30,8 @@ class _AdminTabBarState extends State<AdminTabBar> {
           onTap: () {
             setState(() {
               isTodayTapped = true;
-              isWeeklyTapped=false;
-              isMonthlyTapped=false;
+              isWeeklyTapped = false;
+              isMonthlyTapped = false;
             });
             widget.onTodayTap.call();
           },
@@ -37,8 +42,8 @@ class _AdminTabBarState extends State<AdminTabBar> {
           onTap: () {
             setState(() {
               isTodayTapped = false;
-              isWeeklyTapped=true;
-              isMonthlyTapped=false;
+              isWeeklyTapped = true;
+              isMonthlyTapped = false;
             });
             widget.onWeeklyTap.call();
           },
@@ -49,8 +54,8 @@ class _AdminTabBarState extends State<AdminTabBar> {
           onTap: () {
             setState(() {
               isTodayTapped = false;
-              isWeeklyTapped=false;
-              isMonthlyTapped=true;
+              isWeeklyTapped = false;
+              isMonthlyTapped = true;
             });
             widget.onMonthlyTap.call();
           },

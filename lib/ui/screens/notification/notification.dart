@@ -1,5 +1,5 @@
-import 'package:bailbooks_defendant/ui/screens/notification/components/notification_tile.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/screens/notification/components/notification_tile.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {

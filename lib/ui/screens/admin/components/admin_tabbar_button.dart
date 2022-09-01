@@ -1,5 +1,5 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class AdminTabBarButton extends StatelessWidget {
@@ -24,26 +24,26 @@ class AdminTabBarButton extends StatelessWidget {
             gradient: AppColors.blackishGradient,
           ),
           child: Center(
-                  child: isTapped
-              ? Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 14.0, vertical: 8.0),
-                  decoration: const BoxDecoration(
-                    color: AppColors.colorBackground,
-                    borderRadius: BorderRadius.all(Radius.circular(14.0)),
-                  ),
-                  child: TextWidget(
-                    text: title.toUpperCase(),
-                    color: AppColors.colorWhite,
-                    textSize: 14.0,
-                  ),
-                )
-              : TextWidget(
+            child: isTapped
+                ? Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14.0, vertical: 8.0),
+                    decoration: const BoxDecoration(
+                      color: AppColors.colorBackground,
+                      borderRadius: BorderRadius.all(Radius.circular(14.0)),
+                    ),
+                    child: TextWidget(
+                      text: title.toUpperCase(),
+                      color: AppColors.colorWhite,
+                      textSize: 14.0,
+                    ),
+                  )
+                : TextWidget(
                     text: title.toUpperCase(),
                     color: AppColors.colorWhite.withOpacity(0.5),
                     textSize: 14.0,
                   ),
-                ),
+          ),
         ),
       ),
     );

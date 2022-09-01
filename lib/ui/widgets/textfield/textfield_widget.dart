@@ -1,6 +1,6 @@
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/constants/font_family.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/constants/font_family.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
@@ -36,7 +36,7 @@ class TextFieldWidget extends StatelessWidget {
       onEditingComplete: onEditingComplete,
       onChanged: onChanged,
       autofocus: autoFocus,
-      validator:validator,
+      validator: validator,
       textInputAction: inputAction,
       obscureText: isObscure,
       maxLines: maxLines,
@@ -53,7 +53,7 @@ class TextFieldWidget extends StatelessWidget {
           filled: true,
           hintText: hint,
           hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                color:hintColor,
+                color: hintColor,
                 fontFamily: FontFamily.openSans,
                 fontWeight: FontWeight.w400,
               ),
