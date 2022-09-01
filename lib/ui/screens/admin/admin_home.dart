@@ -1,85 +1,34 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/admin/components/admin_tab_bar.dart';
 import 'package:bailbooks_defendant/ui/screens/admin/components/legend_widget.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/components/analytics_widget.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
-class AdminScreen extends StatefulWidget {
+class AdminHomeScreen extends StatefulWidget {
 
-  AdminScreen({Key? key}) : super(key: key);
+  AdminHomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<AdminScreen> createState() => _AdminScreenState();
+  State<AdminHomeScreen> createState() => _AdminScreenState();
 }
 
-class _AdminScreenState extends State<AdminScreen> {
+class _AdminScreenState extends State<AdminHomeScreen> {
   bool isTodayTapped = true;
   bool isWeeklyTapped = false;
   bool isMonthlyTapped = false;
-  final List<SubscriberSeries> data = [
-    SubscriberSeries(
-      year: "2008",
-      subscribers: 0,
-      barColor: charts.ColorUtil.fromDartColor(Colors.blue),
-    ),
-    SubscriberSeries(
-      year: "2009",
-      subscribers: 20,
-      barColor: charts.ColorUtil.fromDartColor(Colors.blue),
-    ),
-    SubscriberSeries(
-      year: "2010",
-      subscribers: 40,
-      barColor: charts.ColorUtil.fromDartColor(Colors.blue),
-    ),
-    SubscriberSeries(
-      year: "2011",
-      subscribers: 60,
-      barColor: charts.ColorUtil.fromDartColor(Colors.blue),
-    ),
-    SubscriberSeries(
-      year: "2012",
-      subscribers: 80,
-      barColor: charts.ColorUtil.fromDartColor(Colors.blue),
-    ),
-    SubscriberSeries(
-      year: "2013",
-      subscribers: 100,
-      barColor: charts.ColorUtil.fromDartColor(Colors.orange),
-    ),
-    SubscriberSeries(
-      year: "2014",
-      subscribers: 120,
-      barColor: charts.ColorUtil.fromDartColor(Colors.blue),
-    ),
-    SubscriberSeries(
-      year: "2015",
-      subscribers: 140,
-      barColor: charts.ColorUtil.fromDartColor(Colors.pink),
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
     List<charts.Series<dynamic, String>> seriesList = _createSampleData();
-  
-    List<charts.Series<SubscriberSeries, String>> series = [
-      charts.Series(
-          id: "Subscribers",
-          data: data,
-          domainFn: (SubscriberSeries series, _) => series.year,
-          measureFn: (SubscriberSeries series, _) => series.subscribers,
-          colorFn: (SubscriberSeries series, _) => series.barColor)
-    ];
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'Admin',
+        title: loc.adminHomeTxtAdmin,
       ),
       body: Column(
         children: [
@@ -93,12 +42,12 @@ class _AdminScreenState extends State<AdminScreen> {
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 children: [
-                  const AnalyticsWidget(
-                    firstLabel: 'Predictions',
+                   AnalyticsWidget(
+                    firstLabel: loc.adminHomeTxtPredictions,
                     firstValue: '40',
-                    secondLabel: 'Purchases',
+                    secondLabel: loc.adminHomeTxtPurchases,
                     secondValue: '30',
-                    thirdLabel: 'Withraw',
+                    thirdLabel: loc.adminHomeTxtWithdraw,
                     thirdValue: '10',
                   ),
                   UIHelper.verticalSpace(45.0),
@@ -108,13 +57,13 @@ class _AdminScreenState extends State<AdminScreen> {
                     child: charts.BarChart(seriesList, animate: true,),
                   ),
                   UIHelper.verticalSpaceSmall,
-                  LegendWidget(),
+                  const LegendWidget(),
                   UIHelper.verticalSpaceMedium,
                   Row(
                     children: [
                       Flexible(
                         child: MainButton(
-                          text: 'Fixtures',
+                          text: loc.adminHomeBtnFixtures,
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.adminFixture);
                           },
@@ -124,7 +73,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       UIHelper.horizontalSpaceMedium,
                       Flexible(
                         child: MainButton(
-                          text: 'Announce',
+                          text: loc.adminHomeBtnAnnounce,
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.adminAnnounce);
                           },
@@ -134,7 +83,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   ),
                   UIHelper.verticalSpaceMedium,
                   MainButton(
-                    text: 'Users',
+                    text: loc.adminHomeBtnUsers,
                     onPressed: () {
                       Navigator.pushNamed(context, Routes.user);
                     },

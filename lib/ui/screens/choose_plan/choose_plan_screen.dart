@@ -1,4 +1,5 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class ChoosePlanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: 'Choose a Plan'),
+      appBar: AppBarWidget(title: loc.choosePlanTxtChooseAPlan),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Center(

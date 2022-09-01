@@ -1,8 +1,7 @@
 import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/screens/authentication/components/have_account_button.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
@@ -13,7 +12,6 @@ import 'package:flutter/material.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
@@ -21,7 +19,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
-        title: 'Forgot Password',
+        title: loc.authForgotPasswordTxtForgotPassword,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -34,25 +32,25 @@ class ForgotPasswordScreen extends StatelessWidget {
             UIHelper.verticalSpaceLarge,
             Image.asset(Assets.appLogo),
             UIHelper.verticalSpaceXL,
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: Dimens.horizontalSpaceMedium),
-              child:  TextWidget(
-                text:
-                    'Enter your email or phone number to retrieve your password.',
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Dimens.horizontalSpaceMedium),
+              child: TextWidget(
+                text: loc.authForgotPasswordTxtEnterEmailDesc,
                 textAlign: TextAlign.center,
               ),
             ),
             UIHelper.verticalSpaceLarge,
             TextFieldWidget(
               textController: _emailController,
-              hint: 'Email or Phone Number',
+              hint: loc.authForgotPasswordTxtemailOrPhone,
               prefix: const IconWidget(
                 iconData: Icons.drafts_outlined,
               ),
             ),
             UIHelper.verticalSpaceLarge,
             MainButton(
-              text: 'Reset Password',
+              text: loc.authForgotPasswordBtnResetPassword,
               onPressed: () {
                 Navigator.pushNamed(context, Routes.resetPassword);
               },

@@ -1,5 +1,6 @@
 import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/ui/screens/admin_fixture_detail/components/coins/components/coins_textfield.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/coins/components/coins_textfield.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/widgets/checkbox/check_widget.dart';
 import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
@@ -18,11 +19,10 @@ class FixtureDetailCoinsScreen extends StatelessWidget {
       child: Column(
         children: [
           UIHelper.verticalSpace(45.0),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextWidget(
-              text:
-                  'Please select the coins that you want to distribut among winners, coins would be distributed in a way that the users with maximum prediction success rate would be earning more coins.',
+              text:loc.adminFixtureDetailCoinTxtSelectCoinDesc,
               textSize: 16.0,
               textAlign: TextAlign.center,
             ),
@@ -38,7 +38,7 @@ class FixtureDetailCoinsScreen extends StatelessWidget {
                 CoinsTextField(
                   textController: _coinsController,
                   inputType: TextInputType.number,
-                  hint: '1000',
+                  hint: loc.adminFixtureDetailCoinTxt1000,
                   suffix: const GradientWidget(
                     child: Icon(
                       Icons.info_outline_rounded,
@@ -57,9 +57,9 @@ class FixtureDetailCoinsScreen extends StatelessWidget {
             ),
           ),
           UIHelper.verticalSpace(8.0),
-          const GradientWidget(
+           GradientWidget(
             child: TextWidget(
-              text: 'Coins',
+              text: loc.adminFixtureDetailCoinTxtCoins,
               textSize: 20.0,
             ),
           ),
@@ -70,15 +70,15 @@ class FixtureDetailCoinsScreen extends StatelessWidget {
                 onChanged: (value) {},
               ),
               UIHelper.horizontalSpace(8.0),
-              const TextWidget(
-                text: 'Primary Match',
+               TextWidget(
+                text: loc.adminFixtureDetailCoinTxtPrimaryMatch,
                 textSize: 16.0,
               ),
             ],
           ),
           UIHelper.verticalSpaceLarge,
           MainButton(
-            text: 'Save',
+            text: loc.adminFixtureDetailCoinBtnSave,
             onPressed: () {},
           ),
         ],

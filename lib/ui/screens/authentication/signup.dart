@@ -2,6 +2,7 @@ import 'package:bailbooks_defendant/constants/assets.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
 import 'package:bailbooks_defendant/routes/routes.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/components/have_account_button.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
 import 'package:bailbooks_defendant/ui/util/validation/validation_utils.dart';
 import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
@@ -26,7 +27,7 @@ class SignupScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
-        title: 'Signup',
+        title: loc.authSignupTxtSignup,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -45,10 +46,10 @@ class SignupScreen extends StatelessWidget {
                 children: [
                   TextFieldWidget(
                     textController: _nameController,
-                    hint: 'Name',
+                    hint: loc.authSignupTxtName,
                     validator: (value) {
                       if (!ValidationUtils.isValid(value)) {
-                        return "required*";
+                        return loc.authSignupTxtRequired;
                       }
                     },
                     prefix: const IconWidget(
@@ -58,10 +59,10 @@ class SignupScreen extends StatelessWidget {
                   UIHelper.verticalSpaceMedium,
                   TextFieldWidget(
                     textController: _emailController,
-                    hint: 'Email',
+                    hint: loc.authSignupTxtEmail,
                     validator: (value) {
                       if (!ValidationUtils.isValid(value)) {
-                        return "required*";
+                        return loc.authSignupTxtRequired;
                       }
                     },
                     prefix: const IconWidget(
@@ -71,26 +72,26 @@ class SignupScreen extends StatelessWidget {
                   UIHelper.verticalSpaceMedium,
                   PasswordTextField(
                     controller: _passwordController,
-                    hint: 'Password',
+                    hint: loc.authSignupTxtPassword,
                   ),
                   UIHelper.verticalSpaceMedium,
                   PasswordTextField(
                     controller: _confirmPasswordController,
-                    hint: 'Confirm Password',
+                    hint: loc.authSignupTxtConfirmPassword,
                   ),
                 ],
               ),
             ),
             UIHelper.verticalSpaceMedium,
             MainButton(
-              text: 'Sign Up',
+              text: loc.authSignupBtnSignup,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {}
               },
             ),
             UIHelper.verticalSpaceMedium,
             HaveAccountButton(
-              subText: 'Sign In',
+              subText: loc.authSignupBtnSignin,
               onTap: () {
                 Navigator.pushNamed(context, Routes.signin);
               },

@@ -1,5 +1,6 @@
 import 'package:bailbooks_defendant/constants/colors.dart';
 import 'package:bailbooks_defendant/constants/dimens.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
 class HaveAccountButton extends StatelessWidget {
   final String subText;
@@ -12,7 +13,7 @@ class HaveAccountButton extends StatelessWidget {
       onTap: onTap,
       child: RichText(
         text:  TextSpan(
-            text: "Don't have an account? ",
+            text: loc.authTxtDontHaveAccount,
             style:const TextStyle(
               color: AppColors.colorGrey,
               fontSize: Dimens.textRegular,

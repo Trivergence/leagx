@@ -1,6 +1,7 @@
-import 'package:bailbooks_defendant/ui/screens/admin/admin.dart';
-import 'package:bailbooks_defendant/ui/screens/admin_announce/admin_announce.dart';
-import 'package:bailbooks_defendant/ui/screens/admin_fixture/admin_fixture.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_announce.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/admin_fixture_detail.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_home.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/forgot_password.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/reset_password.dart';
 import 'package:bailbooks_defendant/ui/screens/authentication/signin.dart';
@@ -12,7 +13,6 @@ import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/home.da
 import 'package:bailbooks_defendant/ui/screens/dashboard/components/setting/setting.dart';
 import 'package:bailbooks_defendant/ui/screens/dashboard/dashbard.dart';
 import 'package:bailbooks_defendant/ui/screens/faq/faqs_screen.dart';
-import 'package:bailbooks_defendant/ui/screens/admin_fixture_detail/admin_fixture_detail.dart';
 import 'package:bailbooks_defendant/ui/screens/notification/notification.dart';
 import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:bailbooks_defendant/ui/screens/prediciton_s/prediction_s_screen.dart';
@@ -98,7 +98,7 @@ class Routes {
       case profileInfoUpdate:
         return generateRoute(routeSettings.name!, ProfileInfoUpdateScreen());
       case admin:
-        return generateRoute(routeSettings.name!, AdminScreen());
+        return generateRoute(routeSettings.name!, AdminHomeScreen());
       case privacyPolicy:
         return generateRoute(routeSettings.name!, const PrivacyPolicyScreen());
       case user:

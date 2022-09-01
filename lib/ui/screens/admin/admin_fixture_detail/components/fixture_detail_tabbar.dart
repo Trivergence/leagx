@@ -1,6 +1,6 @@
-import 'package:bailbooks_defendant/ui/screens/admin_fixture_detail/components/fixture_detail_tabbar_button.dart';
+import 'package:bailbooks_defendant/ui/screens/admin/admin_fixture_detail/components/fixture_detail_tabbar_button.dart';
+import 'package:bailbooks_defendant/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FixtureDetailTabbar extends StatefulWidget {
   final VoidCallback onCoinsTapped;
@@ -23,7 +23,7 @@ class _FixtureDetailTabbarState extends State<FixtureDetailTabbar> {
     return Row(
       children: [
         FixtureDetailTabbarButton(
-          title: 'coins',
+          title: loc.adminFixtureDetailBtnCoins,
           isTapped: isCoinsTapped,
           onTap: () {
             setState(() {
@@ -34,7 +34,7 @@ class _FixtureDetailTabbarState extends State<FixtureDetailTabbar> {
           },
         ),
         FixtureDetailTabbarButton(
-          title: 'predicitons',
+          title: loc.adminFixtureDetailBtnPredictions,
           isTapped: isPredictionsTapped,
           onTap: () {
             setState(() {
