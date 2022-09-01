@@ -1,1 +1,1 @@
-# betting-app
+# LeagX App
