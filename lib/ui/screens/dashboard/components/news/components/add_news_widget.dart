@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../../../constants/colors.dart';
 
 class AddNewsWidget extends StatelessWidget {
+  final VoidCallback onAddPressed;
   const AddNewsWidget({
-    Key? key,
+    Key? key, required this.onAddPressed,
   }) : super(key: key);
 
   @override
@@ -12,14 +13,17 @@ class AddNewsWidget extends StatelessWidget {
     return Positioned(
        bottom: 40,
        right: 15,
-       child: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: const BoxDecoration(
-          gradient: AppColors.orangishGradient,
-          shape: BoxShape.circle
-        ),
-        child: const Icon(Icons.add),
-        ),
+       child: InkWell(
+        onTap: onAddPressed,
+         child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+            gradient: AppColors.orangishGradient,
+            shape: BoxShape.circle
+          ),
+          child: const Icon(Icons.add),
+          ),
+       ),
      );
   }
 }

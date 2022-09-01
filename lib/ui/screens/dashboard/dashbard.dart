@@ -1,18 +1,20 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/enums.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/components/fixture/fixture.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/components/home/home.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/components/leader/leader.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/components/news/news.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/components/setting/setting.dart';
-import 'package:bailbooks_defendant/ui/screens/drawer/drawer_screen.dart';
-import 'package:bailbooks_defendant/ui/util/size/size_config.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/assets.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/enums.dart';
+import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/screens/dashboard/components/fixture/fixture.dart';
+import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
+import 'package:leagx/ui/screens/dashboard/components/leader/leader.dart';
+import 'package:leagx/ui/screens/dashboard/components/news/news.dart';
+import 'package:leagx/ui/screens/dashboard/components/setting/setting.dart';
+import 'package:leagx/ui/screens/drawer/drawer_screen.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -24,7 +26,15 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int _selectedIndex = 0;
-  static  List<Widget> _widgetOptions = <Widget>[HomeScreen(), FixtureScreen(),LeaderScreen(), NewsScreen(userType: UserType.admin,),SettingScreen()];
+  static List<Widget> _widgetOptions = <Widget>[
+    HomeScreen(),
+    FixtureScreen(),
+    LeaderScreen(),
+    NewsScreen(
+      userType: UserType.admin,
+    ),
+    SettingScreen(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -34,6 +44,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Localization.init(context);
     return Scaffold(
       appBar: AppBarWidget(
         isIcon: true,
@@ -42,7 +53,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           icon: const IconWidget(
             iconData: Icons.notifications_outlined,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.notification);
+          },
         ),
       ),
       drawer: const DrawerScreen(),
@@ -59,17 +72,30 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.colorBackground,
         type: BottomNavigationBarType.fixed,
         items: [
-     
-          _bettingNavBarItem(title: 'Home', iconData: Icons.home_outlined),
-          _bettingNavBarItem(title: 'Fixture', iconData: Icons.format_list_bulleted),
-          _bettingNavBarItem(title: 'Leader', iconData: Icons.leaderboard),
-          _bettingNavBarItem(title: 'News', iconData: Icons.rss_feed),
-          _bettingNavBarItem(title: 'Setting', iconData: Icons.settings,),
+          _bettingNavBarItem(
+            title: loc.dashboardBtnHome,
+            iconData: Icons.home_outlined,
+          ),
+          _bettingNavBarItem(
+            title: loc.dashboardBtnFixture,
+            iconData: Icons.format_list_bulleted,
+          ),
+          _bettingNavBarItem(
+            title: loc.dashboardBtnLeader,
+            iconData: Icons.leaderboard,
+          ),
+          _bettingNavBarItem(
+            title: loc.dashboardBtnNews,
+            iconData: Icons.rss_feed,
+          ),
+          _bettingNavBarItem(
+            title: loc.dashboardBtnSetting,
+            iconData: Icons.settings,
+          ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -78,44 +104,47 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ),
     );
   }
-  BottomNavigationBarItem _bettingNavBarItem({required String title,required IconData iconData})=>BottomNavigationBarItem(
-    backgroundColor: AppColors.colorBackground,
-            label: '',
-            icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconWidget(
-                  iconData: iconData,
-                  color: AppColors.colorWhite.withOpacity(0.5),
-                ),
-                UIHelper.verticalSpace(5.0),
-                TextWidget(
-                  text: title,
-                  textSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.colorWhite.withOpacity(0.5),
-                ),
-              ],
+
+  BottomNavigationBarItem _bettingNavBarItem(
+          {required String title, required IconData iconData}) =>
+      BottomNavigationBarItem(
+        backgroundColor: AppColors.colorBackground,
+        label: '',
+        icon: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconWidget(
+              iconData: iconData,
+              color: AppColors.colorWhite.withOpacity(0.5),
             ),
-            activeIcon: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GradientWidget(
-                  child: IconWidget(
-                    iconData: iconData,
-                    color: AppColors.colorWhite.withOpacity(0.5),
-                  ),
-                ),
-                UIHelper.verticalSpace(5.0),
-                GradientWidget(
-                  child: TextWidget(
-                    text: title,
-                    textSize: 8,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.colorWhite.withOpacity(0.5),
-                  ),
-                ),
-              ],
+            UIHelper.verticalSpace(5.0),
+            TextWidget(
+              text: title,
+              textSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColors.colorWhite.withOpacity(0.5),
             ),
-          );
+          ],
+        ),
+        activeIcon: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GradientWidget(
+              child: IconWidget(
+                iconData: iconData,
+                color: AppColors.colorWhite.withOpacity(0.5),
+              ),
+            ),
+            UIHelper.verticalSpace(5.0),
+            GradientWidget(
+              child: TextWidget(
+                text: title,
+                textSize: 8,
+                fontWeight: FontWeight.w400,
+                color: AppColors.colorWhite.withOpacity(0.5),
+              ),
+            ),
+          ],
+        ),
+      );
 }

@@ -1,10 +1,11 @@
-import 'package:bailbooks_defendant/constants/app_theme.dart';
-import 'package:bailbooks_defendant/constants/strings.dart';
-import 'package:bailbooks_defendant/providers/session_provider.dart';
-import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/screens/base_widget.dart';
-import 'package:bailbooks_defendant/ui/screens/dashboard/dashbard.dart';
-import 'package:bailbooks_defendant/ui/screens/onboarding/onboarding_screen.dart';
+import 'package:leagx/constants/app_theme.dart';
+import 'package:leagx/constants/strings.dart';
+import 'package:leagx/providers/session_provider.dart';
+import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/screens/base_widget.dart';
+import 'package:leagx/ui/screens/dashboard/dashbard.dart';
+import 'package:leagx/ui/screens/onboarding/onboarding_screen.dart';
+import 'package:leagx/ui/widgets/gesture_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,42 +19,45 @@ class Betting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidget(
-      model: SessionProvider(prefs: prefs),
-      child: const SizedBox(),
-      onModelReady: (SessionProvider sessionProvider) {
-        FlutterNativeSplash.remove();
-        sessionProvider.init();
-      },
-      builder: (context, SessionProvider sessionProvider, __) {
-        return MaterialApp(
-          title: Strings.appName,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en', ''),
-          ],
-          debugShowCheckedModeBanner: false,
-          theme: themeLight,
-          onGenerateRoute: Routes().generateRoutes,
-          home: Builder(
-            builder: (context) {
-              switch (sessionProvider.loginStatus) {
-                case LoginStatus.none:
-                case LoginStatus.loggingIn:
-                case LoginStatus.error:
-                  return  OnBoardingScreen();
-                case LoginStatus.loggedIn:
-                  return  DashBoardScreen();
-              }
-            },
-          ),
-        );
-      },
+    return GestureWidget(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: BaseWidget(
+        model: SessionProvider(prefs: prefs),
+        child: const SizedBox(),
+        onModelReady: (SessionProvider sessionProvider) {
+          FlutterNativeSplash.remove();
+          sessionProvider.init();
+        },
+        builder: (context, SessionProvider sessionProvider, __) {
+          return MaterialApp(
+            title: Strings.appName,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', ''),
+            ],
+            debugShowCheckedModeBanner: false,
+            theme: themeLight,
+            onGenerateRoute: Routes().generateRoutes,
+            home: Builder(
+              builder: (context) {
+                switch (sessionProvider.loginStatus) {
+                  case LoginStatus.none:
+                  case LoginStatus.loggingIn:
+                  case LoginStatus.error:
+                    return OnBoardingScreen();
+                  case LoginStatus.loggedIn:
+                    return DashBoardScreen();
+                }
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

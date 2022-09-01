@@ -10,8 +10,9 @@ import 'check_box_widget.dart';
 import 'score_picker.dart';
 
 class PredictionSheetWidget extends StatefulWidget {
+  final Function(BuildContext) onSubmit;
   const PredictionSheetWidget({
-    Key? key,
+    Key? key, required this.onSubmit,
   }) : super(key: key);
 
   @override
@@ -62,14 +63,12 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
                   secondSelected = true;
                   firstSelected = false;
                 });
-              print(score);
             },)
           ],),
           UIHelper.verticalSpace(20),
           Row(
             children: [
             CheckBoxWidget(onPressed: (value) {
-              print(value);
             },),
             UIHelper.horizontalSpace(13),
             const TextWidget(text: "Make my prediction public")
@@ -77,7 +76,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
           UIHelper.verticalSpace(30),
           MainButton(text: "SUBMIT", onPressed: (){}),
           UIHelper.verticalSpace(20),
-          GradientBorderButton(text: "Expert Advise", onPressed: (){})
+          GradientBorderButton(text: "Expert Advise", onPressed: () => widget.onSubmit(context))
         ],
         
       ),

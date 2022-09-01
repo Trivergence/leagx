@@ -1,13 +1,12 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/dot_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/image_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/live_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/assets.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/dot_widget.dart';
+import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/image_widget.dart';
+import 'package:leagx/ui/widgets/live_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class FixtureWidget extends StatelessWidget {
@@ -146,7 +145,9 @@ class FixtureWidget extends StatelessWidget {
                           text: liveTime!,
                           color: AppColors.colorWhite.withOpacity(0.6))
                       : const SizedBox(),
-                      isLive? UIHelper.verticalSpace(8.0): UIHelper.verticalSpace(20.0)
+                  isLive
+                      ? UIHelper.verticalSpace(8.0)
+                      : UIHelper.verticalSpace(20.0)
                 ],
               ),
             ),

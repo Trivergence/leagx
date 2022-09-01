@@ -1,21 +1,17 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/constants/dimens.dart';
-import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/screens/authentication/components/have_account_button.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/app_bar_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/icon_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/main_button.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/textfield/password_textfield.dart';
-import 'package:bailbooks_defendant/ui/widgets/textfield/textfield_widget.dart';
+import 'package:leagx/constants/assets.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
+import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +19,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
-        title: 'Forgot Password',
+        title: loc.authForgotPasswordTxtForgotPassword,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -36,37 +32,36 @@ class ForgotPasswordScreen extends StatelessWidget {
             UIHelper.verticalSpaceLarge,
             Image.asset(Assets.appLogo),
             UIHelper.verticalSpaceXL,
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: Dimens.horizontalSpaceMedium),
-              child:  TextWidget(
-                text:
-                    'Enter your email or phone number to retrieve your password.',
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Dimens.horizontalSpaceMedium),
+              child: TextWidget(
+                text: loc.authForgotPasswordTxtEnterEmailDesc,
                 textAlign: TextAlign.center,
               ),
             ),
             UIHelper.verticalSpaceLarge,
             TextFieldWidget(
               textController: _emailController,
-              hint: 'Email or Phone Number',
-              validator: () {},
+              hint: loc.authForgotPasswordTxtemailOrPhone,
               prefix: const IconWidget(
                 iconData: Icons.drafts_outlined,
               ),
             ),
             UIHelper.verticalSpaceLarge,
             MainButton(
-              text: 'Reset Password',
+              text: loc.authForgotPasswordBtnResetPassword,
               onPressed: () {
                 Navigator.pushNamed(context, Routes.resetPassword);
               },
             ),
-            UIHelper.verticalSpace(150.0),
+            /*UIHelper.verticalSpaceMedium,
             HaveAccountButton(
               subText: 'Sign Up',
               onTap: () {
                 Navigator.pushNamed(context, Routes.signup);
               },
-            ),
+            ),*/
           ],
         ),
       ),

@@ -1,10 +1,10 @@
-import 'package:bailbooks_defendant/constants/assets.dart';
-import 'package:bailbooks_defendant/constants/colors.dart';
-import 'package:bailbooks_defendant/routes/routes.dart';
-import 'package:bailbooks_defendant/ui/screens/drawer/components/drawer_tile.dart';
-import 'package:bailbooks_defendant/ui/util/ui/ui_helper.dart';
-import 'package:bailbooks_defendant/ui/widgets/gradient_widget.dart';
-import 'package:bailbooks_defendant/ui/widgets/text_widget.dart';
+import 'package:leagx/constants/assets.dart';
+import 'package:leagx/constants/colors.dart';
+import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/screens/drawer/components/drawer_tile.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -43,7 +43,9 @@ class DrawerScreen extends StatelessWidget {
           DrawerTile(
             icon: Icons.account_circle_outlined,
             title: 'Profile',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.profileSettings);
+            },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerPredictions,
@@ -62,7 +64,9 @@ class DrawerScreen extends StatelessWidget {
           DrawerTile(
             icon: Icons.gpp_good_outlined,
             title: 'Privacy Policy',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.privacyPolicy);
+            },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerTermsAndService,
@@ -74,10 +78,16 @@ class DrawerScreen extends StatelessWidget {
           DrawerTile(
             imageAsset: Assets.icDrawerAdmin,
             title: 'Admin',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.admin);
+            },
           ),
           UIHelper.verticalSpaceXL,
           GestureDetector(
+            onTap: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, Routes.onboarding, (route) => false);
+            },
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: Row(
