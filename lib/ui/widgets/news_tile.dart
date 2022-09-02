@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/dimens.dart';
 import '../screens/dashboard/components/news/components/tick_widget.dart';
-import '../screens/dashboard/components/news/news.dart';
 import '../util/ui/ui_helper.dart';
-import 'gradient_border_widget.dart';
+import 'gradient/gradient_border_widget.dart';
 import 'text_widget.dart';
 
 class NewsTile extends StatelessWidget {

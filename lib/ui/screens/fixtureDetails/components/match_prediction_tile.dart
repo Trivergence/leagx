@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../widgets/text_widget.dart';
@@ -17,16 +18,24 @@ class MatchPredictionTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const TextWidget(text: "Your Predictions"),
-          Column(children: const [
-            TextWidget(text: "UFC - 3", color: AppColors.colorCyan,
-            fontWeight: FontWeight.w600,),
-            TextWidget(text: "ARS - 2",
-            color: AppColors.colorYellow,
-            fontWeight: FontWeight.w600),
-          ],)
+          TextWidget(
+            text: loc.fixtureDetailsMatchTxtYourPredictions,
+          ),
+          Column(
+            children: const [
+              TextWidget(
+                text: "UFC - 3",
+                color: AppColors.colorCyan,
+                fontWeight: FontWeight.w600,
+              ),
+              TextWidget(
+                  text: "ARS - 2",
+                  color: AppColors.colorYellow,
+                  fontWeight: FontWeight.w600),
+            ],
+          )
         ],
       ),
-      );
+    );
   }
 }

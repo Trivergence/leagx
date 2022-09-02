@@ -4,7 +4,7 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/app_bar_widget.dart';
+import '../../widgets/bar/app_bar_widget.dart';
 import 'components/plan_listing.dart';
 
 class ChoosePlanScreen extends StatelessWidget {

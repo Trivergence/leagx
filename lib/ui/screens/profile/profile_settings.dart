@@ -4,10 +4,11 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/app_bar_widget.dart';
-import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/settings_tile.dart';
@@ -21,7 +22,7 @@ class ProfileSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: "Profile Settings",
+        title: loc.profileProfileSettingsTxtProfileSettings,
         trailing: IconButton(
           icon: const IconWidget(
             iconData: Icons.border_color_outlined,
@@ -83,7 +84,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                         ),
                         UIHelper.verticalSpaceSmall,
                         TextWidget(
-                          text: 'Coins',
+                          text: loc.profileProfileSettingsTxtCoins,
                           textSize: Dimens.textSmall,
                           color: AppColors.colorWhite.withOpacity(0.6),
                         ),
@@ -91,7 +92,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                         MainButton(
                           width: 110.0,
                           height: 26.0,
-                          text: 'Withdraw',
+                          text: loc.profileProfileSettingsTxtWithdraw,
                           fontSize: 14.0,
                           onPressed: () {},
                         ),

@@ -1,5 +1,6 @@
 import 'package:leagx/ui/screens/admin/components/admin_tabbar_button.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 
 class AdminTabBar extends StatefulWidget {
   final VoidCallback onTodayTap;
@@ -25,7 +26,7 @@ class _AdminTabBarState extends State<AdminTabBar> {
     return Row(
       children: [
         AdminTabBarButton(
-          title: 'today',
+          title: loc.adminHomeBtnToday,
           isTapped: isTodayTapped,
           onTap: () {
             setState(() {
@@ -37,7 +38,7 @@ class _AdminTabBarState extends State<AdminTabBar> {
           },
         ),
         AdminTabBarButton(
-          title: 'weekly',
+          title: loc.adminHomeBtnWeekly,
           isTapped: isWeeklyTapped,
           onTap: () {
             setState(() {
@@ -49,7 +50,7 @@ class _AdminTabBarState extends State<AdminTabBar> {
           },
         ),
         AdminTabBarButton(
-          title: 'monthly',
+          title: loc.adminHomeBtnMonthly,
           isTapped: isMonthlyTapped,
           onTap: () {
             setState(() {

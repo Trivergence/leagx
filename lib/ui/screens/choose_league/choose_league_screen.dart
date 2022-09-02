@@ -2,7 +2,7 @@ import 'package:leagx/constants/assets.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/ui_model/choose_league_model.dart';
-import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/textfield/search_textfield.dart';
 import 'package:flutter/material.dart';
 

@@ -2,8 +2,9 @@ import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/drawer/components/drawer_tile.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -42,42 +43,42 @@ class DrawerScreen extends StatelessWidget {
           UIHelper.verticalSpace(60.0),
           DrawerTile(
             icon: Icons.account_circle_outlined,
-            title: 'Profile',
+            title: loc.drawerBtnProfile,
             onTap: () {
               Navigator.pushNamed(context, Routes.profileSettings);
             },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerPredictions,
-            title: 'My Predictions',
+            title: loc.drawerBtnMyPredictions,
             onTap: () {
               Navigator.pushNamed(context, Routes.predictions);
             },
           ),
           DrawerTile(
             icon: Icons.help_outline,
-            title: 'FAQs',
+            title: loc.drawerBtnFaqs,
             onTap: () {
               Navigator.pushNamed(context, Routes.faqs);
             },
           ),
           DrawerTile(
             icon: Icons.gpp_good_outlined,
-            title: 'Privacy Policy',
+            title: loc.drawerBtnPrivacyPolicy,
             onTap: () {
               Navigator.pushNamed(context, Routes.privacyPolicy);
             },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerTermsAndService,
-            title: 'Terms of Services',
+            title: loc.drawerBtnTermsOfServices,
             onTap: () {
               Navigator.pushNamed(context, Routes.termsService);
             },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerAdmin,
-            title: 'Admin',
+            title: loc.drawerBtnAdmin,
             onTap: () {
               Navigator.pushNamed(context, Routes.admin);
             },
@@ -96,9 +97,9 @@ class DrawerScreen extends StatelessWidget {
                     child: Icon(Icons.logout),
                   ),
                   UIHelper.horizontalSpace(26.0),
-                  const GradientWidget(
+                   GradientWidget(
                     child: TextWidget(
-                      text: 'Logout',
+                      text: loc.drawerBtnLogout,
                     ),
                   ),
                 ],

@@ -1,4 +1,5 @@
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/dot_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
@@ -13,8 +14,8 @@ class LiveWidget extends StatelessWidget {
       children: [
         const DotWidget(),
         UIHelper.horizontalSpace(3.0),
-        const TextWidget(
-          text: 'LIVE',
+         TextWidget(
+          text: loc.liveWidgetTxtLive,
           textSize: Dimens.textSmall,
         ),
       ],

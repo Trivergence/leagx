@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../util/ui/ui_helper.dart';
 import '../../../util/ui_model/subscription_plan.dart';
-import '../../../widgets/gradient_widget.dart';
+import '../../../widgets/gradient/gradient_widget.dart';
 import '../../../widgets/text_widget.dart';
 
 class DescWidget extends StatelessWidget {

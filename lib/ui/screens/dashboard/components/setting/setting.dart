@@ -1,6 +1,8 @@
+
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/settings_tile.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
@@ -30,26 +32,26 @@ class _SettingScreenState extends State<SettingScreen> {
             onTap: () {
               Navigator.pushNamed(context, Routes.profileSettings);
             },
-            text: 'Profile',
+            text: loc.settingTxtProfile,
             iconData: Icons.account_circle_outlined,
           ),
           UIHelper.verticalSpace(15.0),
-          const TextWidget(
-            text: 'GENERAL',
+           TextWidget(
+            text: loc.settingTxtGeneral,
             textSize: 14.0,
             color: AppColors.colorGrey,
           ),
           UIHelper.verticalSpace(15.0),
           SettingsTile(
             onTap: () {},
-            text: 'Notification',
+            text: loc.settingTxtNotification,
             imageAsset: Assets.icNotification,
             trailing: Switch(
               value: _switchValue,
-              activeThumbImage: AssetImage(
+              activeThumbImage: const AssetImage(
                 Assets.icSwitch,
               ),
-              inactiveThumbImage: AssetImage(
+              inactiveThumbImage: const AssetImage(
                 Assets.icSwitch,
               ),
               onChanged: (value) {
@@ -64,13 +66,13 @@ class _SettingScreenState extends State<SettingScreen> {
             onTap: () {
               Navigator.pushNamed(context, Routes.resetPassword);
             },
-            text: 'Password',
+            text: loc.settingTxtPassword,
             iconData: Icons.lock_outline,
           ),
           UIHelper.verticalSpace(15.0),
           SettingsTile(
             onTap: () {},
-            text: 'Language',
+            text: loc.settingTxtLanguage,
             iconData: Icons.language,
           ),
           UIHelper.verticalSpace(15.0),
@@ -78,7 +80,7 @@ class _SettingScreenState extends State<SettingScreen> {
             onTap: () {
               Navigator.pushNamed(context, Routes.admin);
             },
-            text: 'Admin',
+            text: loc.settingTxtAdmin,
             imageAsset: Assets.icDrawerAdmin,
           ),
         ],

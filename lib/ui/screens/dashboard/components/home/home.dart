@@ -3,8 +3,9 @@ import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/components/analytics_widget.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,10 @@ class HomeScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const TextWidget(text: 'Leaders', fontWeight: FontWeight.w700),
+                 TextWidget(
+                  text: loc.dashboardHomeTxtLeaders,
+                  fontWeight: FontWeight.w700,
+                ),
                 UIHelper.verticalSpaceSmall,
                 SizedBox(
                   height: 40.0,
@@ -66,8 +70,8 @@ class HomeScreen extends StatelessWidget {
                   thirdLabel: 'Earned Coin',
                   thirdValue: '400',
                 ),
-                const TextWidget(
-                  text: 'Upcoming Matches',
+                 TextWidget(
+                  text: loc.dashboardHomeTxtUpcomingMatches,
                   fontWeight: FontWeight.w700,
                 ),
                 UIHelper.verticalSpaceSmall,
