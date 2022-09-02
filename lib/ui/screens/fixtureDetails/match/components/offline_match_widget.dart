@@ -1,5 +1,6 @@
 import 'package:leagx/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
@@ -34,8 +35,8 @@ class OfflineMatchWidget extends StatelessWidget {
             children: [
               Image.asset(Assets.icSoccer),
               UIHelper.verticalSpaceMedium,
-              const TextWidget(
-                text: "Match to start yet",
+              TextWidget(
+                text: loc.fixtureDetailsMatchTxtMatchToStartYet,
                 textSize: Dimens.textSM,
                 color: AppColors.colorGrey,
               )
@@ -45,7 +46,7 @@ class OfflineMatchWidget extends StatelessWidget {
         SizedBox(
             width: SizeConfig.width * 90,
             child: MainButton(
-              text: "Predict",
+              text: loc.fixtureDetailsMatchBtnPredict,
               onPressed: _showSheet,
             ))
       ],

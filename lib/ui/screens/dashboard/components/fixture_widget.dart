@@ -1,9 +1,10 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/widgets/score_chip.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/dot_widget.dart';
-import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/live_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
@@ -99,32 +100,9 @@ class FixtureWidget extends StatelessWidget {
                       isLive
                           ? Column(
                               children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 5.0),
-                                  decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(4.0)),
-                                      gradient: LinearGradient(colors: [
-                                        Color(0xFF2A3041),
-                                        Color(0xFF2B344D),
-                                        Color(0xFF2A3041),
-                                      ])),
-                                  child: Row(
-                                    children: [
-                                      TextWidget(
-                                        text: teamOneScore.toString(),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      UIHelper.horizontalSpace(10.0),
-                                      const TextWidget(text: '-'),
-                                      UIHelper.horizontalSpace(10.0),
-                                      TextWidget(
-                                        text: teamTwoScore.toString(),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ],
-                                  ),
+                                ScoreChip(
+                                  firstScore: teamOneScore!,
+                                  secondScore: teamTwoScore!,
                                 ),
                               ],
                             )

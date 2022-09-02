@@ -1,9 +1,10 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/app_bar_widget.dart';
-import 'package:leagx/ui/widgets/gradient_border_widget.dart';
-import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class TermsServiceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'Terms of Services',
+        title: loc.termsOfServiceTxtTermsOfServices,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -67,14 +68,14 @@ Morbi non dui dui. Donec elementum neque blandit, pulvinar leo ut, placerat tort
               children: [
                 Flexible(
                   child: MainButton(
-                    text: 'Agree',
+                    text: loc.termsOfServiceBtnAgree,
                     onPressed: () {},
                   ),
                 ),
                 UIHelper.horizontalSpaceMedium,
                 Flexible(
                   child: GradientBorderWidget(
-                    text: 'Deny',
+                    text: loc.termsOfServiceBtnDeny,
                     onPressed: () {},
                   ),
                 ),

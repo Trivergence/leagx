@@ -1,5 +1,6 @@
 import 'package:leagx/ui/screens/user/components/user_role_button.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 
 class UserRolesWidget extends StatefulWidget {
   final VoidCallback onUserTap;
@@ -25,7 +26,7 @@ class _UserRolesWidgetState extends State<UserRolesWidget> {
     return Column(
       children: [
         UserRoleButton(
-          title: 'User',
+          title: loc.userBtnUser,
           isTapped: isUserTapped,
           onTap: () {
             setState(() {
@@ -37,7 +38,7 @@ class _UserRolesWidgetState extends State<UserRolesWidget> {
           },
         ),
         UserRoleButton(
-          title: 'Expert',
+          title: loc.userBtnExpert,
           isTapped: isExpertTapped,
           onTap: () {
             setState(() {
@@ -49,7 +50,7 @@ class _UserRolesWidgetState extends State<UserRolesWidget> {
           },
         ),
         UserRoleButton(
-          title: 'Admin',
+          title: loc.userBtnAdmin,
           isTapped: isAdminTapped,
           onTap: () {
             setState(() {

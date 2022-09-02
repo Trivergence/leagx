@@ -71,7 +71,7 @@ class OnBoardingScreen extends StatelessWidget {
   Widget _button(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 70.0, vertical: 50.0),
         child: MainButton(
-          text: 'Get Started',
+          text: loc.onboardingBtnGetStarted,
           onPressed: () {
             Navigator.pushNamed(context, Routes.signin);
           },

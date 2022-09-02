@@ -5,7 +5,7 @@ import 'package:leagx/ui/screens/admin/components/legend_widget.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/components/analytics_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;

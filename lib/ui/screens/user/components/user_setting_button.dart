@@ -31,7 +31,7 @@ class UserSettingButton extends StatelessWidget {
               text: title,
               textSize: 16.0,
             ),
-            IconWidget(
+           const IconWidget(
               iconData: Icons.arrow_forward_ios,
             ),
           ],

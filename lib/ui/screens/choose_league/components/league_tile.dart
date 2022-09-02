@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../util/ui_model/choose_league_model.dart';
-import '../../../widgets/gradient_border_button.dart';
+import '../../../widgets/gradient/gradient_border_button.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 

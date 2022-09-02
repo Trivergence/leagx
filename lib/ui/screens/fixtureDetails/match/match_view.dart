@@ -1,3 +1,4 @@
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +8,8 @@ import '../../../../constants/dimens.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../widgets/icon_container.dart';
 import '../../../widgets/text_widget.dart';
-import '../components/score_chip.dart';
+import '../../../widgets/score_chip.dart';
 import 'components/live_match_widget.dart';
-import 'components/offline_match_widget.dart';
 
 class MatchView extends StatelessWidget {
   const MatchView({
@@ -30,19 +30,21 @@ class MatchView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(children: [
-                      Image.asset(Assets.flagImage),
-                      const TextWidget(text: "Barcelona"),
-                      UIHelper.verticalSpaceSmall,
-                      const TextWidget(
-                        text: "Top 1 Group A",
-                        textSize: Dimens.textXS,
-                        color: AppColors.colorGrey,
-                      ),
-                    ]),
+                    Column(
+                      children: [
+                        Image.asset(Assets.flagImage),
+                        const TextWidget(text: "Barcelona"),
+                        UIHelper.verticalSpaceSmall,
+                        const TextWidget(
+                          text: "Top 1 Group A",
+                          textSize: Dimens.textXS,
+                          color: AppColors.colorGrey,
+                        ),
+                      ],
+                    ),
                     Column(
                       children: const [
-                        ScoreChip(),
+                        ScoreChip(firstScore: 1,secondScore: 4,),
                         UIHelper.verticalSpaceSmall,
                         TextWidget(
                           text: "00:38:25",
@@ -65,7 +67,7 @@ class MatchView extends StatelessWidget {
                 )),
             IconContainer(
               height: SizeConfig.height * 7,
-              title: "Real Time Match Preview",
+              title: loc.faqsTxtFrequentlyAskedQuestions,
             ),
             LiveMatchWidget()
             //OfflineMatchWidget()

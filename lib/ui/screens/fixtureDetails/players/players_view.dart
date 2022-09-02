@@ -1,5 +1,6 @@
 import 'package:leagx/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
@@ -10,7 +11,7 @@ import '../../../widgets/icon_container.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 import '../components/prediction_bottom_sheet.dart';
-import '../components/score_chip.dart';
+import '../../../widgets/score_chip.dart';
 import '../components/team_vs_widget.dart';
 import 'components/player_tile.dart';
 
@@ -44,7 +45,10 @@ class PlayersView extends StatelessWidget {
                     ),
                     Column(
                       children: const [
-                        ScoreChip(),
+                        ScoreChip(
+                          firstScore: 1,
+                          secondScore: 4,
+                        ),
                         UIHelper.verticalSpaceSmall,
                         TextWidget(
                           text: "00:38:25",
@@ -62,7 +66,7 @@ class PlayersView extends StatelessWidget {
                 )),
             IconContainer(
               height: SizeConfig.height * 7,
-              title: "Team Players",
+              title: loc.fixtureDetailsPlayersTxtTeamPlayers,
             ),
             Column(
               children: const [
@@ -80,8 +84,12 @@ class PlayersView extends StatelessWidget {
             ),
             UIHelper.verticalSpaceMedium,
             SizedBox(
-                width: SizeConfig.width * 90,
-                child: MainButton(text: "Predict", onPressed: _showSheet))
+              width: SizeConfig.width * 90,
+              child: MainButton(
+                text: loc.fixtureDetailsPlayersBtnPredict,
+                onPressed: _showSheet,
+              ),
+            )
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
@@ -95,8 +96,8 @@ class PredictionWidget extends StatelessWidget {
                               size: 18,
                             ),
                             UIHelper.horizontalSpace(6.0),
-                            const TextWidget(
-                              text: 'Pending',
+                             TextWidget(
+                              text:loc.predictionSTxtPending ,
                               color: AppColors.colorYellow,
                               textSize: 14.0,
                               fontWeight: FontWeight.w400,

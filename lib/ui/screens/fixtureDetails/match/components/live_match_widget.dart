@@ -1,4 +1,5 @@
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
@@ -30,54 +31,54 @@ class LiveMatchWidget extends StatelessWidget {
         ),
         IconContainer(
           height: SizeConfig.height * 7,
-          title: "Match Details",
+          title: loc.fixtureDetailsMatchTxtMatchDetails,
         ),
         Column(
-          children: const [
+          children:  [
             DetailTile(
-              title: 'Shooting',
+              title: loc.fixtureDetailsMatchTxtShooting,
               tileColor: AppColors.colorBackground,
               leftValue: 8,
               rightValue: 10,
             ),
             DetailTile(
-              title: 'Attacks',
+              title: loc.fixtureDetailsMatchTxtAttacks,
               tileColor: AppColors.textFieldColor,
               leftValue: 8,
               rightValue: 10,
             ),
             DetailTile(
-              title: 'Possession %',
+              title: '${loc.fixtureDetailsMatchTxtPossession} %',
               tileColor: AppColors.colorBackground,
               leftValue: 8,
               rightValue: 10,
             ),
             DetailTile(
-              title: 'Red cards',
+              title: loc.fixtureDetailsMatchTxtRedCards,
               tileColor: AppColors.textFieldColor,
               leftValue: 8,
               rightValue: 10,
             ),
             DetailTile(
-              title: 'Yellow cards',
+              title: loc.fixtureDetailsMatchTxtYellowCards,
               tileColor: AppColors.colorBackground,
               leftValue: 8,
               rightValue: 10,
             ),
             DetailTile(
-              title: 'Corners',
+              title: loc.fixtureDetailsMatchTxtCorners,
               tileColor: AppColors.textFieldColor,
               leftValue: 8,
               rightValue: 10,
             ),
             DetailTile(
-              title: 'Offsides',
+              title: loc.fixtureDetailsMatchTxtOffsides,
               tileColor: AppColors.colorBackground,
               leftValue: 8,
               rightValue: 10,
             ),
             DetailTile(
-              title: 'Passes',
+              title: loc.fixtureDetailsMatchTxtPasses,
               tileColor: AppColors.textFieldColor,
               leftValue: 200,
               rightValue: 100,
@@ -87,7 +88,7 @@ class LiveMatchWidget extends StatelessWidget {
         const MatchPredictionTile(),
         SizedBox(
             width: SizeConfig.width * 90,
-            child: MainButton(text: "Predict", onPressed: _showSheet)),
+            child: MainButton(text: loc.fixtureDetailsMatchBtnPredict, onPressed: _showSheet)),
         UIHelper.verticalSpaceMedium
       ],
     );

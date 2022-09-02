@@ -1,8 +1,9 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -34,8 +35,8 @@ class AnalyticsWidget extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8.0))),
       child: Column(
         children: [
-          const TextWidget(
-            text: 'Analytics',
+           TextWidget(
+            text: loc.dashboardHomeTxtAnalytics,
             fontWeight: FontWeight.w700,
           ),
           UIHelper.verticalSpace(35.0),

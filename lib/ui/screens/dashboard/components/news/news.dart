@@ -4,10 +4,10 @@ import 'package:leagx/ui/screens/dashboard/components/news/components/approvals.
 import 'package:leagx/ui/screens/dashboard/components/news/components/feed.dart';
 import 'package:leagx/ui/screens/dashboard/components/news/components/my_feed.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/widgets/header_widget.dart';
+import 'package:leagx/ui/widgets/bar/tab_bar/tab_bar_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../util/ui_model/tab_button_model.dart';
+import '../../../../widgets/bar/tab_bar/model/tab_bar_item_model.dart';
 import 'components/add_news_widget.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -19,10 +19,10 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  List<TabButtonModel> listOfTabs = [
-    TabButtonModel(loc.dashboardNewsTxtFeed, 0),
-    TabButtonModel(loc.dashboardNewsTxtMyFeed, 1),
-    TabButtonModel(loc.dashboardNewsTxtApprovals, 2)
+  List<TabBarItemModel> listOfTabs = [
+    TabBarItemModel(loc.dashboardNewsTxtFeed, 0),
+    TabBarItemModel(loc.dashboardNewsTxtMyFeed, 1),
+    TabBarItemModel(loc.dashboardNewsTxtApprovals, 2)
   ];
   int index = 0;
   @override
@@ -32,10 +32,10 @@ class _NewsScreenState extends State<NewsScreen> {
         Column(
           children: [
             if (widget.userType != UserType.user)
-              HeaderWidget(
+              TabBarWidget(
                   totalTabs: widget.userType == UserType.expert ? 2 : 3,
                   selectedIndex: index,
-                  listOfTabs: listOfTabs,
+                  tabs: listOfTabs,
                   onTabChanged: (selectedIndex) {
                     setState(() {
                       index = selectedIndex!;

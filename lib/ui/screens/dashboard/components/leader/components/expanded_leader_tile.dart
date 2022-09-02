@@ -4,7 +4,7 @@ import 'package:leagx/ui/util/locale/localization.dart';
 
 import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/dimens.dart';
-import '../../../../../widgets/gradient_border_widget.dart';
+import '../../../../../widgets/gradient/gradient_border_widget.dart';
 import '../../../../../widgets/text_widget.dart';
 
 class ExpandedLeaderTile extends StatelessWidget {
