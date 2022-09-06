@@ -29,23 +29,23 @@ class OnBoardingScreen extends StatelessWidget {
         child: PageView(
           controller: controller,
           onPageChanged: (index) {},
-          children: const [
+          children:  [
             OnBoardingWidget(
-              title: 'LOREM IPSUM DOLOR',
+              title: loc.onboardingTxtTitle1,
               subtitle:
-                  'Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.',
+                  loc.onboardingTxtDesc1,
               imageAsset: Assets.onBoard1,
             ),
             OnBoardingWidget(
-              title: 'LOREM IPSUM DOLOR',
+              title: loc.onboardingTxtTitle2,
               subtitle:
-                  'Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.',
+                  loc.onboardingTxtDesc2,
               imageAsset: Assets.onBoard2,
             ),
             OnBoardingWidget(
-              title: 'LOREM IPSUM DOLOR',
+              title: loc.onboardingTxtTitle3,
               subtitle:
-                  'Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.',
+                  loc.onboardingTxtDesc3,
               imageAsset: Assets.onBoard3,
             ),
           ],
