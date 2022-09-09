@@ -1,11 +1,5 @@
 {
 	"appName": "LeagX",
-	"notFound": "No {dataType} found",
-	"@notFound": {
-		"placeholder": {
-			"dataType": "String"
-		}
-	},
 	"loginTitle": "Login",
   "onboardingTxtTitle1":"LOREM IPSUM DOLOR",
   "onboardingTxtDesc1":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
