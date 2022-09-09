@@ -31,6 +31,7 @@ class Betting extends StatelessWidget {
         builder: (context, SessionProvider sessionProvider, __) {
           return MaterialApp(
             title: Strings.appName,
+            // locale: Locale('ar'),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -39,6 +40,7 @@ class Betting extends StatelessWidget {
             ],
             supportedLocales: const [
               Locale('en', ''),
+              Locale('ar', ''),
             ],
             debugShowCheckedModeBanner: false,
             theme: themeLight,
