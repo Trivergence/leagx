@@ -1,12 +1,15 @@
 
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/strings.dart';
+import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/settings_tile.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatefulWidget {
   SettingScreen({Key? key}) : super(key: key);
@@ -71,7 +74,9 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           UIHelper.verticalSpace(15.0),
           SettingsTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.chooseLanguage);
+            },
             text: loc.settingTxtLanguage,
             iconData: Icons.language,
           ),

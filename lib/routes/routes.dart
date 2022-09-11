@@ -10,6 +10,7 @@ import 'package:leagx/ui/screens/choose_an_expert/choose_an_expert.dart';
 import 'package:leagx/ui/screens/choose_league/choose_league_screen.dart';
 import 'package:leagx/ui/screens/choose_plan/edit_choose_plan.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
+import 'package:leagx/ui/screens/dashboard/components/setting/components/choose_language.dart';
 import 'package:leagx/ui/screens/dashboard/components/setting/setting.dart';
 import 'package:leagx/ui/screens/dashboard/dashbard.dart';
 import 'package:leagx/ui/screens/faq/faqs_screen.dart';
@@ -55,6 +56,7 @@ class Routes {
   static const String chooseAnExpert = "/chooseAnExpert";
   static const String addNews = "/addNews";
   static const String editChoosePlan = "/editChoosePlan";
+  static const String chooseLanguage = "/chooseLanguage";
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -116,6 +118,8 @@ class Routes {
         return generateRoute(routeSettings.name!, AddNewsScreen());
       case editChoosePlan:
         return generateRoute(routeSettings.name!, EditChoosePlanScreen());
+      case chooseLanguage:
+        return generateRoute(routeSettings.name!, ChooseLanguageScreen());  
 
       default:
         return generateRoute(
