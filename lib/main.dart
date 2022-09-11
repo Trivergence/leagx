@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:leagx/core/network/config/environment.dart';
+import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/ui/screens/betting.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -22,7 +24,11 @@ void main() async {
         builder: (context, constraints) => OrientationBuilder(
           builder: (context, orientation) {
             SizeConfig().init(constraints, orientation);
-            return Betting(prefs: prefs);
+            return MultiProvider(
+              providers: [
+                ChangeNotifierProvider<LocalizationProvider>(create: (_)=>LocalizationProvider(preferences: prefs)),
+              ],
+              child: Betting(prefs: prefs));
           },
         ),
       ),
