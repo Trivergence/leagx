@@ -7,7 +7,7 @@ enum TOAST_TYPE { success, error, msg }
 class ToastMessage {
   static void show(
     String text,
-    dynamic type, {
+    TOAST_TYPE type, {
     dynamic toastLength = Toast.LENGTH_LONG,
   }) {
     Color color = AppColors.colorPrimary;
