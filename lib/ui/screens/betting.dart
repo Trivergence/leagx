@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:leagx/constants/app_theme.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/providers/localization_provider.dart';
@@ -6,6 +7,7 @@ import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/screens/dashboard/dashbard.dart';
 import 'package:leagx/ui/screens/onboarding/onboarding_screen.dart';
+import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/widgets/gesture_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,12 +25,16 @@ class Betting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureWidget(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+        Loader.hideLoader();
+      },
       child: BaseWidget(
         model: SessionProvider(prefs: prefs),
         child: const SizedBox(),
         onModelReady: (SessionProvider sessionProvider) {
           FlutterNativeSplash.remove();
+          
           sessionProvider.init();
           _localizationProvider=context.watch<LocalizationProvider>();
           _localizationProvider.init();
@@ -52,8 +58,10 @@ class Betting extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: themeLight,
             onGenerateRoute: Routes().generateRoutes,
+            builder: EasyLoading.init(),
             home: Builder(
               builder: (context) {
+                
                 switch (sessionProvider.loginStatus) {
                   case LoginStatus.none:
                   case LoginStatus.loggingIn:

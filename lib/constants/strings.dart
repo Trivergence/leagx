@@ -10,4 +10,8 @@ class Strings {
 
   String placeHolderUrl =
       "https://picsum.photos/100/100?${DateTime.now().microsecondsSinceEpoch}";
+
+  // exception and error messages
+  static const String noInternet = "No Internet";
+  static const String badHappened = "Somethig bad happened occured, please try again later";    
 }

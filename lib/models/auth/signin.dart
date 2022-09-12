@@ -1,5 +1,5 @@
-class Login {
-  Login({
+class Signin {
+  Signin({
       this.id, 
       this.email, 
       this.createdAt, 
@@ -17,7 +17,7 @@ class Login {
       this.provider, 
       this.uid,});
 
-  Login.fromJson(dynamic json) {
+  Signin.fromJson(dynamic json) {
     id = json['id'];
     email = json['email'];
     createdAt = json['created_at'];
