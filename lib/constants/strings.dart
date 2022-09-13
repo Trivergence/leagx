@@ -13,5 +13,12 @@ class Strings {
 
   // exception and error messages
   static const String noInternet = "No Internet";
-  static const String badHappened = "Somethig bad happened occured, please try again later";    
+  static const String badHappened = "Somethig bad happened occured, please try again later";   
+
+  //keys
+  static const String apiKeyTwitter = "i3ZQyWHc6vD7yyUZuYiookqAK";
+  static const String apiSecretKeyTwitter = "a7B3JE1V3zV3m0yhLPRjQnhtwEsN5d7rpElpHFIri7Gmf1nCUD"; 
+
+  //uri
+  static const String redirectUriTwitter = "leagx://";
 }
