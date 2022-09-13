@@ -46,7 +46,7 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show(errorResponse.error!,TOAST_TYPE.error );
+            ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
         return null;
       }
     } on Exception {
@@ -94,7 +94,7 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show(errorResponse.error!,TOAST_TYPE.error );
+            ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
         return null;
       }
     } on Exception {
@@ -145,7 +145,7 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show(errorResponse.error!,TOAST_TYPE.error );
+            ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
         return null;
       }
     } on Exception {
@@ -195,7 +195,7 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show(errorResponse.error!,TOAST_TYPE.error );
+            ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
         return null;
       }
     } on Exception {
