@@ -1,6 +1,7 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/constants/strings.dart';
 import 'package:leagx/models/auth/signin.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/authentication/components/have_account_button.dart';
@@ -20,6 +21,7 @@ import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 class SigninScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -85,7 +87,7 @@ class SigninScreen extends StatelessWidget {
             UIHelper.verticalSpaceMedium,
             MainButton(
               text: loc.authSigninBtnSignin,
-              onPressed: () async{
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   Loader.showLoader();
                   Signin? loginResponse = await AuthViewModel.login(
@@ -93,11 +95,11 @@ class SigninScreen extends StatelessWidget {
                     password: _passwordController.text,
                   );
                   Loader.hideLoader();
-                  if(ValidationUtils.isValid(loginResponse)){
-                    ToastMessage.show(loc.authSigninTxtSignedinSuccessfully, TOAST_TYPE.success);
+                  if (ValidationUtils.isValid(loginResponse)) {
+                    ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
+                        TOAST_TYPE.success);
                     Navigator.pushNamed(context, Routes.dashboard);
                   }
-                  
                 }
               },
             ),
@@ -109,12 +111,38 @@ class SigninScreen extends StatelessWidget {
             UIHelper.verticalSpaceMedium,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                SocialMediaWidget(iconData: FontAwesomeIcons.apple),
+              children: [
+                SocialMediaWidget(
+                  iconData: FontAwesomeIcons.apple,
+                  onTap: () {},
+                ),
                 UIHelper.horizontalSpaceMedium,
                 // SocialMediaWidget(iconData: FontAwesomeIcons.facebookF),
                 // UIHelper.horizontalSpaceMedium,
-                SocialMediaWidget(iconData: FontAwesomeIcons.twitter),
+                SocialMediaWidget(
+                  iconData: FontAwesomeIcons.twitter,
+                  onTap: () async {
+                    final twitterLogin = TwitterLogin(
+                      apiKey: Strings.apiKeyTwitter,
+                      apiSecretKey: Strings.apiSecretKeyTwitter,
+                      redirectURI: Strings.redirectUriTwitter,
+                    );
+                    final authResult = await twitterLogin.loginV2();
+                    switch (authResult.status) {
+                      case TwitterLoginStatus.loggedIn:
+                        ToastMessage.show('Logged In', TOAST_TYPE.success);
+                        Navigator.pushNamed(context, Routes.dashboard);
+                        break;
+                      case TwitterLoginStatus.cancelledByUser:
+                        print('====== Login cancel ======');
+                        break;
+                      case TwitterLoginStatus.error:
+                      case null:
+                        print('====== Login error ======');
+                        break;
+                    }
+                  },
+                ),
               ],
             ),
             UIHelper.verticalSpaceMedium,
