@@ -130,7 +130,8 @@ class SigninScreen extends StatelessWidget {
                     final authResult = await twitterLogin.loginV2();
                     switch (authResult.status) {
                       case TwitterLoginStatus.loggedIn:
-                        print('logged in');
+                        ToastMessage.show('Logged In', TOAST_TYPE.success);
+                        Navigator.pushNamed(context, Routes.dashboard);
                         break;
                       case TwitterLoginStatus.cancelledByUser:
                         print('====== Login cancel ======');
