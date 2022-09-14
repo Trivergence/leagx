@@ -122,25 +122,7 @@ class SigninScreen extends StatelessWidget {
                 SocialMediaWidget(
                   iconData: FontAwesomeIcons.twitter,
                   onTap: () async {
-                    final twitterLogin = TwitterLogin(
-                      apiKey: Strings.apiKeyTwitter,
-                      apiSecretKey: Strings.apiSecretKeyTwitter,
-                      redirectURI: Strings.redirectUriTwitter,
-                    );
-                    final authResult = await twitterLogin.loginV2();
-                    switch (authResult.status) {
-                      case TwitterLoginStatus.loggedIn:
-                        ToastMessage.show('Logged In', TOAST_TYPE.success);
-                        Navigator.pushNamed(context, Routes.dashboard);
-                        break;
-                      case TwitterLoginStatus.cancelledByUser:
-                        print('====== Login cancel ======');
-                        break;
-                      case TwitterLoginStatus.error:
-                      case null:
-                        print('====== Login error ======');
-                        break;
-                    }
+                    await _loginWithTwitter(context);
                   },
                 ),
               ],
@@ -156,5 +138,29 @@ class SigninScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _loginWithTwitter(BuildContext context) async {
+    final twitterLogin = TwitterLogin(
+      apiKey: Strings.apiKeyTwitter,
+      apiSecretKey: Strings.apiSecretKeyTwitter,
+      redirectURI: Strings.redirectUriTwitter,
+    );
+    final authResult = await twitterLogin.loginV2();
+    switch (authResult.status) {
+      case TwitterLoginStatus.loggedIn:
+        ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
+        Navigator.pushNamed(context, Routes.dashboard);
+        break;
+      case TwitterLoginStatus.cancelledByUser:
+        ToastMessage.show(loc.authSigninTxtCancelledByUser, TOAST_TYPE.msg);
+        break;
+      case TwitterLoginStatus.error:
+        ToastMessage.show(authResult.errorMessage!, TOAST_TYPE.error);
+        break;
+      case null:
+        ToastMessage.show(loc.authSigninTxtNothingToProceed, TOAST_TYPE.error);
+        break;
+    }
   }
 }
