@@ -1,5 +1,6 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/drawer/components/drawer_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -85,7 +86,9 @@ class DrawerScreen extends StatelessWidget {
           ),
           UIHelper.verticalSpaceXL,
           GestureDetector(
-            onTap: () {
+            onTap: () async{
+              await preferenceHelper.removeAuthToken();
+              await preferenceHelper.removeUser();
               Navigator.pushNamedAndRemoveUntil(
                   context, Routes.onboarding, (route) => false);
             },

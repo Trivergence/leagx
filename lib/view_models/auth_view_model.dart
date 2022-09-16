@@ -4,9 +4,10 @@ import 'package:leagx/core/network/app_url.dart';
 import 'package:leagx/models/auth/forgot_password.dart';
 import 'package:leagx/models/auth/signin.dart';
 import 'package:leagx/models/auth/signup.dart';
+import 'package:leagx/models/user/user.dart';
 
 class AuthViewModel {
-  static Future<Signup?>? signup({
+  static Future<User?>? signup({
     required String name,
     required String email,
     required String password,
@@ -20,11 +21,11 @@ class AuthViewModel {
         "user[password]": password,
         "user[password_confirmation]": confirmPassword,
       },
-      modelName: ApiModels.signup,
+      modelName: ApiModels.user,
     );
   }
 
-  static Future<Signin?>? login({
+  static Future<User?>? login({
     required String email,
     required String password,
   }) async {
@@ -34,7 +35,7 @@ class AuthViewModel {
         "email": email,
         "password": password,
       },
-      modelName: ApiModels.signin,
+      modelName: ApiModels.user,
     );
   }
 

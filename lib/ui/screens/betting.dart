@@ -61,7 +61,6 @@ class Betting extends StatelessWidget {
             builder: EasyLoading.init(),
             home: Builder(
               builder: (context) {
-                
                 switch (sessionProvider.loginStatus) {
                   case LoginStatus.none:
                   case LoginStatus.loggingIn:

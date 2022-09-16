@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:leagx/core/network/config/environment.dart';
 import 'package:leagx/providers/localization_provider.dart';
+import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/betting.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ void main() async {
     loadAppEnvironment();
     await setPreferredOrientations();
     final prefs = await SharedPreferences.getInstance();
+    await setupLocator();
 
     runApp(
       LayoutBuilder(

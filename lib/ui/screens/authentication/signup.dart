@@ -1,6 +1,6 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/models/auth/signup.dart';
+import 'package:leagx/models/user/user.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/authentication/components/have_account_button.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
@@ -101,7 +101,7 @@ class SignupScreen extends StatelessWidget {
                   if (_passwordController.text ==
                       _confirmPasswordController.text) {
                     Loader.showLoader();
-                    Signup? signupResponse = await AuthViewModel.signup(
+                    User? signupResponse = await AuthViewModel.signup(
                       name: _nameController.text,
                       email: _emailController.text,
                       password: _passwordController.text,

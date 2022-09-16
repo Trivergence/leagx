@@ -1,4 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:leagx/models/user/user.dart';
+import 'package:leagx/ui/util/validation/validation_utils.dart';
+
 import 'constants/preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,6 +31,25 @@ class SharedPreferenceHelper {
 
   Future<bool> removeUsername() async {
     return _sharedPreference.remove(Preferences.username);
+  }
+
+  //User
+  User? getUser() {
+    if (ValidationUtils.isValid(
+        _sharedPreference.getString(Preferences.user))) {
+      return User.fromJson(
+          jsonDecode(_sharedPreference.getString(Preferences.user)!));
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool> saveUser(User user){
+    return _sharedPreference.setString(Preferences.user, jsonEncode(user));
+  }
+
+  Future<bool> removeUser() async {
+    return _sharedPreference.remove(Preferences.user);
   }
 
   // Login
