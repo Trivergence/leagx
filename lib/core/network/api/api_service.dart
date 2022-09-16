@@ -3,11 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/app_url.dart';
+import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 
 class ApiService {
+  
   static Future<dynamic> callPostApi({
     required String url,
     dynamic body,
@@ -19,7 +21,9 @@ class ApiService {
       BaseOptions options = BaseOptions(
         contentType: 'application/json',
         baseUrl: AppUrl.baseUrl,
-        // headers: {},
+        headers: {
+          "apitoken":preferenceHelper.authToken,
+        },
       );
 
       var dio = Dio(options);
@@ -68,7 +72,9 @@ class ApiService {
       BaseOptions options = BaseOptions(
         contentType: 'application/json',
         baseUrl: AppUrl.baseUrl,
-        // headers: {},
+        headers: {
+          "apitoken":preferenceHelper.authToken,
+        },
       );
 
       var dio = Dio(options);
@@ -117,7 +123,9 @@ class ApiService {
       BaseOptions options = BaseOptions(
         contentType: 'application/json',
         baseUrl: AppUrl.baseUrl,
-        // headers: {},
+        headers: {
+          "apitoken":preferenceHelper.authToken,
+        },
       );
 
       var dio = Dio(options);
@@ -168,7 +176,9 @@ class ApiService {
       BaseOptions options = BaseOptions(
         contentType: 'application/json',
         baseUrl: AppUrl.baseUrl,
-        // headers: {},
+        headers: {
+          "apitoken":preferenceHelper.authToken,
+        },
       );
 
       var dio = Dio(options);
