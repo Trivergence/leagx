@@ -48,6 +48,10 @@ class SharedPreferenceHelper {
     return _sharedPreference.setString(Preferences.user, jsonEncode(user));
   }
 
+  Future<bool> removeUser() async {
+    return _sharedPreference.remove(Preferences.user);
+  }
+
   // Login
   bool get isLoggedIn =>
       _sharedPreference.getBool(Preferences.isLoggedin) ?? false;
