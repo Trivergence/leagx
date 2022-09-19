@@ -1,6 +1,7 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/constants/enums.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/user/user.dart';
@@ -34,6 +35,7 @@ class SigninScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Localization.init(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
@@ -155,8 +157,13 @@ class SigninScreen extends StatelessWidget {
     final authResult = await twitterLogin.loginV2();
     switch (authResult.status) {
       case TwitterLoginStatus.loggedIn:
-        ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
-        Navigator.pushNamed(context, Routes.dashboard);
+        //ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
+        User? user = await AuthViewModel.socialLogin(authType: AuthType.twitter, user: authResult.user!);
+        if(ValidationUtils.isValid(user)) {
+          preferenceHelper.saveAuthToken(user!.apiToken!);
+          preferenceHelper.saveUser(user);
+          Navigator.pushNamed(context, Routes.dashboard);
+        }
         break;
       case TwitterLoginStatus.cancelledByUser:
         ToastMessage.show(loc.authSigninTxtCancelledByUser, TOAST_TYPE.msg);

@@ -7,6 +7,7 @@ import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiService {
   
@@ -27,6 +28,7 @@ class ApiService {
       );
 
       var dio = Dio(options);
+      dio.interceptors.add(PrettyDioLogger());
       var connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult != ConnectivityResult.none) {
         Response _response = await dio.post(
