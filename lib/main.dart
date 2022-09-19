@@ -4,6 +4,7 @@ import 'package:leagx/core/network/config/environment.dart';
 import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/betting.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +29,7 @@ void main() async {
             SizeConfig().init(constraints, orientation);
             return MultiProvider(
               providers: [
-                ChangeNotifierProvider<LocalizationProvider>(create: (_)=>LocalizationProvider(preferences: prefs)),
+                ChangeNotifierProvider<LocalizationProvider>(create: (_) => LocalizationProvider(preferences: prefs)),
               ],
               child: Betting(prefs: prefs));
           },

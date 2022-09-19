@@ -22,6 +22,14 @@ class SharedPreferenceHelper {
     return _sharedPreference.remove(Preferences.authToken);
   }
 
+  Future<void> setFirstTime(bool value) async {
+    await _sharedPreference.setBool(Preferences.firstTime, value);
+  }
+
+  bool isFirstTime() {
+    return _sharedPreference.getBool(Preferences.firstTime) ?? true;
+  }
+
   //Username
   String? get username => _sharedPreference.getString(Preferences.username);
 

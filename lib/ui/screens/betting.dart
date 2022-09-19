@@ -4,10 +4,12 @@ import 'package:leagx/constants/strings.dart';
 import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/providers/session_provider.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/screens/authentication/signin.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/screens/dashboard/dashbard.dart';
 import 'package:leagx/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/widgets/gesture_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,15 +36,12 @@ class Betting extends StatelessWidget {
         child: const SizedBox(),
         onModelReady: (SessionProvider sessionProvider) {
           FlutterNativeSplash.remove();
-          
           sessionProvider.init();
-          _localizationProvider=context.watch<LocalizationProvider>();
+          _localizationProvider = context.watch<LocalizationProvider>();
           _localizationProvider.init();
-
         },
         builder: (context, SessionProvider sessionProvider, __) {
           return MaterialApp(
-            
             title: Strings.appName,
             locale: _localizationProvider.locale,
             localizationsDelegates: const [
@@ -63,9 +62,10 @@ class Betting extends StatelessWidget {
               builder: (context) {
                 switch (sessionProvider.loginStatus) {
                   case LoginStatus.none:
+                    return OnBoardingScreen();
                   case LoginStatus.loggingIn:
                   case LoginStatus.error:
-                    return OnBoardingScreen();
+                    return SigninScreen();
                   case LoginStatus.loggedIn:
                     return DashBoardScreen();
                 }

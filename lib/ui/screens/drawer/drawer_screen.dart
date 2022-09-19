@@ -90,7 +90,7 @@ class DrawerScreen extends StatelessWidget {
               await preferenceHelper.removeAuthToken();
               await preferenceHelper.removeUser();
               Navigator.pushNamedAndRemoveUntil(
-                  context, Routes.onboarding, (route) => false);
+                  context, Routes.signin, (route) => false);
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0),

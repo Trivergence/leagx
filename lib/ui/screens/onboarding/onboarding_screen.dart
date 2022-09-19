@@ -1,6 +1,8 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/onboarding/components/onboarding_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
@@ -73,6 +75,7 @@ class OnBoardingScreen extends StatelessWidget {
         child: MainButton(
           text: loc.onboardingBtnGetStarted,
           onPressed: () {
+            locator<SharedPreferenceHelper>().setFirstTime(false);
             Navigator.pushNamed(context, Routes.signin);
           },
         ),
