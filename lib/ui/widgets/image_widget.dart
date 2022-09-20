@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/constants/assets.dart';
 
 class ImageWidget extends StatelessWidget {
   final double height;
@@ -23,8 +24,8 @@ class ImageWidget extends StatelessWidget {
       height: height,
       imageUrl: imageUrl!,
       fit:BoxFit.fill,
-      placeholder: (context, url) =>
-          Image.asset(placeholder!, height: height, width: width),
+      errorWidget: (_, __,___) => Image.asset(Assets.imgPlaceholder),
+      placeholder: (_,__) => Image.asset(Assets.imgPlaceholder),
     ):imageAsset!=null? Image.asset(imageAsset!):const SizedBox();
   }
 }

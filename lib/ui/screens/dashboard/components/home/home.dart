@@ -9,12 +9,19 @@ import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../models/dashboard/events.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+
+  List<Events> upcomingMatches = [];
 
   @override
   Widget build(BuildContext context) {
+    upcomingMatches = context.read<DashBoardViewModel>().upcomingMatches;
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
@@ -33,25 +40,25 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 UIHelper.verticalSpaceSmall,
-                SizedBox(
-                  height: 40.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 20.0),
-                        child: GradientBorderWidget(
-                          width: 40.0,
-                          height: 40.0,
-                          isCircular: true,
-                          imageUrl: Strings().placeHolderUrl,
-                          onPressed: () {},
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                // SizedBox(
+                //   height: 40.0,
+                //   child: ListView.builder(
+                //     scrollDirection: Axis.horizontal,
+                //     itemCount: 10,
+                //     itemBuilder: (context, index) {
+                //       return Padding(
+                //         padding: const EdgeInsets.only(right: 20.0),
+                //         child: GradientBorderWidget(
+                //           width: 40.0,
+                //           height: 40.0,
+                //           isCircular: true,
+                //           imageUrl: Strings().placeHolderUrl,
+                //           onPressed: () {},
+                //         ),
+                //       );
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -75,116 +82,20 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 UIHelper.verticalSpaceSmall,
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
-                FixtureWidget(
-                  leagueName: 'UEFA Champion League',
-                  teamOneFlag: Assets.ufcFlag,
-                  teamOneName: 'UFC',
-                  teamTwoFlag: Assets.arsFlag,
-                  teamTwoName: 'ARS',
-                  scheduledTime: 'Today, 20:00',
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.fixtureDetails);
-                  },
-                ),
+                Column(
+                  children: [
+                    for(int i = 0; i < 3; i++) FixtureWidget(
+                        leagueName: upcomingMatches[i].leagueName,
+                        teamOneFlag: upcomingMatches[i].teamHomeBadge,
+                        teamOneName: upcomingMatches[i].matchHometeamName,
+                        teamTwoFlag: upcomingMatches[i].teamAwayBadge,
+                        teamTwoName: upcomingMatches[i].matchAwayteamName,
+                        scheduledTime: upcomingMatches[i].matchTime,
+                        onTap: () => Navigator.pushNamed(context, Routes.fixtureDetails),
+                      ),
+                  ],
+                )
+                
               ],
             ),
           ),

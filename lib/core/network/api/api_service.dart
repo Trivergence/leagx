@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:leagx/constants/app_constants.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/app_url.dart';
+import 'package:leagx/core/network/config/base_config.dart';
+import 'package:leagx/core/network/config/dev_config.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
+import 'package:leagx/models/dashboard/events.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
@@ -28,7 +34,6 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      dio.interceptors.add(PrettyDioLogger());
       var connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult != ConnectivityResult.none) {
         Response _response = await dio.post(
@@ -218,5 +223,56 @@ class ApiService {
       Loader.hideLoader();
       return null;
     }
+  }
+
+  static Future<List<Events>> callFootballApi({
+    String url = "",
+    Map<String, dynamic>? parameters,
+    Map<String, dynamic>? headers,
+    dynamic modelName,
+  }) async {
+    parameters!["APIkey"] = AppConstants.footballApiKey;
+    try {
+      BaseOptions options = BaseOptions(
+        //contentType: 'application/json',
+        baseUrl: AppUrl.footballBaseUrl,
+      );
+      var dio = Dio(options);
+      var connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult != ConnectivityResult.none) {
+        Response _response = await dio.get(
+          url,
+          options: Options(headers: headers),
+          queryParameters: parameters,
+        );
+        if (_response.statusCode == 200 || _response.statusCode == 201) {
+          List<Events> listOfMatches = eventsFromJson(jsonEncode(_response.data));
+          return listOfMatches;
+        }
+      } else {
+        ToastMessage.show(Strings.noInternet, TOAST_TYPE.error);
+        return [];
+      }
+    } on DioError catch (ex) {
+      Loader.hideLoader();
+      if (ex.response != null) {
+        ErrorModel errorResponse =
+            ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
+        ToastMessage.show(
+            "${errorResponse.error} ${errorResponse.errorLog ?? ''}",
+            TOAST_TYPE.error);
+        return [];
+      }
+      return [];
+    } 
+    on Exception {
+      Loader.hideLoader();
+      ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
+      return [];
+    } catch (e) {
+      Loader.hideLoader();
+      return [];
+    }
+    return [];
   }
 }

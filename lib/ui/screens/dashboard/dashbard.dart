@@ -16,6 +16,11 @@ import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../view_models/dashboard_view_model.dart';
+import '../../widgets/loading_widget.dart';
+import '../base_widget.dart';
 
 class DashBoardScreen extends StatefulWidget {
   DashBoardScreen({Key? key}) : super(key: key);
@@ -45,64 +50,69 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     Localization.init(context);
-    return Scaffold(
-      appBar: AppBarWidget(
-        isIcon: true,
-        isDrawer: true,
-        trailing: IconButton(
-          icon: const IconWidget(
-            iconData: Icons.notifications_outlined,
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, Routes.notification);
-          },
-        ),
-      ),
-      drawer: const DrawerScreen(),
-      body: Container(
-        width: SizeConfig.width * 100,
-        height: SizeConfig.height * 100,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage(
-              Assets.homeBackground,
+    return BaseWidget<DashBoardViewModel>(
+        model: context.read<DashBoardViewModel>(),
+        onModelReady: (DashBoardViewModel model) => model.getData(),
+        builder: (context, DashBoardViewModel dashboardModel, _) {
+          return Scaffold(
+            appBar: AppBarWidget(
+              isIcon: true,
+              isDrawer: true,
+              trailing: IconButton(
+                icon: const IconWidget(
+                  iconData: Icons.notifications_outlined,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.notification);
+                },
+              ),
             ),
-          ),
-        ),
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: AppColors.colorBackground,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          _bettingNavBarItem(
-            title: loc.dashboardBtnHome,
-            iconData: Icons.home_outlined,
-          ),
-          _bettingNavBarItem(
-            title: loc.dashboardBtnFixture,
-            iconData: Icons.format_list_bulleted,
-          ),
-          _bettingNavBarItem(
-            title: loc.dashboardBtnLeader,
-            iconData: Icons.leaderboard,
-          ),
-          _bettingNavBarItem(
-            title: loc.dashboardBtnNews,
-            iconData: Icons.rss_feed,
-          ),
-          _bettingNavBarItem(
-            title: loc.dashboardBtnSetting,
-            iconData: Icons.settings,
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-      ),
-    );
+            drawer: const DrawerScreen(),
+            body: dashboardModel.upcomingMatches.isNotEmpty ? Container(
+              width: SizeConfig.width * 100,
+              height: SizeConfig.height * 100,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage(
+                    Assets.homeBackground,
+                  ),
+                ),
+              ),
+              child: _widgetOptions.elementAt(_selectedIndex),
+            ) : const LoadingWidget(),
+            bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: AppColors.colorBackground,
+              type: BottomNavigationBarType.fixed,
+              items: [
+                _bettingNavBarItem(
+                  title: loc.dashboardBtnHome,
+                  iconData: Icons.home_outlined,
+                ),
+                _bettingNavBarItem(
+                  title: loc.dashboardBtnFixture,
+                  iconData: Icons.format_list_bulleted,
+                ),
+                _bettingNavBarItem(
+                  title: loc.dashboardBtnLeader,
+                  iconData: Icons.leaderboard,
+                ),
+                _bettingNavBarItem(
+                  title: loc.dashboardBtnNews,
+                  iconData: Icons.rss_feed,
+                ),
+                _bettingNavBarItem(
+                  title: loc.dashboardBtnSetting,
+                  iconData: Icons.settings,
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              onTap: _onItemTapped,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+            ),
+          );
+        });
   }
 
   BottomNavigationBarItem _bettingNavBarItem(
@@ -148,3 +158,5 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
       );
 }
+
+

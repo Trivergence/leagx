@@ -1,6 +1,8 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/widgets/score_chip.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/dot_widget.dart';
@@ -55,8 +57,11 @@ class FixtureWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextWidget(text: leagueName, textSize: Dimens.textSmall),
+                  SizedBox(
+                    width: SizeConfig.width * 50,
+                    child: TextWidget(text: leagueName, textSize: Dimens.textSmall, overflow: TextOverflow.ellipsis,)),
                   isLive
                       ? const LiveWidget()
                       : withText
@@ -67,7 +72,7 @@ class FixtureWidget extends StatelessWidget {
                                     child: Icon(Icons.access_time_outlined)),
                                 UIHelper.horizontalSpace(4.0),
                                 TextWidget(
-                                    text: scheduledTime!,
+                                    text: "Today, " + scheduledTime!,
                                     textSize: Dimens.textSmall),
                               ],
                             )
@@ -91,10 +96,10 @@ class FixtureWidget extends StatelessWidget {
                       Row(
                         children: [
                           ImageWidget(
-                            imageAsset: teamOneFlag,
-                            placeholder: Assets.ufcFlag,
+                            imageUrl: teamOneFlag,
                           ),
-                          TextWidget(text: teamOneName),
+                          UIHelper.horizontalSpaceSmall,
+                          TextWidget(text: StringUtility.getShortName(teamOneName)),
                         ],
                       ),
                       isLive
@@ -110,10 +115,10 @@ class FixtureWidget extends StatelessWidget {
                       Row(
                         children: [
                           ImageWidget(
-                            imageAsset: teamTwoFlag,
-                            placeholder: Assets.arsFlag,
+                            imageUrl: teamTwoFlag,
                           ),
-                          TextWidget(text: teamTwoName),
+                          UIHelper.horizontalSpaceSmall,
+                          TextWidget(text: StringUtility.getShortName(teamTwoName)),
                         ],
                       ),
                     ],

@@ -15,11 +15,13 @@ class Assets {
   
   static const String imgAvatar = "assets/images/img_avatar.png";
   static const String imgChart = "assets/images/img_chart.png";
+  static const String imgPlaceholder = "assets/images/placeholderImage.png";
   static const String icDrawerPredictions =
       "assets/icons/ic_drawer_predictions.png";
   static const String icDrawerTermsAndService =
       "assets/icons/ic_drawer_terms.png";
   static const String icDrawerAdmin = "assets/icons/ic_drawer_admin.png";
+  
 
   static const String vs = "assets/icons/ic_vs.png";
 

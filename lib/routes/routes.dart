@@ -92,7 +92,7 @@ class Routes {
           ),
         );
       case home:
-        return generateRoute(routeSettings.name!, const HomeScreen());
+        return generateRoute(routeSettings.name!, HomeScreen());
       case predictions:
         return generateRoute(routeSettings.name!, const PredicitonsScreen());
       case dashboard:
