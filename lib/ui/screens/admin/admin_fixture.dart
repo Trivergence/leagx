@@ -90,10 +90,10 @@ class AdminFixtureScreen extends StatelessWidget {
                     leagueName: 'UEFA Champion League',
                     teamOneFlag: Assets.ufcFlag,
                     teamOneName: 'UFC',
-                    teamOneScore: 3,
+                    teamOneScore: "3",
                     teamTwoFlag: Assets.arsFlag,
                     teamTwoName: 'ARS',
-                    teamTwoScore: 5,
+                    teamTwoScore: "5",
                     isLive: true,
                     liveTime: '00:45:35',
                     onTap: () {

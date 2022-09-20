@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'text_widget.dart';
 
 class ScoreChip extends StatelessWidget {
-  final int firstScore;
-  final int secondScore;
+  final String firstScore;
+  final String secondScore;
   const ScoreChip({
     Key? key,
     required this.firstScore,
@@ -27,7 +27,7 @@ class ScoreChip extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           TextWidget(
-            text: "$firstScore",
+            text: firstScore.isEmpty ? "0" : firstScore,
             fontWeight: FontWeight.w600,
           ),
           const TextWidget(
@@ -35,7 +35,7 @@ class ScoreChip extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
           TextWidget(
-            text: "$secondScore",
+            text: secondScore.isEmpty ? "0" : secondScore,
             fontWeight: FontWeight.w600,
           ),
         ],

@@ -8,8 +8,8 @@ class DetailTile extends StatelessWidget {
     Key? key,required this.title, required this.leftValue, required this.rightValue,required this.tileColor,
   }) : super(key: key);
   final String title;
-  final double leftValue;
-  final double rightValue;
+  final String leftValue;
+  final String rightValue;
   final Color tileColor;
 
   @override
@@ -20,9 +20,9 @@ class DetailTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextWidget(text: leftValue.toStringAsFixed(0), color: AppColors.colorYellow,),
+          TextWidget(text: leftValue, color: AppColors.colorYellow,),
           TextWidget(text: title),
-          TextWidget(text: rightValue.toStringAsFixed(0),
+          TextWidget(text: rightValue,
             color: AppColors.colorRed,
             textAlign: TextAlign.end,
           ),

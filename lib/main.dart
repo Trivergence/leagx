@@ -8,6 +8,7 @@ import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,7 +31,8 @@ void main() async {
             return MultiProvider(
               providers: [
                 ChangeNotifierProvider<LocalizationProvider>(create: (_) => LocalizationProvider(preferences: prefs)),
-                ChangeNotifierProvider(create: (_) => DashBoardViewModel())
+                ChangeNotifierProvider(create: (_) => DashBoardViewModel()),
+                ChangeNotifierProvider(create: (_) => FixtureDetailViewModel())
               ],
               child: Betting(prefs: prefs));
           },

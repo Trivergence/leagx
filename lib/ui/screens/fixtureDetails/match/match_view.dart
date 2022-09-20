@@ -1,19 +1,25 @@
+import 'package:leagx/models/dashboard/events.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/utility/date_utility.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../widgets/icon_container.dart';
+import '../../../widgets/image_widget.dart';
 import '../../../widgets/text_widget.dart';
 import '../../../widgets/score_chip.dart';
+import '../components/team_vs_widget.dart';
 import 'components/live_match_widget.dart';
+import 'components/offline_match_widget.dart';
 
 class MatchView extends StatelessWidget {
+  final Events matchDetails;
   const MatchView({
-    Key? key,
+    Key? key, required this.matchDetails,
   }) : super(key: key);
 
   @override
@@ -30,47 +36,51 @@ class MatchView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                    TeamVsWidget(
+                      teamName: matchDetails.matchHometeamName,
+                      groupPosition: 'Top 1 group A',
+                      image: matchDetails.teamHomeBadge,
+                    ),
+                    matchDetails.matchLive == "1" ? Column(
                       children: [
-                        Image.asset(Assets.flagImage),
-                        const TextWidget(text: "Barcelona"),
+                        ScoreChip(firstScore: matchDetails.matchHometeamScore,
+                          secondScore: matchDetails.matchAwayteamScore,),
                         UIHelper.verticalSpaceSmall,
                         const TextWidget(
-                          text: "Top 1 Group A",
-                          textSize: Dimens.textXS,
-                          color: AppColors.colorGrey,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: const [
-                        ScoreChip(firstScore: 1,secondScore: 4,),
-                        UIHelper.verticalSpaceSmall,
-                        TextWidget(
                           text: "00:38:25",
                           color: AppColors.colorGrey,
                           textSize: Dimens.textSmall,
                         )
                       ],
+                    ) : Column(
+                      children: [
+                        Image.asset(Assets.vs),
+                        UIHelper.verticalSpaceSmall,
+                        TextWidget(
+                          text: DateUtility.getUiFormat(matchDetails.matchDate),
+                          color: AppColors.colorGrey,
+                          textSize: Dimens.textSmall,
+                        ),
+                        UIHelper.verticalSpaceSmall,
+                        TextWidget(
+                          text: matchDetails.matchTime,
+                          color: AppColors.colorGrey,
+                          textSize: Dimens.textSmall,
+                        )
+                      ],
                     ),
-                    Column(children: [
-                      Image.asset(Assets.flagImage2),
-                      const TextWidget(text: "Man. United"),
-                      UIHelper.verticalSpaceSmall,
-                      const TextWidget(
-                        text: "Top 2 Group B",
-                        textSize: Dimens.textXS,
-                        color: AppColors.colorGrey,
-                      ),
-                    ])
+                    TeamVsWidget(
+                      teamName: matchDetails.matchAwayteamName,
+                      groupPosition: 'Top 2 Group B',
+                      image: matchDetails.teamAwayBadge,
+                    ),
                   ],
                 )),
             IconContainer(
               height: SizeConfig.height * 7,
               title: loc.faqsTxtFrequentlyAskedQuestions,
             ),
-            LiveMatchWidget()
-            //OfflineMatchWidget()
+            matchDetails.matchLive == "1" ? LiveMatchWidget(matchDetails: matchDetails,) : OfflineMatchWidget()
           ],
         ),
       ),

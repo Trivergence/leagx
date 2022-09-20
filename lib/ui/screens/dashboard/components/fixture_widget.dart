@@ -16,10 +16,10 @@ class FixtureWidget extends StatelessWidget {
   final String leagueName;
   final String teamOneFlag;
   final String teamOneName;
-  final int? teamOneScore;
+  final String? teamOneScore;
   final String teamTwoFlag;
   final String teamTwoName;
-  final int? teamTwoScore;
+  final String? teamTwoScore;
   final String? scheduledTime;
   final String? liveTime;
   final bool isLive;
@@ -30,10 +30,10 @@ class FixtureWidget extends StatelessWidget {
     required this.leagueName,
     required this.teamOneFlag,
     required this.teamOneName,
-    this.teamOneScore,
+    this.teamOneScore = "0",
     required this.teamTwoFlag,
     required this.teamTwoName,
-    this.teamTwoScore,
+    this.teamTwoScore = "0",
     this.scheduledTime,
     this.liveTime,
     this.isLive = false,
@@ -77,7 +77,7 @@ class FixtureWidget extends StatelessWidget {
                               ],
                             )
                           : const DotWidget(
-                              color: AppColors.colorGrey,
+                              isLive: false,
                             )
                 ],
               ),
@@ -123,11 +123,11 @@ class FixtureWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  isLive
-                      ? TextWidget(
-                          text: liveTime!,
-                          color: AppColors.colorWhite.withOpacity(0.6))
-                      : const SizedBox(),
+                  // isLive
+                  //     ? TextWidget(
+                  //         text: liveTime!,
+                  //         color: AppColors.colorWhite.withOpacity(0.6))
+                  //     : const SizedBox(),
                   isLive
                       ? UIHelper.verticalSpace(8.0)
                       : UIHelper.verticalSpace(20.0)

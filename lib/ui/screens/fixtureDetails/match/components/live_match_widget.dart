@@ -1,3 +1,4 @@
+import 'package:leagx/models/dashboard/events.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
@@ -13,14 +14,17 @@ import '../../components/match_prediction_tile.dart';
 import '../../components/prediction_bottom_sheet.dart';
 
 class LiveMatchWidget extends StatelessWidget {
+  final Events matchDetails; 
   LiveMatchWidget({
-    Key? key,
+    Key? key, required this.matchDetails,
   }) : super(key: key);
 
   BuildContext? _context;
+  List<Statistic> statistics =[];
   @override
   Widget build(BuildContext context) {
     _context = context;
+    statistics = matchDetails.statistics;
     return Column(
       children: [
         Image.asset(
@@ -35,54 +39,12 @@ class LiveMatchWidget extends StatelessWidget {
         ),
         Column(
           children:  [
-            DetailTile(
-              title: loc.fixtureDetailsMatchTxtShooting,
-              tileColor: AppColors.colorBackground,
-              leftValue: 8,
-              rightValue: 10,
-            ),
-            DetailTile(
-              title: loc.fixtureDetailsMatchTxtAttacks,
-              tileColor: AppColors.textFieldColor,
-              leftValue: 8,
-              rightValue: 10,
-            ),
-            DetailTile(
-              title: '${loc.fixtureDetailsMatchTxtPossession} %',
-              tileColor: AppColors.colorBackground,
-              leftValue: 8,
-              rightValue: 10,
-            ),
-            DetailTile(
-              title: loc.fixtureDetailsMatchTxtRedCards,
-              tileColor: AppColors.textFieldColor,
-              leftValue: 8,
-              rightValue: 10,
-            ),
-            DetailTile(
-              title: loc.fixtureDetailsMatchTxtYellowCards,
-              tileColor: AppColors.colorBackground,
-              leftValue: 8,
-              rightValue: 10,
-            ),
-            DetailTile(
-              title: loc.fixtureDetailsMatchTxtCorners,
-              tileColor: AppColors.textFieldColor,
-              leftValue: 8,
-              rightValue: 10,
-            ),
-            DetailTile(
-              title: loc.fixtureDetailsMatchTxtOffsides,
-              tileColor: AppColors.colorBackground,
-              leftValue: 8,
-              rightValue: 10,
-            ),
-            DetailTile(
-              title: loc.fixtureDetailsMatchTxtPasses,
-              tileColor: AppColors.textFieldColor,
-              leftValue: 200,
-              rightValue: 100,
-            ),
+            for(int i = 0; i < statistics.length; i++) DetailTile(
+                title: statistics[i].type,
+                tileColor: i % 2 ==0?AppColors.colorBackground : AppColors.textFieldColor,
+                leftValue: statistics[i].home,
+                rightValue: statistics[i].away,
+              ),
           ],
         ),
         const MatchPredictionTile(),

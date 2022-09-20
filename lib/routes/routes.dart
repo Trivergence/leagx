@@ -1,3 +1,4 @@
+import 'package:leagx/models/match_args.dart';
 import 'package:leagx/ui/screens/admin/admin_announce.dart';
 import 'package:leagx/ui/screens/admin/admin_fixture.dart';
 import 'package:leagx/ui/screens/admin/admin_fixture_detail/admin_fixture_detail.dart';
@@ -75,9 +76,9 @@ class Routes {
       case faqs:
         return generateRoute(routeSettings.name!, const FaqsScreen());
       case fixtureDetails:
-        return generateRoute(routeSettings.name!, const FixtureDetails());
+        return generateRoute(routeSettings.name!, FixtureDetails(matchData: routeSettings.arguments as MatchArgs,));
       case adminFixture:
-        return generateRoute(routeSettings.name!, AdminFixtureScreen());
+        return generateRoute(routeSettings.name!, const AdminFixtureScreen());
       case adminFixtureDetail:
         return generateRoute(routeSettings.name!, AdminFixtureDetailScreen());
       case adminAnnounce:

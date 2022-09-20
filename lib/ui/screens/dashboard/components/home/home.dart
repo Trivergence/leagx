@@ -1,11 +1,9 @@
-import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
-import 'package:leagx/constants/strings.dart';
+import 'package:leagx/models/match_args.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/components/analytics_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +89,11 @@ class HomeScreen extends StatelessWidget {
                         teamTwoFlag: upcomingMatches[i].teamAwayBadge,
                         teamTwoName: upcomingMatches[i].matchAwayteamName,
                         scheduledTime: upcomingMatches[i].matchTime,
-                        onTap: () => Navigator.pushNamed(context, Routes.fixtureDetails),
+                        onTap: () => Navigator.pushNamed(context,
+                          Routes.fixtureDetails,
+                          arguments: MatchArgs(matchId: upcomingMatches[i].matchId,
+                           liveStatus: upcomingMatches[i].matchLive == "1",
+                           leagueName: upcomingMatches[i].leagueName)),
                       ),
                   ],
                 )

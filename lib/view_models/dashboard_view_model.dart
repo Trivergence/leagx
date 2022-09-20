@@ -14,8 +14,7 @@ class DashBoardViewModel extends BaseModel {
   }
 
   Future<void> getUpcomingMatches() async {
-     DateTime today = DateTime.now();
-     
+     DateTime today = DateTime.now().toUtc();
      _upcomingMatches = await ApiService.callFootballApi(
       parameters: {
         "action": "get_events",
@@ -24,6 +23,7 @@ class DashBoardViewModel extends BaseModel {
       },
       modelName: ApiModels.upcomingMatches
     );
+    _upcomingMatches = upcomingMatches.where((match) => match.matchStatus == MatchStatus.FINISHED).toList();
     notifyListeners();
   }
 }

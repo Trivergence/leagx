@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
 import '../../../util/ui/ui_helper.dart';
+import '../../../widgets/image_widget.dart';
 import '../../../widgets/text_widget.dart';
 
 class TeamVsWidget extends StatelessWidget {
@@ -17,7 +18,8 @@ class TeamVsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(image),
+        ImageWidget(
+          imageUrl: image,),
         TextWidget(text: teamName),
         UIHelper.verticalSpaceSmall,
         TextWidget(text: groupPosition,

@@ -9,7 +9,6 @@ import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/screens/dashboard/dashbard.dart';
 import 'package:leagx/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
-import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/widgets/gesture_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

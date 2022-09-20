@@ -450,76 +450,22 @@ class Statistic {
     required this.away,
   });
 
-  Type type;
+  String type;
   String home;
   String away;
 
   factory Statistic.fromJson(Map<String, dynamic> json) => Statistic(
-        type: typeValues.map[json["type"]] ?? Type.ATTACKS,
+        type: json["type"],
         home: json["home"],
         away: json["away"],
       );
 
   Map<String, dynamic> toJson() => {
-        "type": typeValues.reverse[type],
+        "type": type,
         "home": home,
         "away": away,
       };
 }
-
-enum Type {
-  THROW_IN,
-  FREE_KICK,
-  GOAL_KICK,
-  PENALTY,
-  SUBSTITUTION,
-  ATTACKS,
-  DANGEROUS_ATTACKS,
-  ON_TARGET,
-  OFF_TARGET,
-  SHOTS_TOTAL,
-  SHOTS_ON_GOAL,
-  SHOTS_OFF_GOAL,
-  SHOTS_BLOCKED,
-  SHOTS_INSIDE_BOX,
-  SHOTS_OUTSIDE_BOX,
-  FOULS,
-  CORNERS,
-  OFFSIDES,
-  BALL_POSSESSION,
-  YELLOW_CARDS,
-  SAVES,
-  PASSES_TOTAL,
-  PASSES_ACCURATE,
-  RED_CARDS
-}
-
-final typeValues = EnumValues({
-  "Attacks": Type.ATTACKS,
-  "Ball Possession": Type.BALL_POSSESSION,
-  "Corners": Type.CORNERS,
-  "Dangerous Attacks": Type.DANGEROUS_ATTACKS,
-  "Fouls": Type.FOULS,
-  "Free Kick": Type.FREE_KICK,
-  "Goal Kick": Type.GOAL_KICK,
-  "Offsides": Type.OFFSIDES,
-  "Off Target": Type.OFF_TARGET,
-  "On Target": Type.ON_TARGET,
-  "Passes Accurate": Type.PASSES_ACCURATE,
-  "Passes Total": Type.PASSES_TOTAL,
-  "Penalty": Type.PENALTY,
-  "Red Cards": Type.RED_CARDS,
-  "Saves": Type.SAVES,
-  "Shots Blocked": Type.SHOTS_BLOCKED,
-  "Shots Inside Box": Type.SHOTS_INSIDE_BOX,
-  "Shots Off Goal": Type.SHOTS_OFF_GOAL,
-  "Shots On Goal": Type.SHOTS_ON_GOAL,
-  "Shots Outside Box": Type.SHOTS_OUTSIDE_BOX,
-  "Shots Total": Type.SHOTS_TOTAL,
-  "Substitution": Type.SUBSTITUTION,
-  "Throw In": Type.THROW_IN,
-  "Yellow Cards": Type.YELLOW_CARDS
-});
 
 class Substitutions {
   Substitutions({

@@ -5,8 +5,10 @@ import 'package:leagx/ui/util/locale/localization.dart';
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
+import '../../../../models/dashboard/events.dart';
 import '../../../util/size/size_config.dart';
 import '../../../util/ui/ui_helper.dart';
+import '../../../util/utility/date_utility.dart';
 import '../../../widgets/icon_container.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
@@ -16,8 +18,9 @@ import '../components/team_vs_widget.dart';
 import 'components/player_tile.dart';
 
 class PlayersView extends StatelessWidget {
+  final Events matchDetails;
   PlayersView({
-    Key? key,
+    Key? key, required this.matchDetails,
   }) : super(key: key);
 
   BuildContext? _context;
@@ -38,29 +41,48 @@ class PlayersView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TeamVsWidget(
-                      teamName: 'Barcelona',
+                    TeamVsWidget(
+                      teamName: matchDetails.matchHometeamName,
                       groupPosition: 'Top 1 group A',
-                      image: Assets.flagImage,
+                      image: matchDetails.teamHomeBadge,
                     ),
-                    Column(
-                      children: const [
-                        ScoreChip(
-                          firstScore: 1,
-                          secondScore: 4,
-                        ),
-                        UIHelper.verticalSpaceSmall,
-                        TextWidget(
-                          text: "00:38:25",
-                          color: AppColors.colorGrey,
-                          textSize: Dimens.textSmall,
-                        )
-                      ],
-                    ),
-                    const TeamVsWidget(
-                      teamName: 'Man. United',
+                    matchDetails.matchLive == "1"
+                        ? Column(
+                            children: [
+                              ScoreChip(
+                                firstScore: matchDetails.matchHometeamScore,
+                                secondScore: matchDetails.matchAwayteamScore,
+                              ),
+                              UIHelper.verticalSpaceSmall,
+                              const TextWidget(
+                                text: "00:38:25",
+                                color: AppColors.colorGrey,
+                                textSize: Dimens.textSmall,
+                              )
+                            ],
+                          )
+                        : Column(
+                            children: [
+                              Image.asset(Assets.vs),
+                              UIHelper.verticalSpaceSmall,
+                              TextWidget(
+                                text: DateUtility.getUiFormat(
+                                    matchDetails.matchDate),
+                                color: AppColors.colorGrey,
+                                textSize: Dimens.textSmall,
+                              ),
+                              UIHelper.verticalSpaceSmall,
+                              TextWidget(
+                                text: matchDetails.matchTime,
+                                color: AppColors.colorGrey,
+                                textSize: Dimens.textSmall,
+                              )
+                            ],
+                          ),
+                    TeamVsWidget(
+                      teamName: matchDetails.matchAwayteamName,
                       groupPosition: 'Top 2 Group B',
-                      image: Assets.flagImage2,
+                      image: matchDetails.teamAwayBadge,
                     ),
                   ],
                 )),
