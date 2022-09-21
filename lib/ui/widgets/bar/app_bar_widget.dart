@@ -1,6 +1,6 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
-import 'package:leagx/ui/util/validation/validation_utils.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -48,10 +48,16 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
               height: 32.0,
             )
           : title != null
-              ? TextWidget(
-                  text: title!,
-                )
-              : const SizedBox(),
+              ? SizedBox(
+                width: SizeConfig.width * 50,
+                child: Center(
+                  child: TextWidget(
+                      text: title!,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                ),
+              )
+              : const SizedBox.shrink(),
       actions: [
         trailing ?? const SizedBox(),
       ],
