@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../models/dashboard/events.dart';
+import '../../../../../models/match_args.dart';
 import '../../../../../view_models/dashboard_view_model.dart';
 
 class FixtureScreen extends StatelessWidget {
@@ -104,7 +105,12 @@ class FixtureScreen extends StatelessWidget {
                     isLive: upcomingMatches[index].matchLive == "1",
                     teamOneScore: upcomingMatches[index].matchHometeamScore,
                     teamTwoScore: upcomingMatches[index].matchAwayteamScore,
-                    onTap: () => Navigator.pushNamed(context, Routes.fixtureDetails),
+                    onTap: () => Navigator.pushNamed(context, Routes.fixtureDetails,
+                    arguments: MatchArgs(
+                      matchId: upcomingMatches[index].matchId,
+                      liveStatus: upcomingMatches[index].matchLive == "1",
+                      leagueName: upcomingMatches[index].leagueName)
+                    ),
                   );
                 })
               ],
