@@ -18,6 +18,7 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../view_models/choose_plan_viewmodel.dart';
 import '../../../view_models/dashboard_view_model.dart';
 import '../../widgets/loading_widget.dart';
 import '../base_widget.dart';

@@ -1,3 +1,4 @@
+import 'package:flutter/scheduler.dart';
 import 'package:leagx/models/dashboard/events.dart';
 import 'package:leagx/models/match_args.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
@@ -36,7 +37,11 @@ class _FixtureDetailsState extends State<FixtureDetails> {
     return BaseWidget<FixtureDetailViewModel>(
         create: false,
         model: context.read<FixtureDetailViewModel>(),
-        onModelReady: (FixtureDetailViewModel model) async => await model.getData(matchId: widget.matchData.matchId),
+        onModelReady: (FixtureDetailViewModel model) async {
+          SchedulerBinding.instance!.addPostFrameCallback((_) {
+            model.getData(matchId: widget.matchData.matchId);
+          });
+          },
         builder: (context, FixtureDetailViewModel fixtureModel, _) {
           return Scaffold(
           appBar: AppBarWidget(

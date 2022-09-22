@@ -1,3 +1,4 @@
+import 'package:flutter/scheduler.dart';
 import 'package:leagx/models/dashboard/league.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -38,7 +39,11 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
         child: BaseWidget<ChooseLeagueViewModel>(
           create: false,
           model: context.read<ChooseLeagueViewModel>(),
-          onModelReady: (ChooseLeagueViewModel chooseLeagueModel) => chooseLeagueModel.getData(),
+          onModelReady: (ChooseLeagueViewModel chooseLeagueModel) async { 
+            SchedulerBinding.instance!.addPostFrameCallback((_) {
+               chooseLeagueModel.getData();
+            });
+          },
           builder: (context, ChooseLeagueViewModel chooseLeagueModel, _) {
             _chooseLeagueModel = chooseLeagueModel;
             listOfLeagues = isFiltering ? filteredList : chooseLeagueModel.leagues;
