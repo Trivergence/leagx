@@ -19,13 +19,13 @@ class ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imageUrl!=null? CachedNetworkImage(
+    return imageUrl != null ? CachedNetworkImage(
       width: width,
       height: height,
       imageUrl: imageUrl!,
-      fit:BoxFit.fill,
-      errorWidget: (_, __,___) => Image.asset(Assets.imgPlaceholder),
-      placeholder: (_,__) => Image.asset(Assets.imgPlaceholder),
-    ):imageAsset!=null? Image.asset(imageAsset!):const SizedBox();
+      fit: BoxFit.fill,
+      errorWidget: (_, __,___) => Image.asset(Assets.imgPlaceholder, fit: BoxFit.fill),
+      placeholder: (_,__) => Image.asset(Assets.imgPlaceholder, fit: BoxFit.fill),
+    ): imageAsset != null ? Image.asset(imageAsset!) : const SizedBox();
   }
 }
