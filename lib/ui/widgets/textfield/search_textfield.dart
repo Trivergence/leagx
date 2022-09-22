@@ -15,6 +15,7 @@ class SearchTextField extends StatelessWidget {
   final EdgeInsets padding;
   final Color iconColor;
   final ValueChanged? onFieldSubmitted;
+  final ValueChanged? onTextEntered;
   final TextInputAction? inputAction;
   final bool isDisabled;
   final VoidCallback? onTap;
@@ -24,6 +25,7 @@ class SearchTextField extends StatelessWidget {
     return TextFormField(
       controller: textController,
       onFieldSubmitted: onFieldSubmitted,
+      onChanged: onTextEntered,
       textInputAction: inputAction,
       readOnly: isDisabled,
       onTap: onTap,
@@ -82,7 +84,7 @@ class SearchTextField extends StatelessWidget {
     this.onFieldSubmitted,
     this.inputAction,
     this.onTap,
-    this.isDisabled = false,
+    this.isDisabled = false, this.onTextEntered,
   }) : super(key: key);
 
   //Styles

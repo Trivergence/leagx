@@ -1,9 +1,9 @@
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/widgets/image_widget.dart';
 
 import '../../../../constants/colors.dart';
-import '../../../util/ui_model/choose_league_model.dart';
 import '../../../widgets/gradient/gradient_border_button.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
@@ -11,12 +11,14 @@ import '../../../widgets/text_widget.dart';
 class LeagueTile extends StatelessWidget {
   const LeagueTile({
     Key? key,
-    required this.listOfLeagues,
-    required this.index,
+    required this.imgUrl,
+    required this.leagueTitle,
+    required this.hasSubscribed
   }) : super(key: key);
 
-  final List<ChooseLeague> listOfLeagues;
-  final int index;
+  final String imgUrl;
+  final String leagueTitle;
+  final bool hasSubscribed;
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +30,15 @@ class LeagueTile extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         tileColor: AppColors.textFieldColor,
         leading: CircleAvatar(
-          backgroundImage: AssetImage(listOfLeagues[index].leagueImage!),
+          child: ImageWidget(imageUrl: imgUrl,),
+          backgroundColor: AppColors.textFieldColor,
           radius: 25,
         ),
-        title: TextWidget(text: listOfLeagues[index].leagueName!),
+        title: TextWidget(text: leagueTitle),
         trailing: SizedBox(
             height: 26,
             width: 88,
-            child: listOfLeagues[index].hasSubscribed!
+            child: hasSubscribed
                 ? MainButton(
                     text: loc.chooseLeagueBtnSubscribed,
                     onPressed: () {},
