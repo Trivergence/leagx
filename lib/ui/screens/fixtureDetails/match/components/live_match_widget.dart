@@ -33,7 +33,7 @@ class LiveMatchWidget extends StatelessWidget {
           height: SizeConfig.height * 25,
           fit: BoxFit.cover,
         ),
-        IconContainer(
+        if(matchDetails.statistics.isNotEmpty) IconContainer(
           height: SizeConfig.height * 7,
           title: loc.fixtureDetailsMatchTxtMatchDetails,
         ),

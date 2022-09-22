@@ -61,8 +61,8 @@ class PlayersView extends StatelessWidget {
                                 secondScore: matchDetails.matchAwayteamScore,
                               ),
                               UIHelper.verticalSpaceSmall,
-                              const TextWidget(
-                                text: "00:38:25",
+                              TextWidget(
+                                text: matchDetails.matchStatus,
                                 color: AppColors.colorGrey,
                                 textSize: Dimens.textSmall,
                               )
@@ -92,20 +92,24 @@ class PlayersView extends StatelessWidget {
                     ),
                   ],
                 )),
-            IconContainer(
-              height: SizeConfig.height * 7,
-              title: loc.fixtureDetailsPlayersTxtTeamPlayers,
-            ),
-            Column(
-              children:  [
-                for(int i = 0; i < getLength(); i++) PlayerTile(
-                  tileColor: i % 2 == 0
-                          ? AppColors.colorBackground
-                          : AppColors.textFieldColor,
-                  playerOneName: homePlayer[i].playerName,
-                  playerOneImg: homePlayer[i].playerImage,
-                  playerTwoName: awayPlayer[i].playerName,
-                  playerTwoImg: awayPlayer[i].playerImage)
+            if (awayPlayer.isNotEmpty && homePlayer.isNotEmpty) Column(
+              children: [
+                IconContainer(
+                  height: SizeConfig.height * 7,
+                  title: loc.fixtureDetailsPlayersTxtTeamPlayers,
+                ),
+                Column(
+                  children:  [
+                    for(int i = 0; i < getLength(); i++) PlayerTile(
+                      tileColor: i % 2 == 0
+                              ? AppColors.colorBackground
+                              : AppColors.textFieldColor,
+                      playerOneName: homePlayer[i].playerName,
+                      playerOneImg: homePlayer[i].playerImage,
+                      playerTwoName: awayPlayer[i].playerName,
+                      playerTwoImg: awayPlayer[i].playerImage)
+                  ],
+                ),
               ],
             ),
             UIHelper.verticalSpaceMedium,
