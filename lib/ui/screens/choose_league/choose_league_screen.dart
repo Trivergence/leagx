@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/choose_league_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/loading_widget.dart';
 import 'components/league_tile.dart';
 
 class ChooseLeagueScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
           builder: (context, ChooseLeagueViewModel chooseLeagueModel, _) {
             _chooseLeagueModel = chooseLeagueModel;
             listOfLeagues = isFiltering ? filteredList : chooseLeagueModel.leagues;
-            return Column(
+            return !_chooseLeagueModel.busy ? Column(
             children: [
               SizedBox(
                 height: 48,
@@ -66,7 +67,7 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
                     }),
               )
             ],
-          );
+          ) : const LoadingWidget();
       }),
     ));
   }
