@@ -61,7 +61,7 @@ class Events {
   String leagueId;
   String leagueName;
   DateTime matchDate;
-  MatchStatus matchStatus;
+  String matchStatus;
   String matchTime;
   String matchHometeamId;
   String matchHometeamName;
@@ -104,7 +104,7 @@ class Events {
         leagueId: json["league_id"],
         leagueName: json["league_name"],
         matchDate: DateTime.parse(json["match_date"]),
-        matchStatus: matchStatusValues.map[json["match_status"]] ?? MatchStatus.EMPTY,
+        matchStatus: json["match_status"],
         matchTime: json["match_time"],
         matchHometeamId: json["match_hometeam_id"],
         matchHometeamName: json["match_hometeam_name"],
@@ -155,7 +155,7 @@ class Events {
         "league_name": leagueName,
         "match_date":
             "${matchDate.year.toString().padLeft(4, '0')}-${matchDate.month.toString().padLeft(2, '0')}-${matchDate.day.toString().padLeft(2, '0')}",
-        "match_status": matchStatusValues.reverse[matchStatus],
+        "match_status": matchStatus,
         "match_time": matchTime,
         "match_hometeam_id": matchHometeamId,
         "match_hometeam_name": matchHometeamName,
@@ -432,17 +432,6 @@ final matchTeamSystemValues = EnumValues({
   "5-3-2": MatchTeamSystem.THE_532,
   "5-4-1": MatchTeamSystem.THE_541
 });
-
-enum MatchStatus { FINISHED, EMPTY, CANCELLED, AFTER_PEN, POSTPONED }
-
-final matchStatusValues = EnumValues({
-  "After Pen.": MatchStatus.AFTER_PEN,
-  "Cancelled": MatchStatus.CANCELLED,
-  "": MatchStatus.EMPTY,
-  "Finished": MatchStatus.FINISHED,
-  "Postponed": MatchStatus.POSTPONED
-});
-
 class Statistic {
   Statistic({
     required this.type,
