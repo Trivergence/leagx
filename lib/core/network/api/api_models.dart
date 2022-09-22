@@ -3,6 +3,7 @@ import 'package:leagx/models/dashboard/events.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/models/user/userdata.dart';
+import 'package:leagx/ui/util/ui_model/subscription_plan.dart';
 
 class ApiModels {
   static const String error = 'Error';
@@ -17,11 +18,11 @@ class ApiModels {
       case forgotPassword:
         return ForgotPassword.fromJson(json);
       case user:
-        return User.fromJson(json); 
+        return User.fromJson(json);
       case userData:
         return UserData.fromJson(json);
       case upcomingMatches:
-        return Events.fromJson(json);    
+        return Events.fromJson(json); 
     }
   }
 }
