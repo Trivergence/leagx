@@ -23,6 +23,7 @@ import 'package:leagx/ui/screens/privacy_policy/privacy_policy_screen.dart';
 import 'package:leagx/ui/screens/profile/profile_info_update.dart';
 import 'package:leagx/ui/screens/profile/profile_settings.dart';
 import 'package:leagx/ui/screens/terms_service/terms_service_screen.dart';
+import 'package:leagx/ui/screens/upcoming_matches.dart';
 import 'package:leagx/ui/screens/user/user.dart';
 import 'package:flutter/material.dart';
 
@@ -59,6 +60,7 @@ class Routes {
   static const String addNews = "/addNews";
   static const String editChoosePlan = "/editChoosePlan";
   static const String chooseLanguage = "/chooseLanguage";
+  static const String upcomingMatches = "/upcomingMatches";
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -121,7 +123,9 @@ class Routes {
       case editChoosePlan:
         return generateRoute(routeSettings.name!, EditChoosePlanScreen());
       case chooseLanguage:
-        return generateRoute(routeSettings.name!, ChooseLanguageScreen());  
+        return generateRoute(routeSettings.name!, ChooseLanguageScreen());
+      case upcomingMatches:
+        return generateRoute(routeSettings.name!, UpcomingMatches());   
 
       default:
         return generateRoute(

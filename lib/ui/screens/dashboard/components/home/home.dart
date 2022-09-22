@@ -97,6 +97,17 @@ class HomeScreen extends StatelessWidget {
                            )),
                       ),
                   ],
+                ),
+                InkWell(
+                  onTap: () => Navigator.of(context).pushNamed(Routes.upcomingMatches),
+                  child: Container(
+                    width: double.infinity,
+                    height: 40,
+                    decoration: BoxDecoration(
+                    gradient: AppColors.blackishGradient,
+                    borderRadius: const BorderRadius.all(Radius.circular(8.0))),
+                    child: const Center(child: TextWidget(text: "View All Matches",)),
+                  ),
                 )
                 
               ],
