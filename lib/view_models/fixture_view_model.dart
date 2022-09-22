@@ -15,10 +15,11 @@ class FixtureDetailViewModel extends BaseModel {
   List<Player> get homeTeamPlayers => _homeTeamPlayers;
 
   Future<void> getData({required String matchId}) async {
+    setBusy(true);
     await getMatchDetails(matchId);
     await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
     await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
-    notifyListeners();
+    setBusy(false);
   }
 
   Future<void> getMatchDetails(String matchId) async {

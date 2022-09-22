@@ -49,7 +49,7 @@ class _FixtureDetailsState extends State<FixtureDetails> {
               ),
             ),
           ),
-          body: fixtureModel.matchDetails.isNotEmpty ? Column(
+          body: !fixtureModel.busy ? Column(
             children: [
               TabBarWidget(
                   totalTabs: 3,

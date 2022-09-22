@@ -53,7 +53,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                 child: Center(
                   child: TextWidget(
                       text: title!,
-                      overflow: TextOverflow.clip,
+                      overflow: TextOverflow.fade,
                     ),
                 ),
               )
