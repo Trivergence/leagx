@@ -9,7 +9,6 @@ import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../widgets/icon_container.dart';
-import '../../../widgets/image_widget.dart';
 import '../../../widgets/text_widget.dart';
 import '../../../widgets/score_chip.dart';
 import '../components/team_vs_widget.dart';
@@ -18,6 +17,7 @@ import 'components/offline_match_widget.dart';
 
 class MatchView extends StatelessWidget {
   final Events matchDetails;
+
   const MatchView({
     Key? key, required this.matchDetails,
   }) : super(key: key);
@@ -46,8 +46,8 @@ class MatchView extends StatelessWidget {
                         ScoreChip(firstScore: matchDetails.matchHometeamScore,
                           secondScore: matchDetails.matchAwayteamScore,),
                         UIHelper.verticalSpaceSmall,
-                        const TextWidget(
-                          text: "00:38:25",
+                        TextWidget(
+                          text: matchDetails.matchStatus,
                           color: AppColors.colorGrey,
                           textSize: Dimens.textSmall,
                         )

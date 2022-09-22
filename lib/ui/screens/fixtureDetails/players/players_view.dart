@@ -66,8 +66,7 @@ class PlayersView extends StatelessWidget {
                               Image.asset(Assets.vs),
                               UIHelper.verticalSpaceSmall,
                               TextWidget(
-                                text: DateUtility.getUiFormat(
-                                    matchDetails.matchDate),
+                                text: DateUtility.getUiFormat(matchDetails.matchDate),
                                 color: AppColors.colorGrey,
                                 textSize: Dimens.textSmall,
                               ),

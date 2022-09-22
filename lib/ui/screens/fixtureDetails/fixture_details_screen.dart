@@ -36,15 +36,16 @@ class _FixtureDetailsState extends State<FixtureDetails> {
     return BaseWidget<FixtureDetailViewModel>(
         create: false,
         model: context.read<FixtureDetailViewModel>(),
-        onModelReady: (FixtureDetailViewModel model) => model.getData(matchId: widget.matchData.matchId),
+        onModelReady: (FixtureDetailViewModel model) async => await model.getData(matchId: widget.matchData.matchId),
         builder: (context, FixtureDetailViewModel fixtureModel, _) {
           return Scaffold(
           appBar: AppBarWidget(
             title: widget.matchData.leagueName,
-            trailing: const Padding(
-              padding: EdgeInsets.all(15.0),
+            trailing: Padding(
+              padding: const EdgeInsets.all(15.0),
               child: DotWidget(
                 size: 22,
+                isLive: widget.matchData.liveStatus,
               ),
             ),
           ),
@@ -60,10 +61,12 @@ class _FixtureDetailsState extends State<FixtureDetails> {
                     });
                   }),
               index == 0
-                  ? MatchView(matchDetails: fixtureModel.matchDetails.first,)
+                  ? MatchView(
+                    matchDetails: fixtureModel.matchDetails.first,)
                   : index == 1
                       ? PlayersView(
-                          matchDetails: fixtureModel.matchDetails.first)
+                          matchDetails: fixtureModel.matchDetails.first,
+                          )
                       : index == 2
                           ? const NewsView()
                           : const SizedBox.shrink(),
