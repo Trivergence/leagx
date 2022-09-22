@@ -42,6 +42,7 @@ class PlayerTile extends StatelessWidget {
                   text: playerOneName,
                   color: AppColors.colorYellow,
                   maxLines: 1,
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),
@@ -74,6 +75,7 @@ class PlayerTile extends StatelessWidget {
                 TextWidget(
                   text: playerTwoName,
                   color: AppColors.colorRed,
+                  textAlign: TextAlign.center,
                 ),                
               ],
             ),
