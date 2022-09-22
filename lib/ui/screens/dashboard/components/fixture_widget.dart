@@ -63,7 +63,7 @@ class FixtureWidget extends StatelessWidget {
                     width: SizeConfig.width * 50,
                     child: TextWidget(text: leagueName, textSize: Dimens.textSmall, overflow: TextOverflow.ellipsis,)),
                   isLive
-                      ? const LiveWidget()
+                      ?  LiveWidget(isLive: isLive,)
                       : withText
                           ? Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,8 +76,8 @@ class FixtureWidget extends StatelessWidget {
                                     textSize: Dimens.textSmall),
                               ],
                             )
-                          : const DotWidget(
-                              isLive: false,
+                          : DotWidget(
+                              isLive: !isLive,
                             )
                 ],
               ),
