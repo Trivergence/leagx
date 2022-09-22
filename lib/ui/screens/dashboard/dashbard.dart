@@ -51,8 +51,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     Localization.init(context);
     return BaseWidget<DashBoardViewModel>(
+        create: false,
         model: context.read<DashBoardViewModel>(),
-        onModelReady: (DashBoardViewModel model) => model.getData(),
+        onModelReady: (DashBoardViewModel dashboardModel) async => await dashboardModel.getData(),
         builder: (context, DashBoardViewModel dashboardModel, _) {
           return Scaffold(
             appBar: AppBarWidget(
