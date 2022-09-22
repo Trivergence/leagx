@@ -1,8 +1,7 @@
-import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
@@ -17,10 +16,13 @@ import '../../../../../view_models/dashboard_view_model.dart';
 class FixtureScreen extends StatelessWidget {
   FixtureScreen({Key? key}) : super(key: key);
   List<Events> upcomingMatches = [];
+  List<SubscribedLeague> subscribedLeagues = [];
 
   @override
   Widget build(BuildContext context) {
-    upcomingMatches = context.read<DashBoardViewModel>().upcomingMatches;
+    DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
+    upcomingMatches = dashBoardViewModel.upcomingMatches;
+    subscribedLeagues = dashBoardViewModel.subscribedLeagues;
     return Column(
       children: [
         Container(
@@ -39,37 +41,36 @@ class FixtureScreen extends StatelessWidget {
               UIHelper.verticalSpaceSmall,
               Row(
                 children: [
-                  SizedBox(
-                    height: 40.0,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 4,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: GradientBorderWidget(
-                            width: 40.0,
-                            height: 40.0,
-                            padding: const EdgeInsets.all(5.0),
-                            isCircular: true,
-                            imageAsset: Assets.arsFlag,
-                            onPressed: () {},
-                          ),
-                        );
-                      },
+                  Expanded(
+                    child: SizedBox(
+                      height: 40.0,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: subscribedLeagues.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 20.0),
+                            child: GradientBorderWidget(
+                              width: 40.0,
+                              height: 40.0,
+                              padding: const EdgeInsets.all(5.0),
+                              isCircular: true,
+                              imageUrl: subscribedLeagues[index].logo,
+                              onPressed: () {},
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20.0),
-                    child: GradientBorderWidget(
-                      width: 40.0,
-                      height: 40.0,
-                      isCircular: true,
-                      iconData: Icons.add,
-                      onPressed: () => Navigator.of(context)
-                          .pushNamed(Routes.chooseLeague),
-                    ),
+                  GradientBorderWidget(
+                    width: 40.0,
+                    height: 40.0,
+                    isCircular: true,
+                    iconData: Icons.add,
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(Routes.chooseLeague),
                   ),
                 ],
               ),

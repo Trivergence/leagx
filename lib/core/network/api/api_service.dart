@@ -15,6 +15,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../models/dashboard/league.dart';
 import '../../../models/players.dart';
+import '../../../models/subscribed_league.dart';
 import '../../../models/subscription_plan.dart';
 
 class ApiService {
@@ -399,6 +400,58 @@ class ApiService {
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           List<SubscriptionPlan> listOfPlans= subscriptionPlanFromJson(jsonEncode(_response.data));
           return listOfPlans;
+        }
+      } else {
+        ToastMessage.show(Strings.noInternet, TOAST_TYPE.error);
+        return [];
+      }
+    } on DioError catch (ex) {
+      Loader.hideLoader();
+      if (ex.response != null) {
+        ErrorModel errorResponse =
+            ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
+        ToastMessage.show(
+            "${errorResponse.error} ${errorResponse.errorLog ?? ''}",
+            TOAST_TYPE.error);
+        return [];
+      }
+    } on Exception {
+      Loader.hideLoader();
+      ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
+      return [];
+    } catch (e) {
+      Loader.hideLoader();
+      print(e.toString());
+      return [];
+    }
+    return [];
+  }
+  static Future<List<SubscribedLeague>> getUserLeagues({
+    required String url,
+    Map<String, dynamic>? parameters,
+    Map<String, dynamic>? headers,
+  }) async {
+    try {
+      BaseOptions options = BaseOptions(
+        contentType: 'application/json',
+        baseUrl: AppUrl.baseUrl,
+        headers: {
+          "apitoken": preferenceHelper.authToken,
+        },
+      );
+      var dio = Dio(options);
+      var connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult != ConnectivityResult.none) {
+        Response _response = await dio.get(
+          url,
+          options: Options(headers: headers),
+          queryParameters: parameters,
+        );
+        print('get response: ${_response.data}');
+        if (_response.statusCode == 200 || _response.statusCode == 201) {
+          List<SubscribedLeague> listOfLeagues =
+              subscribedLeagueFromJson(jsonEncode(_response.data));
+          return listOfLeagues;
         }
       } else {
         ToastMessage.show(Strings.noInternet, TOAST_TYPE.error);

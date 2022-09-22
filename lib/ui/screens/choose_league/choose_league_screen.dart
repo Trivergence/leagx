@@ -7,8 +7,10 @@ import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/textfield/search_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/choose_league_view_model.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/subscribed_league.dart';
 import '../../widgets/loading_widget.dart';
 import 'components/league_tile.dart';
 
@@ -27,9 +29,11 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
   late ChooseLeagueViewModel _chooseLeagueModel;
   bool isFiltering = false;
   List<League> filteredList = [];
+  List<int> subscribedIds = [];
 
   @override
   Widget build(BuildContext context) {
+    subscribedIds = getSubscribedIds(context);
     return Scaffold(
       appBar: AppBarWidget(
         title: loc.chooseLeagueTxtChooseALeague,
@@ -68,7 +72,7 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
                         leagueId: league.leagueId,
                         leagueTitle: league.leagueName,
                         imgUrl: league.leagueLogo,
-                        hasSubscribed: false,
+                        hasSubscribed: subscribedIds.contains(int.parse(league.leagueId)),
                       );
                     }),
               )
@@ -83,5 +87,9 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
       isFiltering = true;
       filteredList = _chooseLeagueModel.searchLeague(enteredText);
     });
+  }
+
+  List<int> getSubscribedIds(BuildContext context) {
+    return context.read<DashBoardViewModel>().subscribedLeagues.map((league) => league.externalLeagueId).toList();
   }
 }
