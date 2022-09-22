@@ -41,7 +41,7 @@ class LiveMatchWidget extends StatelessWidget {
           children:  [
             for(int i = 0; i < statistics.length; i++) DetailTile(
                 title: statistics[i].type,
-                tileColor: i % 2 ==0?AppColors.colorBackground : AppColors.textFieldColor,
+                tileColor: i % 2 == 0 ?AppColors.colorBackground : AppColors.textFieldColor,
                 leftValue: statistics[i].home,
                 rightValue: statistics[i].away,
               ),

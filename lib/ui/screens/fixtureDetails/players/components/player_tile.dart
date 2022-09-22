@@ -12,20 +12,22 @@ class PlayerTile extends StatelessWidget {
   final String playerOneImg;
   final String playerTwoName;
   final String playerTwoImg;
+  final Color tileColor;
   const PlayerTile({
-    Key? key, required this.playerOneName, required this.playerOneImg, required this.playerTwoName, required this.playerTwoImg,
+    Key? key, required this.playerOneName, required this.playerOneImg, required this.playerTwoName, required this.playerTwoImg,required this.tileColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      color: tileColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             flex: 4,
-            child: Row(
+            child: Column(
               children: [
                 GradientBorderWidget(
                   width: 44.0,
@@ -35,7 +37,7 @@ class PlayerTile extends StatelessWidget {
                   onPressed: () {},
                   gradient: AppColors.orangishGradient,
                 ),
-                UIHelper.horizontalSpaceSmall,
+                UIHelper.verticalSpaceSmall,
                 TextWidget(
                   text: playerOneName,
                   color: AppColors.colorYellow,
@@ -58,14 +60,8 @@ class PlayerTile extends StatelessWidget {
           ),
           Expanded(
             flex: 4,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            child: Column(
               children: [
-                TextWidget(
-                  text: playerTwoName,
-                  color: AppColors.colorRed,
-                ),
-                UIHelper.horizontalSpaceSmall,
                 GradientBorderWidget(
                   width: 44.0,
                   height: 44.0,
@@ -74,6 +70,11 @@ class PlayerTile extends StatelessWidget {
                   onPressed: () {},
                   gradient: AppColors.orangishGradient,
                 ),
+                UIHelper.verticalSpaceSmall,
+                TextWidget(
+                  text: playerTwoName,
+                  color: AppColors.colorRed,
+                ),                
               ],
             ),
           ),

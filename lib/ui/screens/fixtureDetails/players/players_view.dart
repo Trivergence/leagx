@@ -98,7 +98,11 @@ class PlayersView extends StatelessWidget {
             ),
             Column(
               children:  [
-                for(int i = 0; i < getLength(); i++) PlayerTile(playerOneName: homePlayer[i].playerName,
+                for(int i = 0; i < getLength(); i++) PlayerTile(
+                  tileColor: i % 2 == 0
+                          ? AppColors.colorBackground
+                          : AppColors.textFieldColor,
+                  playerOneName: homePlayer[i].playerName,
                   playerOneImg: homePlayer[i].playerImage,
                   playerTwoName: awayPlayer[i].playerName,
                   playerTwoImg: awayPlayer[i].playerImage)
