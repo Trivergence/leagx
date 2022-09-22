@@ -89,7 +89,7 @@ class Routes {
         return generateRoute(
           routeSettings.name!,
           ChoosePlanScreen(
-            isAdmin: routeSettings.arguments as bool,
+            leagueData: routeSettings.arguments as Map<String,String>,
           ),
         );
       case home:

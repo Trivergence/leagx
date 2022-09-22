@@ -48,7 +48,7 @@ class LeagueTile extends StatelessWidget {
                 : GradientBorderButton(
                     text: loc.chooseLeagueBtnSubscribe,
                     onPressed: () => Navigator.of(context)
-                        .pushNamed(Routes.choosePlan, arguments: true),
+                        .pushNamed(Routes.choosePlan, arguments: {"imgUrl": imgUrl, "leagueTitle": leagueTitle}),
                     fontWeight: FontWeight.w400,
                     fontSize: 10,
                   )),

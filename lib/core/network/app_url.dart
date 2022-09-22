@@ -7,4 +7,5 @@ class AppUrl{
   static const String socialLogin = "users/social_auth";
   static const String forgotPassword = "users/forgot_password";
   static const String getUser = "users/";
+  static const String getPlan = "plans";
 }

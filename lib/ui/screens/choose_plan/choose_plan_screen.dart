@@ -1,6 +1,8 @@
 import 'package:leagx/constants/assets.dart';
+import 'package:leagx/models/subscription_plan.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +10,8 @@ import '../../widgets/bar/app_bar_widget.dart';
 import 'components/plan_listing.dart';
 
 class ChoosePlanScreen extends StatelessWidget {
-  final bool isAdmin;
-  const ChoosePlanScreen({Key? key, this.isAdmin = false}) : super(key: key);
+  final Map<String,String>? leagueData;
+  const ChoosePlanScreen({Key? key, this.leagueData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +22,15 @@ class ChoosePlanScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage(Assets.leagueImage1),
+              CircleAvatar(
+                child: ImageWidget(imageUrl: leagueData!["imgUrl"],),
                 radius: 35,
               ),
               UIHelper.verticalSpace(8),
-              const TextWidget(text: "FIFA"),
+              TextWidget(text: leagueData!["leagueTitle"]!),
               UIHelper.verticalSpace(70),
-              PlanListing(
-                isAdmin: isAdmin,
+              const PlanListing(
+                isAdmin: true,
               ),
             ],
           ),

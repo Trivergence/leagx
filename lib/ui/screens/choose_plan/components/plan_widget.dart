@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
+import '../../../../models/subscription_plan.dart';
 import '../../../util/ui/ui_helper.dart';
-import '../../../util/ui_model/subscription_plan.dart';
 import '../../../widgets/gradient/gradient_widget.dart';
 import '../../../widgets/text_widget.dart';
 import 'desc_widget.dart';
 
 class PlanWidget extends StatelessWidget {
+  final SubscriptionPlan plan;
   final int index;
   final bool isSelected;
   final VoidCallback onPlanSelected;
@@ -20,11 +21,12 @@ class PlanWidget extends StatelessWidget {
     required this.index,
     required this.isSelected,
     required this.onPlanSelected,
-    required this.isAdmin,
+    required this.isAdmin, required this.plan,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Gradient gradient = getGradient(index);
     return GestureDetector(
       onTap: onPlanSelected,
       child: Padding(
@@ -34,7 +36,7 @@ class PlanWidget extends StatelessWidget {
         child: Stack(clipBehavior: Clip.none, children: [
           Container(
             decoration: BoxDecoration(
-                gradient: isSelected ? listOfPlans[index].gradient : null,
+                gradient: isSelected ? gradient : null,
                 borderRadius: BorderRadius.circular(8)),
             padding: const EdgeInsets.all(1.5),
             child: Card(
@@ -52,9 +54,9 @@ class PlanWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GradientWidget(
-                            gradient: listOfPlans[index].gradient!,
+                            gradient: gradient,
                             child: TextWidget(
-                              text: listOfPlans[index].title!,
+                              text: plan.title,
                               fontWeight: FontWeight.w700,
                               textSize: Dimens.textMedium,
                             ),
@@ -76,19 +78,26 @@ class PlanWidget extends StatelessWidget {
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: listOfPlans[index]
-                                .desc!
-                                .map((desc) => DescWidget(
-                                      text: desc,
-                                      index: index,
-                                    ))
-                                .toList(),
+                            children: [
+                              DescWidget(
+                                  text: plan.feature1,
+                                  gradient: gradient,
+                              ),
+                              DescWidget(
+                                  text: plan.feature2,
+                                  gradient: gradient,
+                              ),
+                              DescWidget(
+                                  text: plan.feature2,
+                                  gradient: gradient,
+                                )
+                            ]
                           ),
                           GradientWidget(
-                              gradient: listOfPlans[index].gradient!,
+                              gradient: gradient,
                               child: TextWidget(
                                 text:
-                                    "\$${listOfPlans[index].price!.toStringAsFixed(2)}",
+                                    "\$${plan.price}",
                                 textSize: Dimens.textLarge,
                                 fontWeight: FontWeight.w600,
                               ))
@@ -102,10 +111,25 @@ class PlanWidget extends StatelessWidget {
               left: 29,
               top: -28,
               child: GradientWidget(
-                  gradient: listOfPlans[index].gradient!,
+                  gradient: gradient,
                   child: Image.asset(Assets.icCrown)))
         ]),
       ),
     );
+  }
+
+  Gradient getGradient(int index) {
+    switch(index){
+      case 0:
+        return AppColors.blueishBottomTopGradient;
+      case 1:
+        return AppColors.orangishGradient;
+      case 2:
+        return AppColors.pinkishGradient;
+      case 3:
+        return AppColors.blueishGradient;
+      default:
+        return AppColors.blueishBottomTopGradient;
+    }
   }
 }

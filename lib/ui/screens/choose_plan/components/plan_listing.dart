@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../../util/ui_model/subscription_plan.dart';
+import '../../../../models/subscription_plan.dart';
+import '../../../../view_models/choose_plan_viewmodel.dart';
 import 'plan_widget.dart';
 
 class PlanListing extends StatefulWidget {
@@ -17,15 +19,22 @@ class PlanListing extends StatefulWidget {
 
 class _PlanListingState extends State<PlanListing> {
   int selectedIndex = 1;
+  late List<SubscriptionPlan> listOfPlans;
+
   @override
   Widget build(BuildContext context) {
+    listOfPlans = context.read<ChoosePlanViewModel>().getPlans;
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       itemCount: listOfPlans.length,
       itemBuilder: (context, index) {
-        return PlanWidget(isAdmin:widget.isAdmin,index: index, isSelected: index == selectedIndex, onPlanSelected: () {
+        return PlanWidget(
+          plan: listOfPlans[index],
+         isAdmin: false,
+         index: index,
+         isSelected: index == selectedIndex, onPlanSelected: () {
           setState(() {
             selectedIndex = index;
           });

@@ -35,7 +35,7 @@ class Betting extends StatelessWidget {
         child: const SizedBox(),
         onModelReady: (SessionProvider sessionProvider) {
           FlutterNativeSplash.remove();
-          sessionProvider.init();
+          sessionProvider.init(context);
           _localizationProvider = context.watch<LocalizationProvider>();
           _localizationProvider.init();
         },

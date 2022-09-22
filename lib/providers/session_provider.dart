@@ -4,6 +4,8 @@ import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/choose_plan_viewmodel.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum LoginStatus { none, loggingIn, loggedIn, error }
@@ -16,16 +18,15 @@ class SessionProvider extends ChangeNotifier {
 
   SessionProvider({required this.prefs});
 
-  init() async {
-    _loadSession();
-  }
+  init(BuildContext context) async => await _loadSession(context);
 
   LoginStatus get loginStatus => _loginStatus;
   //SignupStatus get signupStatus => _signupStatus;
 
-  void _loadSession() {
+  Future<void> _loadSession(BuildContext context) async {
     if (ValidationUtils.isValid(locator<SharedPreferenceHelper>().authToken)) {
-    _loginStatus = LoginStatus.loggedIn;
+     _loginStatus = LoginStatus.loggedIn;
+     await loadData(context);
     }
     else if(!locator<SharedPreferenceHelper>().isFirstTime()) {
       _loginStatus = LoginStatus.error;
@@ -54,5 +55,9 @@ class SessionProvider extends ChangeNotifier {
     SharedPreferenceHelper(prefs).removeAuthToken();
     SharedPreferenceHelper(prefs).removeUsername();
     notifyListeners();
+  }
+
+  Future<void> loadData(BuildContext context) async {
+    await context.read<ChoosePlanViewModel>().getSubscriptionPlans();
   }
 }
