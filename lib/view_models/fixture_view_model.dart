@@ -1,3 +1,5 @@
+import 'package:leagx/core/viewmodels/match_details_viewmodel.dart';
+
 import '../core/network/api/api_models.dart';
 import '../core/network/api/api_service.dart';
 import '../core/viewmodels/base_model.dart';
@@ -14,12 +16,13 @@ class FixtureDetailViewModel extends BaseModel {
 
   Future<void> getMatchDetails(String matchId) async {
     DateTime today = DateTime.now().toUtc();
-    _matchDetails = await ApiService.callFootballApi(parameters: {
+    _matchDetails = await ApiService.getMatches(parameters: {
       "action": "get_events",
       "match_id": matchId,
       "from": DateUtility.getApiFormat(today),
       "to": DateUtility.getApiFormat(today),
-    }, modelName: ApiModels.upcomingMatches);
+      "timezone": "Asia/Karachi",
+    });
     notifyListeners();
   }
 }
