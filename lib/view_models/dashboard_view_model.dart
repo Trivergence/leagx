@@ -14,16 +14,22 @@ class DashBoardViewModel extends BaseModel {
   }
 
   Future<void> getUpcomingMatches() async {
-     DateTime today = DateTime.now().toUtc();
-     _upcomingMatches = await ApiService.callFootballApi(
+     DateTime now = DateTime.now();
+     _upcomingMatches = await ApiService.getMatches(
       parameters: {
         "action": "get_events",
-        "from": DateUtility.getApiFormat(today),
-        "to": DateUtility.getApiFormat(today),
+        "timezone": "Asia/Karachi",
+        "from": DateUtility.getApiFormat(now),
+        "to": DateUtility.getApiFormat(now),
       },
-      modelName: ApiModels.upcomingMatches
     );
-    _upcomingMatches = upcomingMatches.where((match) => match.matchStatus == MatchStatus.FINISHED).toList();
+    _upcomingMatches = upcomingMatches.where((match) => isUpcoming(match, now)).toList();
     notifyListeners();
+  }
+
+  bool isUpcoming(Events match, DateTime now) {
+    DateTime today = DateTime(now.year, now.month, now.day);
+    print(today == match.matchDate);
+    return today == match.matchDate;
   }
 }
