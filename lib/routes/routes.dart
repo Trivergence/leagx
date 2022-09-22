@@ -1,3 +1,4 @@
+import 'package:leagx/models/choose_plan_args.dart';
 import 'package:leagx/models/match_args.dart';
 import 'package:leagx/ui/screens/admin/admin_announce.dart';
 import 'package:leagx/ui/screens/admin/admin_fixture.dart';
@@ -89,7 +90,7 @@ class Routes {
         return generateRoute(
           routeSettings.name!,
           ChoosePlanScreen(
-            leagueData: routeSettings.arguments as Map<String,String>,
+            leagueData: routeSettings.arguments as ChoosePlanArgs,
           ),
         );
       case home:

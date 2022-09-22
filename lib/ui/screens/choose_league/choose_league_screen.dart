@@ -65,6 +65,7 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
                     itemBuilder: (context, index) {
                       League league = listOfLeagues[index];
                       return LeagueTile(
+                        leagueId: league.leagueId,
                         leagueTitle: league.leagueName,
                         imgUrl: league.leagueLogo,
                         hasSubscribed: false,

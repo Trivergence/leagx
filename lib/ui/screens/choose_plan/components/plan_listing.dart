@@ -7,10 +7,11 @@ import 'plan_widget.dart';
 
 class PlanListing extends StatefulWidget {
   final bool isAdmin;
+  final Function(int) onItemPressed;
 
   const PlanListing({
     required this.isAdmin,
-    Key? key,
+    Key? key, required this.onItemPressed,
   }) : super(key: key);
 
   @override
@@ -38,6 +39,7 @@ class _PlanListingState extends State<PlanListing> {
           setState(() {
             selectedIndex = index;
           });
+          widget.onItemPressed(listOfPlans[index].id);
         },);
     });
   }

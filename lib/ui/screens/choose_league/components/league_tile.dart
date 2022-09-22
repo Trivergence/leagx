@@ -1,3 +1,4 @@
+import 'package:leagx/models/choose_plan_args.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +12,12 @@ import '../../../widgets/text_widget.dart';
 class LeagueTile extends StatelessWidget {
   const LeagueTile({
     Key? key,
+    required this.leagueId,
     required this.imgUrl,
     required this.leagueTitle,
     required this.hasSubscribed
   }) : super(key: key);
-
+  final String leagueId;
   final String imgUrl;
   final String leagueTitle;
   final bool hasSubscribed;
@@ -48,7 +50,7 @@ class LeagueTile extends StatelessWidget {
                 : GradientBorderButton(
                     text: loc.chooseLeagueBtnSubscribe,
                     onPressed: () => Navigator.of(context)
-                        .pushNamed(Routes.choosePlan, arguments: {"imgUrl": imgUrl, "leagueTitle": leagueTitle}),
+                        .pushNamed(Routes.choosePlan, arguments: ChoosePlanArgs(leagueId: leagueId, leagueImg: imgUrl, leagueTitle: leagueTitle)),
                     fontWeight: FontWeight.w400,
                     fontSize: 10,
                   )),
