@@ -1,6 +1,5 @@
-import 'package:leagx/core/viewmodels/match_details_viewmodel.dart';
+import 'package:leagx/models/players.dart';
 
-import '../core/network/api/api_models.dart';
 import '../core/network/api/api_service.dart';
 import '../core/viewmodels/base_model.dart';
 import '../models/dashboard/events.dart';
@@ -8,10 +7,18 @@ import '../ui/util/utility/date_utility.dart';
 
 class FixtureDetailViewModel extends BaseModel {
   List<Events> _matchDetails = [];
+  List<Player> _awayTeamPlayers = [];
+  List<Player> _homeTeamPlayers = [];
+
   List<Events> get matchDetails => _matchDetails;
+  List<Player> get awayTeamPlayers => _awayTeamPlayers;
+  List<Player> get homeTeamPlayers => _homeTeamPlayers;
 
   Future<void> getData({required String matchId}) async {
     await getMatchDetails(matchId);
+    await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
+    await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
+    notifyListeners();
   }
 
   Future<void> getMatchDetails(String matchId) async {
@@ -23,6 +30,12 @@ class FixtureDetailViewModel extends BaseModel {
       "to": DateUtility.getApiFormat(today),
       "timezone": "Asia/Karachi",
     });
-    notifyListeners();
+  }
+
+  getHomeTeamPlayers(String matchHometeamId) async {
+    _homeTeamPlayers = await ApiService.getPlayers(matchHometeamId);
+  }
+  getAwayTeamPlayers(String matchAwayteamId) async {
+    _awayTeamPlayers = await ApiService.getPlayers(matchAwayteamId);
   }
 }

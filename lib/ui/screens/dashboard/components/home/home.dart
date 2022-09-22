@@ -92,8 +92,9 @@ class HomeScreen extends StatelessWidget {
                         onTap: () => Navigator.pushNamed(context,
                           Routes.fixtureDetails,
                           arguments: MatchArgs(matchId: upcomingMatches[i].matchId,
-                           liveStatus: upcomingMatches[i].matchLive == "1",
-                           leagueName: upcomingMatches[i].leagueName)),
+                              liveStatus: upcomingMatches[i].matchLive == "1",
+                              leagueName: upcomingMatches[i].leagueName,
+                           )),
                       ),
                   ],
                 )

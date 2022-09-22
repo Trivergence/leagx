@@ -16,6 +16,7 @@ import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../models/dashboard/league.dart';
+import '../../../models/players.dart';
 
 class ApiService {
   
@@ -327,4 +328,54 @@ class ApiService {
     }
     return [];
   }
+  static Future<List<Player>> getPlayers(String teamId) async {
+    Map<String, String> parameters = {
+      "action": "get_teams",
+      "team_id": teamId,
+      "APIkey": AppConstants.footballApiKey
+    };
+    try {
+      BaseOptions options = BaseOptions(
+        contentType: 'application/json',
+        baseUrl: AppUrl.footballBaseUrl,
+      );
+      var dio = Dio(options);
+      //dio.interceptors.add(PrettyDioLogger());
+      var connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult != ConnectivityResult.none) {
+        Response _response = await dio.get(
+          "",
+          queryParameters: parameters,
+        );
+        if (_response.statusCode == 200 || _response.statusCode == 201) {
+          List<Team> listOfPlayers =
+              teamFromJson(jsonEncode(_response.data));
+          return listOfPlayers.first.players;
+        }
+      } else {
+        ToastMessage.show(Strings.noInternet, TOAST_TYPE.error);
+        return [];
+      }
+    } on DioError catch (ex) {
+      Loader.hideLoader();
+      if (ex.response != null) {
+        ErrorModel errorResponse =
+            ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
+        ToastMessage.show(
+            "${errorResponse.error} ${errorResponse.errorLog ?? ''}",
+            TOAST_TYPE.error);
+        return [];
+      }
+      return [];
+    } on Exception {
+      Loader.hideLoader();
+      ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
+      return [];
+    } catch (e) {
+      Loader.hideLoader();
+      return [];
+    }
+    return [];
+  }
 }
+

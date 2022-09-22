@@ -1,11 +1,15 @@
 import 'package:leagx/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/screens/fixtureDetails/players/components/player_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/view_models/fixture_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
 import '../../../../models/dashboard/events.dart';
+import '../../../../models/players.dart';
 import '../../../util/size/size_config.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../util/utility/date_utility.dart';
@@ -15,7 +19,6 @@ import '../../../widgets/text_widget.dart';
 import '../components/prediction_bottom_sheet.dart';
 import '../../../widgets/score_chip.dart';
 import '../components/team_vs_widget.dart';
-import 'components/player_tile.dart';
 
 class PlayersView extends StatelessWidget {
   final Events matchDetails;
@@ -24,9 +27,13 @@ class PlayersView extends StatelessWidget {
   }) : super(key: key);
 
   BuildContext? _context;
+  late List<Player> awayPlayer;
+  late List<Player> homePlayer;
 
   @override
   Widget build(BuildContext context) {
+    awayPlayer = context.read<FixtureDetailViewModel>().awayTeamPlayers;
+    homePlayer = context.read<FixtureDetailViewModel>().homeTeamPlayers;
     _context = context;
     return Expanded(
       child: SingleChildScrollView(
@@ -90,17 +97,11 @@ class PlayersView extends StatelessWidget {
               title: loc.fixtureDetailsPlayersTxtTeamPlayers,
             ),
             Column(
-              children: const [
-                PlayerTile(),
-                PlayerTile(),
-                PlayerTile(),
-                PlayerTile(),
-                PlayerTile(),
-                PlayerTile(),
-                PlayerTile(),
-                PlayerTile(),
-                PlayerTile(),
-                PlayerTile(),
+              children:  [
+                for(int i = 0; i < getLength(); i++) PlayerTile(playerOneName: homePlayer[i].playerName,
+                  playerOneImg: homePlayer[i].playerImage,
+                  playerTwoName: awayPlayer[i].playerName,
+                  playerTwoImg: awayPlayer[i].playerImage)
               ],
             ),
             UIHelper.verticalSpaceMedium,
@@ -126,5 +127,13 @@ class PlayersView extends StatelessWidget {
               onSubmit: (mycontext) =>
                   Navigator.pushNamed(context, Routes.chooseAnExpert));
         });
+  }
+
+  int getLength() {
+    if(homePlayer.length <= awayPlayer.length) {
+      return homePlayer.length >= 11 ? 11 : homePlayer.length;
+    } else {
+      return awayPlayer.length >= 11 ? 11 : awayPlayer.length;
+    }
   }
 }

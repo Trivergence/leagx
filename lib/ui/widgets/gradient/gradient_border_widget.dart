@@ -3,6 +3,7 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -63,11 +64,8 @@ class GradientBorderWidget extends StatelessWidget {
                   size: iconSize,
                 )
               : imageUrl != null
-                  ? CachedNetworkImage(
+                  ? ImageWidget(
                       imageUrl: imageUrl!,
-                      fit: BoxFit.fill,
-                      height: height,
-                      width: width,
                     )
                   : text != null
                       ? Center(
