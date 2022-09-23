@@ -1,9 +1,10 @@
 import 'package:leagx/models/dashboard/events.dart';
-import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/fixture_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
@@ -11,7 +12,6 @@ import '../../../../widgets/icon_container.dart';
 import '../../../../widgets/main_button.dart';
 import '../../components/detail_tile.dart';
 import '../../components/match_prediction_tile.dart';
-import '../../components/prediction_bottom_sheet.dart';
 
 class LiveMatchWidget extends StatelessWidget {
   final Events matchDetails; 
@@ -57,14 +57,15 @@ class LiveMatchWidget extends StatelessWidget {
   }
 
   void _showSheet() {
-    showModalBottomSheet(
-        context: _context!,
-        backgroundColor: AppColors.colorBackground,
-        builder: (context) {
-          return PredictionSheetWidget(
-              matchDetails: matchDetails,
-              onSubmit: (context) =>
-                  Navigator.pushNamed(context, Routes.chooseAnExpert));
-        });
+    _context!.read<FixtureDetailViewModel>().showPredictionSheet(_context!, matchDetails);
+    // showModalBottomSheet(
+    //     context: _context!,
+    //     backgroundColor: AppColors.colorBackground,
+    //     builder: (context) {
+    //       return PredictionSheetWidget(
+    //           matchDetails: matchDetails,
+    //           onSubmit: (context) =>
+    //               Navigator.pushNamed(context, Routes.chooseAnExpert));
+    //     });
   }
 }

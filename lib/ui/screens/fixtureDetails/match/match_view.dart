@@ -80,7 +80,7 @@ class MatchView extends StatelessWidget {
               height: SizeConfig.height * 7,
               title: loc.faqsTxtFrequentlyAskedQuestions,
             ),
-            matchDetails.matchLive == "1" ? LiveMatchWidget(matchDetails: matchDetails,) : OfflineMatchWidget()
+            matchDetails.matchLive == "1" ? LiveMatchWidget(matchDetails: matchDetails,) : OfflineMatchWidget(matchDetails: matchDetails)
           ],
         ),
       ),

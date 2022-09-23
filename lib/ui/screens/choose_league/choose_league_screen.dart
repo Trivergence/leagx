@@ -33,7 +33,7 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
 
   @override
   Widget build(BuildContext context) {
-    subscribedIds = getSubscribedIds(context);
+    subscribedIds = context.read<DashBoardViewModel>().subscribedLeagueIds;
     return Scaffold(
       appBar: AppBarWidget(
         title: loc.chooseLeagueTxtChooseALeague,
@@ -87,9 +87,5 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
       isFiltering = true;
       filteredList = _chooseLeagueModel.searchLeague(enteredText);
     });
-  }
-
-  List<int> getSubscribedIds(BuildContext context) {
-    return context.read<DashBoardViewModel>().subscribedLeagues.map((league) => league.externalLeagueId).toList();
   }
 }

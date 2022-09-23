@@ -29,11 +29,13 @@ class PlayersView extends StatelessWidget {
   BuildContext? _context;
   late List<Player> awayPlayer;
   late List<Player> homePlayer;
+  late FixtureDetailViewModel _fixtureModel;
 
   @override
   Widget build(BuildContext context) {
-    awayPlayer = context.read<FixtureDetailViewModel>().awayTeamPlayers;
-    homePlayer = context.read<FixtureDetailViewModel>().homeTeamPlayers;
+    _fixtureModel = context.read<FixtureDetailViewModel>();
+    awayPlayer = _fixtureModel.awayTeamPlayers;
+    homePlayer = _fixtureModel.homeTeamPlayers;
     _context = context;
     return Expanded(
       child: SingleChildScrollView(
@@ -127,15 +129,7 @@ class PlayersView extends StatelessWidget {
   }
 
   void _showSheet() {
-    showModalBottomSheet(
-        context: _context!,
-        backgroundColor: AppColors.colorBackground,
-        builder: (context) {
-          return PredictionSheetWidget(
-              matchDetails: matchDetails,
-              onSubmit: (context) =>
-                  Navigator.pushNamed(context, Routes.chooseAnExpert));
-        });
+   _fixtureModel.showPredictionSheet(_context!, matchDetails);
   }
 
   int getLength() {

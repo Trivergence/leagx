@@ -1,20 +1,22 @@
-import 'package:leagx/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/dimens.dart';
+import '../../../../../models/dashboard/events.dart';
+import '../../../../../view_models/fixture_view_model.dart';
 import '../../../../util/size/size_config.dart';
 import '../../../../util/ui/ui_helper.dart';
 import '../../../../widgets/divider_widget.dart';
 import '../../../../widgets/main_button.dart';
 import '../../../../widgets/text_widget.dart';
-import '../../components/prediction_bottom_sheet.dart';
 
 class OfflineMatchWidget extends StatelessWidget {
+  final Events matchDetails;
   OfflineMatchWidget({
-    Key? key,
+    Key? key, required this.matchDetails,
   }) : super(key: key);
 
   late BuildContext _context;
@@ -54,16 +56,8 @@ class OfflineMatchWidget extends StatelessWidget {
   }
 
   void _showSheet() {
-    showModalBottomSheet(
-        context: _context,
-        backgroundColor: AppColors.colorBackground,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        builder: (context) {
-          return PredictionSheetWidget(
-              onSubmit: (context) =>
-                  Navigator.pushNamed(context, Routes.chooseAnExpert));
-        });
+    _context
+        .read<FixtureDetailViewModel>()
+        .showPredictionSheet(_context, matchDetails);
   }
 }

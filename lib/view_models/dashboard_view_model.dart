@@ -14,8 +14,10 @@ class DashBoardViewModel extends BaseModel {
 
   List<Events> _upcomingMatches = [];
   List<SubscribedLeague> _subscribedLeagues = [];
+  List<int> _subscribedLeagueIds = [];
   List<Events> get upcomingMatches => _upcomingMatches;
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
+  List<int> get subscribedLeagueIds => _subscribedLeagueIds;
   Future<void> getData() async {
     await getUpcomingMatches();
     await getUserLeagues();
@@ -39,6 +41,13 @@ class DashBoardViewModel extends BaseModel {
     User? user = locator<SharedPreferenceHelper>().getUser();
     String completeUrl = AppUrl.getUser + "${user!.id}" + "/subscribed_leagues";
     _subscribedLeagues = await ApiService.getUserLeagues(url: completeUrl);
+    _subscribedLeagueIds = getSubscribedIds();
+  }
+
+  List<int> getSubscribedIds() {
+    return _subscribedLeagues
+        .map((league) => league.externalLeagueId)
+        .toList();
   }
 
   bool isUpcoming(Events match, DateTime now) {

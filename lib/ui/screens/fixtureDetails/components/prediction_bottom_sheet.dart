@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -32,9 +33,11 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   bool isPublic = false;
   int awayScore = 2;
   int homeScore = 1;
+  late int leagueId;
   @override
   Widget build(BuildContext context) {
     _context = context;
+    leagueId = getMatchId();
     return Padding(
       padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 25.0),
       child: Column(
@@ -122,13 +125,22 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
 
   void _predictMatch() {
     _context!.read<FixtureDetailViewModel>().savePrediction(
-      matchId: widget.matchDetails!.matchId,
-      leagueId: widget.matchDetails!.leagueId,
+      context: _context!,
+      matchId: int.parse(widget.matchDetails!.matchId),
+      leagueId: leagueId,
       homeScore: homeScore,
       awayScore: awayScore,
       awayTeamName: widget.matchDetails!.matchAwayteamName,
       homeTeamName: widget.matchDetails!.matchHometeamName,
       isPublic: isPublic
     );
+  }
+
+  int getMatchId() {
+     return context.read<DashBoardViewModel>()
+    .subscribedLeagues
+    .where((league) => league.externalLeagueId.toString() == widget.matchDetails!.leagueId)
+    .first
+    .id;
   }
 }

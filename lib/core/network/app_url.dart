@@ -9,4 +9,5 @@ class AppUrl{
   static const String getUser = "users/";
   static const String getPlan = "plans";
   static const String subscribeLeague = "leagues/subscribe";
+  static const String makePrediction = "matches/make_prediction";
 }
