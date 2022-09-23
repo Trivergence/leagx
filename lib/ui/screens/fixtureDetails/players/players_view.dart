@@ -132,7 +132,8 @@ class PlayersView extends StatelessWidget {
         backgroundColor: AppColors.colorBackground,
         builder: (context) {
           return PredictionSheetWidget(
-              onSubmit: (mycontext) =>
+              matchDetails: matchDetails,
+              onSubmit: (context) =>
                   Navigator.pushNamed(context, Routes.chooseAnExpert));
         });
   }

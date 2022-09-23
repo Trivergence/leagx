@@ -1,8 +1,11 @@
+import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/models/players.dart';
 
 import '../core/network/api/api_service.dart';
 import '../core/viewmodels/base_model.dart';
 import '../models/dashboard/events.dart';
+import '../models/user/user.dart';
+import '../service/service_locator.dart';
 import '../ui/util/utility/date_utility.dart';
 
 class FixtureDetailViewModel extends BaseModel {
@@ -31,6 +34,19 @@ class FixtureDetailViewModel extends BaseModel {
       "to": DateUtility.getApiFormat(today),
       "timezone": "Asia/Karachi",
     });
+  }
+
+  void savePrediction({required String homeTeamName,
+  required String awayTeamName,
+  required String matchId,
+  required String leagueId,
+  required int homeScore,
+  required int awayScore,
+  required bool isPublic,
+  int? expertId }
+  ) {
+    User? user =locator<SharedPreferenceHelper>().getUser();
+    print(homeTeamName + homeScore.toString() + awayTeamName + awayScore.toString() + matchId + leagueId + isPublic.toString() + expertId.toString());
   }
 
   getHomeTeamPlayers(String matchHometeamId) async {

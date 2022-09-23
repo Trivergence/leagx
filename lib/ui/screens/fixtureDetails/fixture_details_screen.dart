@@ -71,7 +71,7 @@ class _FixtureDetailsState extends State<FixtureDetails> {
                   : index == 1
                       ? PlayersView(
                           matchDetails: fixtureModel.matchDetails.first,
-                          )
+                        )
                       : index == 2
                           ? const NewsView()
                           : const SizedBox.shrink(),

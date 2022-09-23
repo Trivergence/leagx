@@ -7,14 +7,14 @@ import '../../../util/size/size_config.dart';
 import '../../../widgets/text_widget.dart';
 
 class ScorePicker extends StatelessWidget {
-  final Function(String) onChanged;
+  final Function(int) onChanged;
   final int initialScore;
   final bool isSelected;
   ScorePicker({
     Key? key, required this.onChanged,required this.initialScore, required this.isSelected,
   }) : super(key: key);
 
-  List totalScores = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+  List<int> totalScores = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,14 +41,14 @@ class ScorePicker extends StatelessWidget {
           enableInfiniteScroll: false,
           initialPage: initialScore,
           onPageChanged: (value, _) {
-            onChanged(value.toString());
+            onChanged(value);
           }
         ),
-        items: totalScores.map((i) {
+        items: totalScores.map((score) {
           return Builder(
             builder: (BuildContext context) {
               return Center(
-                child: TextWidget(text: i.toString(),
+                child: TextWidget(text: score.toString(),
                  textSize: Dimens.textRegular,
                  fontWeight: FontWeight.w400,
                  ),

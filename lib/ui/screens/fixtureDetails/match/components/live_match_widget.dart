@@ -62,6 +62,7 @@ class LiveMatchWidget extends StatelessWidget {
         backgroundColor: AppColors.colorBackground,
         builder: (context) {
           return PredictionSheetWidget(
+              matchDetails: matchDetails,
               onSubmit: (context) =>
                   Navigator.pushNamed(context, Routes.chooseAnExpert));
         });
