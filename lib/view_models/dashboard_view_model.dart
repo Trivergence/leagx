@@ -19,8 +19,8 @@ class DashBoardViewModel extends BaseModel {
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
   List<int> get subscribedLeagueIds => _subscribedLeagueIds;
   Future<void> getData() async {
-    await getUpcomingMatches();
     await getUserLeagues();
+    await getUpcomingMatches();
   }
 
   Future<void> getUpcomingMatches() async {
@@ -29,6 +29,7 @@ class DashBoardViewModel extends BaseModel {
       parameters: {
         "action": "get_events",
         "timezone": "Asia/Karachi",
+        "league_id": subscribedLeagueIds.join(","),
         "from": DateUtility.getApiFormat(now),
         "to": DateUtility.getApiFormat(now),
       },
