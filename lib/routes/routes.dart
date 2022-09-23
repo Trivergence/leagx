@@ -27,6 +27,7 @@ import 'package:leagx/ui/screens/upcoming_matches.dart';
 import 'package:leagx/ui/screens/user/user.dart';
 import 'package:flutter/material.dart';
 
+import '../ui/screens/choose_fixture.dart/choose_fixture_screen.dart';
 import '../ui/screens/choose_plan/choose_plan_screen.dart';
 import '../ui/screens/dashboard/components/news/add_news.dart';
 import '../ui/screens/fixtureDetails/fixture_details_screen.dart';
@@ -46,6 +47,9 @@ class Routes {
   static const String adminFixtureDetail = '/adminFixtureDetail';
   static const String adminAnnounce = '/adminAnnounce';
   static const String chooseLeague = '/chooseLeague';
+  static const String chooseFixture = '/chooseFixture';
+
+  
   static const String choosePlan = '/choosePlan';
   static const String home = '/home';
   static const String predictions = '/predicitons';
@@ -87,7 +91,9 @@ class Routes {
       case adminAnnounce:
         return generateRoute(routeSettings.name!, AdmiinAnnounceScreen());
       case chooseLeague:
-        return generateRoute(routeSettings.name!, ChooseLeagueScreen());
+        return generateRoute(routeSettings.name!, const ChooseLeagueScreen());
+      case chooseFixture:
+        return generateRoute(routeSettings.name!, const ChooseFixtureScreen());
       case choosePlan:
         return generateRoute(
           routeSettings.name!,

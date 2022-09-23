@@ -45,4 +45,11 @@ class DashBoardViewModel extends BaseModel {
     DateTime today = DateTime(now.year, now.month, now.day);
     return today == match.matchDate;
   }
+
+  List<Events> searchMatches(String value) {
+    return _upcomingMatches
+        .where((match) =>
+            match.leagueName.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+  }
 }
