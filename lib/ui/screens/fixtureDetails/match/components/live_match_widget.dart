@@ -14,7 +14,7 @@ import '../../components/detail_tile.dart';
 import '../../components/match_prediction_tile.dart';
 
 class LiveMatchWidget extends StatelessWidget {
-  final Events matchDetails; 
+  final Fixture matchDetails; 
   LiveMatchWidget({
     Key? key, required this.matchDetails,
   }) : super(key: key);

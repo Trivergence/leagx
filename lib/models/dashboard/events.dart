@@ -4,14 +4,14 @@
 
 import 'dart:convert';
 
-List<Events> eventsFromJson(String str) =>
-    List<Events>.from(json.decode(str).map((x) => Events.fromJson(x)));
+List<Fixture> eventsFromJson(String str) =>
+    List<Fixture>.from(json.decode(str).map((x) => Fixture.fromJson(x)));
 
-String eventsToJson(List<Events> data) =>
+String eventsToJson(List<Fixture> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Events {
-  Events({
+class Fixture {
+  Fixture({
     required this.matchId,
     required this.countryId,
     required this.countryName,
@@ -97,7 +97,7 @@ class Events {
   List<Statistic> statistics;
   List<Statistic> statistics1Half;
 
-  factory Events.fromJson(Map<String, dynamic> json) => Events(
+  factory Fixture.fromJson(Map<String, dynamic> json) => Fixture(
         matchId: json["match_id"],
         countryId: json["country_id"],
         countryName: json["country_name"],

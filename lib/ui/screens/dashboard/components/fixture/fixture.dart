@@ -15,7 +15,7 @@ import '../../../../../view_models/dashboard_view_model.dart';
 
 class FixtureScreen extends StatelessWidget {
   FixtureScreen({Key? key}) : super(key: key);
-  List<Events> upcomingMatches = [];
+  List<Fixture> upcomingMatches = [];
   List<SubscribedLeague> subscribedLeagues = [];
 
   @override

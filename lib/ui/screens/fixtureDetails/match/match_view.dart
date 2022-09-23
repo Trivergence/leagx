@@ -16,7 +16,7 @@ import 'components/live_match_widget.dart';
 import 'components/offline_match_widget.dart';
 
 class MatchView extends StatelessWidget {
-  final Events matchDetails;
+  final Fixture matchDetails;
 
   const MatchView({
     Key? key, required this.matchDetails,

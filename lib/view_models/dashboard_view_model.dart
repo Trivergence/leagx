@@ -12,10 +12,10 @@ import '../models/user/user.dart';
 
 class DashBoardViewModel extends BaseModel {
 
-  List<Events> _upcomingMatches = [];
+  List<Fixture> _upcomingMatches = [];
   List<SubscribedLeague> _subscribedLeagues = [];
   List<int> _subscribedLeagueIds = [];
-  List<Events> get upcomingMatches => _upcomingMatches;
+  List<Fixture> get upcomingMatches => _upcomingMatches;
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
   List<int> get subscribedLeagueIds => _subscribedLeagueIds;
   Future<void> getData() async {
@@ -50,7 +50,7 @@ class DashBoardViewModel extends BaseModel {
         .toList();
   }
 
-  bool isUpcoming(Events match, DateTime now) {
+  bool isUpcoming(Fixture match, DateTime now) {
     DateTime today = DateTime(now.year, now.month, now.day);
     return today == match.matchDate;
   }

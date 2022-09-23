@@ -15,7 +15,7 @@ import '../../../../../models/dashboard/events.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  List<Events> upcomingMatches = [];
+  List<Fixture> upcomingMatches = [];
 
   @override
   Widget build(BuildContext context) {

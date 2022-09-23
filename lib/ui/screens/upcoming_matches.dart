@@ -10,7 +10,7 @@ import 'dashboard/components/fixture_widget.dart';
 
 class UpcomingMatches extends StatelessWidget {
   UpcomingMatches({ Key? key }) : super(key: key);
-  List<Events> upcomingMatches = [];
+  List<Fixture> upcomingMatches = [];
   @override
   Widget build(BuildContext context) {
     DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();

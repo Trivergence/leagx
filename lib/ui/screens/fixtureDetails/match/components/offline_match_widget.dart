@@ -14,7 +14,7 @@ import '../../../../widgets/main_button.dart';
 import '../../../../widgets/text_widget.dart';
 
 class OfflineMatchWidget extends StatelessWidget {
-  final Events matchDetails;
+  final Fixture matchDetails;
   OfflineMatchWidget({
     Key? key, required this.matchDetails,
   }) : super(key: key);

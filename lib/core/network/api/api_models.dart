@@ -22,7 +22,7 @@ class ApiModels {
       case userData:
         return UserData.fromJson(json);
       case upcomingMatches:
-        return Events.fromJson(json); 
+        return Fixture.fromJson(json); 
     }
   }
 }

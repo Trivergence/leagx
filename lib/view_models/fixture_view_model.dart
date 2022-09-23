@@ -14,11 +14,11 @@ import '../ui/util/loader/loader.dart';
 import '../ui/util/utility/date_utility.dart';
 
 class FixtureDetailViewModel extends BaseModel {
-  List<Events> _matchDetails = [];
+  List<Fixture> _matchDetails = [];
   List<Player> _awayTeamPlayers = [];
   List<Player> _homeTeamPlayers = [];
 
-  List<Events> get matchDetails => _matchDetails;
+  List<Fixture> get matchDetails => _matchDetails;
   List<Player> get awayTeamPlayers => _awayTeamPlayers;
   List<Player> get homeTeamPlayers => _homeTeamPlayers;
 
@@ -85,7 +85,7 @@ class FixtureDetailViewModel extends BaseModel {
     _awayTeamPlayers = await ApiService.getPlayers(matchAwayteamId);
   }
 
-  showPredictionSheet(BuildContext context, Events matchDeta) {
+  showPredictionSheet(BuildContext context, Fixture matchDeta) {
     showModalBottomSheet(
         context: context,
         backgroundColor: AppColors.colorBackground,

@@ -16,7 +16,7 @@ import 'score_picker.dart';
 
 class PredictionSheetWidget extends StatefulWidget {
   final Function(BuildContext) onSubmit;
-  final Events? matchDetails;
+  final Fixture? matchDetails;
   const PredictionSheetWidget({
     Key? key,
     required this.onSubmit, this.matchDetails,

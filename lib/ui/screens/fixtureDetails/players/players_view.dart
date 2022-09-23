@@ -21,7 +21,7 @@ import '../../../widgets/score_chip.dart';
 import '../components/team_vs_widget.dart';
 
 class PlayersView extends StatelessWidget {
-  final Events matchDetails;
+  final Fixture matchDetails;
   PlayersView({
     Key? key, required this.matchDetails,
   }) : super(key: key);

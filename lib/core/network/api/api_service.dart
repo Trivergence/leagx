@@ -228,7 +228,7 @@ class ApiService {
     }
   }
 
-  static Future<List<Events>> getMatches({
+  static Future<List<Fixture>> getMatches({
     String url = "",
     Map<String, dynamic>? parameters,
     Map<String, dynamic>? headers,
@@ -249,7 +249,7 @@ class ApiService {
           queryParameters: parameters,
         );
         if (_response.statusCode == 200 || _response.statusCode == 201) {
-          List<Events> listOfMatches = eventsFromJson(jsonEncode(_response.data));
+          List<Fixture> listOfMatches = eventsFromJson(jsonEncode(_response.data));
           return listOfMatches;
         }
       } else {
