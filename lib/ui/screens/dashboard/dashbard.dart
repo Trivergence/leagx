@@ -1,3 +1,4 @@
+import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/enums.dart';
@@ -35,8 +36,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     FixtureScreen(),
-    LeaderScreen(),
-    NewsScreen(
+    const LeaderScreen(),
+    const NewsScreen(
       userType: UserType.admin,
     ),
     SettingScreen(),
@@ -54,64 +55,72 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return BaseWidget<DashBoardViewModel>(
         create: false,
         model: context.read<DashBoardViewModel>(),
-        onModelReady: (DashBoardViewModel dashboardModel) async => await dashboardModel.getData(),
+        onModelReady: (DashBoardViewModel dashboardModel) {
+          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) async { 
+            await dashboardModel.getData();
+            await context.read<ChoosePlanViewModel>().getSubscriptionPlans();
+          });
+        },
         builder: (context, DashBoardViewModel dashboardModel, _) {
-          return Scaffold(
-            appBar: AppBarWidget(
-              isIcon: true,
-              isDrawer: true,
-              trailing: IconButton(
-                icon: const IconWidget(
-                  iconData: Icons.notifications_outlined,
+          return RefreshIndicator(
+            onRefresh: () =>  dashboardModel.getData(),
+            child: Scaffold(
+              appBar: AppBarWidget(
+                isIcon: true,
+                isDrawer: true,
+                trailing: IconButton(
+                  icon: const IconWidget(
+                    iconData: Icons.notifications_outlined,
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.notification);
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.notification);
-                },
               ),
-            ),
-            drawer: const DrawerScreen(),
-            body: dashboardModel.upcomingMatches.isNotEmpty ? Container(
-              width: SizeConfig.width * 100,
-              height: SizeConfig.height * 100,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                    Assets.homeBackground,
+              drawer: const DrawerScreen(),
+              body: !dashboardModel.busy ? Container(
+                width: SizeConfig.width * 100,
+                height: SizeConfig.height * 100,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage(
+                      Assets.homeBackground,
+                    ),
                   ),
                 ),
+                child: _widgetOptions.elementAt(_selectedIndex),
+              ) : const LoadingWidget(),
+              bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: AppColors.colorBackground,
+                type: BottomNavigationBarType.fixed,
+                items: [
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnHome,
+                    iconData: Icons.home_outlined,
+                  ),
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnFixture,
+                    iconData: Icons.format_list_bulleted,
+                  ),
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnLeader,
+                    iconData: Icons.leaderboard,
+                  ),
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnNews,
+                    iconData: Icons.rss_feed,
+                  ),
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnSetting,
+                    iconData: Icons.settings,
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
               ),
-              child: _widgetOptions.elementAt(_selectedIndex),
-            ) : const LoadingWidget(),
-            bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: AppColors.colorBackground,
-              type: BottomNavigationBarType.fixed,
-              items: [
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnHome,
-                  iconData: Icons.home_outlined,
-                ),
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnFixture,
-                  iconData: Icons.format_list_bulleted,
-                ),
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnLeader,
-                  iconData: Icons.leaderboard,
-                ),
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnNews,
-                  iconData: Icons.rss_feed,
-                ),
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnSetting,
-                  iconData: Icons.settings,
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              onTap: _onItemTapped,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
             ),
           );
         });

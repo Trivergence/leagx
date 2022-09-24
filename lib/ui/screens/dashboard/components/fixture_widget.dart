@@ -22,6 +22,7 @@ class FixtureWidget extends StatelessWidget {
   final String? teamTwoScore;
   final String? scheduledTime;
   final String? liveTime;
+  final String? matchStatus;
   final bool isLive;
   final bool withText;
   final VoidCallback? onTap;
@@ -38,7 +39,7 @@ class FixtureWidget extends StatelessWidget {
     this.liveTime,
     this.isLive = false,
     this.withText = true,
-    this.onTap,
+    this.onTap, this.matchStatus,
   }) : super(key: key);
 
   @override
@@ -109,6 +110,12 @@ class FixtureWidget extends StatelessWidget {
                                   firstScore: teamOneScore!,
                                   secondScore: teamTwoScore!,
                                 ),
+                                UIHelper.verticalSpaceSmall,
+                                TextWidget(
+                                  text: matchStatus!,
+                                  color: AppColors.colorGrey,
+                                  textSize: Dimens.textSmall,
+                                )
                               ],
                             )
                           : Image.asset(Assets.vs),

@@ -1,5 +1,5 @@
 import 'package:flutter/scheduler.dart';
-import 'package:leagx/models/dashboard/events.dart';
+import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/match_args.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/screens/fixtureDetails/news/news_view.dart';
@@ -43,41 +43,44 @@ class _FixtureDetailsState extends State<FixtureDetails> {
           });
           },
         builder: (context, FixtureDetailViewModel fixtureModel, _) {
-          return Scaffold(
-          appBar: AppBarWidget(
-            title: widget.matchData.leagueName,
-            trailing: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: DotWidget(
-                size: 22,
-                isLive: widget.matchData.liveStatus,
+          return RefreshIndicator(
+            onRefresh: () => fixtureModel.getData(matchId: widget.matchData.matchId),
+            child: Scaffold(
+            appBar: AppBarWidget(
+              title: widget.matchData.leagueName,
+              trailing: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: DotWidget(
+                  size: 22,
+                  isLive: widget.matchData.liveStatus,
+                ),
               ),
             ),
-          ),
-          body: !fixtureModel.busy ? Column(
-            children: [
-              TabBarWidget(
-                  totalTabs: 3,
-                  selectedIndex: index,
-                  tabs: listOfTabs,
-                  onTabChanged: (selectedIndex) {
-                    setState(() {
-                      index = selectedIndex!;
-                    });
-                  }),
-              index == 0
-                  ? MatchView(
-                    matchDetails: fixtureModel.matchDetails.first,)
-                  : index == 1
-                      ? PlayersView(
-                          matchDetails: fixtureModel.matchDetails.first,
-                        )
-                      : index == 2
-                          ? const NewsView()
-                          : const SizedBox.shrink(),
-            ],
-          ) : const LoadingWidget(),
-        );
+            body: !fixtureModel.busy && fixtureModel.matchDetails.isNotEmpty ? Column(
+              children: [
+                TabBarWidget(
+                    totalTabs: 3,
+                    selectedIndex: index,
+                    tabs: listOfTabs,
+                    onTabChanged: (selectedIndex) {
+                      setState(() {
+                        index = selectedIndex!;
+                      });
+                    }),
+                index == 0
+                    ? MatchView(
+                      matchDetails: fixtureModel.matchDetails.first,)
+                    : index == 1
+                        ? PlayersView(
+                            matchDetails: fixtureModel.matchDetails.first,
+                          )
+                        : index == 2
+                            ? NewsView(leagueId: fixtureModel.matchDetails.first.leagueId,)
+                            : const SizedBox.shrink(),
+              ],
+            ) : const LoadingWidget(),
+                  ),
+          );
         },);
   }
 }

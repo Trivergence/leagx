@@ -1,4 +1,4 @@
-import 'package:leagx/models/dashboard/events.dart';
+import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class MatchView extends StatelessWidget {
                           secondScore: matchDetails.matchAwayteamScore,),
                         UIHelper.verticalSpaceSmall,
                         TextWidget(
-                          text: matchDetails.matchStatus,
+                          text: matchDetails.matchStatus!,
                           color: AppColors.colorGrey,
                           textSize: Dimens.textSmall,
                         )

@@ -64,7 +64,7 @@ class PlayersView extends StatelessWidget {
                               ),
                               UIHelper.verticalSpaceSmall,
                               TextWidget(
-                                text: matchDetails.matchStatus,
+                                text: matchDetails.matchStatus!,
                                 color: AppColors.colorGrey,
                                 textSize: Dimens.textSmall,
                               )

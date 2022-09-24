@@ -17,26 +17,33 @@ import '../models/user/user.dart';
 class DashBoardViewModel extends BaseModel {
 
   List<Fixture> _upcomingMatches = [];
+  List<Fixture> _subscribedMatches = [];
   List<SubscribedLeague> _subscribedLeagues = [];
   List<News> _news = [];
   List<int> _subscribedLeagueIds = [];
   List<Fixture> get upcomingMatches => _upcomingMatches;
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
+  List<Fixture> get subscribedMatches => _subscribedMatches;
   List<int> get subscribedLeagueIds => _subscribedLeagueIds;
   List<News> get getNews => _news;
   Future<void> getData() async {
-    await getUserLeagues();
+    setBusy(true);
+    await getSubscribedLeagues();
     await getUpcomingMatches();
-    await getAllNews();
+    if(subscribedLeagues.isNotEmpty) {
+      await getAllNews();
+      await getSubscribedMatches();
+    }
+    setBusy(false);
   }
 
   Future<void> getUpcomingMatches() async {
      DateTime now = DateTime.now();
+     //TODO make dynamic timezone
      _upcomingMatches = await ApiService.getMatches(
       parameters: {
         "action": "get_events",
-        "timezone": "Asia/Karachi",
-        "league_id": subscribedLeagueIds.join(","),
+        "timezone": "Asia/Riyadh",
         "from": DateUtility.getApiFormat(now),
         "to": DateUtility.getApiFormat(now),
       },
@@ -141,5 +148,23 @@ class DashBoardViewModel extends BaseModel {
       String completeUrl = AppUrl.getUser + user.id.toString() + AppUrl.subscribedNews;
       _news = await ApiService.getAllNews(url: completeUrl);
     }
+  }
+  List<News> getNewsbyLeague(String externalId) {
+    int? id = getLeagueInternalId(externalId);
+    if(id == null) {
+      return [];
+    } else {
+    return _news
+          .where(
+              (newsItems) => newsItems.leagueId == id)
+          .toList();
+    }
+  }
+  clearData() {
+    _upcomingMatches = [];
+    _subscribedMatches = [];
+    _subscribedLeagues = [];
+    _news = [];
+    _subscribedLeagueIds = [];
   }
 }

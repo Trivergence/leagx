@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/colors.dart';
-import '../../../../models/dashboard/events.dart';
+import '../../../../models/dashboard/fixture.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../widgets/gradient/gradient_border_button.dart';
 import '../../../widgets/gradient/gradient_widget.dart';
@@ -33,7 +35,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   bool isPublic = false;
   int awayScore = 2;
   int homeScore = 1;
-  late int leagueId;
+  int? leagueId;
   @override
   Widget build(BuildContext context) {
     _context = context;
@@ -124,23 +126,32 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   }
 
   void _predictMatch() {
-    _context!.read<FixtureDetailViewModel>().savePrediction(
+    if(leagueId != null) {
+      _context!.read<FixtureDetailViewModel>().savePrediction(
       context: _context!,
       matchId: int.parse(widget.matchDetails!.matchId),
-      leagueId: leagueId,
+      leagueId: leagueId!,
       homeScore: homeScore,
       awayScore: awayScore,
       awayTeamName: widget.matchDetails!.matchAwayteamName,
       homeTeamName: widget.matchDetails!.matchHometeamName,
-      isPublic: isPublic
-    );
+      isPublic: isPublic);
+    } else {
+      //TODO : localize meassage
+      ToastMessage.show("League is not subscribed", TOAST_TYPE.msg);
+    }
+
   }
 
-  int getMatchId() {
-     return context.read<DashBoardViewModel>()
+  int? getMatchId() {
+     List<SubscribedLeague> subscribedLeagues = context.read<DashBoardViewModel>()
     .subscribedLeagues
-    .where((league) => league.externalLeagueId.toString() == widget.matchDetails!.leagueId)
-    .first
-    .id;
+    .where((league) => league.externalLeagueId.toString() == widget.matchDetails!.leagueId).toList();
+    if(subscribedLeagues.isNotEmpty) {
+      return subscribedLeagues.first.id;
+    } else {
+      return null;
+    }
+
   }
 }

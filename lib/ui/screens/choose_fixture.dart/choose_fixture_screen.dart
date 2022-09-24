@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/dashboard/events.dart';
+import '../../../models/dashboard/fixture.dart';
 
 class ChooseFixtureScreen extends StatefulWidget {
   const ChooseFixtureScreen({Key? key}) : super(key: key);
@@ -41,16 +41,16 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                   child: SearchTextField(
                     textController: _searchController,
                     hint: loc.chooseLeagueTxtSearch,
-                    onTextEntered: _onTextEntered,
+                    onTextEntered: (text) => _onTextEntered(text),
                   ),
                 ),
                 UIHelper.verticalSpace(30),
                 Expanded(
                   child: ListView.builder(
-                      itemCount: availableMatches.length,
+                      itemCount: isFiltering ? filteredList.length : availableMatches.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        Fixture match = availableMatches[index];
+                        Fixture match = isFiltering ? filteredList[index] : availableMatches[index];
                         return ChooseFixtureTile(leagueId: match.leagueId,
                           imgUrl: match.leagueLogo,
                           leagueTitle: match.leagueName,
@@ -64,16 +64,18 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
         ));
   }
 
-  void _onTextEntered(enteredText) {
+  void _onTextEntered(String enteredText) {
     setState(() {
       isFiltering = true;
-      filteredList = _context!.read<DashBoardViewModel>().searchMatches(enteredText);
+      filteredList = availableMatches
+      .where((matchItem) => matchItem.leagueName.toLowerCase().contains(enteredText.toLowerCase()))
+      .toList();
     });
   }
 
   List<Fixture> getMatches(BuildContext context) {
     return context
         .read<DashBoardViewModel>()
-        .upcomingMatches;
+        .subscribedMatches;
   }
 }

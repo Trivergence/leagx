@@ -8,6 +8,8 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:provider/provider.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -89,6 +91,7 @@ class DrawerScreen extends StatelessWidget {
             onTap: () async{
               await preferenceHelper.removeAuthToken();
               await preferenceHelper.removeUser();
+              context.read<DashBoardViewModel>().clearData();
               Navigator.pushNamedAndRemoveUntil(
                   context, Routes.signin, (route) => false);
             },
