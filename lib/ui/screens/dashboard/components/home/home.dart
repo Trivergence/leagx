@@ -10,7 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../models/dashboard/events.dart';
+import '../../../../../constants/strings.dart';
+import '../../../../../models/dashboard/fixture.dart';
+import '../../../../widgets/gradient/gradient_border_widget.dart';
+import '../../../../widgets/placeholder_tile.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -38,25 +41,25 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 UIHelper.verticalSpaceSmall,
-                // SizedBox(
-                //   height: 40.0,
-                //   child: ListView.builder(
-                //     scrollDirection: Axis.horizontal,
-                //     itemCount: 10,
-                //     itemBuilder: (context, index) {
-                //       return Padding(
-                //         padding: const EdgeInsets.only(right: 20.0),
-                //         child: GradientBorderWidget(
-                //           width: 40.0,
-                //           height: 40.0,
-                //           isCircular: true,
-                //           imageUrl: Strings().placeHolderUrl,
-                //           onPressed: () {},
-                //         ),
-                //       );
-                //     },
-                //   ),
-                // ),
+                SizedBox(
+                  height: 40.0,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: GradientBorderWidget(
+                          width: 40.0,
+                          height: 40.0,
+                          isCircular: true,
+                          imageUrl: Strings().placeHolderUrl,
+                          onPressed: () {},
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -80,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 UIHelper.verticalSpaceSmall,
-                Column(
+                upcomingMatches.isNotEmpty ? Column(
                   children: [
                     for(int i = 0; i < 3; i++) FixtureWidget(
                         leagueName: upcomingMatches[i].leagueName,
@@ -97,17 +100,10 @@ class HomeScreen extends StatelessWidget {
                            )),
                       ),
                   ],
-                ),
-                InkWell(
+                ) : const PlaceHolderTile(height: 80, msgText: "No upcoming match available"),
+                if(upcomingMatches.length > 3) InkWell(
                   onTap: () => Navigator.of(context).pushNamed(Routes.upcomingMatches),
-                  child: Container(
-                    width: double.infinity,
-                    height: 40,
-                    decoration: BoxDecoration(
-                    gradient: AppColors.blackishGradient,
-                    borderRadius: const BorderRadius.all(Radius.circular(8.0))),
-                    child: const Center(child: TextWidget(text: "View All Matches",)),
-                  ),
+                  child: const PlaceHolderTile(height: 40, msgText: "View All Matches",),
                 )
                 
               ],
@@ -118,3 +114,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+

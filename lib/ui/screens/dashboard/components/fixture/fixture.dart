@@ -1,6 +1,7 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
@@ -9,19 +10,20 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../models/dashboard/events.dart';
+import '../../../../../models/dashboard/fixture.dart';
 import '../../../../../models/match_args.dart';
 import '../../../../../view_models/dashboard_view_model.dart';
+import '../../../../widgets/placeholder_tile.dart';
 
 class FixtureScreen extends StatelessWidget {
   FixtureScreen({Key? key}) : super(key: key);
-  List<Fixture> upcomingMatches = [];
+  List<Fixture> subscribedMatches = [];
   List<SubscribedLeague> subscribedLeagues = [];
 
   @override
   Widget build(BuildContext context) {
     DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
-    upcomingMatches = dashBoardViewModel.upcomingMatches;
+    subscribedMatches = dashBoardViewModel.subscribedMatches;
     subscribedLeagues = dashBoardViewModel.subscribedLeagues;
     return Column(
       children: [
@@ -41,7 +43,7 @@ class FixtureScreen extends StatelessWidget {
               UIHelper.verticalSpaceSmall,
               Row(
                 children: [
-                  Expanded(
+                  if(subscribedLeagues.isNotEmpty) Expanded(
                     child: SizedBox(
                       height: 40.0,
                       child: ListView.builder(
@@ -77,7 +79,7 @@ class FixtureScreen extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(
+        subscribedMatches.isNotEmpty ? Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16.0,
@@ -94,23 +96,25 @@ class FixtureScreen extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: upcomingMatches.length,
+                    itemCount: subscribedMatches.length,
                     itemBuilder: (context, index) {
+                    Fixture match = subscribedMatches[index];
                     return FixtureWidget(
-                      leagueName: upcomingMatches[index].leagueName,
-                      teamOneFlag: upcomingMatches[index].teamHomeBadge,
-                      teamOneName: upcomingMatches[index].matchHometeamName,
-                      teamTwoFlag: upcomingMatches[index].teamAwayBadge,
-                      teamTwoName: upcomingMatches[index].matchAwayteamName,
-                      scheduledTime: upcomingMatches[index].matchTime,
-                      isLive: upcomingMatches[index].matchLive == "1",
-                      teamOneScore: upcomingMatches[index].matchHometeamScore,
-                      teamTwoScore: upcomingMatches[index].matchAwayteamScore,
+                      leagueName: match.leagueName,
+                      teamOneFlag: match.teamHomeBadge,
+                      teamOneName: match.matchHometeamName,
+                      teamTwoFlag: match.teamAwayBadge,
+                      teamTwoName: match.matchAwayteamName,
+                      scheduledTime: match.matchTime,
+                      isLive: match.matchLive == "1",
+                      matchStatus: match.matchStatus,
+                      teamOneScore: match.matchHometeamScore,
+                      teamTwoScore: match.matchAwayteamScore,
                       onTap: () => Navigator.pushNamed(context, Routes.fixtureDetails,
                       arguments: MatchArgs(
-                          matchId: upcomingMatches[index].matchId,
-                          liveStatus: upcomingMatches[index].matchLive == "1",
-                          leagueName: upcomingMatches[index].leagueName,
+                          matchId: match.matchId,
+                          liveStatus: match.matchLive == "1",
+                          leagueName: match.leagueName,
                         )
                       ),
                     );
@@ -119,6 +123,10 @@ class FixtureScreen extends StatelessWidget {
               ],
             ),
           ),
+          // TODO: localize this message
+        ) : const Padding(
+          padding: EdgeInsets.symmetric(horizontal:8.0),
+          child: PlaceHolderTile(height: 80, msgText: "No upcoming matches to show today"),
         ),
       ],
     );
