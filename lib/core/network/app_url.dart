@@ -11,4 +11,5 @@ class AppUrl{
   static const String subscribeLeague = "leagues/subscribe";
   static const String makePrediction = "matches/make_prediction";
   static const String addNews = "news";
+  static const String subscribedNews = "/subscribed_leagues_news";
 }

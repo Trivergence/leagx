@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/utility/date_utility.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/dimens.dart';
@@ -8,13 +9,13 @@ import 'gradient/gradient_border_widget.dart';
 import 'text_widget.dart';
 
 class NewsTile extends StatelessWidget {
-  final String imageUrl;
+  final String? imageUrl;
   final String postedBy;
-  final String when;
+  final DateTime when;
   final String desc;
   final bool isApproval;
   const NewsTile({
-    Key? key, required this.imageUrl, required this.postedBy, required this.when,required this.desc, this.isApproval = false,
+    Key? key, this.imageUrl, required this.postedBy, required this.when,required this.desc, this.isApproval = false,
   }) : super(key: key);
 
   @override
@@ -51,7 +52,7 @@ class NewsTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                 TextWidget(text: postedBy),
-                TextWidget(text: when,
+                TextWidget(text: DateUtility.getRemainingTime(when),
                 textSize: Dimens.textXS,
                 color: isApproval == true ? AppColors.colorCyan : AppColors.colorYellow,)
               ],),

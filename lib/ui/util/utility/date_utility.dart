@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class DateUtility {
   static String getApiFormat(DateTime dateTime) {
@@ -8,5 +9,13 @@ class DateUtility {
   static String getUiFormat(DateTime dateTime) {
     DateFormat formatter = DateFormat('dd-MM-yyyy');
     return formatter.format(dateTime);
+  }
+  static String getRemainingTime(DateTime dateTime) {
+    if (dateTime.isUtc) {
+      return timeago.format(dateTime.toLocal()) ;
+    }
+    else {
+      return timeago.format(dateTime);
+    }
   }
 }
