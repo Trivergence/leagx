@@ -1,7 +1,9 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/drawer/components/drawer_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
@@ -11,11 +13,14 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/user/user.dart';
+
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String userName = getUserName();
     return Drawer(
       backgroundColor: AppColors.colorBackground,
       child: ListView(
@@ -31,14 +36,14 @@ class DrawerScreen extends StatelessWidget {
                   child: Image.asset(Assets.appLogo),
                 ),
                 UIHelper.verticalSpaceSmall,
-                const TextWidget(
-                  text: 'John Aly',
+                TextWidget(
+                  text: userName,
                   fontWeight: FontWeight.w700,
                   textSize: 18,
                 ),
                 UIHelper.verticalSpaceSmall,
                 const TextWidget(
-                  text: '@Johne39',
+                  text: '',
                 ),
               ],
             ),
@@ -115,5 +120,14 @@ class DrawerScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String getUserName() {
+    User? user = locator<SharedPreferenceHelper>().getUser();
+    if(user != null) {
+      return user.firstName! + user.lastName!;
+    } else {
+      return "";
+    }
   }
 }
