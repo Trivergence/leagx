@@ -56,6 +56,7 @@ class AuthViewModel {
     } else {
       firstName = fullName[0];
     }
+    //TODO: change email
     dynamic responce = await ApiService.callPostApi(
       url: AppUrl.socialLogin,
       parameters: {

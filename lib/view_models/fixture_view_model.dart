@@ -5,7 +5,7 @@ import 'package:leagx/models/players.dart';
 import '../constants/colors.dart';
 import '../core/network/api/api_service.dart';
 import '../core/viewmodels/base_model.dart';
-import '../models/dashboard/events.dart';
+import '../models/dashboard/fixture.dart';
 import '../models/user/user.dart';
 import '../routes/routes.dart';
 import '../service/service_locator.dart';
@@ -37,7 +37,7 @@ class FixtureDetailViewModel extends BaseModel {
       "match_id": matchId,
       "from": DateUtility.getApiFormat(today),
       "to": DateUtility.getApiFormat(today),
-      "timezone": "Asia/Karachi",
+      "timezone": "Asia/Riyadh",
     });
   }
 

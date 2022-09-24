@@ -61,7 +61,7 @@ class Fixture {
   String leagueId;
   String leagueName;
   DateTime matchDate;
-  String matchStatus;
+  String? matchStatus;
   String matchTime;
   String matchHometeamId;
   String matchHometeamName;
@@ -104,7 +104,7 @@ class Fixture {
         leagueId: json["league_id"],
         leagueName: json["league_name"],
         matchDate: DateTime.parse(json["match_date"]),
-        matchStatus: json["match_status"],
+        matchStatus: json["match_status"] ?? "",
         matchTime: json["match_time"],
         matchHometeamId: json["match_hometeam_id"],
         matchHometeamName: json["match_hometeam_name"],

@@ -1,5 +1,5 @@
 import 'package:leagx/models/auth/forgot_password.dart';
-import 'package:leagx/models/dashboard/events.dart';
+import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/models/user/userdata.dart';

@@ -102,7 +102,7 @@ class SigninScreen extends StatelessWidget {
                   Loader.hideLoader();
                   
                   if (ValidationUtils.isValid(loginResponse)) {
-                    preferenceHelper.saveAuthToken(loginResponse!.apiToken!);
+                    preferenceHelper.saveAuthToken(loginResponse!.apiToken);
                     preferenceHelper.saveUser(loginResponse);
                     ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
                         TOAST_TYPE.success);
@@ -160,7 +160,7 @@ class SigninScreen extends StatelessWidget {
         //ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
         User? user = await AuthViewModel.socialLogin(authType: AuthType.twitter, user: authResult.user!);
         if(ValidationUtils.isValid(user)) {
-          preferenceHelper.saveAuthToken(user!.apiToken!);
+          preferenceHelper.saveAuthToken(user!.apiToken);
           preferenceHelper.saveUser(user);
           Navigator.pushNamed(context, Routes.dashboard);
         }

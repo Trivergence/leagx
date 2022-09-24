@@ -1,4 +1,4 @@
-import 'package:leagx/models/dashboard/events.dart';
+import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';

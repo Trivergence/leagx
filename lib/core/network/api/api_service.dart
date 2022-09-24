@@ -69,6 +69,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
       return null;
     } catch(e){
+      print(e.toString());
       Loader.hideLoader();
       return null;
     }
@@ -119,6 +120,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
       return null;
     } catch(e){
+      print(e.toString());
       Loader.hideLoader();
       return null;
     }
@@ -172,6 +174,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
       return null;
     } catch(e){
+      print(e.toString());
       Loader.hideLoader();
       return null;
     }
@@ -224,6 +227,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
       return null;
     } catch(e){
+      print(e.toString());
       Loader.hideLoader();
       return null;
     }
@@ -274,6 +278,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
       return [];
     } catch (e) {
+      print(e.toString());
       Loader.hideLoader();
       return [];
     }
@@ -323,6 +328,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
       return [];
     } catch (e) {
+      print(e.toString());
       Loader.hideLoader();
       return [];
     }
@@ -371,6 +377,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
       return [];
     } catch (e) {
+      print(e.toString());
       Loader.hideLoader();
       return [];
     }
@@ -421,8 +428,8 @@ class ApiService {
       ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
       return [];
     } catch (e) {
-      Loader.hideLoader();
       print(e.toString());
+      Loader.hideLoader();
       return [];
     }
     return [];
@@ -580,6 +587,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
       return false;
     } catch (e) {
+      print(e.toString());
       Loader.hideLoader();
       return false;
     }
@@ -633,6 +641,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
       return false;
     } catch (e) {
+      print(e.toString());
       Loader.hideLoader();
       return false;
     }

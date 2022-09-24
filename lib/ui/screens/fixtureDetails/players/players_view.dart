@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
-import '../../../../models/dashboard/events.dart';
+import '../../../../models/dashboard/fixture.dart';
 import '../../../../models/players.dart';
 import '../../../util/size/size_config.dart';
 import '../../../util/ui/ui_helper.dart';
