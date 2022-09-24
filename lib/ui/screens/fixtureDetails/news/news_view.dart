@@ -1,24 +1,29 @@
-import 'package:leagx/constants/strings.dart';
 import 'package:leagx/ui/widgets/news_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../models/dashboard/news.dart';
 
 class NewsView extends StatelessWidget {
-  const NewsView({Key? key}) : super(key: key);
-
+  final String leagueId;
+  NewsView({Key? key, required this.leagueId}) : super(key: key);
+  List<News> leagueNews = [];
   @override
   Widget build(BuildContext context) {
+    leagueNews = context.read<DashBoardViewModel>().getNewsbyLeague(leagueId);
     return Expanded(
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: 10,
+          itemCount: leagueNews.length,
           padding: const EdgeInsets.only(top: 20),
           itemBuilder: (_, index) {
+            News newsItem = leagueNews[index];
             return NewsTile(
-              imageUrl: Strings().placeHolderUrl,
-              postedBy: 'James FC',
-              when: DateTime(2022),
-              desc:
-                  'FIFA’s iconic competitions inspire billions of football fans and provide opportunities to have a wider positive social and environmental impact. By the global nature of the tournaments it ...',
+              imageUrl: newsItem.user.profileImg,
+              postedBy: newsItem.user.firstName! + newsItem.user.lastName!,
+              when: newsItem.createdAt,
+              desc: newsItem.description,
             );
           }),
     );

@@ -44,8 +44,28 @@ class DashBoardViewModel extends BaseModel {
     _upcomingMatches = upcomingMatches.where((match) => isUpcoming(match, now)).toList();
     notifyListeners();
   }
+    Future<void> getSubscribedMatches() async {
+    if (subscribedLeagueIds.isNotEmpty) {
+      DateTime now = DateTime.now();
+      //TODO make dynamic timezone
+      _subscribedMatches = await ApiService.getMatches(
+        parameters: {
+          "action": "get_events",
+          "timezone": "Asia/Riyadh",
+          "league_id": subscribedLeagueIds.join(","),
+          "from": DateUtility.getApiFormat(now),
+          "to": DateUtility.getApiFormat(now),
+        },
+      );
+      _subscribedMatches =
+          _subscribedMatches.where((match) => isUpcoming(match, now)).toList();
+    } else {
+      _subscribedMatches = [];
+    }
+    notifyListeners();
+  }
 
-  Future<void> getUserLeagues() async {
+  Future<void> getSubscribedLeagues() async {
     User? user = locator<SharedPreferenceHelper>().getUser();
     String completeUrl = AppUrl.getUser + "${user!.id}" + "/subscribed_leagues";
     _subscribedLeagues = await ApiService.getUserLeagues(url: completeUrl);
