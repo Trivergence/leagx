@@ -32,7 +32,9 @@ class ChoosePlanViewModel extends BaseModel {
         "external_league_id": leagueId
       }
     };
-    bool success = await ApiService.subscribeLeague(body: body);
+    bool success = await ApiService.postWoResponce(
+      url: AppUrl.subscribeLeague,
+      body: body);
     if(success) {
       Navigator.of(context).pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
       Loader.hideLoader();

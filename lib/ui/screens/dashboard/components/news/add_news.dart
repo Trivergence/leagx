@@ -8,15 +8,29 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:leagx/ui/widgets/textfield/search_textfield.dart';
 import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:provider/provider.dart';
 
-class AddNewsScreen extends StatelessWidget {
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _messageController = TextEditingController();
-  final TextEditingController _searchController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  BuildContext? _context;
+class AddNewsScreen extends StatefulWidget {
 
   AddNewsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AddNewsScreen> createState() => _AddNewsScreenState();
+}
+
+class _AddNewsScreenState extends State<AddNewsScreen> {
+  final TextEditingController _titleController = TextEditingController();
+
+  final TextEditingController _messageController = TextEditingController();
+
+  final TextEditingController _searchController = TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  late BuildContext _context;
+
+  Map<String, String>? fixutrePayload;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +85,7 @@ class AddNewsScreen extends StatelessWidget {
                 UIHelper.verticalSpace(8.0),
                 SearchTextField(
                   textController: _searchController,
-                  hint: loc.dashboardNewsAddNewsTxtSearch,
+                  hint: fixutrePayload == null ? loc.dashboardNewsAddNewsTxtSearch : null,
                   isDisabled: true,
                   onTap: _chooseFixture,
                 ),
@@ -91,11 +105,27 @@ class AddNewsScreen extends StatelessWidget {
   void _addNews() {
     bool isValid = _formKey.currentState!.validate();
     if(isValid) {
+      if(fixutrePayload != null) {
+        _context.read<DashBoardViewModel>().addNews(
+          context: _context,
+          title: _titleController.text,
+          desc: _messageController.text,
+          matchId: fixutrePayload!["matchId"]!,
+          leagueId: fixutrePayload!["leagueId"]!);
+      } else {
+        //TODO: Add a localized msg
+      }
 
     }
   }
 
   Future<void> _chooseFixture() async {
-    await Navigator.of(_context!).pushNamed(Routes.chooseFixture);
+    var payload = await Navigator.of(_context).pushNamed(Routes.chooseFixture);
+    if(payload != null) {
+      setState(() {
+        fixutrePayload = payload as Map<String, String>;
+        _searchController.text = fixutrePayload!["leagueTitle"]!;
+      });
+    }
   }
 }

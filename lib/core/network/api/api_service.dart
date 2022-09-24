@@ -479,7 +479,8 @@ class ApiService {
     return [];
   }
 
-  static Future<bool> subscribeLeague({
+  static Future<bool> postWoResponce({
+    required String url,
     dynamic body,
     Map<String, dynamic>? parameters,
     Map<String, dynamic>? headers,
@@ -498,16 +499,13 @@ class ApiService {
       var connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult != ConnectivityResult.none) {
         Response _response = await dio.post(
-          AppUrl.subscribeLeague,
+          url,
           options: Options(headers: headers),
           data: body,
           queryParameters: parameters,
         );
         print('post response: ${_response.data}');
         if (_response.statusCode == 200 || _response.statusCode == 201) {
-          ToastMessage.show(
-              _response.data["success"],
-              TOAST_TYPE.msg);
           return true;
         }
       } else {

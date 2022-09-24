@@ -51,12 +51,12 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         Events match = availableMatches[index];
-                        return SearchFixtureTile(leagueId: match.leagueId,
-                         imgUrl: match.leagueLogo,
+                        return ChooseFixtureTile(leagueId: match.leagueId,
+                          imgUrl: match.leagueLogo,
                           leagueTitle: match.leagueName,
-                           matchId: match.matchId,
-                            awayTeamName: match.matchAwayteamName,
-                             homeTeamName: match.matchHometeamName);
+                          matchId: match.matchId,
+                          awayTeamName: match.matchAwayteamName,
+                          homeTeamName: match.matchHometeamName);
                       }),
                 )
               ],
