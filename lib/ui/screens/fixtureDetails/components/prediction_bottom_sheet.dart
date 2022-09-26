@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/models/subscribed_league.dart';
+import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
@@ -17,11 +18,9 @@ import 'check_box_widget.dart';
 import 'score_picker.dart';
 
 class PredictionSheetWidget extends StatefulWidget {
-  final Function(BuildContext) onSubmit;
   final Fixture? matchDetails;
   const PredictionSheetWidget({
-    Key? key,
-    required this.onSubmit, this.matchDetails,
+    Key? key, this.matchDetails,
   }) : super(key: key);
 
   @override
@@ -36,6 +35,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   int awayScore = 2;
   int homeScore = 1;
   int? leagueId;
+  int? expertId;
   @override
   Widget build(BuildContext context) {
     _context = context;
@@ -118,7 +118,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
           UIHelper.verticalSpace(20),
           GradientBorderButton(
             text: loc.fixtureDetailsBtnExpertAdvise,
-            onPressed: () => widget.onSubmit(context),
+            onPressed: () => _chooseExpert(),
           ),
         ],
       ),
@@ -133,6 +133,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
       leagueId: leagueId!,
       homeScore: homeScore,
       awayScore: awayScore,
+      expertId: expertId,
       awayTeamName: widget.matchDetails!.matchAwayteamName,
       homeTeamName: widget.matchDetails!.matchHometeamName,
       isPublic: isPublic);
@@ -153,5 +154,12 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
       return null;
     }
 
+  }
+
+  Future<void> _chooseExpert() async {
+    dynamic id = await Navigator.of(_context!).pushNamed(Routes.chooseAnExpert);
+    if(id != null) {
+      expertId = id;
+    }
   }
 }
