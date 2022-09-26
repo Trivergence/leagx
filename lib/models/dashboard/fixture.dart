@@ -4,10 +4,10 @@
 
 import 'dart:convert';
 
-List<Fixture> eventsFromJson(String str) =>
+List<Fixture> fixturesFromJson(String str) =>
     List<Fixture>.from(json.decode(str).map((x) => Fixture.fromJson(x)));
 
-String eventsToJson(List<Fixture> data) =>
+String fixturesToJson(List<Fixture> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Fixture {

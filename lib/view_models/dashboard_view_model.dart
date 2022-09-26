@@ -10,7 +10,9 @@ import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/utility/date_utility.dart';
 
+import '../constants/app_constants.dart';
 import '../core/network/app_url.dart';
+import '../core/sharedpref/sharedpref.dart';
 import '../models/dashboard/news.dart';
 import '../models/leader.dart';
 import '../models/user/user.dart';
@@ -44,8 +46,11 @@ class DashBoardViewModel extends BaseModel {
   Future<void> getUpcomingMatches() async {
      DateTime now = DateTime.now();
      //TODO make dynamic timezone
-     _upcomingMatches = await ApiService.getMatches(
+     _upcomingMatches = await ApiService.getListRequest(
+      baseUrl: AppUrl.footballBaseUrl,
+      modelName: ApiModels.upcomingMatches,
       parameters: {
+        "APIkey": AppConstants.footballApiKey,
         "action": "get_events",
         "timezone": "Asia/Riyadh",
         "from": DateUtility.getApiFormat(now),
@@ -59,8 +64,11 @@ class DashBoardViewModel extends BaseModel {
     if (subscribedLeagueIds.isNotEmpty) {
       DateTime now = DateTime.now();
       //TODO make dynamic timezone
-      _subscribedMatches = await ApiService.getMatches(
+      _subscribedMatches = await ApiService.getListRequest(
+        baseUrl: AppUrl.footballBaseUrl,
+        modelName: ApiModels.upcomingMatches,
         parameters: {
+          "APIkey": AppConstants.footballApiKey,
           "action": "get_events",
           "timezone": "Asia/Riyadh",
           "league_id": subscribedLeagueIds.join(","),
@@ -79,7 +87,14 @@ class DashBoardViewModel extends BaseModel {
   Future<void> getSubscribedLeagues() async {
     User? user = locator<SharedPreferenceHelper>().getUser();
     String completeUrl = AppUrl.getUser + "${user!.id}" + "/subscribed_leagues";
-    _subscribedLeagues = await ApiService.getUserLeagues(url: completeUrl);
+    _subscribedLeagues = await ApiService.getListRequest(
+      baseUrl: AppUrl.baseUrl,
+      url: completeUrl,
+      headers: {
+        "apitoken": preferenceHelper.authToken,
+      },
+      modelName: ApiModels.getSubscribedLeagues
+      );
     _subscribedLeagueIds = getSubscribedIds();
   }
 
@@ -150,13 +165,27 @@ class DashBoardViewModel extends BaseModel {
     User? user = locator<SharedPreferenceHelper>().getUser();
     if(user != null) {
       String completeUrl = AppUrl.getUser + user.id.toString() + AppUrl.subscribedNews;
-      _news = await ApiService.getAllNews(url: completeUrl);
+      _news = await ApiService.getListRequest(
+        baseUrl: AppUrl.baseUrl,
+        url: completeUrl,
+        headers: {
+          "apitoken": preferenceHelper.authToken,
+        },
+        modelName: ApiModels.getNews
+      );
     }
   }
     Future<void> getAllLeaders() async {
       String completeUrl =
           AppUrl.getUser + AppUrl.getLeaders;
-      _leaders = await ApiService.getLeaders(url: completeUrl);
+      _leaders = await ApiService.getListRequest(
+        baseUrl: AppUrl.baseUrl,
+        url: completeUrl,
+        modelName: ApiModels.getLeaders,
+        headers: {
+        "apitoken": preferenceHelper.authToken,
+      },
+    );
   }
 
   List<News> getNewsbyLeague(String externalId) {

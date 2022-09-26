@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/models/players.dart';
 
+import '../constants/app_constants.dart';
 import '../constants/colors.dart';
+import '../core/network/api/api_models.dart';
 import '../core/network/api/api_service.dart';
+import '../core/network/app_url.dart';
 import '../core/viewmodels/base_model.dart';
 import '../models/dashboard/fixture.dart';
 import '../models/user/user.dart';
@@ -32,7 +35,11 @@ class FixtureDetailViewModel extends BaseModel {
 
   Future<void> getMatchDetails(String matchId) async {
     DateTime today = DateTime.now().toUtc();
-    _matchDetails = await ApiService.getMatches(parameters: {
+    _matchDetails = await ApiService.getListRequest(
+      baseUrl: AppUrl.footballBaseUrl,
+      modelName: ApiModels.upcomingMatches,
+      parameters: {
+      "APIkey": AppConstants.footballApiKey,
       "action": "get_events",
       "match_id": matchId,
       "from": DateUtility.getApiFormat(today),
@@ -69,7 +76,9 @@ class FixtureDetailViewModel extends BaseModel {
       }
     };
     Loader.showLoader();
-    bool success = await ApiService.makePrediction(body: body);
+    bool success = await ApiService.postWoResponce(
+      url: AppUrl.makePrediction,
+      body: body);
     if(success) {
       Navigator.of(context).pop();
       Loader.hideLoader();
@@ -79,10 +88,25 @@ class FixtureDetailViewModel extends BaseModel {
   }
 
   getHomeTeamPlayers(String matchHometeamId) async {
-    _homeTeamPlayers = await ApiService.getPlayers(matchHometeamId);
+    _homeTeamPlayers = await ApiService.getListRequest(
+      baseUrl: AppUrl.footballBaseUrl,
+      parameters: {
+      "action": "get_teams",
+      "team_id": matchHometeamId,
+      "APIkey": AppConstants.footballApiKey
+      },
+      modelName: ApiModels.getTeams
+    );
   }
   getAwayTeamPlayers(String matchAwayteamId) async {
-    _awayTeamPlayers = await ApiService.getPlayers(matchAwayteamId);
+    _awayTeamPlayers = _homeTeamPlayers = await ApiService.getListRequest(
+        baseUrl: AppUrl.footballBaseUrl,
+        parameters: {
+          "action": "get_teams",
+          "team_id": matchAwayteamId,
+          "APIkey": AppConstants.footballApiKey
+        },
+        modelName: ApiModels.getTeams);
   }
 
   showPredictionSheet(BuildContext context, Fixture matchDeta) {
@@ -92,8 +116,7 @@ class FixtureDetailViewModel extends BaseModel {
         builder: (context) {
           return PredictionSheetWidget(
               matchDetails: matchDeta,
-              onSubmit: (context) =>
-                  Navigator.pushNamed(context, Routes.chooseAnExpert));
+            );
         });
   }
 }

@@ -19,7 +19,7 @@ class LeaderScreen extends StatelessWidget {
           Leader leader = listOfLeader[index];
           return index != 0
               ? LeaderBoardTile(
-                  number: index,
+                  number: index + 1,
                   imageUrl: Strings().placeHolderUrl,
                   title: leader.firstName! + leader.lastName!,
                   numberOfPrediciton: leader.totalPredictions,

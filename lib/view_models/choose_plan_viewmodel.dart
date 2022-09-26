@@ -11,6 +11,7 @@ import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../core/sharedpref/sharedpref.dart';
 import '../models/user/user.dart';
 
 class ChoosePlanViewModel extends BaseModel {
@@ -18,7 +19,14 @@ class ChoosePlanViewModel extends BaseModel {
   List<SubscriptionPlan> get getPlans => _listOfPlan;
 
   Future<void> getSubscriptionPlans() async {
-    _listOfPlan = await ApiService.getPlans(url: AppUrl.getPlan);
+    _listOfPlan = await ApiService.getListRequest(
+      baseUrl: AppUrl.baseUrl,
+      url: AppUrl.getPlan,
+      headers: {
+        "apitoken": preferenceHelper.authToken,
+      },
+      modelName: ApiModels.getPlans
+    );  
   }
   subscribeLeague({required BuildContext context, required int planId, required String leagueId, required String leagueTitle, required String leagueImg}) async {
     Loader.showLoader();
