@@ -12,6 +12,7 @@ import 'package:leagx/ui/util/utility/date_utility.dart';
 
 import '../core/network/app_url.dart';
 import '../models/dashboard/news.dart';
+import '../models/leader.dart';
 import '../models/user/user.dart';
 
 class DashBoardViewModel extends BaseModel {
@@ -20,16 +21,19 @@ class DashBoardViewModel extends BaseModel {
   List<Fixture> _subscribedMatches = [];
   List<SubscribedLeague> _subscribedLeagues = [];
   List<News> _news = [];
+  List<Leader> _leaders = [];
   List<int> _subscribedLeagueIds = [];
   List<Fixture> get upcomingMatches => _upcomingMatches;
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
   List<Fixture> get subscribedMatches => _subscribedMatches;
   List<int> get subscribedLeagueIds => _subscribedLeagueIds;
   List<News> get getNews => _news;
+  List<Leader> get getLeaders => _leaders;
   Future<void> getData() async {
     setBusy(true);
     await getSubscribedLeagues();
     await getUpcomingMatches();
+    await getAllLeaders();
     if(subscribedLeagues.isNotEmpty) {
       await getAllNews();
       await getSubscribedMatches();
@@ -149,6 +153,12 @@ class DashBoardViewModel extends BaseModel {
       _news = await ApiService.getAllNews(url: completeUrl);
     }
   }
+    Future<void> getAllLeaders() async {
+      String completeUrl =
+          AppUrl.getUser + AppUrl.getLeaders;
+      _leaders = await ApiService.getLeaders(url: completeUrl);
+  }
+
   List<News> getNewsbyLeague(String externalId) {
     int? id = getLeagueInternalId(externalId);
     if(id == null) {

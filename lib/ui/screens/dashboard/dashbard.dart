@@ -36,7 +36,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     FixtureScreen(),
-    const LeaderScreen(),
+    LeaderScreen(),
     const NewsScreen(
       userType: UserType.admin,
     ),

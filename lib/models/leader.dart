@@ -1,33 +1,37 @@
 // To parse this JSON data, do
 //
-//     final user = userFromJson(jsonString);
+//     final leader = leaderFromJson(jsonString);
 
 import 'dart:convert';
 
-User userFromJson(String str) => User.fromJson(json.decode(str));
+List<Leader> leaderFromJson(String str) =>
+    List<Leader>.from(json.decode(str).map((x) => Leader.fromJson(x)));
 
-String userToJson(User data) => json.encode(data.toJson());
+String leaderToJson(List<Leader> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class User {
-  User({
+class Leader {
+  Leader({
     required this.id,
     required this.email,
     required this.createdAt,
     required this.updatedAt,
-    this.firstName,
-    this.lastName,
-    this.phone,
-    this.gender,
-    this.address,
+    required this.firstName,
+    required this.lastName,
+    required this.phone,
+    required this.gender,
+    required this.address,
     required this.apiToken,
-    this.role,
-    this.dob,
-    this.profileImg,
-    this.coverImg,
-    this.provider,
-    this.uid,
-    this.language,
+    required this.role,
+    required this.dob,
+    required this.profileImg,
+    required this.coverImg,
+    required this.provider,
+    required this.uid,
+    required this.language,
     required this.notification,
+    required this.totalPredictions,
+    required this.predictionSuccessRate,
   });
 
   int id;
@@ -39,7 +43,7 @@ class User {
   String? phone;
   String? gender;
   String? address;
-  String apiToken;
+  String? apiToken;
   String? role;
   String? dob;
   String? profileImg;
@@ -48,8 +52,10 @@ class User {
   String? uid;
   String? language;
   String notification;
+  int totalPredictions;
+  int predictionSuccessRate;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory Leader.fromJson(Map<String, dynamic> json) => Leader(
         id: json["id"],
         email: json["email"],
         createdAt: DateTime.parse(json["created_at"]),
@@ -68,6 +74,8 @@ class User {
         uid: json["uid"],
         language: json["language"],
         notification: json["notification"],
+        totalPredictions: json["total_predictions"] ?? 0,
+        predictionSuccessRate: json["prediction_success_rate"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -89,5 +97,7 @@ class User {
         "uid": uid,
         "language": language,
         "notification": notification,
+        "total_predictions": totalPredictions,
+        "prediction_success_rate": predictionSuccessRate,
       };
 }

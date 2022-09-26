@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../constants/strings.dart';
 import '../../../../../models/dashboard/fixture.dart';
+import '../../../../../models/leader.dart';
 import '../../../../widgets/gradient/gradient_border_widget.dart';
 import '../../../../widgets/placeholder_tile.dart';
 
@@ -19,10 +19,12 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   List<Fixture> upcomingMatches = [];
+  List<Leader> listOfLeaders = [];
 
   @override
   Widget build(BuildContext context) {
     upcomingMatches = context.read<DashBoardViewModel>().upcomingMatches;
+    listOfLeaders = context.read<DashBoardViewModel>().getLeaders;
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
@@ -45,15 +47,16 @@ class HomeScreen extends StatelessWidget {
                   height: 40.0,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
+                    itemCount: listOfLeaders.length,
                     itemBuilder: (context, index) {
+                      Leader leader = listOfLeaders[index];
                       return Padding(
                         padding: const EdgeInsets.only(right: 20.0),
                         child: GradientBorderWidget(
                           width: 40.0,
                           height: 40.0,
                           isCircular: true,
-                          imageUrl: Strings().placeHolderUrl,
+                          imageUrl: leader.profileImg,
                           onPressed: () {},
                         ),
                       );
