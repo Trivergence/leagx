@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../models/subscription_plan.dart';
 import '../../../../view_models/choose_plan_viewmodel.dart';
+import '../../../widgets/placeholder_tile.dart';
 import 'plan_widget.dart';
 
 class PlanListing extends StatefulWidget {
@@ -25,7 +26,7 @@ class _PlanListingState extends State<PlanListing> {
   @override
   Widget build(BuildContext context) {
     listOfPlans = context.read<ChoosePlanViewModel>().getPlans;
-    return ListView.builder(
+    return listOfPlans.isNotEmpty ? ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       shrinkWrap: true,
@@ -41,6 +42,12 @@ class _PlanListingState extends State<PlanListing> {
           });
           widget.onItemPressed(listOfPlans[index].id);
         },);
-    });
+    })
+    //TODO localization
+    : const Padding(
+        padding: EdgeInsets.only(top: 100.0),
+        child: PlaceHolderTile(height: 60, msgText: "Please check your network connection and try again"),
+      )
+    ;
   }
 }

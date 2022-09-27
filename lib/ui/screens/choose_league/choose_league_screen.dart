@@ -1,9 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/scheduler.dart';
 import 'package:leagx/models/dashboard/league.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/placeholder_tile.dart';
 import 'package:leagx/ui/widgets/textfield/search_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/choose_league_view_model.dart';
@@ -62,7 +65,7 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
                 ),
               ),
               UIHelper.verticalSpace(30),
-              Expanded(
+              listOfLeagues.isNotEmpty ? Expanded(
                 child: ListView.builder(
                     itemCount: listOfLeagues.length,
                     shrinkWrap: true,
@@ -75,6 +78,11 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
                         hasSubscribed: subscribedIds.contains(int.parse(league.leagueId)),
                       );
                     }),
+              )
+              //TODO localization
+              : Padding(
+                padding: const EdgeInsets.only(top: 100.0),
+                child: PlaceHolderTile(height: 60, msgText: "Please check your network connection and try again"),
               )
             ],
           ) : const LoadingWidget();

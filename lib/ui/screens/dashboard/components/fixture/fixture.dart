@@ -43,6 +43,17 @@ class FixtureScreen extends StatelessWidget {
               UIHelper.verticalSpaceSmall,
               Row(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right:18.0),
+                    child: GradientBorderWidget(
+                      width: 40.0,
+                      height: 40.0,
+                      isCircular: true,
+                      iconData: Icons.add,
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed(Routes.chooseLeague),
+                    ),
+                  ),
                   if(subscribedLeagues.isNotEmpty) Expanded(
                     child: SizedBox(
                       height: 40.0,
@@ -66,14 +77,7 @@ class FixtureScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  GradientBorderWidget(
-                    width: 40.0,
-                    height: 40.0,
-                    isCircular: true,
-                    iconData: Icons.add,
-                    onPressed: () => Navigator.of(context)
-                        .pushNamed(Routes.chooseLeague),
-                  ),
+                  
                 ],
               ),
             ],

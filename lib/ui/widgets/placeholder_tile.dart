@@ -16,6 +16,7 @@ class PlaceHolderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.all(10),
       width: double.infinity,
       height: height,
       decoration: BoxDecoration(
@@ -23,7 +24,8 @@ class PlaceHolderTile extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8.0))),
       child: Center(
           child: TextWidget(
-        text: msgText,
+          text: msgText,
+          textAlign: TextAlign.center,
       )),
     );
   }

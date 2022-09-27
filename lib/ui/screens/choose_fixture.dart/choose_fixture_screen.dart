@@ -8,6 +8,7 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/dashboard/fixture.dart';
+import '../../widgets/placeholder_tile.dart';
 
 class ChooseFixtureScreen extends StatefulWidget {
   const ChooseFixtureScreen({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                   ),
                 ),
                 UIHelper.verticalSpace(30),
-                Expanded(
+                availableMatches.isNotEmpty ? Expanded(
                   child: ListView.builder(
                       itemCount: isFiltering ? filteredList.length : availableMatches.length,
                       shrinkWrap: true,
@@ -59,6 +60,11 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                           homeTeamName: match.matchHometeamName);
                       }),
                 )
+                //TODO localization
+                : const Center(child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal :8.0, vertical: 100),
+                  child: PlaceHolderTile(height: 80, msgText: 'No match to show today. Make sure to subscribe at least one league'),
+                )),
               ],
             )
         ));
