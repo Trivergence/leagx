@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/subscription_plan.dart';
-import '../../../../view_models/choose_plan_viewmodel.dart';
+import '../../../../view_models/subscription_viewmodel.dart';
 import '../../../widgets/placeholder_tile.dart';
 import 'plan_widget.dart';
 
@@ -25,7 +25,7 @@ class _PlanListingState extends State<PlanListing> {
 
   @override
   Widget build(BuildContext context) {
-    listOfPlans = context.read<ChoosePlanViewModel>().getPlans;
+    listOfPlans = context.read<SubscriptionViewModel>().getPlans;
     return listOfPlans.isNotEmpty ? ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,

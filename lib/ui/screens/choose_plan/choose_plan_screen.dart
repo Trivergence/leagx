@@ -6,7 +6,7 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:leagx/view_models/choose_plan_viewmodel.dart';
+import 'package:leagx/view_models/subscription_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/bar/app_bar_widget.dart';
@@ -35,7 +35,7 @@ class ChoosePlanScreen extends StatelessWidget {
               PlanListing(
                 isAdmin: true,
                 onItemPressed: (planId) {
-                  context.read<ChoosePlanViewModel>().subscribeLeague(
+                  context.read<SubscriptionViewModel>().subscribeLeague(
                    context: context,
                    planId: planId,
                    leagueId: leagueData.leagueId,
