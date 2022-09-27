@@ -33,12 +33,16 @@ class DashBoardViewModel extends BaseModel {
   List<Leader> get getLeaders => _leaders;
   Future<void> getData() async {
     setBusy(true);
-    await getSubscribedLeagues();
-    await getUpcomingMatches();
-    await getAllLeaders();
-    if(subscribedLeagues.isNotEmpty) {
-      await getAllNews();
-      await getSubscribedMatches();
+    try {
+      await getSubscribedLeagues();
+      await getUpcomingMatches();
+      await getAllLeaders();
+      if(subscribedLeagues.isNotEmpty) {
+        await getAllNews();
+        await getSubscribedMatches();
+      }
+    } on Exception catch (_) {
+      setBusy(false);
     }
     setBusy(false);
   }

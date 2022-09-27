@@ -1,4 +1,5 @@
 import 'package:flutter/scheduler.dart';
+import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/match_args.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
@@ -44,7 +45,8 @@ class _FixtureDetailsState extends State<FixtureDetails> {
           },
         builder: (context, FixtureDetailViewModel fixtureModel, _) {
           return RefreshIndicator(
-            onRefresh: () => fixtureModel.getData(matchId: widget.matchData.matchId),
+            backgroundColor: AppColors.textFieldColor,
+            onRefresh: () => fixtureModel.refreshData(matchId: widget.matchData.matchId),
             child: Scaffold(
             appBar: AppBarWidget(
               title: widget.matchData.leagueName,
