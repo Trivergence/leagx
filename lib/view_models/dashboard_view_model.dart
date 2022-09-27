@@ -19,13 +19,13 @@ import '../models/user/user.dart';
 
 class DashBoardViewModel extends BaseModel {
 
-  List<Fixture> _upcomingMatches = [];
+  //List<Fixture> _upcomingMatches = [];
   List<Fixture> _subscribedMatches = [];
   List<SubscribedLeague> _subscribedLeagues = [];
   List<News> _news = [];
   List<Leader> _leaders = [];
   List<int> _subscribedLeagueIds = [];
-  List<Fixture> get upcomingMatches => _upcomingMatches;
+  //List<Fixture> get upcomingMatches => _upcomingMatches;
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
   List<Fixture> get subscribedMatches => _subscribedMatches;
   List<int> get subscribedLeagueIds => _subscribedLeagueIds;
@@ -35,7 +35,7 @@ class DashBoardViewModel extends BaseModel {
     setBusy(true);
     try {
       await getSubscribedLeagues();
-      await getUpcomingMatches();
+      //await getUpcomingMatches();
       await getAllLeaders();
       if(subscribedLeagues.isNotEmpty) {
         await getAllNews();
@@ -47,27 +47,29 @@ class DashBoardViewModel extends BaseModel {
     setBusy(false);
   }
 
-  Future<void> getUpcomingMatches() async {
-     DateTime now = DateTime.now();
-     //TODO make dynamic timezone
-     List<dynamic> tempList = await ApiService.getListRequest(
-      baseUrl: AppUrl.footballBaseUrl,
-      modelName: ApiModels.upcomingMatches,
-      parameters: {
-        "APIkey": AppConstants.footballApiKey,
-        "action": "get_events",
-        "timezone": "Asia/Riyadh",
-        "from": DateUtility.getApiFormat(now),
-        "to": DateUtility.getApiFormat(now),
-      },
-    );
-    _upcomingMatches = tempList.cast<Fixture>();
-    _upcomingMatches = upcomingMatches.where((match) => isUpcoming(match, now)).toList();
-    notifyListeners();
-  }
+  // Future<void> getUpcomingMatches() async {
+  //    DateTime now = DateTime.now();
+  //    //TODO make dynamic timezone
+  //    List<dynamic> tempList = await ApiService.getListRequest(
+  //     baseUrl: AppUrl.footballBaseUrl,
+  //     modelName: ApiModels.upcomingMatches,
+  //     parameters: {
+  //       "APIkey": AppConstants.footballApiKey,
+  //       "action": "get_events",
+  //       "timezone": "Asia/Riyadh",
+  //       "from": DateUtility.getApiFormat(now),
+  //       "to": DateUtility.getApiFormat(now),
+  //     },
+  //   );
+  //   _upcomingMatches = tempList.cast<Fixture>();
+  //   _upcomingMatches = upcomingMatches.where((match) => isUpcoming(match, now)).toList();
+  //   notifyListeners();
+  // }
     Future<void> getSubscribedMatches() async {
     if (subscribedLeagueIds.isNotEmpty) {
       DateTime now = DateTime.now();
+      print(DateUtility.getApiFormat(now));
+      print(DateUtility.getApiFormat(now.add(const Duration(days: 20))));
       //TODO make dynamic timezone
       List<dynamic> tempList = await ApiService.getListRequest(
         baseUrl: AppUrl.footballBaseUrl,
@@ -78,12 +80,12 @@ class DashBoardViewModel extends BaseModel {
           "timezone": "Asia/Riyadh",
           "league_id": subscribedLeagueIds.join(","),
           "from": DateUtility.getApiFormat(now),
-          "to": DateUtility.getApiFormat(now),
+          "to": DateUtility.getApiFormat(now.add(const Duration(days: 3))),
         },
       );
       _subscribedMatches = tempList.cast<Fixture>();
       _subscribedMatches =
-          _subscribedMatches.where((match) => isUpcoming(match, now)).toList();
+          _subscribedMatches.where((match) => isValid(match, now)).toList();
     } else {
       _subscribedMatches = [];
     }
@@ -103,6 +105,7 @@ class DashBoardViewModel extends BaseModel {
       ) as List<SubscribedLeague>;
       _subscribedLeagues = tempList.cast<SubscribedLeague>();
     _subscribedLeagueIds = getSubscribedIds();
+    print(_subscribedLeagueIds);
   }
 
   List<int> getSubscribedIds() {
@@ -111,17 +114,26 @@ class DashBoardViewModel extends BaseModel {
         .toList();
   }
 
-  bool isUpcoming(Fixture match, DateTime now) {
-    DateTime today = DateTime(now.year, now.month, now.day);
-    return today == match.matchDate;
+  bool isValid(Fixture match, DateTime now) {
+    String matchStatus = match.matchStatus!;
+    if(matchStatus == "Fisnished" ||
+     matchStatus == "After ET" ||
+     matchStatus == "After Pen." ||
+     matchStatus == "Cancelled" || 
+     matchStatus == "Awarded" 
+     //match.matchDate.isBefore(now)
+     ) {
+      return false;
+    }
+    return true;
   }
 
-  List<Fixture> searchMatches(String value) {
-    return _upcomingMatches
-        .where((match) =>
-            match.leagueName.toLowerCase().contains(value.toLowerCase()))
-        .toList();
-  }
+  // List<Fixture> searchMatches(String value) {
+  //   return _upcomingMatches
+  //       .where((match) =>
+  //           match.leagueName.toLowerCase().contains(value.toLowerCase()))
+  //       .toList();
+  // }
   int? getLeagueInternalId (String externalId) {
     List<SubscribedLeague> listOfLeague = _subscribedLeagues
     .where((league) => league.externalLeagueId.toString() == externalId)
@@ -207,7 +219,7 @@ class DashBoardViewModel extends BaseModel {
     }
   }
   clearData() {
-    _upcomingMatches = [];
+    //_upcomingMatches = [];
     _subscribedMatches = [];
     _subscribedLeagues = [];
     _news = [];
