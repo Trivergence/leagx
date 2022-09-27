@@ -19,7 +19,7 @@ class ChoosePlanViewModel extends BaseModel {
   List<SubscriptionPlan> get getPlans => _listOfPlan;
 
   Future<void> getSubscriptionPlans() async {
-    _listOfPlan = await ApiService.getListRequest(
+    List<SubscriptionPlan> tempList = await ApiService.getListRequest(
       baseUrl: AppUrl.baseUrl,
       url: AppUrl.getPlan,
       headers: {
@@ -27,6 +27,7 @@ class ChoosePlanViewModel extends BaseModel {
       },
       modelName: ApiModels.getPlans
     );  
+    _listOfPlan = tempList.cast<SubscriptionPlan>();
   }
   subscribeLeague({required BuildContext context, required int planId, required String leagueId, required String leagueTitle, required String leagueImg}) async {
     Loader.showLoader();

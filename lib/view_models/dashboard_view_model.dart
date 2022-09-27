@@ -50,7 +50,7 @@ class DashBoardViewModel extends BaseModel {
   Future<void> getUpcomingMatches() async {
      DateTime now = DateTime.now();
      //TODO make dynamic timezone
-     _upcomingMatches = await ApiService.getListRequest(
+     List<dynamic> tempList = await ApiService.getListRequest(
       baseUrl: AppUrl.footballBaseUrl,
       modelName: ApiModels.upcomingMatches,
       parameters: {
@@ -61,6 +61,7 @@ class DashBoardViewModel extends BaseModel {
         "to": DateUtility.getApiFormat(now),
       },
     );
+    _upcomingMatches = tempList.cast<Fixture>();
     _upcomingMatches = upcomingMatches.where((match) => isUpcoming(match, now)).toList();
     notifyListeners();
   }
@@ -68,7 +69,7 @@ class DashBoardViewModel extends BaseModel {
     if (subscribedLeagueIds.isNotEmpty) {
       DateTime now = DateTime.now();
       //TODO make dynamic timezone
-      _subscribedMatches = await ApiService.getListRequest(
+      List<dynamic> tempList = await ApiService.getListRequest(
         baseUrl: AppUrl.footballBaseUrl,
         modelName: ApiModels.upcomingMatches,
         parameters: {
@@ -80,6 +81,7 @@ class DashBoardViewModel extends BaseModel {
           "to": DateUtility.getApiFormat(now),
         },
       );
+      _subscribedMatches = tempList.cast<Fixture>();
       _subscribedMatches =
           _subscribedMatches.where((match) => isUpcoming(match, now)).toList();
     } else {
@@ -91,14 +93,15 @@ class DashBoardViewModel extends BaseModel {
   Future<void> getSubscribedLeagues() async {
     User? user = locator<SharedPreferenceHelper>().getUser();
     String completeUrl = AppUrl.getUser + "${user!.id}" + "/subscribed_leagues";
-    _subscribedLeagues = await ApiService.getListRequest(
+    List<dynamic> tempList = await ApiService.getListRequest(
       baseUrl: AppUrl.baseUrl,
       url: completeUrl,
       headers: {
         "apitoken": preferenceHelper.authToken,
       },
       modelName: ApiModels.getSubscribedLeagues
-      );
+      ) as List<SubscribedLeague>;
+      _subscribedLeagues = tempList.cast<SubscribedLeague>();
     _subscribedLeagueIds = getSubscribedIds();
   }
 

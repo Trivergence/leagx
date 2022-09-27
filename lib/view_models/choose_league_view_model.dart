@@ -16,7 +16,7 @@ class ChooseLeagueViewModel extends BaseModel {
   }
 
   Future<void> getLeagues() async {
-    _leagues = await ApiService.getListRequest(
+    List<League> tempList = await ApiService.getListRequest(
     baseUrl: AppUrl.footballBaseUrl,
     parameters:{
       "action":"get_leagues",
@@ -24,6 +24,7 @@ class ChooseLeagueViewModel extends BaseModel {
     },
     modelName: ApiModels.getLeagues
     );
+    _leagues = tempList.cast<League>();
   } 
   List<League> searchLeague(String value) {
     return _leagues

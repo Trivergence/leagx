@@ -10,7 +10,6 @@ import '../core/network/app_url.dart';
 import '../core/viewmodels/base_model.dart';
 import '../models/dashboard/fixture.dart';
 import '../models/user/user.dart';
-import '../routes/routes.dart';
 import '../service/service_locator.dart';
 import '../ui/screens/fixtureDetails/components/prediction_bottom_sheet.dart';
 import '../ui/util/loader/loader.dart';
@@ -45,7 +44,7 @@ class FixtureDetailViewModel extends BaseModel {
 
   Future<void> getMatchDetails(String matchId) async {
     DateTime today = DateTime.now().toUtc();
-    _matchDetails = await ApiService.getListRequest(
+    List<Fixture> tempList = await ApiService.getListRequest(
       baseUrl: AppUrl.footballBaseUrl,
       modelName: ApiModels.upcomingMatches,
       parameters: {
@@ -56,6 +55,7 @@ class FixtureDetailViewModel extends BaseModel {
       "to": DateUtility.getApiFormat(today),
       "timezone": "Asia/Riyadh",
     });
+    _matchDetails = tempList.cast<Fixture>();
   }
 
   Future<void> savePrediction({
@@ -98,7 +98,7 @@ class FixtureDetailViewModel extends BaseModel {
   }
 
   getHomeTeamPlayers(String matchHometeamId) async {
-    _homeTeamPlayers = await ApiService.getListRequest(
+    List<Player> tempList = await ApiService.getListRequest(
       baseUrl: AppUrl.footballBaseUrl,
       parameters: {
       "action": "get_teams",
@@ -106,17 +106,19 @@ class FixtureDetailViewModel extends BaseModel {
       "APIkey": AppConstants.footballApiKey
       },
       modelName: ApiModels.getTeams
-    ) as List<Player>;
+    ) ;
+    _homeTeamPlayers = tempList.cast<Player>();
   }
   getAwayTeamPlayers(String matchAwayteamId) async {
-    _awayTeamPlayers = _homeTeamPlayers = await ApiService.getListRequest(
+    List<Player> tempList = await ApiService.getListRequest(
         baseUrl: AppUrl.footballBaseUrl,
         parameters: {
           "action": "get_teams",
           "team_id": matchAwayteamId,
           "APIkey": AppConstants.footballApiKey
         },
-        modelName: ApiModels.getTeams) as List<Player>;
+        modelName: ApiModels.getTeams);
+        _awayTeamPlayers = tempList.cast<Player>();
   }
 
   showPredictionSheet(BuildContext context, Fixture matchDeta) {
