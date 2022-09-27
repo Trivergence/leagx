@@ -28,12 +28,12 @@ class FixtureDetailViewModel extends BaseModel {
     setBusy(true);
     try {
       await getMatchDetails(matchId);
+      setBusy(false);
       await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
       await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
     } on Exception catch (_) {
       setBusy(false);
     }
-    setBusy(false);
   }
     Future<void> refreshData({required String matchId}) async {
     await getMatchDetails(matchId);
@@ -108,6 +108,7 @@ class FixtureDetailViewModel extends BaseModel {
       modelName: ApiModels.getTeams
     ) ;
     _homeTeamPlayers = tempList.cast<Player>();
+    notifyListeners();
   }
   getAwayTeamPlayers(String matchAwayteamId) async {
     List<Player> tempList = await ApiService.getListRequest(
@@ -119,6 +120,7 @@ class FixtureDetailViewModel extends BaseModel {
         },
         modelName: ApiModels.getTeams);
         _awayTeamPlayers = tempList.cast<Player>();
+        notifyListeners();
   }
 
   showPredictionSheet(BuildContext context, Fixture matchDeta) {
