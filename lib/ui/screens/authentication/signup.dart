@@ -78,6 +78,7 @@ class SignupScreen extends StatelessWidget {
                       iconData: Icons.drafts_outlined,
                     ),
                     inputAction: TextInputAction.next,
+                    inputType: TextInputType.emailAddress,
                   ),
                   UIHelper.verticalSpaceMedium,
                   PasswordTextField(

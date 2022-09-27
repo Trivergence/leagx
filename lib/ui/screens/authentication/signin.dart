@@ -40,6 +40,7 @@ class SigninScreen extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
         title: loc.authSigninTxtSignin,
+        hasBackButton: false,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -71,11 +72,13 @@ class SigninScreen extends StatelessWidget {
                       iconData: Icons.drafts_outlined,
                     ),
                     inputAction: TextInputAction.next,
+                    inputType: TextInputType.emailAddress,
                   ),
                   UIHelper.verticalSpaceMedium,
                   PasswordTextField(
                     controller: _passwordController,
                     hint: loc.authSigninTxtPassword,
+                    inputAction: TextInputAction.done,
                   ),
                 ],
               ),
