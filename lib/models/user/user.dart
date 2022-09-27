@@ -56,7 +56,7 @@ class User {
         updatedAt: DateTime.parse(json["updated_at"]),
         firstName: json["first_name"] ?? "",
         lastName: json["last_name"] ?? "",
-        phone: json["phone"] ?? "",
+        phone: json["phone"],
         gender: json["gender"],
         address: json["address"],
         apiToken: json["api_token"],

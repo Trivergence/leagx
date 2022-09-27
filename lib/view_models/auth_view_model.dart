@@ -60,7 +60,7 @@ class AuthViewModel {
     dynamic responce = await ApiService.callPostApi(
       url: AppUrl.socialLogin,
       parameters: {
-        "user[email]": "test@gmail.com",
+        "user[email]": userEmail,
         "user[first_name]": firstName,
         "user[last_name]": lastName,
         "user[uid]": userId,
