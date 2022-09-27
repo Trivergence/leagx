@@ -20,13 +20,11 @@ import '../models/user/user.dart';
 
 class DashBoardViewModel extends BaseModel {
 
-  //List<Fixture> _upcomingMatches = [];
   List<Fixture> _subscribedMatches = [];
   List<SubscribedLeague> _subscribedLeagues = [];
   List<News> _news = [];
   List<Leader> _leaders = [];
   List<int> _subscribedLeagueIds = [];
-  //List<Fixture> get upcomingMatches => _upcomingMatches;
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
   List<Fixture> get subscribedMatches => _subscribedMatches;
   List<int> get subscribedLeagueIds => _subscribedLeagueIds;
@@ -47,46 +45,29 @@ class DashBoardViewModel extends BaseModel {
     }
     setBusy(false);
   }
-
-  // Future<void> getUpcomingMatches() async {
-  //    DateTime now = DateTime.now();
-  //    //TODO make dynamic timezone
-  //    List<dynamic> tempList = await ApiService.getListRequest(
-  //     baseUrl: AppUrl.footballBaseUrl,
-  //     modelName: ApiModels.upcomingMatches,
-  //     parameters: {
-  //       "APIkey": AppConstants.footballApiKey,
-  //       "action": "get_events",
-  //       "timezone": "Asia/Riyadh",
-  //       "from": DateUtility.getApiFormat(now),
-  //       "to": DateUtility.getApiFormat(now),
-  //     },
-  //   );
-  //   _upcomingMatches = tempList.cast<Fixture>();
-  //   _upcomingMatches = upcomingMatches.where((match) => isUpcoming(match, now)).toList();
-  //   notifyListeners();
-  // }
     Future<void> getSubscribedMatches() async {
     if (subscribedLeagueIds.isNotEmpty) {
-      DateTime now = DateTime.now();
-      print(DateUtility.getApiFormat(now));
-      print(DateUtility.getApiFormat(now.add(const Duration(days: 20))));
-      //TODO make dynamic timezone
-      List<dynamic> tempList = await ApiService.getListRequest(
-        baseUrl: AppUrl.footballBaseUrl,
-        modelName: ApiModels.upcomingMatches,
-        parameters: {
-          "APIkey": AppConstants.footballApiKey,
-          "action": "get_events",
-          "timezone": "Asia/Riyadh",
-          "league_id": subscribedLeagueIds.join(","),
-          "from": DateUtility.getApiFormat(now),
-          "to": DateUtility.getApiFormat(now.add(const Duration(days: 3))),
-        },
-      );
-      _subscribedMatches = tempList.cast<Fixture>();
-      _subscribedMatches =
-          _subscribedMatches.where((match) => isValid(match, now)).toList();
+      try {
+        DateTime now = DateTime.now();
+        //TODO make dynamic timezone
+        List<dynamic> tempList = await ApiService.getListRequest(
+          baseUrl: AppUrl.footballBaseUrl,
+          modelName: ApiModels.upcomingMatches,
+          parameters: {
+            "APIkey": AppConstants.footballApiKey,
+            "action": "get_events",
+            "timezone": "Asia/Riyadh",
+            "league_id": subscribedLeagueIds.join(","),
+            "from": DateUtility.getApiFormat(now),
+            "to": DateUtility.getApiFormat(now.add(const Duration(days: 3))),
+          },
+        );
+        _subscribedMatches = tempList.cast<Fixture>();
+        _subscribedMatches =
+            _subscribedMatches.where((match) => isValid(match, now)).toList();
+      } on Exception catch (e) {
+        setBusy(false);
+      }
     } else {
       _subscribedMatches = [];
     }
@@ -94,19 +75,22 @@ class DashBoardViewModel extends BaseModel {
   }
 
   Future<void> getSubscribedLeagues() async {
-    User? user = locator<SharedPreferenceHelper>().getUser();
-    String completeUrl = AppUrl.getUser + "${user!.id}" + "/subscribed_leagues";
-    List<dynamic> tempList = await ApiService.getListRequest(
-      baseUrl: AppUrl.baseUrl,
-      url: completeUrl,
-      headers: {
-        "apitoken": preferenceHelper.authToken,
-      },
-      modelName: ApiModels.getSubscribedLeagues
-      ) as List<SubscribedLeague>;
-      _subscribedLeagues = tempList.cast<SubscribedLeague>();
-    _subscribedLeagueIds = getSubscribedIds();
-    print(_subscribedLeagueIds);
+    try {
+      User? user = locator<SharedPreferenceHelper>().getUser();
+      String completeUrl = AppUrl.getUser + "${user!.id}" + "/subscribed_leagues";
+      List<dynamic> tempList = await ApiService.getListRequest(
+        baseUrl: AppUrl.baseUrl,
+        url: completeUrl,
+        headers: {
+          "apitoken": preferenceHelper.authToken,
+        },
+        modelName: ApiModels.getSubscribedLeagues
+        ) as List<SubscribedLeague>;
+        _subscribedLeagues = tempList.cast<SubscribedLeague>();
+      _subscribedLeagueIds = getSubscribedIds();
+    } on Exception catch (e) {
+      setBusy(false);
+    }
   }
 
   List<int> getSubscribedIds() {
@@ -128,21 +112,18 @@ class DashBoardViewModel extends BaseModel {
     }
     return true;
   }
-
-  // List<Fixture> searchMatches(String value) {
-  //   return _upcomingMatches
-  //       .where((match) =>
-  //           match.leagueName.toLowerCase().contains(value.toLowerCase()))
-  //       .toList();
-  // }
   int? getLeagueInternalId (String externalId) {
-    List<SubscribedLeague> listOfLeague = _subscribedLeagues
-    .where((league) => league.externalLeagueId.toString() == externalId)
-    .toList();
-    if(listOfLeague.isNotEmpty) {
-      return listOfLeague.first.id;
-    } else {
-      return null;
+    try {
+      List<SubscribedLeague> listOfLeague = _subscribedLeagues
+      .where((league) => league.externalLeagueId.toString() == externalId)
+      .toList();
+      if(listOfLeague.isNotEmpty) {
+        return listOfLeague.first.id;
+      } else {
+        return null;
+      }
+    } on Exception catch (e) {
+      setBusy(false);
     }
  
   }
@@ -155,71 +136,87 @@ class DashBoardViewModel extends BaseModel {
     User? user = locator<SharedPreferenceHelper>().getUser();
     int? internalLeagueId = getLeagueInternalId(leagueId);
     if (user != null && internalLeagueId != null) {
-      Loader.showLoader();
-      Map<String,dynamic> requestBody = {
-        "news":{
-            "title": title,
-            "description": desc,
-            "user_id": user.id,
-            "league_id": internalLeagueId,
-            "match_id": int.parse(matchId)
-          }
-        };
-      bool success = await ApiService.postWoResponce(url: AppUrl.addNews,
-        body: requestBody
-      );
-      if(success) {
-        Loader.hideLoader();
-        ToastMessage.show(loc.dashboardNewsAddNewsTxtSuccess, TOAST_TYPE.success);
-        Navigator.of(context).pop();
-        await getAllNews();
-        notifyListeners();
-      } else {
-        ToastMessage.show(
-            loc.errorTryAgain, TOAST_TYPE.error);
+      try {
+        Loader.showLoader();
+        Map<String,dynamic> requestBody = {
+          "news":{
+              "title": title,
+              "description": desc,
+              "user_id": user.id,
+              "league_id": internalLeagueId,
+              "match_id": int.parse(matchId)
+            }
+          };
+        bool success = await ApiService.postWoResponce(url: AppUrl.addNews,
+          body: requestBody
+        );
+        if(success) {
+          Loader.hideLoader();
+          ToastMessage.show(loc.dashboardNewsAddNewsTxtSuccess, TOAST_TYPE.success);
+          Navigator.of(context).pop();
+          await getAllNews();
+          notifyListeners();
+        } else {
+          ToastMessage.show(
+              loc.errorTryAgain, TOAST_TYPE.error);
+        }
+      } on Exception catch (e) {
+        setBusy(false);
       }
     }
   }
   Future<void> getAllNews() async {
     User? user = locator<SharedPreferenceHelper>().getUser();
     if(user != null) {
-      String completeUrl = AppUrl.getUser + user.id.toString() + AppUrl.subscribedNews;
-      _news = await ApiService.getListRequest(
-        baseUrl: AppUrl.baseUrl,
-        url: completeUrl,
-        headers: {
-          "apitoken": preferenceHelper.authToken,
-        },
-        modelName: ApiModels.getNews
-      );
+      try {
+        String completeUrl = AppUrl.getUser + user.id.toString() + AppUrl.subscribedNews;
+        _news = await ApiService.getListRequest(
+          baseUrl: AppUrl.baseUrl,
+          url: completeUrl,
+          headers: {
+            "apitoken": preferenceHelper.authToken,
+          },
+          modelName: ApiModels.getNews
+        );
+      } on Exception catch (e) {
+        setBusy(false);
+      }
     }
   }
     Future<void> getAllLeaders() async {
-      String completeUrl =
-          AppUrl.getUser + AppUrl.getLeaders;
-      _leaders = await ApiService.getListRequest(
-        baseUrl: AppUrl.baseUrl,
-        url: completeUrl,
-        modelName: ApiModels.getLeaders,
-        headers: {
-        "apitoken": preferenceHelper.authToken,
-      },
-    );
+      try {
+        String completeUrl =
+            AppUrl.getUser + AppUrl.getLeaders;
+        _leaders = await ApiService.getListRequest(
+          baseUrl: AppUrl.baseUrl,
+          url: completeUrl,
+          modelName: ApiModels.getLeaders,
+          headers: {
+          "apitoken": preferenceHelper.authToken,
+        },
+            );
+      } on Exception catch (e) {
+        setBusy(false);
+      }
   }
 
   List<News> getNewsbyLeague(String externalId) {
-    int? id = getLeagueInternalId(externalId);
-    if(id == null) {
+    try {
+      int? id = getLeagueInternalId(externalId);
+      if(id == null) {
+        return [];
+      } else {
+      return _news
+            .where(
+                (newsItems) => newsItems.leagueId == id)
+            .toList();
+      }
+    } on Exception catch (e) {
+      setBusy(false);
       return [];
-    } else {
-    return _news
-          .where(
-              (newsItems) => newsItems.leagueId == id)
-          .toList();
     }
   }
   clearData() {
-    //_upcomingMatches = [];
     _subscribedMatches = [];
     _subscribedLeagues = [];
     _news = [];

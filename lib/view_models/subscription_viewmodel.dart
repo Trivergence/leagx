@@ -21,15 +21,19 @@ class SubscriptionViewModel extends BaseModel {
   List<SubscriptionPlan> get getPlans => _listOfPlan;
 
   Future<void> getSubscriptionPlans() async {
-    List<SubscriptionPlan> tempList = await ApiService.getListRequest(
-      baseUrl: AppUrl.baseUrl,
-      url: AppUrl.getPlan,
-      headers: {
-        "apitoken": preferenceHelper.authToken,
-      },
-      modelName: ApiModels.getPlans
-    );  
-    _listOfPlan = tempList.cast<SubscriptionPlan>();
+    try {
+      List<SubscriptionPlan> tempList = await ApiService.getListRequest(
+        baseUrl: AppUrl.baseUrl,
+        url: AppUrl.getPlan,
+        headers: {
+          "apitoken": preferenceHelper.authToken,
+        },
+        modelName: ApiModels.getPlans
+      );  
+      _listOfPlan = tempList.cast<SubscriptionPlan>();
+    } on Exception catch (e) {
+      setBusy(false);
+    }
   }
   subscribeLeague({required BuildContext context, required int planId, required String leagueId, required String leagueTitle, required String leagueImg}) async {
     Loader.showLoader();
@@ -54,14 +58,18 @@ class SubscriptionViewModel extends BaseModel {
     }
   }
   Future<void> getLeagues() async {
-    List<League> tempList = await ApiService.getListRequest(
-        baseUrl: AppUrl.footballBaseUrl,
-        parameters: {
-          "action": "get_leagues",
-          "APIkey": AppConstants.footballApiKey
-        },
-        modelName: ApiModels.getLeagues);
-    _leagues = tempList.cast<League>();
+    try {
+      List<League> tempList = await ApiService.getListRequest(
+          baseUrl: AppUrl.footballBaseUrl,
+          parameters: {
+            "action": "get_leagues",
+            "APIkey": AppConstants.footballApiKey
+          },
+          modelName: ApiModels.getLeagues);
+      _leagues = tempList.cast<League>();
+    } on Exception catch (e) {
+      setBusy(false);
+    }
   }
 
   List<League> searchLeague(String value) {

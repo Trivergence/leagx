@@ -43,19 +43,23 @@ class FixtureDetailViewModel extends BaseModel {
   }
 
   Future<void> getMatchDetails(String matchId) async {
-    DateTime today = DateTime.now().toUtc();
-    List<dynamic> tempList = await ApiService.getListRequest(
-      baseUrl: AppUrl.footballBaseUrl,
-      modelName: ApiModels.upcomingMatches,
-      parameters: {
-      "APIkey": AppConstants.footballApiKey,
-      "action": "get_events",
-      "match_id": matchId,
-      "from": DateUtility.getApiFormat(today),
-      "to": DateUtility.getApiFormat(today.add(const Duration(days: 3))),
-      "timezone": "Asia/Riyadh",
-    });
-    _matchDetails = tempList.cast<Fixture>();
+    try {
+      DateTime today = DateTime.now().toUtc();
+      List<dynamic> tempList = await ApiService.getListRequest(
+        baseUrl: AppUrl.footballBaseUrl,
+        modelName: ApiModels.upcomingMatches,
+        parameters: {
+        "APIkey": AppConstants.footballApiKey,
+        "action": "get_events",
+        "match_id": matchId,
+        "from": DateUtility.getApiFormat(today),
+        "to": DateUtility.getApiFormat(today.add(const Duration(days: 3))),
+        "timezone": "Asia/Riyadh",
+      });
+      _matchDetails = tempList.cast<Fixture>();
+    } on Exception catch (e) {
+        setBusy(false);
+    }
   }
 
   Future<void> savePrediction({
@@ -98,29 +102,37 @@ class FixtureDetailViewModel extends BaseModel {
   }
 
   getHomeTeamPlayers(String matchHometeamId) async {
-    List<Player> tempList = await ApiService.getListRequest(
-      baseUrl: AppUrl.footballBaseUrl,
-      parameters: {
-      "action": "get_teams",
-      "team_id": matchHometeamId,
-      "APIkey": AppConstants.footballApiKey
-      },
-      modelName: ApiModels.getTeams
-    ) ;
-    _homeTeamPlayers = tempList.cast<Player>();
-    notifyListeners();
-  }
-  getAwayTeamPlayers(String matchAwayteamId) async {
-    List<Player> tempList = await ApiService.getListRequest(
+    try {
+      List<Player> tempList = await ApiService.getListRequest(
         baseUrl: AppUrl.footballBaseUrl,
         parameters: {
-          "action": "get_teams",
-          "team_id": matchAwayteamId,
-          "APIkey": AppConstants.footballApiKey
+        "action": "get_teams",
+        "team_id": matchHometeamId,
+        "APIkey": AppConstants.footballApiKey
         },
-        modelName: ApiModels.getTeams);
-        _awayTeamPlayers = tempList.cast<Player>();
-        notifyListeners();
+        modelName: ApiModels.getTeams
+      ) ;
+      _homeTeamPlayers = tempList.cast<Player>();
+      notifyListeners();
+    } on Exception catch (e) {
+      setBusy(false);
+    }
+  }
+  getAwayTeamPlayers(String matchAwayteamId) async {
+    try {
+      List<Player> tempList = await ApiService.getListRequest(
+          baseUrl: AppUrl.footballBaseUrl,
+          parameters: {
+            "action": "get_teams",
+            "team_id": matchAwayteamId,
+            "APIkey": AppConstants.footballApiKey
+          },
+          modelName: ApiModels.getTeams);
+          _awayTeamPlayers = tempList.cast<Player>();
+          notifyListeners();
+    } on Exception catch (e) {
+      setBusy(false);
+    }
   }
 
   showPredictionSheet(BuildContext context, Fixture matchDeta) {
