@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   final String? title;
   final bool isIcon;
-  final Widget? trailing;
+  final List<Widget>? trailing;
   final bool isDrawer;
 
   AppBarWidget({
@@ -58,9 +58,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                 ),
               )
               : const SizedBox.shrink(),
-      actions: [
-        trailing ?? const SizedBox(),
-      ],
+      actions: trailing ?? trailing,
     );
   }
 
