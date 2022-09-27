@@ -63,6 +63,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         value!, loc.authForgotPasswordTxtValidEmail);
                   }
                 },
+                inputType: TextInputType.emailAddress,
               ),
             ),
             UIHelper.verticalSpaceLarge,
