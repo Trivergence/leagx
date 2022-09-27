@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    upcomingMatches = context.read<DashBoardViewModel>().upcomingMatches;
+    upcomingMatches = context.read<DashBoardViewModel>().subscribedMatches;
     listOfLeaders = context.read<DashBoardViewModel>().getLeaders;
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -95,6 +95,7 @@ class HomeScreen extends StatelessWidget {
                         teamOneName: upcomingMatches[i].matchHometeamName,
                         teamTwoFlag: upcomingMatches[i].teamAwayBadge,
                         teamTwoName: upcomingMatches[i].matchAwayteamName,
+                        scheduledDate: upcomingMatches[i].matchDate,
                         scheduledTime: upcomingMatches[i].matchTime,
                         onTap: () => Navigator.pushNamed(context,
                           Routes.fixtureDetails,

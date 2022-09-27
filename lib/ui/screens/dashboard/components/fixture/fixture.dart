@@ -110,6 +110,7 @@ class FixtureScreen extends StatelessWidget {
                       teamTwoFlag: match.teamAwayBadge,
                       teamTwoName: match.matchAwayteamName,
                       scheduledTime: match.matchTime,
+                      scheduledDate: match.matchDate,
                       isLive: match.matchLive == "1",
                       matchStatus: match.matchStatus,
                       teamOneScore: match.matchHometeamScore,

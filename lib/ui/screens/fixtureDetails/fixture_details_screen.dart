@@ -42,7 +42,7 @@ class _FixtureDetailsState extends State<FixtureDetails> {
           SchedulerBinding.instance!.addPostFrameCallback((_) {
             model.getData(matchId: widget.matchData.matchId);
           });
-          },
+        },
         builder: (context, FixtureDetailViewModel fixtureModel, _) {
           return RefreshIndicator(
             backgroundColor: AppColors.textFieldColor,

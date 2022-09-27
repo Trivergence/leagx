@@ -33,7 +33,7 @@ class PlayersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _fixtureModel = context.read<FixtureDetailViewModel>();
+    _fixtureModel = context.watch<FixtureDetailViewModel>();
     awayPlayer = _fixtureModel.awayTeamPlayers;
     homePlayer = _fixtureModel.homeTeamPlayers;
     _context = context;
