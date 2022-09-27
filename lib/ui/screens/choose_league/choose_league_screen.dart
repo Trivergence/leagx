@@ -67,10 +67,9 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
                       );
                     }),
               )
-              //TODO localization
               : Padding(
                 padding: const EdgeInsets.only(top: 100.0),
-                child: PlaceHolderTile(height: 60, msgText: "Please check your network connection and try again"),
+                child: PlaceHolderTile(height: 60, msgText: loc.errorCheckNetwork),
               )
             ],
           )
@@ -84,38 +83,3 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
     });
   }
 }
-
-// _chooseLeagueModel = chooseLeagueModel;
-//             listOfLeagues = isFiltering ? filteredList : chooseLeagueModel.leagues;
-//             return !_chooseLeagueModel.busy ? Column(
-//             children: [
-//               SizedBox(
-//                 height: 48,
-//                 child: SearchTextField(
-//                   textController: _searchController,
-//                   hint: loc.chooseLeagueTxtSearch,
-//                   onTextEntered: _onTextEntered,
-//                 ),
-//               ),
-//               UIHelper.verticalSpace(30),
-//               listOfLeagues.isNotEmpty ? Expanded(
-//                 child: ListView.builder(
-//                     itemCount: listOfLeagues.length,
-//                     shrinkWrap: true,
-//                     itemBuilder: (context, index) {
-//                       League league = listOfLeagues[index];
-//                       return LeagueTile(
-//                         leagueId: league.leagueId,
-//                         leagueTitle: league.leagueName,
-//                         imgUrl: league.leagueLogo,
-//                         hasSubscribed: subscribedIds.contains(int.parse(league.leagueId)),
-//                       );
-//                     }),
-//               )
-//               //TODO localization
-//               : Padding(
-//                 padding: const EdgeInsets.only(top: 100.0),
-//                 child: PlaceHolderTile(height: 60, msgText: "Please check your network connection and try again"),
-//               )
-//             ],
-//           ) : const LoadingWidget();

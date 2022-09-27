@@ -1,6 +1,7 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/utility/date_utility.dart';
 import 'package:leagx/ui/util/utility/string_utility.dart';
@@ -77,7 +78,7 @@ class FixtureWidget extends StatelessWidget {
                                 UIHelper.horizontalSpace(4.0),
                                 //TODO localization
                                 TextWidget(
-                                    text: isToday ? "Today, " + scheduledTime! : DateUtility.getUiFormat(scheduledDate),
+                                    text: isToday ? "${loc.today}, " + scheduledTime! : DateUtility.getUiFormat(scheduledDate),
                                     textSize: Dimens.textSmall),
                               ],
                             )
@@ -100,10 +101,8 @@ class FixtureWidget extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          CircleAvatar(
-                            child: ImageWidget(
-                              imageUrl: teamOneFlag,
-                            ),
+                          ImageWidget(
+                            imageUrl: teamOneFlag,
                           ),
                           UIHelper.horizontalSpaceSmall,
                           TextWidget(text: StringUtility.getShortName(teamOneName)),

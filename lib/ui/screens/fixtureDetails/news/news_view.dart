@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/widgets/news_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/widgets/placeholder_tile.dart';
@@ -29,10 +30,9 @@ class NewsView extends StatelessWidget {
               desc: newsItem.description,
             );
           }),
-          //TODO localization
     ) : Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 200),
-      child: PlaceHolderTile(height: 50, msgText: "No news to show today"),
+      child: PlaceHolderTile(height: 50, msgText: loc.fixtureDetailsNewsTxtEmptyList),
     );
   }
 }

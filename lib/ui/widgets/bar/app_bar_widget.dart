@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   final String? title;
   final bool isIcon;
+  final bool hasBackButton;
   final List<Widget>? trailing;
   final bool isDrawer;
 
@@ -15,7 +16,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
     this.title,
     this.trailing,
     this.isDrawer = false,
-    this.isIcon = false,
+    this.isIcon = false, this.hasBackButton = true,
   }) : super(key: key);
 
   @override
@@ -34,13 +35,13 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                 Scaffold.of(context).openDrawer();
               },
             )
-          : IconButton(
+          : hasBackButton == true ? IconButton(
               icon: const Icon(
                 Icons.arrow_back,
                 color: AppColors.colorWhite,
               ),
               onPressed: () => Navigator.pop(context),
-            ),
+            ) : null,
       title: isIcon
           ? Image.asset(
               Assets.appLogo,

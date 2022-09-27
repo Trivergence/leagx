@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../models/subscription_plan.dart';
@@ -43,10 +44,9 @@ class _PlanListingState extends State<PlanListing> {
           widget.onItemPressed(listOfPlans[index].id);
         },);
     })
-    //TODO localization
-    : const Padding(
-        padding: EdgeInsets.only(top: 100.0),
-        child: PlaceHolderTile(height: 60, msgText: "Please check your network connection and try again"),
+    :Padding(
+        padding: const EdgeInsets.only(top: 100.0),
+        child: PlaceHolderTile(height: 60, msgText: loc.errorCheckNetwork),
       )
     ;
   }

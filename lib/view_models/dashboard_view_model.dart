@@ -7,6 +7,7 @@ import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/utility/date_utility.dart';
 
@@ -169,14 +170,13 @@ class DashBoardViewModel extends BaseModel {
       );
       if(success) {
         Loader.hideLoader();
-        //TODO: Add localized message
-        ToastMessage.show("News added successfully", TOAST_TYPE.success);
+        ToastMessage.show(loc.dashboardNewsAddNewsTxtSuccess, TOAST_TYPE.success);
         Navigator.of(context).pop();
         await getAllNews();
         notifyListeners();
       } else {
-        //TODO: Add localized message
-        print("failure");
+        ToastMessage.show(
+            loc.errorTryAgain, TOAST_TYPE.error);
       }
     }
   }

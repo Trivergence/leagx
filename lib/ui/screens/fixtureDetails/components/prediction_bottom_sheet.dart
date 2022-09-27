@@ -137,11 +137,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
       awayTeamName: widget.matchDetails!.matchAwayteamName,
       homeTeamName: widget.matchDetails!.matchHometeamName,
       isPublic: isPublic);
-    } else {
-      //TODO : localize meassage
-      ToastMessage.show("League is not subscribed", TOAST_TYPE.msg);
     }
-
   }
 
   int? getMatchId() {

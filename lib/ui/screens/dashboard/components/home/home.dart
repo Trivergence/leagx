@@ -73,7 +73,6 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //TODO: localization
                 const AnalyticsWidget(
                   firstLabel: 'Predictions',
                   firstValue: '0.0',
@@ -105,12 +104,11 @@ class HomeScreen extends StatelessWidget {
                            )),
                       ),
                   ],
-                ) : const PlaceHolderTile(height: 80, msgText: "No upcoming match available"),
+                ) : PlaceHolderTile(height: 80, msgText: loc.dashboardHomeTxtEmptyList),
                 if(upcomingMatches.length > 3) InkWell(
                   onTap: () => Navigator.of(context).pushNamed(Routes.upcomingMatches),
-                  child: const PlaceHolderTile(height: 40, msgText: "View All Matches",),
+                  child: PlaceHolderTile(height: 40, msgText: loc.dashboardHomeTxtViewAll,),
                 )
-                
               ],
             ),
           ),

@@ -128,10 +128,9 @@ class FixtureScreen extends StatelessWidget {
               ],
             ),
           ),
-          // TODO: localize this message
-        ) : const Padding(
-          padding: EdgeInsets.symmetric(horizontal:8.0),
-          child: PlaceHolderTile(height: 80, msgText: "No upcoming matches to show today"),
+        ) : Padding(
+          padding: const EdgeInsets.symmetric(horizontal:8.0),
+          child: PlaceHolderTile(height: 80, msgText: loc.dashboardFixtureTxtEmptyList),
         ),
       ],
     );

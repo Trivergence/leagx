@@ -44,7 +44,7 @@ class Assets {
   // login screen assets
   static const String carBackground = "assets/images/img_login.jpg";
 
-  //TODO: delete them later
+  // //TODO: delete them later
   static const String flagImage = "assets/images/flagImage.png";
   static const String flagImage2 = "assets/images/flagImage2.png";
   static const String leagueImage1 = "assets/images/leagueImage1.png";

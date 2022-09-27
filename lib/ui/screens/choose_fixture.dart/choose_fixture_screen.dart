@@ -31,7 +31,7 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
     availableMatches = getMatches(context);
     return Scaffold(
         appBar: AppBarWidget(
-          title: "Choose A Fixture",
+          title: loc.chooseFixtureTxtTitle,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
@@ -60,10 +60,9 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                           homeTeamName: match.matchHometeamName);
                       }),
                 )
-                //TODO localization
-                : const Center(child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal :8.0, vertical: 100),
-                  child: PlaceHolderTile(height: 80, msgText: 'No match to show today. Make sure to subscribe at least one league'),
+                : Center(child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal :8.0, vertical: 100),
+                  child: PlaceHolderTile(height: 80, msgText: loc.chooseFixtureTxtEmptyList),
                 )),
               ],
             )
