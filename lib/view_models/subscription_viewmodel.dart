@@ -8,25 +8,32 @@ import 'package:leagx/models/subscription_plan.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
-import 'package:leagx/view_models/dashboard_view_model.dart';
-import 'package:provider/provider.dart';
 
+import '../constants/app_constants.dart';
 import '../core/sharedpref/sharedpref.dart';
+import '../models/dashboard/league.dart';
 import '../models/user/user.dart';
 
-class ChoosePlanViewModel extends BaseModel {
+class SubscriptionViewModel extends BaseModel {
   List<SubscriptionPlan> _listOfPlan = [];
+  List<League> _leagues = [];
+  List<League> get leagues => _leagues;
   List<SubscriptionPlan> get getPlans => _listOfPlan;
 
   Future<void> getSubscriptionPlans() async {
-    _listOfPlan = await ApiService.getListRequest(
-      baseUrl: AppUrl.baseUrl,
-      url: AppUrl.getPlan,
-      headers: {
-        "apitoken": preferenceHelper.authToken,
-      },
-      modelName: ApiModels.getPlans
-    );  
+    try {
+      List<SubscriptionPlan> tempList = await ApiService.getListRequest(
+        baseUrl: AppUrl.baseUrl,
+        url: AppUrl.getPlan,
+        headers: {
+          "apitoken": preferenceHelper.authToken,
+        },
+        modelName: ApiModels.getPlans
+      );  
+      _listOfPlan = tempList.cast<SubscriptionPlan>();
+    } on Exception catch (e) {
+      setBusy(false);
+    }
   }
   subscribeLeague({required BuildContext context, required int planId, required String leagueId, required String leagueTitle, required String leagueImg}) async {
     Loader.showLoader();
@@ -49,5 +56,26 @@ class ChoosePlanViewModel extends BaseModel {
     } else {
       Loader.hideLoader();
     }
+  }
+  Future<void> getLeagues() async {
+    try {
+      List<League> tempList = await ApiService.getListRequest(
+          baseUrl: AppUrl.footballBaseUrl,
+          parameters: {
+            "action": "get_leagues",
+            "APIkey": AppConstants.footballApiKey
+          },
+          modelName: ApiModels.getLeagues);
+      _leagues = tempList.cast<League>();
+    } on Exception catch (e) {
+      setBusy(false);
+    }
+  }
+
+  List<League> searchLeague(String value) {
+    return _leagues
+        .where((league) =>
+            league.leagueName.toLowerCase().contains(value.toLowerCase()))
+        .toList();
   }
 }

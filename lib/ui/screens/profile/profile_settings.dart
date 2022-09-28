@@ -44,7 +44,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     return Scaffold(
       appBar: AppBarWidget(
         title: loc.profileProfileSettingsTxtProfileSettings,
-        trailing: IconButton(
+        trailing: [IconButton(
           icon: const IconWidget(
             iconData: Icons.border_color_outlined,
           ),
@@ -59,7 +59,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               });
             });
           },
-        ),
+        )],
       ),
       body: SingleChildScrollView(
         child: Container(

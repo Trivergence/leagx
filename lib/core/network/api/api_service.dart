@@ -260,9 +260,14 @@ class ApiService {
           queryParameters: parameters,
         );
         if (_response.statusCode == 200 || _response.statusCode == 201) {
-          dynamic listOfData = ApiModels.getListOfObjects(modelName,
-          jsonEncode(_response.data));
-          return listOfData;
+          if(_response.data is List<dynamic>)  {
+            dynamic listOfData = ApiModels.getListOfObjects(
+            modelName, jsonEncode(_response.data));
+            return listOfData;
+          } else {
+            return [];
+          }
+          
         }
       } else {
         ToastMessage.show(Strings.noInternet, TOAST_TYPE.error);
@@ -284,11 +289,12 @@ class ApiService {
       Loader.hideLoader();
       ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
       return [];
-    } catch (e) {
-      print(e.toString());
-      Loader.hideLoader();
-      return [];
-    }
+    } 
+    // catch (e) {
+    //   print(e.toString());
+    //   Loader.hideLoader();
+    //   return [];
+    // }
     return [];
   }
   static Future<bool> postWoResponce({

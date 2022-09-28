@@ -42,7 +42,7 @@ class _FixtureDetailsState extends State<FixtureDetails> {
           SchedulerBinding.instance!.addPostFrameCallback((_) {
             model.getData(matchId: widget.matchData.matchId);
           });
-          },
+        },
         builder: (context, FixtureDetailViewModel fixtureModel, _) {
           return RefreshIndicator(
             backgroundColor: AppColors.textFieldColor,
@@ -50,13 +50,13 @@ class _FixtureDetailsState extends State<FixtureDetails> {
             child: Scaffold(
             appBar: AppBarWidget(
               title: widget.matchData.leagueName,
-              trailing: Padding(
+              trailing: [Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: DotWidget(
                   size: 22,
                   isLive: widget.matchData.liveStatus,
                 ),
-              ),
+              )],
             ),
             body: !fixtureModel.busy && fixtureModel.matchDetails.isNotEmpty ? Column(
               children: [

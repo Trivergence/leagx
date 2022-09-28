@@ -43,6 +43,17 @@ class FixtureScreen extends StatelessWidget {
               UIHelper.verticalSpaceSmall,
               Row(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right:18.0),
+                    child: GradientBorderWidget(
+                      width: 40.0,
+                      height: 40.0,
+                      isCircular: true,
+                      iconData: Icons.add,
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed(Routes.chooseLeague),
+                    ),
+                  ),
                   if(subscribedLeagues.isNotEmpty) Expanded(
                     child: SizedBox(
                       height: 40.0,
@@ -66,14 +77,7 @@ class FixtureScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  GradientBorderWidget(
-                    width: 40.0,
-                    height: 40.0,
-                    isCircular: true,
-                    iconData: Icons.add,
-                    onPressed: () => Navigator.of(context)
-                        .pushNamed(Routes.chooseLeague),
-                  ),
+                  
                 ],
               ),
             ],
@@ -106,6 +110,7 @@ class FixtureScreen extends StatelessWidget {
                       teamTwoFlag: match.teamAwayBadge,
                       teamTwoName: match.matchAwayteamName,
                       scheduledTime: match.matchTime,
+                      scheduledDate: match.matchDate,
                       isLive: match.matchLive == "1",
                       matchStatus: match.matchStatus,
                       teamOneScore: match.matchHometeamScore,
@@ -123,10 +128,9 @@ class FixtureScreen extends StatelessWidget {
               ],
             ),
           ),
-          // TODO: localize this message
-        ) : const Padding(
-          padding: EdgeInsets.symmetric(horizontal:8.0),
-          child: PlaceHolderTile(height: 80, msgText: "No upcoming matches to show today"),
+        ) : Padding(
+          padding: const EdgeInsets.symmetric(horizontal:8.0),
+          child: PlaceHolderTile(height: 80, msgText: loc.dashboardFixtureTxtEmptyList),
         ),
       ],
     );

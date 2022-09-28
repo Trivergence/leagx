@@ -7,8 +7,7 @@ import 'package:leagx/ui/screens/betting.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:leagx/view_models/choose_league_view_model.dart';
-import 'package:leagx/view_models/choose_plan_viewmodel.dart';
+import 'package:leagx/view_models/subscription_viewmodel.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/edit_profile_viewmodel.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
@@ -36,9 +35,8 @@ void main() async {
                 ChangeNotifierProvider<LocalizationProvider>(create: (_) => LocalizationProvider(preferences: prefs)),
                 ChangeNotifierProvider(create: (_) => DashBoardViewModel()),
                 ChangeNotifierProvider(create: (_) => FixtureDetailViewModel()),
-                ChangeNotifierProvider(create: (_) => ChooseLeagueViewModel()),
-                ChangeNotifierProvider(create: (_) => ChoosePlanViewModel()),
-                ChangeNotifierProvider(create: (_) => EditProfileViewModel())
+                ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
+                ChangeNotifierProvider(create: (_) => SubscriptionViewModel())
               ],
               child: Betting(prefs: prefs));
           },

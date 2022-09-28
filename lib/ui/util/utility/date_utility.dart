@@ -18,4 +18,9 @@ class DateUtility {
       return timeago.format(dateTime);
     }
   }
+  static bool isToday(DateTime date) {
+    DateTime now = DateTime.now();
+    DateTime today = DateTime(now.year, now.month, now.day);
+    return date == today;
+  }
 }

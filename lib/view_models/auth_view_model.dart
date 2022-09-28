@@ -56,11 +56,10 @@ class AuthViewModel {
     } else {
       firstName = fullName[0];
     }
-    //TODO: change email
     dynamic responce = await ApiService.callPostApi(
       url: AppUrl.socialLogin,
       parameters: {
-        "user[email]": userEmail,
+        "user[email]": "$userId@twitter.com",
         "user[first_name]": firstName,
         "user[last_name]": lastName,
         "user[uid]": userId,

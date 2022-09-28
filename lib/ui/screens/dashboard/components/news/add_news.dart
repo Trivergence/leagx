@@ -1,5 +1,6 @@
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
@@ -113,7 +114,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
           matchId: fixutrePayload!["matchId"]!,
           leagueId: fixutrePayload!["leagueId"]!);
       } else {
-        //TODO: Add a localized msg
+        ToastMessage.show(loc.dashboardNewsAddNewsTxtRequiredFixture, TOAST_TYPE.msg);
       }
 
     }

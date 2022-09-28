@@ -1,12 +1,15 @@
 {
 	"appName": "LeagX",
+	"today": "Today",
+
 	"loginTitle": "Login",
-  "onboardingTxtTitle1":"LOREM IPSUM DOLOR",
-  "onboardingTxtDesc1":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
-  "onboardingTxtTitle2":"LOREM IPSUM DOLOR",
-  "onboardingTxtDesc2":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
-  "onboardingTxtTitle3":"LOREM IPSUM DOLOR",
-  "onboardingTxtDesc3":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
+	"onboardingTxtTitle1":"LOREM IPSUM DOLOR",
+	"onboardingTxtDesc1":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
+	"onboardingTxtTitle2":"LOREM IPSUM DOLOR",
+	"onboardingTxtDesc2":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
+	"onboardingTxtTitle3":"LOREM IPSUM DOLOR",
+	"onboardingTxtDesc3":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
+
 	"adminHomeTxtAdmin": "Admin",
 	"adminHomeBtnToday": "today",
 	"adminHomeBtnWeekly": "weekly",
@@ -17,13 +20,16 @@
 	"adminHomeBtnFixtures": "Fixtures",
 	"adminHomeBtnAnnounce": "Announce",
 	"adminHomeBtnUsers": "Users",
+
 	"adminFixtureTxtFixtures": "Fixtures",
 	"adminFixtureTxtLeagues": "Leagues",
 	"adminFixtureTxtUpcomingMatches": "Upcoming Matches",
+
 	"adminAnnounceTxtAnnounce": "Announce",
 	"adminAnnounceTxtTitle": "Title",
 	"adminAnnounceTxtMessage": "Message",
 	"adminAnnounceBtnAnnounce": "Announce",
+
 	"adminFixtureDetailBtnCoins": "Coins",
 	"adminFixtureDetailBtnPredictions": "Predictions",
 	"adminFixtureDetailCoinTxtSelectCoinDesc": "Please select the coins that you want to distribute among winners, coins would be distributed in a way that the users with maximum prediction success rate would be earning more coins.",
@@ -31,8 +37,10 @@
 	"adminFixtureDetailCoinTxtCoins": "Coins",
 	"adminFixtureDetailCoinTxtPrimaryMatch": "Primary Match",
 	"adminFixtureDetailCoinBtnSave": "Save",
+
 	"authTxtRequired":"required",
 	"authTxtPasswordLength":"Password should be of atleast 6 characters",
+
 	"authSigninTxtSignin": "Sign In",
 	"authSigninTxtEmail": "Email",
 	"authSigninTxtRequired": "required",
@@ -46,6 +54,7 @@
 	"authSigninTxtLoggedin":"Logged In",
 	"authSigninTxtCancelledByUser":"Cancelled by user.",
 	"authSigninTxtNothingToProceed":"Nothing to proceed, result is null.",
+
 	"authSignupTxtSignup": "Signup",
 	"authSignupTxtName": "Name",
 	"authSignupTxtRequired": "required",
@@ -57,26 +66,34 @@
 	"authSignupBtnSignin": "Sign In",
 	"authSignupTxtSignedupSuccessfully":"Signed up successfully",
 	"authSignupTxtPasswordNotMatch":"Password doesn't match",
+
 	"authForgotPasswordTxtForgotPassword": "Forgot Password",
 	"authForgotPasswordTxtValidEmail":"Please enter valid email",
 	"authForgotPasswordTxtRequired":"required",
 	"authForgotPasswordTxtEnterEmailDesc": "Enter your email or phone number to retrieve your password.",
 	"authForgotPasswordTxtemailOrPhone": "Email or Phone Number",
 	"authForgotPasswordBtnResetPassword": "Reset Password",
+
 	"authResetPasswordTxtResetPassword": "Reset Password",
 	"authResetPasswordTxtCheckEmailDes": "Check your email or phone number to retrieve your password.",
 	"authResetPasswordTxtPassword": "Password",
 	"authResetPasswordTxtConfirmPassword": "Confirm Password",
 	"authResetPasswordBtnResetPassword": "Reset Password",
 	"authTxtDontHaveAccount": "Don't have an account? ",
+
 	"chooseAnExpertTxtChooseAnExpert": "Choose an Expert",
 	"chooseAnExpertTxtPredictions": "predictions",
 	"chooseAnExpertTxtSuccess": "Success",
+
 	"chooseLeagueTxtChooseALeague": "Choose a League",
 	"chooseLeagueTxtSearch": "Search",
 	"chooseLeagueBtnSubscribed": "Subscribed",
 	"chooseLeagueBtnSubscribe": "Subscribe",
+
 	"choosePlanTxtChooseAPlan": "Choose a Plan",
+	"chooseFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
+	"chooseFixtureTxtTitle": "Choose A Fixture",
+
 	"editChoosePlanTxtEditPlan": "Edit Plan",
 	"editChoosePlanTxtName": "Name",
 	"editChoosePlanTxtPlanName": "Plan Name",
@@ -86,20 +103,29 @@
 	"editChoosePlanTxt2Feature": "2-Feature",
 	"editChoosePlanTxt3Feature": "3-Feature",
 	"editChoosePlanBtnSave": "Save",
+
 	"dashboardBtnHome": "Home",
 	"dashboardBtnFixture": "Fixture",
 	"dashboardBtnLeader": "Leader",
 	"dashboardBtnNews": "News",
 	"dashboardBtnSetting": "Setting",
+
 	"dashboardFixtureTxtLeagues": "Leagues",
 	"dashboardFixtureTxtUpcomingMatches": "Upcoming Matches",
+	"dashboardFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
+
 	"dashboardHomeTxtLeaders": "Leaders",
 	"dashboardHomeTxtAnalytics": "Analytics",
 	"dashboardHomeTxtUpcomingMatches": "Upcoming Matches",
+	"dashboardHomeTxtViewAll": "View all matches",
+	"dashboardHomeTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
+
 	"dashboardLeaderTxtPredictions": "predictions",
 	"dashboardLeaderTxtWin": "Win",
 	"dashboardLeaderTxtSuccess": "Success",
+
 	"dashboardNewsTxtFeed": "FEED",
+	"dashboardNewsTxtEmptyList": "No news to show. Please make sure to subscribe at least one league",
 	"dashboardNewsTxtMyFeed": "MY FEED",
 	"dashboardNewsTxtApprovals": "APPROVALS",
 	"dashboardNewsAddNewsTxtAddNews": "Add News",
@@ -108,6 +134,9 @@
 	"dashboardNewsAddNewsTxtChooseFixture": "Choose a Fixture",
 	"dashboardNewsAddNewsTxtSearch": "Search",
 	"dashboardNewsAddNewsBtnSubmit": "Submit",
+	"dashboardNewsAddNewsTxtSuccess": "News added succesfully",
+	"dashboardNewsAddNewsTxtRequiredFixture": "Please choose a fixture to proceed forward",
+
 	"settingTxtProfile": "Profile",
 	"settingTxtGeneral": "GENERAL",
 	"settingTxtNotification": "Notification",
@@ -117,6 +146,7 @@
 	"settingChooseLanguageTxtChooseLanguage":"Choose Language",
 	"settingChooseLanguageTxtEnglish":"English",
 	"settingChooseLanguageTxtArabic":"Arabic",
+
 	"drawerBtnProfile": "Profile",
 	"drawerBtnMyPredictions": "My Predictions",
 	"drawerBtnFaqs": "FAQs",
@@ -124,8 +154,10 @@
 	"drawerBtnTermsOfServices": "Terms of Services",
 	"drawerBtnAdmin": "Admin",
 	"drawerBtnLogout": "Logout",
+
 	"faqsTxtFaqs": "FAQs",
 	"faqsTxtFrequentlyAskedQuestions": "Frequently Asked Questions",
+
 	"fixtureDetailsBtnMatch": "MATCH",
 	"fixtureDetailsBtnPlayers": "PLAYERS",
 	"fixtureDetailsBtnNews": "NEWS",
@@ -148,13 +180,18 @@
 	"fixtureDetailsMatchTxtYourPredictions": "Your Predictions",
 	"fixtureDetailsPlayersTxtTeamPlayers": "Team Players",
 	"fixtureDetailsPlayersBtnPredict": "Predict",
+	"fixtureDetailsNewsTxtEmptyList": "No news to show today",
+
 	"notificationTxtNotification": "Notification",
 	"onboardingBtnGetStarted": "Get Started",
+
 	"predictionSTxtPredictions": "Predictions",
 	"predictionSTxtPending": "Pending",
+
 	"privacyPolicyTxtPrivacyPolicy": "Privacy Poliicy",
 	"privacyPolicyBtnAgree": "Agree",
 	"privacyPolicyBtnDeny": "Deny",
+
 	"profileProfileSettingsTxtProfileSettings": "Profile Settings",
 	"profileProfileSettingsTxtCoins": "Coins",
 	"profileProfileSettingsTxtWithdraw": "Withdraw",
@@ -164,9 +201,11 @@
 	"profileProfileInfoMale": "Male",
 	"profileProfileInfoFemale": "Female",
 	"profileProfileInfoUpdateSuccesful": "Profile udpated successfully",
+
 	"termsOfServiceTxtTermsOfServices": "Terms of Services",
 	"termsOfServiceBtnAgree": "Agree",
 	"termsOfServiceBtnDeny": "Deny",
+	
 	"userTxtUsers": "Users",
 	"userTxtSearch": "Search",
 	"userBtnChangeRole": "Change Role",
@@ -176,5 +215,8 @@
 	"userBtnUser": "User",
 	"userBtnExpert": "Expert",
 	"userBtnAdmin": "Admin",
-	"liveWidgetTxtLive": "LIVE"
+	"liveWidgetTxtLive": "LIVE",
+
+	"errorTryAgain": "An error has occured. Try again later",
+	"errorCheckNetwork": "Please check your network connection and try again"
 }

@@ -1,8 +1,13 @@
 {
+	"appName": "LeagX",
+	"loginTitle": "تسجيل الدخول",
+	"today": "اليوم",
+
 	"adminAnnounceBtnAnnounce": "أعلن",
 	"adminAnnounceTxtAnnounce": "أعلن",
 	"adminAnnounceTxtMessage": "رسالة",
 	"adminAnnounceTxtTitle": "عنوان",
+
 	"adminFixtureDetailBtnCoins": "عملات معدنية",
 	"adminFixtureDetailBtnPredictions": "التوقعات",
 	"adminFixtureDetailCoinTxt1000": "1000",
@@ -11,6 +16,7 @@
 	"adminFixtureTxtFixtures": "تركيبات",
 	"adminFixtureTxtLeagues": "الدوريات",
 	"adminFixtureTxtUpcomingMatches": "المباريات القادمة",
+
 	"adminHomeBtnAnnounce": "أعلن",
 	"adminHomeBtnFixtures": "تركيبات",
 	"adminHomeBtnMonthly": "شهريا",
@@ -21,16 +27,18 @@
 	"adminHomeTxtPredictions": "التوقعات",
 	"adminHomeTxtPurchases": "المشتريات",
 	"adminHomeTxtWithdraw": "سحب",
-	"appName": "LeagX",
-	"loginTitle": "تسجيل الدخول",
+
+	
 	"onboardingTxtDesc1": "Donec finibus et lorem في تيمبوس. معرف Etiam ، في scelerisque dolor.",
 	"onboardingTxtDesc2": "Donec finibus et lorem في تيمبوس. معرف Etiam ، في scelerisque dolor.",
 	"onboardingTxtDesc3": "Donec finibus et lorem في تيمبوس. معرف Etiam ، في scelerisque dolor.",
 	"onboardingTxtTitle1": "لوريم ايبسوم دولور",
 	"onboardingTxtTitle2": "لوريم ايبسوم دولور",
 	"onboardingTxtTitle3": "لوريم ايبسوم دولور",
+
 	"adminFixtureDetailCoinBtnSave": "حفظ",
 	"adminFixtureDetailCoinTxtPrimaryMatch": "المباراة الأساسية",
+
 	"authTxtRequired":"مطلوب",
 	"authTxtPasswordLength":"يجب أن تكون كلمة المرور على الأقل 6",
 	"authForgotPasswordBtnResetPassword": "إعادة تعيين كلمة المرور",
@@ -39,11 +47,13 @@
 	"authForgotPasswordTxtemailOrPhone": "البريد الإلكتروني أو رقم الهاتف",
 	"authForgotPasswordTxtValidEmail":"الرجاء إدخال بريد إلكتروني صحيح",
 	"authForgotPasswordTxtRequired":"مطلوب",
+
 	"authResetPasswordBtnResetPassword": "إعادة تعيين كلمة المرور",
 	"authResetPasswordTxtCheckEmailDes": "تحقق من بريدك الإلكتروني أو رقم هاتفك لاسترداد كلمة المرور الخاصة بك.",
 	"authResetPasswordTxtConfirmPassword": "تأكيد كلمة المرور",
 	"authResetPasswordTxtPassword": "كلمه السر",
 	"authResetPasswordTxtResetPassword": "إعادة تعيين كلمة المرور",
+
 	"authSigninBtnForgotPassword": "هل نسيت كلمة المرور ؟",
 	"authSigninBtnSignin": "تسجيل الدخول",
 	"authSigninBtnSignup": "سجل",
@@ -57,6 +67,7 @@
 	"authSigninTxtLoggedin":"مسجّل الدخول",
 	"authSigninTxtCancelledByUser":"ألغى المستخدم.",
 	"authSigninTxtNothingToProceed":"لا شيء للمتابعة ، النتيجة خالية.",
+
 	"authSignupBtnSignin": "تسجيل الدخول",
 	"authSignupBtnSignup": "سجل",
 	"authSignupTxtConfirmPassword": "تأكيد كلمة المرور",
@@ -69,14 +80,20 @@
 	"authSignupTxtSignedupSuccessfully":"تم التسجيل بنجاح",
 	"authSignupTxtPasswordNotMatch":"كلمة المرور غير متطابقة",
 	"authTxtDontHaveAccount": "ليس لديك حساب؟",
+
 	"chooseAnExpertTxtChooseAnExpert": "اختر خبيرًا",
 	"chooseAnExpertTxtPredictions": "التوقعات",
 	"chooseAnExpertTxtSuccess": "نجاح",
+
 	"chooseLeagueBtnSubscribe": "الاشتراك",
 	"chooseLeagueBtnSubscribed": "مشترك",
 	"chooseLeagueTxtChooseALeague": "اختر الدوري",
 	"chooseLeagueTxtSearch": "بحث",
+
 	"choosePlanTxtChooseAPlan": "اختر خطة",
+	"chooseFixtureTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
+	"chooseFixtureTxtTitle": "اختر تركيبات",
+
 	"dashboardBtnFixture": "المباراة",
 	"dashboardBtnHome": "الصفحة الرئيسية",
 	"dashboardBtnLeader": "زعيم",
@@ -84,14 +101,22 @@
 	"dashboardBtnSetting": "ضبط",
 	"dashboardFixtureTxtLeagues": "الدوريات",
 	"dashboardFixtureTxtUpcomingMatches": "المباريات القادمة",
+	"dashboardFixtureTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
+
 	"dashboardHomeTxtAnalytics": "تحليلات",
 	"dashboardHomeTxtLeaders": "القادة",
 	"dashboardHomeTxtUpcomingMatches": "المباريات القادمة",
+	"dashboardHomeTxtViewAll": "عرض جميع المباريات",
+	"dashboardHomeTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
+
 	"dashboardLeaderTxtPredictions": "التوقعات",
 	"dashboardLeaderTxtSuccess": "نجاح",
 	"dashboardLeaderTxtWin": "يفوز",
+
 	"dashboardNewsTxtFeed": "تغذية",
+	"dashboardNewsTxtEmptyList": "لا توجد أخبار للعرض. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
 	"dashboardNewsTxtMyFeed": "تغذية بلدي",
+
 	"editChoosePlanBtnSave": "حفظ",
 	"editChoosePlanTxt1Feature": "1-الميزة",
 	"editChoosePlanTxt2Feature": "2-الميزة",
@@ -101,13 +126,17 @@
 	"editChoosePlanTxtName": "اسم",
 	"editChoosePlanTxtPlanName": "اسم الخطة",
 	"editChoosePlanTxtPrice": "السعر",
+
 	"dashboardNewsAddNewsBtnSubmit": "خضع",
 	"dashboardNewsAddNewsTxtAddNews": "أضف أخبار",
 	"dashboardNewsAddNewsTxtChooseFixture": "اختر تركيبات",
 	"dashboardNewsAddNewsTxtDetails": "تفاصيل",
 	"dashboardNewsAddNewsTxtSearch": "بحث",
 	"dashboardNewsAddNewsTxtTitle": "عنوان",
+	"dashboardNewsAddNewsTxtSuccess": "تمت إضافة الأخبار بنجاح",
+	"dashboardNewsAddNewsTxtRequiredFixture": "الرجاء اختيار لاعبا أساسيا للمضي قدما",
 	"dashboardNewsTxtApprovals": "الموافقات",
+
 	"drawerBtnAdmin": "مشرف",
 	"drawerBtnFaqs": "أسئلة وأجوبة",
 	"drawerBtnLogout": "الخروج",
@@ -115,8 +144,10 @@
 	"drawerBtnPrivacyPolicy": "سياسة خاصة",
 	"drawerBtnProfile": "الملف الشخصي",
 	"drawerBtnTermsOfServices": "شروط الخدمة",
+
 	"faqsTxtFaqs": "أسئلة وأجوبة",
 	"faqsTxtFrequentlyAskedQuestions": "أسئلة مكررة",
+
 	"fixtureDetailsBtnExpertAdvise": "مشورة الخبراء",
 	"fixtureDetailsBtnMatch": "مباراة",
 	"fixtureDetailsBtnNews": "أخبار",
@@ -125,6 +156,7 @@
 	"fixtureDetailsMatchTxtRealTImeMatchPreview": "معاينة المباراة في الوقت الحقيقي",
 	"fixtureDetailsTxtMakeMyPredictPublic": "اجعل توقعاتي عامة",
 	"fixtureDetailsTxtPredictMatchResult": "توقع نتيجة المباراة",
+
 	"settingTxtAdmin": "مشرف",
 	"settingTxtGeneral": "جنرال لواء",
 	"settingTxtLanguage": "لغة",
@@ -134,6 +166,7 @@
 	"settingChooseLanguageTxtChooseLanguage":"اختر اللغة",
 	"settingChooseLanguageTxtEnglish":"إنجليزي",
 	"settingChooseLanguageTxtArabic":"عربي",
+
 	"fixtureDetailsMatchBtnPredict": "يتنبأ",
 	"fixtureDetailsMatchTxtAttacks": "الهجمات",
 	"fixtureDetailsMatchTxtCorners": "زوايا",
@@ -147,15 +180,19 @@
 	"fixtureDetailsMatchTxtYellowCards": "البطاقات الصفراء",
 	"fixtureDetailsMatchTxtYourPredictions": "توقعاتك",
 	"fixtureDetailsPlayersBtnPredict": "يتنبأ",
+	"fixtureDetailsNewsTxtEmptyList": "لا توجد أخبار لتظهر اليوم",
 	"fixtureDetailsPlayersTxtTeamPlayers": "لاعبو الفريق",
+
 	"notificationTxtNotification": "إعلام",
 	"onboardingBtnGetStarted": "البدء",
 	"predictionSTxtPending": "قيد الانتظار",
 	"predictionSTxtPredictions": "التوقعات",
+
 	"privacyPolicyBtnAgree": "يوافق على",
 	"privacyPolicyBtnDeny": "أنكر",
 	"privacyPolicyTxtPrivacyPolicy": "سياسة الخصوصية",
 	"profileProfileInfoUpdateBtnSave": "حفظ",
+
 	"profileProfileInfoUpdateTxtEditProfile": "تعديل الملف الشخصي",
 	"profileProfileSettingsTxtCoins": "عملات معدنية",
 	"profileProfileSettingsTxtProfileSettings": "إعدادات الملف الشخصي",
@@ -164,11 +201,14 @@
 	"profileProfileInfoMale": "ذكر",
 	"profileProfileInfoFemale": "أنثى",
 	"profileProfileInfoUpdateSuccesful": "الملف الشخصي تمت مراجعته بنجاح",
+
 	"termsOfServiceBtnAgree": "يوافق على",
 	"termsOfServiceBtnDeny": "أنكر",
 	"termsOfServiceTxtTermsOfServices": "شروط الخدمة",
+
 	"userTxtUsers": "المستخدمين",
 	"liveWidgetTxtLive": "حي",
+
 	"userBtnAdmin": "مشرف",
 	"userBtnBlockUser": "مستخدم محضور",
 	"userBtnChangeRole": "تغيير الدور",
@@ -176,5 +216,8 @@
 	"userBtnInviteAUser": "قم بدعوة مستخدم",
 	"userBtnUser": "المستعمل",
 	"userTxtSearch": "بحث",
-	"userTxtUserRoleSetting": "إعداد دور المستخدم"
+	"userTxtUserRoleSetting": "إعداد دور المستخدم",
+	
+	"errorTryAgain": "حدث خطأ. حاول مرة أخرى في وقت لاحق",
+	"errorCheckNetwork": "يرجى التحقق من اتصال الشبكة الخاص بك وحاول مرة أخرى"
 }

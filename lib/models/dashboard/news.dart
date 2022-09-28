@@ -2,7 +2,6 @@
 //
 //     final news = newsFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import '../user/user.dart';
