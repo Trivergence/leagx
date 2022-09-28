@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 
 import '../../constants/dimens.dart';
 
+// ignore: must_be_immutable
 class DropDownFormWidget extends StatelessWidget {
-  final String defaultGender;
+  final String? defaultGender;
   final ValueChanged onChanged;
+  final String? Function(String?)? validator;
 
-  const DropDownFormWidget({ Key? key, required this.defaultGender, required this.onChanged }) : super(key: key);
+  DropDownFormWidget({ Key? key, required this.defaultGender, required this.onChanged, this.validator }) : super(key: key);
+  late Map<String,String> listOfGender;
 
   @override
   Widget build(BuildContext context) {
+    listOfGender = {
+      "male": loc.profileProfileInfoMale,
+      "female": loc.profileProfileInfoFemale,
+    };
     return DropdownButtonFormField<String>(
           iconEnabledColor: AppColors.colorWhite,
           iconDisabledColor: AppColors.colorWhite,
@@ -30,23 +38,28 @@ class DropDownFormWidget extends StatelessWidget {
           focusedBorder: focusedBorder,
           errorBorder: errorBorder,
           errorMaxLines: 3,
+          hintText: loc.profileProfileInfoHintGender,
+          hintStyle: const TextStyle(color: AppColors.colorWhite, fontSize: Dimens.textRegular, fontWeight: FontWeight.normal),
           prefixIcon: Container(
           width: Dimens.textFieldPrefixWidth,
           padding: const EdgeInsets.only(left: 10.0),
           alignment: Alignment.centerLeft,
           child: const Icon(Icons.perm_contact_cal, color: AppColors.colorWhite, size: 25,),
         ),
+        //TODO localization
           focusedErrorBorder: focusedErrorBorder,),
-            items: <String>[
-              'Male',
-              'Female'
-            ]
-                .map((String value) => DropdownMenuItem<String>(
-                      value: value,
-                      child: TextWidget(text: value)
-                    ))
-                .toList(),
+            items: [
+              DropdownMenuItem<String>(
+                      value: "male",
+                      child: TextWidget(text: listOfGender["male"]!)
+                    ),
+              DropdownMenuItem<String>(
+                      value: "female",
+                      child: TextWidget(text: listOfGender["female"]!)
+                    )
+            ],
             onChanged: onChanged,
+            validator: validator,
             value: defaultGender,
           );
   }

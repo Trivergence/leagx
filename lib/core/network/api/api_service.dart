@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
@@ -147,12 +148,14 @@ class ApiService {
       var dio = Dio(options);
       var connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult != ConnectivityResult.none) {
+        
         Response _response = await dio.put(
           url,
           options: Options(headers: headers),
           data: body,
           queryParameters: parameters,
         );
+        dio.interceptors.add(PrettyDioLogger());
         print('put response: ${_response.data}');
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           dynamic modelObj =
