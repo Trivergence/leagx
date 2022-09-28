@@ -2,11 +2,13 @@ import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/font_family.dart';
-import 'package:leagx/constants/strings.dart';
+import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
@@ -15,11 +17,30 @@ import 'package:leagx/ui/widgets/settings_tile.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
-class ProfileSettingsScreen extends StatelessWidget {
-  const ProfileSettingsScreen({Key? key}) : super(key: key);
+import '../../../models/update_profile_args.dart';
+import '../../../models/user/user.dart';
+
+class ProfileSettingsScreen extends StatefulWidget {
+  ProfileSettingsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileSettingsScreen> createState() => _ProfileSettingsScreenState();
+}
+
+class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
+  late String userName;
+
+  late String imagUrl;
+
+  late String userEmail;
+
+  late String phone;
+
+  late String gender;
 
   @override
   Widget build(BuildContext context) {
+    getUserData();
     return Scaffold(
       appBar: AppBarWidget(
         title: loc.profileProfileSettingsTxtProfileSettings,
@@ -27,8 +48,16 @@ class ProfileSettingsScreen extends StatelessWidget {
           icon: const IconWidget(
             iconData: Icons.border_color_outlined,
           ),
-          onPressed: () {
-            Navigator.pushNamed(context, Routes.profileInfoUpdate);
+          onPressed: () async {
+            Navigator.pushNamed(context, Routes.profileInfoUpdate,
+            arguments: UpdateProfileArgs(imgUrl: imagUrl,
+            userName: userName, 
+            userEmail: userEmail,
+            phone: phone, 
+            gender: gender)).then((_) {
+              setState(() {
+              });
+            });
           },
         )],
       ),
@@ -66,7 +95,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                       children: [
                         UIHelper.verticalSpace(50.0),
                         TextWidget(
-                          text: 'Dylan Dybala',
+                          text: userName,
                           fontWeight: FontWeight.w600,
                           textSize: 18.0,
                           fontFamily: FontFamily.raleway,
@@ -105,7 +134,7 @@ class ProfileSettingsScreen extends StatelessWidget {
                     child: GradientBorderWidget(
                       onPressed: () {},
                       gradient: AppColors.orangishGradient,
-                      imageUrl: Strings().placeHolderUrl,
+                      imageUrl: imagUrl,
                       height: 80.0,
                       width: 80.0,
                       isCircular: true,
@@ -115,25 +144,25 @@ class ProfileSettingsScreen extends StatelessWidget {
               ),
               UIHelper.verticalSpace(30.0),
               SettingsTile(
-                text: 'John Smith',
+                text: userName,
                 iconData: Icons.account_circle_outlined,
                 onTap: () {},
               ),
               UIHelper.verticalSpace(15.0),
               SettingsTile(
-                text: 'abc@xyz.com',
+                text: userEmail,
                 iconData: Icons.drafts_outlined,
                 onTap: () {},
               ),
               UIHelper.verticalSpace(15.0),
-              SettingsTile(
-                text: '+1234567890',
+              if(phone.isNotEmpty) SettingsTile(
+                text: phone,
                 iconData: Icons.smartphone,
                 onTap: () {},
               ),
               UIHelper.verticalSpace(15.0),
-              SettingsTile(
-                text: 'Male',
+              if(gender.isNotEmpty) SettingsTile(
+                text: StringUtility.capitalizeFirstLetter(gender),
                 iconData: Icons.perm_contact_cal,
                 onTap: () {},
               ),
@@ -142,5 +171,14 @@ class ProfileSettingsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void getUserData() {
+    User? user = locator<SharedPreferenceHelper>().getUser();
+    userName = user!.firstName!;
+    imagUrl = user.profileImg!;
+    userEmail = user.email;
+    phone = user.phone ?? '';
+    gender = user.gender ?? '';
   }
 }

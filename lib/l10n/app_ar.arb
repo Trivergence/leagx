@@ -197,6 +197,10 @@
 	"profileProfileSettingsTxtCoins": "عملات معدنية",
 	"profileProfileSettingsTxtProfileSettings": "إعدادات الملف الشخصي",
 	"profileProfileSettingsTxtWithdraw": "سحب",
+	"profileProfileInfoHintGender": "جنس",
+	"profileProfileInfoMale": "ذكر",
+	"profileProfileInfoFemale": "أنثى",
+	"profileProfileInfoUpdateSuccesful": "الملف الشخصي تمت مراجعته بنجاح",
 
 	"termsOfServiceBtnAgree": "يوافق على",
 	"termsOfServiceBtnDeny": "أنكر",

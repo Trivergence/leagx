@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leagx/view_models/subscription_viewmodel.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:leagx/view_models/edit_profile_viewmodel.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +35,7 @@ void main() async {
                 ChangeNotifierProvider<LocalizationProvider>(create: (_) => LocalizationProvider(preferences: prefs)),
                 ChangeNotifierProvider(create: (_) => DashBoardViewModel()),
                 ChangeNotifierProvider(create: (_) => FixtureDetailViewModel()),
+                ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
                 ChangeNotifierProvider(create: (_) => SubscriptionViewModel())
               ],
               child: Betting(prefs: prefs));

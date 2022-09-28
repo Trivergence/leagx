@@ -1,5 +1,6 @@
 import 'package:leagx/models/choose_plan_args.dart';
 import 'package:leagx/models/match_args.dart';
+import 'package:leagx/models/update_profile_args.dart';
 import 'package:leagx/ui/screens/admin/admin_announce.dart';
 import 'package:leagx/ui/screens/admin/admin_fixture.dart';
 import 'package:leagx/ui/screens/admin/admin_fixture_detail/admin_fixture_detail.dart';
@@ -111,9 +112,9 @@ class Routes {
         return generateRoute(routeSettings.name!, SettingScreen());
       case profileSettings:
         return generateRoute(
-            routeSettings.name!, const ProfileSettingsScreen());
+            routeSettings.name!, ProfileSettingsScreen());
       case profileInfoUpdate:
-        return generateRoute(routeSettings.name!, ProfileInfoUpdateScreen());
+        return generateRoute(routeSettings.name!, ProfileInfoUpdateScreen(payload: routeSettings.arguments as UpdateProfileArgs,));
       case admin:
         return generateRoute(routeSettings.name!, AdminHomeScreen());
       case privacyPolicy:
