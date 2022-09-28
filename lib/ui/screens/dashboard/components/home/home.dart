@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    upcomingMatches = context.read<DashBoardViewModel>().upcomingMatches;
+    upcomingMatches = context.read<DashBoardViewModel>().subscribedMatches;
     listOfLeaders = context.read<DashBoardViewModel>().getLeaders;
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -75,11 +75,11 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const AnalyticsWidget(
                   firstLabel: 'Predictions',
-                  firstValue: '5.5',
+                  firstValue: '0.0',
                   secondLabel: 'Winning Ratio',
-                  secondValue: '70.1',
+                  secondValue: '0.0',
                   thirdLabel: 'Earned Coin',
-                  thirdValue: '400',
+                  thirdValue: '0',
                 ),
                  TextWidget(
                   text: loc.dashboardHomeTxtUpcomingMatches,
@@ -94,6 +94,7 @@ class HomeScreen extends StatelessWidget {
                         teamOneName: upcomingMatches[i].matchHometeamName,
                         teamTwoFlag: upcomingMatches[i].teamAwayBadge,
                         teamTwoName: upcomingMatches[i].matchAwayteamName,
+                        scheduledDate: upcomingMatches[i].matchDate,
                         scheduledTime: upcomingMatches[i].matchTime,
                         onTap: () => Navigator.pushNamed(context,
                           Routes.fixtureDetails,
@@ -103,12 +104,11 @@ class HomeScreen extends StatelessWidget {
                            )),
                       ),
                   ],
-                ) : const PlaceHolderTile(height: 80, msgText: "No upcoming match available"),
+                ) : PlaceHolderTile(height: 80, msgText: loc.dashboardHomeTxtEmptyList),
                 if(upcomingMatches.length > 3) InkWell(
                   onTap: () => Navigator.of(context).pushNamed(Routes.upcomingMatches),
-                  child: const PlaceHolderTile(height: 40, msgText: "View All Matches",),
+                  child: PlaceHolderTile(height: 40, msgText: loc.dashboardHomeTxtViewAll,),
                 )
-                
               ],
             ),
           ),

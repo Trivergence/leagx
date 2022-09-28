@@ -23,14 +23,14 @@ class ProfileSettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBarWidget(
         title: loc.profileProfileSettingsTxtProfileSettings,
-        trailing: IconButton(
+        trailing: [IconButton(
           icon: const IconWidget(
             iconData: Icons.border_color_outlined,
           ),
           onPressed: () {
             Navigator.pushNamed(context, Routes.profileInfoUpdate);
           },
-        ),
+        )],
       ),
       body: SingleChildScrollView(
         child: Container(

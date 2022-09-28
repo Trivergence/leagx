@@ -1,7 +1,9 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/util/utility/date_utility.dart';
 import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/widgets/score_chip.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
@@ -21,6 +23,7 @@ class FixtureWidget extends StatelessWidget {
   final String teamTwoName;
   final String? teamTwoScore;
   final String? scheduledTime;
+  final DateTime scheduledDate;
   final String? liveTime;
   final String? matchStatus;
   final bool isLive;
@@ -39,11 +42,12 @@ class FixtureWidget extends StatelessWidget {
     this.liveTime,
     this.isLive = false,
     this.withText = true,
-    this.onTap, this.matchStatus,
+    this.onTap, this.matchStatus, required this.scheduledDate,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool isToday = DateUtility.isToday(scheduledDate);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -72,8 +76,9 @@ class FixtureWidget extends StatelessWidget {
                                 const GradientWidget(
                                     child: Icon(Icons.access_time_outlined)),
                                 UIHelper.horizontalSpace(4.0),
+                                //TODO localization
                                 TextWidget(
-                                    text: "Today, " + scheduledTime!,
+                                    text: isToday ? "${loc.today}, " + scheduledTime! : DateUtility.getUiFormat(scheduledDate),
                                     textSize: Dimens.textSmall),
                               ],
                             )

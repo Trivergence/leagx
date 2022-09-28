@@ -8,6 +8,7 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/dashboard/fixture.dart';
+import '../../widgets/placeholder_tile.dart';
 
 class ChooseFixtureScreen extends StatefulWidget {
   const ChooseFixtureScreen({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
     availableMatches = getMatches(context);
     return Scaffold(
         appBar: AppBarWidget(
-          title: "Choose A Fixture",
+          title: loc.chooseFixtureTxtTitle,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
@@ -45,7 +46,7 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                   ),
                 ),
                 UIHelper.verticalSpace(30),
-                Expanded(
+                availableMatches.isNotEmpty ? Expanded(
                   child: ListView.builder(
                       itemCount: isFiltering ? filteredList.length : availableMatches.length,
                       shrinkWrap: true,
@@ -59,6 +60,10 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                           homeTeamName: match.matchHometeamName);
                       }),
                 )
+                : Center(child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal :8.0, vertical: 100),
+                  child: PlaceHolderTile(height: 80, msgText: loc.chooseFixtureTxtEmptyList),
+                )),
               ],
             )
         ));

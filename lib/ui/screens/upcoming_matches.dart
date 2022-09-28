@@ -14,7 +14,7 @@ class UpcomingMatches extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
-    upcomingMatches = dashBoardViewModel.upcomingMatches;
+    upcomingMatches = dashBoardViewModel.subscribedMatches;
     return Scaffold(
       appBar: AppBarWidget(title: "Upcoming Matches"),
       body: Padding(
@@ -31,6 +31,7 @@ class UpcomingMatches extends StatelessWidget {
             teamTwoFlag: match.teamAwayBadge,
             teamTwoName: match.matchAwayteamName,
             scheduledTime: match.matchTime,
+            scheduledDate: match.matchDate,
             isLive: match.matchLive == "1",
             matchStatus: match.matchStatus,
             teamOneScore: match.matchHometeamScore,
