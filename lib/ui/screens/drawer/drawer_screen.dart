@@ -52,9 +52,7 @@ class DrawerScreen extends StatelessWidget {
           DrawerTile(
             icon: Icons.account_circle_outlined,
             title: loc.drawerBtnProfile,
-            onTap: () {
-              Navigator.pushNamed(context, Routes.profileSettings);
-            },
+            onTap: () => Navigator.popAndPushNamed(context, Routes.profileSettings),
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerPredictions,

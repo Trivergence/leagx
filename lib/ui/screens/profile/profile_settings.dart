@@ -106,7 +106,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         GradientBorderWidget(
                           onPressed: () {},
                           gradient: AppColors.pinkishGradient,
-                          text: '930',
+                          text: '0',
                           height: 60.0,
                           width: 60.0,
                           isCircular: true,

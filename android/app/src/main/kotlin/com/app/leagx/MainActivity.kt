@@ -1,4 +1,4 @@
-package com.app.leagx
+package dev.app.leagx
 
 import io.flutter.embedding.android.FlutterActivity
 

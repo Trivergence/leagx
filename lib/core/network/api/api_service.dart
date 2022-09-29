@@ -239,7 +239,7 @@ class ApiService {
     }
   }
 
-  static Future<dynamic> getListRequest({
+  static Future<List<dynamic>> getListRequest({
     required String baseUrl,
     String url = "",
     Map<String, dynamic>? parameters,
