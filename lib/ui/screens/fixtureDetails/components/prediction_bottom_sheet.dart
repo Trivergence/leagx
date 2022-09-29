@@ -133,6 +133,8 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
       leagueId: leagueId!,
       homeScore: homeScore,
       awayScore: awayScore,
+      awayTeamLogo: widget.matchDetails!.teamAwayBadge,
+      homeTeamLogo: widget.matchDetails!.teamHomeBadge,
       expertId: expertId,
       awayTeamName: widget.matchDetails!.matchAwayteamName,
       homeTeamName: widget.matchDetails!.matchHometeamName,

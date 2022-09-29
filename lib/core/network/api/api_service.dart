@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:leagx/constants/app_constants.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/core/network/api/api_models.dart';
@@ -284,17 +285,12 @@ class ApiService {
         return [];
       }
       return [];
-    } 
-    on Exception {
-      Loader.hideLoader();
+    } catch (e) {
+      debugPrint(e.toString());
       ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
+      Loader.hideLoader();
       return [];
-    } 
-    // catch (e) {
-    //   print(e.toString());
-    //   Loader.hideLoader();
-    //   return [];
-    // }
+    }
     return [];
   }
   static Future<bool> postWoResponce({

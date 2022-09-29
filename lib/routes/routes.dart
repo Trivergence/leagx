@@ -105,7 +105,7 @@ class Routes {
       case home:
         return generateRoute(routeSettings.name!, HomeScreen());
       case predictions:
-        return generateRoute(routeSettings.name!, const PredicitonsScreen());
+        return generateRoute(routeSettings.name!, PredicitonsScreen());
       case dashboard:
         return generateRoute(routeSettings.name!, DashBoardScreen());
       case setting:

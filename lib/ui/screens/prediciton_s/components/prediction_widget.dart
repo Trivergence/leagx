@@ -2,6 +2,7 @@ import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
@@ -48,10 +49,10 @@ class PredictionWidget extends StatelessWidget {
                       Row(
                         children: [
                           ImageWidget(
-                            imageAsset: teamOneFlag,
+                            imageUrl: teamOneFlag,
                             placeholder: Assets.ufcFlag,
                           ),
-                          TextWidget(text: teamOneName),
+                          TextWidget(text: StringUtility.getShortName(teamOneName)),
                         ],
                       ),
                       Container(
@@ -78,10 +79,10 @@ class PredictionWidget extends StatelessWidget {
                       Row(
                         children: [
                           ImageWidget(
-                            imageAsset: teamTwoFlag,
+                            imageUrl: teamTwoFlag,
                             placeholder: Assets.arsFlag,
                           ),
-                          TextWidget(text: teamTwoName),
+                          TextWidget(text: StringUtility.getShortName(teamTwoName)),
                         ],
                       ),
                     ],

@@ -1,4 +1,5 @@
 import 'package:leagx/models/dashboard/fixture.dart';
+import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,10 @@ import 'components/offline_match_widget.dart';
 
 class MatchView extends StatelessWidget {
   final Fixture matchDetails;
+  final Prediction? prediction;
 
   const MatchView({
-    Key? key, required this.matchDetails,
+    Key? key, required this.matchDetails, required this.prediction,
   }) : super(key: key);
 
   @override
@@ -81,7 +83,9 @@ class MatchView extends StatelessWidget {
               height: SizeConfig.height * 7,
               title: loc.faqsTxtFrequentlyAskedQuestions,
             ),
-            matchDetails.matchLive == "1" ? LiveMatchWidget(matchDetails: matchDetails,) : OfflineMatchWidget(matchDetails: matchDetails)
+            matchDetails.matchLive == "1" 
+            ? LiveMatchWidget(matchDetails: matchDetails, prediction: prediction,) 
+            : OfflineMatchWidget(matchDetails: matchDetails, prediction: prediction,)
           ],
         ),
       ),

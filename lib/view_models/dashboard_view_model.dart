@@ -34,7 +34,6 @@ class DashBoardViewModel extends BaseModel {
     setBusy(true);
     try {
       await getSubscribedLeagues();
-      //await getUpcomingMatches();
       await getAllLeaders();
       if(subscribedLeagues.isNotEmpty) {
         await getAllNews();

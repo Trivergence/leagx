@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
+import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/players.dart';
+import 'package:leagx/models/prediction.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 
 import '../constants/app_constants.dart';
 import '../constants/colors.dart';
@@ -19,10 +22,12 @@ class FixtureDetailViewModel extends BaseModel {
   List<Fixture> _matchDetails = [];
   List<Player> _awayTeamPlayers = [];
   List<Player> _homeTeamPlayers = [];
+  List<Prediction> _predictions = [];
 
   List<Fixture> get matchDetails => _matchDetails;
   List<Player> get awayTeamPlayers => _awayTeamPlayers;
   List<Player> get homeTeamPlayers => _homeTeamPlayers;
+  List<Prediction> get getPredictions => _predictions;
 
   Future<void> getData({required String matchId}) async {
     setBusy(true);
@@ -66,6 +71,8 @@ class FixtureDetailViewModel extends BaseModel {
   required BuildContext context,
   required String homeTeamName,
   required String awayTeamName,
+  required String homeTeamLogo,
+  required String awayTeamLogo,
   required int matchId,
   required int leagueId,
   required int homeScore,
@@ -78,6 +85,8 @@ class FixtureDetailViewModel extends BaseModel {
       "match":{
           "first_team_name": homeTeamName,
           "second_team_name": awayTeamName,
+          "first_team_logo": homeTeamLogo,
+          "second_team_logo": awayTeamLogo,
           "external_match_id": matchId,
           "league_id": leagueId
       },
@@ -94,11 +103,28 @@ class FixtureDetailViewModel extends BaseModel {
       url: AppUrl.makePrediction,
       body: body);
     if(success) {
+      await getUserPredictions();
+      ToastMessage.show("Prediction submitted successfully", TOAST_TYPE.success);
       Navigator.of(context).pop();
       Loader.hideLoader();
     } else {
       Loader.hideLoader();
     }
+  }
+
+  Future<void> getUserPredictions() async {
+    User? user = preferenceHelper.getUser();
+    if(user != null) {
+      String completeUrl = AppUrl.getUser + user.id.toString() + AppUrl.getPredictions;
+      List<dynamic> tempList = await ApiService.getListRequest(
+        url: completeUrl,
+        baseUrl: AppUrl.baseUrl,
+        modelName: ApiModels.getPredictions);
+      _predictions = tempList.cast<Prediction>();
+      notifyListeners();
+      } else {
+        _predictions = [];
+      }
   }
 
   getHomeTeamPlayers(String matchHometeamId) async {
@@ -144,5 +170,14 @@ class FixtureDetailViewModel extends BaseModel {
               matchDetails: matchDeta,
             );
         });
+  }
+  Prediction? getMatchPrediction({required String matchId}) {
+    List<Prediction> userPredictions = _predictions
+    .where((prediction) => prediction.externalMatchId == int.parse(matchId))
+    .toList();
+    if(userPredictions.isNotEmpty) {
+      return userPredictions[0];
+    }
+    return null;
   }
 }

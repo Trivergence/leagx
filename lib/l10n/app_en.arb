@@ -181,12 +181,15 @@
 	"fixtureDetailsPlayersTxtTeamPlayers": "Team Players",
 	"fixtureDetailsPlayersBtnPredict": "Predict",
 	"fixtureDetailsNewsTxtEmptyList": "No news to show today",
+	"fixtureDetailsPredictionSuccess": "Prediction submitted successfully",
 
 	"notificationTxtNotification": "Notification",
 	"onboardingBtnGetStarted": "Get Started",
 
 	"predictionSTxtPredictions": "Predictions",
 	"predictionSTxtPending": "Pending",
+	"predictionSTxtEmptyList": "No prediction has been submitted yet",
+
 
 	"privacyPolicyTxtPrivacyPolicy": "Privacy Poliicy",
 	"privacyPolicyBtnAgree": "Agree",
