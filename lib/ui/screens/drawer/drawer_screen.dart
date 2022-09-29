@@ -125,7 +125,7 @@ class DrawerScreen extends StatelessWidget {
   String getUserName() {
     User? user = locator<SharedPreferenceHelper>().getUser();
     if(user != null) {
-      return user.firstName! + user.lastName!;
+      return user.firstName!;
     } else {
       return "";
     }

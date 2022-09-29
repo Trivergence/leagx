@@ -25,7 +25,7 @@ class NewsView extends StatelessWidget {
             News newsItem = leagueNews[index];
             return NewsTile(
               imageUrl: newsItem.user.profileImg,
-              postedBy: newsItem.user.firstName! + newsItem.user.lastName!,
+              postedBy: newsItem.user.firstName!,
               when: newsItem.createdAt,
               desc: newsItem.description,
             );

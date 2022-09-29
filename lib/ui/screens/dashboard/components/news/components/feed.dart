@@ -27,7 +27,7 @@ class Feed extends StatelessWidget {
             News news = listOfNews[index];
             return NewsTile(
               imageUrl: news.user.profileImg,
-              postedBy: news.user.firstName! + news.user.lastName!,
+              postedBy: news.user.firstName!,
               when: news.createdAt,
               desc: news.description
             );
