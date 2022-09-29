@@ -182,11 +182,14 @@
 	"fixtureDetailsPlayersBtnPredict": "يتنبأ",
 	"fixtureDetailsNewsTxtEmptyList": "لا توجد أخبار لتظهر اليوم",
 	"fixtureDetailsPlayersTxtTeamPlayers": "لاعبو الفريق",
+	"fixtureDetailsPredictionSuccess": "تم إرسال التنبؤ بنجاح",
 
 	"notificationTxtNotification": "إعلام",
 	"onboardingBtnGetStarted": "البدء",
+
 	"predictionSTxtPending": "قيد الانتظار",
 	"predictionSTxtPredictions": "التوقعات",
+	"predictionSTxtEmptyList": "لم يتم تقديم أي توقع حتى الآن",
 
 	"privacyPolicyBtnAgree": "يوافق على",
 	"privacyPolicyBtnDeny": "أنكر",

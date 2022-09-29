@@ -1,8 +1,10 @@
 import 'package:leagx/models/dashboard/fixture.dart';
+import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +16,10 @@ import '../../components/detail_tile.dart';
 import '../../components/match_prediction_tile.dart';
 
 class LiveMatchWidget extends StatelessWidget {
-  final Fixture matchDetails; 
+  final Fixture matchDetails;
+  final Prediction? prediction;
   LiveMatchWidget({
-    Key? key, required this.matchDetails,
+    Key? key, required this.matchDetails, required this.prediction,
   }) : super(key: key);
 
   BuildContext? _context;
@@ -47,8 +50,13 @@ class LiveMatchWidget extends StatelessWidget {
               ),
           ],
         ),
-        const MatchPredictionTile(),
-        SizedBox(
+        if(ValidationUtils.isValid(prediction)) MatchPredictionTile(
+          homeTeamName: prediction!.match.firstTeamName,
+          awayTeamName: prediction!.match.secondTeamName,
+          homeScore: prediction!.firstTeamScore ?? 0,
+          awayScore: prediction!.secondTeamScore ?? 0,
+        ),
+        if (!ValidationUtils.isValid(prediction)) SizedBox(
             width: SizeConfig.width * 90,
             child: MainButton(text: loc.fixtureDetailsMatchBtnPredict, onPressed: _showSheet)),
         UIHelper.verticalSpaceMedium
@@ -58,14 +66,5 @@ class LiveMatchWidget extends StatelessWidget {
 
   void _showSheet() {
     _context!.read<FixtureDetailViewModel>().showPredictionSheet(_context!, matchDetails);
-    // showModalBottomSheet(
-    //     context: _context!,
-    //     backgroundColor: AppColors.colorBackground,
-    //     builder: (context) {
-    //       return PredictionSheetWidget(
-    //           matchDetails: matchDetails,
-    //           onSubmit: (context) =>
-    //               Navigator.pushNamed(context, Routes.chooseAnExpert));
-    //     });
   }
 }

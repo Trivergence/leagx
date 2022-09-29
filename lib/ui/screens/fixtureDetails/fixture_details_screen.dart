@@ -2,6 +2,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/match_args.dart';
+import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/screens/fixtureDetails/news/news_view.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -33,6 +34,7 @@ class _FixtureDetailsState extends State<FixtureDetails> {
     TabBarItemModel(loc.fixtureDetailsBtnNews, 2)
   ];
   int index = 0;
+  Prediction? userPrediction;
   @override
   Widget build(BuildContext context) {
     return BaseWidget<FixtureDetailViewModel>(
@@ -44,20 +46,21 @@ class _FixtureDetailsState extends State<FixtureDetails> {
           });
         },
         builder: (context, FixtureDetailViewModel fixtureModel, _) {
+          userPrediction = fixtureModel.getMatchPrediction(matchId: widget.matchData.matchId);
           return RefreshIndicator(
             backgroundColor: AppColors.textFieldColor,
             onRefresh: () => fixtureModel.refreshData(matchId: widget.matchData.matchId),
             child: Scaffold(
-            appBar: AppBarWidget(
+            appBar:  fixtureModel.matchDetails.isNotEmpty ?AppBarWidget(
               title: widget.matchData.leagueName,
               trailing: [Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: DotWidget(
                   size: 22,
-                  isLive: widget.matchData.liveStatus,
+                  isLive: fixtureModel.matchDetails.isEmpty ? false : fixtureModel.matchDetails[0].matchLive == "1",
                 ),
               )],
-            ),
+            ) : null,
             body: !fixtureModel.busy && fixtureModel.matchDetails.isNotEmpty ? Column(
               children: [
                 TabBarWidget(
@@ -71,9 +74,11 @@ class _FixtureDetailsState extends State<FixtureDetails> {
                     }),
                 index == 0
                     ? MatchView(
+                      prediction: userPrediction,
                       matchDetails: fixtureModel.matchDetails.first,)
                     : index == 1
                         ? PlayersView(
+                            prediction: userPrediction,
                             matchDetails: fixtureModel.matchDetails.first,
                           )
                         : index == 2
@@ -85,4 +90,5 @@ class _FixtureDetailsState extends State<FixtureDetails> {
           );
         },);
   }
+
 }

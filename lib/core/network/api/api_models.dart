@@ -4,6 +4,7 @@ import 'package:leagx/models/dashboard/league.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/models/leader.dart';
 import 'package:leagx/models/players.dart';
+import 'package:leagx/models/prediction.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/models/user/userdata.dart';
 
@@ -21,6 +22,7 @@ class ApiModels {
   static const String getTeams = "GET_TEAM";
   static const String getPlans = "GET_PLANS";
   static const String getLeaders = "GET_LEADERS";
+  static const String getPredictions = "GET_PREDICTIONS";
   static const String getSubscribedLeagues = "GET_SUBSCRIBED_LEAGUE";
   static const String userData = "USERDATA";
   static dynamic getModelObjects(String modelName, dynamic json) {
@@ -51,6 +53,8 @@ class ApiModels {
         return leaderFromJson(json);
       case getSubscribedLeagues:
         return subscribedLeagueFromJson(json);
+      case getPredictions:
+        return predictionFromJson(json);
     }
   }
 }

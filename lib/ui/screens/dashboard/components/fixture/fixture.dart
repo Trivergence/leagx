@@ -118,7 +118,6 @@ class FixtureScreen extends StatelessWidget {
                       onTap: () => Navigator.pushNamed(context, Routes.fixtureDetails,
                       arguments: MatchArgs(
                           matchId: match.matchId,
-                          liveStatus: match.matchLive == "1",
                           leagueName: match.leagueName,
                         )
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:provider/provider.dart';
 
@@ -9,14 +10,17 @@ import '../../../../../models/dashboard/fixture.dart';
 import '../../../../../view_models/fixture_view_model.dart';
 import '../../../../util/size/size_config.dart';
 import '../../../../util/ui/ui_helper.dart';
+import '../../../../util/validation/validation_utils.dart';
 import '../../../../widgets/divider_widget.dart';
 import '../../../../widgets/main_button.dart';
 import '../../../../widgets/text_widget.dart';
+import '../../components/match_prediction_tile.dart';
 
 class OfflineMatchWidget extends StatelessWidget {
   final Fixture matchDetails;
+  final Prediction? prediction;
   OfflineMatchWidget({
-    Key? key, required this.matchDetails,
+    Key? key, required this.matchDetails, required this.prediction,
   }) : super(key: key);
 
   late BuildContext _context;
@@ -45,7 +49,14 @@ class OfflineMatchWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        if (ValidationUtils.isValid(prediction))
+          MatchPredictionTile(
+            homeTeamName: prediction!.match.firstTeamName,
+            awayTeamName: prediction!.match.secondTeamName,
+            homeScore: prediction!.firstTeamScore ?? 0,
+            awayScore: prediction!.secondTeamScore ?? 0,
+          ),
+        if (!ValidationUtils.isValid(prediction)) SizedBox(
             width: SizeConfig.width * 90,
             child: MainButton(
               text: loc.fixtureDetailsMatchBtnPredict,
