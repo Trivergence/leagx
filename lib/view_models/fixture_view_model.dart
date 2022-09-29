@@ -44,7 +44,7 @@ class FixtureDetailViewModel extends BaseModel {
 
   Future<void> getMatchDetails(String matchId) async {
     try {
-      DateTime today = DateTime.now().toUtc();
+      DateTime today = DateTime.now();
       List<dynamic> tempList = await ApiService.getListRequest(
         baseUrl: AppUrl.footballBaseUrl,
         modelName: ApiModels.upcomingMatches,
@@ -103,7 +103,7 @@ class FixtureDetailViewModel extends BaseModel {
 
   getHomeTeamPlayers(String matchHometeamId) async {
     try {
-      List<Player> tempList = await ApiService.getListRequest(
+      List<dynamic> tempList = await ApiService.getListRequest(
         baseUrl: AppUrl.footballBaseUrl,
         parameters: {
         "action": "get_teams",
@@ -120,7 +120,7 @@ class FixtureDetailViewModel extends BaseModel {
   }
   getAwayTeamPlayers(String matchAwayteamId) async {
     try {
-      List<Player> tempList = await ApiService.getListRequest(
+      List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.footballBaseUrl,
           parameters: {
             "action": "get_teams",

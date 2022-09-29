@@ -51,7 +51,7 @@ class EditProfileViewModel extends BaseModel {
           ToastMessage.show(
               loc.profileProfileInfoUpdateSuccesful, TOAST_TYPE.success);
           Loader.hideLoader();
-          Navigator.of(context).pushReplacementNamed(Routes.profileSettings);
+          Navigator.of(context).pop();
         }
       }
     } else {

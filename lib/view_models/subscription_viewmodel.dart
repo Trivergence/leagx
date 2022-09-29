@@ -22,7 +22,7 @@ class SubscriptionViewModel extends BaseModel {
 
   Future<void> getSubscriptionPlans() async {
     try {
-      List<SubscriptionPlan> tempList = await ApiService.getListRequest(
+      List<dynamic> tempList = await ApiService.getListRequest(
         baseUrl: AppUrl.baseUrl,
         url: AppUrl.getPlan,
         headers: {
@@ -59,7 +59,7 @@ class SubscriptionViewModel extends BaseModel {
   }
   Future<void> getLeagues() async {
     try {
-      List<League> tempList = await ApiService.getListRequest(
+      List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.footballBaseUrl,
           parameters: {
             "action": "get_leagues",

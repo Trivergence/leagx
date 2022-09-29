@@ -40,10 +40,11 @@ class DashBoardViewModel extends BaseModel {
         await getAllNews();
         await getSubscribedMatches();
       }
+      setBusy(false);
     } on Exception catch (_) {
       setBusy(false);
     }
-    setBusy(false);
+    
   }
     Future<void> getSubscribedMatches() async {
     if (subscribedLeagueIds.isNotEmpty) {
@@ -170,7 +171,7 @@ class DashBoardViewModel extends BaseModel {
     if(user != null) {
       try {
         String completeUrl = AppUrl.getUser + user.id.toString() + AppUrl.subscribedNews;
-        _news = await ApiService.getListRequest(
+        List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.baseUrl,
           url: completeUrl,
           headers: {
@@ -178,6 +179,7 @@ class DashBoardViewModel extends BaseModel {
           },
           modelName: ApiModels.getNews
         );
+        _news = tempList.cast<News>();
       } on Exception catch (e) {
         setBusy(false);
       }
@@ -187,7 +189,7 @@ class DashBoardViewModel extends BaseModel {
       try {
         String completeUrl =
             AppUrl.getUser + AppUrl.getLeaders;
-        _leaders = await ApiService.getListRequest(
+        List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.baseUrl,
           url: completeUrl,
           modelName: ApiModels.getLeaders,
@@ -195,6 +197,7 @@ class DashBoardViewModel extends BaseModel {
           "apitoken": preferenceHelper.authToken,
         },
             );
+            _leaders = tempList.cast<Leader>();
       } on Exception catch (e) {
         setBusy(false);
       }
