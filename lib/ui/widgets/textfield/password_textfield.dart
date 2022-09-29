@@ -8,11 +8,12 @@ class PasswordTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hint;
   final TextInputAction inputAction;
+  final String? Function(String?)? validator;
   const PasswordTextField({
     Key? key,
     required this.controller,
     required this.hint,
-    this.inputAction=TextInputAction.done,
+    this.inputAction=TextInputAction.done, this.validator,
   }) : super(key: key);
 
   @override
@@ -28,13 +29,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       isObscure: isObscure,
       hint: widget.hint,
       inputAction: widget.inputAction,
-      validator: (value) {
-        if (!ValidationUtils.isValid(value)) {
-          return loc.authTxtRequired;
-        } else if (!(value!.length >= 6)) {
-          return loc.authTxtPasswordLength;
-        }
-      },
+      validator: widget.validator,
       prefix: const IconWidget(
         iconData: Icons.lock_outline,
       ),

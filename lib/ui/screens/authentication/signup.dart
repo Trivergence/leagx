@@ -7,6 +7,7 @@ import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/util/ui/validation_helper.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
@@ -51,11 +52,7 @@ class SignupScreen extends StatelessWidget {
                   TextFieldWidget(
                     textController: _nameController,
                     hint: loc.authSignupTxtName,
-                    validator: (value) {
-                      if (!ValidationUtils.isValid(value)) {
-                        return loc.authSignupTxtRequired;
-                      }
-                    },
+                    validator: (value) => ValidationHelper.validateField(value),
                     prefix: const IconWidget(
                       iconData: Icons.account_circle_outlined,
                     ),
@@ -66,14 +63,7 @@ class SignupScreen extends StatelessWidget {
                   TextFieldWidget(
                     textController: _emailController,
                     hint: loc.authSignupTxtEmail,
-                    validator: (value) {
-                      if (!ValidationUtils.isValid(value)) {
-                        return loc.authSignupTxtRequired;
-                      } else {
-                        return ValidationUtils.email(
-                            value!, loc.authSignupTxtValidEmail);
-                      }
-                    },
+                    validator: (value) => ValidationHelper.validateEmail(value),
                     prefix: const IconWidget(
                       iconData: Icons.drafts_outlined,
                     ),
@@ -85,11 +75,14 @@ class SignupScreen extends StatelessWidget {
                     controller: _passwordController,
                     hint: loc.authSignupTxtPassword,
                     inputAction: TextInputAction.next,
+                    validator: (value) => ValidationHelper.validatePassword(value),
                   ),
                   UIHelper.verticalSpaceMedium,
                   PasswordTextField(
                     controller: _confirmPasswordController,
                     hint: loc.authSignupTxtConfirmPassword,
+                    validator: (value) =>
+                        ValidationHelper.validatePassword(value),
                   ),
                 ],
               ),

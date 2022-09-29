@@ -8,6 +8,7 @@ import 'package:leagx/models/update_profile_args.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/util/ui/validation_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/dropdown_form_widget.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
@@ -102,13 +103,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                   prefix:
                       const IconWidget(iconData: Icons.account_circle_outlined),
                   inputAction: TextInputAction.next,
-                  validator: (value) {
-                    if(value!.isEmpty) {
-                      return "Required";
-                    } else { 
-                      return null;
-                    }
-                  },
+                  validator: (value) => ValidationHelper.validateField(value),
                 ),
                 UIHelper.verticalSpace(15.0),
                 TextFieldWidget(
@@ -125,13 +120,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                   prefix: const IconWidget(iconData: Icons.smartphone),
                   inputAction: TextInputAction.done,
                   inputType: TextInputType.number,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Required";
-                    } else {
-                      return null;
-                    }
-                  },
+                  validator: (value) => ValidationHelper.validatePhone(value),
                 ),
                 UIHelper.verticalSpace(15.0),
                 DropDownFormWidget(
@@ -141,13 +130,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                   onChanged: (value) {
                     selectedGender = value;
                   },
-                  validator: (value) {
-                        if (value == null) {
-                          return "Required";
-                        } else {
-                          return null;
-                        }
-                      },
+                  validator: (value) => ValidationHelper.validateField(value)
                 )
               ],)
             
