@@ -6,7 +6,7 @@ import '../../../../constants/dimens.dart';
 import '../../../util/size/size_config.dart';
 import '../../../widgets/text_widget.dart';
 
-class ScorePicker extends StatelessWidget {
+class ScorePicker extends StatefulWidget {
   final Function(int) onChanged;
   final int initialScore;
   final bool isSelected;
@@ -14,7 +14,20 @@ class ScorePicker extends StatelessWidget {
     Key? key, required this.onChanged,required this.initialScore, required this.isSelected,
   }) : super(key: key);
 
+  @override
+  State<ScorePicker> createState() => _ScorePickerState();
+}
+
+class _ScorePickerState extends State<ScorePicker> {
   List<int> totalScores = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+  int currentIndex= 0;
+
+  @override
+  void initState() {
+    currentIndex = widget.initialScore;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +36,7 @@ class ScorePicker extends StatelessWidget {
           //border: Border.all(color: AppColors.colorDarkGrey, width: 2),
           borderRadius: BorderRadius.circular(10),
           color: AppColors.colorDarkGrey,
-          gradient: isSelected ? AppColors.pinkishGradient : null
+          gradient: widget.isSelected ? AppColors.pinkishGradient : null
         ),
       child: Container(
         height: SizeConfig.height * 5,
@@ -39,23 +52,33 @@ class ScorePicker extends StatelessWidget {
           viewportFraction: 0.33,
           enlargeCenterPage: true,
           enableInfiniteScroll: false,
-          initialPage: initialScore,
+          initialPage: widget.initialScore,
           onPageChanged: (value, _) {
-            onChanged(value);
+            widget.onChanged(value);
+            setState(() {
+              currentIndex = value;
+            });
           }
         ),
-        items: totalScores.map((score) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Center(
-                child: TextWidget(text: score.toString(),
+        
+        items: [
+          for(int i = 0; i < totalScores.length ; i++) Center(
+            child: TextWidget(text: totalScores[i].toString(),
                  textSize: Dimens.textRegular,
-                 fontWeight: FontWeight.w400,
+                 fontWeight: i == currentIndex? FontWeight.w900 : FontWeight.w400,
                  ),
-              );
-            },
-          );
-        }).toList(),
+          )
+        ]
+        // totalScores.map((score) {
+        //   return Builder(
+        //     builder: (BuildContext context) {
+        //       return TextWidget(text: score.toString(),
+        //        textSize: Dimens.textRegular,
+        //        fontWeight: FontWeight.w400,
+        //        );
+        //     },
+        //   );
+        // }).toList(),
         ),
       ),
     );
