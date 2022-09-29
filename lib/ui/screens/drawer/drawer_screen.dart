@@ -14,6 +14,7 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/user/user.dart';
+import '../../util/app_dialogs/confirmation_dialog.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -92,11 +93,12 @@ class DrawerScreen extends StatelessWidget {
           UIHelper.verticalSpaceXL,
           GestureDetector(
             onTap: () async{
-              await preferenceHelper.removeAuthToken();
-              await preferenceHelper.removeUser();
-              context.read<DashBoardViewModel>().clearData();
-              Navigator.pushNamedAndRemoveUntil(
-                  context, Routes.signin, (route) => false);
+              ConfirmationDialog.show(context: context,
+               title: loc.logoutConfirmTitle,
+               positiveBtnTitle: loc.logoutConfirmYes,
+               negativeBtnTitle: loc.logoutConfirmNo,
+               body:loc.logoutConfirmBody, 
+               onPositiveBtnPressed: () => logout(context));
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
@@ -127,5 +129,13 @@ class DrawerScreen extends StatelessWidget {
     } else {
       return "";
     }
+  }
+
+  logout(BuildContext context) async {
+    await preferenceHelper.removeAuthToken();
+    await preferenceHelper.removeUser();
+    context.read<DashBoardViewModel>().clearData();
+    Navigator.pushNamedAndRemoveUntil(
+        context, Routes.signin, (route) => false);
   }
 }

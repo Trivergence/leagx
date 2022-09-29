@@ -9,7 +9,7 @@ import 'plan_widget.dart';
 
 class PlanListing extends StatefulWidget {
   final bool isAdmin;
-  final Function(int) onItemPressed;
+  final Function(int, String) onItemPressed;
 
   const PlanListing({
     required this.isAdmin,
@@ -34,14 +34,14 @@ class _PlanListingState extends State<PlanListing> {
       itemCount: listOfPlans.length,
       itemBuilder: (context, index) {
         return PlanWidget(
-          plan: listOfPlans[index],
+        plan: listOfPlans[index],
          isAdmin: false,
          index: index,
          isSelected: index == selectedIndex, onPlanSelected: () {
           setState(() {
             selectedIndex = index;
           });
-          widget.onItemPressed(listOfPlans[index].id);
+          widget.onItemPressed(listOfPlans[index].id, listOfPlans[index].price.toStringAsFixed(0));
         },);
     })
     :Padding(

@@ -213,6 +213,16 @@
 	"userBtnUser": "المستعمل",
 	"userTxtSearch": "بحث",
 	"userTxtUserRoleSetting": "إعداد دور المستخدم",
+
+	"logoutConfirmTitle": "تأكيد الخروج",
+	"logoutConfirmBody": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+	"logoutConfirmNo": "رقم",
+	"logoutConfirmYes": "نعم",
+
+	"subscribeConfirmTitle": "تأكيد الاشتراك",
+	"subscribeConfirmBody": " هل أنت متأكد أنك تريد الاشتراك في هذا الدوري. هذا سوف تهمة",
+	"subscribeConfirmCancel": "يلغي",
+	"subscribeConfirmSubscribe": "الإشتراك",
 	
 	"errorTryAgain": "حدث خطأ. حاول مرة أخرى في وقت لاحق",
 	"errorCheckNetwork": "يرجى التحقق من اتصال الشبكة الخاص بك وحاول مرة أخرى",

@@ -213,6 +213,16 @@
 	"userBtnAdmin": "Admin",
 	"liveWidgetTxtLive": "LIVE",
 
+	"logoutConfirmTitle": "Logout Confirmation",
+	"logoutConfirmBody": "Are you sure you want to logout?",
+	"logoutConfirmNo": "No",
+	"logoutConfirmYes": "Yes",
+
+	"subscribeConfirmTitle": "Confirm subscription",
+	"subscribeConfirmBody": "Are your sure you want to subscribe this league. This will charge ",
+	"subscribeConfirmCancel": "Cancel",
+	"subscribeConfirmSubscribe": "Subscribe",
+
 	"errorTryAgain": "An error has occured. Try again later",
 	"errorCheckNetwork": "Please check your network connection and try again",
 	"errorRequired": "required",
