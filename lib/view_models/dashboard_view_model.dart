@@ -39,10 +39,10 @@ class DashBoardViewModel extends BaseModel {
       await getSubscribedLeagues();
       await getAllLeaders();
       await getUserSummary();
+      await getSubscribedMatches();
       setBusy(false);
       if(subscribedLeagues.isNotEmpty) {
         await getAllNews();
-        await getSubscribedMatches();
       }
     } on Exception catch (_) {
       setBusy(false);
