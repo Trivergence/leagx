@@ -8,6 +8,8 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../constants/assets.dart';
+
 class GradientBorderWidget extends StatelessWidget {
   final double? width;
   final double? height;
@@ -20,6 +22,7 @@ class GradientBorderWidget extends StatelessWidget {
   final double? iconSize;
   final String? imageUrl;
   final String? imageAsset;
+  final String? placeHolderImg;
   final EdgeInsetsGeometry? padding;
   const GradientBorderWidget({
     Key? key,
@@ -34,7 +37,7 @@ class GradientBorderWidget extends StatelessWidget {
     this.iconSize,
     this.imageUrl,
     this.imageAsset,
-    this.padding,
+    this.padding, this.placeHolderImg,
   }) : super(key: key);
 
   @override
@@ -66,6 +69,7 @@ class GradientBorderWidget extends StatelessWidget {
               : imageUrl != null
                   ? ImageWidget(
                       imageUrl: imageUrl!,
+                      placeholder: placeHolderImg ?? ''
                     )
                   : text != null
                       ? Center(

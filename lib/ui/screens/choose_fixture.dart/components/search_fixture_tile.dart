@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 
+import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
 import '../../../widgets/text_widget.dart';
@@ -41,6 +42,7 @@ class ChooseFixtureTile extends StatelessWidget {
           leading: CircleAvatar(
             child: ImageWidget(
               imageUrl: imgUrl,
+               placeholder: Assets.icLeague
             ),
             backgroundColor: AppColors.textFieldColor,
             radius: 25,

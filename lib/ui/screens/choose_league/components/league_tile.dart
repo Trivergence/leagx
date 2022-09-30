@@ -4,6 +4,7 @@ import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 
+import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../widgets/gradient/gradient_border_button.dart';
 import '../../../widgets/main_button.dart';
@@ -32,7 +33,10 @@ class LeagueTile extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         tileColor: AppColors.textFieldColor,
         leading: CircleAvatar(
-          child: ImageWidget(imageUrl: imgUrl,),
+          child: ImageWidget(
+            imageUrl: imgUrl,
+             placeholder: Assets.icLeague
+            ),
           backgroundColor: AppColors.textFieldColor,
           radius: 25,
         ),

@@ -1,3 +1,4 @@
+import 'package:leagx/ui/util/utility/image_utitlity.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/colors.dart';
@@ -39,6 +40,7 @@ class UserTile extends StatelessWidget {
             height: 44.0,
             isCircular: true,
             imageUrl: imageUrl,
+            placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
             onPressed: () {},
             gradient: AppColors.orangishGradient,
           ),

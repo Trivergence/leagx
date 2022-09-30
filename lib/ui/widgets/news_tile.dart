@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/utility/date_utility.dart';
+import 'package:leagx/ui/util/utility/image_utitlity.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/dimens.dart';
@@ -41,6 +42,7 @@ class NewsTile extends StatelessWidget {
             imageUrl: imageUrl,
             onPressed: () {},
             gradient: AppColors.orangishGradient,
+            placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
           ),
           ],
         ),

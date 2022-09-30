@@ -99,12 +99,10 @@ class EditProfileViewModel extends BaseModel {
      CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: image.path,
       compressQuality: 50,
+      cropStyle: CropStyle.circle,
       aspectRatio: const CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
       compressFormat:
           type == "png" ? ImageCompressFormat.png : ImageCompressFormat.jpg,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.square,
-      ],
       uiSettings: [
         AndroidUiSettings(
             toolbarColor: Colors.black,

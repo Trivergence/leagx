@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/subscription_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/assets.dart';
 import '../../util/app_dialogs/confirmation_dialog.dart';
 import '../../widgets/bar/app_bar_widget.dart';
 import 'components/plan_listing.dart';
@@ -25,7 +26,10 @@ class ChoosePlanScreen extends StatelessWidget {
           child: Column(
             children: [
               CircleAvatar(
-                child: ImageWidget(imageUrl: leagueData.leagueImg,),
+                child: ImageWidget(
+                  imageUrl: leagueData.leagueImg,
+                  placeholder: Assets.icPlayerAvatar
+                  ),
                 radius: 35,
               ),
               UIHelper.verticalSpace(8),

@@ -20,13 +20,13 @@ class LeaderScreen extends StatelessWidget {
           return index != 0
               ? LeaderBoardTile(
                   number: index + 1,
-                  imageUrl: Strings().placeHolderUrl,
-                  title: leader.firstName! + leader.lastName!,
+                  imageUrl: leader.profileImg!,
+                  title: leader.firstName!,
                   numberOfPrediciton: leader.totalPredictions,
                   successRate: leader.predictionSuccessRate.toString())
               : ExpandedLeaderTile(
-                  imageUrl: Strings().placeHolderUrl,
-                  title: leader.firstName! + leader.lastName!,
+                  imageUrl: leader.profileImg!,
+                  title: leader.firstName!,
                   numberOfPrediciton: leader.totalPredictions,
                   successRate: leader.predictionSuccessRate.toString(),
                 );
