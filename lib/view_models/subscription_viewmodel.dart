@@ -17,6 +17,8 @@ import '../models/user/user.dart';
 class SubscriptionViewModel extends BaseModel {
   List<SubscriptionPlan> _listOfPlan = [];
   List<League> _leagues = [];
+  // Remove them later
+  List<String> saudiLeagueIds = ["278","605","277","604","536"];
   List<League> get leagues => _leagues;
   List<SubscriptionPlan> get getPlans => _listOfPlan;
 
@@ -67,6 +69,8 @@ class SubscriptionViewModel extends BaseModel {
           },
           modelName: ApiModels.getLeagues);
       _leagues = tempList.cast<League>();
+      // Remove this later
+      _leagues = leagues.where((league) => saudiLeagueIds.contains(league.leagueId)).toList();
     } on Exception catch (e) {
       setBusy(false);
     }
