@@ -1,4 +1,5 @@
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/models/match_args.dart';
 import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
@@ -102,6 +103,11 @@ class HomeScreen extends StatelessWidget {
                         teamTwoName: upcomingMatches[i].matchAwayteamName,
                         scheduledDate: upcomingMatches[i].matchDate,
                         scheduledTime: upcomingMatches[i].matchTime,
+                        isLive: upcomingMatches[i].matchLive == "1",
+                        matchStatus: upcomingMatches[i].matchStatus!,
+                        isOver: Utility.isMatchOver(upcomingMatches[i].matchStatus!),
+                        teamOneScore: upcomingMatches[i].matchHometeamScore,
+                        teamTwoScore: upcomingMatches[i].matchAwayteamScore,
                         onTap: () {
                           Navigator.pushNamed(context,
                           Routes.fixtureDetails,

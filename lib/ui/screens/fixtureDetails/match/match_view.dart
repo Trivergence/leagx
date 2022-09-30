@@ -1,3 +1,4 @@
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -44,7 +45,8 @@ class MatchView extends StatelessWidget {
                       groupPosition: 'Top 1 group A',
                       image: matchDetails.teamHomeBadge,
                     ),
-                    matchDetails.matchLive == "1" ? Column(
+                    matchDetails.matchLive == "1" || Utility.isMatchOver(matchDetails.matchStatus!)
+                         ? Column(
                       children: [
                         ScoreChip(firstScore: matchDetails.matchHometeamScore,
                           secondScore: matchDetails.matchAwayteamScore,),
@@ -83,7 +85,7 @@ class MatchView extends StatelessWidget {
               height: SizeConfig.height * 7,
               title: loc.faqsTxtFrequentlyAskedQuestions,
             ),
-            matchDetails.matchLive == "1" 
+            matchDetails.matchLive == "1" || Utility.isMatchOver(matchDetails.matchStatus!)
             ? LiveMatchWidget(matchDetails: matchDetails, prediction: prediction,) 
             : OfflineMatchWidget(matchDetails: matchDetails, prediction: prediction,)
           ],

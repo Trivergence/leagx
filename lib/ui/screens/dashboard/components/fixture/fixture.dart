@@ -1,5 +1,6 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
@@ -114,6 +115,7 @@ class FixtureScreen extends StatelessWidget {
                       scheduledTime: match.matchTime,
                       scheduledDate: match.matchDate,
                       isLive: match.matchLive == "1",
+                      isOver: Utility.isMatchOver(match.matchStatus!),
                       matchStatus: match.matchStatus,
                       teamOneScore: match.matchHometeamScore,
                       teamTwoScore: match.matchAwayteamScore,

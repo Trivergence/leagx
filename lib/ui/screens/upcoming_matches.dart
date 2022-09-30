@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,7 @@ class UpcomingMatches extends StatelessWidget {
             scheduledTime: match.matchTime,
             scheduledDate: match.matchDate,
             isLive: match.matchLive == "1",
+            isOver: Utility.isMatchOver(match.matchStatus!),
             matchStatus: match.matchStatus,
             teamOneScore: match.matchHometeamScore,
             teamTwoScore: match.matchAwayteamScore,

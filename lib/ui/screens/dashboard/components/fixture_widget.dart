@@ -27,6 +27,7 @@ class FixtureWidget extends StatelessWidget {
   final String? liveTime;
   final String? matchStatus;
   final bool isLive;
+  final bool isOver;
   final bool withText;
   final VoidCallback? onTap;
   const FixtureWidget({
@@ -42,7 +43,9 @@ class FixtureWidget extends StatelessWidget {
     this.liveTime,
     this.isLive = false,
     this.withText = true,
-    this.onTap, this.matchStatus, required this.scheduledDate,
+    this.onTap, this.matchStatus,
+    required this.scheduledDate, 
+    required this.isOver,
   }) : super(key: key);
 
   @override
@@ -111,7 +114,7 @@ class FixtureWidget extends StatelessWidget {
                           TextWidget(text: StringUtility.getShortName(teamOneName)),
                         ],
                       ),
-                      isLive
+                      isLive || isOver
                           ? Column(
                               children: [
                                 ScoreChip(
