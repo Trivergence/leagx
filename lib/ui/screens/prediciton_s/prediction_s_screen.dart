@@ -45,7 +45,7 @@ class PredicitonsScreen extends StatelessWidget {
               teamTwoName: match.secondTeamName!,
               teamTwoScore: prediction.secondTeamScore,
               predictionRate: prediction.accuratePercentage.toString(),
-              isPending: !ValidationUtils.isValid(prediction.accuratePercentage),
+              isPending: isPending(prediction.status),
             );
           },
         )
@@ -55,5 +55,13 @@ class PredicitonsScreen extends StatelessWidget {
         )),
       ),
     );
+  }
+
+  isPending(String? status) {
+    if( status == "Finished" || status == "After ET" || status == "After Pen.") {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

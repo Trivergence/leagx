@@ -4,6 +4,8 @@ import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/players.dart';
 import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/app_constants.dart';
 import '../constants/colors.dart';
@@ -34,8 +36,10 @@ class FixtureDetailViewModel extends BaseModel {
     try {
       await getMatchDetails(matchId);
       setBusy(false);
-      await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
-      await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
+      if(matchDetails.isNotEmpty) {
+        await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
+        await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
+      }
     } on Exception catch (_) {
       setBusy(false);
     }
@@ -57,8 +61,8 @@ class FixtureDetailViewModel extends BaseModel {
         "APIkey": AppConstants.footballApiKey,
         "action": "get_events",
         "match_id": matchId,
-        "from": DateUtility.getApiFormat(today),
-        "to": DateUtility.getApiFormat(today.add(const Duration(days: 3))),
+        "from": "2021-01-01",
+        "to": "2022-12-30",
         "timezone": "Asia/Riyadh",
       });
       _matchDetails = tempList.cast<Fixture>();
@@ -105,6 +109,9 @@ class FixtureDetailViewModel extends BaseModel {
     if(success) {
       await getUserPredictions();
       ToastMessage.show("Prediction submitted successfully", TOAST_TYPE.success);
+      context.read<DashBoardViewModel>().getUserSummary();
+      context.read<DashBoardViewModel>().getAllLeaders();
+      context.read<DashBoardViewModel>().getData();
       Navigator.of(context).pop();
       Loader.hideLoader();
     } else {

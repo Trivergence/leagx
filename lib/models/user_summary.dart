@@ -54,9 +54,9 @@ class UserSummary {
   String? uid;
   String? language;
   String notification;
-  int? totalPredictions;
-  double? predictionSuccessRate;
-  int? coinEarned;
+  num? totalPredictions;
+  num? predictionSuccessRate;
+  num? coinEarned;
   List<dynamic> userDevices;
 
   factory UserSummary.fromJson(Map<String, dynamic> json) => UserSummary(

@@ -200,6 +200,9 @@
 	"profileProfileInfoMale": "ذكر",
 	"profileProfileInfoFemale": "أنثى",
 	"profileProfileInfoUpdateSuccesful": "الملف الشخصي تمت مراجعته بنجاح",
+	"profileProfileInfoUpdateSelectOption": "حدد خيار",
+	"profileProfileInfoUpdateCamera": "آلة تصوير",
+	"profileProfileInfoUpdateGallery": "صالة عرض",
 
 	"termsOfServiceBtnAgree": "يوافق على",
 	"termsOfServiceBtnDeny": "أنكر",

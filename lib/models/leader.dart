@@ -53,7 +53,7 @@ class Leader {
   String? language;
   String notification;
   int totalPredictions;
-  int predictionSuccessRate;
+  double? predictionSuccessRate;
 
   factory Leader.fromJson(Map<String, dynamic> json) => Leader(
         id: json["id"],
@@ -75,7 +75,7 @@ class Leader {
         language: json["language"],
         notification: json["notification"],
         totalPredictions: json["total_predictions"] ?? 0,
-        predictionSuccessRate: json["prediction_success_rate"] ?? 0,
+        predictionSuccessRate: json["prediction_success_rate"] ?? 0.0,
       );
 
   Map<String, dynamic> toJson() => {

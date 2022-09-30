@@ -200,6 +200,10 @@
 	"profileProfileInfoMale": "Male",
 	"profileProfileInfoFemale": "Female",
 	"profileProfileInfoUpdateSuccesful": "Profile udpated successfully",
+	"profileProfileInfoUpdateSelectOption": "Select Option",
+	"profileProfileInfoUpdateCamera": "Camera",
+	"profileProfileInfoUpdateGallery": "Gallery",
+
 
 	"termsOfServiceTxtTermsOfServices": "Terms of Services",
 	"termsOfServiceBtnAgree": "Agree",

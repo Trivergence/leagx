@@ -65,7 +65,6 @@ class ApiService {
     } on DioError catch (ex) {
       Loader.hideLoader();
       if (ex.response != null) {
-        debugPrint(ex.response!.data);
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
             ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
@@ -119,7 +118,7 @@ class ApiService {
     } on DioError catch (ex) {
       Loader.hideLoader();
       if (ex.response != null) {
-        debugPrint(ex.response!.data);
+        // debugPrint(ex.response!.data);
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
             ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
@@ -175,9 +174,9 @@ class ApiService {
         return null;
       }
     } on DioError catch (ex) {
-      debugPrint(ex.response!.data);
+      // debugPrint(ex.response!.data);
       Loader.hideLoader();
-      print('error response: ${ex.response}');
+     // print('error response: ${ex.response}');
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
@@ -230,7 +229,7 @@ class ApiService {
         return null;
       }
     } on DioError catch (ex) {
-      debugPrint(ex.response!.data);
+      // debugPrint(ex.response!.data);
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =
@@ -284,7 +283,7 @@ class ApiService {
         return [];
       }
     } on DioError catch (ex) {
-      debugPrint(ex.response!.data);
+      // debugPrint(ex.response!.data);
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =
@@ -319,7 +318,7 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      dio.interceptors.add(PrettyDioLogger());
+      dio.interceptors.add(PrettyDioLogger(requestBody: true));
       var connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult != ConnectivityResult.none) {
         Response _response = await dio.post(
@@ -337,7 +336,7 @@ class ApiService {
         return false;
       }
     } on DioError catch (ex) {
-      debugPrint(ex.response!.data);
+      // debugPrint(ex.response!.data);
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =

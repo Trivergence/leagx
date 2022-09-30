@@ -50,6 +50,8 @@ class DashBoardViewModel extends BaseModel {
     
   }
     Future<void> getSubscribedMatches() async {
+      // "from": DateUtility.getApiFormat(now),
+      //       "to": DateUtility.getApiFormat(now.add(const Duration(days: 3))),
     if (subscribedLeagueIds.isNotEmpty) {
       try {
         DateTime now = DateTime.now();
@@ -62,13 +64,13 @@ class DashBoardViewModel extends BaseModel {
             "action": "get_events",
             "timezone": "Asia/Riyadh",
             "league_id": subscribedLeagueIds.join(","),
-            "from": DateUtility.getApiFormat(now),
-            "to": DateUtility.getApiFormat(now.add(const Duration(days: 3))),
+            "from": "2021-01-01",
+            "to": "2022-12-30",
           },
         );
         _subscribedMatches = tempList.cast<Fixture>();
-        _subscribedMatches =
-            _subscribedMatches.where((match) => isValid(match, now)).toList();
+        // _subscribedMatches =
+        //     _subscribedMatches.where((match) => isValid(match, now)).toList();
       } on Exception catch (e) {
         setBusy(false);
       }
@@ -204,6 +206,9 @@ class DashBoardViewModel extends BaseModel {
       } on Exception catch (e) {
         setBusy(false);
       }
+  }
+  notify() {
+    notifyListeners();
   }
 
   List<News> getNewsbyLeague(String externalId) {

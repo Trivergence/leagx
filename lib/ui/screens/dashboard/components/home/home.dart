@@ -102,11 +102,12 @@ class HomeScreen extends StatelessWidget {
                         teamTwoName: upcomingMatches[i].matchAwayteamName,
                         scheduledDate: upcomingMatches[i].matchDate,
                         scheduledTime: upcomingMatches[i].matchTime,
-                        onTap: () => Navigator.pushNamed(context,
+                        onTap: () {
+                          Navigator.pushNamed(context,
                           Routes.fixtureDetails,
                           arguments: MatchArgs(matchId: upcomingMatches[i].matchId,
                               leagueName: upcomingMatches[i].leagueName,
-                           )),
+                           ));}
                       ),
                   ],
                 ) : PlaceHolderTile(height: 80, msgText: loc.dashboardHomeTxtEmptyList),

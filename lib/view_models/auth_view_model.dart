@@ -2,6 +2,7 @@ import 'package:leagx/constants/enums.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/api/api_service.dart';
 import 'package:leagx/core/network/app_url.dart';
+import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/auth/forgot_password.dart';
 import 'package:leagx/models/auth/signin.dart';
 import 'package:leagx/models/auth/signup.dart';
@@ -39,6 +40,21 @@ class AuthViewModel {
       },
       modelName: ApiModels.user,
     );
+  }
+  static Future<void> subscribeOneLeague(int userId) async {
+    Map<String,dynamic> body = {
+      "user_id": userId,
+      "plan_id": 1,
+      "league": {
+        "title": "King's Cup",
+        "logo": "",
+        "external_league_id": "604"
+      }
+    };
+    bool success = await ApiService.postWoResponce(
+      url: AppUrl.subscribeLeague,
+      body: body);
+
   }
 
     static Future<User?>? socialLogin({

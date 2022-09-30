@@ -46,7 +46,7 @@ class SubscriptionViewModel extends BaseModel {
       "league": {
         "title": leagueTitle,
         "logo": leagueImg,
-        "external_league_id": leagueId
+        "external_league_id": int.parse(leagueId)
       }
     };
     bool success = await ApiService.postWoResponce(

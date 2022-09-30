@@ -1,5 +1,6 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/authentication/components/have_account_button.dart';
@@ -103,8 +104,10 @@ class SignupScreen extends StatelessWidget {
                     );
                     Loader.hideLoader();
                     if (ValidationUtils.isValid(signupResponse)) {
+                      preferenceHelper.saveAuthToken(signupResponse!.apiToken);
                       ToastMessage.show(
                           loc.authSignupTxtSignedupSuccessfully, TOAST_TYPE.success);
+                      await AuthViewModel.subscribeOneLeague(signupResponse.id);
                       Navigator.pushNamed(context, Routes.signin);
                     }
                   } else {

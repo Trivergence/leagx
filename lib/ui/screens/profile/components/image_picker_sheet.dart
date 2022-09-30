@@ -1,6 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
 
 import '../../../../constants/colors.dart';
+import '../../../util/locale/localization.dart';
 
 class ImagePickerSheet extends StatelessWidget {
   final VoidCallback onCameraClick;
@@ -17,10 +21,10 @@ class ImagePickerSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Padding(
+         Padding(
           padding: EdgeInsets.all(15.0),
           child: Text(
-            'Select Option',
+            loc.profileProfileInfoUpdateSelectOption,
             style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
@@ -29,11 +33,11 @@ class ImagePickerSheet extends StatelessWidget {
         ),
         InkWell(
           onTap: onCameraClick,
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.all(15.0),
             child: Text(
-              'Camera',
-              style: TextStyle(
+              loc.profileProfileInfoUpdateCamera,
+              style: const TextStyle(
                   fontSize: 16,
                   color: AppColors.colorWhite,
                   fontWeight: FontWeight.w500),
@@ -42,10 +46,11 @@ class ImagePickerSheet extends StatelessWidget {
         ),
         InkWell(
           onTap: onGalleryClick,
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.all(15.0),
             child: Text(
-              'Gallery',
+              loc.profileProfileInfoUpdateGallery,
+              // ignore: prefer_const_constructors
               style: TextStyle(
                   fontSize: 16,
                   color: AppColors.colorWhite,
@@ -53,6 +58,7 @@ class ImagePickerSheet extends StatelessWidget {
             ),
           ),
         ),
+        UIHelper.verticalSpaceSmall
       ],
     );
   }

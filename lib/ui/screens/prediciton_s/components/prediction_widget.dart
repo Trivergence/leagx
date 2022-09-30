@@ -117,7 +117,7 @@ class PredictionWidget extends StatelessWidget {
                         )
                       : predictionRate != null
                           ? TextWidget(
-                              text: predictionRate!,
+                              text: predictionRate! + "%",
                               color: AppColors.colorGreen)
                           : const SizedBox(),
                 ],
