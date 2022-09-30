@@ -46,14 +46,19 @@ class PredictionWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          ImageWidget(
-                            imageUrl: teamOneFlag,
-                            placeholder: Assets.ufcFlag,
-                          ),
-                          TextWidget(text: StringUtility.getShortName(teamOneName)),
-                        ],
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            ImageWidget(
+                              imageUrl: teamOneFlag,
+                              placeholder: Assets.icTeamAvatar,
+                            ),
+                            UIHelper.horizontalSpaceSmall,
+                            TextWidget(text: StringUtility.getShortName(teamOneName)),
+                          ],
+                        ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -76,14 +81,19 @@ class PredictionWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Row(
-                        children: [
-                          ImageWidget(
-                            imageUrl: teamTwoFlag,
-                            placeholder: Assets.arsFlag,
-                          ),
-                          TextWidget(text: StringUtility.getShortName(teamTwoName)),
-                        ],
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ImageWidget(
+                              imageUrl: teamTwoFlag,
+                              placeholder: Assets.icTeamAvatar
+                            ),
+                            UIHelper.horizontalSpaceSmall,
+                            TextWidget(text: StringUtility.getShortName(teamTwoName)),
+                          ],
+                        ),
                       ),
                     ],
                   ),

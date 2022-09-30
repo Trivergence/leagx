@@ -1,6 +1,7 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/utility/image_utitlity.dart';
 
 import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/dimens.dart';
@@ -45,6 +46,7 @@ class ExpandedLeaderTile extends StatelessWidget {
                   isCircular: true,
                   imageUrl: imageUrl,
                   onPressed: () {},
+                  placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
                   gradient: AppColors.orangishGradient,
                 ),
               ],

@@ -39,14 +39,11 @@
 	"adminFixtureDetailCoinBtnSave": "حفظ",
 	"adminFixtureDetailCoinTxtPrimaryMatch": "المباراة الأساسية",
 
-	"authTxtRequired":"مطلوب",
 	"authTxtPasswordLength":"يجب أن تكون كلمة المرور على الأقل 6",
 	"authForgotPasswordBtnResetPassword": "إعادة تعيين كلمة المرور",
 	"authForgotPasswordTxtEnterEmailDesc": "أدخل بريدك الإلكتروني أو رقم هاتفك لاسترداد كلمة المرور الخاصة بك.",
 	"authForgotPasswordTxtForgotPassword": "هل نسيت كلمة المرور",
 	"authForgotPasswordTxtemailOrPhone": "البريد الإلكتروني أو رقم الهاتف",
-	"authForgotPasswordTxtValidEmail":"الرجاء إدخال بريد إلكتروني صحيح",
-	"authForgotPasswordTxtRequired":"مطلوب",
 
 	"authResetPasswordBtnResetPassword": "إعادة تعيين كلمة المرور",
 	"authResetPasswordTxtCheckEmailDes": "تحقق من بريدك الإلكتروني أو رقم هاتفك لاسترداد كلمة المرور الخاصة بك.",
@@ -59,8 +56,6 @@
 	"authSigninBtnSignup": "سجل",
 	"authSigninTxtEmail": "البريد الإلكتروني",
 	"authSigninTxtPassword": "كلمه السر",
-	"authSigninTxtRequired": "مطلوب",
-	"authSigninTxtValidEmail":"الرجاء إدخال بريد إلكتروني صحيح",
 	"authSigninTxtSignin": "تسجيل الدخول",
 	"authSigninTxtSocialAccounts": "أو عن طريق الحسابات الاجتماعية",
 	"authSigninTxtSignedinSuccessfully":"تم تسجيل الدخول بنجاح",
@@ -74,8 +69,6 @@
 	"authSignupTxtEmail": "البريد الإلكتروني",
 	"authSignupTxtName": "اسم",
 	"authSignupTxtPassword": "كلمه السر",
-	"authSignupTxtRequired": "مطلوب",
-	"authSignupTxtValidEmail":"الرجاء إدخال بريد إلكتروني صحيح",
 	"authSignupTxtSignup": "سجل",
 	"authSignupTxtSignedupSuccessfully":"تم التسجيل بنجاح",
 	"authSignupTxtPasswordNotMatch":"كلمة المرور غير متطابقة",
@@ -220,7 +213,21 @@
 	"userBtnUser": "المستعمل",
 	"userTxtSearch": "بحث",
 	"userTxtUserRoleSetting": "إعداد دور المستخدم",
+
+	"logoutConfirmTitle": "تأكيد الخروج",
+	"logoutConfirmBody": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+	"logoutConfirmNo": "رقم",
+	"logoutConfirmYes": "نعم",
+
+	"subscribeConfirmTitle": "تأكيد الاشتراك",
+	"subscribeConfirmBody": " هل أنت متأكد أنك تريد الاشتراك في هذا الدوري. هذا سوف تهمة",
+	"subscribeConfirmCancel": "يلغي",
+	"subscribeConfirmSubscribe": "الإشتراك",
 	
 	"errorTryAgain": "حدث خطأ. حاول مرة أخرى في وقت لاحق",
-	"errorCheckNetwork": "يرجى التحقق من اتصال الشبكة الخاص بك وحاول مرة أخرى"
+	"errorCheckNetwork": "يرجى التحقق من اتصال الشبكة الخاص بك وحاول مرة أخرى",
+	"errorRequired": "مطلوب",
+	"errorInvalidEmail":"الرجاء إدخال بريد إلكتروني صحيح",
+	"errorInvalidPhone":"الرجاء إدخال رقم هاتف صحيح",
+	"errorPasswordLength":"يجب أن تتكون كلمة المرور من 8 أحرف على الأقل"
 }

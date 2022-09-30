@@ -86,7 +86,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               
               ],
             ),
-            drawer: const DrawerScreen(),
+            drawer: DrawerScreen(),
             body: !dashboardModel.busy ? Container(
               width: SizeConfig.width * 100,
               height: SizeConfig.height * 100,

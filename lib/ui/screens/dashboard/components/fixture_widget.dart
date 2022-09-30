@@ -101,8 +101,11 @@ class FixtureWidget extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          ImageWidget(
-                            imageUrl: teamOneFlag,
+                          ClipOval(
+                            child: ImageWidget(
+                              imageUrl: teamOneFlag,
+                              placeholder: Assets.icTeamAvatar
+                            ),
                           ),
                           UIHelper.horizontalSpaceSmall,
                           TextWidget(text: StringUtility.getShortName(teamOneName)),
@@ -128,6 +131,7 @@ class FixtureWidget extends StatelessWidget {
                         children: [
                           ImageWidget(
                             imageUrl: teamTwoFlag,
+                            placeholder: Assets.icTeamAvatar,
                           ),
                           UIHelper.horizontalSpaceSmall,
                           TextWidget(text: StringUtility.getShortName(teamTwoName)),

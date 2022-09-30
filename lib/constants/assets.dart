@@ -5,7 +5,18 @@ class Assets {
   static const String appLogo = "assets/icons/ic_logo.png";
   static const String icPlayer = "assets/icons/ic_player.png";
   static const String icSoccer = "assets/icons/ic_soccer.png";
+  //static const String icPlayerAvatar = "assets/icons/ic_playerAvatar.png";
+  static const String icMaleProfile = "assets/icons/ic_maleProfile.png";
+  static const String icFemaleProfile = "assets/icons/ic_femaleProfile.png";
   static const String icPlayerAvatar = "assets/icons/ic_playerAvatar.png";
+  static const String icTeamAvatar = "assets/icons/ic_teamAvatar.png";
+  static const String icLeaderMale = "assets/icons/ic_leaderMale.png";
+  static const String icExpertMale = "assets/icons/ic_expertMale.png";
+  static const String icLeague = "assets/icons/ic_league.png";
+  
+  
+  
+  
   static const String icCrown = "assets/icons/ic_crown.png";
   static const String icSmallCrown = "assets/icons/ic_small_crown.png";
   static const String icNotification = "assets/icons/ic_notification.png";
@@ -15,7 +26,7 @@ class Assets {
   
   static const String imgAvatar = "assets/images/img_avatar.png";
   static const String imgChart = "assets/images/img_chart.png";
-  static const String imgPlaceholder = "assets/images/placeholderImage.png";
+  //static const String imgPlaceholder = "assets/images/placeholderImage.png";
   static const String icDrawerPredictions =
       "assets/icons/ic_drawer_predictions.png";
   static const String icDrawerTermsAndService =

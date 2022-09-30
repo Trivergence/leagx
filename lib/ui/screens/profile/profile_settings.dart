@@ -8,6 +8,7 @@ import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/util/utility/image_utitlity.dart';
 import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
@@ -110,6 +111,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                           height: 60.0,
                           width: 60.0,
                           isCircular: true,
+                          placeHolderImg: '',
                         ),
                         UIHelper.verticalSpaceSmall,
                         TextWidget(
@@ -138,6 +140,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                       height: 80.0,
                       width: 80.0,
                       isCircular: true,
+                      placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
                     ),
                   ),
                 ],

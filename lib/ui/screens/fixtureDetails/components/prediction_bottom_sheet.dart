@@ -116,10 +116,10 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
             onPressed: _predictMatch,
           ),
           UIHelper.verticalSpace(20),
-          GradientBorderButton(
-            text: loc.fixtureDetailsBtnExpertAdvise,
-            onPressed: () => _chooseExpert(),
-          ),
+          // GradientBorderButton(
+          //   text: loc.fixtureDetailsBtnExpertAdvise,
+          //   onPressed: () => _chooseExpert(),
+          // ),
         ],
       ),
     );

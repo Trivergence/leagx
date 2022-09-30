@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 
+import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
 import '../../../util/ui/ui_helper.dart';
@@ -20,7 +21,9 @@ class TeamVsWidget extends StatelessWidget {
     return Column(
       children: [
         ImageWidget(
-          imageUrl: image,),
+          imageUrl: image,
+          placeholder: Assets.icTeamAvatar
+        ),
         SizedBox(
           width: SizeConfig.width * 20,
           height: 40,

@@ -1,3 +1,4 @@
+import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
@@ -67,6 +68,7 @@ class FixtureScreen extends StatelessWidget {
                             child: GradientBorderWidget(
                               width: 40.0,
                               height: 40.0,
+                              placeHolderImg: Assets.icLeague,
                               padding: const EdgeInsets.all(5.0),
                               isCircular: true,
                               imageUrl: subscribedLeagues[index].logo,

@@ -45,23 +45,21 @@ class AuthViewModel {
     required AuthType authType,
     required twitter.User user
   }) async {
-    String userEmail = user.screenName;
     int userId = user.id;
-    List<String> fullName = user.name.split(" ");
-    String firstName;
-    String lastName = '';
-    if(fullName.length > 1) {
-      firstName = fullName[0];
-      lastName = fullName[1];
-    } else {
-      firstName = fullName[0];
-    }
+    // List<String> fullName = user.name.split(" ");
+    // String firstName;
+    // String lastName = '';
+    // if(fullName.length > 1) {
+    //   firstName = fullName[0];
+    //   lastName = fullName[1];
+    // } else {
+    //   firstName = fullName[0];
+    // }
     dynamic responce = await ApiService.callPostApi(
       url: AppUrl.socialLogin,
       parameters: {
         "user[email]": "$userId@twitter.com",
-        "user[first_name]": firstName,
-        "user[last_name]": lastName,
+        "user[first_name]": user.name,
         "user[uid]": userId,
         "user[provider]": authType.name
       },

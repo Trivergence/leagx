@@ -14,13 +14,19 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/user/user.dart';
+import '../../util/app_dialogs/confirmation_dialog.dart';
+import '../../util/utility/image_utitlity.dart';
+import '../../widgets/gradient/gradient_border_widget.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
+  DrawerScreen({Key? key}) : super(key: key);
+
+  String userName = '';
+  String userImage = '';
 
   @override
   Widget build(BuildContext context) {
-    String userName = getUserName();
+    getUserName();
     return Drawer(
       backgroundColor: AppColors.colorBackground,
       child: ListView(
@@ -29,11 +35,14 @@ class DrawerScreen extends StatelessWidget {
           Center(
             child: Column(
               children: [
-                Container(
-                  height: 85.0,
-                  width: 85.0,
-                  decoration: const BoxDecoration(shape: BoxShape.circle),
-                  child: Image.asset(Assets.appLogo),
+                GradientBorderWidget(
+                  onPressed: () {},
+                  gradient: AppColors.orangishGradient,
+                  imageUrl: userImage,
+                  height: 80.0,
+                  width: 80.0,
+                  isCircular: true,
+                  placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
                 ),
                 UIHelper.verticalSpaceSmall,
                 TextWidget(
@@ -92,11 +101,12 @@ class DrawerScreen extends StatelessWidget {
           UIHelper.verticalSpaceXL,
           GestureDetector(
             onTap: () async{
-              await preferenceHelper.removeAuthToken();
-              await preferenceHelper.removeUser();
-              context.read<DashBoardViewModel>().clearData();
-              Navigator.pushNamedAndRemoveUntil(
-                  context, Routes.signin, (route) => false);
+              ConfirmationDialog.show(context: context,
+               title: loc.logoutConfirmTitle,
+               positiveBtnTitle: loc.logoutConfirmYes,
+               negativeBtnTitle: loc.logoutConfirmNo,
+               body:loc.logoutConfirmBody, 
+               onPositiveBtnPressed: () => logout(context));
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
@@ -120,12 +130,19 @@ class DrawerScreen extends StatelessWidget {
     );
   }
 
-  String getUserName() {
+  getUserName() {
     User? user = locator<SharedPreferenceHelper>().getUser();
     if(user != null) {
-      return user.firstName! + user.lastName!;
-    } else {
-      return "";
+      userName = user.firstName!;
+      userImage = user.profileImg!;
     }
+  }
+
+  logout(BuildContext context) async {
+    await preferenceHelper.removeAuthToken();
+    await preferenceHelper.removeUser();
+    context.read<DashBoardViewModel>().clearData();
+    Navigator.pushNamedAndRemoveUntil(
+        context, Routes.signin, (route) => false);
   }
 }

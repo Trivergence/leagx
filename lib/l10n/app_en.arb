@@ -38,13 +38,10 @@
 	"adminFixtureDetailCoinTxtPrimaryMatch": "Primary Match",
 	"adminFixtureDetailCoinBtnSave": "Save",
 
-	"authTxtRequired":"required",
 	"authTxtPasswordLength":"Password should be of atleast 6 characters",
 
 	"authSigninTxtSignin": "Sign In",
 	"authSigninTxtEmail": "Email",
-	"authSigninTxtRequired": "required",
-	"authSigninTxtValidEmail":"Please enter valid email",
 	"authSigninTxtPassword": "Password",
 	"authSigninBtnForgotPassword": "Forgot Password ?",
 	"authSigninBtnSignin": "Sign In",
@@ -57,8 +54,6 @@
 
 	"authSignupTxtSignup": "Signup",
 	"authSignupTxtName": "Name",
-	"authSignupTxtRequired": "required",
-	"authSignupTxtValidEmail":"Please enter valid email",
 	"authSignupTxtEmail": "Email",
 	"authSignupTxtPassword": "Password",
 	"authSignupTxtConfirmPassword": "Confirm Password",
@@ -68,8 +63,6 @@
 	"authSignupTxtPasswordNotMatch":"Password doesn't match",
 
 	"authForgotPasswordTxtForgotPassword": "Forgot Password",
-	"authForgotPasswordTxtValidEmail":"Please enter valid email",
-	"authForgotPasswordTxtRequired":"required",
 	"authForgotPasswordTxtEnterEmailDesc": "Enter your email or phone number to retrieve your password.",
 	"authForgotPasswordTxtemailOrPhone": "Email or Phone Number",
 	"authForgotPasswordBtnResetPassword": "Reset Password",
@@ -220,6 +213,20 @@
 	"userBtnAdmin": "Admin",
 	"liveWidgetTxtLive": "LIVE",
 
+	"logoutConfirmTitle": "Logout Confirmation",
+	"logoutConfirmBody": "Are you sure you want to logout?",
+	"logoutConfirmNo": "No",
+	"logoutConfirmYes": "Yes",
+
+	"subscribeConfirmTitle": "Confirm subscription",
+	"subscribeConfirmBody": "Are your sure you want to subscribe this league. This will charge ",
+	"subscribeConfirmCancel": "Cancel",
+	"subscribeConfirmSubscribe": "Subscribe",
+
 	"errorTryAgain": "An error has occured. Try again later",
-	"errorCheckNetwork": "Please check your network connection and try again"
+	"errorCheckNetwork": "Please check your network connection and try again",
+	"errorRequired": "required",
+	"errorInvalidEmail":"Please enter valid email",
+	"errorInvalidPhone":"Please enter valid phone",
+	"errorPasswordLength":"Password must atleast 8 characters"
 }

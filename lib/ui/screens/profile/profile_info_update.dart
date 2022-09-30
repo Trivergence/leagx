@@ -6,8 +6,9 @@ import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/update_profile_args.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/util/ui/validation_helper.dart';
+import 'package:leagx/ui/util/utility/image_utitlity.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/dropdown_form_widget.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
@@ -19,7 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/edit_profile_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-import '../../util/loader/loader.dart';
 
 class ProfileInfoUpdateScreen extends StatefulWidget {
   final UpdateProfileArgs payload;
@@ -77,15 +77,16 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                       child: ImageWidget(
                         imageUrl: widget.payload.imgUrl.isNotEmpty ? widget.payload.imgUrl : null,
                         fileAsset: file != null ? File(file!.path) : null,
+                        placeholder: ImageUtitlity.getRandomProfileAvatar()
                       ),
                     ),
                   ),
                 ),
-                if(widget.payload.imgUrl.isEmpty && file == null) const Positioned(
-                  bottom: 5.0,
-                  right: 5.0,
+                const Positioned(
+                  bottom: 1.0,
+                  right: 1.0,
                   child: GradientWidget(
-                    child: Icon(Icons.camera_alt),
+                    child: Icon(Icons.camera_alt, size: 30,),
                     gradient: AppColors.pinkishGradient,
                   ),
                 )
@@ -102,13 +103,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                   prefix:
                       const IconWidget(iconData: Icons.account_circle_outlined),
                   inputAction: TextInputAction.next,
-                  validator: (value) {
-                    if(value!.isEmpty) {
-                      return "Required";
-                    } else { 
-                      return null;
-                    }
-                  },
+                  validator: (value) => ValidationHelper.validateField(value),
                 ),
                 UIHelper.verticalSpace(15.0),
                 TextFieldWidget(
@@ -125,13 +120,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                   prefix: const IconWidget(iconData: Icons.smartphone),
                   inputAction: TextInputAction.done,
                   inputType: TextInputType.number,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Required";
-                    } else {
-                      return null;
-                    }
-                  },
+                  validator: (value) => ValidationHelper.validatePhone(value),
                 ),
                 UIHelper.verticalSpace(15.0),
                 DropDownFormWidget(
@@ -141,13 +130,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                   onChanged: (value) {
                     selectedGender = value;
                   },
-                  validator: (value) {
-                        if (value == null) {
-                          return "Required";
-                        } else {
-                          return null;
-                        }
-                      },
+                  validator: (value) => ValidationHelper.validateField(value)
                 )
               ],)
             
