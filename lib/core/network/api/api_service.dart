@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/app_constants.dart';
 import 'package:leagx/constants/strings.dart';
@@ -64,6 +65,7 @@ class ApiService {
     } on DioError catch (ex) {
       Loader.hideLoader();
       if (ex.response != null) {
+        debugPrint(ex.response!.data);
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
             ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
@@ -74,7 +76,9 @@ class ApiService {
       ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
       return null;
     } catch(e){
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
       Loader.hideLoader();
       return null;
     }
@@ -115,6 +119,7 @@ class ApiService {
     } on DioError catch (ex) {
       Loader.hideLoader();
       if (ex.response != null) {
+        debugPrint(ex.response!.data);
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
             ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
@@ -125,7 +130,9 @@ class ApiService {
       ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
       return null;
     } catch(e){
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
       Loader.hideLoader();
       return null;
     }
@@ -168,6 +175,7 @@ class ApiService {
         return null;
       }
     } on DioError catch (ex) {
+      debugPrint(ex.response!.data);
       Loader.hideLoader();
       print('error response: ${ex.response}');
       if (ex.response != null) {
@@ -222,6 +230,7 @@ class ApiService {
         return null;
       }
     } on DioError catch (ex) {
+      debugPrint(ex.response!.data);
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =
@@ -275,6 +284,7 @@ class ApiService {
         return [];
       }
     } on DioError catch (ex) {
+      debugPrint(ex.response!.data);
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =
@@ -327,6 +337,7 @@ class ApiService {
         return false;
       }
     } on DioError catch (ex) {
+      debugPrint(ex.response!.data);
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =

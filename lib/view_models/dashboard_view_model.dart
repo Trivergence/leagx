@@ -5,6 +5,7 @@ import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/subscribed_league.dart';
+import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -20,6 +21,7 @@ import '../models/user/user.dart';
 
 class DashBoardViewModel extends BaseModel {
 
+  UserSummary? _userSummary;
   List<Fixture> _subscribedMatches = [];
   List<SubscribedLeague> _subscribedLeagues = [];
   List<News> _news = [];
@@ -30,16 +32,18 @@ class DashBoardViewModel extends BaseModel {
   List<int> get subscribedLeagueIds => _subscribedLeagueIds;
   List<News> get getNews => _news;
   List<Leader> get getLeaders => _leaders;
+  UserSummary? get userSummary => _userSummary; 
   Future<void> getData() async {
     setBusy(true);
     try {
       await getSubscribedLeagues();
       await getAllLeaders();
+      await getUserSummary();
+      setBusy(false);
       if(subscribedLeagues.isNotEmpty) {
         await getAllNews();
         await getSubscribedMatches();
       }
-      setBusy(false);
     } on Exception catch (_) {
       setBusy(false);
     }
@@ -216,6 +220,13 @@ class DashBoardViewModel extends BaseModel {
     } on Exception catch (e) {
       setBusy(false);
       return [];
+    }
+  }
+  getUserSummary() async {
+    User? user = preferenceHelper.getUser();
+    if(user != null) {
+      String completeUrl = AppUrl.getUser + user.id.toString();
+      _userSummary = await  ApiService.callGetApi(url: completeUrl, modelName: ApiModels.userSummary);
     }
   }
   clearData() {

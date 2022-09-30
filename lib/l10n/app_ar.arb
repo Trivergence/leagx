@@ -101,6 +101,9 @@
 	"dashboardHomeTxtUpcomingMatches": "المباريات القادمة",
 	"dashboardHomeTxtViewAll": "عرض جميع المباريات",
 	"dashboardHomeTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
+	"dashboardHomeTxtPredictions": "التنبؤات",
+	"dashboardHomeTxtWiningRatio": "نسبة الفوز",
+	"dashboardHomeTxtEarnedCoid": "عملة مكتسبة",
 
 	"dashboardLeaderTxtPredictions": "التوقعات",
 	"dashboardLeaderTxtSuccess": "نجاح",

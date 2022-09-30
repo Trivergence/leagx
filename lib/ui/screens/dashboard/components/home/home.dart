@@ -1,5 +1,6 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/match_args.dart';
+import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/components/analytics_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -21,11 +22,14 @@ class HomeScreen extends StatelessWidget {
 
   List<Fixture> upcomingMatches = [];
   List<Leader> listOfLeaders = [];
+  UserSummary? _userSummary;
 
   @override
   Widget build(BuildContext context) {
-    upcomingMatches = context.read<DashBoardViewModel>().subscribedMatches;
-    listOfLeaders = context.read<DashBoardViewModel>().getLeaders;
+    DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
+    upcomingMatches = dashBoardViewModel.subscribedMatches;
+    listOfLeaders = dashBoardViewModel.getLeaders;
+    _userSummary = dashBoardViewModel.userSummary;
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
@@ -75,13 +79,13 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AnalyticsWidget(
-                  firstLabel: 'Predictions',
-                  firstValue: '0.0',
-                  secondLabel: 'Winning Ratio',
-                  secondValue: '0.0',
-                  thirdLabel: 'Earned Coin',
-                  thirdValue: '0',
+                if (_userSummary != null) AnalyticsWidget(
+                  firstLabel: loc.dashboardHomeTxtPredictions,
+                  firstValue: _userSummary!.totalPredictions.toString(),
+                  secondLabel: loc.dashboardHomeTxtWiningRatio,
+                  secondValue: _userSummary!.predictionSuccessRate.toString(),
+                  thirdLabel: loc.dashboardHomeTxtEarnedCoid,
+                  thirdValue: _userSummary!.coinEarned.toString(),
                 ),
                  TextWidget(
                   text: loc.dashboardHomeTxtUpcomingMatches,
