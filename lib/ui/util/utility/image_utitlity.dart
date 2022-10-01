@@ -35,7 +35,8 @@ class ImageUtitlity {
   static String getRandomProfileAvatar() {
     List<String> listOfAvatars = [Assets.icMaleProfile, Assets.icLeaderMale, Assets.icExpertMale];
     final _random = Random();
-    String image = listOfAvatars[_random.nextInt(listOfAvatars.length)];
+    //String image = listOfAvatars[_random.nextInt(listOfAvatars.length)];
+    String image = listOfAvatars[0];
     return image;
   }
 }
