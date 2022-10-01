@@ -18,7 +18,7 @@ class Feed extends StatelessWidget {
 
     listOfNews = context.watch<DashBoardViewModel>().getNews;
     return SizedBox(
-      //height: double.infinity,
+      height: double.infinity,
       child: listOfNews.isNotEmpty ? ListView.builder(
           shrinkWrap: true,
           itemCount: listOfNews.length,

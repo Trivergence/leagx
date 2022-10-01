@@ -43,8 +43,9 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
               UIHelper.verticalSpaceLarge,
               PasswordTextField(
-                  controller: _passwordController,
-                  hint: loc.authResetPasswordTxtPassword),
+                inputAction: TextInputAction.next,
+                controller: _passwordController,
+                hint: loc.authResetPasswordTxtPassword),
               UIHelper.verticalSpaceMedium,
               PasswordTextField(
                 controller: _confirmPasswordController,
