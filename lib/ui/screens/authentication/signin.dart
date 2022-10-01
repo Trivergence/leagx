@@ -24,6 +24,8 @@ import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -102,6 +104,11 @@ class SigninScreen extends StatelessWidget {
                   if (ValidationUtils.isValid(loginResponse)) {
                     preferenceHelper.saveAuthToken(loginResponse!.apiToken);
                     preferenceHelper.saveUser(loginResponse);
+                    DashBoardViewModel dashBoardModel = context.read<DashBoardViewModel>();
+                    await dashBoardModel.getSubscribedLeagues();
+                    if(dashBoardModel.subscribedLeagues.isEmpty) {
+                      AuthViewModel.subscribeOneLeague(loginResponse.id);
+                    }
                     ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
                         TOAST_TYPE.success);
                     Navigator.pushNamed(context, Routes.dashboard);

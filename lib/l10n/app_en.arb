@@ -112,6 +112,9 @@
 	"dashboardHomeTxtUpcomingMatches": "Upcoming Matches",
 	"dashboardHomeTxtViewAll": "View all matches",
 	"dashboardHomeTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
+	"dashboardHomeTxtPredictions": "Predictions",
+	"dashboardHomeTxtWiningRatio": "Winning Ratio",
+	"dashboardHomeTxtEarnedCoid": "Earned Coin",
 
 	"dashboardLeaderTxtPredictions": "predictions",
 	"dashboardLeaderTxtWin": "Win",
@@ -197,6 +200,10 @@
 	"profileProfileInfoMale": "Male",
 	"profileProfileInfoFemale": "Female",
 	"profileProfileInfoUpdateSuccesful": "Profile udpated successfully",
+	"profileProfileInfoUpdateSelectOption": "Select Option",
+	"profileProfileInfoUpdateCamera": "Camera",
+	"profileProfileInfoUpdateGallery": "Gallery",
+
 
 	"termsOfServiceTxtTermsOfServices": "Terms of Services",
 	"termsOfServiceBtnAgree": "Agree",

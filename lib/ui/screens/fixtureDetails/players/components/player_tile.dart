@@ -1,3 +1,4 @@
+import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
@@ -34,6 +35,7 @@ class PlayerTile extends StatelessWidget {
                   height: 44.0,
                   isCircular: true,
                   imageUrl: playerOneImg,
+                  placeHolderImg: Assets.icPlayerAvatar,
                   onPressed: () {},
                   gradient: AppColors.orangishGradient,
                 ),
@@ -68,6 +70,7 @@ class PlayerTile extends StatelessWidget {
                   height: 44.0,
                   isCircular: true,
                   imageUrl: playerTwoImg,
+                  placeHolderImg: Assets.icPlayerAvatar,
                   onPressed: () {},
                   gradient: AppColors.orangishGradient,
                 ),

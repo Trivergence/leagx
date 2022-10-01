@@ -7,6 +7,7 @@ import 'package:leagx/models/players.dart';
 import 'package:leagx/models/prediction.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/models/user/userdata.dart';
+import 'package:leagx/models/user_summary.dart';
 
 import '../../../models/dashboard/news.dart';
 import '../../../models/subscribed_league.dart';
@@ -16,6 +17,7 @@ class ApiModels {
   static const String error = 'Error';
   static const String forgotPassword = "FORGOT_PASSWORD";
   static const String user = "USER";
+  static const String userSummary = "USER_SUMMARY";
   static const String upcomingMatches = "UPCOMING_MATCHES";
   static const String getLeagues = "GET_LEAGUES";
   static const String getNews = "GET_NEWS";
@@ -35,6 +37,8 @@ class ApiModels {
         return User.fromJson(json);
       case userData:
         return UserData.fromJson(json);
+      case userSummary:
+        return UserSummary.fromJson(json);
     }
   }
   static dynamic getListOfObjects(String modelName, dynamic json) {

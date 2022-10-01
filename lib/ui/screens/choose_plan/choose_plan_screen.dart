@@ -25,13 +25,10 @@ class ChoosePlanScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              CircleAvatar(
-                child: ImageWidget(
-                  imageUrl: leagueData.leagueImg,
-                  placeholder: Assets.icPlayerAvatar
-                  ),
-                radius: 35,
-              ),
+              ImageWidget(
+                imageUrl: leagueData.leagueImg,
+                placeholder: Assets.icPlayerAvatar
+                ),
               UIHelper.verticalSpace(8),
               TextWidget(text: leagueData.leagueTitle),
               UIHelper.verticalSpace(70),

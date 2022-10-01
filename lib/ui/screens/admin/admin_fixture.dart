@@ -76,6 +76,7 @@ class AdminFixtureScreen extends StatelessWidget {
                   ),
                   UIHelper.verticalSpaceSmall,
                   for(int i = 0; i<5 ; i++) FixtureWidget(
+                      isOver: true,
                       leagueName: 'UEFA Champion League',
                       scheduledDate: DateTime(2022,01,01),
                       teamOneFlag: Assets.ufcFlag,

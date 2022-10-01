@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/update_profile_args.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -11,7 +10,6 @@ import 'package:leagx/ui/util/ui/validation_helper.dart';
 import 'package:leagx/ui/util/utility/image_utitlity.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/dropdown_form_widget.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
@@ -33,6 +31,7 @@ class ProfileInfoUpdateScreen extends StatefulWidget {
 class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
+  final FocusNode _passwordNode = FocusNode();
 
   final TextEditingController _emailController = TextEditingController();
 
@@ -71,7 +70,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                   onGalleryClick: () => _pickImage(ImageSource.gallery)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(180),
-                    child: Container(
+                    child: SizedBox(
                       width: 80.0,
                       height: 80.0,
                       child: ImageWidget(
@@ -85,10 +84,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                 const Positioned(
                   bottom: 1.0,
                   right: 1.0,
-                  child: GradientWidget(
-                    child: Icon(Icons.camera_alt, size: 30,),
-                    gradient: AppColors.pinkishGradient,
-                  ),
+                  child: Icon(Icons.camera_alt, size: 30, color: AppColors.colorWhite,),
                 )
               ],
             ),

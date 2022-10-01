@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/ui/util/utility/date_utility.dart';
 import 'package:leagx/ui/util/utility/image_utitlity.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/dimens.dart';
@@ -21,6 +23,7 @@ class NewsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale locale = context.read<LocalizationProvider>().getLocale;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
       margin: const EdgeInsets.only(right: 16.0, left: 16, bottom: 10.0),
@@ -54,7 +57,7 @@ class NewsTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                 TextWidget(text: postedBy),
-                TextWidget(text: DateUtility.getRemainingTime(when),
+                TextWidget(text: DateUtility.getRemainingTime(when, locale),
                 textSize: Dimens.textXS,
                 color: isApproval == true ? AppColors.colorCyan : AppColors.colorYellow,)
               ],),

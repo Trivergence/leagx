@@ -99,17 +99,17 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
             ],
           ),
           UIHelper.verticalSpace(20),
-          Row(
-            children: [
-              CheckBoxWidget(
-                onPressed: (isChecked) => isPublic = isChecked,
-              ),
-              UIHelper.horizontalSpace(13),
-              TextWidget(
-                text: loc.fixtureDetailsTxtMakeMyPredictPublic,
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     CheckBoxWidget(
+          //       onPressed: (isChecked) => isPublic = isChecked,
+          //     ),
+          //     UIHelper.horizontalSpace(13),
+          //     TextWidget(
+          //       text: loc.fixtureDetailsTxtMakeMyPredictPublic,
+          //     ),
+          //   ],
+          // ),
           UIHelper.verticalSpace(30),
           MainButton(
             text: loc.fixtureDetailsBtnSubmit,
