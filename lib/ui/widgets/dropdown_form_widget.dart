@@ -16,10 +16,7 @@ class DropDownFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    listOfGender = {
-      "male": loc.profileProfileInfoMale,
-      "female": loc.profileProfileInfoFemale,
-    };
+    initializeData();
     return DropdownButtonFormField<String>(
           iconEnabledColor: AppColors.colorWhite,
           iconDisabledColor: AppColors.colorWhite,
@@ -89,4 +86,11 @@ class DropDownFormWidget extends StatelessWidget {
         ),
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       );
+
+  void initializeData() {
+    listOfGender = {
+      "male": loc.profileProfileInfoMale,
+      "female": loc.profileProfileInfoFemale,
+    };
+  }
 }

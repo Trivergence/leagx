@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
@@ -63,10 +64,18 @@ class _ScorePickerState extends State<ScorePicker> {
         
         items: [
           for(int i = 0; i < totalScores.length ; i++) Center(
-            child: TextWidget(text: totalScores[i].toString(),
-                 textSize: Dimens.textRegular,
-                 fontWeight: i == currentIndex? FontWeight.w900 : FontWeight.w400,
-                 ),
+            child: i == currentIndex ? GradientWidget(
+              gradient: AppColors.pinkishGradient,
+              child: TextWidget(text: totalScores[i].toString(),
+                   textSize: Dimens.textMedium,
+                   fontWeight: FontWeight.bold
+                   ),
+            )
+            : TextWidget(
+                text: totalScores[i].toString(),
+                textSize: Dimens.textRegular,
+                fontWeight: FontWeight.w400,
+              ),
           )
         ]
         // totalScores.map((score) {

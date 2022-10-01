@@ -7,22 +7,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/core/network/api/api_service.dart';
 import 'package:leagx/core/network/app_url.dart';
-import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
-import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 
 import '../core/network/api/api_models.dart';
 import '../core/sharedpref/sharedpref.dart';
 import '../models/user/user.dart';
-import '../routes/routes.dart';
 import '../ui/screens/profile/components/image_picker_sheet.dart';
 import '../ui/util/toast/toast.dart';
 import '../ui/util/validation/validation_utils.dart';
 
 class EditProfileViewModel extends BaseModel {
-
   updateProfile({ required BuildContext context,
     required File imgFile,
     required String userName, 

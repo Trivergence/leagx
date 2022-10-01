@@ -28,26 +28,31 @@ class PredicitonsScreen extends StatelessWidget {
         appBar: AppBarWidget(
           title: loc.predictionSTxtPredictions,
         ),
-        body: listOfPrediction.isNotEmpty ? ListView.builder(
-          itemCount: listOfPrediction.length,
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(
-              horizontal: Dimens.horizontalPadding,
-              vertical: Dimens.verticalPadding),
-          itemBuilder: (context, index) {
-            Prediction prediction = listOfPrediction[index];
-            Match match = prediction.match;
-            return PredictionWidget(
-              teamOneFlag: match.firstTeamLogo!,
-              teamOneName: match.firstTeamName!,
-              teamOneScore: prediction.firstTeamScore,
-              teamTwoFlag: match.secondTeamLogo!,
-              teamTwoName: match.secondTeamName!,
-              teamTwoScore: prediction.secondTeamScore,
-              predictionRate: prediction.accuratePercentage.toString(),
-              isPending: isPending(prediction.status),
-            );
-          },
+        body: listOfPrediction.isNotEmpty ? SizedBox(
+          height: double.infinity,
+          child: ListView.builder(
+            itemCount: listOfPrediction.length,
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(
+                horizontal: Dimens.horizontalPadding,
+                vertical: Dimens.verticalPadding),
+            itemBuilder: (context, index) {
+              Prediction prediction = listOfPrediction[index];
+              Match match = prediction.match;
+              return PredictionWidget(
+                teamOneFlag: match.firstTeamLogo!,
+                teamOneName: match.firstTeamName!,
+                teamOneScore: prediction.firstTeamScore,
+                teamTwoFlag: match.secondTeamLogo!,
+                teamTwoName: match.secondTeamName!,
+                teamTwoScore: prediction.secondTeamScore,
+                predictionRate: prediction.accuratePercentage != null 
+                  ? prediction.accuratePercentage.toString()
+                  : "0.0",
+                isPending: isPending(prediction.status),
+              );
+            },
+          ),
         )
         : Center(child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),

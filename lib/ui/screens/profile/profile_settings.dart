@@ -17,6 +17,8 @@ import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/settings_tile.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/edit_profile_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/update_profile_args.dart';
 import '../../../models/user/user.dart';
@@ -38,6 +40,16 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   late String phone;
 
   late String gender;
+  late Map<String, String> genders;
+
+  @override
+  void initState() {
+    genders = {
+      "male": loc.profileProfileInfoMale,
+      "female": loc.profileProfileInfoFemale,
+    };
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +177,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               ),
               UIHelper.verticalSpace(15.0),
               if(gender.isNotEmpty) SettingsTile(
-                text: StringUtility.capitalizeFirstLetter(gender),
+                text: genders[gender]!,
                 iconData: Icons.perm_contact_cal,
                 onTap: () {},
               ),

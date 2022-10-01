@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:leagx/constants/colors.dart';
@@ -18,6 +20,8 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/edit_profile_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../../util/ui/keyboardoverlay.dart';
+
 
 class ProfileInfoUpdateScreen extends StatefulWidget {
   final UpdateProfileArgs payload;
@@ -29,6 +33,7 @@ class ProfileInfoUpdateScreen extends StatefulWidget {
 }
 
 class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
+  late StreamSubscription<bool> keyboardSubscription;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final FocusNode _passwordNode = FocusNode();
@@ -45,6 +50,9 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
 
   @override
   void initState() {
+    var keyboardVisibilityController = KeyboardVisibilityController();
+    startNodeListener(keyboardVisibilityController);
+    
     initializeData();
     super.initState();
   }
@@ -112,6 +120,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                 UIHelper.verticalSpace(15.0),
                 TextFieldWidget(
                   textController: _phoneController,
+                  focusNode: _passwordNode,
                   hint: '1234567890',
                   prefix: const IconWidget(iconData: Icons.smartphone),
                   inputAction: TextInputAction.done,
@@ -140,6 +149,14 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    if (Platform.isIOS) {
+      keyboardSubscription.cancel();
+      _passwordNode.dispose();
+    } 
+    super.dispose();
   }
 
   void initializeData() {
@@ -186,5 +203,35 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
       }
       
     }
+  }
+
+  void startkeyboardListener(KeyboardVisibilityController keyboardVisibilityController) {
+    if (Platform.isIOS) {
+      keyboardSubscription = keyboardVisibilityController.onChange.listen(
+        (visible) {
+          if (visible) {
+            KeyboardOverlay.showOverlay(context);
+          } else {
+            KeyboardOverlay.removeOverlay();
+          }
+        },
+      );
+    }
+  }
+
+  void startNodeListener(
+      KeyboardVisibilityController keyboardVisibilityController) {
+    _passwordNode.addListener(
+      () {
+        if (_passwordNode.hasFocus) {
+          startkeyboardListener(keyboardVisibilityController);
+        } else {
+          if (Platform.isIOS) {
+            keyboardSubscription.cancel();
+            KeyboardOverlay.removeOverlay();
+          }
+        }
+      },
+    );
   }
 }

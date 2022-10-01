@@ -67,35 +67,35 @@ class DrawerScreen extends StatelessWidget {
             imageAsset: Assets.icDrawerPredictions,
             title: loc.drawerBtnMyPredictions,
             onTap: () {
-              Navigator.pushNamed(context, Routes.predictions);
+              Navigator.popAndPushNamed(context, Routes.predictions);
             },
           ),
           DrawerTile(
             icon: Icons.help_outline,
             title: loc.drawerBtnFaqs,
             onTap: () {
-              Navigator.pushNamed(context, Routes.faqs);
+              Navigator.popAndPushNamed(context, Routes.faqs);
             },
           ),
           DrawerTile(
             icon: Icons.gpp_good_outlined,
             title: loc.drawerBtnPrivacyPolicy,
             onTap: () {
-              Navigator.pushNamed(context, Routes.privacyPolicy);
+              Navigator.popAndPushNamed(context, Routes.privacyPolicy);
             },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerTermsAndService,
             title: loc.drawerBtnTermsOfServices,
             onTap: () {
-              Navigator.pushNamed(context, Routes.termsService);
+              Navigator.popAndPushNamed(context, Routes.termsService);
             },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerAdmin,
             title: loc.drawerBtnAdmin,
             onTap: () {
-              Navigator.pushNamed(context, Routes.admin);
+              Navigator.popAndPushNamed(context, Routes.admin);
             },
           ),
           UIHelper.verticalSpaceXL,

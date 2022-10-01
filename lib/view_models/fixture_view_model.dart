@@ -3,6 +3,7 @@ import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/players.dart';
 import 'package:leagx/models/prediction.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
@@ -108,7 +109,7 @@ class FixtureDetailViewModel extends BaseModel {
       body: body);
     if(success) {
       await getUserPredictions();
-      ToastMessage.show("Prediction submitted successfully", TOAST_TYPE.success);
+      ToastMessage.show(loc.fixtureDetailsPredictionSuccess, TOAST_TYPE.success);
       context.read<DashBoardViewModel>().getUserSummary();
       context.read<DashBoardViewModel>().getAllLeaders();
       context.read<DashBoardViewModel>().getData();
