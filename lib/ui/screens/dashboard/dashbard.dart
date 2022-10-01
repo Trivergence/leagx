@@ -149,7 +149,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             UIHelper.verticalSpace(5.0),
             TextWidget(
               text: title,
-              textSize: 12,
+              textSize: 10,
               fontWeight: FontWeight.w400,
               color: AppColors.colorWhite.withOpacity(0.5),
             ),
@@ -168,7 +168,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             GradientWidget(
               child: TextWidget(
                 text: title,
-                textSize: 8,
+                textSize: 12,
                 fontWeight: FontWeight.w400,
                 color: AppColors.colorWhite.withOpacity(0.5),
               ),
