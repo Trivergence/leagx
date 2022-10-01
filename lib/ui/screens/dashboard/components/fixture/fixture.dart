@@ -12,6 +12,7 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/network/internet_info.dart';
 import '../../../../../models/dashboard/fixture.dart';
 import '../../../../../models/match_args.dart';
 import '../../../../../view_models/dashboard_view_model.dart';
@@ -119,12 +120,17 @@ class FixtureScreen extends StatelessWidget {
                       matchStatus: match.matchStatus,
                       teamOneScore: match.matchHometeamScore,
                       teamTwoScore: match.matchAwayteamScore,
-                      onTap: () => Navigator.pushNamed(context, Routes.fixtureDetails,
-                      arguments: MatchArgs(
-                          matchId: match.matchId,
-                          leagueName: match.leagueName,
-                        )
-                      ),
+                      onTap: () async {
+                        bool isConnected = await InternetInfo.isConnected();
+                        if (isConnected) {
+                          Navigator.pushNamed(context, Routes.fixtureDetails,
+                          arguments: MatchArgs(
+                            matchId: match.matchId,
+                            leagueName: match.leagueName,
+                          )
+                          );
+                        }
+                      }
                     );
                   }),
                 )

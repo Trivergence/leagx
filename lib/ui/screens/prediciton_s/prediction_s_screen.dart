@@ -11,6 +11,8 @@ import 'package:leagx/ui/widgets/placeholder_tile.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/network/internet_info.dart';
+
 class PredicitonsScreen extends StatelessWidget {
   PredicitonsScreen({Key? key}) : super(key: key);
 
@@ -22,7 +24,12 @@ class PredicitonsScreen extends StatelessWidget {
     listOfPrediction = fixtureModel.getPredictions;
     return RefreshIndicator(
       backgroundColor: AppColors.textFieldColor,
-      onRefresh: () async => await fixtureModel.getUserPredictions(),
+      onRefresh: () async {
+        bool isConnected = await InternetInfo.isConnected();
+        if (isConnected) {
+          await fixtureModel.getUserPredictions();
+        }
+      },
       child: Scaffold(
         backgroundColor: AppColors.colorBackground,
         appBar: AppBarWidget(

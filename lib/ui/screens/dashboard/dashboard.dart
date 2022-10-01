@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/network/internet_info.dart';
 import '../../../view_models/subscription_viewmodel.dart';
 import '../../../view_models/dashboard_view_model.dart';
 import '../../widgets/loading_widget.dart';
@@ -57,11 +58,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         create: false,
         model: context.read<DashBoardViewModel>(),
         onModelReady: (DashBoardViewModel dashboardModel) {
-          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) async { 
-            await dashboardModel.getData();
-            await context.read<SubscriptionViewModel>().getSubscriptionPlans();
-            await context.read<SubscriptionViewModel>().getLeagues();
-            await context.read<FixtureDetailViewModel>().getUserPredictions();
+          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) async {
+            bool isConnected = await InternetInfo.isConnected();
+            if (isConnected) {
+              await dashboardModel.getData();
+              await context.read<SubscriptionViewModel>().getSubscriptionPlans();
+              await context.read<SubscriptionViewModel>().getLeagues();
+              await context.read<FixtureDetailViewModel>().getUserPredictions();
+            }
           });
         },
         builder: (context, DashBoardViewModel dashboardModel, _) {
@@ -74,7 +78,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 icon: const IconWidget(
                   iconData: Icons.refresh,
                 ),
-                onPressed: () => dashboardModel.getData(),),
+                onPressed: () async { 
+                  bool isConnected = await InternetInfo.isConnected();
+                  if(isConnected) {
+                    dashboardModel.getData();
+                  }
+                }),
                 IconButton(
                 icon: const IconWidget(
                   iconData: Icons.notifications_outlined,

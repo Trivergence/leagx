@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/edit_profile_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/network/internet_info.dart';
 import '../../util/ui/keyboardoverlay.dart';
 
 
@@ -52,7 +53,6 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
   void initState() {
     var keyboardVisibilityController = KeyboardVisibilityController();
     startNodeListener(keyboardVisibilityController);
-    
     initializeData();
     super.initState();
   }
@@ -167,41 +167,44 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
   }
 
   _pickImage(ImageSource pickerType) async {
-    Navigator.of(context).pop();
-    XFile? image = await _picker.pickImage(
-      source: pickerType,
-    );
-
-    if (image != null) {
-      CroppedFile? croppedFile = await profileModel.compressImage(image);
-      if(croppedFile != null) {
-        setState(() {
-          file = croppedFile;
-        });
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected) {
+      Navigator.of(context).pop();
+      XFile? image = await _picker.pickImage(
+        source: pickerType,
+      );
+      if (image != null) {
+        CroppedFile? croppedFile = await profileModel.compressImage(image);
+        if(croppedFile != null) {
+          setState(() {
+            file = croppedFile;
+          });
+        }
       }
     }
   }
 
   Future<void> _updateProfile() async {
-      
-    if (_formKey.currentState!.validate()) {
-      if(file != null) {
-        await profileModel.updateProfile(
-          context: context,
-          imgFile: File(file!.path),
-          userName: _nameController.text,
-          userEmail: _emailController.text,
-          userPhone: _phoneController.text,
-          userGender: selectedGender!);
-      } else {
-        await profileModel.updateProfileWoImage(
-          context: context,
-          userName: _nameController.text,
-          userEmail: _emailController.text,
-          userPhone: _phoneController.text,
-          userGender: selectedGender!);
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected) {
+      if (_formKey.currentState!.validate()) {
+        if(file != null) {
+          await profileModel.updateProfile(
+            context: context,
+            imgFile: File(file!.path),
+            userName: _nameController.text,
+            userEmail: _emailController.text,
+            userPhone: _phoneController.text,
+            userGender: selectedGender!);
+        } else {
+          await profileModel.updateProfileWoImage(
+            context: context,
+            userName: _nameController.text,
+            userEmail: _emailController.text,
+            userPhone: _phoneController.text,
+            userGender: selectedGender!);
+        }
       }
-      
     }
   }
 

@@ -1,29 +1,16 @@
-// ignore_for_file: unused_import
-
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:leagx/constants/app_constants.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/app_url.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
-import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../../../models/dashboard/league.dart';
-import '../../../models/dashboard/news.dart';
-import '../../../models/leader.dart';
-import '../../../models/players.dart';
-import '../../../models/subscribed_league.dart';
-import '../../../models/subscription_plan.dart';
+import '../internet_info.dart';
 
 class ApiService {
   
@@ -44,24 +31,22 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      var connectivityResult = await Connectivity().checkConnectivity();
-      if (connectivityResult != ConnectivityResult.none) {
+      bool isConnected = await InternetInfo.isConnected();
+      if (isConnected) {
         Response _response = await dio.post(
           url,
           options: Options(headers: headers),
           data: body,
           queryParameters: parameters,
         );
-        print('post response: ${_response.data}');
+        debugPrint('post response: ${_response.data}');
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           dynamic modelObj =
               await ApiModels.getModelObjects(modelName, _response.data);
           return modelObj;
         }
-      } else {
-        ToastMessage.show(Strings.noInternet,TOAST_TYPE.error );
-        return null;
-      }
+      } 
+      return null;
     } on DioError catch (ex) {
       Loader.hideLoader();
       if (ex.response != null) {
@@ -98,27 +83,24 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      var connectivityResult = await Connectivity().checkConnectivity();
-      if (connectivityResult != ConnectivityResult.none) {
+      bool isConnected = await InternetInfo.isConnected();
+      if (isConnected) {
         Response _response = await dio.get(
           url,
           options: Options(headers: headers),
           queryParameters: parameters,
         );
-        print('get response: ${_response.data}');
+        debugPrint('get response: ${_response.data}');
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           dynamic modelObj =
               await ApiModels.getModelObjects(modelName, _response.data);
           return modelObj;
         }
-      } else {
-        ToastMessage.show(Strings.noInternet,TOAST_TYPE.error );
-        return null;
       }
+      return null;
     } on DioError catch (ex) {
       Loader.hideLoader();
       if (ex.response != null) {
-        // debugPrint(ex.response!.data);
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
             ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
@@ -153,30 +135,24 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      var connectivityResult = await Connectivity().checkConnectivity();
-      if (connectivityResult != ConnectivityResult.none) {
-        
+      bool isConnected = await InternetInfo.isConnected();
+      if (isConnected) {
         Response _response = await dio.put(
           url,
           options: Options(headers: headers),
           data: body,
           queryParameters: parameters,
         );
-        dio.interceptors.add(PrettyDioLogger());
-        print('put response: ${_response.data}');
+        debugPrint('put response: ${_response.data}');
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           dynamic modelObj =
               await ApiModels.getModelObjects(modelName, _response.data);
           return modelObj;
         }
-      } else {
-        ToastMessage.show(Strings.noInternet,TOAST_TYPE.error );
-        return null;
       }
+      return null;
     } on DioError catch (ex) {
-      // debugPrint(ex.response!.data);
       Loader.hideLoader();
-     // print('error response: ${ex.response}');
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
@@ -188,7 +164,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
       return null;
     } catch(e){
-      print(e.toString());
+      debugPrint(e.toString());
       Loader.hideLoader();
       return null;
     }
@@ -210,26 +186,23 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      var connectivityResult = await Connectivity().checkConnectivity();
-      if (connectivityResult != ConnectivityResult.none) {
+      bool isConnected = await InternetInfo.isConnected();
+      if (isConnected) {
         Response _response = await dio.delete(
           url,
           options: Options(headers: headers),
           data: body,
           queryParameters: parameters,
         );
-        print('delete response: ${_response.data}');
+        debugPrint('delete response: ${_response.data}');
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           dynamic modelObj =
               await ApiModels.getModelObjects(modelName, _response.data);
           return modelObj;
         }
-      } else {
-        ToastMessage.show(Strings.noInternet,TOAST_TYPE.error );
-        return null;
-      }
+      } 
+      return null;
     } on DioError catch (ex) {
-      // debugPrint(ex.response!.data);
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =
@@ -242,7 +215,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
       return null;
     } catch(e){
-      print(e.toString());
+      debugPrint(e.toString());
       Loader.hideLoader();
       return null;
     }
@@ -261,8 +234,8 @@ class ApiService {
         baseUrl: baseUrl,
       );
       var dio = Dio(options);
-      var connectivityResult = await Connectivity().checkConnectivity();
-      if (connectivityResult != ConnectivityResult.none) {
+      bool isConnected = await InternetInfo.isConnected();
+      if (isConnected) {
         Response _response = await dio.get(
           url,
           options: Options(headers: headers),
@@ -278,12 +251,9 @@ class ApiService {
           }
           
         }
-      } else {
-        ToastMessage.show(Strings.noInternet, TOAST_TYPE.error);
-        return [];
       }
+      return [];
     } on DioError catch (ex) {
-      // debugPrint(ex.response!.data);
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =
@@ -300,7 +270,6 @@ class ApiService {
       Loader.hideLoader();
       return [];
     }
-    return [];
   }
   static Future<bool> postWoResponce({
     required String url,
@@ -318,25 +287,21 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      dio.interceptors.add(PrettyDioLogger(requestBody: true));
-      var connectivityResult = await Connectivity().checkConnectivity();
-      if (connectivityResult != ConnectivityResult.none) {
+      bool isConnected = await InternetInfo.isConnected();
+      if (isConnected) {
         Response _response = await dio.post(
           url,
           options: Options(headers: headers),
           data: body,
           queryParameters: parameters,
         );
-        print('post response: ${_response.data}');
+        debugPrint('post response: ${_response.data}');
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           return true;
         }
-      } else {
-        ToastMessage.show(Strings.noInternet, TOAST_TYPE.error);
-        return false;
-      }
+      } 
+      return false;
     } on DioError catch (ex) {
-      // debugPrint(ex.response!.data);
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =
@@ -351,7 +316,7 @@ class ApiService {
       ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
       return false;
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       Loader.hideLoader();
       return false;
     }

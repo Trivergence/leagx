@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/network/internet_info.dart';
 import '../../../../../models/dashboard/fixture.dart';
 import '../../../../../models/leader.dart';
 import '../../../../widgets/gradient/gradient_border_widget.dart';
@@ -108,12 +109,16 @@ class HomeScreen extends StatelessWidget {
                         isOver: Utility.isMatchOver(upcomingMatches[i].matchStatus!),
                         teamOneScore: upcomingMatches[i].matchHometeamScore,
                         teamTwoScore: upcomingMatches[i].matchAwayteamScore,
-                        onTap: () {
-                          Navigator.pushNamed(context,
-                          Routes.fixtureDetails,
-                          arguments: MatchArgs(matchId: upcomingMatches[i].matchId,
-                              leagueName: upcomingMatches[i].leagueName,
-                           ));}
+                        onTap: () async {
+                          bool isConnected = await InternetInfo.isConnected();
+                          if (isConnected) {
+                            Navigator.pushNamed(context,
+                            Routes.fixtureDetails,
+                            arguments: MatchArgs(matchId: upcomingMatches[i].matchId,
+                                leagueName: upcomingMatches[i].leagueName,
+                            ));
+                          }
+                        }
                       ),
                   ],
                 ) : PlaceHolderTile(height: 80, msgText: loc.dashboardHomeTxtEmptyList),

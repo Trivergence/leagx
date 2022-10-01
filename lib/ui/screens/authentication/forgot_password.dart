@@ -16,6 +16,8 @@ import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
 
+import '../../../core/network/internet_info.dart';
+
 class ForgotPasswordScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
@@ -64,17 +66,20 @@ class ForgotPasswordScreen extends StatelessWidget {
             MainButton(
               text: loc.authForgotPasswordBtnResetPassword,
               onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  Loader.showLoader();
-                  ForgotPassword? forgotPasswordResponse =
-                      await AuthViewModel.forgotPassword(
-                    email: _emailController.text,
-                  );
-                  Loader.hideLoader();
-                  if (ValidationUtils.isValid(forgotPasswordResponse)) {
-                    ToastMessage.show(
-                        forgotPasswordResponse!.success!, TOAST_TYPE.msg);
-                    Navigator.pushReplacementNamed(context, Routes.signin);
+                bool isConnected = await InternetInfo.isConnected();
+                if (isConnected) {
+                  if (_formKey.currentState!.validate()) {
+                    Loader.showLoader();
+                    ForgotPassword? forgotPasswordResponse =
+                        await AuthViewModel.forgotPassword(
+                      email: _emailController.text,
+                    );
+                    Loader.hideLoader();
+                    if (ValidationUtils.isValid(forgotPasswordResponse)) {
+                      ToastMessage.show(
+                          forgotPasswordResponse!.success!, TOAST_TYPE.msg);
+                      Navigator.pushReplacementNamed(context, Routes.signin);
+                    }
                   }
                 }
               },
