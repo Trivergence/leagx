@@ -102,17 +102,20 @@ class FixtureWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          ClipOval(
-                            child: ImageWidget(
-                              imageUrl: teamOneFlag,
-                              placeholder: Assets.icTeamAvatar
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          children: [
+                            ClipOval(
+                              child: ImageWidget(
+                                imageUrl: teamOneFlag,
+                                placeholder: Assets.icTeamAvatar
+                              ),
                             ),
-                          ),
-                          UIHelper.horizontalSpaceSmall,
-                          TextWidget(text: StringUtility.getShortName(teamOneName)),
-                        ],
+                            UIHelper.horizontalSpaceSmall,
+                            TextWidget(text: StringUtility.getShortName(teamOneName)),
+                          ],
+                        ),
                       ),
                       isLive || isOver
                           ? Column(
@@ -130,15 +133,19 @@ class FixtureWidget extends StatelessWidget {
                               ],
                             )
                           : Image.asset(Assets.vs),
-                      Row(
-                        children: [
-                          ImageWidget(
-                            imageUrl: teamTwoFlag,
-                            placeholder: Assets.icTeamAvatar,
-                          ),
-                          UIHelper.horizontalSpaceSmall,
-                          TextWidget(text: StringUtility.getShortName(teamTwoName)),
-                        ],
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ImageWidget(
+                              imageUrl: teamTwoFlag,
+                              placeholder: Assets.icTeamAvatar,
+                            ),
+                            UIHelper.horizontalSpaceSmall,
+                            TextWidget(text: StringUtility.getShortName(teamTwoName)),
+                          ],
+                        ),
                       ),
                     ],
                   ),
