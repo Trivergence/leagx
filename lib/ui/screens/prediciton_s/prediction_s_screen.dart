@@ -46,7 +46,9 @@ class PredicitonsScreen extends StatelessWidget {
                 teamTwoFlag: match.secondTeamLogo!,
                 teamTwoName: match.secondTeamName!,
                 teamTwoScore: prediction.secondTeamScore,
-                predictionRate: prediction.accuratePercentage.toString(),
+                predictionRate: prediction.accuratePercentage != null 
+                  ? prediction.accuratePercentage.toString()
+                  : "0.0",
                 isPending: isPending(prediction.status),
               );
             },
