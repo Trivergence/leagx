@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/network/internet_info.dart';
 import '../../../models/user/user.dart';
 import '../../util/app_dialogs/confirmation_dialog.dart';
 import '../../util/utility/image_utitlity.dart';
@@ -139,10 +140,13 @@ class DrawerScreen extends StatelessWidget {
   }
 
   logout(BuildContext context) async {
-    await preferenceHelper.removeAuthToken();
-    await preferenceHelper.removeUser();
-    context.read<DashBoardViewModel>().clearData();
-    Navigator.pushNamedAndRemoveUntil(
-        context, Routes.signin, (route) => false);
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected) {
+      await preferenceHelper.removeAuthToken();
+      await preferenceHelper.removeUser();
+      context.read<DashBoardViewModel>().clearData();
+      Navigator.pushNamedAndRemoveUntil(
+          context, Routes.signin, (route) => false);
+    }
   }
 }

@@ -8,6 +8,7 @@ import 'package:leagx/view_models/subscription_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/assets.dart';
+import '../../../core/network/internet_info.dart';
 import '../../util/app_dialogs/confirmation_dialog.dart';
 import '../../widgets/bar/app_bar_widget.dart';
 import 'components/plan_listing.dart';
@@ -51,13 +52,16 @@ class ChoosePlanScreen extends StatelessWidget {
     );
   }
 
-  _subscribe(BuildContext context, int planId) {
-    context.read<SubscriptionViewModel>().subscribeLeague(
-     context: context,
-     planId: planId,
-     leagueId: leagueData.leagueId,
-     leagueImg: leagueData.leagueImg,
-     leagueTitle: leagueData.leagueTitle
-     );
+  _subscribe(BuildContext context, int planId) async {
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected) {
+      context.read<SubscriptionViewModel>().subscribeLeague(
+      context: context,
+      planId: planId,
+      leagueId: leagueData.leagueId,
+      leagueImg: leagueData.leagueImg,
+      leagueTitle: leagueData.leagueTitle
+      );
+    }
   }
 }

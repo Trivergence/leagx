@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/enums.dart';
 import 'package:leagx/constants/strings.dart';
+import 'package:leagx/core/network/internet_info.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/routes/routes.dart';
@@ -93,25 +96,28 @@ class SigninScreen extends StatelessWidget {
             MainButton(
               text: loc.authSigninBtnSignin,
               onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  Loader.showLoader();
-                  User? loginResponse = await AuthViewModel.login(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                  );
-                  Loader.hideLoader();
-                  
-                  if (ValidationUtils.isValid(loginResponse)) {
-                    preferenceHelper.saveAuthToken(loginResponse!.apiToken);
-                    preferenceHelper.saveUser(loginResponse);
-                    DashBoardViewModel dashBoardModel = context.read<DashBoardViewModel>();
-                    await dashBoardModel.getSubscribedLeagues();
-                    if(dashBoardModel.subscribedLeagues.isEmpty) {
-                      AuthViewModel.subscribeOneLeague(loginResponse.id);
+                bool isConnected = await InternetInfo.isConnected();
+                if (isConnected) {
+                  if (_formKey.currentState!.validate()) {
+                    Loader.showLoader();
+                    User? loginResponse = await AuthViewModel.login(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                    Loader.hideLoader();
+                    
+                    if (ValidationUtils.isValid(loginResponse)) {
+                      preferenceHelper.saveAuthToken(loginResponse!.apiToken);
+                      preferenceHelper.saveUser(loginResponse);
+                      DashBoardViewModel dashBoardModel = context.read<DashBoardViewModel>();
+                      await dashBoardModel.getSubscribedLeagues();
+                      if(dashBoardModel.subscribedLeagues.isEmpty) {
+                        AuthViewModel.subscribeOneLeague(loginResponse.id);
+                      }
+                      ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
+                          TOAST_TYPE.success);
+                      Navigator.pushNamed(context, Routes.dashboard);
                     }
-                    ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
-                        TOAST_TYPE.success);
-                    Navigator.pushNamed(context, Routes.dashboard);
                   }
                 }
               },
@@ -125,7 +131,7 @@ class SigninScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SocialMediaWidget(
+                if(Platform.isIOS) SocialMediaWidget(
                   iconData: FontAwesomeIcons.apple,
                   onTap: () {},
                 ),
@@ -154,31 +160,34 @@ class SigninScreen extends StatelessWidget {
   }
 
   _loginWithTwitter(BuildContext context) async {
-    final twitterLogin = TwitterLogin(
-      apiKey: Strings.apiKeyTwitter,
-      apiSecretKey: Strings.apiSecretKeyTwitter,
-      redirectURI: Strings.redirectUriTwitter,
-    );
-    final authResult = await twitterLogin.loginV2();
-    switch (authResult.status) {
-      case TwitterLoginStatus.loggedIn:
-        //ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
-        User? user = await AuthViewModel.socialLogin(authType: AuthType.twitter, user: authResult.user!);
-        if(ValidationUtils.isValid(user)) {
-          preferenceHelper.saveAuthToken(user!.apiToken);
-          preferenceHelper.saveUser(user);
-          Navigator.pushNamed(context, Routes.dashboard);
-        }
-        break;
-      case TwitterLoginStatus.cancelledByUser:
-        ToastMessage.show(loc.authSigninTxtCancelledByUser, TOAST_TYPE.msg);
-        break;
-      case TwitterLoginStatus.error:
-        ToastMessage.show(authResult.errorMessage!, TOAST_TYPE.error);
-        break;
-      case null:
-        ToastMessage.show(loc.authSigninTxtNothingToProceed, TOAST_TYPE.error);
-        break;
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected) {
+      final twitterLogin = TwitterLogin(
+        apiKey: Strings.apiKeyTwitter,
+        apiSecretKey: Strings.apiSecretKeyTwitter,
+        redirectURI: Strings.redirectUriTwitter,
+      );
+      final authResult = await twitterLogin.loginV2();
+      switch (authResult.status) {
+        case TwitterLoginStatus.loggedIn:
+          User? user = await AuthViewModel.socialLogin(authType: AuthType.twitter, user: authResult.user!);
+          if(ValidationUtils.isValid(user)) {
+            preferenceHelper.saveAuthToken(user!.apiToken);
+            preferenceHelper.saveUser(user);
+            ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
+            Navigator.pushNamed(context, Routes.dashboard);
+          }
+          break;
+        case TwitterLoginStatus.cancelledByUser:
+          ToastMessage.show(loc.authSigninTxtCancelledByUser, TOAST_TYPE.msg);
+          break;
+        case TwitterLoginStatus.error:
+          ToastMessage.show(authResult.errorMessage!, TOAST_TYPE.error);
+          break;
+        case null:
+          ToastMessage.show(loc.authSigninTxtNothingToProceed, TOAST_TYPE.error);
+          break;
+      }
     }
   }
 }

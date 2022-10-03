@@ -14,6 +14,7 @@ import 'package:leagx/ui/widgets/dot_widget.dart';
 import 'package:leagx/ui/widgets/loading_widget.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
+import '../../../core/network/internet_info.dart';
 import '../../widgets/bar/tab_bar/model/tab_bar_item_model.dart';
 
 import 'match/match_view.dart';
@@ -49,9 +50,14 @@ class _FixtureDetailsState extends State<FixtureDetails> {
           userPrediction = fixtureModel.getMatchPrediction(matchId: widget.matchData.matchId);
           return RefreshIndicator(
             backgroundColor: AppColors.textFieldColor,
-            onRefresh: () => fixtureModel.refreshData(matchId: widget.matchData.matchId),
+            onRefresh: () async {
+              bool isConnected = await InternetInfo.isConnected();
+              if(isConnected) {
+               fixtureModel.refreshData(matchId: widget.matchData.matchId);
+              }
+            },
             child: Scaffold(
-            appBar:  fixtureModel.matchDetails.isNotEmpty ?AppBarWidget(
+            appBar:  fixtureModel.matchDetails.isNotEmpty ? AppBarWidget(
               title: widget.matchData.leagueName,
               trailing: [Padding(
                 padding: const EdgeInsets.all(15.0),

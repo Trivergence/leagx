@@ -18,6 +18,8 @@ import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
 
+import '../../../core/network/internet_info.dart';
+
 class SignupScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
@@ -34,6 +36,7 @@ class SignupScreen extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       appBar: AppBarWidget(
         title: loc.authSignupTxtSignup,
+        hasBackButton: false,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -92,36 +95,39 @@ class SignupScreen extends StatelessWidget {
             MainButton(
               text: loc.authSignupBtnSignup,
               onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  if (_passwordController.text ==
-                      _confirmPasswordController.text) {
-                    Loader.showLoader();
-                    User? signupResponse = await AuthViewModel.signup(
-                      name: _nameController.text,
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                      confirmPassword: _confirmPasswordController.text,
-                    );
-                    Loader.hideLoader();
-                    if (ValidationUtils.isValid(signupResponse)) {
-                      preferenceHelper.saveAuthToken(signupResponse!.apiToken);
+                bool isConnected = await InternetInfo.isConnected();
+                if (isConnected) {
+                  if (_formKey.currentState!.validate()) {
+                    if (_passwordController.text ==
+                        _confirmPasswordController.text) {
+                      Loader.showLoader();
+                      User? signupResponse = await AuthViewModel.signup(
+                        name: _nameController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                        confirmPassword: _confirmPasswordController.text,
+                      );
+                      Loader.hideLoader();
+                      if (ValidationUtils.isValid(signupResponse)) {
+                        preferenceHelper.saveAuthToken(signupResponse!.apiToken);
+                        ToastMessage.show(
+                            loc.authSignupTxtSignedupSuccessfully, TOAST_TYPE.success);
+                        await AuthViewModel.subscribeOneLeague(signupResponse.id);
+                        Navigator.pushNamed(context, Routes.signin);
+                      }
+                    } else {
                       ToastMessage.show(
-                          loc.authSignupTxtSignedupSuccessfully, TOAST_TYPE.success);
-                      await AuthViewModel.subscribeOneLeague(signupResponse.id);
-                      Navigator.pushNamed(context, Routes.signin);
+                          loc.authSignupTxtPasswordNotMatch, TOAST_TYPE.error);
                     }
-                  } else {
-                    ToastMessage.show(
-                        "Password doesn't match", TOAST_TYPE.error);
                   }
-                }
+}
               },
             ),
             UIHelper.verticalSpaceMedium,
             HaveAccountButton(
               subText: loc.authSignupBtnSignin,
               onTap: () {
-                Navigator.pushNamed(context, Routes.signin);
+                Navigator.pushReplacementNamed(context, Routes.signin);
               },
             ),
           ],

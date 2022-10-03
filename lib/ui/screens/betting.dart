@@ -6,7 +6,7 @@ import 'package:leagx/providers/session_provider.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/authentication/signin.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
-import 'package:leagx/ui/screens/dashboard/dashbard.dart';
+import 'package:leagx/ui/screens/dashboard/dashboard.dart';
 import 'package:leagx/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/widgets/gesture_widget.dart';

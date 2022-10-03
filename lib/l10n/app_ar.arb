@@ -163,6 +163,8 @@
 	"settingChooseLanguageTxtEnglish":"إنجليزي",
 	"settingChooseLanguageTxtArabic":"عربي",
 
+	"upcomingMatchesTitle": "المباريات القادمة",
+
 	"fixtureDetailsMatchBtnPredict": "يتنبأ",
 	"fixtureDetailsMatchTxtAttacks": "الهجمات",
 	"fixtureDetailsMatchTxtCorners": "زوايا",
@@ -235,5 +237,15 @@
 	"errorRequired": "مطلوب",
 	"errorInvalidEmail":"الرجاء إدخال بريد إلكتروني صحيح",
 	"errorInvalidPhone":"الرجاء إدخال رقم هاتف صحيح",
-	"errorPasswordLength":"يجب أن تتكون كلمة المرور من 8 أحرف على الأقل"
+	"errorPasswordLength":"يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+	"errorRequestCancelled": "تم إلغاء الطلب",
+	"errorConnectionTimeout": "انتهى وقت محاولة الاتصال",
+	"errorSendTimeout": "طلب مهلة الإرسال",
+	"errorUndefined": "حدث خطأ غير متوقع",
+	"somethingWentWrong": "هناك خطأ ما. حاول مرة أخرى في وقت لاحق",
+	"errorRequestBad": "اقتراح غير جيد",
+	"errorRequestUnauthorized": "غير مصرح",
+	"errorRequestForbidden": "ممنوع",
+	"errorInternalServer": "خطأ في الخادم الداخلي",
+	"errorBadGateway": "مدخل خاطأ"
 }

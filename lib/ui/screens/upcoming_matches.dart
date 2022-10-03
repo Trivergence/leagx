@@ -3,10 +3,12 @@ import 'package:leagx/core/utility.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/network/internet_info.dart';
 import '../../models/dashboard/fixture.dart';
 import '../../models/match_args.dart';
 import '../../routes/routes.dart';
 import '../../view_models/dashboard_view_model.dart';
+import '../util/locale/localization.dart';
 import 'dashboard/components/fixture_widget.dart';
 
 class UpcomingMatches extends StatelessWidget {
@@ -17,7 +19,7 @@ class UpcomingMatches extends StatelessWidget {
     DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
     upcomingMatches = dashBoardViewModel.subscribedMatches;
     return Scaffold(
-      appBar: AppBarWidget(title: "Upcoming Matches"),
+      appBar: AppBarWidget(title: loc.upcomingMatchesTitle),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: ListView.builder(
@@ -38,11 +40,16 @@ class UpcomingMatches extends StatelessWidget {
             matchStatus: match.matchStatus,
             teamOneScore: match.matchHometeamScore,
             teamTwoScore: match.matchAwayteamScore,
-            onTap: () => Navigator.pushNamed(context, Routes.fixtureDetails,
-                arguments: MatchArgs(
-                  matchId: match.matchId,
-                  leagueName: match.leagueName,
-            )),
+            onTap: () async {
+              bool isConnected = await InternetInfo.isConnected();
+              if (isConnected) {
+                Navigator.pushNamed(context, Routes.fixtureDetails,
+                  arguments: MatchArgs(
+                    matchId: match.matchId,
+                    leagueName: match.leagueName,
+                ));
+              }
+            }
           );
         }),
       ));

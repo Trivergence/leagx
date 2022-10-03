@@ -15,7 +15,7 @@ import 'package:leagx/ui/screens/choose_plan/edit_choose_plan.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
 import 'package:leagx/ui/screens/dashboard/components/setting/components/choose_language.dart';
 import 'package:leagx/ui/screens/dashboard/components/setting/setting.dart';
-import 'package:leagx/ui/screens/dashboard/dashbard.dart';
+import 'package:leagx/ui/screens/dashboard/dashboard.dart';
 import 'package:leagx/ui/screens/faq/faqs_screen.dart';
 import 'package:leagx/ui/screens/notification/notification.dart';
 import 'package:leagx/ui/screens/onboarding/onboarding_screen.dart';
@@ -122,7 +122,7 @@ class Routes {
       case user:
         return generateRoute(routeSettings.name!, UserScreen());
       case notification:
-        return generateRoute(routeSettings.name!, NotificationScreen());
+        return generateRoute(routeSettings.name!, const NotificationScreen());
       case chooseAnExpert:
         return generateRoute(routeSettings.name!, ChooseAnExpertScreen());
       case addNews:
@@ -130,7 +130,7 @@ class Routes {
       case editChoosePlan:
         return generateRoute(routeSettings.name!, EditChoosePlanScreen());
       case chooseLanguage:
-        return generateRoute(routeSettings.name!, ChooseLanguageScreen());
+        return generateRoute(routeSettings.name!, const ChooseLanguageScreen());
       case upcomingMatches:
         return generateRoute(routeSettings.name!, UpcomingMatches());   
 

@@ -8,6 +8,7 @@ import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/colors.dart';
+import '../../../../core/network/internet_info.dart';
 import '../../../../models/dashboard/fixture.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../widgets/gradient/gradient_border_button.dart';
@@ -125,20 +126,23 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
     );
   }
 
-  void _predictMatch() {
-    if(leagueId != null) {
-      _context!.read<FixtureDetailViewModel>().savePrediction(
-      context: _context!,
-      matchId: int.parse(widget.matchDetails!.matchId),
-      leagueId: leagueId!,
-      homeScore: homeScore,
-      awayScore: awayScore,
-      awayTeamLogo: widget.matchDetails!.teamAwayBadge,
-      homeTeamLogo: widget.matchDetails!.teamHomeBadge,
-      expertId: expertId,
-      awayTeamName: widget.matchDetails!.matchAwayteamName,
-      homeTeamName: widget.matchDetails!.matchHometeamName,
-      isPublic: isPublic);
+  Future<void> _predictMatch() async {
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected) {
+      if(leagueId != null) {
+        _context!.read<FixtureDetailViewModel>().savePrediction(
+        context: _context!,
+        matchId: int.parse(widget.matchDetails!.matchId),
+        leagueId: leagueId!,
+        homeScore: homeScore,
+        awayScore: awayScore,
+        awayTeamLogo: widget.matchDetails!.teamAwayBadge,
+        homeTeamLogo: widget.matchDetails!.teamHomeBadge,
+        expertId: expertId,
+        awayTeamName: widget.matchDetails!.matchAwayteamName,
+        homeTeamName: widget.matchDetails!.matchHometeamName,
+        isPublic: isPublic);
+      }
     }
   }
 
