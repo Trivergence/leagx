@@ -143,6 +143,8 @@
 	"settingChooseLanguageTxtEnglish":"English",
 	"settingChooseLanguageTxtArabic":"Arabic",
 
+	"upcomingMatchesTitle": "Upcoming Matches",
+
 	"drawerBtnProfile": "Profile",
 	"drawerBtnMyPredictions": "My Predictions",
 	"drawerBtnFaqs": "FAQs",
@@ -235,5 +237,15 @@
 	"errorRequired": "required",
 	"errorInvalidEmail":"Please enter valid email",
 	"errorInvalidPhone":"Please enter valid phone",
-	"errorPasswordLength":"Password must atleast 8 characters"
+	"errorPasswordLength":"Password must atleast 8 characters",
+	"errorRequestCancelled": "Request cancelled",
+	"errorConnectionTimeout": "Connection timeout",
+	"errorSendTimeout": "Request sending timeout",
+	"errorUndefined": "An unexpected error occured.",
+	"somethingWentWrong": "Something went wrong. Try again later",
+	"errorRequestBad": "Bad request",
+	"errorRequestUnauthorized": "Unauthorized",
+	"errorRequestForbidden": "Forbidden",
+	"errorInternalServer": "Internal server error",
+	"errorBadGateway": "Bad gateway"
 }

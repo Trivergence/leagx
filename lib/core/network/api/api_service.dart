@@ -2,14 +2,16 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:leagx/constants/strings.dart';
+import 'package:leagx/constants/app_constants.dart';
 import 'package:leagx/core/network/api/api_models.dart';
+import 'package:leagx/core/network/api/dio_exceptions.dart';
 import 'package:leagx/core/network/app_url.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 
+import '../../../ui/util/locale/localization.dart';
 import '../internet_info.dart';
 
 class ApiService {
@@ -28,6 +30,9 @@ class ApiService {
         headers: {
           "apitoken":preferenceHelper.authToken,
         },
+        connectTimeout: AppConstants.networkTimeout,
+        receiveTimeout: AppConstants.networkTimeout,
+        sendTimeout: AppConstants.networkTimeout
       );
 
       var dio = Dio(options);
@@ -52,12 +57,15 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
+            ToastMessage.show("${errorResponse.error ?? loc.errorUndefined}",TOAST_TYPE.error );
+        return null;
+      } else {
+        DioExceptions.fromDioError(ex);
         return null;
       }
     } on Exception {
       Loader.hideLoader();
-      ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
+      ToastMessage.show(loc.errorUndefined,TOAST_TYPE.error );
       return null;
     } catch(e){
       if (kDebugMode) {
@@ -78,8 +86,11 @@ class ApiService {
         contentType: 'application/json',
         baseUrl: AppUrl.baseUrl,
         headers: {
-          "apitoken":preferenceHelper.authToken,
+          "apitoken": preferenceHelper.authToken,
         },
+        connectTimeout: AppConstants.networkTimeout,
+        receiveTimeout: AppConstants.networkTimeout,
+        sendTimeout: AppConstants.networkTimeout
       );
 
       var dio = Dio(options);
@@ -103,12 +114,15 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
+            ToastMessage.show("${errorResponse.error ?? loc.errorUndefined}",TOAST_TYPE.error );
+        return null;
+      } else {
+        DioExceptions.fromDioError(ex);
         return null;
       }
     } on Exception {
       Loader.hideLoader();
-      ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
+      ToastMessage.show(loc.errorUndefined,TOAST_TYPE.error );
       return null;
     } catch(e){
       if (kDebugMode) {
@@ -132,6 +146,9 @@ class ApiService {
         headers: {
           "apitoken":preferenceHelper.authToken,
         },
+        connectTimeout: AppConstants.networkTimeout,
+        receiveTimeout: AppConstants.networkTimeout,
+        sendTimeout: AppConstants.networkTimeout
       );
 
       var dio = Dio(options);
@@ -156,12 +173,15 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
+            ToastMessage.show("${errorResponse.error ?? loc.errorUndefined}",TOAST_TYPE.error );
+        return null;
+      } else {
+        DioExceptions.fromDioError(ex);
         return null;
       }
     } on Exception {
       Loader.hideLoader();
-      ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
+      ToastMessage.show(loc.errorUndefined,TOAST_TYPE.error );
       return null;
     } catch(e){
       debugPrint(e.toString());
@@ -183,6 +203,9 @@ class ApiService {
         headers: {
           "apitoken":preferenceHelper.authToken,
         },
+        connectTimeout: AppConstants.networkTimeout,
+        receiveTimeout: AppConstants.networkTimeout,
+        sendTimeout: AppConstants.networkTimeout
       );
 
       var dio = Dio(options);
@@ -207,12 +230,15 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show("${errorResponse.error} ${errorResponse.errorLog??''}",TOAST_TYPE.error );
+            ToastMessage.show("${errorResponse.error ?? loc.errorUndefined}",TOAST_TYPE.error );
+        return null;
+      } else {
+        DioExceptions.fromDioError(ex);
         return null;
       }
     } on Exception {
       Loader.hideLoader();
-      ToastMessage.show(Strings.badHappened,TOAST_TYPE.error );
+      ToastMessage.show(loc.errorUndefined,TOAST_TYPE.error );
       return null;
     } catch(e){
       debugPrint(e.toString());
@@ -232,6 +258,9 @@ class ApiService {
       BaseOptions options = BaseOptions(
         contentType: 'application/json',
         baseUrl: baseUrl,
+        connectTimeout: AppConstants.networkTimeout,
+        receiveTimeout: AppConstants.networkTimeout,
+        sendTimeout: AppConstants.networkTimeout
       );
       var dio = Dio(options);
       bool isConnected = await InternetInfo.isConnected();
@@ -259,14 +288,16 @@ class ApiService {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
         ToastMessage.show(
-            "${errorResponse.error} ${errorResponse.errorLog ?? ''}",
+            "${errorResponse.error ?? loc.errorUndefined}",
             TOAST_TYPE.error);
         return [];
+      } else {
+        DioExceptions.fromDioError(ex);
+        return [];
       }
-      return [];
     } catch (e) {
       debugPrint(e.toString());
-      ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
+      ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
       Loader.hideLoader();
       return [];
     }
@@ -284,6 +315,9 @@ class ApiService {
         headers: {
           "apitoken": preferenceHelper.authToken,
         },
+        connectTimeout: AppConstants.networkTimeout,
+        receiveTimeout: AppConstants.networkTimeout,
+        sendTimeout: AppConstants.networkTimeout
       );
 
       var dio = Dio(options);
@@ -307,20 +341,22 @@ class ApiService {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
         ToastMessage.show(
-            "${errorResponse.error} ${errorResponse.errorLog ?? ''}",
+            "${errorResponse.error ?? loc.errorUndefined}",
             TOAST_TYPE.error);
+        return false;
+      } else {
+        DioExceptions.fromDioError(ex);
         return false;
       }
     } on Exception {
       Loader.hideLoader();
-      ToastMessage.show(Strings.badHappened, TOAST_TYPE.error);
+      ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
       return false;
     } catch (e) {
       debugPrint(e.toString());
       Loader.hideLoader();
       return false;
     }
-    return false;
   }
 }
 
