@@ -30,6 +30,7 @@ import 'package:leagx/view_models/auth_view_model.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -133,7 +134,7 @@ class SigninScreen extends StatelessWidget {
               children: [
                 if(Platform.isIOS) SocialMediaWidget(
                   iconData: FontAwesomeIcons.apple,
-                  onTap: () {},
+                  onTap: () => _signInWithApple(context),
                 ),
                 UIHelper.horizontalSpaceMedium,
                 // SocialMediaWidget(iconData: FontAwesomeIcons.facebookF),
@@ -170,7 +171,7 @@ class SigninScreen extends StatelessWidget {
       final authResult = await twitterLogin.loginV2();
       switch (authResult.status) {
         case TwitterLoginStatus.loggedIn:
-          User? user = await AuthViewModel.socialLogin(authType: AuthType.twitter, user: authResult.user!);
+          User? user = await AuthViewModel.twitterLogin(authType: AuthType.twitter, user: authResult.user!);
           if(ValidationUtils.isValid(user)) {
             preferenceHelper.saveAuthToken(user!.apiToken);
             preferenceHelper.saveUser(user);
@@ -187,6 +188,34 @@ class SigninScreen extends StatelessWidget {
         case null:
           ToastMessage.show(loc.authSigninTxtNothingToProceed, TOAST_TYPE.error);
           break;
+      }
+    }
+  }
+
+  Future<void> _signInWithApple(BuildContext context) async {
+    bool isAvailable = await SignInWithApple.isAvailable();
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected) {
+      if(isAvailable) {
+        try {
+        AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
+          scopes: [
+            AppleIDAuthorizationScopes.email,
+            AppleIDAuthorizationScopes.fullName,
+          ],
+        );
+        User? user = await AuthViewModel.appleLogin(authType: AuthType.apple, userCredentials: credential);
+        if (ValidationUtils.isValid(user)) {
+            preferenceHelper.saveAuthToken(user!.apiToken);
+            preferenceHelper.saveUser(user);
+            ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
+            Navigator.pushNamed(context, Routes.dashboard);
+        }
+      } on SignInWithAppleException catch (e) {
+        debugPrint(e.toString());
+      }
+      } else {
+      
       }
     }
   }
