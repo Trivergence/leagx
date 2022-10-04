@@ -7,6 +7,8 @@ import 'package:leagx/models/auth/forgot_password.dart';
 import 'package:leagx/models/auth/signin.dart';
 import 'package:leagx/models/auth/signup.dart';
 import 'package:leagx/models/user/user.dart';
+import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/entity/user.dart' as twitter;
 
 class AuthViewModel {
@@ -57,20 +59,12 @@ class AuthViewModel {
 
   }
 
-    static Future<User?>? socialLogin({
+    static Future<User?>? twitterLogin({
     required AuthType authType,
     required twitter.User user
   }) async {
+    Loader.showLoader();
     int userId = user.id;
-    // List<String> fullName = user.name.split(" ");
-    // String firstName;
-    // String lastName = '';
-    // if(fullName.length > 1) {
-    //   firstName = fullName[0];
-    //   lastName = fullName[1];
-    // } else {
-    //   firstName = fullName[0];
-    // }
     dynamic responce = await ApiService.callPostApi(
       url: AppUrl.socialLogin,
       parameters: {
@@ -81,8 +75,40 @@ class AuthViewModel {
       },
       modelName: ApiModels.user,
     );
+    Loader.hideLoader();
     return responce;
   }
+
+    static Future<User?>? appleLogin(
+      {required AuthType authType, required AuthorizationCredentialAppleID userCredentials}) async {
+        dynamic responce;
+        Loader.showLoader();
+      if(userCredentials.email != null && userCredentials.givenName != null) {
+        responce = await ApiService.callPostApi(
+        url: AppUrl.socialLogin,
+        parameters: {
+          "user[email]": userCredentials.email,
+          "user[first_name]": userCredentials.givenName,
+          "user[uid]": userCredentials.userIdentifier,
+          "user[provider]": authType.name
+        },
+        modelName: ApiModels.user,
+      );
+      } else {
+        responce = await ApiService.callPostApi(
+        url: AppUrl.socialLogin,
+        parameters: {
+          "user[uid]": userCredentials.userIdentifier,
+          "user[provider]": authType.name
+        },
+        modelName: ApiModels.user,
+      );
+    }
+    Loader.hideLoader();
+    return responce;
+  }
+
+
 
   static Future<ForgotPassword?>? forgotPassword({
     required String email,
