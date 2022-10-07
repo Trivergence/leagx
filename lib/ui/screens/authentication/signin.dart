@@ -6,9 +6,11 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/enums.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/core/network/internet_info.dart';
+import 'package:leagx/core/secure_storage/secure_storage.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/authentication/components/have_account_button.dart';
 import 'package:leagx/ui/screens/authentication/components/social_media_widget.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
@@ -28,8 +30,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:payments/payments.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -118,6 +120,14 @@ class SigninScreen extends StatelessWidget {
                       ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
                           TOAST_TYPE.success);
                       Navigator.pushNamed(context, Routes.dashboard);
+                      //TODO Stripe place it in better file
+                      Customer? customer = await PayIn.createCustomer(
+                          userId: loginResponse.id.toString(),
+                          userName: loginResponse.firstName!,
+                          userEmail: loginResponse.email);
+                      if(customer != null) {
+                        locator<SecureStore>().saveCustomerId(customer.id!);
+                      }
                     }
                   }
                 }
@@ -210,6 +220,7 @@ class SigninScreen extends StatelessWidget {
             preferenceHelper.saveUser(user);
             ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
             Navigator.pushNamed(context, Routes.dashboard);
+            
         }
       } on SignInWithAppleException catch (e) {
         debugPrint(e.toString());

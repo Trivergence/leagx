@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:leagx/core/network/config/environment.dart';
 import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/service/service_locator.dart';
@@ -11,8 +12,11 @@ import 'package:leagx/view_models/subscription_viewmodel.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/edit_profile_viewmodel.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '.env';
 
 void main() async {
   FlutterError.onError = (FlutterErrorDetails details) async {
@@ -20,6 +24,8 @@ void main() async {
   };
   return runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    Stripe.publishableKey = stripePublishableKey;
+    await Stripe.instance.applySettings();
     loadAppEnvironment();
     await setPreferredOrientations();
     final prefs = await SharedPreferences.getInstance();
@@ -36,7 +42,8 @@ void main() async {
                 ChangeNotifierProvider(create: (_) => DashBoardViewModel()),
                 ChangeNotifierProvider(create: (_) => FixtureDetailViewModel()),
                 ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
-                ChangeNotifierProvider(create: (_) => SubscriptionViewModel())
+                ChangeNotifierProvider(create: (_) => SubscriptionViewModel()),
+                ChangeNotifierProvider(create: (_) => WalletViewModel()),
               ],
               child: Betting(prefs: prefs));
           },

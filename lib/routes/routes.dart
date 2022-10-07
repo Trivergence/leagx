@@ -27,6 +27,7 @@ import 'package:leagx/ui/screens/terms_service/terms_service_screen.dart';
 import 'package:leagx/ui/screens/upcoming_matches.dart';
 import 'package:leagx/ui/screens/user/user.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/screens/wallet/wallet.dart';
 
 import '../ui/screens/choose_fixture.dart/choose_fixture_screen.dart';
 import '../ui/screens/choose_plan/choose_plan_screen.dart';
@@ -49,8 +50,6 @@ class Routes {
   static const String adminAnnounce = '/adminAnnounce';
   static const String chooseLeague = '/chooseLeague';
   static const String chooseFixture = '/chooseFixture';
-
-  
   static const String choosePlan = '/choosePlan';
   static const String home = '/home';
   static const String predictions = '/predicitons';
@@ -66,6 +65,7 @@ class Routes {
   static const String editChoosePlan = "/editChoosePlan";
   static const String chooseLanguage = "/chooseLanguage";
   static const String upcomingMatches = "/upcomingMatches";
+  static const String wallet = "/wallet";
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -132,7 +132,9 @@ class Routes {
       case chooseLanguage:
         return generateRoute(routeSettings.name!, const ChooseLanguageScreen());
       case upcomingMatches:
-        return generateRoute(routeSettings.name!, UpcomingMatches());   
+        return generateRoute(routeSettings.name!, UpcomingMatches());
+      case wallet:
+        return generateRoute(routeSettings.name!, const WalletScreen()); 
 
       default:
         return generateRoute(

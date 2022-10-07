@@ -99,9 +99,17 @@ class DrawerScreen extends StatelessWidget {
               Navigator.popAndPushNamed(context, Routes.admin);
             },
           ),
+          // TODO Add localization
+          DrawerTile(
+            icon: Icons.account_balance_wallet_outlined,
+            title: "Wallet",
+            onTap: () {
+              Navigator.popAndPushNamed(context, Routes.wallet);
+            },
+          ),
           UIHelper.verticalSpaceXL,
           GestureDetector(
-            onTap: () async{
+            onTap: () async {
               ConfirmationDialog.show(context: context,
                title: loc.logoutConfirmTitle,
                positiveBtnTitle: loc.logoutConfirmYes,
