@@ -6,6 +6,8 @@ class ApiModels {
   //static const String error = 'Error';
   static const String customer = "CUSTOMER";
   static const String getPaymentMethods = "GET_PAYMENT_METHODS";
+  static const String createSetupIntent = "create_setup_intent";
+  static const String createPaymentIntent = "create_payment_intent";
   static dynamic getModelObjects(String modelName, dynamic json) {
     switch (modelName) {
       // case error:
@@ -14,6 +16,10 @@ class ApiModels {
         return Customer.fromJson(json);
       case getPaymentMethods:
         return PaymentMethods.fromJson(json);
+      case createSetupIntent:
+        return SetupIntent.fromJson(json);
+        case createPaymentIntent:
+        return PaymentIntent.fromJson(json);
     }
   }
 

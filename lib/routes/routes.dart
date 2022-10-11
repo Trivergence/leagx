@@ -134,7 +134,7 @@ class Routes {
       case upcomingMatches:
         return generateRoute(routeSettings.name!, UpcomingMatches());
       case wallet:
-        return generateRoute(routeSettings.name!, const WalletScreen()); 
+        return generateRoute(routeSettings.name!, WalletScreen()); 
 
       default:
         return generateRoute(

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/loading_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
 class WalletScreen extends StatelessWidget {
-  const WalletScreen({ Key? key }) : super(key: key);
+  WalletScreen({ Key? key }) : super(key: key);
+
+  late WalletViewModel _walletViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +21,15 @@ class WalletScreen extends StatelessWidget {
       create: false,
       model: context.read<WalletViewModel>(), 
       onModelReady: (WalletViewModel walletModel) async {
-        await walletModel.getData();
+        SchedulerBinding.instance!.addPostFrameCallback((timeStamp) async {
+          await walletModel.getData();
+        });
       },
       builder: (context, WalletViewModel walletModel, _) {
+        _walletViewModel = walletModel;
       return  Scaffold(
       appBar: AppBarWidget(),
-      body: SingleChildScrollView(
+      body: !walletModel.busy ? SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -70,11 +77,57 @@ class WalletScreen extends StatelessWidget {
               fontWeight: FontWeight.w700),
               UIHelper.verticalSpaceSmall,
             if(walletModel.paymentMethods.isEmpty) const TextWidget(text: "No Payment Method Added yet"),
-            MainButton(text: "Add Payment Methods", onPressed: () {})
+            walletModel.paymentMethods.isEmpty 
+            ? MainButton(text: "Add Payment Methods", onPressed: _addPaymentMethod)
+            :  Column(
+              children: [
+                Card(
+                  color: AppColors.textFieldColor,
+                  elevation: 15,
+                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)
+                )
+          ),
+          child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.payment),
+                        TextWidget(text: "**** **** **** " + walletModel.paymentMethods.first.card!.last4!),
+                      ],
+                    ),
+                    UIHelper.horizontalSpaceSmall,
+                     TextWidget(text: walletModel
+                        .paymentMethods.first.card!.expMonth!
+                        .toString() +
+                    "/" +
+                    walletModel
+                        .paymentMethods.first.card!.expYear!
+                        .toString())
+                ]),
+          ),
+          ),
+          TextButton(
+            onPressed: _removeCard, 
+            child: const TextWidget(text : "Remove", color: AppColors.colorRed,))
+              ],
+            )
         ]),
-      ),
+      )
+      : const LoadingWidget()
+      ,
     );
       }, 
       );
+  }
+
+  void _addPaymentMethod() {
+    _walletViewModel.addPaymentMethod();
+  }
+
+  void _removeCard() {
+    _walletViewModel.removePaymentMethod();
   }
 }

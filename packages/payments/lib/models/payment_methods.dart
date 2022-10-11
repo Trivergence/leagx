@@ -18,13 +18,13 @@ class PaymentMethods {
   });
 
   String? object;
-  List<PaymentMethod>? data;
+  List<PayMethod>? data;
   bool? hasMore;
   String? url;
 
   factory PaymentMethods.fromJson(Map<String, dynamic> json) => PaymentMethods(
         object: json["object"],
-        data: List<PaymentMethod>.from(json["data"].map((x) => PaymentMethod.fromJson(x))),
+        data: List<PayMethod>.from(json["data"].map((x) => PayMethod.fromJson(x))),
         hasMore: json["has_more"],
         url: json["url"],
       );
@@ -37,8 +37,8 @@ class PaymentMethods {
       };
 }
 
-class PaymentMethod {
-  PaymentMethod({
+class PayMethod {
+  PayMethod({
     this.id,
     this.object,
     this.billingDetails,
@@ -60,7 +60,7 @@ class PaymentMethod {
   PaymentMetaData? metadata;
   String? type;
 
-  factory PaymentMethod.fromJson(Map<String, dynamic> json) => PaymentMethod(
+  factory PayMethod.fromJson(Map<String, dynamic> json) => PayMethod(
         id: json["id"],
         object: json["object"],
         billingDetails: BillingDetails.fromJson(json["billing_details"]),

@@ -5,6 +5,7 @@ import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/subscription_viewmodel.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/assets.dart';
@@ -60,7 +61,8 @@ class ChoosePlanScreen extends StatelessWidget {
       planId: planId,
       leagueId: leagueData.leagueId,
       leagueImg: leagueData.leagueImg,
-      leagueTitle: leagueData.leagueTitle
+      leagueTitle: leagueData.leagueTitle,
+      walletModel: context.read<WalletViewModel>()
       );
     }
   }

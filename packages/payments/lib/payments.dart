@@ -5,7 +5,10 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:payments/constants/payment_constants.dart';
+import 'package:payments/models/setup_intent.dart';
 import 'package:payments/network/payment_url.dart';
+
+import 'models/payment_intent.dart';
 
 
 part 'pay_in.dart';

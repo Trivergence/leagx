@@ -12,4 +12,12 @@ class SecureStore {
     String? id = await secureStorage.read(key: SecureKeys.customerId);
     return id;
   }
+  Future<void> savePaymentId(String id) async {
+    await secureStorage.write(key: SecureKeys.paymentId, value: id);
+  }
+
+  Future<String?> getPaymentId() async {
+    String? id = await secureStorage.read(key: SecureKeys.paymentId);
+    return id;
+  }
 }

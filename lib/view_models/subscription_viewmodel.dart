@@ -8,6 +8,8 @@ import 'package:leagx/models/subscription_plan.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/app_constants.dart';
 import '../core/sharedpref/sharedpref.dart';
@@ -37,8 +39,19 @@ class SubscriptionViewModel extends BaseModel {
       setBusy(false);
     }
   }
-  subscribeLeague({required BuildContext context, required int planId, required String leagueId, required String leagueTitle, required String leagueImg}) async {
+  subscribeLeague({required BuildContext context,
+   required int planId, 
+   required String leagueId, 
+   required String leagueTitle, 
+   required String leagueImg,
+   required WalletViewModel walletModel
+   }) async {
     Loader.showLoader();
+    if(walletModel.paymentMethods.isEmpty) {
+      await walletModel.purchaseIndirectly(amount: "20", currency: "usd");
+    } else {
+
+    }
     User? user = locator<SharedPreferenceHelper>().getUser();
     Map<String,dynamic> body = {
       "user_id": user!.id,
