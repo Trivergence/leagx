@@ -1,10 +1,12 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/utility/date_utility.dart';
 import 'package:leagx/ui/util/utility/string_utility.dart';
+import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/score_chip.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/dot_widget.dart';
@@ -13,8 +15,11 @@ import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/live_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
-class FixtureWidget extends StatelessWidget {
+import '../../../widgets/shimmer_widget.dart';
+
+class FixtureWidget extends StatefulWidget {
   final String leagueName;
   final String teamOneFlag;
   final String teamOneName;
@@ -30,7 +35,7 @@ class FixtureWidget extends StatelessWidget {
   final bool isOver;
   final bool withText;
   final VoidCallback? onTap;
-  const FixtureWidget({
+   FixtureWidget({
     Key? key,
     required this.leagueName,
     required this.teamOneFlag,
@@ -49,10 +54,26 @@ class FixtureWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<FixtureWidget> createState() => _FixtureWidgetState();
+}
+
+class _FixtureWidgetState extends State<FixtureWidget> {
+  String translatedLeagueName = "--";
+  String translatedStatus = "--";
+  String teamOneName = "--";
+  String teamTwoName = "--";
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    translateData();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    bool isToday = DateUtility.isToday(scheduledDate);
-    return GestureDetector(
-      onTap: onTap,
+    bool isToday = DateUtility.isToday(widget.scheduledDate);
+    return !isLoading ? GestureDetector(
+      onTap: widget.onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5.0),
         padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -69,10 +90,15 @@ class FixtureWidget extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: SizeConfig.width * 50,
-                    child: TextWidget(text: leagueName, textSize: Dimens.textSmall, overflow: TextOverflow.ellipsis,)),
-                  isLive
-                      ?  LiveWidget(isLive: isLive,)
-                      : withText
+                    child: TextWidget(
+                      text: translatedLeagueName, 
+                      textSize: Dimens.textSmall, 
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
+                      )),
+                  widget.isLive
+                      ? LiveWidget(isLive: widget.isLive,)
+                      : widget.withText
                           ? Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -81,12 +107,12 @@ class FixtureWidget extends StatelessWidget {
                                 UIHelper.horizontalSpace(4.0),
                                 //TODO localization
                                 TextWidget(
-                                    text: isToday ? "${loc.today}, " + scheduledTime! : DateUtility.getUiFormat(scheduledDate),
+                                    text: isToday ? "${loc.today}, " + widget.scheduledTime! : DateUtility.getUiFormat(widget.scheduledDate),
                                     textSize: Dimens.textSmall),
                               ],
                             )
                           : DotWidget(
-                              isLive: !isLive,
+                              isLive: !widget.isLive,
                             )
                 ],
               ),
@@ -108,25 +134,25 @@ class FixtureWidget extends StatelessWidget {
                           children: [
                             ClipOval(
                               child: ImageWidget(
-                                imageUrl: teamOneFlag,
+                                imageUrl: widget.teamOneFlag,
                                 placeholder: Assets.icTeamAvatar
                               ),
                             ),
                             UIHelper.horizontalSpaceSmall,
-                            TextWidget(text: StringUtility.getShortName(teamOneName)),
+                            TextWidget(text: teamTwoName),
                           ],
                         ),
                       ),
-                      isLive || isOver
+                      widget.isLive || widget.isOver
                           ? Column(
                               children: [
                                 ScoreChip(
-                                  firstScore: teamOneScore!,
-                                  secondScore: teamTwoScore!,
+                                  firstScore: widget.teamOneScore!,
+                                  secondScore: widget.teamTwoScore!,
                                 ),
                                 UIHelper.verticalSpaceSmall,
                                 TextWidget(
-                                  text: matchStatus!,
+                                  text: translatedStatus,
                                   color: AppColors.colorGrey,
                                   textSize: Dimens.textSmall,
                                 )
@@ -139,11 +165,11 @@ class FixtureWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ImageWidget(
-                              imageUrl: teamTwoFlag,
+                              imageUrl: widget.teamTwoFlag,
                               placeholder: Assets.icTeamAvatar,
                             ),
                             UIHelper.horizontalSpaceSmall,
-                            TextWidget(text: StringUtility.getShortName(teamTwoName)),
+                            TextWidget(text: teamTwoName),
                           ],
                         ),
                       ),
@@ -154,7 +180,7 @@ class FixtureWidget extends StatelessWidget {
                   //         text: liveTime!,
                   //         color: AppColors.colorWhite.withOpacity(0.6))
                   //     : const SizedBox(),
-                  isLive
+                  widget.isLive
                       ? UIHelper.verticalSpace(8.0)
                       : UIHelper.verticalSpace(20.0)
                 ],
@@ -163,6 +189,19 @@ class FixtureWidget extends StatelessWidget {
           ],
         ),
       ),
-    );
+    )
+    : const ShimmerWidget(height: 130,);
+  }
+
+  Future<void> translateData() async {
+      translatedLeagueName = await TranslationUtility.translate(widget.leagueName);
+      translatedStatus =
+        await TranslationUtility.translate(widget.matchStatus!);
+        teamOneName = await TranslationUtility.translate(StringUtility.getShortName(widget.teamOneName));
+        teamTwoName = await TranslationUtility.translate(StringUtility.getShortName(widget.teamTwoName));
+        isLoading = false;
+      setState(() {});
   }
 }
+
+

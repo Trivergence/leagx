@@ -3,12 +3,14 @@ import 'package:leagx/constants/colors.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/utility/string_utility.dart';
+import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
+import 'package:leagx/ui/widgets/shimmer_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
-class PredictionWidget extends StatelessWidget {
+class PredictionWidget extends StatefulWidget {
   final String teamOneFlag;
   final String teamOneName;
   final int? teamOneScore;
@@ -30,8 +32,23 @@ class PredictionWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<PredictionWidget> createState() => _PredictionWidgetState();
+}
+
+class _PredictionWidgetState extends State<PredictionWidget> {
+  String? teamOneName;
+  String? teamTwoName;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    getTranslatedData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return !isLoading ? Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       decoration: BoxDecoration(
@@ -52,11 +69,11 @@ class PredictionWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             ImageWidget(
-                              imageUrl: teamOneFlag,
+                              imageUrl: widget.teamOneFlag,
                               placeholder: Assets.icTeamAvatar,
                             ),
                             UIHelper.horizontalSpaceSmall,
-                            TextWidget(text: StringUtility.getShortName(teamOneName)),
+                            TextWidget(text: teamOneName!),
                           ],
                         ),
                       ),
@@ -73,11 +90,11 @@ class PredictionWidget extends StatelessWidget {
                             ])),
                         child: Row(
                           children: [
-                            TextWidget(text: teamOneScore.toString()),
+                            TextWidget(text: widget.teamOneScore.toString()),
                             UIHelper.horizontalSpace(10.0),
                             const TextWidget(text: '-'),
                             UIHelper.horizontalSpace(10.0),
-                            TextWidget(text: teamTwoScore.toString()),
+                            TextWidget(text: widget.teamTwoScore.toString()),
                           ],
                         ),
                       ),
@@ -87,17 +104,17 @@ class PredictionWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ImageWidget(
-                              imageUrl: teamTwoFlag,
+                              imageUrl: widget.teamTwoFlag,
                               placeholder: Assets.icTeamAvatar
                             ),
                             UIHelper.horizontalSpaceSmall,
-                            TextWidget(text: StringUtility.getShortName(teamTwoName)),
+                            TextWidget(text: teamTwoName!),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  isPending
+                  widget.isPending
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -115,15 +132,28 @@ class PredictionWidget extends StatelessWidget {
                             ),
                           ],
                         )
-                      : predictionRate != null
+                      : widget.predictionRate != null
                           ? TextWidget(
-                              text: predictionRate! + "%",
+                              text: widget.predictionRate! + "%",
                               color: AppColors.colorGreen)
                           : const SizedBox(),
                 ],
               )),
         ],
       ),
-    );
+    )
+    : const ShimmerWidget(height: 120)
+    ;
+  }
+
+  Future<void> getTranslatedData() async {
+    teamOneName = await TranslationUtility.translate(
+        StringUtility.getShortName(widget.teamOneName));
+    teamTwoName = await TranslationUtility.translate(
+        StringUtility.getShortName(widget.teamTwoName));
+    isLoading = false;
+    setState(() {
+    });
+
   }
 }
