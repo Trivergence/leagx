@@ -69,8 +69,6 @@ class SubscriptionViewModel extends BaseModel {
           },
           modelName: ApiModels.getLeagues);
       _leagues = tempList.cast<League>();
-      // Remove this later
-      _leagues = leagues.where((league) => saudiLeagueIds.contains(league.leagueId)).toList();
     } on Exception catch (e) {
       setBusy(false);
     }
