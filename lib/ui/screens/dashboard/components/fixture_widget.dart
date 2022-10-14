@@ -34,7 +34,7 @@ class FixtureWidget extends StatefulWidget {
   final bool isLive;
   final bool isOver;
   final bool withText;
-  final VoidCallback? onTap;
+  final Function(String) onTap;
    FixtureWidget({
     Key? key,
     required this.leagueName,
@@ -48,7 +48,7 @@ class FixtureWidget extends StatefulWidget {
     this.liveTime,
     this.isLive = false,
     this.withText = true,
-    this.onTap, this.matchStatus,
+    required this.onTap, this.matchStatus,
     required this.scheduledDate, 
     required this.isOver,
   }) : super(key: key);
@@ -58,10 +58,10 @@ class FixtureWidget extends StatefulWidget {
 }
 
 class _FixtureWidgetState extends State<FixtureWidget> {
-  String translatedLeagueName = "--";
-  String translatedStatus = "--";
-  String teamOneName = "--";
-  String teamTwoName = "--";
+  String? translatedLeagueName;
+  String? translatedStatus;
+  String? teamOneName;
+  String? teamTwoName;
   bool isLoading = true;
 
   @override
@@ -73,7 +73,7 @@ class _FixtureWidgetState extends State<FixtureWidget> {
   Widget build(BuildContext context) {
     bool isToday = DateUtility.isToday(widget.scheduledDate);
     return !isLoading ? GestureDetector(
-      onTap: widget.onTap,
+      onTap: () => widget.onTap(translatedLeagueName!),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5.0),
         padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -91,7 +91,7 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                   SizedBox(
                     width: SizeConfig.width * 50,
                     child: TextWidget(
-                      text: translatedLeagueName, 
+                      text: translatedLeagueName!, 
                       textSize: Dimens.textSmall, 
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
@@ -130,7 +130,9 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Row(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             ClipOval(
                               child: ImageWidget(
@@ -138,8 +140,8 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                                 placeholder: Assets.icTeamAvatar
                               ),
                             ),
-                            UIHelper.horizontalSpaceSmall,
-                            TextWidget(text: teamTwoName),
+                            UIHelper.verticalSpaceSmall,
+                            TextWidget(text: teamOneName!, textAlign: TextAlign.center,),
                           ],
                         ),
                       ),
@@ -152,7 +154,7 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                                 ),
                                 UIHelper.verticalSpaceSmall,
                                 TextWidget(
-                                  text: translatedStatus,
+                                  text: translatedStatus!,
                                   color: AppColors.colorGrey,
                                   textSize: Dimens.textSmall,
                                 )
@@ -161,15 +163,16 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                           : Image.asset(Assets.vs),
                       Expanded(
                         flex: 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             ImageWidget(
                               imageUrl: widget.teamTwoFlag,
                               placeholder: Assets.icTeamAvatar,
                             ),
-                            UIHelper.horizontalSpaceSmall,
-                            TextWidget(text: teamTwoName),
+                            UIHelper.verticalSpaceSmall,
+                            TextWidget(text: teamTwoName!, textAlign: TextAlign.center,),
                           ],
                         ),
                       ),
@@ -197,8 +200,8 @@ class _FixtureWidgetState extends State<FixtureWidget> {
       translatedLeagueName = await TranslationUtility.translate(widget.leagueName);
       translatedStatus =
         await TranslationUtility.translate(widget.matchStatus!);
-        teamOneName = await TranslationUtility.translate(StringUtility.getShortName(widget.teamOneName));
-        teamTwoName = await TranslationUtility.translate(StringUtility.getShortName(widget.teamTwoName));
+        teamOneName = await TranslationUtility.translate(widget.teamOneName);
+        teamTwoName = await TranslationUtility.translate(widget.teamTwoName);
         isLoading = false;
       setState(() {});
   }

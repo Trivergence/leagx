@@ -23,12 +23,12 @@ class LeaderScreen extends StatelessWidget {
                   imageUrl: leader.profileImg!,
                   title: leader.firstName!,
                   numberOfPrediciton: leader.totalPredictions,
-                  successRate: leader.predictionSuccessRate.toString())
+                  successRate: leader.predictionSuccessRate!.toStringAsFixed(1))
               : ExpandedLeaderTile(
                   imageUrl: leader.profileImg!,
                   title: leader.firstName!,
                   numberOfPrediciton: leader.totalPredictions,
-                  successRate: leader.predictionSuccessRate.toString(),
+                  successRate: leader.predictionSuccessRate!.toStringAsFixed(1),
                 );
         });
   }

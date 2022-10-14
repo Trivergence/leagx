@@ -29,6 +29,7 @@ class DrawerTile extends StatelessWidget {
       title: TextWidget(
         text: title,
         color: AppColors.colorWhite.withOpacity(0.70),
+        textAlign: TextAlign.start,
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
+import 'package:leagx/ui/widgets/score_chip.dart';
 import 'package:leagx/ui/widgets/shimmer_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -62,95 +63,89 @@ class _PredictionWidgetState extends State<PredictionWidget> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Row(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             ImageWidget(
                               imageUrl: widget.teamOneFlag,
                               placeholder: Assets.icTeamAvatar,
                             ),
-                            UIHelper.horizontalSpaceSmall,
-                            TextWidget(text: teamOneName!),
+                            UIHelper.verticalSpaceSmall,
+                            TextWidget(text: teamOneName!,
+                                    textAlign: TextAlign.center,
+                                  ),
                           ],
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 5.0),
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.0)),
-                            gradient: LinearGradient(colors: [
-                              Color(0xFF2A3041),
-                              Color(0xFF2B344D),
-                              Color(0xFF2A3041),
-                            ])),
-                        child: Row(
-                          children: [
-                            TextWidget(text: widget.teamOneScore.toString()),
-                            UIHelper.horizontalSpace(10.0),
-                            const TextWidget(text: '-'),
-                            UIHelper.horizontalSpace(10.0),
-                            TextWidget(text: widget.teamTwoScore.toString()),
-                          ],
-                        ),
+                      Column(
+                        children: [
+                          UIHelper.verticalSpaceMedium,
+                          ScoreChip(
+                            firstScore: widget.teamOneScore.toString(), 
+                            secondScore: widget.teamTwoScore.toString()),
+                          UIHelper.verticalSpaceSmall,
+                          widget.isPending
+                          ? Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.center,
+                              children: [
+                                const IconWidget(
+                                  iconData: Icons.campaign_outlined,
+                                  color: AppColors.colorYellow,
+                                  size: 18,
+                                ),
+                                UIHelper.horizontalSpace(6.0),
+                                TextWidget(
+                                  text: loc.predictionSTxtPending,
+                                  color: AppColors.colorYellow,
+                                  textSize: 14.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ],
+                            )
+                          : widget.predictionRate != null
+                              ? TextWidget(
+                                  text: widget.predictionRate! + "%",
+                                  color: AppColors.colorGreen)
+                              : const SizedBox(),
+                        ],
                       ),
                       Expanded(
                         flex: 2,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             ImageWidget(
                               imageUrl: widget.teamTwoFlag,
                               placeholder: Assets.icTeamAvatar
                             ),
-                            UIHelper.horizontalSpaceSmall,
-                            TextWidget(text: teamTwoName!),
+                            UIHelper.verticalSpaceSmall,
+                            TextWidget(text: teamTwoName!, textAlign: TextAlign.center,),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  widget.isPending
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const IconWidget(
-                              iconData: Icons.campaign_outlined,
-                              color: AppColors.colorYellow,
-                              size: 18,
-                            ),
-                            UIHelper.horizontalSpace(6.0),
-                             TextWidget(
-                              text:loc.predictionSTxtPending ,
-                              color: AppColors.colorYellow,
-                              textSize: 14.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ],
-                        )
-                      : widget.predictionRate != null
-                          ? TextWidget(
-                              text: widget.predictionRate! + "%",
-                              color: AppColors.colorGreen)
-                          : const SizedBox(),
+                  
                 ],
               )),
         ],
       ),
     )
-    : const ShimmerWidget(height: 120)
-    ;
+    : const ShimmerWidget(height: 120);
   }
 
   Future<void> getTranslatedData() async {
     teamOneName = await TranslationUtility.translate(
-        StringUtility.getShortName(widget.teamOneName));
+        widget.teamOneName);
     teamTwoName = await TranslationUtility.translate(
-        StringUtility.getShortName(widget.teamTwoName));
+        widget.teamTwoName);
     isLoading = false;
     setState(() {
     });

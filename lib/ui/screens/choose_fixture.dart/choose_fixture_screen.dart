@@ -48,17 +48,17 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                 UIHelper.verticalSpace(30),
                 availableMatches.isNotEmpty ? Expanded(
                   child: ListView.builder(
-                      itemCount: isFiltering ? filteredList.length : availableMatches.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        Fixture match = isFiltering ? filteredList[index] : availableMatches[index];
-                        return ChooseFixtureTile(leagueId: match.leagueId,
-                          imgUrl: match.leagueLogo,
-                          leagueTitle: match.leagueName,
-                          matchId: match.matchId,
-                          awayTeamName: match.matchAwayteamName,
-                          homeTeamName: match.matchHometeamName);
-                      }),
+                  itemCount: isFiltering ? filteredList.length : availableMatches.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    Fixture match = isFiltering ? filteredList[index] : availableMatches[index];
+                    return ChooseFixtureTile(leagueId: match.leagueId,
+                      imgUrl: match.leagueLogo,
+                      leagueTitle: match.leagueName,
+                      matchId: match.matchId,
+                      awayTeamName: match.matchAwayteamName,
+                      homeTeamName: match.matchHometeamName);
+                  }),
                 )
                 : Center(child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal :8.0, vertical: 100),

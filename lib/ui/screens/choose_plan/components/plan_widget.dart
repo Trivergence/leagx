@@ -1,5 +1,7 @@
 import 'package:leagx/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/utility/translation_utility.dart';
+import 'package:leagx/ui/widgets/shimmer_widget.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
@@ -10,7 +12,7 @@ import '../../../widgets/gradient/gradient_widget.dart';
 import '../../../widgets/text_widget.dart';
 import 'desc_widget.dart';
 
-class PlanWidget extends StatelessWidget {
+class PlanWidget extends StatefulWidget {
   final SubscriptionPlan plan;
   final int index;
   final bool isSelected;
@@ -25,18 +27,34 @@ class PlanWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<PlanWidget> createState() => _PlanWidgetState();
+}
+
+class _PlanWidgetState extends State<PlanWidget> {
+  bool isLoading = true;
+  String? title;
+  String? feature1;
+  String? feature2;
+  String? feature3;
+
+  @override
+  void initState() {
+    translateData();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    Gradient gradient = getGradient(index);
-    return GestureDetector(
-      onTap: onPlanSelected,
+    Gradient gradient = getGradient(widget.index);
+    return !isLoading ? GestureDetector(
+      onTap: widget.onPlanSelected,
       child: Padding(
-        padding: index != 3
+        padding: widget.index != 3
             ? const EdgeInsets.only(bottom: 60.0)
             : const EdgeInsets.only(bottom: 30.0),
         child: Stack(clipBehavior: Clip.none, children: [
           Container(
             decoration: BoxDecoration(
-                gradient: isSelected ? gradient : null,
+                gradient: widget.isSelected ? gradient : null,
                 borderRadius: BorderRadius.circular(8)),
             padding: const EdgeInsets.all(1.5),
             child: Card(
@@ -56,12 +74,12 @@ class PlanWidget extends StatelessWidget {
                           GradientWidget(
                             gradient: gradient,
                             child: TextWidget(
-                              text: plan.title,
+                              text: title!,
                               fontWeight: FontWeight.w700,
                               textSize: Dimens.textMedium,
                             ),
                           ),
-                          isAdmin
+                          widget.isAdmin
                               ? GestureDetector(
                                   onTap: () {
                                     Navigator.pushNamed(
@@ -80,15 +98,15 @@ class PlanWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               DescWidget(
-                                  text: plan.feature1,
+                                  text: feature1!,
                                   gradient: gradient,
                               ),
                               DescWidget(
-                                  text: plan.feature2,
+                                  text: feature2!,
                                   gradient: gradient,
                               ),
                               DescWidget(
-                                  text: plan.feature2,
+                                  text: feature3!,
                                   gradient: gradient,
                                 )
                             ]
@@ -97,7 +115,7 @@ class PlanWidget extends StatelessWidget {
                               gradient: gradient,
                               child: TextWidget(
                                 text:
-                                    "\$${plan.price}",
+                                    "\$${widget.plan.price}",
                                 textSize: Dimens.textLarge,
                                 fontWeight: FontWeight.w600,
                               ))
@@ -115,7 +133,8 @@ class PlanWidget extends StatelessWidget {
                   child: Image.asset(Assets.icCrown)))
         ]),
       ),
-    );
+    )
+    : const ShimmerWidget(height: 120);
   }
 
   Gradient getGradient(int index) {
@@ -131,5 +150,14 @@ class PlanWidget extends StatelessWidget {
       default:
         return AppColors.blueishBottomTopGradient;
     }
+  }
+
+  Future<void> translateData() async {
+    feature1 = await TranslationUtility.translate(widget.plan.feature1);
+    feature2 = await TranslationUtility.translate(widget.plan.feature2);
+    feature3 = await TranslationUtility.translate(widget.plan.feature3);
+    title = await TranslationUtility.translate(widget.plan.title);
+    isLoading = false;
+    setState(() {});
   }
 }

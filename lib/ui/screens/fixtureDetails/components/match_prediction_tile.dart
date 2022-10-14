@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/utility/string_utility.dart';
+import 'package:leagx/ui/util/utility/translation_utility.dart';
+import 'package:leagx/ui/widgets/shimmer_widget.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../widgets/text_widget.dart';
 
-class MatchPredictionTile extends StatelessWidget {
+class MatchPredictionTile extends StatefulWidget {
   final String? homeTeamName;
   final String? awayTeamName;
   final int homeScore;
@@ -15,10 +17,21 @@ class MatchPredictionTile extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<MatchPredictionTile> createState() => _MatchPredictionTileState();
+}
+
+class _MatchPredictionTileState extends State<MatchPredictionTile> {
+  String? homeTeamName;
+  String? awayTeamName;
+  bool isLoading = true;
+  @override
+  void initState() {
+    translateData();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    String awayShortName = StringUtility.getShortName(awayTeamName!);
-    String homeShortName = StringUtility.getShortName((homeTeamName!));
-    return Container(
+    return !isLoading ? Container(
       color: AppColors.textFieldColor,
       padding: const EdgeInsets.all(15),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
@@ -29,20 +42,31 @@ class MatchPredictionTile extends StatelessWidget {
             text: loc.fixtureDetailsMatchTxtYourPredictions,
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextWidget(
-                text: "$homeShortName - $homeScore",
+                text: "$homeTeamName - ${widget.homeScore}",
                 color: AppColors.colorCyan,
                 fontWeight: FontWeight.w600,
               ),
               TextWidget(
-                  text: "$awayShortName - $awayScore",
+                  text: "$awayTeamName - ${widget.awayScore}",
                   color: AppColors.colorYellow,
                   fontWeight: FontWeight.w600),
             ],
           )
         ],
       ),
-    );
+    )
+    : const ShimmerWidget(height: 70);
+  }
+
+  Future<void> translateData() async {
+     awayTeamName = await TranslationUtility.translate(
+        widget.awayTeamName!);
+     homeTeamName = await TranslationUtility.translate(
+        widget.homeTeamName!);
+    isLoading = false;
+    setState(() {});
   }
 }

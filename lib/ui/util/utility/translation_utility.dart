@@ -10,4 +10,16 @@ class TranslationUtility {
     }
     return text;
   }
+
+   static Future<String> translateWoFrom(String text) async {
+    if (preferenceHelper.currentLanguage == "ar") {
+      Translation translation =
+          await GoogleTranslator().translate(text, to: "ar");
+      return translation.text;
+    } else {
+      Translation translation =
+          await GoogleTranslator().translate(text, to: "en");
+      return translation.text;
+    }
+  }
 }

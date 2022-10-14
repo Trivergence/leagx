@@ -1,9 +1,6 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/font_family.dart';
-import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/icon_widget.dart';
-import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class SearchTextField extends StatelessWidget {
@@ -79,7 +76,7 @@ class SearchTextField extends StatelessWidget {
     this.inputType,
     this.hint,
     this.isIcon = false,
-    this.padding = const EdgeInsets.only(left: 20),
+    this.padding = const EdgeInsets.only(left: 20, right: 20),
     this.iconColor = Colors.grey,
     this.onFieldSubmitted,
     this.inputAction,

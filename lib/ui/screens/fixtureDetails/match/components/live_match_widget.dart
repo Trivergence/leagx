@@ -48,6 +48,7 @@ class LiveMatchWidget extends StatelessWidget {
                 leftValue: statistics[i].home,
                 rightValue: statistics[i].away,
               ),
+              UIHelper.verticalSpaceLarge
           ],
         ),
         if(ValidationUtils.isValid(prediction)) MatchPredictionTile(
@@ -56,6 +57,7 @@ class LiveMatchWidget extends StatelessWidget {
           homeScore: prediction!.firstTeamScore ?? 0,
           awayScore: prediction!.secondTeamScore ?? 0,
         ),
+        if(statistics.isEmpty) UIHelper.verticalSpaceXL,
         if (!ValidationUtils.isValid(prediction)) SizedBox(
             width: SizeConfig.width * 90,
             child: MainButton(text: loc.fixtureDetailsMatchBtnPredict, onPressed: _showSheet)),

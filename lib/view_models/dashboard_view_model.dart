@@ -10,7 +10,6 @@ import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
-import 'package:leagx/ui/util/utility/date_utility.dart';
 
 import '../constants/app_constants.dart';
 import '../core/network/app_url.dart';

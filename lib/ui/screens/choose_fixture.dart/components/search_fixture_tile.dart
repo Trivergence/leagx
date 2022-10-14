@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/utility/string_utility.dart';
+import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
+import 'package:leagx/ui/widgets/shimmer_widget.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
 import '../../../widgets/text_widget.dart';
 
-class ChooseFixtureTile extends StatelessWidget {
+class ChooseFixtureTile extends StatefulWidget {
   const ChooseFixtureTile(
       {Key? key,
       required this.leagueId,
@@ -23,13 +25,26 @@ class ChooseFixtureTile extends StatelessWidget {
   final String homeTeamName;
 
   @override
+  State<ChooseFixtureTile> createState() => _ChooseFixtureTileState();
+}
+
+class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
+  String? homeName;
+  String? awayName;
+  String? leagueTitle;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    translateData();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    String homeName = StringUtility.getShortName(homeTeamName);
-    String awayName = StringUtility.getShortName(awayTeamName);
-    return InkWell(
+    return !isLoading ? InkWell(
       onTap: () => Navigator.pop(context, {
-        "matchId": matchId,
-        "leagueId": leagueId,
+        "matchId": widget.matchId,
+        "leagueId": widget.leagueId,
         "leagueTitle": leagueTitle
       }),
       child: Padding(
@@ -41,13 +56,13 @@ class ChooseFixtureTile extends StatelessWidget {
           tileColor: AppColors.textFieldColor,
           leading: CircleAvatar(
             child: ImageWidget(
-              imageUrl: imgUrl,
+              imageUrl: widget.imgUrl,
                placeholder: Assets.icLeague
             ),
             backgroundColor: AppColors.textFieldColor,
             radius: 25,
           ),
-          title: TextWidget(text: leagueTitle),
+          title: TextWidget(text: leagueTitle!),
           subtitle: TextWidget(
             text:"$homeName-$awayName",
             textSize: Dimens.textSmall,
@@ -56,6 +71,17 @@ class ChooseFixtureTile extends StatelessWidget {
           ),
           
       ),
-    );
+    )
+    : const ShimmerWidget(height: 100);
+  }
+
+  Future<void> translateData() async {
+    homeName = await TranslationUtility.translate(
+        widget.homeTeamName);
+    awayName = await TranslationUtility.translate(
+        widget.awayTeamName);
+    leagueTitle = await TranslationUtility.translate(widget.leagueTitle);
+    isLoading = false;
+    setState(() {});
   }
 }
