@@ -162,7 +162,10 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                                 )
                               ],
                             )
-                          : Image.asset(Assets.vs),
+                          : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal : 5.0),
+                            child: Image.asset(Assets.vs),
+                          ),
                       Expanded(
                         flex: 2,
                         child: Row(
