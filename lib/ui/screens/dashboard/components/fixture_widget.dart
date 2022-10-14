@@ -1,11 +1,9 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/utility/date_utility.dart';
-import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/score_chip.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
@@ -15,7 +13,6 @@ import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/live_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../widgets/shimmer_widget.dart';
 
@@ -35,7 +32,7 @@ class FixtureWidget extends StatefulWidget {
   final bool isOver;
   final bool withText;
   final Function(String) onTap;
-   FixtureWidget({
+   const FixtureWidget({
     Key? key,
     required this.leagueName,
     required this.teamOneFlag,
@@ -105,7 +102,6 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                                 const GradientWidget(
                                     child: Icon(Icons.access_time_outlined)),
                                 UIHelper.horizontalSpace(4.0),
-                                //TODO localization
                                 TextWidget(
                                     text: isToday ? "${loc.today}, " + widget.scheduledTime! : DateUtility.getUiFormat(widget.scheduledDate),
                                     textSize: Dimens.textSmall),
@@ -121,7 +117,8 @@ class _FixtureWidgetState extends State<FixtureWidget> {
               color: AppColors.colorWhite.withOpacity(0.07),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
                   UIHelper.verticalSpace(15.0),
@@ -130,29 +127,34 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          // crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            Expanded(
+                                child: TextWidget(
+                              text: teamOneName!,
+                              textAlign: TextAlign.center,
+                            )),
+                            UIHelper.horizontalSpace(5),
                             ClipOval(
                               child: ImageWidget(
-                                imageUrl: widget.teamOneFlag,
-                                placeholder: Assets.icTeamAvatar
-                              ),
+                                  imageUrl: widget.teamOneFlag,
+                                  placeholder: Assets.icTeamAvatar),
                             ),
-                            UIHelper.verticalSpaceSmall,
-                            TextWidget(text: teamOneName!, textAlign: TextAlign.center,),
                           ],
                         ),
                       ),
                       widget.isLive || widget.isOver
                           ? Column(
                               children: [
+                                UIHelper.verticalSpace(20),
                                 ScoreChip(
                                   firstScore: widget.teamOneScore!,
                                   secondScore: widget.teamTwoScore!,
+                                  hasGradient: false,
                                 ),
-                                UIHelper.verticalSpaceSmall,
+                                // UIHelper.verticalSpaceSmall,
                                 TextWidget(
                                   text: translatedStatus!,
                                   color: AppColors.colorGrey,
@@ -163,16 +165,20 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                           : Image.asset(Assets.vs),
                       Expanded(
                         flex: 2,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ImageWidget(
                               imageUrl: widget.teamTwoFlag,
                               placeholder: Assets.icTeamAvatar,
                             ),
-                            UIHelper.verticalSpaceSmall,
-                            TextWidget(text: teamTwoName!, textAlign: TextAlign.center,),
+                            UIHelper.horizontalSpace(5),
+                            Expanded(
+                                child: TextWidget(
+                              text: teamTwoName!,
+                              textAlign: TextAlign.center,
+                            )),
                           ],
                         ),
                       ),
