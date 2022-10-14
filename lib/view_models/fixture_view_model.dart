@@ -63,7 +63,7 @@ class FixtureDetailViewModel extends BaseModel {
         "action": "get_events",
         "match_id": matchId,
         "from": "2021-01-01",
-        "to": "2022-12-30",
+        "to": "2022-06-30",
         "timezone": "Asia/Riyadh",
       });
       _matchDetails = tempList.cast<Fixture>();

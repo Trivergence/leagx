@@ -64,7 +64,7 @@ class DashBoardViewModel extends BaseModel {
             "timezone": "Asia/Riyadh",
             "league_id": subscribedLeagueIds.join(","),
             "from": "2021-01-01",
-            "to": "2022-12-30",
+            "to": "2022-06-30",
           },
         );
         _subscribedMatches = tempList.cast<Fixture>();
