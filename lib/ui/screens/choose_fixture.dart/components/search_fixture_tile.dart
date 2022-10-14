@@ -31,7 +31,7 @@ class ChooseFixtureTile extends StatefulWidget {
 class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
   String? homeName;
   String? awayName;
-  String? leagueTitle;
+  String leagueTitle = "";
   bool isLoading = true;
 
   @override
@@ -62,7 +62,7 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
             backgroundColor: AppColors.textFieldColor,
             radius: 25,
           ),
-          title: TextWidget(text: leagueTitle!),
+          title: TextWidget(text: leagueTitle),
           subtitle: TextWidget(
             text:"$homeName-$awayName",
             textSize: Dimens.textSmall,

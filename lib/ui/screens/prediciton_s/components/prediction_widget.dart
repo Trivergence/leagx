@@ -63,29 +63,33 @@ class _PredictionWidgetState extends State<PredictionWidget> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                           //crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            ImageWidget(
-                              imageUrl: widget.teamOneFlag,
-                              placeholder: Assets.icTeamAvatar,
+                            Expanded(
+                                child: TextWidget(
+                              text: teamOneName!,
+                              textAlign: TextAlign.center,
+                            )),
+                            UIHelper.horizontalSpace(5),
+                            ClipOval(
+                              child: ImageWidget(
+                                  imageUrl: widget.teamOneFlag,
+                                  placeholder: Assets.icTeamAvatar),
                             ),
-                            UIHelper.verticalSpaceSmall,
-                            TextWidget(text: teamOneName!,
-                                    textAlign: TextAlign.center,
-                                  ),
                           ],
                         ),
                       ),
                       Column(
                         children: [
-                          UIHelper.verticalSpaceMedium,
+                          UIHelper.verticalSpace(30),
                           ScoreChip(
+                            hasGradient: false,
                             firstScore: widget.teamOneScore.toString(), 
                             secondScore: widget.teamTwoScore.toString()),
                           UIHelper.verticalSpaceSmall,
@@ -117,18 +121,22 @@ class _PredictionWidgetState extends State<PredictionWidget> {
                       ),
                       Expanded(
                         flex: 2,
-                        child: Column(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ImageWidget(
                               imageUrl: widget.teamTwoFlag,
-                              placeholder: Assets.icTeamAvatar
+                              placeholder: Assets.icTeamAvatar,
                             ),
-                            UIHelper.verticalSpaceSmall,
-                            TextWidget(text: teamTwoName!, textAlign: TextAlign.center,),
+                            UIHelper.horizontalSpace(5),
+                            Expanded(
+                                child: TextWidget(
+                              text: teamTwoName!,
+                              textAlign: TextAlign.center,
+                            )),
                           ],
-                        ),
+                        )
                       ),
                     ],
                   ),
