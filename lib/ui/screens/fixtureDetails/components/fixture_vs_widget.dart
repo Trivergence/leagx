@@ -42,7 +42,11 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
     return !isLoading
         ? Container(
             width: double.infinity,
-            color: AppColors.textFieldColor,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(Assets.homeBackground),
+                fit: BoxFit.fill,
+              )),
             margin: const EdgeInsets.only(bottom: 10, top: 5),
             padding: const EdgeInsets.all(20),
             child: Row(
