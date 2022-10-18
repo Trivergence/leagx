@@ -8,10 +8,12 @@ class ApiModels {
   static const String getPaymentMethods = "GET_PAYMENT_METHODS";
   static const String createSetupIntent = "create_setup_intent";
   static const String createPaymentIntent = "create_payment_intent";
+  static const String error = "error";
+
   static dynamic getModelObjects(String modelName, dynamic json) {
     switch (modelName) {
-      // case error:
-      //   return ErrorModel.fromJson(json);
+      case error:
+        return ErrorModel.fromJson(json);
       case customer:
         return Customer.fromJson(json);
       case getPaymentMethods:

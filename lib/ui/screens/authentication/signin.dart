@@ -30,6 +30,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:multiple_result/multiple_result.dart';
 import 'package:payments/payments.dart';
 import 'package:provider/provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -121,13 +122,15 @@ class SigninScreen extends StatelessWidget {
                           TOAST_TYPE.success);
                       Navigator.pushNamed(context, Routes.dashboard);
                       //TODO Stripe place it in better file
-                      Customer? customer = await PayIn.createCustomer(
-                          userId: loginResponse.id.toString(),
-                          userName: loginResponse.firstName!,
-                          userEmail: loginResponse.email);
-                      if(customer != null) {
+                      Result<String, Customer> customer = await PayIn.createCustomer(
+                        userId: loginResponse.id.toString(),
+                        userName: loginResponse.firstName!,
+                        userEmail: loginResponse.email);
+                        customer.when((errorCode) {
+                          
+                        }, (customer) {
                         locator<SecureStore>().saveCustomerId(customer.id!);
-                      }
+                      });
                     }
                   }
                 }

@@ -76,8 +76,8 @@ class WalletScreen extends StatelessWidget {
             const TextWidget(text: "Payment Methods", textSize: 27,
               fontWeight: FontWeight.w700),
               UIHelper.verticalSpaceSmall,
-            if(walletModel.paymentMethods.isEmpty) const TextWidget(text: "No Payment Method Added yet"),
-            walletModel.paymentMethods.isEmpty 
+            if(walletModel.getPayementMethods.isEmpty) const TextWidget(text: "No Payment Method Added yet"),
+            walletModel.getPayementMethods.isEmpty 
             ? MainButton(text: "Add Payment Methods", onPressed: _addPaymentMethod)
             :  Column(
               children: [
@@ -95,16 +95,18 @@ class WalletScreen extends StatelessWidget {
                     Row(
                       children: [
                         const Icon(Icons.payment),
-                        TextWidget(text: "**** **** **** " + walletModel.paymentMethods.first.card!.last4!),
+                        TextWidget(text: "**** **** **** " + walletModel.getPayementMethods.first.card!.last4!),
                       ],
                     ),
                     UIHelper.horizontalSpaceSmall,
                      TextWidget(text: walletModel
-                        .paymentMethods.first.card!.expMonth!
+                        .getPayementMethods
+                                                        .first.card!.expMonth!
                         .toString() +
                     "/" +
                     walletModel
-                        .paymentMethods.first.card!.expYear!
+                        .getPayementMethods
+                                                        .first.card!.expYear!
                         .toString())
                 ]),
           ),

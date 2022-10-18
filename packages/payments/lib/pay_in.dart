@@ -2,7 +2,7 @@ part of payments;
 
 
 class PayIn {
-  static Future<Customer?> createCustomer({
+  static Future<Result<String, Customer>> createCustomer({
      String? userId, 
      String? userName, 
      String? userEmail, 
@@ -15,56 +15,71 @@ class PayIn {
         "internalId": userId
       }
     };
-      Customer? customer = await ApiService.callPostApi(
+       Result<ErrorModel, dynamic> result= await ApiService.callPostApi(
         url: PaymentUrl.customer,
         body: body,
         modelName: ApiModels.customer
       );
-      return customer;
+      return result.when((errorModel) {
+        return Error(errorModel.error!.code!);
+      }, (customerModel) {
+        Customer? customer = customerModel;
+        if(customer != null) {
+         return Success(customer);
+        }
+        return const Error("custom_code");
+      });
   }
-  static Future<List<PayMethod>> getPaymentMethods({required String customerId}) async {
+  static Future<Result<String, List<PayMethod>>> getPaymentMethods({required String customerId}) async {
     String completeUrl = PaymentUrl.customer + "/" + customerId + "/" + PaymentUrl.paymentMethods;
     var params = {"type": "card"};
-    PaymentMethods? paymentMethods = await  ApiService.callGetApi(
+     Result<ErrorModel, dynamic> result = await  ApiService.callGetApi(
       url: completeUrl, 
       modelName: ApiModels.getPaymentMethods,
       parameters: params
     );
-    if(paymentMethods != null) {
-      return paymentMethods.data!;
-    }
-    return [];
+    return result.when((errorModel) => Error(errorModel.error!.code!), (paymentModel) {
+      PaymentMethods? paymentMethods = paymentModel;
+      if (paymentMethods != null) {
+        return Success(paymentMethods.data!);
+      }
+      return const Success([]);
+    });
   }
-    static Future<bool> removePaymentMethod(
+    static Future<Result<String, bool>> removePaymentMethod(
       {required String paymentId}) async {
     String completeUrl = PaymentUrl.paymentMethods +
         "/" +
         paymentId +
         "/" +
         PaymentUrl.detachPaymentMethods;
-    bool success = await ApiService.callPostWoResponceApi(
+    Result<ErrorModel, bool> result = await ApiService.callPostWoResponceApi(
         url: completeUrl,
       );
-    return success;
+    return result.when((errorModel) => Error(errorModel.error!.code!), (isSuccessfull) => Success(isSuccessfull));
   }
-  static Future<String?> createSetupIntent(
+  static Future<Result<String, String?>> createSetupIntent(
       {required String customerId}) async {
     Map<String,dynamic> body = {
      "payment_method_types[]": "card",
      "customer": customerId,
     };
-
-    SetupIntent? setupIntent = await ApiService.callPostApi(
+     Result<ErrorModel, dynamic> result = await ApiService.callPostApi(
       url: PaymentUrl.setupIntent,
       body: body,
       modelName: ApiModels.createSetupIntent);
+      return result.when((errorModel) {
+        return Error(errorModel.error!.code!);
+      }, (setupIntentModel) {
+      SetupIntent? setupIntent = setupIntentModel;
       if(setupIntent != null) {
-        return setupIntent.clientSecret;
+        return Success(setupIntent.clientSecret);
       }
-      return null;
+       return const Success(null);
+      });
   }
-    static Future<String?> createIndirectPaymentIntent({
-      required String customerId, 
+    static Future<Result<String, String?>> createIndirectPaymentIntent({
+      required String customerId,
       required String amount, 
       required String currency}) async {
     Map<String, dynamic> body = {
@@ -74,14 +89,47 @@ class PayIn {
       "payment_method_types[]": "card",
       "customer": customerId,
     };
-
-    PaymentIntent? paymentIntent = await ApiService.callPostApi(
+    Result<ErrorModel, dynamic> result = await ApiService.callPostApi(
         url: PaymentUrl.paymentIntent,
         body: body,
         modelName: ApiModels.createPaymentIntent);
-    if (paymentIntent != null) {
-      return paymentIntent.clientSecret;
-    }
-    return null;
+        return result.when((errorModel) {
+          return Error(errorModel.error!.code!);
+        }, (paymentIntentModel) {
+          PaymentIntent? paymentIntent = paymentIntentModel;
+          if (paymentIntent != null) {
+           return Success(paymentIntent.clientSecret);
+          }
+          return const Success(null);
+        });
+  }
+  static Future<Result<String, bool>> createDirectPaymentIntent(
+      {required String customerId,
+      required String amount,
+      required String currency,
+      required String paymentMethodId
+      }) async {
+    Map<String, dynamic> body = {
+      'amount': (int.parse(amount) * 100).toString(),
+      'currency': currency,
+      "customer": customerId,
+      "payment_method": paymentMethodId,
+      "off_session": true,
+      "confirm": true,
+    };
+
+    Result<ErrorModel, dynamic> result = await ApiService.callPostApi(
+        url: PaymentUrl.paymentIntent,
+        body: body,
+        modelName: ApiModels.createPaymentIntent);
+    return result.when((errorModel) {
+      return Error(errorModel.error!.code!);
+    }, (paymentIntentModel) {
+      PaymentIntent? paymentIntent = paymentIntentModel;
+      if (paymentIntent != null) {
+        return const Success(true);
+      }
+      return const Success(false);
+    });
   }
 }

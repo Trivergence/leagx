@@ -9,7 +9,6 @@ import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
-import 'package:provider/provider.dart';
 
 import '../constants/app_constants.dart';
 import '../core/sharedpref/sharedpref.dart';
@@ -35,7 +34,7 @@ class SubscriptionViewModel extends BaseModel {
         modelName: ApiModels.getPlans
       );  
       _listOfPlan = tempList.cast<SubscriptionPlan>();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       setBusy(false);
     }
   }
@@ -47,27 +46,27 @@ class SubscriptionViewModel extends BaseModel {
    required WalletViewModel walletModel
    }) async {
     Loader.showLoader();
-    if(walletModel.paymentMethods.isEmpty) {
-      await walletModel.purchaseIndirectly(amount: "20", currency: "usd");
-    } else {
-
-    }
-    User? user = locator<SharedPreferenceHelper>().getUser();
-    Map<String,dynamic> body = {
-      "user_id": user!.id,
-      "plan_id": planId,
-      "league": {
-        "title": leagueTitle,
-        "logo": leagueImg,
-        "external_league_id": int.parse(leagueId)
+    bool isPurchased = await purchaseModel(walletModel);
+    if (isPurchased) {
+      User? user = locator<SharedPreferenceHelper>().getUser();
+      Map<String,dynamic> body = {
+        "user_id": user!.id,
+        "plan_id": planId,
+        "league": {
+          "title": leagueTitle,
+          "logo": leagueImg,
+          "external_league_id": int.parse(leagueId)
+        }
+      };
+      bool success = await ApiService.postWoResponce(
+        url: AppUrl.subscribeLeague,
+        body: body);
+      if(success) {
+        Navigator.of(context).pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
+        Loader.hideLoader();
+      } else {
+        Loader.hideLoader();
       }
-    };
-    bool success = await ApiService.postWoResponce(
-      url: AppUrl.subscribeLeague,
-      body: body);
-    if(success) {
-      Navigator.of(context).pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
-      Loader.hideLoader();
     } else {
       Loader.hideLoader();
     }
@@ -84,7 +83,7 @@ class SubscriptionViewModel extends BaseModel {
       _leagues = tempList.cast<League>();
       // Remove this later
       _leagues = leagues.where((league) => saudiLeagueIds.contains(league.leagueId)).toList();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       setBusy(false);
     }
   }
@@ -94,5 +93,15 @@ class SubscriptionViewModel extends BaseModel {
         .where((league) =>
             league.leagueName.toLowerCase().contains(value.toLowerCase()))
         .toList();
+  }
+
+  Future<bool> purchaseModel(WalletViewModel walletModel ) async {
+    bool success = false;
+    if(walletModel.getPayementMethods.isEmpty) {
+      success = await walletModel.purchaseIndirectly(amount: "20", currency: "usd");
+    } else {
+      success = await walletModel.purchaseDirectly(amount: "20", currency: "usd");
+    }
+    return success;
   }
 }
