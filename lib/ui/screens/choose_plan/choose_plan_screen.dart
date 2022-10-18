@@ -42,7 +42,7 @@ class ChoosePlanScreen extends StatelessWidget {
                    body: loc.subscribeConfirmBody + "\$$price",
                    negativeBtnTitle: loc.subscribeConfirmCancel, 
                    positiveBtnTitle: loc.subscribeConfirmSubscribe, 
-                   onPositiveBtnPressed: () => _subscribe(context,planId));
+                   onPositiveBtnPressed: () => _subscribe(context,planId, price));
                   
                 },
               ),
@@ -53,7 +53,7 @@ class ChoosePlanScreen extends StatelessWidget {
     );
   }
 
-  _subscribe(BuildContext context, int planId) async {
+  _subscribe(BuildContext context, int planId, String price) async {
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected) {
       context.read<SubscriptionViewModel>().subscribeLeague(
@@ -62,7 +62,7 @@ class ChoosePlanScreen extends StatelessWidget {
       leagueId: leagueData.leagueId,
       leagueImg: leagueData.leagueImg,
       leagueTitle: leagueData.leagueTitle,
-      walletModel: context.read<WalletViewModel>()
+      price: price
       );
     }
   }

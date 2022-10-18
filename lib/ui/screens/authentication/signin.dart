@@ -6,11 +6,9 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/enums.dart';
 import 'package:leagx/constants/strings.dart';
 import 'package:leagx/core/network/internet_info.dart';
-import 'package:leagx/core/secure_storage/secure_storage.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/routes/routes.dart';
-import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/authentication/components/have_account_button.dart';
 import 'package:leagx/ui/screens/authentication/components/social_media_widget.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
@@ -30,6 +28,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:payments/payments.dart';
 import 'package:provider/provider.dart';
@@ -104,33 +103,23 @@ class SigninScreen extends StatelessWidget {
                 if (isConnected) {
                   if (_formKey.currentState!.validate()) {
                     Loader.showLoader();
-                    User? loginResponse = await AuthViewModel.login(
+                    User? userData = await AuthViewModel.login(
                       email: _emailController.text,
                       password: _passwordController.text,
                     );
                     Loader.hideLoader();
                     
-                    if (ValidationUtils.isValid(loginResponse)) {
-                      preferenceHelper.saveAuthToken(loginResponse!.apiToken);
-                      preferenceHelper.saveUser(loginResponse);
+                    if (ValidationUtils.isValid(userData)) {
+                      preferenceHelper.saveAuthToken(userData!.apiToken);
+                      preferenceHelper.saveUser(userData);
                       DashBoardViewModel dashBoardModel = context.read<DashBoardViewModel>();
                       await dashBoardModel.getSubscribedLeagues();
                       if(dashBoardModel.subscribedLeagues.isEmpty) {
-                        AuthViewModel.subscribeOneLeague(loginResponse.id);
+                        AuthViewModel.subscribeOneLeague(userData.id);
                       }
                       ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
                           TOAST_TYPE.success);
                       Navigator.pushNamed(context, Routes.dashboard);
-                      //TODO Stripe place it in better file
-                      Result<String, Customer> customer = await PayIn.createCustomer(
-                        userId: loginResponse.id.toString(),
-                        userName: loginResponse.firstName!,
-                        userEmail: loginResponse.email);
-                        customer.when((errorCode) {
-                          
-                        }, (customer) {
-                        locator<SecureStore>().saveCustomerId(customer.id!);
-                      });
                     }
                   }
                 }

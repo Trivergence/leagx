@@ -1,4 +1,5 @@
 import 'package:leagx/models/auth/forgot_password.dart';
+import 'package:leagx/models/customer_cred.dart';
 import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/dashboard/league.dart';
 import 'package:leagx/models/error_model.dart';
@@ -19,6 +20,8 @@ class ApiModels {
   static const String user = "USER";
   static const String userSummary = "USER_SUMMARY";
   static const String upcomingMatches = "UPCOMING_MATCHES";
+  static const String paymentAccounts = "PAYMENT_ACCOUNTS";
+  static const String paymentAccount = "PAYMENT_ACCOUNT";
   static const String getLeagues = "GET_LEAGUES";
   static const String getNews = "GET_NEWS";
   static const String getTeams = "GET_TEAM";
@@ -39,6 +42,8 @@ class ApiModels {
         return UserData.fromJson(json);
       case userSummary:
         return UserSummary.fromJson(json);
+      case paymentAccount:
+        return CustomerCred.fromJson(json);
     }
   }
   static dynamic getListOfObjects(String modelName, dynamic json) {
@@ -59,6 +64,8 @@ class ApiModels {
         return subscribedLeagueFromJson(json);
       case getPredictions:
         return predictionFromJson(json);
+      case paymentAccounts:
+        return customerCredFromJson(json);
     }
   }
 }

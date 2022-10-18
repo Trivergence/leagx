@@ -9,6 +9,7 @@ import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/app_constants.dart';
 import '../core/sharedpref/sharedpref.dart';
@@ -38,15 +39,17 @@ class SubscriptionViewModel extends BaseModel {
       setBusy(false);
     }
   }
-  subscribeLeague({required BuildContext context,
-   required int planId, 
-   required String leagueId, 
-   required String leagueTitle, 
-   required String leagueImg,
-   required WalletViewModel walletModel
+  subscribeLeague({
+    required BuildContext context,
+    required int planId, 
+    required String leagueId, 
+    required String leagueTitle, 
+    required String leagueImg,
+    required String price
    }) async {
     Loader.showLoader();
-    bool isPurchased = await purchaseModel(walletModel);
+    WalletViewModel  walletModel = context.read<WalletViewModel>();
+    bool isPurchased = await purchaseModel(walletModel, price);
     if (isPurchased) {
       User? user = locator<SharedPreferenceHelper>().getUser();
       Map<String,dynamic> body = {
@@ -95,12 +98,12 @@ class SubscriptionViewModel extends BaseModel {
         .toList();
   }
 
-  Future<bool> purchaseModel(WalletViewModel walletModel ) async {
+  Future<bool> purchaseModel(WalletViewModel walletModel, String price) async {
     bool success = false;
     if(walletModel.getPayementMethods.isEmpty) {
-      success = await walletModel.purchaseIndirectly(amount: "20", currency: "usd");
+      success = await walletModel.purchaseIndirectly(amount: price, currency: "sar");
     } else {
-      success = await walletModel.purchaseDirectly(amount: "20", currency: "usd");
+      success = await walletModel.purchaseDirectly(amount: price, currency: "sar");
     }
     return success;
   }

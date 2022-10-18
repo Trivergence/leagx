@@ -6,6 +6,7 @@ import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/models/user_summary.dart';
+import 'package:leagx/service/payment_service/payment_config.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -15,6 +16,7 @@ import 'package:leagx/ui/util/utility/date_utility.dart';
 import '../constants/app_constants.dart';
 import '../core/network/app_url.dart';
 import '../core/sharedpref/sharedpref.dart';
+import '../models/customer_cred.dart';
 import '../models/dashboard/news.dart';
 import '../models/leader.dart';
 import '../models/user/user.dart';
@@ -44,6 +46,7 @@ class DashBoardViewModel extends BaseModel {
       if(subscribedLeagues.isNotEmpty) {
         await getAllNews();
       }
+      getPaymentCredentials();
     } on Exception catch (_) {
       setBusy(false);
     }
@@ -91,10 +94,10 @@ class DashBoardViewModel extends BaseModel {
           "apitoken": preferenceHelper.authToken,
         },
         modelName: ApiModels.getSubscribedLeagues
-        ) as List<SubscribedLeague>;
+        );
         _subscribedLeagues = tempList.cast<SubscribedLeague>();
       _subscribedLeagueIds = getSubscribedIds();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       setBusy(false);
     }
   }
@@ -128,7 +131,7 @@ class DashBoardViewModel extends BaseModel {
       } else {
         return null;
       }
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       setBusy(false);
     }
  
@@ -234,6 +237,21 @@ class DashBoardViewModel extends BaseModel {
       _userSummary = await  ApiService.callGetApi(url: completeUrl, modelName: ApiModels.userSummary);
     }
   }
+  void getPaymentCredentials() async {
+    User? user = preferenceHelper.getUser();
+    if(user != null) {
+      List<dynamic> tempList= await ApiService.getListRequest(
+        baseUrl: AppUrl.baseUrl,
+        url: AppUrl.getPaymentAccounts,
+        modelName: ApiModels.paymentAccounts,
+      );
+      List<CustomerCred> listOfCred = tempList.cast<CustomerCred>();
+      if(listOfCred.isNotEmpty) {
+        locator<PaymentConfig>().setCustomerCred = listOfCred.first;
+      }
+    }
+  }
+
   clearData() {
     _subscribedMatches = [];
     _subscribedLeagues = [];

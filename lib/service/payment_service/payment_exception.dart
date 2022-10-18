@@ -100,9 +100,6 @@ class PaymentExceptions {
         break;
       default:
       message = loc.errorTryAgain;
-
-      // case "sepa_unsupported_account":
-      //   message = loc.errorStripeSepaUnsupportedAccount;
     }
     ToastMessage.show(message, TOAST_TYPE.error);
   }
