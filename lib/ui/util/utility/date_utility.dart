@@ -33,4 +33,17 @@ class DateUtility {
     DateTime today = DateTime(now.year, now.month, now.day);
     return date == today;
   }
+  static DateTime combineDateTime(DateTime date, String time) {
+    int hour = int.parse(time.split(":")[0]);
+    int minutes = int.parse(time.split(":")[1]);
+    DateTime parsedDateTime = DateTime(date.year, date.month, date.day, hour, minutes);
+    return parsedDateTime;
+  }
+  static DateTime parseTime(String time) {
+    int hour = int.parse(time.split(":")[0]);
+    int minutes = int.parse(time.split(":")[1]);
+    DateTime parsedDateTime =
+        DateTime(hour, minutes);
+    return parsedDateTime;
+  }
 }

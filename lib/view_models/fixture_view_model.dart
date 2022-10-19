@@ -54,7 +54,7 @@ class FixtureDetailViewModel extends BaseModel {
 
   Future<void> getMatchDetails(String matchId) async {
     try {
-      DateTime today = DateTime.now();
+      DateTime now = DateTime.now();
       List<dynamic> tempList = await ApiService.getListRequest(
         baseUrl: AppUrl.footballBaseUrl,
         modelName: ApiModels.upcomingMatches,
@@ -63,7 +63,7 @@ class FixtureDetailViewModel extends BaseModel {
         "action": "get_events",
         "match_id": matchId,
         "from": "2021-01-01",
-        "to": "2022-06-30",
+        "to": DateUtility.getApiFormat(now),
         "timezone": "Asia/Riyadh",
       });
       _matchDetails = tempList.cast<Fixture>();

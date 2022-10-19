@@ -10,6 +10,7 @@ import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
+import 'package:leagx/ui/util/utility/date_utility.dart';
 
 import '../constants/app_constants.dart';
 import '../core/network/app_url.dart';
@@ -64,10 +65,13 @@ class DashBoardViewModel extends BaseModel {
             "timezone": "Asia/Riyadh",
             "league_id": subscribedLeagueIds.join(","),
             "from": "2021-01-01",
-            "to": "2022-06-30",
+            "to": DateUtility.getApiFormat(now),
           },
         );
         _subscribedMatches = tempList.cast<Fixture>();
+        _subscribedMatches.sort(
+          (fixture1, fixture2) => sortMatches(fixture1, fixture2)
+        );
         // _subscribedMatches =
         //     _subscribedMatches.where((match) => isValid(match, now)).toList();
       } on Exception catch (e) {
@@ -134,7 +138,6 @@ class DashBoardViewModel extends BaseModel {
   }
   Future<void> addNews({
     required BuildContext context,
-    required String title,
     required String desc,
     required String matchId,
     required String leagueId}) async {
@@ -145,7 +148,7 @@ class DashBoardViewModel extends BaseModel {
         Loader.showLoader();
         Map<String,dynamic> requestBody = {
           "news":{
-              "title": title,
+              "title": "",
               "description": desc,
               "user_id": user.id,
               "league_id": internalLeagueId,
@@ -238,5 +241,23 @@ class DashBoardViewModel extends BaseModel {
     _subscribedLeagues = [];
     _news = [];
     _subscribedLeagueIds = [];
+  }
+
+  int sortMatches(Fixture fixture1, Fixture fixture2) {
+    DateTime refinedTime1 = DateUtility.parseTime(fixture1.matchTime);
+    DateTime refinedTime2 = DateUtility.parseTime(fixture2.matchTime);
+    if(fixture2.matchDate.compareTo(fixture1.matchDate) > 0) {
+      return 1;
+    } else if (fixture2.matchDate.compareTo(fixture1.matchDate) < 0) {
+      return -1;
+    } else {
+      if(refinedTime2.compareTo(refinedTime1) > 0) {
+        return 1;
+      } if (refinedTime2.compareTo(refinedTime1) < 0) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
   }
 }

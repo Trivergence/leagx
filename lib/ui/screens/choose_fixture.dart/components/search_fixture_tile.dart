@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/shimmer_widget.dart';
