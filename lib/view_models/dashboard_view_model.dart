@@ -12,6 +12,7 @@ import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
+import 'package:leagx/view_models/auth_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +70,7 @@ class DashBoardViewModel extends BaseModel {
             "action": "get_events",
             "timezone": "Asia/Riyadh",
             "league_id": subscribedLeagueIds.join(","),
-            "from": "2021-01-01",
+            "from": "2022-01-01",
             "to": "2022-12-30",
           },
         );
@@ -99,6 +100,10 @@ class DashBoardViewModel extends BaseModel {
         );
         _subscribedLeagues = tempList.cast<SubscribedLeague>();
       _subscribedLeagueIds = getSubscribedIds();
+      if(subscribedLeagueIds.isEmpty) {
+        await subscribeDefaultLeague(user.id);
+      }
+      
     } on Exception catch (_) {
       setBusy(false);
     }
@@ -261,5 +266,13 @@ class DashBoardViewModel extends BaseModel {
     _subscribedLeagues = [];
     _news = [];
     _subscribedLeagueIds = [];
+  }
+  // TODO remove this later
+  Future<void> subscribeDefaultLeague(int userId) async {
+    bool success = await AuthViewModel.subscribeOneLeague(userId);
+    if(success) {
+      await getSubscribedLeagues();
+    }
+    
   }
 }

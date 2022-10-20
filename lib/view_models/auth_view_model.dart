@@ -43,7 +43,7 @@ class AuthViewModel {
       modelName: ApiModels.user,
     );
   }
-  static Future<void> subscribeOneLeague(int userId) async {
+  static Future<bool> subscribeOneLeague(int userId) async {
     Map<String,dynamic> body = {
       "user_id": userId,
       "plan_id": 1,
@@ -56,7 +56,7 @@ class AuthViewModel {
     bool success = await ApiService.postWoResponce(
       url: AppUrl.subscribeLeague,
       body: body);
-
+    return success;
   }
 
     static Future<User?>? twitterLogin({
