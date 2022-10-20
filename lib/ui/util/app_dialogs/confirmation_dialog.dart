@@ -9,7 +9,7 @@ class ConfirmationDialog {
    required String body, 
    required String negativeBtnTitle,
    required String positiveBtnTitle,
-   required VoidCallback onPositiveBtnPressed
+   required ValueChanged onPositiveBtnPressed
    } ) {
     showDialog(
     context: context,
@@ -25,7 +25,7 @@ class ConfirmationDialog {
             child: Text(negativeBtnTitle),
           ),
           TextButton(
-            onPressed: onPositiveBtnPressed,
+            onPressed: () => onPositiveBtnPressed(ctx),
             child: Text(positiveBtnTitle),
           ),
         ],

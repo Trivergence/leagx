@@ -84,6 +84,8 @@
 	"chooseLeagueBtnSubscribe": "Subscribe",
 
 	"choosePlanTxtChooseAPlan": "Choose a Plan",
+	"choosePlanDialogSuccessful": "Purchase Successful",
+
 	"chooseFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
 	"chooseFixtureTxtTitle": "Choose A Fixture",
 

@@ -136,7 +136,7 @@ class SigninScreen extends StatelessWidget {
               children: [
                 if(Platform.isIOS) SocialMediaWidget(
                   iconData: FontAwesomeIcons.apple,
-                  onTap: () => _signInWithApple(context),
+                  onTap: () => _logInWithApple(context),
                 ),
                 UIHelper.horizontalSpaceMedium,
                 // SocialMediaWidget(iconData: FontAwesomeIcons.facebookF),
@@ -179,6 +179,7 @@ class SigninScreen extends StatelessWidget {
             preferenceHelper.saveUser(user);
             ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
             Navigator.pushNamed(context, Routes.dashboard);
+            context.read<DashBoardViewModel>().getPaymentCredentials(context);
           }
           break;
         case TwitterLoginStatus.cancelledByUser:
@@ -194,7 +195,7 @@ class SigninScreen extends StatelessWidget {
     }
   }
 
-  Future<void> _signInWithApple(BuildContext context) async {
+  Future<void> _logInWithApple(BuildContext context) async {
     bool isAvailable = await SignInWithApple.isAvailable();
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected) {
@@ -212,7 +213,7 @@ class SigninScreen extends StatelessWidget {
             preferenceHelper.saveUser(user);
             ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
             Navigator.pushNamed(context, Routes.dashboard);
-            
+            context.read<DashBoardViewModel>().getPaymentCredentials(context);
         }
       } on SignInWithAppleException catch (e) {
         debugPrint(e.toString());

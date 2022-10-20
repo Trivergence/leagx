@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/api/api_service.dart';
@@ -15,6 +16,7 @@ import '../constants/app_constants.dart';
 import '../core/sharedpref/sharedpref.dart';
 import '../models/dashboard/league.dart';
 import '../models/user/user.dart';
+import '../ui/util/locale/localization.dart';
 
 class SubscriptionViewModel extends BaseModel {
   List<SubscriptionPlan> _listOfPlan = [];
@@ -65,8 +67,17 @@ class SubscriptionViewModel extends BaseModel {
         url: AppUrl.subscribeLeague,
         body: body);
       if(success) {
-        Navigator.of(context).pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
         Loader.hideLoader();
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.success,
+          animType: AnimType.rightSlide,
+          title: loc.choosePlanDialogSuccessful,
+          btnOkOnPress: () {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
+          },
+          ).show();
       } else {
         Loader.hideLoader();
       }
@@ -101,9 +112,9 @@ class SubscriptionViewModel extends BaseModel {
   Future<bool> purchaseModel(WalletViewModel walletModel, String price) async {
     bool success = false;
     if(walletModel.getPayementMethods.isEmpty) {
-      success = await walletModel.purchaseIndirectly(amount: price, currency: "sar");
+      success = await walletModel.purchaseIndirectly(amount: price, currency: "usd");
     } else {
-      success = await walletModel.purchaseDirectly(amount: price, currency: "sar");
+      success = await walletModel.purchaseDirectly(amount: price, currency: "usd");
     }
     return success;
   }

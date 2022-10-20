@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/api/api_service.dart';
@@ -11,7 +12,8 @@ import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
-import 'package:leagx/ui/util/utility/date_utility.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/app_constants.dart';
 import '../core/network/app_url.dart';
@@ -35,7 +37,7 @@ class DashBoardViewModel extends BaseModel {
   List<News> get getNews => _news;
   List<Leader> get getLeaders => _leaders;
   UserSummary? get userSummary => _userSummary; 
-  Future<void> getData() async {
+  Future<void> getData(BuildContext context) async {
     setBusy(true);
     try {
       await getSubscribedLeagues();
@@ -46,7 +48,7 @@ class DashBoardViewModel extends BaseModel {
       if(subscribedLeagues.isNotEmpty) {
         await getAllNews();
       }
-      getPaymentCredentials();
+      getPaymentCredentials(context);
     } on Exception catch (_) {
       setBusy(false);
     }
@@ -237,17 +239,19 @@ class DashBoardViewModel extends BaseModel {
       _userSummary = await  ApiService.callGetApi(url: completeUrl, modelName: ApiModels.userSummary);
     }
   }
-  void getPaymentCredentials() async {
+  void getPaymentCredentials(BuildContext context) async {
     User? user = preferenceHelper.getUser();
-    if(user != null) {
+    if(user != null && locator<PaymentConfig>().getCustomerCred == null) {
       List<dynamic> tempList= await ApiService.getListRequest(
         baseUrl: AppUrl.baseUrl,
         url: AppUrl.getPaymentAccounts,
         modelName: ApiModels.paymentAccounts,
       );
-      List<CustomerCred> listOfCred = tempList.cast<CustomerCred>();
+      List<CustomerCred> listOfCred = tempList.cast<CustomerCred>().where((userCred) => userCred.userId == user.id).toList();
       if(listOfCred.isNotEmpty) {
-        locator<PaymentConfig>().setCustomerCred = listOfCred.first;
+        locator<PaymentConfig>().setCustomerCred = listOfCred.where((userCred) => userCred.userId == user.id).toList().first;
+      } else {
+        context.read<WalletViewModel>().createCustomer(userData: user);
       }
     }
   }

@@ -36,6 +36,7 @@ dependencies:
   sign_in_with_apple: ^4.1.0
   flutter_stripe: ^5.1.0
   multiple_result: ^1.0.4
+  awesome_dialog: ^3.0.2
 
   payments:
     path: ./packages/payments

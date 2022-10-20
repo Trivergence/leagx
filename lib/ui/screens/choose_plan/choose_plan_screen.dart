@@ -42,7 +42,7 @@ class ChoosePlanScreen extends StatelessWidget {
                    body: loc.subscribeConfirmBody + "\$$price",
                    negativeBtnTitle: loc.subscribeConfirmCancel, 
                    positiveBtnTitle: loc.subscribeConfirmSubscribe, 
-                   onPositiveBtnPressed: () => _subscribe(context,planId, price));
+                   onPositiveBtnPressed: (dialogContext) => _subscribe(context,planId, price, dialogContext));
                   
                 },
               ),
@@ -53,9 +53,10 @@ class ChoosePlanScreen extends StatelessWidget {
     );
   }
 
-  _subscribe(BuildContext context, int planId, String price) async {
+  _subscribe(BuildContext context, int planId, String price, BuildContext dialogContext) async {
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected) {
+      Navigator.of(dialogContext).pop();
       context.read<SubscriptionViewModel>().subscribeLeague(
       context: context,
       planId: planId,

@@ -5,5 +5,5 @@ class PaymentConfig {
 
   CustomerCred? get getCustomerCred => _customerCred;
 
-  set setCustomerCred(CustomerCred customerCred) => _customerCred = customerCred;
+  set setCustomerCred(CustomerCred? customerCred) => _customerCred = customerCred;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
+import 'package:leagx/ui/util/app_dialogs/confirmation_dialog.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/loading_widget.dart';
@@ -14,9 +15,11 @@ class WalletScreen extends StatelessWidget {
   WalletScreen({ Key? key }) : super(key: key);
 
   late WalletViewModel _walletViewModel;
+  late BuildContext _context;
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
     return BaseWidget<WalletViewModel>(
       create: false,
       model: context.read<WalletViewModel>(), 
@@ -51,7 +54,7 @@ class WalletScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const TextWidget(text: "Betting Cash", 
+                      const TextWidget(text: "Betting Coins", 
                        color: AppColors.colorWhite,
                        fontWeight: FontWeight.w700,
                        ),
@@ -65,18 +68,19 @@ class WalletScreen extends StatelessWidget {
                       ],),
 
                       UIHelper.verticalSpaceMedium,
-                      MainButton(
-                        width: 150,
-                        text: "Add Funds", onPressed: () {})
+                      // MainButton(
+                      //   width: 150,
+                      //   text: "Add Funds", onPressed: () {})
                     ],
                   ),
                 ),
               ),
             ),
-            const TextWidget(text: "Payment Methods", textSize: 27,
-              fontWeight: FontWeight.w700),
-              UIHelper.verticalSpaceSmall,
-            if(walletModel.getPayementMethods.isEmpty) const TextWidget(text: "No Payment Method Added yet"),
+            const TextWidget(text: "Attached Card", textSize: 27,
+            fontWeight: FontWeight.w700),
+            UIHelper.verticalSpaceSmall,
+            if(walletModel.getPayementMethods.isEmpty) const TextWidget(text: "No card added yet"),
+            UIHelper.verticalSpaceSmall,
             walletModel.getPayementMethods.isEmpty 
             ? MainButton(text: "Add Payment Methods", onPressed: _addPaymentMethod)
             :  Column(
@@ -112,14 +116,13 @@ class WalletScreen extends StatelessWidget {
           ),
           ),
           TextButton(
-            onPressed: _removeCard, 
+            onPressed: _showConfirmationDialog, 
             child: const TextWidget(text : "Remove", color: AppColors.colorRed,))
               ],
             )
         ]),
       )
-      : const LoadingWidget()
-      ,
+      : const LoadingWidget(),
     );
       }, 
       );
@@ -129,7 +132,18 @@ class WalletScreen extends StatelessWidget {
     _walletViewModel.addPaymentMethod();
   }
 
-  void _removeCard() {
-    _walletViewModel.removePaymentMethod();
+  _showConfirmationDialog() {
+    ConfirmationDialog.show(
+        context: _context,
+        title: "Confirmation",
+        body: "Are you sure you want to remove this card?",
+        negativeBtnTitle: "No",
+        positiveBtnTitle: "Yes",
+        onPositiveBtnPressed: (dialogContext) => _removeCard(dialogContext));
+  }
+
+  Future<void> _removeCard(BuildContext context) async {
+    Navigator.of(context).pop();
+    await _walletViewModel.removePaymentMethod();
   }
 }
