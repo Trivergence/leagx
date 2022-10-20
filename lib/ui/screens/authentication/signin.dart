@@ -28,8 +28,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:multiple_result/multiple_result.dart';
+import 'package:payments/payments.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -101,19 +103,19 @@ class SigninScreen extends StatelessWidget {
                 if (isConnected) {
                   if (_formKey.currentState!.validate()) {
                     Loader.showLoader();
-                    User? loginResponse = await AuthViewModel.login(
+                    User? userData = await AuthViewModel.login(
                       email: _emailController.text,
                       password: _passwordController.text,
                     );
                     Loader.hideLoader();
                     
-                    if (ValidationUtils.isValid(loginResponse)) {
-                      preferenceHelper.saveAuthToken(loginResponse!.apiToken);
-                      preferenceHelper.saveUser(loginResponse);
+                    if (ValidationUtils.isValid(userData)) {
+                      preferenceHelper.saveAuthToken(userData!.apiToken);
+                      preferenceHelper.saveUser(userData);
                       DashBoardViewModel dashBoardModel = context.read<DashBoardViewModel>();
                       await dashBoardModel.getSubscribedLeagues();
                       if(dashBoardModel.subscribedLeagues.isEmpty) {
-                        AuthViewModel.subscribeOneLeague(loginResponse.id);
+                        AuthViewModel.subscribeOneLeague(userData.id);
                       }
                       ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
                           TOAST_TYPE.success);
@@ -134,7 +136,7 @@ class SigninScreen extends StatelessWidget {
               children: [
                 if(Platform.isIOS) SocialMediaWidget(
                   iconData: FontAwesomeIcons.apple,
-                  onTap: () => _signInWithApple(context),
+                  onTap: () => _logInWithApple(context),
                 ),
                 UIHelper.horizontalSpaceMedium,
                 // SocialMediaWidget(iconData: FontAwesomeIcons.facebookF),
@@ -177,6 +179,7 @@ class SigninScreen extends StatelessWidget {
             preferenceHelper.saveUser(user);
             ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
             Navigator.pushNamed(context, Routes.dashboard);
+            context.read<DashBoardViewModel>().getPaymentCredentials(context);
           }
           break;
         case TwitterLoginStatus.cancelledByUser:
@@ -192,7 +195,7 @@ class SigninScreen extends StatelessWidget {
     }
   }
 
-  Future<void> _signInWithApple(BuildContext context) async {
+  Future<void> _logInWithApple(BuildContext context) async {
     bool isAvailable = await SignInWithApple.isAvailable();
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected) {
@@ -210,6 +213,7 @@ class SigninScreen extends StatelessWidget {
             preferenceHelper.saveUser(user);
             ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
             Navigator.pushNamed(context, Routes.dashboard);
+            context.read<DashBoardViewModel>().getPaymentCredentials(context);
         }
       } on SignInWithAppleException catch (e) {
         debugPrint(e.toString());

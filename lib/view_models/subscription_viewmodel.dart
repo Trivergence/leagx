@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/api/api_service.dart';
@@ -8,11 +9,14 @@ import 'package:leagx/models/subscription_plan.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/app_constants.dart';
 import '../core/sharedpref/sharedpref.dart';
 import '../models/dashboard/league.dart';
 import '../models/user/user.dart';
+import '../ui/util/locale/localization.dart';
 
 class SubscriptionViewModel extends BaseModel {
   List<SubscriptionPlan> _listOfPlan = [];
@@ -33,28 +37,50 @@ class SubscriptionViewModel extends BaseModel {
         modelName: ApiModels.getPlans
       );  
       _listOfPlan = tempList.cast<SubscriptionPlan>();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       setBusy(false);
     }
   }
-  subscribeLeague({required BuildContext context, required int planId, required String leagueId, required String leagueTitle, required String leagueImg}) async {
+  subscribeLeague({
+    required BuildContext context,
+    required int planId, 
+    required String leagueId, 
+    required String leagueTitle, 
+    required String leagueImg,
+    required String price
+   }) async {
     Loader.showLoader();
-    User? user = locator<SharedPreferenceHelper>().getUser();
-    Map<String,dynamic> body = {
-      "user_id": user!.id,
-      "plan_id": planId,
-      "league": {
-        "title": leagueTitle,
-        "logo": leagueImg,
-        "external_league_id": int.parse(leagueId)
+    WalletViewModel  walletModel = context.read<WalletViewModel>();
+    bool isPurchased = await purchaseModel(walletModel, price);
+    if (isPurchased) {
+      User? user = locator<SharedPreferenceHelper>().getUser();
+      Map<String,dynamic> body = {
+        "user_id": user!.id,
+        "plan_id": planId,
+        "league": {
+          "title": leagueTitle,
+          "logo": leagueImg,
+          "external_league_id": int.parse(leagueId)
+        }
+      };
+      bool success = await ApiService.postWoResponce(
+        url: AppUrl.subscribeLeague,
+        body: body);
+      if(success) {
+        Loader.hideLoader();
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.success,
+          animType: AnimType.rightSlide,
+          title: loc.choosePlanDialogSuccessful,
+          btnOkOnPress: () {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
+          },
+          ).show();
+      } else {
+        Loader.hideLoader();
       }
-    };
-    bool success = await ApiService.postWoResponce(
-      url: AppUrl.subscribeLeague,
-      body: body);
-    if(success) {
-      Navigator.of(context).pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
-      Loader.hideLoader();
     } else {
       Loader.hideLoader();
     }
@@ -71,7 +97,7 @@ class SubscriptionViewModel extends BaseModel {
       _leagues = tempList.cast<League>();
       // Remove this later
       _leagues = leagues.where((league) => saudiLeagueIds.contains(league.leagueId)).toList();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       setBusy(false);
     }
   }
@@ -81,5 +107,15 @@ class SubscriptionViewModel extends BaseModel {
         .where((league) =>
             league.leagueName.toLowerCase().contains(value.toLowerCase()))
         .toList();
+  }
+
+  Future<bool> purchaseModel(WalletViewModel walletModel, String price) async {
+    bool success = false;
+    if(walletModel.getPayementMethods.isEmpty) {
+      success = await walletModel.purchaseIndirectly(amount: price, currency: "usd");
+    } else {
+      success = await walletModel.purchaseDirectly(amount: price, currency: "usd");
+    }
+    return success;
   }
 }

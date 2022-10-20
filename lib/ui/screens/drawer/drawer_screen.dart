@@ -3,6 +3,7 @@ import 'package:leagx/constants/colors.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/service/payment_service/payment_config.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/drawer/components/drawer_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -11,6 +12,7 @@ import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
@@ -99,15 +101,23 @@ class DrawerScreen extends StatelessWidget {
               Navigator.popAndPushNamed(context, Routes.admin);
             },
           ),
+          // TODO Add localization
+          DrawerTile(
+            icon: Icons.account_balance_wallet_outlined,
+            title: "Wallet",
+            onTap: () {
+              Navigator.popAndPushNamed(context, Routes.wallet);
+            },
+          ),
           UIHelper.verticalSpaceXL,
           GestureDetector(
-            onTap: () async{
+            onTap: () async {
               ConfirmationDialog.show(context: context,
                title: loc.logoutConfirmTitle,
                positiveBtnTitle: loc.logoutConfirmYes,
                negativeBtnTitle: loc.logoutConfirmNo,
                body:loc.logoutConfirmBody, 
-               onPositiveBtnPressed: () => logout(context));
+               onPositiveBtnPressed: (_) => logout(context));
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
@@ -145,6 +155,8 @@ class DrawerScreen extends StatelessWidget {
       await preferenceHelper.removeAuthToken();
       await preferenceHelper.removeUser();
       context.read<DashBoardViewModel>().clearData();
+      context.read<WalletViewModel>().clearData();
+      locator<PaymentConfig>().setCustomerCred = null;
       Navigator.pushNamedAndRemoveUntil(
           context, Routes.signin, (route) => false);
     }

@@ -61,7 +61,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           SchedulerBinding.instance!.addPostFrameCallback((timeStamp) async {
             bool isConnected = await InternetInfo.isConnected();
             if (isConnected) {
-              await dashboardModel.getData();
+              await dashboardModel.getData(context);
               await context.read<SubscriptionViewModel>().getSubscriptionPlans();
               await context.read<SubscriptionViewModel>().getLeagues();
               await context.read<FixtureDetailViewModel>().getUserPredictions();
@@ -81,7 +81,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 onPressed: () async { 
                   bool isConnected = await InternetInfo.isConnected();
                   if(isConnected) {
-                    dashboardModel.getData();
+                    dashboardModel.getData(context);
                   }
                 }),
                 IconButton(

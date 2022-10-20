@@ -5,6 +5,7 @@ import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/subscription_viewmodel.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/assets.dart';
@@ -41,7 +42,7 @@ class ChoosePlanScreen extends StatelessWidget {
                    body: loc.subscribeConfirmBody + "\$$price",
                    negativeBtnTitle: loc.subscribeConfirmCancel, 
                    positiveBtnTitle: loc.subscribeConfirmSubscribe, 
-                   onPositiveBtnPressed: () => _subscribe(context,planId));
+                   onPositiveBtnPressed: (dialogContext) => _subscribe(context,planId, price, dialogContext));
                   
                 },
               ),
@@ -52,15 +53,17 @@ class ChoosePlanScreen extends StatelessWidget {
     );
   }
 
-  _subscribe(BuildContext context, int planId) async {
+  _subscribe(BuildContext context, int planId, String price, BuildContext dialogContext) async {
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected) {
+      Navigator.of(dialogContext).pop();
       context.read<SubscriptionViewModel>().subscribeLeague(
       context: context,
       planId: planId,
       leagueId: leagueData.leagueId,
       leagueImg: leagueData.leagueImg,
-      leagueTitle: leagueData.leagueTitle
+      leagueTitle: leagueData.leagueTitle,
+      price: price
       );
     }
   }

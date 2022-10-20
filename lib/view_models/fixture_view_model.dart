@@ -112,7 +112,7 @@ class FixtureDetailViewModel extends BaseModel {
       ToastMessage.show(loc.fixtureDetailsPredictionSuccess, TOAST_TYPE.success);
       context.read<DashBoardViewModel>().getUserSummary();
       context.read<DashBoardViewModel>().getAllLeaders();
-      context.read<DashBoardViewModel>().getData();
+      context.read<DashBoardViewModel>().getData(context);
       Navigator.of(context).pop();
       Loader.hideLoader();
     } else {

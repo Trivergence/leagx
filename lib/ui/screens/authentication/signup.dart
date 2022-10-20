@@ -17,8 +17,10 @@ import 'package:leagx/ui/widgets/textfield/password_textfield.dart';
 import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
+import '../../../view_models/wallet_view_model.dart';
 
 class SignupScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -101,19 +103,22 @@ class SignupScreen extends StatelessWidget {
                     if (_passwordController.text ==
                         _confirmPasswordController.text) {
                       Loader.showLoader();
-                      User? signupResponse = await AuthViewModel.signup(
+                      User? userData = await AuthViewModel.signup(
                         name: _nameController.text,
                         email: _emailController.text,
                         password: _passwordController.text,
                         confirmPassword: _confirmPasswordController.text,
                       );
                       Loader.hideLoader();
-                      if (ValidationUtils.isValid(signupResponse)) {
-                        preferenceHelper.saveAuthToken(signupResponse!.apiToken);
+                      if (ValidationUtils.isValid(userData)) {
+                        preferenceHelper.saveAuthToken(userData!.apiToken);
                         ToastMessage.show(
                             loc.authSignupTxtSignedupSuccessfully, TOAST_TYPE.success);
-                        await AuthViewModel.subscribeOneLeague(signupResponse.id);
+                        await AuthViewModel.subscribeOneLeague(userData.id);
                         Navigator.pushNamed(context, Routes.signin);
+                        WalletViewModel walletModel =
+                            context.read<WalletViewModel>();
+                        walletModel.createCustomer(userData: userData);
                       }
                     } else {
                       ToastMessage.show(
