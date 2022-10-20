@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/app_dialogs/confirmation_dialog.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
@@ -117,9 +118,14 @@ class WalletScreen extends StatelessWidget {
           ),
           TextButton(
             onPressed: _showConfirmationDialog, 
-            child: const TextWidget(text : "Remove", color: AppColors.colorRed,))
-              ],
-            )
+            child: const TextWidget(text : "Remove", color: AppColors.colorRed,)),
+          UIHelper.verticalSpaceLarge,
+          MainButton(text: "Payout",
+                onPressed: () => Navigator.of(context)
+                    .pushNamed(Routes.payout),
+              ),
+            ],
+          )
         ]),
       )
       : const LoadingWidget(),
