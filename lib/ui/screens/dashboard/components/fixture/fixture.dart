@@ -120,13 +120,13 @@ class FixtureScreen extends StatelessWidget {
                       matchStatus: match.matchStatus,
                       teamOneScore: match.matchHometeamScore,
                       teamTwoScore: match.matchAwayteamScore,
-                      onTap: () async {
+                      onTap: (leagueName) async {
                         bool isConnected = await InternetInfo.isConnected();
                         if (isConnected) {
                           Navigator.pushNamed(context, Routes.fixtureDetails,
                           arguments: MatchArgs(
                             matchId: match.matchId,
-                            leagueName: match.leagueName,
+                            leagueName: leagueName,
                           )
                           );
                         }

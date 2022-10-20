@@ -37,6 +37,8 @@ dependencies:
   flutter_stripe: ^5.1.0
   multiple_result: ^1.0.4
   awesome_dialog: ^3.0.2
+  translator: ^0.1.7
+  shimmer: ^2.0.0
 
   payments:
     path: ./packages/payments

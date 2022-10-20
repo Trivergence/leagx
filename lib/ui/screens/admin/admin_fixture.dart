@@ -84,7 +84,7 @@ class AdminFixtureScreen extends StatelessWidget {
                       teamTwoFlag: Assets.arsFlag,
                       teamTwoName: 'ARS',
                       scheduledTime: 'Today, 20:00',
-                      onTap: () {
+                      onTap: (leagueName) {
                         Navigator.pushNamed(context, Routes.adminFixtureDetail);
                       },
                     ),

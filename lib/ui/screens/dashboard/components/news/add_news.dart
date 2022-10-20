@@ -21,7 +21,6 @@ class AddNewsScreen extends StatefulWidget {
 }
 
 class _AddNewsScreenState extends State<AddNewsScreen> {
-  final TextEditingController _titleController = TextEditingController();
 
   final TextEditingController _messageController = TextEditingController();
 
@@ -48,21 +47,6 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                  TextWidget(
-                  text: loc.dashboardNewsAddNewsTxtTitle,
-                  textSize: 16.0,
-                ),
-                UIHelper.verticalSpace(8.0),
-                TextFieldWidget(
-                  textController: _titleController,
-                  validator: (text) {
-                    if(!ValidationUtils.isValid(text)) {
-                      return "Required";
-                    }
-                    return null;
-                  },
-                ),
-                UIHelper.verticalSpace(15.0),
-                 TextWidget(
                   text: loc.dashboardNewsAddNewsTxtDetails,
                   textSize: 16.0,
                 ),
@@ -70,7 +54,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                 TextFieldWidget(
                   textController: _messageController,
                   inputAction: TextInputAction.newline,
-                  maxLines: 6,
+                  maxLines: 10,
                   validator: (text) {
                     if (!ValidationUtils.isValid(text)) {
                       return "Required";
@@ -109,7 +93,6 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
       if(fixutrePayload != null) {
         _context.read<DashBoardViewModel>().addNews(
           context: _context,
-          title: _titleController.text,
           desc: _messageController.text,
           matchId: fixutrePayload!["matchId"]!,
           leagueId: fixutrePayload!["leagueId"]!);

@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                   firstLabel: loc.dashboardHomeTxtPredictions,
                   firstValue: _userSummary!.totalPredictions.toString(),
                   secondLabel: loc.dashboardHomeTxtWiningRatio,
-                  secondValue: _userSummary!.predictionSuccessRate.toString(),
+                  secondValue: _userSummary!.predictionSuccessRate!.toStringAsFixed(1),
                   thirdLabel: loc.dashboardHomeTxtEarnedCoid,
                   thirdValue: _userSummary!.coinEarned.toString(),
                 ),
@@ -109,13 +109,14 @@ class HomeScreen extends StatelessWidget {
                         isOver: Utility.isMatchOver(upcomingMatches[i].matchStatus!),
                         teamOneScore: upcomingMatches[i].matchHometeamScore,
                         teamTwoScore: upcomingMatches[i].matchAwayteamScore,
-                        onTap: () async {
+                        onTap: (leagueName) async {
                           bool isConnected = await InternetInfo.isConnected();
                           if (isConnected) {
                             Navigator.pushNamed(context,
                             Routes.fixtureDetails,
-                            arguments: MatchArgs(matchId: upcomingMatches[i].matchId,
-                                leagueName: upcomingMatches[i].leagueName,
+                            arguments: MatchArgs(
+                              matchId: upcomingMatches[i].matchId,
+                              leagueName: leagueName,
                             ));
                           }
                         }

@@ -6,9 +6,12 @@ import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/utility/image_utitlity.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/shimmer_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 
-class LeaderBoardTile extends StatelessWidget {
+import '../../../../../util/utility/translation_utility.dart';
+
+class LeaderBoardTile extends StatefulWidget {
   final int number;
   final String imageUrl;
   final String title;
@@ -25,8 +28,21 @@ class LeaderBoardTile extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<LeaderBoardTile> createState() => _LeaderBoardTileState();
+}
+
+class _LeaderBoardTileState extends State<LeaderBoardTile> {
+  bool isLoading = true;
+  String? leaderName;
+
+  @override
+  void initState() {
+    translateData();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return !isLoading ? Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 24.0),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
@@ -42,7 +58,7 @@ class LeaderBoardTile extends StatelessWidget {
             height: 20.0,
             isCircular: true,
             gradient: AppColors.grayishGradient,
-            text: number.toString(),
+            text: widget.number.toString(),
             textSize: 12.0,
             onPressed: () {},
           ),
@@ -51,7 +67,7 @@ class LeaderBoardTile extends StatelessWidget {
             width: 44.0,
             height: 44.0,
             isCircular: true,
-            imageUrl: imageUrl,
+            imageUrl: widget.imageUrl,
             placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
             onPressed: () {},
             gradient: AppColors.orangishGradient,
@@ -65,9 +81,9 @@ class LeaderBoardTile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextWidget(text: title),
+                    TextWidget(text: leaderName!),
                     TextWidget(
-                      text: '$successRate%',
+                      text: '${widget.successRate}%',
                       color: AppColors.colorGreen,
                       textSize: Dimens.textXM,
                     ),
@@ -78,7 +94,7 @@ class LeaderBoardTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextWidget(
-                      text: '$numberOfPrediciton ${loc.dashboardLeaderTxtPredictions}',
+                      text: '${widget.numberOfPrediciton} ${loc.dashboardLeaderTxtPredictions}',
                       textSize: Dimens.textSmall,
                       color: AppColors.colorWhite.withOpacity(0.5),
                     ),
@@ -93,6 +109,12 @@ class LeaderBoardTile extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ) : const ShimmerWidget(height: 100);
+  }
+
+  Future<void> translateData() async {
+      leaderName = await TranslationUtility.translate(widget.title);
+      isLoading = false;
+      setState(() {});
   }
 }

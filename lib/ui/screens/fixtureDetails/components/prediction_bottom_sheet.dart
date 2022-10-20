@@ -3,6 +3,8 @@ import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
+import 'package:leagx/ui/util/utility/translation_utility.dart';
+import 'package:leagx/ui/widgets/shimmer_widget.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +39,15 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   int homeScore = 1;
   int? leagueId;
   int? expertId;
+  String homeTeamName = '';
+  String awayTeamName = '';
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    translateData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     _context = context;
@@ -58,11 +69,11 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
             ),
           ),
           UIHelper.verticalSpace(34),
-          Row(
+          !isLoading ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
                 TextWidget(
-                text: widget.matchDetails!.matchHometeamName,
+                text: homeTeamName,
                 fontWeight: FontWeight.w600,
               ),
               ScorePicker(
@@ -77,13 +88,13 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
                 },
               )
             ],
-          ),
+          ) : const ShimmerWidget(height: 20),
           UIHelper.verticalSpace(22),
-          Row(
+          !isLoading ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
                 TextWidget(
-                text: widget.matchDetails!.matchAwayteamName,
+                text: awayTeamName,
                 fontWeight: FontWeight.w600,
               ),
               ScorePicker(
@@ -98,7 +109,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
                 },
               )
             ],
-          ),
+          ) : const ShimmerWidget(height: 20),
           UIHelper.verticalSpace(20),
           // Row(
           //   children: [
@@ -163,5 +174,14 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
     if(id != null) {
       expertId = id;
     }
+  }
+
+  Future<void> translateData() async {
+    homeTeamName = await TranslationUtility.translate(widget.matchDetails!.matchHometeamName);
+    awayTeamName = await TranslationUtility.translate(
+        widget.matchDetails!.matchAwayteamName);
+    isLoading = false;
+    setState(() {
+    });
   }
 }

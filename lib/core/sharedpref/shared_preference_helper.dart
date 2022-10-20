@@ -79,7 +79,7 @@ class SharedPreferenceHelper {
 
   // Language
   String? get currentLanguage {
-    return _sharedPreference.getString(Preferences.currentLanguage);
+    return _sharedPreference.getString(Preferences.currentLanguage) ?? "en";
   }
 
   Future<void> changeLanguage(String language) {
