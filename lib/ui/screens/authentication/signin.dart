@@ -110,12 +110,10 @@ class SigninScreen extends StatelessWidget {
                     Loader.hideLoader();
                     
                     if (ValidationUtils.isValid(userData)) {
-                      preferenceHelper.saveAuthToken(userData!.apiToken);
-                      preferenceHelper.saveUser(userData);
                       DashBoardViewModel dashBoardModel = context.read<DashBoardViewModel>();
                       await dashBoardModel.getSubscribedLeagues();
                       if(dashBoardModel.subscribedLeagues.isEmpty) {
-                        AuthViewModel.subscribeOneLeague(userData.id);
+                        AuthViewModel.subscribeOneLeague(userData!.id);
                       }
                       ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
                           TOAST_TYPE.success);

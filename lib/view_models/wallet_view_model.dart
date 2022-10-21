@@ -163,8 +163,8 @@ class WalletViewModel extends BaseModel {
       userEmail: userData.email);
       customer.when((errorCode) {
         PaymentExceptions.handleException(errorCode: errorCode);
-      }, (customer) {
-      saveCustomerId(userData.id, customer.id);
+      }, (customer) async {
+      await saveCustomerId(userData.id, customer.id);
     }
     );
   }

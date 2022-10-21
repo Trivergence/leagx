@@ -5,5 +5,8 @@ class PaymentUrl {
   static const String detachPaymentMethods = "detach";
   static const String setupIntent = "setup_intents";
   static const String paymentIntent = "payment_intents";
-  
+  static const String accounts = "accounts";
+  static const String transfers = "transfers";
+  static const String payouts = "payouts";
+  static const String accountLink = "account_links";
 }

@@ -6,7 +6,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:payments/constants/payment_constants.dart';
+import 'package:payments/models/account_link.dart';
+import 'package:payments/models/express_account.dart';
 import 'package:payments/models/setup_intent.dart';
+import 'package:payments/models/transfer.dart';
 import 'package:payments/network/payment_url.dart';
 
 import 'models/error_model.dart';
