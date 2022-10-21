@@ -4,7 +4,7 @@ import '../../../core/sharedpref/sharedpref.dart';
 
 class TranslationUtility {
   static Future<String> translate(String text) async {
-    if(preferenceHelper.currentLanguage == "ar") {
+    if(preferenceHelper.currentLanguage == "ar" && text.isNotEmpty) {
       Translation translation = await GoogleTranslator().translate(text, from: "en", to: "ar");
       return translation.text;
     }
