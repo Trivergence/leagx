@@ -1,6 +1,7 @@
 import 'package:leagx/models/choose_plan_args.dart';
 import 'package:leagx/models/match_args.dart';
 import 'package:leagx/models/update_profile_args.dart';
+import 'package:leagx/ui/screens/add_payout_details.dart/add_payout_details.dart';
 import 'package:leagx/ui/screens/admin/admin_announce.dart';
 import 'package:leagx/ui/screens/admin/admin_fixture.dart';
 import 'package:leagx/ui/screens/admin/admin_fixture_detail/admin_fixture_detail.dart';
@@ -68,6 +69,7 @@ class Routes {
   static const String upcomingMatches = "/upcomingMatches";
   static const String wallet = "/wallet";
   static const String payout = "/payout";
+  static const String addPayoutDetails = "/addPayoutDetails";
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -138,7 +140,9 @@ class Routes {
       case wallet:
         return generateRoute(routeSettings.name!, WalletScreen());
       case payout:
-      return generateRoute(routeSettings.name!, const PayoutScreen()); 
+      return generateRoute(routeSettings.name!, PayoutScreen());
+      case addPayoutDetails:
+        return generateRoute(routeSettings.name!, AddPayoutDetails(accountLink: routeSettings.arguments as String,)); 
 
       default:
         return generateRoute(

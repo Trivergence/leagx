@@ -9,9 +9,10 @@ import 'package:payments/payments.dart';
 
 class PayOut{
 
-  static Future<Result<String?, ExpressAccount>> createExpressAccount() async {
+  static Future<Result<String, ExpressAccount>> createExpressAccount() async {
     var body = {
       "type": 'express',
+      "country": "SA",
       "business_type": 'individual',
       "capabilities": {
       "transfers": {
@@ -21,18 +22,30 @@ class PayOut{
       "service_agreement": 'recipient',
     },
     };
-    Result<ErrorModel,dynamic> result = await  ApiService.callPostApi(
+    Result<ErrorModel,dynamic> result = await ApiService.callPostApi(
       url: PaymentUrl.accounts,
       body: body,
       modelName: ApiModels.createExpressAccount
     );
-    return result.when((errorModel) => Error(errorModel.error!.code), (responceModel) {
+    return result.when((errorModel) => Error(errorModel.error!.code!), (responceModel) {
       ExpressAccount expressAccount = responceModel;
       return Success(expressAccount);
     });
   }
 
-  Future<Result<String?, String>> createAccountLink(String accountId) async{
+  static Future<Result<String, ExpressAccount>> getAccount(String accountId) async {
+    String completeUrl = PaymentUrl.accounts + "/" + accountId;
+    Result<ErrorModel,dynamic> result = await ApiService.callPostApi(
+      url: completeUrl,
+      modelName: ApiModels.createExpressAccount
+    );
+    return result.when((errorModel) => Error(errorModel.error!.code!), (responceModel) {
+      ExpressAccount expressAccount = responceModel;
+      return Success(expressAccount);
+    });
+  }
+
+  static Future<Result<String?, String>> createAccountLink(String accountId) async{
     var body = {
       "account": accountId,
       "refresh_url": 'https://github.com/',

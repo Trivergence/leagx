@@ -55,23 +55,23 @@ class ExpressAccount {
 
 class ExternalAccounts {
   ExternalAccounts({
-    this.object,
-    this.data,
-    this.hasMore,
-    this.totalCount,
-    this.url,
+    required this.object,
+    required this.data,
+    required this.hasMore,
+    required this.totalCount,
+    required this.url,
   });
 
-  String? object;
-  List<ExternalAccountsDatum>? data;
-  bool? hasMore;
-  int? totalCount;
-  String? url;
+  String object;
+  List<Datum> data;
+  bool hasMore;
+  int totalCount;
+  String url;
 
   factory ExternalAccounts.fromJson(Map<String, dynamic> json) =>
       ExternalAccounts(
         object: json["object"],
-        data: List<ExternalAccountsDatum>.from(json["data"].map((x) => x)),
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
         hasMore: json["has_more"],
         totalCount: json["total_count"],
         url: json["url"],
@@ -79,7 +79,7 @@ class ExternalAccounts {
 
   Map<String, dynamic> toJson() => {
         "object": object,
-        "data": data != null ? List<dynamic>.from(data!.map((x) => x)) : [],
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
         "has_more": hasMore,
         "total_count": totalCount,
         "url": url,
@@ -335,104 +335,76 @@ class Schedule {
       };
 }
 
-class ExternalAccountsDatum {
-  ExternalAccountsDatum({
-    required this.id,
-    required this.account,
+class Datum {
+  Datum({
+    this.id,
+    this.object,
+    this.account,
     this.accountHolderName,
     this.accountHolderType,
     this.accountType,
-    this.availablePayoutMethods,
+    required this.availablePayoutMethods,
     this.bankName,
     this.country,
     this.currency,
     required this.defaultForCurrency,
-    required this.fingerprint,
-    required this.last4,
-    required this.routingNumber,
-    required this.status,
-    this.addressCity,
-    this.addressCountry,
-    this.addressLine1,
-    this.addressLine1Check,
-    this.addressLine2,
-    this.addressState,
-    this.addressZip,
-    this.addressZipCheck,
-    this.brand,
-    this.cvcCheck,
-    this.dynamicLast4,
-    required this.expMonth,
-    required this.expYear,
-    this.funding,
-    this.name,
-    this.tokenizationMethod,
+    this.fingerprint,
+    this.last4,
+    this.routingNumber,
+    this.status,
   });
 
-  String id;
-  String account;
+  String? id;
+  String? object;
+  String? account;
   dynamic accountHolderName;
   dynamic accountHolderType;
   dynamic accountType;
-  List<String>? availablePayoutMethods;
+  List<String> availablePayoutMethods;
   String? bankName;
   String? country;
   String? currency;
   bool defaultForCurrency;
-  String fingerprint;
-  String last4;
-  String routingNumber;
-  String status;
-  dynamic addressCity;
-  dynamic addressCountry;
-  dynamic addressLine1;
-  dynamic addressLine1Check;
-  dynamic addressLine2;
-  dynamic addressState;
-  dynamic addressZip;
-  dynamic addressZipCheck;
-  String? brand;
-  dynamic cvcCheck;
-  dynamic dynamicLast4;
-  int expMonth;
-  int expYear;
-  String? funding;
-  dynamic name;
-  dynamic tokenizationMethod;
+  String? fingerprint;
+  String? last4;
+  String? routingNumber;
+  String? status;
 
-  factory ExternalAccountsDatum.fromJson(Map<String, dynamic> json) =>
-      ExternalAccountsDatum(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
+        object: json["object"],
         account: json["account"],
         accountHolderName: json["account_holder_name"],
         accountHolderType: json["account_holder_type"],
         accountType: json["account_type"],
         availablePayoutMethods:
             List<String>.from(json["available_payout_methods"].map((x) => x)),
-        bankName: json["bank_name"] ?? "",
-        country: json["country"] ?? "SA",
-        currency: json["currency"] ?? "sar",
+        bankName: json["bank_name"],
+        country: json["country"],
+        currency: json["currency"],
         defaultForCurrency: json["default_for_currency"],
         fingerprint: json["fingerprint"],
         last4: json["last4"],
-        routingNumber:
-            json["routing_number"] ?? "",
+        routingNumber: json["routing_number"],
         status: json["status"],
-        addressCity: json["address_city"],
-        addressCountry: json["address_country"],
-        addressLine1: json["address_line1"],
-        addressLine1Check: json["address_line1_check"],
-        addressLine2: json["address_line2"],
-        addressState: json["address_state"],
-        addressZip: json["address_zip"],
-        addressZipCheck: json["address_zip_check"],
-        brand: json["brand"] ?? "",
-        cvcCheck: json["cvc_check"],
-        dynamicLast4: json["dynamic_last4"],
-        expMonth: json["exp_month"],
-        expYear: json["exp_year"],
-        funding: json["funding"] ?? "",
-        name: json["name"],
-        tokenizationMethod: json["tokenization_method"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "object": object,
+        "account": account,
+        "account_holder_name": accountHolderName,
+        "account_holder_type": accountHolderType,
+        "account_type": accountType,
+        "available_payout_methods":
+            List<dynamic>.from(availablePayoutMethods.map((x) => x)),
+        "bank_name": bankName,
+        "country": country,
+        "currency": currency,
+        "default_for_currency": defaultForCurrency,
+        "fingerprint": fingerprint,
+        "last4": last4,
+        "routing_number": routingNumber,
+        "status": status,
+      };
 }
