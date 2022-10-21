@@ -119,13 +119,15 @@ class WalletScreen extends StatelessWidget {
           TextButton(
             onPressed: _showConfirmationDialog, 
             child: const TextWidget(text : "Remove", color: AppColors.colorRed,)),
-          UIHelper.verticalSpaceLarge,
-          MainButton(text: "Payout",
-                onPressed: () => Navigator.of(context)
-                    .pushNamed(Routes.payout),
-              ),
+          
             ],
-          )
+          ),
+          UIHelper.verticalSpaceLarge,
+          MainButton(
+            text: "Payout",
+            onPressed: () =>
+                Navigator.of(context).pushNamed(Routes.payout),
+          ),
         ]),
       )
       : const LoadingWidget(),

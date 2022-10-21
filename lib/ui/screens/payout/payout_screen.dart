@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
+import 'package:leagx/view_models/payout_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/colors.dart';
 import '../../widgets/text_widget.dart';
@@ -13,7 +16,11 @@ class PayoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(title: "Payout"),
-      body: Column(
+      body: BaseWidget<PayoutViewModel>(
+        model: context.read<PayoutViewModel>(), 
+        onModelReady: (PayoutViewModel model){},
+        builder: (context, PayoutViewModel model,_ ) {
+          return Column(
         children: [
           SizedBox(
             width: 200,
@@ -43,7 +50,9 @@ class PayoutScreen extends StatelessWidget {
           ),
           MainButton(text: "Add Bank", onPressed: () {})
         ],
-      ),
+      );
+        },
+        )
     );
   }
 }

@@ -39,7 +39,7 @@ class SigninScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-   
+
   SigninScreen({Key? key}) : super(key: key);
 
   @override
@@ -81,7 +81,8 @@ class SigninScreen extends StatelessWidget {
                     controller: _passwordController,
                     hint: loc.authSigninTxtPassword,
                     inputAction: TextInputAction.done,
-                    validator: (value) => ValidationHelper.validatePassword(value),
+                    validator: (value) =>
+                        ValidationHelper.validatePassword(value),
                   ),
                 ],
               ),
@@ -108,12 +109,15 @@ class SigninScreen extends StatelessWidget {
                       password: _passwordController.text,
                     );
                     Loader.hideLoader();
-                    
+
                     if (ValidationUtils.isValid(userData)) {
-                      DashBoardViewModel dashBoardModel = context.read<DashBoardViewModel>();
+                      preferenceHelper.saveAuthToken(userData!.apiToken);
+                      preferenceHelper.saveUser(userData);
+                      DashBoardViewModel dashBoardModel =
+                          context.read<DashBoardViewModel>();
                       await dashBoardModel.getSubscribedLeagues();
-                      if(dashBoardModel.subscribedLeagues.isEmpty) {
-                        AuthViewModel.subscribeOneLeague(userData!.id);
+                      if (dashBoardModel.subscribedLeagues.isEmpty) {
+                        AuthViewModel.subscribeOneLeague(userData.id);
                       }
                       ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
                           TOAST_TYPE.success);
@@ -132,10 +136,11 @@ class SigninScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if(Platform.isIOS) SocialMediaWidget(
-                  iconData: FontAwesomeIcons.apple,
-                  onTap: () => _logInWithApple(context),
-                ),
+                if (Platform.isIOS)
+                  SocialMediaWidget(
+                    iconData: FontAwesomeIcons.apple,
+                    onTap: () => _logInWithApple(context),
+                  ),
                 UIHelper.horizontalSpaceMedium,
                 // SocialMediaWidget(iconData: FontAwesomeIcons.facebookF),
                 // UIHelper.horizontalSpaceMedium,
@@ -171,8 +176,9 @@ class SigninScreen extends StatelessWidget {
       final authResult = await twitterLogin.loginV2();
       switch (authResult.status) {
         case TwitterLoginStatus.loggedIn:
-          User? user = await AuthViewModel.twitterLogin(authType: AuthType.twitter, user: authResult.user!);
-          if(ValidationUtils.isValid(user)) {
+          User? user = await AuthViewModel.twitterLogin(
+              authType: AuthType.twitter, user: authResult.user!);
+          if (ValidationUtils.isValid(user)) {
             preferenceHelper.saveAuthToken(user!.apiToken);
             preferenceHelper.saveUser(user);
             ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
@@ -187,7 +193,8 @@ class SigninScreen extends StatelessWidget {
           ToastMessage.show(authResult.errorMessage!, TOAST_TYPE.error);
           break;
         case null:
-          ToastMessage.show(loc.authSigninTxtNothingToProceed, TOAST_TYPE.error);
+          ToastMessage.show(
+              loc.authSigninTxtNothingToProceed, TOAST_TYPE.error);
           break;
       }
     }
@@ -197,28 +204,28 @@ class SigninScreen extends StatelessWidget {
     bool isAvailable = await SignInWithApple.isAvailable();
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected) {
-      if(isAvailable) {
+      if (isAvailable) {
         try {
-        AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
-          scopes: [
-            AppleIDAuthorizationScopes.email,
-            AppleIDAuthorizationScopes.fullName,
-          ],
-        );
-        User? user = await AuthViewModel.appleLogin(authType: AuthType.apple, userCredentials: credential);
-        if (ValidationUtils.isValid(user)) {
+          AuthorizationCredentialAppleID credential =
+              await SignInWithApple.getAppleIDCredential(
+            scopes: [
+              AppleIDAuthorizationScopes.email,
+              AppleIDAuthorizationScopes.fullName,
+            ],
+          );
+          User? user = await AuthViewModel.appleLogin(
+              authType: AuthType.apple, userCredentials: credential);
+          if (ValidationUtils.isValid(user)) {
             preferenceHelper.saveAuthToken(user!.apiToken);
             preferenceHelper.saveUser(user);
             ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
             Navigator.pushNamed(context, Routes.dashboard);
             context.read<DashBoardViewModel>().getPaymentCredentials(context);
+          }
+        } on SignInWithAppleException catch (e) {
+          debugPrint(e.toString());
         }
-      } on SignInWithAppleException catch (e) {
-        debugPrint(e.toString());
-      }
-      } else {
-      
-      }
+      } else {}
     }
   }
 }
