@@ -22,51 +22,43 @@ class SubscriptionViewModel extends BaseModel {
   List<SubscriptionPlan> _listOfPlan = [];
   List<League> _leagues = [];
   // Remove them later
-  List<String> saudiLeagueIds = ["278","605","277","604","536"];
   List<League> get leagues => _leagues;
   List<SubscriptionPlan> get getPlans => _listOfPlan;
 
   Future<void> getSubscriptionPlans() async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(
-        baseUrl: AppUrl.baseUrl,
-        url: AppUrl.getPlan,
-        headers: {
-          "apitoken": preferenceHelper.authToken,
-        },
-        modelName: ApiModels.getPlans
-      );  
+          baseUrl: AppUrl.baseUrl,
+          url: AppUrl.getPlan,
+          headers: {
+            "apitoken": preferenceHelper.authToken,
+          },
+          modelName: ApiModels.getPlans);
       _listOfPlan = tempList.cast<SubscriptionPlan>();
     } on Exception catch (_) {
       setBusy(false);
     }
   }
-  subscribeLeague({
-    required BuildContext context,
-    required int planId, 
-    required String leagueId, 
-    required String leagueTitle, 
-    required String leagueImg,
-    required String price
-   }) async {
+
+  subscribeLeague(
+      {required BuildContext context,
+      required int planId,
+      required String leagueId,
+      required String leagueTitle,
+      required String leagueImg,
+      required String price}) async {
     Loader.showLoader();
-    WalletViewModel  walletModel = context.read<WalletViewModel>();
+    WalletViewModel walletModel = context.read<WalletViewModel>();
     bool isPurchased = await purchaseModel(walletModel, price);
     if (isPurchased) {
       User? user = locator<SharedPreferenceHelper>().getUser();
-      Map<String,dynamic> body = {
+      Map<String, dynamic> body = {
         "user_id": user!.id,
         "plan_id": planId,
-        "league": {
-          "title": leagueTitle,
-          "logo": leagueImg,
-          "external_league_id": int.parse(leagueId)
-        }
+        "league": {"title": leagueTitle, "logo": leagueImg, "external_league_id": int.parse(leagueId)}
       };
-      bool success = await ApiService.postWoResponce(
-        url: AppUrl.subscribeLeague,
-        body: body);
-      if(success) {
+      bool success = await ApiService.postWoResponce(url: AppUrl.subscribeLeague, body: body);
+      if (success) {
         Loader.hideLoader();
         AwesomeDialog(
           context: context,
@@ -74,10 +66,9 @@ class SubscriptionViewModel extends BaseModel {
           animType: AnimType.rightSlide,
           title: loc.choosePlanDialogSuccessful,
           btnOkOnPress: () {
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
           },
-          ).show();
+        ).show();
       } else {
         Loader.hideLoader();
       }
@@ -85,33 +76,26 @@ class SubscriptionViewModel extends BaseModel {
       Loader.hideLoader();
     }
   }
+
   Future<void> getLeagues() async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.footballBaseUrl,
-          parameters: {
-            "action": "get_leagues",
-            "APIkey": AppConstants.footballApiKey
-          },
+          parameters: {"action": "get_leagues", "APIkey": AppConstants.footballApiKey},
           modelName: ApiModels.getLeagues);
       _leagues = tempList.cast<League>();
-      // Remove this later
-      _leagues = leagues.where((league) => saudiLeagueIds.contains(league.leagueId)).toList();
     } on Exception catch (_) {
       setBusy(false);
     }
   }
 
   List<League> searchLeague(String value) {
-    return _leagues
-        .where((league) =>
-            league.leagueName.toLowerCase().contains(value.toLowerCase()))
-        .toList();
+    return _leagues.where((league) => league.leagueName.toLowerCase().contains(value.toLowerCase())).toList();
   }
 
   Future<bool> purchaseModel(WalletViewModel walletModel, String price) async {
     bool success = false;
-    if(walletModel.getPayementMethods.isEmpty) {
+    if (walletModel.getPayementMethods.isEmpty) {
       success = await walletModel.purchaseIndirectly(amount: price, currency: "usd");
     } else {
       success = await walletModel.purchaseDirectly(amount: price, currency: "usd");
