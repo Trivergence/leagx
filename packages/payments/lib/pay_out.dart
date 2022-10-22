@@ -1,4 +1,5 @@
 import 'package:multiple_result/multiple_result.dart';
+import 'package:payments/constants/payment_constants.dart';
 import 'package:payments/models/account_link.dart';
 import 'package:payments/models/error_model.dart';
 import 'package:payments/models/express_account.dart';
@@ -48,9 +49,8 @@ class PayOut{
   static Future<Result<String?, String>> createAccountLink(String accountId) async{
     var body = {
       "account": accountId,
-      "refresh_url": 'https://github.com/',
-      "return_url":
-          'https://itnext.io/local-notifications-in-flutter-6136235e1b51',
+      "refresh_url": PaymentConstants.refreshUrl,
+      "return_url": PaymentConstants.returnUrl,
       "type": 'account_onboarding',
     };
     Result<ErrorModel, dynamic> result = await ApiService.callPostApi(
@@ -65,7 +65,7 @@ class PayOut{
     });
   }
 
-  Future<Result<String, Transfer>> transfer(String amount, String accountId) async {
+  static Future<Result<String, Transfer>> transfer(String amount, String accountId) async {
     var body = {
       "amount": (int.parse(amount) * 100).toString(),
       "currency": 'usd',
@@ -82,12 +82,11 @@ class PayOut{
     });
   }
 
-  Future<Result<String, PayoutModel>> payout(
+  static Future<Result<String, PayoutModel>> payout(
       String amount, String currency , String cardId, String accountId) async {
     var body = {
-      "amount": (int.parse(amount) * 100).toString(),
+      "amount": double.parse(amount).round().toString(),
       "currency": currency,
-      //"destination": accountId,
     };
     Result<ErrorModel, dynamic> result = await ApiService.callPostApi(
         url: PaymentUrl.payouts,

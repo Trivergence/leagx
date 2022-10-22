@@ -251,6 +251,7 @@
 	"errorRequestForbidden": "ممنوع",
 	"errorInternalServer": "خطأ في الخادم الداخلي",
 	"errorBadGateway": "مدخل خاطأ",
+	"errorWithdrawLimit": "",
 
 	"errorStripeAccountAlreadyExists": "",
     "errorStripeAccountCountryInvalidAddress": "",

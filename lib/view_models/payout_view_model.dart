@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
+import 'package:leagx/models/currency.dart';
 import 'package:leagx/service/payment_service/payment_exception.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:payments/models/express_account.dart';
+import 'package:payments/models/payout_model.dart';
+import 'package:payments/models/transfer.dart';
 import 'package:payments/pay_out.dart';
 
+import '../core/network/api/api_models.dart';
+import '../core/network/api/api_service.dart';
+import '../core/network/app_url.dart';
 import '../models/customer_cred.dart';
 import '../service/payment_service/payment_config.dart';
 
@@ -31,8 +37,8 @@ class PayoutViewModel extends BaseModel{
       result.when(
           (errorCode) =>
               PaymentExceptions.handleException(errorCode: errorCode!),
-          (expressAccount) {
-        locator<PaymentConfig>().getCustomerCred!.accountId = expressAccount.id;
+          (expressAccount) async {
+            await updateAccountId(accountId: expressAccount.id);
       });
     }
   }
@@ -51,7 +57,7 @@ class PayoutViewModel extends BaseModel{
     String? accountLink;
     await createAccount();
     String? accountId = locator<PaymentConfig>().getAccountId;
-    if(accountId != null) {
+    if(accountId != null && _expressAccount != null &&  _expressAccount!.externalAccounts!.data.isEmpty) {
       Result<String? , String> result = await PayOut.createAccountLink(accountId);
       result.when((errorCode) => PaymentExceptions.handleException(errorCode: errorCode!), 
       (link) {
@@ -59,5 +65,73 @@ class PayoutViewModel extends BaseModel{
       });
     }
     return accountLink;
+  }
+
+  Future<void> updateAccountId({required String accountId}) async {
+    CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
+    if (savedCred != null) {
+      String completeUrl =
+          AppUrl.getPaymentAccounts + "/" + savedCred.id.toString();
+      CustomerCred? customerCred = await ApiService.callPutApi(
+          url: completeUrl,
+          body: {
+            "payment_account": {
+              "account_id": accountId
+            }
+          },
+          modelName: ApiModels.paymentAccount);
+      if (customerCred != null) {
+        locator<PaymentConfig>().setCustomerCred = customerCred;
+      }
+    }
+  }
+
+  Future<bool> payoutMoney(String amount, String currency, String bankId,) async {
+    bool success = false;
+    String? convertedAmount = await convertAmount(from: "usd", to: currency, withdrawlAmount: amount);
+    CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
+    if(savedCred != null && savedCred.accountId != null && convertedAmount != null) {
+      Result<String, PayoutModel> result = await PayOut.payout(convertedAmount, currency, bankId, savedCred.accountId!);
+      result.when((errorCode) => PaymentExceptions.handleException(errorCode: errorCode), (_) {
+          success = true;
+      });
+    }
+    return success;
+  }
+
+  Future<bool> transferToUser(
+    String amount,
+  ) async {
+    bool success = false;
+    CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
+    if (savedCred != null && savedCred.accountId != null) {
+      Result<String, Transfer> result =
+          await PayOut.transfer(amount, savedCred.accountId!);
+      result.when(
+          (errorCode) =>
+              PaymentExceptions.handleException(errorCode: errorCode),
+          (_) {
+        success = true;
+      });
+    }
+    return success;
+  }
+
+  Future<String?> convertAmount({required String from, required String to, required String withdrawlAmount}) async {
+    String? amount;
+    Currency? currency = await ApiService.callCurrencyConverter(
+      url: AppUrl.convert,
+      parameters: {
+        "format": "json",
+        "from" : from.toUpperCase(),
+        "to" : to.toUpperCase(),
+        "amount": withdrawlAmount
+      },
+      modelName: ApiModels.getCurrencyAmount
+    );
+    if(currency != null) {
+      amount = currency.rates.values.toList().first["rate_for_amount"];
+    }
+    return amount;
   }
 }

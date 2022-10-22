@@ -16,5 +16,4 @@ class ErrorModel {
     map['error_log'] = errorLog;
     return map;
   }
-
 }

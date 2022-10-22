@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/app_dialogs/confirmation_dialog.dart';
@@ -9,6 +10,7 @@ import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/loading_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -16,11 +18,13 @@ class WalletScreen extends StatelessWidget {
   WalletScreen({ Key? key }) : super(key: key);
 
   late WalletViewModel _walletViewModel;
+  late UserSummary _dashBoardViewModel;
   late BuildContext _context;
 
   @override
   Widget build(BuildContext context) {
     _context = context;
+    UserSummary? userSummary = context.read<DashBoardViewModel>().userSummary;
     return BaseWidget<WalletViewModel>(
       create: false,
       model: context.read<WalletViewModel>(), 
@@ -55,19 +59,13 @@ class WalletScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const TextWidget(text: "Betting Coins", 
+                      const TextWidget(text: "Total Coins", 
                        color: AppColors.colorWhite,
                        fontWeight: FontWeight.w700,
                        ),
                       UIHelper.verticalSpaceSmall,
-                      Row(
-                        children: const  [
-                         TextWidget(text: "RS", textSize: 27, fontWeight: FontWeight.w700,),
-                         UIHelper.horizontalSpaceSmall,
-                         TextWidget(text: "0.00", textSize: 27, fontWeight: FontWeight.w700,
-                        ),
-                      ],),
-
+                        TextWidget(text: userSummary != null ? userSummary.coinEarned.toString() : "0.0", textSize: 27, fontWeight: FontWeight.w700,
+                      ),
                       UIHelper.verticalSpaceMedium,
                       // MainButton(
                       //   width: 150,

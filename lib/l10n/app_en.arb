@@ -250,6 +250,7 @@
 	"errorRequestForbidden": "Forbidden",
 	"errorInternalServer": "Internal server error",
 	"errorBadGateway": "Bad gateway",
+	"errorWithdrawLimit": "Wihtdraw amount limit is 50$",
 
 	"errorStripeAccountAlreadyExists": "The email address provided for the creation of a deferred account already has an account associated with it.",
     "errorStripeAccountCountryInvalidAddress": "The country of the business address provided does not match the country of the account.",

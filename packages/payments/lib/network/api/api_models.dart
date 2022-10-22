@@ -30,6 +30,8 @@ class ApiModels {
         return ExpressAccount.fromJson(json);
       case createTransfer:
         return Transfer.fromJson(json);
+      case createPayout:
+      return PayoutModel.fromJson(json);
       case createAccountLink:
         return AccountLink.fromJson(json);
     }
