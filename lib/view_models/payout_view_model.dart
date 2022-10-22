@@ -5,6 +5,8 @@ import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/currency.dart';
 import 'package:leagx/service/payment_service/payment_exception.dart';
 import 'package:leagx/service/service_locator.dart';
+import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:payments/models/express_account.dart';
 import 'package:payments/models/payout_model.dart';
@@ -16,6 +18,7 @@ import '../core/network/api/api_service.dart';
 import '../core/network/app_url.dart';
 import '../models/customer_cred.dart';
 import '../service/payment_service/payment_config.dart';
+import '../ui/util/locale/localization.dart';
 
 class PayoutViewModel extends BaseModel{
   ExpressAccount? _expressAccount ;
@@ -57,12 +60,14 @@ class PayoutViewModel extends BaseModel{
     String? accountLink;
     await createAccount();
     String? accountId = locator<PaymentConfig>().getAccountId;
-    if(accountId != null && _expressAccount != null &&  _expressAccount!.externalAccounts!.data.isEmpty) {
+    if(accountId != null) {
       Result<String? , String> result = await PayOut.createAccountLink(accountId);
       result.when((errorCode) => PaymentExceptions.handleException(errorCode: errorCode!), 
       (link) {
         accountLink = link;
       });
+    } else {
+      ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
     }
     return accountLink;
   }
@@ -92,7 +97,10 @@ class PayoutViewModel extends BaseModel{
     CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
     if(savedCred != null && savedCred.accountId != null && convertedAmount != null) {
       Result<String, PayoutModel> result = await PayOut.payout(convertedAmount, currency, bankId, savedCred.accountId!);
-      result.when((errorCode) => PaymentExceptions.handleException(errorCode: errorCode), (_) {
+      result.when((errorCode) {
+        Loader.hideLoader();
+        PaymentExceptions.handleException(errorCode: errorCode);
+      }, (_) {
           success = true;
       });
     }
@@ -108,8 +116,10 @@ class PayoutViewModel extends BaseModel{
       Result<String, Transfer> result =
           await PayOut.transfer(amount, savedCred.accountId!);
       result.when(
-          (errorCode) =>
-              PaymentExceptions.handleException(errorCode: errorCode),
+          (errorCode) {
+            Loader.hideLoader();
+            PaymentExceptions.handleException(errorCode: errorCode);
+          },
           (_) {
         success = true;
       });
@@ -132,6 +142,7 @@ class PayoutViewModel extends BaseModel{
     if(currency != null) {
       amount = currency.rates.values.toList().first["rate_for_amount"];
     }
+    Loader.hideLoader();
     return amount;
   }
 }

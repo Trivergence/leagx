@@ -75,13 +75,13 @@ class WalletScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const TextWidget(text: "Attached Card", textSize: 27,
+            if(walletModel.getPayementMethods.isNotEmpty) const TextWidget(text: "Attached Card", textSize: 27,
             fontWeight: FontWeight.w700),
             UIHelper.verticalSpaceSmall,
-            if(walletModel.getPayementMethods.isEmpty) const TextWidget(text: "No card added yet"),
+            //if(walletModel.getPayementMethods.isEmpty) const TextWidget(text: "No card added yet"),
             UIHelper.verticalSpaceSmall,
             walletModel.getPayementMethods.isEmpty 
-            ? MainButton(text: "Add Payment Methods", onPressed: _addPaymentMethod)
+            ? MainButton(text: "Add Payment Method", onPressed: _addPaymentMethod)
             :  Column(
               children: [
                 Card(

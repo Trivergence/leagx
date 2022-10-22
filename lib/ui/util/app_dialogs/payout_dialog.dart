@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/ui/validation_helper.dart';
 import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
@@ -44,23 +45,20 @@ class PayoutFormWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     _context = context;
     return AlertDialog(
-      title: TextWidget(
-        text: title,
-        fontWeight: FontWeight.w700,
-        textAlign: TextAlign.center,
-      ),
       content: Form(
         key: _formKey,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
           TextWidget(text: body),
           UIHelper.verticalSpaceSmall,
           TextFieldWidget(
+            inputType: TextInputType.number,
+            inputAction: TextInputAction.done,
             textController: amountController,
             validator: (text) => ValidationHelper.validateAmount(text),
-            prefix: const TextWidget(text: "\$"),
+            prefix: const TextWidget(text: "\$", fontWeight: FontWeight.bold, textSize: Dimens.textMedium,),
            )
         ],),
       ),

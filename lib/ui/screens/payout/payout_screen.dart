@@ -6,6 +6,8 @@ import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/app_dialogs/payout_dialog.dart';
+import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/loading_widget.dart';
@@ -65,55 +67,66 @@ class PayoutScreen extends StatelessWidget {
           UIHelper.verticalSpaceLarge,
           if (listOfExtAccounts.isNotEmpty) Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
-            child: Card(
-                color: AppColors.textFieldColor,
-                elevation: 15,
-                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)
-              )
-            ),
-            child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-                  child: Row(
-                    children:  [
-                       const Icon(Icons.account_balance, size: 40,),
-                       UIHelper.horizontalSpaceSmall,
-                       Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                           Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const TextWidget(
+                  text: "Attached Bank",
+                  textSize: 27,
+                  fontWeight: FontWeight.w700,
+                  textAlign: TextAlign.start,),
+                UIHelper.verticalSpaceSmall,
+                Card(
+                    color: AppColors.textFieldColor,
+                    elevation: 15,
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)
+                  )
+                ),
+                child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+                      child: Row(
+                        children:  [
+                           const Icon(Icons.account_balance, size: 40,),
+                           UIHelper.horizontalSpaceSmall,
+                           Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                              children: [
-                                TextWidget(text: bankName!),
-                                UIHelper.horizontalSpaceSmall,
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                                    color: AppColors.colorBackground,
-                                    child: TextWidget(text: currency!, textSize: Dimens.textXS,),
-                                  ),
+                               Row(
+                                 children: [
+                                    TextWidget(text: bankName!),
+                                    UIHelper.horizontalSpaceSmall,
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.all(Radius.circular(5)),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                                        color: AppColors.colorBackground,
+                                        child: TextWidget(text: currency!, textSize: Dimens.textXS,),
+                                      ),
+                                    ),
+                                  UIHelper.horizontalSpaceSmall,
+                                  const CircleAvatar(
+                                    radius: 10,
+                                    backgroundColor: AppColors.colorGreen,
+                                    child: Center(child: Icon(
+                                      Icons.done, 
+                                      color: AppColors.colorWhite, 
+                                      size: 10,)))
+                                 ],
+                               ),
+                               Row( children: [
+                                    TextWidget(text: routingNumber!,textSize: Dimens.textSmall,),
+                                    UIHelper.horizontalSpaceSmall,
+                                    TextWidget(text: "****  " + last4!),
+                                  ],
                                 ),
-                              UIHelper.horizontalSpaceSmall,
-                              const CircleAvatar(
-                                radius: 10,
-                                backgroundColor: AppColors.colorGreen,
-                                child: Center(child: Icon(
-                                  Icons.done, 
-                                  color: AppColors.colorWhite, 
-                                  size: 10,)))
                              ],
                            ),
-                           Row( children: [
-                                TextWidget(text: routingNumber!,textSize: Dimens.textSmall,),
-                                UIHelper.horizontalSpaceSmall,
-                                TextWidget(text: "****  " + last4!),
-                              ],
-                            ),
-                         ],
-                       ),
-                    ],
-                  ),
-            ),
+                        ],
+                      ),
+                ),
+                ),
+              ],
             ),
           ),
           if(listOfExtAccounts.isEmpty) MainButton(text: "Add Bank", onPressed: _addBank)
@@ -149,24 +162,33 @@ class PayoutScreen extends StatelessWidget {
   void _withdraw() async {
     PayoutDialog.show(context: _context!, 
     title: "Withdraw", 
-    body: "Enter amount", 
+    body: "Enter required amount", 
     negativeBtnTitle: "Cancel", 
     positiveBtnTitle: "Withdraw", 
     onPositiveBtnPressed: (amount) async {
-      bool isTransfered = await _payoutViewModel!.transferToUser(amount);
-        if (isTransfered == true) {
-          bool success = await _payoutViewModel!.payoutMoney(amount, currency!, listOfExtAccounts.first.id!);
-          if(success == true) {
-            AwesomeDialog(
-              context: _context!,
-              dialogType: DialogType.success,
-              animType: AnimType.rightSlide,
-              title: "Completed Successfully",
-              btnOkOnPress: () {
-              },
-            ).show();
+      // if (double.parse(amount) <= double.parse(userSummary!.coinEarned.toString())) {
+        Loader.showLoader();
+        bool isTransfered = await _payoutViewModel!.transferToUser(amount);
+          if (isTransfered == true) {
+            bool success = await _payoutViewModel!.payoutMoney(amount, currency!, listOfExtAccounts.first.id!);
+            if(success == true) {
+              Loader.hideLoader();
+              AwesomeDialog(
+                context: _context!,
+                dialogType: DialogType.success,
+                animType: AnimType.rightSlide,
+                title: "Completed Successfully",
+                btnOkOnPress: () {
+                },
+              ).show();
+            }
+          } else {
+          Loader.hideLoader();
           }
-        }
-    });
+      // } else {
+      //   ToastMessage.show("You don't have enough coins", TOAST_TYPE.msg);
+      // }
+     }
+    );
   }
 }

@@ -146,11 +146,12 @@ class WalletViewModel extends BaseModel {
                   customerId: customerId,
                   style: ThemeMode.dark));
           await Stripe.instance.presentPaymentSheet();
-          await getUserPaymentMethods();
           setBusy(true);
           await getUserPaymentMethods(save: true);
+          setBusy(false);
         } on Exception catch (_) {
           Loader.hideLoader();
+          setBusy(false);
         }
       }
       });
