@@ -89,7 +89,7 @@ class WalletViewModel extends BaseModel {
               paymentSheetParameters: SetupPaymentSheetParameters(
                   customFlow: true,
                   paymentIntentClientSecret: _secretKey,
-                  merchantDisplayName: 'Flutter Stripe Store Demo',
+                  merchantDisplayName: 'LeagX',
                   customerId: customerId,
                   style: ThemeMode.dark));
           await Stripe.instance.presentPaymentSheet();
@@ -102,10 +102,7 @@ class WalletViewModel extends BaseModel {
         ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
         return success;
       }
-    } on Exception catch (e) {
-      if (e is StripeException) {
-        print("here");
-      }
+    } on Exception catch (_) {
       Loader.hideLoader();
       return false;
     }
@@ -141,10 +138,7 @@ class WalletViewModel extends BaseModel {
           try {
             await Stripe.instance.initPaymentSheet(
                 paymentSheetParameters: SetupPaymentSheetParameters(
-                    setupIntentClientSecret: secretKey,
-                    merchantDisplayName: 'Flutter Stripe Store Demo',
-                    customerId: customerId,
-                    style: ThemeMode.dark));
+                    setupIntentClientSecret: secretKey, merchantDisplayName: 'LeagX', customerId: customerId, style: ThemeMode.dark));
             await Stripe.instance.presentPaymentSheet();
             setBusy(true);
             await getUserPaymentMethods(save: true);
@@ -188,7 +182,7 @@ class WalletViewModel extends BaseModel {
           body: {
             "payment_account": {"payment_card_id": paymentId}
           },
-          modelName: ApiModels.paymentAccounts);
+          modelName: ApiModels.paymentAccount);
       if (customerCred != null) {
         locator<PaymentConfig>().setCustomerCred = customerCred;
       }
