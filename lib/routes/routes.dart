@@ -31,7 +31,7 @@ import 'package:leagx/ui/screens/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/screens/wallet/wallet.dart';
 
-import '../ui/screens/choose_fixture.dart/choose_fixture_screen.dart';
+import '../ui/screens/choose_fixture.dart/choose_match_screen.dart';
 import '../ui/screens/choose_plan/choose_plan_screen.dart';
 import '../ui/screens/dashboard/components/news/add_news.dart';
 import '../ui/screens/fixtureDetails/fixture_details_screen.dart';
