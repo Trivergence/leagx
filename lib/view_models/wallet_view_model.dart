@@ -44,6 +44,9 @@ class WalletViewModel extends BaseModel {
         }
         setBusy(false);
       });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+      setBusy(false);
     }
   }
 
@@ -60,6 +63,9 @@ class WalletViewModel extends BaseModel {
           if (isSuccesful) _paymentMethods = [];
           setBusy(false);
         });
+      } else {
+        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+        setBusy(false);
       }
     } on Exception catch (_) {
       setBusy(false);
@@ -99,7 +105,7 @@ class WalletViewModel extends BaseModel {
         return success;
       } else {
         Loader.hideLoader();
-        ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
         return success;
       }
     } on Exception catch (_) {
@@ -123,6 +129,8 @@ class WalletViewModel extends BaseModel {
       }, (isSuccessfull) {
         success = isSuccessfull;
       });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
     return success;
   }
@@ -149,6 +157,8 @@ class WalletViewModel extends BaseModel {
           }
         }
       });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
   }
 

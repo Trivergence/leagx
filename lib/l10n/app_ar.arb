@@ -84,7 +84,8 @@
 	"chooseLeagueTxtSearch": "بحث",
 
 	"choosePlanTxtChooseAPlan": "اختر الباقة",
-	"choosePlanDialogSuccessful": "",
+	"choosePlanDialogSuccessTitle": "",
+	"choosePlanDialogSuccessDesc": "",
 
 	
 	"chooseFixtureTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
@@ -142,6 +143,7 @@
 	"drawerBtnMyPredictions": "توقعاتي",
 	"drawerBtnPrivacyPolicy": "سياسة الخصوصية",
 	"drawerBtnProfile": "الملف الشخصي",
+	"drawerBtnWalllet": "",
 	"drawerBtnTermsOfServices": "شروط الخدمة",
 
 	"faqsTxtFaqs": "أسئلة وأجوبة",

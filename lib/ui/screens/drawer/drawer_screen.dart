@@ -101,12 +101,14 @@ class DrawerScreen extends StatelessWidget {
               Navigator.popAndPushNamed(context, Routes.admin);
             },
           ),
-          // TODO Add localization
           DrawerTile(
             icon: Icons.account_balance_wallet_outlined,
-            title: "Wallet",
-            onTap: () {
-              Navigator.popAndPushNamed(context, Routes.wallet);
+            title: loc.drawerBtnWalllet,
+            onTap: () async {
+              bool isConnected = await InternetInfo.isConnected();
+              if(isConnected) {
+                Navigator.popAndPushNamed(context, Routes.wallet);
+              }
             },
           ),
           UIHelper.verticalSpaceXL,

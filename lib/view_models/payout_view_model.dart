@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
-import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/currency.dart';
 import 'package:leagx/service/payment_service/payment_exception.dart';
@@ -67,7 +64,7 @@ class PayoutViewModel extends BaseModel{
         accountLink = link;
       });
     } else {
-      ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
     return accountLink;
   }
@@ -103,6 +100,8 @@ class PayoutViewModel extends BaseModel{
       }, (_) {
           success = true;
       });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
     return success;
   }
@@ -123,6 +122,8 @@ class PayoutViewModel extends BaseModel{
           (_) {
         success = true;
       });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
     return success;
   }

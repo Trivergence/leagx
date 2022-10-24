@@ -5,6 +5,7 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
+import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
 import 'package:leagx/ui/util/app_dialogs/payout_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
@@ -18,6 +19,7 @@ import 'package:payments/models/express_account.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/colors.dart';
+import '../../../core/network/internet_info.dart';
 import '../../widgets/text_widget.dart';
 
 class PayoutScreen extends StatelessWidget {
@@ -114,7 +116,8 @@ class PayoutScreen extends StatelessWidget {
                                       size: 10,)))
                                  ],
                                ),
-                               Row( children: [
+                               Row( 
+                                children: [
                                     TextWidget(text: routingNumber!,textSize: Dimens.textSmall,),
                                     UIHelper.horizontalSpaceSmall,
                                     TextWidget(text: "****  " + last4!),
@@ -139,11 +142,14 @@ class PayoutScreen extends StatelessWidget {
   }
 
   Future<void> _addBank() async {
-    String? linkUrl = await _payoutViewModel!.addBank();
-    if(linkUrl != null) {
-      Navigator.pushNamed(_context!, Routes.addPayoutDetails, arguments: linkUrl).then((_) {
-        _payoutViewModel!.initializeData();
-      });
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected) {
+      String? linkUrl = await _payoutViewModel!.addBank();
+      if(linkUrl != null) {
+        Navigator.pushNamed(_context!, Routes.addPayoutDetails, arguments: linkUrl).then((_) {
+          _payoutViewModel!.initializeData();
+        });
+      }
     }
   }
 
@@ -166,21 +172,20 @@ class PayoutScreen extends StatelessWidget {
     negativeBtnTitle: "Cancel", 
     positiveBtnTitle: "Withdraw", 
     onPositiveBtnPressed: (amount) async {
-      // if (double.parse(amount) <= double.parse(userSummary!.coinEarned.toString())) {
+      bool isConnected = await InternetInfo.isConnected();
+      if(isConnected) {
+        // if (double.parse(amount) <= double.parse(userSummary!.coinEarned.toString())) {
         Loader.showLoader();
         bool isTransfered = await _payoutViewModel!.transferToUser(amount);
           if (isTransfered == true) {
             bool success = await _payoutViewModel!.payoutMoney(amount, currency!, listOfExtAccounts.first.id!);
             if(success == true) {
               Loader.hideLoader();
-              AwesomeDialog(
+              FancyDialog.showSuccess(
                 context: _context!,
-                dialogType: DialogType.success,
-                animType: AnimType.rightSlide,
                 title: "Completed Successfully",
-                btnOkOnPress: () {
-                },
-              ).show();
+                description: "You have successfully withdrawn $amount\$"
+              );
             }
           } else {
           Loader.hideLoader();
@@ -188,6 +193,8 @@ class PayoutScreen extends StatelessWidget {
       // } else {
       //   ToastMessage.show("You don't have enough coins", TOAST_TYPE.msg);
       // }
+      }
+      
      }
     );
   }

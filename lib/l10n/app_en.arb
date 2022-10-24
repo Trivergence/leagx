@@ -84,7 +84,8 @@
 	"chooseLeagueBtnSubscribe": "Subscribe",
 
 	"choosePlanTxtChooseAPlan": "Choose a Package",
-	"choosePlanDialogSuccessful": "Purchase Successful",
+	"choosePlanDialogSuccessTitle": "Purchase Successful",
+	"choosePlanDialogSuccessDesc": "You have succesfully subscribed the package",
 
 	"chooseFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
 	"chooseFixtureTxtTitle": "Choose A Fixture",
@@ -153,6 +154,7 @@
 	"drawerBtnPrivacyPolicy": "Privacy Policy",
 	"drawerBtnTermsOfServices": "Terms of Services",
 	"drawerBtnAdmin": "Admin",
+	"drawerBtnWalllet": "Wallet",
 	"drawerBtnLogout": "Logout",
 
 	"faqsTxtFaqs": "FAQs",

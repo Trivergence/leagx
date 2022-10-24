@@ -14,6 +14,8 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/network/internet_info.dart';
+
 class WalletScreen extends StatelessWidget {
   WalletScreen({ Key? key }) : super(key: key);
 
@@ -123,8 +125,12 @@ class WalletScreen extends StatelessWidget {
           UIHelper.verticalSpaceLarge,
           MainButton(
             text: "Payout",
-            onPressed: () =>
-                Navigator.of(context).pushNamed(Routes.payout),
+            onPressed: () async {
+              bool isConnected = await InternetInfo.isConnected();
+              if(isConnected) {
+                Navigator.of(context).pushNamed(Routes.payout);
+              }
+            }
           ),
         ]),
       )
@@ -134,8 +140,12 @@ class WalletScreen extends StatelessWidget {
       );
   }
 
-  void _addPaymentMethod() {
-    _walletViewModel.addPaymentMethod();
+  Future<void> _addPaymentMethod() async {
+    bool isConnected = await InternetInfo.isConnected();
+    if(isConnected) {
+      await _walletViewModel.addPaymentMethod();
+    }
+    
   }
 
   _showConfirmationDialog() {
@@ -149,7 +159,10 @@ class WalletScreen extends StatelessWidget {
   }
 
   Future<void> _removeCard(BuildContext context) async {
+    bool isConnected = await InternetInfo.isConnected();
+    if(isConnected){
     Navigator.of(context).pop();
     await _walletViewModel.removePaymentMethod();
+    }
   }
 }

@@ -8,6 +8,7 @@ import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/subscription_plan.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
+import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
@@ -60,15 +61,12 @@ class SubscriptionViewModel extends BaseModel {
       bool success = await ApiService.postWoResponce(url: AppUrl.subscribeLeague, body: body);
       if (success) {
         Loader.hideLoader();
-        AwesomeDialog(
+        FancyDialog.showSuccess(
           context: context,
-          dialogType: DialogType.success,
-          animType: AnimType.rightSlide,
-          title: loc.choosePlanDialogSuccessful,
-          btnOkOnPress: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(Routes.dashboard, (route) => false);
-          },
-        ).show();
+          title: loc.choosePlanDialogSuccessTitle,
+          description: loc.choosePlanDialogSuccessDesc,
+          onOkPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(Routes.dashboard, (route) => false),
+        );
       } else {
         Loader.hideLoader();
       }
