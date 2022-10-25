@@ -53,6 +53,7 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                   itemBuilder: (context, index) {
                     Fixture match = isFiltering ? filteredList[index] : availableMatches[index];
                     return ChooseFixtureTile(
+                      key: UniqueKey(),
                       leagueId: match.leagueId,
                       teamOneFlag: match.teamHomeBadge,
                       teamTwoFlag: match.teamAwayBadge,
@@ -74,9 +75,14 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
     setState(() {
       isFiltering = true;
       filteredList = availableMatches
-      .where((matchItem) => matchItem.leagueName.toLowerCase().contains(enteredText.toLowerCase()))
+      .where((matchItem) => filterMatches(matchItem, enteredText))
       .toList();
     });
+  }
+
+  bool filterMatches(Fixture matchItem, String enteredText) {
+    return matchItem.matchAwayteamName.toLowerCase().contains(enteredText.toLowerCase()) 
+    || matchItem.matchHometeamName.toLowerCase().contains(enteredText.toLowerCase());
   }
 
   List<Fixture> getMatches(BuildContext context) {
