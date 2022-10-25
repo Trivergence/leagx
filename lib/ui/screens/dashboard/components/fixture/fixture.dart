@@ -3,7 +3,6 @@ import 'package:leagx/constants/colors.dart';
 import 'package:leagx/core/utility.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
-import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
@@ -18,15 +17,25 @@ import '../../../../../models/match_args.dart';
 import '../../../../../view_models/dashboard_view_model.dart';
 import '../../../../widgets/placeholder_tile.dart';
 
-class FixtureScreen extends StatelessWidget {
-  FixtureScreen({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class FixtureScreen extends StatefulWidget {
+  const FixtureScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FixtureScreen> createState() => _FixtureScreenState();
+}
+
+class _FixtureScreenState extends State<FixtureScreen> {
   List<Fixture> subscribedMatches = [];
+
   List<SubscribedLeague> subscribedLeagues = [];
+  bool isFiltering = false;
+  int selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
     DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
-    subscribedMatches = dashBoardViewModel.subscribedMatches;
+    subscribedMatches = isFiltering == true ?  dashBoardViewModel.filteredMatches : dashBoardViewModel.subscribedMatches;
     subscribedLeagues = dashBoardViewModel.subscribedLeagues;
     return Column(
       children: [
@@ -53,8 +62,10 @@ class FixtureScreen extends StatelessWidget {
                       height: 40.0,
                       isCircular: true,
                       iconData: Icons.add,
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed(Routes.chooseLeague),
+                      onPressed: () async {
+                          await Navigator.of(context).pushNamed(Routes.chooseLeague);
+                          setState(() {});
+                      },
                     ),
                   ),
                   if(subscribedLeagues.isNotEmpty) Expanded(
@@ -64,17 +75,47 @@ class FixtureScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: subscribedLeagues.length,
                         shrinkWrap: true,
-                        itemBuilder: (context, index) {
+                        itemBuilder: (_, index) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 20.0),
-                            child: GradientBorderWidget(
-                              width: 40.0,
-                              height: 40.0,
-                              placeHolderImg: Assets.icLeague,
-                              padding: const EdgeInsets.all(5.0),
-                              isCircular: true,
-                              imageUrl: subscribedLeagues[index].logo,
-                              onPressed: () {},
+                            child: Stack(
+                              children: [
+                                GradientBorderWidget(
+                                  width: 40.0,
+                                  height: 40.0,
+                                  placeHolderImg: Assets.icLeague,
+                                  padding: const EdgeInsets.all(5.0),
+                                  isCircular: true,
+                                  imageUrl: subscribedLeagues[index].logo,
+                                  onPressed: () {
+                                  },
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    if(selectedIndex != index) {
+                                      dashBoardViewModel.filterByLeague(
+                                            leagueId: subscribedLeagues[index]
+                                                .externalLeagueId
+                                                .toString());
+                                        setState(() {
+                                          isFiltering = true;
+                                          selectedIndex = index;
+                                        });
+                                    }
+                                  },
+                                  child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: index ==
+                                                selectedIndex ? BoxDecoration(
+                                        color: AppColors.textFieldColor.withOpacity(0.3),
+                                        shape: BoxShape.circle,
+                                      ) : null,
+                                      child: index ==
+                                                selectedIndex ? const Icon(Icons.done) : null,
+                                    ),
+                                ),
+                              ],
                             ),
                           );
                         },
@@ -108,6 +149,7 @@ class FixtureScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                     Fixture match = subscribedMatches[index];
                     return FixtureWidget(
+                      key: UniqueKey(),
                       leagueName: match.leagueName,
                       teamOneFlag: match.teamHomeBadge,
                       teamOneName: match.matchHometeamName,

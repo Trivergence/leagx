@@ -27,12 +27,14 @@ import '../ui/util/utility/date_utility.dart';
 class DashBoardViewModel extends BaseModel {
   UserSummary? _userSummary;
   List<Fixture> _subscribedMatches = [];
+  List<Fixture> _filteredMatches = [];
   List<SubscribedLeague> _subscribedLeagues = [];
   List<News> _news = [];
   List<Leader> _leaders = [];
   List<int> _subscribedLeagueIds = [];
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
   List<Fixture> get subscribedMatches => _subscribedMatches;
+  List<Fixture> get filteredMatches => _filteredMatches;
   List<int> get subscribedLeagueIds => _subscribedLeagueIds;
   List<News> get getNews => _news;
   List<Leader> get getLeaders => _leaders;
@@ -77,7 +79,7 @@ class DashBoardViewModel extends BaseModel {
         _subscribedMatches.sort((fixture1, fixture2) => sortMatches(fixture1, fixture2));
         // _subscribedMatches =
         //     _subscribedMatches.where((match) => isValid(match, now)).toList();
-      } on Exception catch (e) {
+      } on Exception catch (_) {
         setBusy(false);
       }
     } else {
@@ -157,7 +159,7 @@ class DashBoardViewModel extends BaseModel {
         } else {
           ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
         }
-      } on Exception catch (e) {
+      } on Exception catch (_) {
         setBusy(false);
       }
     }
@@ -176,7 +178,7 @@ class DashBoardViewModel extends BaseModel {
             },
             modelName: ApiModels.getNews);
         _news = tempList.cast<News>();
-      } on Exception catch (e) {
+      } on Exception catch (_) {
         setBusy(false);
       }
     }
@@ -255,6 +257,10 @@ class DashBoardViewModel extends BaseModel {
     if (success) {
       await getSubscribedLeagues();
     }
+  }
+
+  void filterByLeague({required String leagueId}) async {
+    _filteredMatches = _subscribedMatches.where((match) => match.leagueId == leagueId).toList();
   }
 
   int sortMatches(Fixture fixture1, Fixture fixture2) {
