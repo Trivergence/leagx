@@ -81,7 +81,10 @@ class WalletViewModel extends BaseModel {
       String? _secretKey;
       String? customerId = locator<PaymentConfig>().getCustomerCred!.customerId;
       if (customerId != null) {
-        Result<String, String?> result = await PayIn.createIndirectPaymentIntent(customerId: customerId, amount: amount, currency: currency);
+        Result<String, String?> result = await PayIn.createIndirectPaymentIntent(
+          customerId: customerId, 
+          amount: amount, 
+          currency: currency);
         result.when((errorCode) {
           PaymentExceptions.handleException(errorCode: errorCode);
           success = false;
@@ -93,7 +96,6 @@ class WalletViewModel extends BaseModel {
         if (_secretKey != null) {
           await Stripe.instance.initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
-                  customFlow: true,
                   paymentIntentClientSecret: _secretKey,
                   merchantDisplayName: 'LeagX',
                   customerId: customerId,
