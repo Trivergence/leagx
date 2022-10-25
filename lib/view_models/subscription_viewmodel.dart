@@ -8,8 +8,10 @@ import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/subscription_plan.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
+import 'package:leagx/ui/screens/choose_league/choose_league_screen.dart';
 import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -41,6 +43,21 @@ class SubscriptionViewModel extends BaseModel {
     }
   }
 
+  loadData(BuildContext context) async {
+    DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
+    setBusy(true);
+    try {
+      await dashBoardViewModel.getSubscribedLeagues();
+      await dashBoardViewModel.getSubscribedMatches();
+      dashBoardViewModel.notify();
+      setBusy(false);
+      await dashBoardViewModel.getAllNews();
+      dashBoardViewModel.notify();
+    } on Exception catch (_) {
+      setBusy(false);
+    }
+  }
+
   subscribeLeague(
       {required BuildContext context,
       required int planId,
@@ -65,7 +82,12 @@ class SubscriptionViewModel extends BaseModel {
           context: context,
           title: loc.choosePlanDialogSuccessTitle,
           description: loc.choosePlanDialogSuccessDesc,
-          onOkPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(Routes.dashboard, (route) => false),
+          onOkPressed: () {
+            loadData(context); 
+            Navigator.of(context).popUntil((route) {
+              return route.settings.name == Routes.chooseLeague;
+            });
+          },
         );
       } else {
         Loader.hideLoader();
