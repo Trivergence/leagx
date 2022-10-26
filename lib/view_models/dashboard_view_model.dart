@@ -146,7 +146,7 @@ class DashBoardViewModel extends BaseModel {
       try {
         Loader.showLoader();
         Map<String, dynamic> requestBody = {
-          "news": {"title": "", "description": desc, "user_id": user.id, "league_id": internalLeagueId, "match_id": int.parse(matchId)}
+          "news": {"title": "LeagX", "description": desc, "user_id": user.id, "league_id": internalLeagueId, "match_id": int.parse(matchId)}
         };
         bool success = await ApiService.postWoResponce(url: AppUrl.addNews, body: requestBody);
         if (success) {
