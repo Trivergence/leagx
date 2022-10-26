@@ -286,11 +286,17 @@ class ApiService {
     } on DioError catch (ex) {
       Loader.hideLoader();
       if (ex.response != null) {
+        if(baseUrl == AppUrl.footballBaseUrl) {
+          ToastMessage.show(
+            loc.errorUndefined,
+            TOAST_TYPE.error);
+        } else {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
         ToastMessage.show(
             "${errorResponse.error ?? loc.errorUndefined}",
             TOAST_TYPE.error);
+        }
         return [];
       } else {
         DioExceptions.fromDioError(ex);

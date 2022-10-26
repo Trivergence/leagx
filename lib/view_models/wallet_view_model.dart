@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:leagx/core/network/app_url.dart';
+import 'package:leagx/models/stripe_cred.dart';
 import 'package:leagx/service/payment_service/payment_config.dart';
 import 'package:leagx/service/payment_service/payment_exception.dart';
 import 'package:leagx/service/service_locator.dart';
@@ -21,9 +22,22 @@ class WalletViewModel extends BaseModel {
 
   List<PayMethod> get getPayementMethods => _paymentMethods;
 
-  getData() async {
+  Future<void> getData() async {
     setBusy(true);
+    if(StripeConfig().getSecretKey.isEmpty) {
+      await setupStripeCredentials();
+    }
     await getUserPaymentMethods();
+  }
+
+  Future<void> setupStripeCredentials() async {
+    if(StripeConfig().getSecretKey.isEmpty) {
+      StripeCred? stripeCred = await ApiService.callGetApi(
+          url: AppUrl.setupStripeCred, modelName: ApiModels.getStripeCred);
+      if (stripeCred != null) {
+        StripeConfig().setSecretkey(key: stripeCred.stripeSecret);
+      }
+    }
   }
 
   Future<void> getUserPaymentMethods({save = false}) async {
@@ -165,13 +179,18 @@ class WalletViewModel extends BaseModel {
   }
 
   Future<void> createCustomer({required User userData}) async {
-    Result<String, Customer> customer =
-        await PayIn.createCustomer(userId: userData.id.toString(), userName: userData.firstName!, userEmail: userData.email);
-    customer.when((errorCode) {
-      PaymentExceptions.handleException(errorCode: errorCode);
-    }, (customer) async {
-      await saveCustomerId(userData.id, customer.id);
-    });
+    if(StripeConfig().getSecretKey.isNotEmpty) {
+        Result<String, Customer> customer =
+          await PayIn.createCustomer(userId: userData.id.toString(), userName: userData.firstName!, userEmail: userData.email);
+      customer.when((errorCode) {
+        PaymentExceptions.handleException(errorCode: errorCode);
+      }, (customer) async {
+        await saveCustomerId(userData.id, customer.id);
+      });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+      await setupStripeCredentials();
+     }
   }
 
   Future<void> saveCustomerId(int userId, String? customerId) async {

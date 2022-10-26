@@ -20,13 +20,13 @@ class WalletScreen extends StatelessWidget {
   WalletScreen({ Key? key }) : super(key: key);
 
   late WalletViewModel _walletViewModel;
-  late UserSummary _dashBoardViewModel;
+  UserSummary? userSummary;
   late BuildContext _context;
 
   @override
   Widget build(BuildContext context) {
     _context = context;
-    UserSummary? userSummary = context.read<DashBoardViewModel>().userSummary;
+    userSummary = context.read<DashBoardViewModel>().userSummary;
     return BaseWidget<WalletViewModel>(
       create: false,
       model: context.read<WalletViewModel>(), 
@@ -66,7 +66,8 @@ class WalletScreen extends StatelessWidget {
                        fontWeight: FontWeight.w700,
                        ),
                       UIHelper.verticalSpaceSmall,
-                        TextWidget(text: userSummary != null ? userSummary.coinEarned.toString() : "0.0", textSize: 27, fontWeight: FontWeight.w700,
+                        TextWidget(text: userSummary != null ? userSummary!.coinEarned.toString() 
+                        : "0.0", textSize: 27, fontWeight: FontWeight.w700,
                       ),
                       UIHelper.verticalSpaceMedium,
                       // MainButton(

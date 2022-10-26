@@ -1,3 +1,4 @@
+import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/currency.dart';
 import 'package:leagx/service/payment_service/payment_exception.dart';
@@ -14,6 +15,7 @@ import '../core/network/api/api_models.dart';
 import '../core/network/api/api_service.dart';
 import '../core/network/app_url.dart';
 import '../models/customer_cred.dart';
+import '../models/user/user.dart';
 import '../service/payment_service/payment_config.dart';
 import '../ui/util/locale/localization.dart';
 
@@ -53,6 +55,32 @@ class PayoutViewModel extends BaseModel{
     }
   }
 
+  Future<bool> withdrawCoins({
+    required String amountInDollars,
+    required String payoutToken,
+    }) async {
+    bool success = false;
+    User? user = preferenceHelper.getUser();
+    CustomerCred? customerCred = locator<PaymentConfig>().getCustomerCred;
+    if (user != null && customerCred != null) {
+        success = await ApiService.postWoResponce(
+          url: AppUrl.addPaymentToken,
+          body: {
+          "payment": {
+            "user_id": user.id,
+            "payment_account_id": customerCred.id,
+            "payment_token": payoutToken,
+            "payment_type": "StripePayOut",
+            "amount": amountInDollars
+          }
+        }
+      );
+    } else {
+      ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.msg);
+    }
+    return success;
+  }
+
   Future<String?> addBank() async {
     String? accountLink;
     await createAccount();
@@ -88,8 +116,8 @@ class PayoutViewModel extends BaseModel{
     }
   }
 
-  Future<bool> payoutMoney(String amount, String currency, String bankId,) async {
-    bool success = false;
+  Future<PayoutModel?> payoutMoney(String amount, String currency, String bankId,) async {
+    PayoutModel? _payoutModel;
     String? convertedAmount = await convertAmount(from: "usd", to: currency, withdrawlAmount: amount);
     CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
     if(savedCred != null && savedCred.accountId != null && convertedAmount != null) {
@@ -97,13 +125,13 @@ class PayoutViewModel extends BaseModel{
       result.when((errorCode) {
         Loader.hideLoader();
         PaymentExceptions.handleException(errorCode: errorCode);
-      }, (_) {
-          success = true;
+      }, (payoutModel) {
+          _payoutModel = payoutModel;
       });
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
-    return success;
+    return _payoutModel;
   }
 
   Future<bool> transferToUser(

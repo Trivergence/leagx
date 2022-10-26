@@ -8,6 +8,7 @@ import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
 import 'package:leagx/ui/util/app_dialogs/payout_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
@@ -16,6 +17,7 @@ import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/payout_view_model.dart';
 import 'package:payments/models/express_account.dart';
+import 'package:payments/models/payout_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/colors.dart';
@@ -178,17 +180,24 @@ class PayoutScreen extends StatelessWidget {
         Loader.showLoader();
         bool isTransfered = await _payoutViewModel!.transferToUser(amount);
           if (isTransfered == true) {
-            bool success = await _payoutViewModel!.payoutMoney(amount, currency!, listOfExtAccounts.first.id!);
-            if(success == true) {
+            PayoutModel? payoutModel = await _payoutViewModel!.payoutMoney(amount, currency!, listOfExtAccounts.first.id!);
+            if(payoutModel != null) {
+              bool success = await _payoutViewModel!.withdrawCoins(
+                amountInDollars: amount, 
+                payoutToken: payoutModel.id);
+              if(success == true) {
+                FancyDialog.showSuccess(
+                  context: _context!,
+                  title: "Completed Successfully",
+                  onOkPressed: (){},
+                  description: "You have successfully withdrawn $amount\$");
+              } else {
+                ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+              }
               Loader.hideLoader();
-              FancyDialog.showSuccess(
-                context: _context!,
-                title: "Completed Successfully",
-                description: "You have successfully withdrawn $amount\$"
-              );
             }
           } else {
-          Loader.hideLoader();
+           Loader.hideLoader();
           }
       // } else {
       //   ToastMessage.show("You don't have enough coins", TOAST_TYPE.msg);

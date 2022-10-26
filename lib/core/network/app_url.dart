@@ -17,4 +17,6 @@ class AppUrl{
   static const String getPredictions = "/get_user_predictions";
   static const String subscribedNews = "/subscribed_leagues_news";
   static const String getPaymentAccounts = "/payment_accounts";
+  static const String addPaymentToken = "/payments";
+  static const String setupStripeCred = "/get_stripe_cred";
 }

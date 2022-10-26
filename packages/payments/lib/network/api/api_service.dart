@@ -13,7 +13,7 @@ class ApiService {
           contentType: "application/x-www-form-urlencoded",
           baseUrl: PaymentUrl.baseUrl,
           headers: {
-            "Authorization": "Bearer ${PaymentConstants.secretKey}",
+            "Authorization": "Bearer ${StripeConfig().getSecretKey}",
           },
           connectTimeout: PaymentConstants.networkTimeout,
           receiveTimeout: PaymentConstants.networkTimeout,
@@ -71,7 +71,7 @@ class ApiService {
           contentType: "application/x-www-form-urlencoded",
           baseUrl: PaymentUrl.baseUrl,
           headers: {
-            "Authorization": "Bearer ${PaymentConstants.secretKey}",
+            "Authorization": "Bearer ${StripeConfig().getSecretKey}",
           },
           connectTimeout: PaymentConstants.networkTimeout,
           receiveTimeout: PaymentConstants.networkTimeout,
@@ -124,7 +124,7 @@ class ApiService {
           contentType: 'application/x-www-form-urlencoded',
           baseUrl: PaymentUrl.baseUrl,
           headers: {
-            "Authorization": "Bearer ${PaymentConstants.secretKey}",
+            "Authorization": "Bearer ${StripeConfig().getSecretKey}",
           },
           connectTimeout: PaymentConstants.networkTimeout,
           receiveTimeout: PaymentConstants.networkTimeout,

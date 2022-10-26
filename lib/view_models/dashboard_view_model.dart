@@ -50,7 +50,6 @@ class DashBoardViewModel extends BaseModel {
       if (subscribedLeagues.isNotEmpty) {
         await getAllNews();
       }
-      getPaymentCredentials(context);
     } on Exception catch (_) {
       setBusy(false);
     }

@@ -32,6 +32,8 @@ import 'package:provider/provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
+import '../../../view_models/wallet_view_model.dart';
+
 class SigninScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
@@ -105,8 +107,6 @@ class SigninScreen extends StatelessWidget {
                       email: _emailController.text,
                       password: _passwordController.text,
                     );
-                    Loader.hideLoader();
-
                     if (ValidationUtils.isValid(userData)) {
                       preferenceHelper.saveAuthToken(userData!.apiToken);
                       preferenceHelper.saveUser(userData);
@@ -116,9 +116,12 @@ class SigninScreen extends StatelessWidget {
                       if (dashBoardModel.subscribedLeagues.isEmpty) {
                         AuthViewModel.subscribeOneLeague(userData.id);
                       }
+                      Loader.hideLoader();
                       ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
                           TOAST_TYPE.success);
                       Navigator.pushNamed(context, Routes.dashboard);
+                    } else {
+                      Loader.hideLoader();
                     }
                   }
                 }

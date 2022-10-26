@@ -18,6 +18,7 @@ import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
@@ -65,6 +66,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               await context.read<SubscriptionViewModel>().getSubscriptionPlans();
               await context.read<SubscriptionViewModel>().getLeagues();
               await context.read<FixtureDetailViewModel>().getUserPredictions();
+              await context.read<WalletViewModel>().setupStripeCredentials();
+              context.read<DashBoardViewModel>().getPaymentCredentials(context);
             }
           });
         },
