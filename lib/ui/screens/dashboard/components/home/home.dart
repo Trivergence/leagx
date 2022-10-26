@@ -85,9 +85,12 @@ class HomeScreen extends StatelessWidget {
                   firstLabel: loc.dashboardHomeTxtPredictions,
                   firstValue: _userSummary!.totalPredictions.toString(),
                   secondLabel: loc.dashboardHomeTxtWiningRatio,
-                  secondValue: _userSummary!.predictionSuccessRate!.toStringAsFixed(1),
+                  secondValue: _userSummary!
+                      .predictionSuccessRate.toString() != "100.0" 
+                      ? _userSummary!.predictionSuccessRate!.toStringAsFixed(1) 
+                      : _userSummary!.predictionSuccessRate!.toStringAsFixed(0),
                   thirdLabel: loc.dashboardHomeTxtEarnedCoid,
-                  thirdValue: _userSummary!.coinEarned.toString(),
+                  thirdValue: _userSummary!.coinEarned!.round().toString(),
                 ),
                  TextWidget(
                   text: loc.dashboardHomeTxtUpcomingMatches,

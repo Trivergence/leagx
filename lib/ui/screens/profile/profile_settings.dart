@@ -3,13 +3,13 @@ import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
+import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/utility/image_utitlity.dart';
-import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
@@ -17,14 +17,14 @@ import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/settings_tile.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:leagx/view_models/edit_profile_viewmodel.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/update_profile_args.dart';
 import '../../../models/user/user.dart';
 
 class ProfileSettingsScreen extends StatefulWidget {
-  ProfileSettingsScreen({Key? key}) : super(key: key);
+  const ProfileSettingsScreen({Key? key}) : super(key: key);
 
   @override
   State<ProfileSettingsScreen> createState() => _ProfileSettingsScreenState();
@@ -53,6 +53,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    UserSummary? userSummary = context.read<DashBoardViewModel>().userSummary;
     getUserData();
     return Scaffold(
       appBar: AppBarWidget(
@@ -116,28 +117,28 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         UIHelper.verticalSpace(
                           35.0,
                         ),
-                        GradientBorderWidget(
-                          onPressed: () {},
-                          gradient: AppColors.pinkishGradient,
-                          text: '0',
-                          height: 60.0,
-                          width: 60.0,
-                          isCircular: true,
-                          placeHolderImg: '',
-                        ),
-                        UIHelper.verticalSpaceSmall,
-                        TextWidget(
-                          text: loc.profileProfileSettingsTxtCoins,
-                          textSize: Dimens.textSmall,
-                          color: AppColors.colorWhite.withOpacity(0.6),
-                        ),
-                        UIHelper.verticalSpace(16.0),
-                        MainButton(
-                          width: 110.0,
-                          height: 26.0,
-                          text: loc.profileProfileSettingsTxtWithdraw,
-                          fontSize: 14.0,
-                          onPressed: () {},
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ProfileDetailWidget(
+                              value: userSummary != null ? userSummary.coinEarned!.round().toString() : "0",
+                              title: loc.profileProfileSettingsTxtCoins,
+                              buttonTitle: loc.profileProfileSettingsTxtWithdraw,
+                              onBtnPressed: (){},
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 20),
+                              height: 100,
+                              width: 0.3,
+                              color: AppColors.colorGrey,
+                            ),
+                            ProfileDetailWidget(
+                              value: "0",
+                              title: loc.profileProfileSettingsTxtPrediction,
+                              buttonTitle: loc.profileProfileSettingsTxtAddPredictions,
+                              onBtnPressed: (){},
+                            ),
+                          ],
                         ),
                         UIHelper.verticalSpace(22.0),
                       ],
@@ -195,5 +196,50 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     userEmail = user.email;
     phone = user.phone ?? '';
     gender = user.gender ?? '';
+  }
+}
+
+class ProfileDetailWidget extends StatelessWidget {
+  final String value;
+  final String title;
+  final String buttonTitle;
+  final VoidCallback onBtnPressed;
+  const ProfileDetailWidget({
+    Key? key, 
+    required this.value, 
+    required this.title, 
+    required this.buttonTitle, 
+    required this.onBtnPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        GradientBorderWidget(
+          onPressed: () {},
+          gradient: AppColors.pinkishGradient,
+          text: value,
+          height: 60.0,
+          width: 60.0,
+          isCircular: true,
+          placeHolderImg: '',
+        ),
+        UIHelper.verticalSpaceSmall,
+        TextWidget(
+          text: title,
+          textSize: Dimens.textSmall,
+          color: AppColors.colorWhite.withOpacity(0.6),
+        ),
+        UIHelper.verticalSpace(16.0),
+        MainButton(
+          width: 110.0,
+          height: 26.0,
+          text: buttonTitle,
+          fontSize: 14.0,
+          onPressed: onBtnPressed,
+        ),
+      ],
+    );
   }
 }
