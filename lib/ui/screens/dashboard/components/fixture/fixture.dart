@@ -1,5 +1,6 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/core/utility.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
@@ -32,11 +33,13 @@ class _FixtureScreenState extends State<FixtureScreen> {
   bool isFiltering = false;
   int selectedIndex = -1;
 
+  late DashBoardViewModel _dashBoardViewModel;
+
   @override
   Widget build(BuildContext context) {
-    DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
-    subscribedMatches = isFiltering == true ?  dashBoardViewModel.filteredMatches : dashBoardViewModel.subscribedMatches;
-    subscribedLeagues = dashBoardViewModel.subscribedLeagues;
+    _dashBoardViewModel = context.read<DashBoardViewModel>();
+    subscribedMatches = isFiltering == true ?  _dashBoardViewModel.filteredMatches : _dashBoardViewModel.subscribedMatches;
+    subscribedLeagues = _dashBoardViewModel.subscribedLeagues;
     return Column(
       children: [
         Container(
@@ -68,6 +71,18 @@ class _FixtureScreenState extends State<FixtureScreen> {
                       },
                     ),
                   ),
+                  if (subscribedLeagues.isNotEmpty) Padding(
+                    padding: const EdgeInsets.only(right: 18.0),
+                    child: GradientBorderWidget(
+                      width: 40.0,
+                      height: 40.0,
+                      isCircular: true,
+                      //TODO localization
+                      text: "All",
+                      textSize: Dimens.textSmall,
+                      onPressed: showAll,
+                    ),
+                  ),
                   if(subscribedLeagues.isNotEmpty) Expanded(
                     child: SizedBox(
                       height: 40.0,
@@ -91,28 +106,15 @@ class _FixtureScreenState extends State<FixtureScreen> {
                                   },
                                 ),
                                 InkWell(
-                                  onTap: () {
-                                    if(selectedIndex != index) {
-                                      dashBoardViewModel.filterByLeague(
-                                            leagueId: subscribedLeagues[index]
-                                                .externalLeagueId
-                                                .toString());
-                                        setState(() {
-                                          isFiltering = true;
-                                          selectedIndex = index;
-                                        });
-                                    }
-                                  },
+                                  onTap: () => filterByLeague(index),
                                   child: Container(
                                       width: 40,
                                       height: 40,
                                       decoration: index ==
                                                 selectedIndex ? BoxDecoration(
-                                        color: AppColors.textFieldColor.withOpacity(0.3),
+                                        color: AppColors.colorYellow.withOpacity(0.3),
                                         shape: BoxShape.circle,
                                       ) : null,
-                                      child: index ==
-                                                selectedIndex ? const Icon(Icons.done) : null,
                                     ),
                                 ),
                               ],
@@ -185,5 +187,24 @@ class _FixtureScreenState extends State<FixtureScreen> {
         ),
       ],
     );
+  }
+
+  void showAll() {
+    if (isFiltering != false) {
+      selectedIndex = -1;
+      isFiltering = false;
+      setState(() {});
+    }
+  }
+  
+  filterByLeague(int index) {
+    if (selectedIndex != index) {
+      _dashBoardViewModel.filterByLeague(
+          leagueId: subscribedLeagues[index].externalLeagueId.toString());
+      setState(() {
+        isFiltering = true;
+        selectedIndex = index;
+      });
+    }
   }
 }
