@@ -34,11 +34,11 @@ class PayoutScreen extends StatelessWidget {
   String? last4;
   String? routingNumber;
   UserSummary? userSummary;
+  late DashBoardViewModel _dashBoardViewModel;
 
   @override
   Widget build(BuildContext context) {
-    _context = context;
-    userSummary = context.read<DashBoardViewModel>().userSummary;
+    
     return Scaffold(
       appBar: AppBarWidget(title: loc.payoutTxtPayout),
       body: BaseWidget<PayoutViewModel>(
@@ -50,6 +50,8 @@ class PayoutScreen extends StatelessWidget {
           });
         },
         builder: (context, PayoutViewModel model,_ ) {
+        _dashBoardViewModel = context.read<DashBoardViewModel>();
+        userSummary = _dashBoardViewModel.userSummary;
         _payoutViewModel = model;
         _context = context;
         getData();
@@ -129,7 +131,7 @@ class PayoutScreen extends StatelessWidget {
                 FancyDialog.showSuccess(
                   context: _context!,
                   title: loc.payoutDialogTxtSuccessTitle,
-                  onOkPressed: (){},
+                  onOkPressed: () async => await _payoutViewModel!.updateCoins(_dashBoardViewModel),
                   description: "${loc.payoutDialogTxtSuccessDesc} $amount\$");
               } else {
                 ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);

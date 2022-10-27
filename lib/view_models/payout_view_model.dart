@@ -5,6 +5,7 @@ import 'package:leagx/service/payment_service/payment_exception.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:payments/models/express_account.dart';
 import 'package:payments/models/payout_model.dart';
@@ -173,5 +174,11 @@ class PayoutViewModel extends BaseModel{
     }
     Loader.hideLoader();
     return amount;
+  }
+
+  Future<void> updateCoins(DashBoardViewModel dashBoardViewModel) async {
+    setBusy(true);
+    await dashBoardViewModel.getUserSummary();
+    setBusy(false);
   }
 }

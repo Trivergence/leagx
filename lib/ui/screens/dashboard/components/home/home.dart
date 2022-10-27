@@ -16,7 +16,6 @@ import 'package:provider/provider.dart';
 import '../../../../../core/network/internet_info.dart';
 import '../../../../../models/dashboard/fixture.dart';
 import '../../../../../models/leader.dart';
-import '../../../../widgets/gradient/gradient_border_widget.dart';
 import '../../../../widgets/placeholder_tile.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,9 +28,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
+    _userSummary = context.select<DashBoardViewModel, UserSummary?>((dasboardModel) => dasboardModel.userSummary);
     upcomingMatches = dashBoardViewModel.subscribedMatches;
     listOfLeaders = dashBoardViewModel.getLeaders;
-    _userSummary = dashBoardViewModel.userSummary;
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(

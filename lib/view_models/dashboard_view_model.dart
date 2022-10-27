@@ -223,6 +223,7 @@ class DashBoardViewModel extends BaseModel {
     if (user != null) {
       String completeUrl = AppUrl.getUser + user.id.toString();
       _userSummary = await ApiService.callGetApi(url: completeUrl, modelName: ApiModels.userSummary);
+      notify();
     }
   }
 
