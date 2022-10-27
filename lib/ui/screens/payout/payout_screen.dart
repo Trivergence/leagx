@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/dimens.dart';
@@ -20,9 +19,9 @@ import 'package:payments/models/express_account.dart';
 import 'package:payments/models/payout_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../../constants/colors.dart';
 import '../../../core/network/internet_info.dart';
 import '../../widgets/text_widget.dart';
+import 'components/bank_info.dart';
 
 class PayoutScreen extends StatelessWidget {
   PayoutScreen({ Key? key }) : super(key: key);
@@ -41,12 +40,12 @@ class PayoutScreen extends StatelessWidget {
     _context = context;
     userSummary = context.read<DashBoardViewModel>().userSummary;
     return Scaffold(
-      appBar: AppBarWidget(title: "Payout"),
+      appBar: AppBarWidget(title: loc.payoutTxtPayout),
       body: BaseWidget<PayoutViewModel>(
         create: false,
         model: context.read<PayoutViewModel>(),
         onModelReady: (PayoutViewModel model) async {
-          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) async {
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
             await model.initializeData();
           });
         },
@@ -61,80 +60,21 @@ class PayoutScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-              const TextWidget(text: "Total Amount", textSize: Dimens.textMedium, fontWeight: FontWeight.bold,),
-              TextWidget(text: (userSummary != null ? userSummary!.coinEarned.toString() : "0.0") + "\$", textSize: Dimens.textMedium)
+              TextWidget(text: loc.payoutTxtTotalAmount, textSize: Dimens.textMedium, fontWeight: FontWeight.bold,),
+              TextWidget(text: (userSummary != null 
+              ? userSummary!.coinEarned!.round().toString()
+              : "0.0") + "\$", textSize: Dimens.textMedium)
             ],),
           ),
           if (listOfExtAccounts.isNotEmpty) SizedBox(
             width: 200,
-            child: MainButton(text: "Withdraw", onPressed: _withdraw)),
+            child: MainButton(text: loc.payoutBtnWithdraw, onPressed: _withdraw)),
           UIHelper.verticalSpaceLarge,
-          if (listOfExtAccounts.isNotEmpty) Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const TextWidget(
-                  text: "Attached Bank",
-                  textSize: 27,
-                  fontWeight: FontWeight.w700,
-                  textAlign: TextAlign.start,),
-                UIHelper.verticalSpaceSmall,
-                Card(
-                    color: AppColors.textFieldColor,
-                    elevation: 15,
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)
-                  )
-                ),
-                child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-                      child: Row(
-                        children:  [
-                           const Icon(Icons.account_balance, size: 40,),
-                           UIHelper.horizontalSpaceSmall,
-                           Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                             children: [
-                               Row(
-                                 children: [
-                                    TextWidget(text: bankName!),
-                                    UIHelper.horizontalSpaceSmall,
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.all(Radius.circular(5)),
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                                        color: AppColors.colorBackground,
-                                        child: TextWidget(text: currency!, textSize: Dimens.textXS,),
-                                      ),
-                                    ),
-                                  UIHelper.horizontalSpaceSmall,
-                                  const CircleAvatar(
-                                    radius: 10,
-                                    backgroundColor: AppColors.colorGreen,
-                                    child: Center(child: Icon(
-                                      Icons.done, 
-                                      color: AppColors.colorWhite, 
-                                      size: 10,)))
-                                 ],
-                               ),
-                               Row( 
-                                children: [
-                                    TextWidget(text: routingNumber!,textSize: Dimens.textSmall,),
-                                    UIHelper.horizontalSpaceSmall,
-                                    TextWidget(text: "****  " + last4!),
-                                  ],
-                                ),
-                             ],
-                           ),
-                        ],
-                      ),
-                ),
-                ),
-              ],
-            ),
-          ),
-          if(listOfExtAccounts.isEmpty) MainButton(text: "Add Bank", onPressed: _addBank)
+          if (listOfExtAccounts.isNotEmpty) BankInfoWidget(bankName: bankName, 
+              currency: currency,
+              routingNumber: routingNumber, 
+              last4: last4),
+          if(listOfExtAccounts.isEmpty) MainButton(text: loc.payoutBtnAddBank, onPressed: _addBank)
         ],
       )
       : const LoadingWidget();
@@ -169,10 +109,10 @@ class PayoutScreen extends StatelessWidget {
 
   void _withdraw() async {
     PayoutDialog.show(context: _context!, 
-    title: "Withdraw", 
-    body: "Enter required amount", 
-    negativeBtnTitle: "Cancel", 
-    positiveBtnTitle: "Withdraw", 
+    title: loc.payoutDialogTitle, 
+    body: loc.payoutDialogBody, 
+    negativeBtnTitle: loc.payoutDialogBtnNegative, 
+    positiveBtnTitle: loc.payoutDialogBtnPositive, 
     onPositiveBtnPressed: (amount) async {
       bool isConnected = await InternetInfo.isConnected();
       if(isConnected) {
@@ -188,9 +128,9 @@ class PayoutScreen extends StatelessWidget {
               if(success == true) {
                 FancyDialog.showSuccess(
                   context: _context!,
-                  title: "Completed Successfully",
+                  title: loc.payoutDialogTxtSuccessTitle,
                   onOkPressed: (){},
-                  description: "You have successfully withdrawn $amount\$");
+                  description: "${loc.payoutDialogTxtSuccessDesc} $amount\$");
               } else {
                 ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
               }

@@ -15,6 +15,9 @@ import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
+import '../../util/locale/localization.dart';
+import 'components/card_info.dart';
+import 'components/wallet_widget.dart';
 
 class WalletScreen extends StatelessWidget {
   WalletScreen({ Key? key }) : super(key: key);
@@ -31,7 +34,7 @@ class WalletScreen extends StatelessWidget {
       create: false,
       model: context.read<WalletViewModel>(), 
       onModelReady: (WalletViewModel walletModel) async {
-        SchedulerBinding.instance!.addPostFrameCallback((timeStamp) async {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
           await walletModel.getData();
         });
       },
@@ -44,88 +47,32 @@ class WalletScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children:  [
-            const TextWidget(
-            text: "Wallet", 
+            TextWidget(
+            text: loc.walletTxtWallet, 
             textSize: 30, 
             fontWeight: FontWeight.bold,),
             UIHelper.verticalSpaceSmall,
-            SizedBox(
-              height: 200,
-              child: Card(
-                color: AppColors.textFieldColor,
-                elevation: 15,
-                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const TextWidget(text: "Total Coins", 
-                       color: AppColors.colorWhite,
-                       fontWeight: FontWeight.w700,
-                       ),
-                      UIHelper.verticalSpaceSmall,
-                        TextWidget(text: userSummary != null ? userSummary!.coinEarned.toString() 
-                        : "0.0", textSize: 27, fontWeight: FontWeight.w700,
-                      ),
-                      UIHelper.verticalSpaceMedium,
-                      // MainButton(
-                      //   width: 150,
-                      //   text: "Add Funds", onPressed: () {})
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            if(walletModel.getPayementMethods.isNotEmpty) const TextWidget(text: "Attached Card", textSize: 27,
+            WalletWidget(userSummary: userSummary),
+            if(walletModel.getPayementMethods.isNotEmpty) TextWidget(text: loc.walletTxtAttachedCard, textSize: 27,
             fontWeight: FontWeight.w700),
             UIHelper.verticalSpaceSmall,
             //if(walletModel.getPayementMethods.isEmpty) const TextWidget(text: "No card added yet"),
             UIHelper.verticalSpaceSmall,
             walletModel.getPayementMethods.isEmpty 
-            ? MainButton(text: "Add Payment Method", onPressed: _addPaymentMethod)
+            ? MainButton(text: loc.walletBtnaddMethod, onPressed: _addPaymentMethod)
             :  Column(
               children: [
-                Card(
-                  color: AppColors.textFieldColor,
-                  elevation: 15,
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)
-                )
-          ),
-          child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.payment),
-                        TextWidget(text: "**** **** **** " + walletModel.getPayementMethods.first.card!.last4!),
-                      ],
-                    ),
-                    UIHelper.horizontalSpaceSmall,
-                     TextWidget(text: walletModel
-                        .getPayementMethods
-                                                        .first.card!.expMonth!
-                        .toString() +
-                    "/" +
-                    walletModel
-                        .getPayementMethods
-                                                        .first.card!.expYear!
-                        .toString())
-                ]),
-          ),
-          ),
-          TextButton(
-            onPressed: _showConfirmationDialog, 
-            child: const TextWidget(text : "Remove", color: AppColors.colorRed,)),
-          
+                CardInfoWidget(
+                  walletModel: walletModel,
+                ),
+                TextButton(
+                  onPressed: _showConfirmationDialog, 
+                  child: TextWidget(text : loc.walletBtnRemove, color: AppColors.colorRed,)),
             ],
           ),
           UIHelper.verticalSpaceLarge,
           MainButton(
-            text: "Payout",
+            text: loc.walletBtnPayout,
             onPressed: () async {
               bool isConnected = await InternetInfo.isConnected();
               if(isConnected) {
@@ -146,16 +93,15 @@ class WalletScreen extends StatelessWidget {
     if(isConnected) {
       await _walletViewModel.addPaymentMethod();
     }
-    
   }
 
   _showConfirmationDialog() {
     ConfirmationDialog.show(
         context: _context,
-        title: "Confirmation",
-        body: "Are you sure you want to remove this card?",
-        negativeBtnTitle: "No",
-        positiveBtnTitle: "Yes",
+        title: loc.walletRemoveDialogTitle,
+        body: loc.walletRemoveDialogBody,
+        negativeBtnTitle: loc.walletRemoveDialogBtnNegative,
+        positiveBtnTitle: loc.walletRemoveDialogBtnPositive,
         onPositiveBtnPressed: (dialogContext) => _removeCard(dialogContext));
   }
 
@@ -167,3 +113,4 @@ class WalletScreen extends StatelessWidget {
     }
   }
 }
+

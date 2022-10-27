@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:payments/constants/payment_constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -22,7 +23,7 @@ class _AddPayoutDetailsState extends State<AddPayoutDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: "Add Details",),
+      appBar: AppBarWidget(title: loc.addPayoutTxtTitle,),
       body: WebView(
         javascriptMode: JavascriptMode.unrestricted,
         initialUrl: widget.accountLink,

@@ -42,7 +42,7 @@ class _FixtureDetailsState extends State<FixtureDetails> {
         create: false,
         model: context.read<FixtureDetailViewModel>(),
         onModelReady: (FixtureDetailViewModel model) async {
-          SchedulerBinding.instance!.addPostFrameCallback((_) {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
             model.getData(matchId: widget.matchData.matchId);
           });
         },

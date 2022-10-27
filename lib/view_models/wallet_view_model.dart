@@ -111,7 +111,7 @@ class WalletViewModel extends BaseModel {
           await Stripe.instance.initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
                   paymentIntentClientSecret: _secretKey,
-                  merchantDisplayName: 'LeagX',
+                  merchantDisplayName: loc.appName,
                   customerId: customerId,
                   style: ThemeMode.dark));
           await Stripe.instance.presentPaymentSheet();
