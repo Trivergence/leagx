@@ -1,9 +1,9 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/core/utility.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
-import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
@@ -18,16 +18,28 @@ import '../../../../../models/match_args.dart';
 import '../../../../../view_models/dashboard_view_model.dart';
 import '../../../../widgets/placeholder_tile.dart';
 
-class FixtureScreen extends StatelessWidget {
-  FixtureScreen({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class FixtureScreen extends StatefulWidget {
+  const FixtureScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FixtureScreen> createState() => _FixtureScreenState();
+}
+
+class _FixtureScreenState extends State<FixtureScreen> {
   List<Fixture> subscribedMatches = [];
+
   List<SubscribedLeague> subscribedLeagues = [];
+  bool isFiltering = false;
+  int selectedIndex = -1;
+
+  late DashBoardViewModel _dashBoardViewModel;
 
   @override
   Widget build(BuildContext context) {
-    DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
-    subscribedMatches = dashBoardViewModel.subscribedMatches;
-    subscribedLeagues = dashBoardViewModel.subscribedLeagues;
+    _dashBoardViewModel = context.read<DashBoardViewModel>();
+    subscribedMatches = isFiltering == true ?  _dashBoardViewModel.filteredMatches : _dashBoardViewModel.subscribedMatches;
+    subscribedLeagues = _dashBoardViewModel.subscribedLeagues;
     return Column(
       children: [
         Container(
@@ -53,8 +65,22 @@ class FixtureScreen extends StatelessWidget {
                       height: 40.0,
                       isCircular: true,
                       iconData: Icons.add,
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed(Routes.chooseLeague),
+                      onPressed: () async {
+                          await Navigator.of(context).pushNamed(Routes.chooseLeague);
+                          setState(() {});
+                      },
+                    ),
+                  ),
+                  if (subscribedLeagues.isNotEmpty) Padding(
+                    padding: const EdgeInsets.only(right: 18.0),
+                    child: GradientBorderWidget(
+                      width: 40.0,
+                      height: 40.0,
+                      isCircular: true,
+                      //TODO localization
+                      text: "All",
+                      textSize: Dimens.textSmall,
+                      onPressed: showAll,
                     ),
                   ),
                   if(subscribedLeagues.isNotEmpty) Expanded(
@@ -64,17 +90,34 @@ class FixtureScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: subscribedLeagues.length,
                         shrinkWrap: true,
-                        itemBuilder: (context, index) {
+                        itemBuilder: (_, index) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 20.0),
-                            child: GradientBorderWidget(
-                              width: 40.0,
-                              height: 40.0,
-                              placeHolderImg: Assets.icLeague,
-                              padding: const EdgeInsets.all(5.0),
-                              isCircular: true,
-                              imageUrl: subscribedLeagues[index].logo,
-                              onPressed: () {},
+                            child: Stack(
+                              children: [
+                                GradientBorderWidget(
+                                  width: 40.0,
+                                  height: 40.0,
+                                  placeHolderImg: Assets.icLeague,
+                                  padding: const EdgeInsets.all(5.0),
+                                  isCircular: true,
+                                  imageUrl: subscribedLeagues[index].logo,
+                                  onPressed: () {
+                                  },
+                                ),
+                                InkWell(
+                                  onTap: () => filterByLeague(index),
+                                  child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: index ==
+                                                selectedIndex ? BoxDecoration(
+                                        color: AppColors.colorYellow.withOpacity(0.3),
+                                        shape: BoxShape.circle,
+                                      ) : null,
+                                    ),
+                                ),
+                              ],
                             ),
                           );
                         },
@@ -108,6 +151,7 @@ class FixtureScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                     Fixture match = subscribedMatches[index];
                     return FixtureWidget(
+                      key: UniqueKey(),
                       leagueName: match.leagueName,
                       teamOneFlag: match.teamHomeBadge,
                       teamOneName: match.matchHometeamName,
@@ -143,5 +187,24 @@ class FixtureScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void showAll() {
+    if (isFiltering != false) {
+      selectedIndex = -1;
+      isFiltering = false;
+      setState(() {});
+    }
+  }
+  
+  filterByLeague(int index) {
+    if (selectedIndex != index) {
+      _dashBoardViewModel.filterByLeague(
+          leagueId: subscribedLeagues[index].externalLeagueId.toString());
+      setState(() {
+        isFiltering = true;
+        selectedIndex = index;
+      });
+    }
   }
 }

@@ -10,6 +10,7 @@ import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../ui/util/locale/localization.dart';
 import '../internet_info.dart';
@@ -285,11 +286,17 @@ class ApiService {
     } on DioError catch (ex) {
       Loader.hideLoader();
       if (ex.response != null) {
+        if(baseUrl == AppUrl.footballBaseUrl) {
+          ToastMessage.show(
+            loc.errorUndefined,
+            TOAST_TYPE.error);
+        } else {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
         ToastMessage.show(
             "${errorResponse.error ?? loc.errorUndefined}",
             TOAST_TYPE.error);
+        }
         return [];
       } else {
         DioExceptions.fromDioError(ex);
@@ -356,6 +363,64 @@ class ApiService {
       debugPrint(e.toString());
       Loader.hideLoader();
       return false;
+    }
+  }
+
+  static Future<dynamic> callCurrencyConverter({
+    required String url,
+    Map<String, dynamic>? parameters,
+    Map<String, dynamic>? headers,
+    dynamic modelName,
+  }) async {
+    try {
+      BaseOptions options = BaseOptions(
+          contentType: 'application/json',
+          baseUrl: AppUrl.currencyBaseUrl,
+          headers: {
+            "X-RapidAPI-Key": AppConstants.currencyApiKey,
+            "X-RapidAPI-Host": "currency-converter5.p.rapidapi.com"
+          },
+          connectTimeout: AppConstants.networkTimeout,
+          receiveTimeout: AppConstants.networkTimeout,
+          sendTimeout: AppConstants.networkTimeout);
+
+      var dio = Dio(options);
+      dio.interceptors.add(PrettyDioLogger());
+      bool isConnected = await InternetInfo.isConnected();
+      if (isConnected) {
+        Response _response = await dio.get(
+          url,
+          options: Options(headers: headers),
+          queryParameters: parameters,
+        );
+        debugPrint('get response: ${_response.data}');
+        if (_response.statusCode == 200 || _response.statusCode == 201) {
+          dynamic modelObj =
+              await ApiModels.getModelObjects(modelName, _response.data);
+          return modelObj;
+        }
+      }
+      return null;
+    } on DioError catch (ex) {
+      Loader.hideLoader();
+      if (ex.response != null) {
+        ToastMessage.show(
+            "${loc.errorUndefined}", TOAST_TYPE.error);
+        return null;
+      } else {
+        DioExceptions.fromDioError(ex);
+        return null;
+      }
+    } on Exception {
+      Loader.hideLoader();
+      ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
+      return null;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      Loader.hideLoader();
+      return null;
     }
   }
 }

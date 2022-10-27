@@ -4,11 +4,10 @@ import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:leagx/view_models/subscription_viewmodel.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../view_models/subscription_viewmodel.dart';
 
 enum LoginStatus { none, loggingIn, loggedIn, error }
 enum SignupStatus { none, loading }
@@ -32,7 +31,7 @@ class SessionProvider extends ChangeNotifier {
     else if(!locator<SharedPreferenceHelper>().isFirstTime()) {
       _loginStatus = LoginStatus.error;
     }
-    
+    context.read<WalletViewModel>().setupStripeCredentials();
     notifyListeners();
   }
 

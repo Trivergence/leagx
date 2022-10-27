@@ -16,6 +16,7 @@ class CustomerCred {
     this.userId,
     this.paymentCardId,
     this.customerId,
+    this.accountId,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -24,6 +25,7 @@ class CustomerCred {
   int? userId;
   String? paymentCardId;
   String? customerId;
+  String? accountId;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -32,6 +34,7 @@ class CustomerCred {
         userId: json["user_id"],
         paymentCardId: json["payment_card_id"],
         customerId: json["customer_id"],
+        accountId: json["account_id"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -41,6 +44,7 @@ class CustomerCred {
         "user_id": userId,
         "payment_card_id": paymentCardId,
         "customer_id": customerId,
+        "account_id": accountId,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };

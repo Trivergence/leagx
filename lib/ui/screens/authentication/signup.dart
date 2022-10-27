@@ -17,9 +17,11 @@ import 'package:leagx/ui/widgets/textfield/password_textfield.dart';
 import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
+import 'package:payments/payments.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
+import '../../../view_models/dashboard_view_model.dart';
 import '../../../view_models/wallet_view_model.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -109,23 +111,33 @@ class SignupScreen extends StatelessWidget {
                         password: _passwordController.text,
                         confirmPassword: _confirmPasswordController.text,
                       );
-                      Loader.hideLoader();
                       if (ValidationUtils.isValid(userData)) {
                         preferenceHelper.saveAuthToken(userData!.apiToken);
+                        preferenceHelper.saveUser(userData);
+                        DashBoardViewModel dashBoardModel =
+                            context.read<DashBoardViewModel>();
+                        await dashBoardModel.getSubscribedLeagues();
+                        if (dashBoardModel.subscribedLeagues.isEmpty) {
+                          await AuthViewModel.subscribeOneLeague(userData.id);
+                        }
+                        Loader.hideLoader();
                         ToastMessage.show(
                             loc.authSignupTxtSignedupSuccessfully, TOAST_TYPE.success);
-                        await AuthViewModel.subscribeOneLeague(userData.id);
-                        Navigator.pushNamed(context, Routes.signin);
-                        WalletViewModel walletModel =
+                        Navigator.pushNamed(context, Routes.dashboard);
+                        if(StripeConfig().getSecretKey.isNotEmpty) {
+                          WalletViewModel walletModel =
                             context.read<WalletViewModel>();
-                        walletModel.createCustomer(userData: userData);
+                          walletModel.createCustomer(userData: userData);
+                        }
+                      } else {
+                        Loader.hideLoader();
                       }
                     } else {
                       ToastMessage.show(
                           loc.authSignupTxtPasswordNotMatch, TOAST_TYPE.error);
                     }
                   }
-}
+                }
               },
             ),
             UIHelper.verticalSpaceMedium,

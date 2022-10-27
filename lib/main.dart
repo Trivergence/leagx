@@ -8,6 +8,7 @@ import 'package:leagx/ui/screens/betting.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:leagx/view_models/payout_view_model.dart';
 import 'package:leagx/view_models/subscription_viewmodel.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/edit_profile_viewmodel.dart';
@@ -44,6 +45,7 @@ void main() async {
                 ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
                 ChangeNotifierProvider(create: (_) => SubscriptionViewModel()),
                 ChangeNotifierProvider(create: (_) => WalletViewModel()),
+                ChangeNotifierProvider(create: (_) => PayoutViewModel()),
               ],
               child: Betting(prefs: prefs));
           },

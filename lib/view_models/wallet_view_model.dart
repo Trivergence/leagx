@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:leagx/core/network/app_url.dart';
+import 'package:leagx/models/stripe_cred.dart';
 import 'package:leagx/service/payment_service/payment_config.dart';
 import 'package:leagx/service/payment_service/payment_exception.dart';
 import 'package:leagx/service/service_locator.dart';
@@ -21,23 +22,35 @@ class WalletViewModel extends BaseModel {
 
   List<PayMethod> get getPayementMethods => _paymentMethods;
 
-  getData() async {
+  Future<void> getData() async {
     setBusy(true);
+    if(StripeConfig().getSecretKey.isEmpty) {
+      await setupStripeCredentials();
+    }
     await getUserPaymentMethods();
   }
 
+  Future<void> setupStripeCredentials() async {
+    if(StripeConfig().getSecretKey.isEmpty) {
+      StripeCred? stripeCred = await ApiService.callGetApi(
+          url: AppUrl.setupStripeCred, modelName: ApiModels.getStripeCred);
+      if (stripeCred != null) {
+        StripeConfig().setSecretkey(key: stripeCred.stripeSecret);
+      }
+    }
+  }
 
-  Future<void> getUserPaymentMethods({save = false}) async{
+  Future<void> getUserPaymentMethods({save = false}) async {
     CustomerCred? customerCred = locator<PaymentConfig>().getCustomerCred;
-    if(customerCred != null) {
-      Result<String, List<PayMethod>> result= await PayIn.getPaymentMethods(customerId: customerCred.customerId.toString());
+    if (customerCred != null) {
+      Result<String, List<PayMethod>> result = await PayIn.getPaymentMethods(customerId: customerCred.customerId.toString());
       result.when((errorCode) {
         PaymentExceptions.handleException(errorCode: errorCode);
         setBusy(false);
       }, (paymentMethods) async {
         _paymentMethods = paymentMethods;
         if (_paymentMethods.isNotEmpty) {
-          if(save == true) {
+          if (save == true) {
             await savePaymentId(paymentId: _paymentMethods.first.id!);
           } else {
             await updatePaymentId(paymentId: _paymentMethods.first.id!);
@@ -45,8 +58,12 @@ class WalletViewModel extends BaseModel {
         }
         setBusy(false);
       });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+      setBusy(false);
     }
   }
+
   Future<void> removePaymentMethod() async {
     setBusy(true);
     try {
@@ -60,37 +77,41 @@ class WalletViewModel extends BaseModel {
           if (isSuccesful) _paymentMethods = [];
           setBusy(false);
         });
+      } else {
+        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+        setBusy(false);
       }
     } on Exception catch (_) {
       setBusy(false);
     }
   }
+
   Future<bool> purchaseIndirectly({
     required String amount,
     required String currency,
-    }) async{
-      try {
-        bool success = false;
-        String? _secretKey;
-        String? customerId =
-          locator<PaymentConfig>().getCustomerCred!.customerId;
-        if(customerId != null) {
+  }) async {
+    try {
+      bool success = false;
+      String? _secretKey;
+      String? customerId = locator<PaymentConfig>().getCustomerCred!.customerId;
+      if (customerId != null) {
         Result<String, String?> result = await PayIn.createIndirectPaymentIntent(
-         customerId: customerId,
-         amount: amount,
-         currency: currency);
+          customerId: customerId, 
+          amount: amount, 
+          currency: currency);
         result.when((errorCode) {
-            PaymentExceptions.handleException(errorCode: errorCode);
-            success = false;
-         }, (secretKey) async {
-        if (secretKey != null) {
+          PaymentExceptions.handleException(errorCode: errorCode);
+          success = false;
+        }, (secretKey) async {
+          if (secretKey != null) {
             _secretKey = secretKey;
           }
-         });
+        });
         if (_secretKey != null) {
           await Stripe.instance.initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
                   paymentIntentClientSecret: _secretKey,
+                  merchantDisplayName: loc.appName,
                   customerId: customerId,
                   style: ThemeMode.dark));
           await Stripe.instance.presentPaymentSheet();
@@ -98,35 +119,34 @@ class WalletViewModel extends BaseModel {
           success = true;
         }
         return success;
-        } else {
-          Loader.hideLoader();
-          ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
-          return success;
-        }
-      } on Exception catch (_) {
+      } else {
         Loader.hideLoader();
-        return false;
+        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+        return success;
       }
-}
-   Future<bool> purchaseDirectly({
+    } on Exception catch (_) {
+      Loader.hideLoader();
+      return false;
+    }
+  }
+
+  Future<bool> purchaseDirectly({
     required String amount,
     required String currency,
   }) async {
     bool success = false;
     String? customerId = locator<PaymentConfig>().getCustomerCred!.customerId;
     if (customerId != null) {
-        Result<String, bool> result = await PayIn.createDirectPaymentIntent(
-        customerId: customerId, 
-        amount: amount,
-        currency: currency, 
-        paymentMethodId: _paymentMethods.first.id!
-      );
+      Result<String, bool> result = await PayIn.createDirectPaymentIntent(
+          customerId: customerId, amount: amount, currency: currency, paymentMethodId: _paymentMethods.first.id!);
       result.when((errorCode) {
         success = false;
         PaymentExceptions.handleException(errorCode: errorCode);
       }, (isSuccessfull) {
         success = isSuccessfull;
       });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
     return success;
   }
@@ -139,82 +159,82 @@ class WalletViewModel extends BaseModel {
         PaymentExceptions.handleException(errorCode: errorCode);
       }, (secretKey) async {
         if (secretKey != null) {
-        try {
-          await Stripe.instance.initPaymentSheet(
-              paymentSheetParameters: SetupPaymentSheetParameters(
-                  setupIntentClientSecret: secretKey,
-                  customerId: customerId,
-                  style: ThemeMode.dark));
-          await Stripe.instance.presentPaymentSheet();
-          await getUserPaymentMethods();
-          setBusy(true);
-          await getUserPaymentMethods(save: true);
-        } on Exception catch (_) {
-          Loader.hideLoader();
+          try {
+            await Stripe.instance.initPaymentSheet(
+                paymentSheetParameters: SetupPaymentSheetParameters(
+                    setupIntentClientSecret: secretKey, merchantDisplayName: 'LeagX', customerId: customerId, style: ThemeMode.dark));
+            await Stripe.instance.presentPaymentSheet();
+            setBusy(true);
+            await getUserPaymentMethods(save: true);
+            setBusy(false);
+          } on Exception catch (_) {
+            Loader.hideLoader();
+            setBusy(false);
+          }
         }
-      }
       });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
   }
+
   Future<void> createCustomer({required User userData}) async {
-    Result<String, Customer> customer = await PayIn.createCustomer(
-      userId: userData.id.toString(),
-      userName: userData.firstName!,
-      userEmail: userData.email);
+    if(StripeConfig().getSecretKey.isNotEmpty) {
+        Result<String, Customer> customer =
+          await PayIn.createCustomer(userId: userData.id.toString(), userName: userData.firstName!, userEmail: userData.email);
       customer.when((errorCode) {
         PaymentExceptions.handleException(errorCode: errorCode);
-      }, (customer) {
-      saveCustomerId(userData.id, customer.id);
-    }
-    );
+      }, (customer) async {
+        await saveCustomerId(userData.id, customer.id);
+      });
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+      await setupStripeCredentials();
+     }
   }
 
   Future<void> saveCustomerId(int userId, String? customerId) async {
     CustomerCred? customerCred = await ApiService.callPostApi(
-      url: AppUrl.getPaymentAccounts,
-      body: {
-        "payment_account": {
-          "user_id": userId,
-          "customer_id": customerId
-        }
-      },
-      modelName: ApiModels.paymentAccounts
-    );
-    if(customerCred != null) {
-     locator<PaymentConfig>().setCustomerCred = customerCred;
+        url: AppUrl.getPaymentAccounts,
+        body: {
+          "payment_account": {"user_id": userId, "customer_id": customerId}
+        },
+        modelName: ApiModels.paymentAccounts);
+    if (customerCred != null) {
+      locator<PaymentConfig>().setCustomerCred = customerCred;
     }
   }
 
-    Future<void> savePaymentId({String? paymentId}) async {
-      CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
-      if (savedCred != null) {
-        CustomerCred? customerCred = await ApiService.callPutApi(
-            url: AppUrl.getPaymentAccounts + "/" + savedCred.id.toString(),
-            body: {
-              "payment_account": {"payment_card_id": paymentId}
-            },
-            modelName: ApiModels.paymentAccounts);
-        if (customerCred != null) {
-          locator<PaymentConfig>().setCustomerCred = customerCred;
-        }
+  Future<void> savePaymentId({String? paymentId}) async {
+    CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
+    if (savedCred != null) {
+      CustomerCred? customerCred = await ApiService.callPutApi(
+          url: AppUrl.getPaymentAccounts + "/" + savedCred.id.toString(),
+          body: {
+            "payment_account": {"payment_card_id": paymentId}
+          },
+          modelName: ApiModels.paymentAccount);
+      if (customerCred != null) {
+        locator<PaymentConfig>().setCustomerCred = customerCred;
       }
+    }
   }
 
   Future<void> updatePaymentId({required String paymentId}) async {
     CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
-    if(savedCred != null) {
+    if (savedCred != null) {
       String completeUrl = AppUrl.getPaymentAccounts + "/" + savedCred.id.toString();
       CustomerCred? customerCred = await ApiService.callPutApi(
-        url: completeUrl,
-        body: {
-          "payment_account": {"payment_card_id": paymentId}
-        },
-        modelName: ApiModels.paymentAccount
-      );
-      if(customerCred != null) {
-        locator<PaymentConfig>().setCustomerCred = customerCred; 
+          url: completeUrl,
+          body: {
+            "payment_account": {"payment_card_id": paymentId}
+          },
+          modelName: ApiModels.paymentAccount);
+      if (customerCred != null) {
+        locator<PaymentConfig>().setCustomerCred = customerCred;
       }
     }
   }
-  clearData()=> _paymentMethods = [];
+
+  clearData() => _paymentMethods = [];
 }
