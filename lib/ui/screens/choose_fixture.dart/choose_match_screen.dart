@@ -1,4 +1,4 @@
-import 'package:leagx/ui/screens/choose_fixture.dart/components/search_fixture_tile.dart';
+import 'package:leagx/ui/screens/choose_fixture.dart/components/choose_match_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
@@ -52,9 +52,11 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     Fixture match = isFiltering ? filteredList[index] : availableMatches[index];
-                    return ChooseFixtureTile(leagueId: match.leagueId,
-                      imgUrl: match.leagueLogo,
-                      leagueTitle: match.leagueName,
+                    return ChooseFixtureTile(
+                      key: UniqueKey(),
+                      leagueId: match.leagueId,
+                      teamOneFlag: match.teamHomeBadge,
+                      teamTwoFlag: match.teamAwayBadge,
                       matchId: match.matchId,
                       awayTeamName: match.matchAwayteamName,
                       homeTeamName: match.matchHometeamName);
@@ -73,9 +75,14 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
     setState(() {
       isFiltering = true;
       filteredList = availableMatches
-      .where((matchItem) => matchItem.leagueName.toLowerCase().contains(enteredText.toLowerCase()))
+      .where((matchItem) => filterMatches(matchItem, enteredText))
       .toList();
     });
+  }
+
+  bool filterMatches(Fixture matchItem, String enteredText) {
+    return matchItem.matchAwayteamName.toLowerCase().contains(enteredText.toLowerCase()) 
+    || matchItem.matchHometeamName.toLowerCase().contains(enteredText.toLowerCase());
   }
 
   List<Fixture> getMatches(BuildContext context) {

@@ -4,6 +4,7 @@ import 'package:leagx/models/dashboard/league.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/loading_widget.dart';
 import 'package:leagx/ui/widgets/placeholder_tile.dart';
 import 'package:leagx/ui/widgets/textfield/search_textfield.dart';
 import 'package:flutter/material.dart';
@@ -33,14 +34,14 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _subscriptionViewModel = context.read<SubscriptionViewModel>();
+    _subscriptionViewModel = context.watch<SubscriptionViewModel>();
     subscribedIds = context.read<DashBoardViewModel>().subscribedLeagueIds;
     listOfLeagues = isFiltering ? filteredList : _subscriptionViewModel.leagues;
     return Scaffold(
       appBar: AppBarWidget(
         title: loc.chooseLeagueTxtChooseALeague,
       ),
-      body: Padding(
+      body: !_subscriptionViewModel.busy ? Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
         child: Column(
             children: [
@@ -60,6 +61,7 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
                     itemBuilder: (context, index) {
                       League league = listOfLeagues[index];
                       return LeagueTile(
+                        key: UniqueKey(),
                         leagueId: league.leagueId,
                         leagueTitle: league.leagueName,
                         imgUrl: league.leagueLogo,
@@ -73,7 +75,8 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
               )
             ],
           )
-    ));
+    ) : LoadingWidget()
+    );
   }
 
   void _onTextEntered(enteredText) {

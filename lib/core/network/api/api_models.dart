@@ -1,4 +1,5 @@
 import 'package:leagx/models/auth/forgot_password.dart';
+import 'package:leagx/models/currency.dart';
 import 'package:leagx/models/customer_cred.dart';
 import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/dashboard/league.dart';
@@ -6,6 +7,7 @@ import 'package:leagx/models/error_model.dart';
 import 'package:leagx/models/leader.dart';
 import 'package:leagx/models/players.dart';
 import 'package:leagx/models/prediction.dart';
+import 'package:leagx/models/stripe_cred.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/models/user/userdata.dart';
 import 'package:leagx/models/user_summary.dart';
@@ -30,6 +32,8 @@ class ApiModels {
   static const String getPredictions = "GET_PREDICTIONS";
   static const String getSubscribedLeagues = "GET_SUBSCRIBED_LEAGUE";
   static const String userData = "USERDATA";
+  static const String getCurrencyAmount = "GET_CURRENCY_AMOUNT";
+  static const String getStripeCred = "GET_STRIPE_CRED";
   static dynamic getModelObjects(String modelName, dynamic json) {
     switch (modelName) {
       case error:
@@ -44,6 +48,10 @@ class ApiModels {
         return UserSummary.fromJson(json);
       case paymentAccount:
         return CustomerCred.fromJson(json);
+      case getCurrencyAmount:
+        return Currency.fromJson(json);
+      case getStripeCred:
+      return StripeCred.fromJson(json);
     }
   }
   static dynamic getListOfObjects(String modelName, dynamic json) {

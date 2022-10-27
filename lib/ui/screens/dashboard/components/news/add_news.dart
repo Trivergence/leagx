@@ -2,6 +2,7 @@ import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/util/ui/validation_helper.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
@@ -55,12 +56,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                   textController: _messageController,
                   inputAction: TextInputAction.newline,
                   maxLines: 10,
-                  validator: (text) {
-                    if (!ValidationUtils.isValid(text)) {
-                      return "Required";
-                    }
-                    return null;
-                  },
+                  validator: (text) => ValidationHelper.validateField(text),
                 ),
                 UIHelper.verticalSpace(15.0),
                  TextWidget(
@@ -108,7 +104,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
     if(payload != null) {
       setState(() {
         fixutrePayload = payload as Map<String, String>;
-        _searchController.text = fixutrePayload!["leagueTitle"]!;
+        _searchController.text = fixutrePayload!["vsTitle"]!;
       });
     }
   }

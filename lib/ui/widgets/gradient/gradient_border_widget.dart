@@ -6,9 +6,6 @@ import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-
-import '../../../constants/assets.dart';
 
 class GradientBorderWidget extends StatelessWidget {
   final double? width;

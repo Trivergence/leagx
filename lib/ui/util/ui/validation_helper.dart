@@ -26,6 +26,14 @@ class ValidationHelper {
     }
     return null;
   }
+  static String? validateAmount(String? text) {
+    if (text == null || text.isEmpty) {
+      return loc.errorRequired;
+    } else if(int.parse(text) < 50) {
+      return loc.errorWithdrawLimit;
+    }
+    return null;
+  }
   static String? validateField(String? text) {
     if (text == null || text.isEmpty) {
       return loc.errorRequired;

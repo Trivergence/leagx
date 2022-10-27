@@ -39,6 +39,7 @@ dependencies:
   awesome_dialog: ^3.0.2
   translator: ^0.1.7
   shimmer: ^2.0.0
+  webview_flutter: ^3.0.4
 
   payments:
     path: ./packages/payments

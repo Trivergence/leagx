@@ -8,6 +8,10 @@ class ApiModels {
   static const String getPaymentMethods = "GET_PAYMENT_METHODS";
   static const String createSetupIntent = "create_setup_intent";
   static const String createPaymentIntent = "create_payment_intent";
+  static const String createExpressAccount = "create_express_account";
+  static const String createAccountLink = "create_account_link";
+  static const String createTransfer = "create_transfer";
+  static const String createPayout = "create_payout";
   static const String error = "error";
 
   static dynamic getModelObjects(String modelName, dynamic json) {
@@ -20,8 +24,16 @@ class ApiModels {
         return PaymentMethods.fromJson(json);
       case createSetupIntent:
         return SetupIntent.fromJson(json);
-        case createPaymentIntent:
+      case createPaymentIntent:
         return PaymentIntent.fromJson(json);
+      case createExpressAccount:
+        return ExpressAccount.fromJson(json);
+      case createTransfer:
+        return Transfer.fromJson(json);
+      case createPayout:
+      return PayoutModel.fromJson(json);
+      case createAccountLink:
+        return AccountLink.fromJson(json);
     }
   }
 
