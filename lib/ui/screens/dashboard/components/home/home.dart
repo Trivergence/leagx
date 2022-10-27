@@ -36,44 +36,44 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
         children: [
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              gradient: AppColors.blackishGradient,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                 TextWidget(
-                  text: loc.dashboardHomeTxtLeaders,
-                  fontWeight: FontWeight.w700,
-                ),
-                UIHelper.verticalSpaceSmall,
-                SizedBox(
-                  height: 40.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: listOfLeaders.length,
-                    itemBuilder: (context, index) {
-                      Leader leader = listOfLeaders[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 20.0),
-                        child: GradientBorderWidget(
-                          width: 40.0,
-                          height: 40.0,
-                          isCircular: true,
-                          imageUrl: leader.profileImg,
-                          placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
-                          onPressed: () {},
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   padding: const EdgeInsets.all(16.0),
+          //   decoration: BoxDecoration(
+          //     gradient: AppColors.blackishGradient,
+          //   ),
+          //   child: Column(
+          //     mainAxisSize: MainAxisSize.min,
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //        TextWidget(
+          //         text: loc.dashboardHomeTxtLeaders,
+          //         fontWeight: FontWeight.w700,
+          //       ),
+          //       UIHelper.verticalSpaceSmall,
+          //       SizedBox(
+          //         height: 40.0,
+          //         child: ListView.builder(
+          //           scrollDirection: Axis.horizontal,
+          //           itemCount: listOfLeaders.length,
+          //           itemBuilder: (context, index) {
+          //             Leader leader = listOfLeaders[index];
+          //             return Padding(
+          //               padding: const EdgeInsets.only(right: 20.0),
+          //               child: GradientBorderWidget(
+          //                 width: 40.0,
+          //                 height: 40.0,
+          //                 isCircular: true,
+          //                 imageUrl: leader.profileImg,
+          //                 placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
+          //                 onPressed: () {},
+          //               ),
+          //             );
+          //           },
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16.0,
@@ -85,9 +85,12 @@ class HomeScreen extends StatelessWidget {
                   firstLabel: loc.dashboardHomeTxtPredictions,
                   firstValue: _userSummary!.totalPredictions.toString(),
                   secondLabel: loc.dashboardHomeTxtWiningRatio,
-                  secondValue: _userSummary!.predictionSuccessRate!.toStringAsFixed(1),
+                  secondValue: _userSummary!
+                      .predictionSuccessRate.toString() != "100.0" 
+                      ? _userSummary!.predictionSuccessRate!.toStringAsFixed(1) 
+                      : _userSummary!.predictionSuccessRate!.toStringAsFixed(0),
                   thirdLabel: loc.dashboardHomeTxtEarnedCoid,
-                  thirdValue: _userSummary!.coinEarned.toString(),
+                  thirdValue: _userSummary!.coinEarned!.round().toString(),
                 ),
                  TextWidget(
                   text: loc.dashboardHomeTxtUpcomingMatches,
