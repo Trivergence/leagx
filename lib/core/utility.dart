@@ -13,4 +13,15 @@ class Utility{
         return false;
       }
   }
+
+  static bool isTimeValid(String matchStatus) {
+    if(matchStatus == "Half Time") {
+      return false;
+    } else if(matchStatus.contains("+")) {
+      return false;
+    } else if (matchStatus.isEmpty) {
+      return false;
+    }
+    return true;
+  }
 }

@@ -67,7 +67,7 @@ class FixtureDetailViewModel extends BaseModel {
         "timezone": "Asia/Riyadh",
       });
       _matchDetails = tempList.cast<Fixture>();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
         setBusy(false);
     }
   }

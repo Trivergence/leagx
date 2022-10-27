@@ -1,3 +1,5 @@
+import 'dart:async' as MyAsync;
+
 import 'package:flutter/material.dart';
 
 import '../../../../constants/assets.dart';
@@ -31,10 +33,49 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
   String? matchStatus;
   bool isLoading = true;
 
-  @override
+  int hour = 0;
+  int minute = 0;
+  int seconds = 0;
+  String timeString = "--:--:--";
+  MyAsync.Timer? timer;
+
+    @override
   void initState() {
-    translateData();
     super.initState();
+    if (!Utility.isMatchOver(widget.matchDetails.matchStatus!) && Utility.isTimeValid(widget.matchDetails.matchStatus!)) {
+        minute = Utility.isMatchOver(widget.matchDetails.matchStatus!)
+            ? 0
+            : int.parse(widget.matchDetails.matchStatus!);
+          timer = MyAsync.Timer.periodic(
+            const Duration(seconds: 1),
+            (timer) {
+              setState(() {
+                seconds = seconds + 1;
+                if (seconds % 60 == 0) {
+                  seconds = 0;
+                  minute = minute + 1;
+                  if (minute % 60 == 0) {
+                    minute = 0;
+                    hour = hour + 1;
+                  }
+            }
+          
+            if (widget.matchDetails.matchLive == "1") {
+              String hrs = "0" + hour.toString();
+              String mts =
+                  minute < 10 ? "0" + minute.toString() : minute.toString();
+              String sds =
+                  seconds < 10 ? "0" + seconds.toString() : seconds.toString();
+              timeString = hrs + ":" + mts + ":" + sds;
+            }
+          });
+        },
+          );
+      } else {
+        timeString = widget.matchDetails.matchStatus!;
+      }
+
+    translateData();
   }
 
   @override
@@ -67,7 +108,7 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                           ),
                           UIHelper.verticalSpaceSmall,
                           TextWidget(
-                            text: matchStatus!,
+                            text: timeString,
                             color: AppColors.colorGrey,
                             textSize: Dimens.textSmall,
                           )
