@@ -71,17 +71,36 @@ class _FixtureScreenState extends State<FixtureScreen> {
                       },
                     ),
                   ),
-                  if (subscribedLeagues.isNotEmpty) Padding(
-                    padding: const EdgeInsets.only(right: 18.0),
-                    child: GradientBorderWidget(
-                      width: 40.0,
-                      height: 40.0,
-                      isCircular: true,
-                      //TODO localization
-                      text: "All",
-                      textSize: Dimens.textSmall,
-                      onPressed: showAll,
-                    ),
+                  if (subscribedLeagues.isNotEmpty) Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 18.0),
+                        child: GradientBorderWidget(
+                          width: 40.0,
+                          height: 40.0,
+                          isCircular: true,
+                          gradient: isFiltering ? AppColors.grayishGradient : AppColors.pinkishGradient ,
+                          text: loc.dashboardFixtureTxtAll,
+                          textSize: Dimens.textSmall,
+                          onPressed: () {},
+                        ),
+                      ),
+                      InkWell(
+                          onTap: showAll,
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 18),
+                            width: 40,
+                            height: 40,
+                            decoration: !isFiltering
+                                ? BoxDecoration(
+                                    color:
+                                        AppColors.colorYellow.withOpacity(0.3),
+                                    shape: BoxShape.circle,
+                                  )
+                                : null,
+                          ),
+                        ),
+                    ],
                   ),
                   if(subscribedLeagues.isNotEmpty) Expanded(
                     child: SizedBox(
@@ -102,6 +121,9 @@ class _FixtureScreenState extends State<FixtureScreen> {
                                   padding: const EdgeInsets.all(5.0),
                                   isCircular: true,
                                   imageUrl: subscribedLeagues[index].logo,
+                                  gradient: index != selectedIndex || !isFiltering
+                                        ? AppColors.grayishGradient
+                                        : AppColors.pinkishGradient,
                                   onPressed: () {
                                   },
                                 ),
