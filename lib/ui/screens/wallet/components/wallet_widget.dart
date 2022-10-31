@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/constants/enums.dart';
+import 'package:leagx/ui/util/app_dialogs/payout_dialog.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../models/user_summary.dart';
 import '../../../util/locale/localization.dart';
 import '../../../util/ui/ui_helper.dart';
+import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 
 class WalletWidget extends StatelessWidget {
-  const WalletWidget({
+ WalletWidget({
     Key? key,
     required this.userSummary,
   }) : super(key: key);
 
   final UserSummary? userSummary;
+  late BuildContext _context;
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
     return SizedBox(
       height: 200,
       child: Card(
@@ -43,13 +50,25 @@ class WalletWidget extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
               UIHelper.verticalSpaceMedium,
-              // MainButton(
-              //   width: 150,
-              //   text: "Add Funds", onPressed: () {})
+              MainButton(
+                width: 150,
+                text: "Add Coins", onPressed: _showDialog)
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _showDialog() {
+    FormDialog.show(
+      context: _context, 
+      type: DialogType.addCoins,
+      title: "Add Coins", 
+      body: "How many coins you want to add?", 
+      negativeBtnTitle: "Cancel", 
+      positiveBtnTitle: "Add", onPositiveBtnPressed: (coins) async {
+        await _context.read<WalletViewModel>().purchaseCoin(coins);
+      });
   }
 }

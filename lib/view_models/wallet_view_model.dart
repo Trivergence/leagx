@@ -13,6 +13,7 @@ import 'package:payments/payments.dart' hide ApiModels, ApiService;
 
 import '../core/network/api/api_models.dart';
 import '../core/network/api/api_service.dart';
+import '../core/sharedpref/sharedpref.dart';
 import '../core/viewmodels/base_model.dart';
 import '../models/customer_cred.dart';
 import '../models/user/user.dart';
@@ -234,6 +235,45 @@ class WalletViewModel extends BaseModel {
         locator<PaymentConfig>().setCustomerCred = customerCred;
       }
     }
+  }
+
+  Future<bool> purchaseCoin(String numOfCoins) async {
+    bool success = false;
+    if (_paymentMethods.isEmpty) {
+      success =
+          await purchaseIndirectly(amount: numOfCoins, currency: "usd");
+    } else {
+      success =
+          await purchaseDirectly(amount: numOfCoins, currency: "usd");
+    }
+    if(success == true) {
+      success = await addCoins(amountInDollars: numOfCoins);
+    }
+    return success;
+  }
+
+  Future<bool> addCoins({
+    required String amountInDollars,
+    String? payInToken,
+  }) async {
+    bool success = false;
+    User? user = preferenceHelper.getUser();
+    CustomerCred? customerCred = locator<PaymentConfig>().getCustomerCred;
+    if (user != null && customerCred != null) {
+      success =
+          await ApiService.postWoResponce(url: AppUrl.addPaymentToken, body: {
+        "payment": {
+          "user_id": user.id,
+          "payment_account_id": customerCred.id,
+          "payment_token": payInToken,
+          "payment_type": "StripePayIn",
+          "amount": amountInDollars
+        }
+      });
+    } else {
+      ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.msg);
+    }
+    return success;
   }
 
   clearData() => _paymentMethods = [];

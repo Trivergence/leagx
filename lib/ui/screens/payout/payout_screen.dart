@@ -19,6 +19,7 @@ import 'package:payments/models/express_account.dart';
 import 'package:payments/models/payout_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/enums.dart';
 import '../../../core/network/internet_info.dart';
 import '../../widgets/text_widget.dart';
 import 'components/bank_info.dart';
@@ -109,7 +110,9 @@ class PayoutScreen extends StatelessWidget {
   }
 
   void _withdraw() async {
-    PayoutDialog.show(context: _context!, 
+    FormDialog.show(
+    context: _context!, 
+    type: DialogType.payout,
     title: loc.payoutDialogTitle, 
     body: loc.payoutDialogBody,
     negativeBtnTitle: loc.payoutDialogBtnNegative, 
