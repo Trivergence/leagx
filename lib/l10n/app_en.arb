@@ -72,6 +72,9 @@
 	"authResetPasswordTxtPassword": "Password",
 	"authResetPasswordTxtConfirmPassword": "Confirm Password",
 	"authResetPasswordBtnResetPassword": "Reset Password",
+	"authResetPasswordSuccessfull": "Password changed successfully",
+	"authResetPasswordSameMsg": "Passwords must be same",
+
 	"authTxtDontHaveAccount": "Don't have an account? ",
 
 	"chooseAnExpertTxtChooseAnExpert": "Choose an Expert",
@@ -107,8 +110,9 @@
 	"dashboardBtnSetting": "My Profile",
 
 	"dashboardFixtureTxtLeagues": "Leagues",
+	"dashboardFixtureTxtAll": "All",
 	"dashboardFixtureTxtUpcomingMatches": "Upcoming Matches",
-	"dashboardFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
+	"dashboardFixtureTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
 
 	"dashboardHomeTxtLeaders": "Experts",
 	"dashboardHomeTxtAnalytics": "My Stats",

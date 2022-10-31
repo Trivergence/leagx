@@ -49,6 +49,8 @@
 	"authResetPasswordTxtCheckEmailDes": "تحقق من بريدك الإلكتروني أو رقم هاتفك لاسترداد كلمة المرور الخاصة بك.",
 	"authResetPasswordTxtConfirmPassword": "تأكيد كلمة المرور",
 	"authResetPasswordTxtPassword": "كلمه السر",
+	"authResetPasswordSuccessfull": "تم تغيير الرقم السري بنجاح",
+	"authResetPasswordSameMsg": "يجب أن تكون كلمات المرور هي نفسها",
 	"authResetPasswordTxtResetPassword": "إعادة تعيين كلمة المرور",
 
 	"authSigninBtnForgotPassword": "هل نسيت كلمة المرور ؟",
@@ -96,7 +98,9 @@
 	"dashboardBtnLeader": "الخبراء",
 	"dashboardBtnNews": "التحليلات",
 	"dashboardBtnSetting": "ملفي",
+
 	"dashboardFixtureTxtLeagues": "الدوريات",
+	"dashboardFixtureTxtAll": "الجميع",
 	"dashboardFixtureTxtUpcomingMatches": "المباريات القادمة",
 	"dashboardFixtureTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
 

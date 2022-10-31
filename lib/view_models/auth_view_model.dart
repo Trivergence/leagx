@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:leagx/constants/enums.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/api/api_service.dart';
@@ -8,8 +9,12 @@ import 'package:leagx/models/auth/signin.dart';
 import 'package:leagx/models/auth/signup.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/entity/user.dart' as twitter;
+
+import '../ui/util/validation/validation_utils.dart';
 
 class AuthViewModel {
   static Future<User?>? signup({
@@ -120,5 +125,34 @@ class AuthViewModel {
       },
       modelName: ApiModels.forgotPassword,
     );
+  }
+
+  static Future<bool> changePassword({
+    required String password,
+  }) async {
+    User? user = preferenceHelper.getUser();
+    if(user != null) {
+      String completeUrl = AppUrl.getUser + user.id.toString();
+      FormData formData = FormData.fromMap({
+        "user[password]": password,
+        "user[password_confirmation]": password
+      });
+      User? userData =  await ApiService.callPutApi(
+        url: completeUrl,
+        body: formData,
+        modelName: ApiModels.user,
+      );
+      if(userData != null) {
+          preferenceHelper.saveAuthToken(userData.apiToken);
+          preferenceHelper.saveUser(userData);
+          ToastMessage.show(
+              loc.authResetPasswordSuccessfull, TOAST_TYPE.success);
+        return true;
+      }
+      return false;
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+      return false;
+    }
   }
 }
