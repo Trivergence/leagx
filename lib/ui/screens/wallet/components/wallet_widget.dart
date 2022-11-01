@@ -52,7 +52,7 @@ class WalletWidget extends StatelessWidget {
               UIHelper.verticalSpaceMedium,
               MainButton(
                 width: 150,
-                text: "Add Coins", onPressed: _showDialog)
+                text: loc.walletBtnAddCoins, onPressed: _showDialog)
             ],
           ),
         ),
@@ -64,10 +64,11 @@ class WalletWidget extends StatelessWidget {
     FormDialog.show(
       context: _context, 
       type: DialogType.addCoins,
-      title: "Add Coins", 
-      body: "How many coins you want to add?", 
-      negativeBtnTitle: "Cancel", 
-      positiveBtnTitle: "Add", onPositiveBtnPressed: (coins) async {
+      title: loc.walletAddCoinDialogTitle,
+      body: loc.walletAddCoinDialogBody,
+      negativeBtnTitle: loc.walletAddCoinDialogBtnNegative, 
+      positiveBtnTitle: loc.walletAddCoinDialogBtnPositive, 
+      onPositiveBtnPressed: (coins) async {
         await _context.read<WalletViewModel>().purchaseCoin(coins);
       });
   }

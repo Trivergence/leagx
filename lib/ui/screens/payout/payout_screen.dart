@@ -120,7 +120,6 @@ class PayoutScreen extends StatelessWidget {
     onPositiveBtnPressed: (amount) async {
       bool isConnected = await InternetInfo.isConnected();
       if(isConnected) {
-        // if (double.parse(amount) <= double.parse(userSummary!.coinEarned.toString())) {
         if (double.parse(amount).round() <= userSummary!.coinEarned!.round() ) {
           Loader.showLoader();
           bool isTransfered = await _payoutViewModel!.transferToUser(amount);
@@ -144,13 +143,9 @@ class PayoutScreen extends StatelessWidget {
           } else {
             Loader.hideLoader();
           }
-          //TODO localization
           } else {
-            ToastMessage.show("You don't have enough coins", TOAST_TYPE.error);
+            ToastMessage.show(loc.payoutTxtLessCoins, TOAST_TYPE.error);
           }
-      // } else {
-      //   ToastMessage.show("You don't have enough coins", TOAST_TYPE.msg);
-      // }
       }
      }
     );
