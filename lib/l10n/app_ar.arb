@@ -86,10 +86,14 @@
 	"chooseLeagueTxtSearch": "بحث",
 
 	"choosePlanTxtChooseAPlan": "اختر الباقة",
-	"choosePlanDialogSuccessTitle": "",
-	"choosePlanDialogSuccessDesc": "",
+	"choosePlanDialogSelectPayment": "اختار طريقة الدفع",
+	"choosePlanDialogSelectCard": "بطاقة",
+	"choosePlanDialogSelectWallet": "محفظة",
+	"choosePlanDialogBtnNegative": "يلغي",
+	"choosePlanDialogBtnPositive": "يختار",
+	"choosePlanDialogSuccessTitle": "تم الشراء بنجاح",
+	"choosePlanDialogSuccessDesc": "لقد نجحت في الاشتراك في الحزمة",
 
-	
 	"chooseFixtureTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
 	"chooseFixtureTxtTitle": "اختر تطابق",
 

@@ -1,6 +1,7 @@
 enum UserType { user, expert, admin }
 enum AuthType { apple, twitter, local}
 enum DialogType { payout, addCoins }
+enum PaymentType { wallet, card }
 // enum ImageTpye { 
 //  profileMale,
 //  profileFemale, 

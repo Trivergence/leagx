@@ -47,7 +47,7 @@ class SubscriptionViewModel extends BaseModel {
     try {
       await dashBoardViewModel.getSubscribedLeagues();
       await dashBoardViewModel.getSubscribedMatches();
-      dashBoardViewModel.notify();
+      await dashBoardViewModel.getUserSummary();
       setBusy(false);
       await dashBoardViewModel.getAllNews();
       dashBoardViewModel.notify();
@@ -56,7 +56,7 @@ class SubscriptionViewModel extends BaseModel {
     }
   }
 
-  subscribeLeague(
+  subscribeLeagueByCard(
       {required BuildContext context,
       required int planId,
       required String leagueId,
@@ -82,6 +82,49 @@ class SubscriptionViewModel extends BaseModel {
           description: loc.choosePlanDialogSuccessDesc,
           onOkPressed: () {
             loadData(context); 
+            Navigator.of(context).popUntil((route) {
+              return route.settings.name == Routes.chooseLeague;
+            });
+          },
+        );
+      } else {
+        Loader.hideLoader();
+      }
+    } else {
+      Loader.hideLoader();
+    }
+  }
+
+  subscribeLeagueByCoin(
+      {required BuildContext context,
+      required int planId,
+      required String leagueId,
+      required String leagueTitle,
+      required String leagueImg,
+      required String price}) async {
+    Loader.showLoader();
+    User? user = locator<SharedPreferenceHelper>().getUser();
+    if (user != null) {
+      Map<String, dynamic> body = {
+        "user_id": user.id,
+        "plan_id": planId,
+        "pay_by_wallet": true,
+        "league": {
+          "title": leagueTitle,
+          "logo": leagueImg,
+          "external_league_id": int.parse(leagueId)
+        }
+      };
+      bool success = await ApiService.postWoResponce(
+          url: AppUrl.subscribeLeague, body: body);
+      if (success == true) {
+        Loader.hideLoader();
+        FancyDialog.showSuccess(
+          context: context,
+          title: loc.choosePlanDialogSuccessTitle,
+          description: loc.choosePlanDialogSuccessDesc,
+          onOkPressed: () {
+            loadData(context);
             Navigator.of(context).popUntil((route) {
               return route.settings.name == Routes.chooseLeague;
             });

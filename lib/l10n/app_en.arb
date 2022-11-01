@@ -88,6 +88,11 @@
 
 	"choosePlanTxtChooseAPlan": "Choose a Package",
 	"choosePlanDialogSuccessTitle": "Purchase Successful",
+	"choosePlanDialogSelectPayment": "Select Payment Method",
+	"choosePlanDialogSelectCard": "Card",
+	"choosePlanDialogSelectWallet": "Wallet",
+	"choosePlanDialogBtnNegative": "Cancel",
+	"choosePlanDialogBtnPositive": "Select",
 	"choosePlanDialogSuccessDesc": "You have succesfully subscribed the package",
 
 	"chooseFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
