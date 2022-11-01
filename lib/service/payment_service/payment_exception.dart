@@ -98,6 +98,9 @@ class PaymentExceptions {
       case "url_invalid":
         message = loc.errorStripeUrlInvalid;
         break;
+      case "country_unsupported":
+        message = loc.errorStripeCountryUnsupported;
+        break;
       default:
       message = loc.errorTryAgain;
     }
