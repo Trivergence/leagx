@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/enums.dart';
 import 'package:leagx/ui/util/app_dialogs/payout_dialog.dart';
+import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +71,12 @@ class WalletWidget extends StatelessWidget {
       negativeBtnTitle: loc.walletAddCoinDialogBtnNegative, 
       positiveBtnTitle: loc.walletAddCoinDialogBtnPositive, 
       onPositiveBtnPressed: (coins) async {
-        await _context.read<WalletViewModel>().purchaseCoin(coins);
+        Loader.showLoader();
+        bool success = await _context.read<WalletViewModel>().purchaseCoin(coins);
+        if(success == true) {
+          await _context.read<DashBoardViewModel>().getUserSummary();
+        }
+        Loader.hideLoader();
       });
   }
 }
