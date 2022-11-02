@@ -206,11 +206,18 @@ class _FixtureWidgetState extends State<FixtureWidget> {
   }
 
   Future<void> translateData() async {
-      translatedLeagueName = await TranslationUtility.translate(widget.leagueName);
-      translatedStatus =
-        await TranslationUtility.translate(widget.matchStatus!);
-        teamOneName = await TranslationUtility.translate(widget.teamOneName);
-        teamTwoName = await TranslationUtility.translate(widget.teamTwoName);
+      String originalCommaText = widget.leagueName + ',' + widget.teamOneName + ',' + widget.teamTwoName + "," + widget.matchStatus!;
+      String translatedCommaText = await TranslationUtility.translate(originalCommaText);
+      List<String> listOfValues = [];
+      if(translatedCommaText.contains("،")) {
+         listOfValues = translatedCommaText.split("،");
+      } else {
+        listOfValues = translatedCommaText.split(",");
+      }
+        translatedLeagueName = listOfValues[0];
+        teamOneName = listOfValues[1];
+        teamTwoName = listOfValues[2];
+        translatedStatus = widget.matchStatus!.isNotEmpty ? listOfValues[3] : widget.matchStatus;
         isLoading = false;
       setState(() {});
   }
