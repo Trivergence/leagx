@@ -57,7 +57,6 @@ class WalletScreen extends StatelessWidget {
             if(walletModel.getPayementMethods.isNotEmpty) TextWidget(text: loc.walletTxtAttachedCard, textSize: 27,
             fontWeight: FontWeight.w700),
             UIHelper.verticalSpaceSmall,
-            //if(walletModel.getPayementMethods.isEmpty) const TextWidget(text: "No card added yet"),
             UIHelper.verticalSpaceSmall,
             walletModel.getPayementMethods.isEmpty 
             ? MainButton(text: loc.walletBtnaddMethod, onPressed: _addPaymentMethod)

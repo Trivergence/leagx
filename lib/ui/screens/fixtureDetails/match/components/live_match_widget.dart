@@ -6,6 +6,7 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
+import 'package:leagx/ui/widgets/ai_widgets/ai_widgets.dart' as MainWidget;
 import 'package:provider/provider.dart';
 
 import '../../../../../constants/assets.dart';
@@ -30,6 +31,7 @@ class LiveMatchWidget extends StatelessWidget {
     statistics = matchDetails.statistics;
     return Column(
       children: [
+        matchDetails.matchLive == "1" ? MainWidget.Animation():
         Image.asset(
           Assets.stadiumImage,
           width: SizeConfig.width * 100,

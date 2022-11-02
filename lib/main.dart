@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:country_codes/country_codes.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:leagx/core/network/config/environment.dart';
 import 'package:leagx/providers/localization_provider.dart';
@@ -31,7 +32,8 @@ void main() async {
     await setPreferredOrientations();
     final prefs = await SharedPreferences.getInstance();
     await setupLocator();
-
+    await CountryCodes.init();
+    
     runApp(
       LayoutBuilder(
         builder: (context, constraints) => OrientationBuilder(

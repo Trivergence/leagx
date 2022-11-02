@@ -1,4 +1,5 @@
 import 'package:leagx/core/sharedpref/sharedpref.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/currency.dart';
 import 'package:leagx/service/payment_service/payment_exception.dart';
@@ -35,14 +36,17 @@ class PayoutViewModel extends BaseModel{
   Future<void> createAccount() async {
     CustomerCred? customerCred = locator<PaymentConfig>().getCustomerCred;
     if( customerCred != null && locator<PaymentConfig>().getAccountId == null) {
-      Result<String?, ExpressAccount> result =
-          await PayOut.createExpressAccount();
-      result.when(
-          (errorCode) =>
-              PaymentExceptions.handleException(errorCode: errorCode!),
-          (expressAccount) async {
-            await updateAccountId(accountId: expressAccount.id);
-      });
+      String? countryCode = Utility.getCountryCode();
+      if (countryCode != null) {
+        Result<String?, ExpressAccount> result =
+            await PayOut.createExpressAccount(countryCode: countryCode);
+        result.when(
+            (errorCode) =>
+                PaymentExceptions.handleException(errorCode: errorCode!),
+            (expressAccount) async {
+              await updateAccountId(accountId: expressAccount.id);
+        });
+      }
     }
   }
 

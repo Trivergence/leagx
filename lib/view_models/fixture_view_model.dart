@@ -13,6 +13,7 @@ import '../constants/colors.dart';
 import '../core/network/api/api_models.dart';
 import '../core/network/api/api_service.dart';
 import '../core/network/app_url.dart';
+import '../core/utility.dart';
 import '../core/viewmodels/base_model.dart';
 import '../models/dashboard/fixture.dart';
 import '../models/user/user.dart';
@@ -55,6 +56,7 @@ class FixtureDetailViewModel extends BaseModel {
   Future<void> getMatchDetails(String matchId) async {
     try {
       DateTime now = DateTime.now();
+      String currentTimeZone = await Utility.getTzName();
       List<dynamic> tempList = await ApiService.getListRequest(
         baseUrl: AppUrl.footballBaseUrl,
         modelName: ApiModels.upcomingMatches,
@@ -64,10 +66,10 @@ class FixtureDetailViewModel extends BaseModel {
         "match_id": matchId,
         "from": "2022-01-01",
         "to": "2022-12-30",
-        "timezone": "Asia/Riyadh",
+        "timezone": currentTimeZone,
       });
       _matchDetails = tempList.cast<Fixture>();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
         setBusy(false);
     }
   }

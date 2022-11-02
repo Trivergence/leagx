@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/api/api_service.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/subscribed_league.dart';
@@ -61,14 +62,14 @@ class DashBoardViewModel extends BaseModel {
     if (subscribedLeagueIds.isNotEmpty) {
       try {
         DateTime now = DateTime.now();
-        //TODO make dynamic timezone
+        String currentTimeZone = await Utility.getTzName();
         List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.footballBaseUrl,
           modelName: ApiModels.upcomingMatches,
           parameters: {
             "APIkey": AppConstants.footballApiKey,
             "action": "get_events",
-            "timezone": "Asia/Riyadh",
+            "timezone": currentTimeZone,
             "league_id": subscribedLeagueIds.join(","),
             "from": "2022-01-01",
             "to": "2022-12-30",

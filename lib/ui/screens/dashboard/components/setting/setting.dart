@@ -11,6 +11,10 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../models/user_summary.dart';
+import '../../../../../view_models/dashboard_view_model.dart';
+import '../home/components/analytics_widget.dart';
+
 class SettingScreen extends StatefulWidget {
   SettingScreen({Key? key}) : super(key: key);
 
@@ -20,9 +24,12 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   bool _switchValue = false;
+  UserSummary? _userSummary;
 
   @override
   Widget build(BuildContext context) {
+    _userSummary = context.select<DashBoardViewModel, UserSummary?>(
+        (dasboardModel) => dasboardModel.userSummary);
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(
         horizontal: 15.0,
@@ -30,7 +37,18 @@ class _SettingScreenState extends State<SettingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          UIHelper.verticalSpace(30.0),
+          if (_userSummary != null)
+            AnalyticsWidget(
+              firstLabel: loc.dashboardHomeTxtPredictions,
+              firstValue: _userSummary!.totalPredictions.toString(),
+              secondLabel: loc.dashboardHomeTxtWiningRatio,
+              secondValue:
+                  _userSummary!.predictionSuccessRate.toString() != "100.0"
+                      ? _userSummary!.predictionSuccessRate!.toStringAsFixed(1)
+                      : _userSummary!.predictionSuccessRate!.toStringAsFixed(0),
+              thirdLabel: loc.dashboardHomeTxtEarnedCoid,
+              thirdValue: _userSummary!.coinEarned!.round().toString(),
+            ),
           SettingsTile(
             onTap: () {
               Navigator.pushNamed(context, Routes.profileSettings);

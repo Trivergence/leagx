@@ -5,7 +5,7 @@ import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
-import 'package:leagx/ui/util/app_dialogs/payout_dialog.dart';
+import 'package:leagx/ui/util/app_dialogs/form_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
@@ -19,6 +19,7 @@ import 'package:payments/models/express_account.dart';
 import 'package:payments/models/payout_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/enums.dart';
 import '../../../core/network/internet_info.dart';
 import '../../widgets/text_widget.dart';
 import 'components/bank_info.dart';
@@ -38,7 +39,6 @@ class PayoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBarWidget(title: loc.payoutTxtPayout),
       body: BaseWidget<PayoutViewModel>(
@@ -110,17 +110,19 @@ class PayoutScreen extends StatelessWidget {
   }
 
   void _withdraw() async {
-    PayoutDialog.show(context: _context!, 
+    FormDialog.show(
+    context: _context!, 
+    type: DialogType.payout,
     title: loc.payoutDialogTitle, 
-    body: loc.payoutDialogBody, 
+    body: loc.payoutDialogBody,
     negativeBtnTitle: loc.payoutDialogBtnNegative, 
     positiveBtnTitle: loc.payoutDialogBtnPositive, 
     onPositiveBtnPressed: (amount) async {
       bool isConnected = await InternetInfo.isConnected();
       if(isConnected) {
-        // if (double.parse(amount) <= double.parse(userSummary!.coinEarned.toString())) {
-        Loader.showLoader();
-        bool isTransfered = await _payoutViewModel!.transferToUser(amount);
+        if (double.parse(amount).round() <= userSummary!.coinEarned!.round() ) {
+          Loader.showLoader();
+          bool isTransfered = await _payoutViewModel!.transferToUser(amount);
           if (isTransfered == true) {
             PayoutModel? payoutModel = await _payoutViewModel!.payoutMoney(amount, currency!, listOfExtAccounts.first.id!);
             if(payoutModel != null) {
@@ -139,13 +141,12 @@ class PayoutScreen extends StatelessWidget {
               Loader.hideLoader();
             }
           } else {
-           Loader.hideLoader();
+            Loader.hideLoader();
           }
-      // } else {
-      //   ToastMessage.show("You don't have enough coins", TOAST_TYPE.msg);
-      // }
+          } else {
+            ToastMessage.show(loc.payoutTxtLessCoins, TOAST_TYPE.error);
+          }
       }
-      
      }
     );
   }

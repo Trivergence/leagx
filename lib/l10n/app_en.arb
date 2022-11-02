@@ -72,6 +72,9 @@
 	"authResetPasswordTxtPassword": "Password",
 	"authResetPasswordTxtConfirmPassword": "Confirm Password",
 	"authResetPasswordBtnResetPassword": "Reset Password",
+	"authResetPasswordSuccessfull": "Password changed successfully",
+	"authResetPasswordSameMsg": "Passwords must be same",
+
 	"authTxtDontHaveAccount": "Don't have an account? ",
 
 	"chooseAnExpertTxtChooseAnExpert": "Choose an Expert",
@@ -85,6 +88,11 @@
 
 	"choosePlanTxtChooseAPlan": "Choose a Package",
 	"choosePlanDialogSuccessTitle": "Purchase Successful",
+	"choosePlanDialogSelectPayment": "Select Payment Method",
+	"choosePlanDialogSelectCard": "Card",
+	"choosePlanDialogSelectWallet": "Wallet",
+	"choosePlanDialogBtnNegative": "Cancel",
+	"choosePlanDialogBtnPositive": "Select",
 	"choosePlanDialogSuccessDesc": "You have succesfully subscribed the package",
 
 	"chooseFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
@@ -104,11 +112,12 @@
 	"dashboardBtnFixture": "Matches",
 	"dashboardBtnLeader": "Experts",
 	"dashboardBtnNews": "Analytics",
-	"dashboardBtnSetting": "Setting",
+	"dashboardBtnSetting": "My Profile",
 
 	"dashboardFixtureTxtLeagues": "Leagues",
+	"dashboardFixtureTxtAll": "All",
 	"dashboardFixtureTxtUpcomingMatches": "Upcoming Matches",
-	"dashboardFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
+	"dashboardFixtureTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
 
 	"dashboardHomeTxtLeaders": "Experts",
 	"dashboardHomeTxtAnalytics": "My Stats",
@@ -240,6 +249,7 @@
 
 	"walletTxtWallet": "Wallet",
 	"walletTxtTotalCoins": "Total Coins",
+	"walletBtnAddCoins": "Add Coins",
 	"walletTxtAttachedCard": "Attached Card",
 	"walletBtnaddMethod": "Add Payment Method",
 	"walletBtnPayout": "Payout",
@@ -248,11 +258,16 @@
 	"walletRemoveDialogBody": "Are you sure you want to remove this card?",
 	"walletRemoveDialogBtnNegative": "No",
 	"walletRemoveDialogBtnPositive": "Yes",
+	"walletAddCoinDialogTitle": "Add Coins",
+	"walletAddCoinDialogBody": "How many coins you want to add?",
+	"walletAddCoinDialogBtnNegative": "Cancel",
+	"walletAddCoinDialogBtnPositive": "Add",
 
 	"payoutTxtPayout": "Payout",
 	"payoutTxtTotalAmount": "Total Amount",
 	"payoutBtnWithdraw": "Withdraw",
 	"payoutTxtAttachedBank": "Attached Bank",
+	"payoutTxtLessCoins": "You don't have enough coins",
 	"payoutBtnAddBank": "Add Bank",
 	"payoutDialogTitle": "Withdraw",
 	"payoutDialogBody": "Enter required amount",
