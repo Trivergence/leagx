@@ -5,7 +5,7 @@ import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
-import 'package:leagx/ui/util/app_dialogs/payout_dialog.dart';
+import 'package:leagx/ui/util/app_dialogs/form_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';

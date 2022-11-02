@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/enums.dart';
-import 'package:leagx/ui/util/app_dialogs/payout_dialog.dart';
+import 'package:leagx/ui/util/app_dialogs/form_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
