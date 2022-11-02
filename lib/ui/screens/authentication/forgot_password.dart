@@ -6,6 +6,7 @@ import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/util/ui/validation_helper.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
@@ -14,6 +15,8 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
+
+import '../../../core/network/internet_info.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -55,31 +58,28 @@ class ForgotPasswordScreen extends StatelessWidget {
                 prefix: const IconWidget(
                   iconData: Icons.drafts_outlined,
                 ),
-                validator: (value) {
-                  if (!ValidationUtils.isValid(value)) {
-                    return loc.authForgotPasswordTxtRequired;
-                  } else {
-                    return ValidationUtils.email(
-                        value!, loc.authForgotPasswordTxtValidEmail);
-                  }
-                },
+                validator: (value) => ValidationHelper.validateEmail(value),
+                inputType: TextInputType.emailAddress,
               ),
             ),
             UIHelper.verticalSpaceLarge,
             MainButton(
               text: loc.authForgotPasswordBtnResetPassword,
               onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  Loader.showLoader();
-                  ForgotPassword? forgotPasswordResponse =
-                      await AuthViewModel.forgotPassword(
-                    email: _emailController.text,
-                  );
-                  Loader.hideLoader();
-                  if (ValidationUtils.isValid(forgotPasswordResponse)) {
-                    ToastMessage.show(
-                        forgotPasswordResponse!.success!, TOAST_TYPE.msg);
-                    Navigator.pushReplacementNamed(context, Routes.signin);
+                bool isConnected = await InternetInfo.isConnected();
+                if (isConnected) {
+                  if (_formKey.currentState!.validate()) {
+                    Loader.showLoader();
+                    ForgotPassword? forgotPasswordResponse =
+                        await AuthViewModel.forgotPassword(
+                      email: _emailController.text,
+                    );
+                    Loader.hideLoader();
+                    if (ValidationUtils.isValid(forgotPasswordResponse)) {
+                      ToastMessage.show(
+                          forgotPasswordResponse!.success!, TOAST_TYPE.msg);
+                      Navigator.pushReplacementNamed(context, Routes.signin);
+                    }
                   }
                 }
               },

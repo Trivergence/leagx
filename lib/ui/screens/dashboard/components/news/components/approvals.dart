@@ -18,7 +18,7 @@ class Approvals extends StatelessWidget {
               isApproval: true,
               imageUrl: Strings().placeHolderUrl,
               postedBy: 'James FC',
-              when: '1 min ago',
+              when: DateTime(2022),
               desc:
                   'FIFA’s iconic competitions inspire billions of football fans and provide opportunities to have a wider positive social and environmental impact. By the global nature of the tournaments it ...',
             );

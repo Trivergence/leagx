@@ -9,6 +9,8 @@ class LocalizationProvider extends ChangeNotifier {
   late Locale _locale;
   LocalizationProvider({required this.preferences});
 
+  Locale get getLocale => _locale;
+
   init() async {
     if (ValidationUtils.isValid(
         SharedPreferenceHelper(preferences).currentLanguage)) {

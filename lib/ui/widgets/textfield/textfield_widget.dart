@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/font_family.dart';
@@ -26,6 +27,7 @@ class TextFieldWidget extends StatelessWidget {
   final bool? readOnly;
   final VoidCallback? onTap;
   final int? maxLines;
+  final List<TextInputFormatter>? listOfFormaters;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class TextFieldWidget extends StatelessWidget {
       enabled: enabled,
       readOnly: readOnly!,
       keyboardType: inputType,
+      inputFormatters: listOfFormaters,
       style: Theme.of(context)
           .textTheme
           .bodyText1!
@@ -116,7 +119,8 @@ class TextFieldWidget extends StatelessWidget {
     this.enabled = true,
     this.readOnly = false,
     this.onTap,
-    this.maxLines = 1,
+    this.maxLines = 1, 
+    this.listOfFormaters,
   }) : super(key: key);
 
   //Styles

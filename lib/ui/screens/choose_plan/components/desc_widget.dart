@@ -2,17 +2,16 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:flutter/material.dart';
 
 import '../../../util/ui/ui_helper.dart';
-import '../../../util/ui_model/subscription_plan.dart';
 import '../../../widgets/gradient/gradient_widget.dart';
 import '../../../widgets/text_widget.dart';
 
 class DescWidget extends StatelessWidget {
   final String text;
-  final int index;
+  final Gradient gradient;
   const DescWidget({
     Key? key,
     required this.text,
-    required this.index,
+    required this.gradient,
   }) : super(key: key);
 
   @override
@@ -22,7 +21,7 @@ class DescWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         GradientWidget(
-            gradient: listOfPlans[index].gradient!,
+            gradient: gradient,
             child: const Icon(
               Icons.done,
               size: 14,

@@ -3,9 +3,9 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class GradientBorderWidget extends StatelessWidget {
   final double? width;
@@ -19,6 +19,7 @@ class GradientBorderWidget extends StatelessWidget {
   final double? iconSize;
   final String? imageUrl;
   final String? imageAsset;
+  final String? placeHolderImg;
   final EdgeInsetsGeometry? padding;
   const GradientBorderWidget({
     Key? key,
@@ -33,7 +34,7 @@ class GradientBorderWidget extends StatelessWidget {
     this.iconSize,
     this.imageUrl,
     this.imageAsset,
-    this.padding,
+    this.padding, this.placeHolderImg,
   }) : super(key: key);
 
   @override
@@ -63,11 +64,9 @@ class GradientBorderWidget extends StatelessWidget {
                   size: iconSize,
                 )
               : imageUrl != null
-                  ? CachedNetworkImage(
+                  ? ImageWidget(
                       imageUrl: imageUrl!,
-                      fit: BoxFit.fill,
-                      height: height,
-                      width: width,
+                      placeholder: placeHolderImg ?? ''
                     )
                   : text != null
                       ? Center(
