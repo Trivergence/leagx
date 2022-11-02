@@ -62,10 +62,19 @@ class _MatchPredictionTileState extends State<MatchPredictionTile> {
   }
 
   Future<void> translateData() async {
-     awayTeamName = await TranslationUtility.translate(
-        widget.awayTeamName!);
-     homeTeamName = await TranslationUtility.translate(
-        widget.homeTeamName!);
+    String originalCommaText = widget.awayTeamName! +
+        ',' +
+        widget.homeTeamName!;
+    String translatedCommaText =
+        await TranslationUtility.translate(originalCommaText);
+    List<String> listOfValues = [];
+    if (translatedCommaText.contains("،")) {
+      listOfValues = translatedCommaText.split("،");
+    } else {
+      listOfValues = translatedCommaText.split(",");
+    }
+     awayTeamName = listOfValues[0];
+     homeTeamName = listOfValues[1];
     isLoading = false;
     setState(() {});
   }

@@ -117,10 +117,17 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
   }
 
   Future<void> translateData() async {
-    homeName = await TranslationUtility.translate(
-        widget.homeTeamName);
-    awayName = await TranslationUtility.translate(
-        widget.awayTeamName);
+    String originalCommaText = widget.homeTeamName + ',' + widget.awayTeamName;
+    String translatedCommaText =
+        await TranslationUtility.translate(originalCommaText);
+    List<String> listOfValues = [];
+    if (translatedCommaText.contains("،")) {
+      listOfValues = translatedCommaText.split("،");
+    } else {
+      listOfValues = translatedCommaText.split(",");
+    }
+    homeName = listOfValues[0];
+    awayName = listOfValues[1];
     isLoading = false;
     setState(() {});
   }

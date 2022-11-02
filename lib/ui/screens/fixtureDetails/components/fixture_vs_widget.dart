@@ -108,7 +108,8 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                           ),
                           UIHelper.verticalSpaceSmall,
                           TextWidget(
-                            text: timeString,
+                            text: !Utility.isMatchOver(widget.matchDetails.matchStatus!) && Utility.isTimeValid(widget.matchDetails.matchStatus!)
+                            ? timeString : matchStatus!,
                             color: AppColors.colorGrey,
                             textSize: Dimens.textSmall,
                           )
@@ -143,12 +144,20 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
   }
 
   Future<void> translateData() async {
-    awayTeamName = await TranslationUtility.translate(
-        widget.matchDetails.matchAwayteamName);
-    homeTeamName = await TranslationUtility.translate(
-        widget.matchDetails.matchHometeamName);
-    matchStatus = await TranslationUtility.translate(
-        widget.matchDetails.matchStatus!);
+    String originalCommaText = widget.matchDetails.matchAwayteamName + 
+      "," + widget.matchDetails.matchHometeamName +
+      "," + widget.matchDetails.matchStatus!;
+    String translatedCommaText =
+        await TranslationUtility.translate(originalCommaText);
+    List<String> listOfValues = [];
+    if (translatedCommaText.contains("،")) {
+      listOfValues = translatedCommaText.split("،");
+    } else {
+      listOfValues = translatedCommaText.split(",");
+    }
+    awayTeamName = listOfValues[0];
+    homeTeamName = listOfValues[1];
+    matchStatus = widget.matchDetails.matchStatus!.isNotEmpty ? listOfValues[2] : widget.matchDetails.matchStatus!;
     isLoading = false;
     setState(() {});
   }

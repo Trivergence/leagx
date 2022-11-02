@@ -106,8 +106,16 @@ class _NewsTileState extends State<NewsTile> {
   }
 
   Future<void> translateData() async {
-    desc = await TranslationUtility.translateWoFrom(widget.desc);
-    postedBy = await TranslationUtility.translateWoFrom(widget.postedBy);
+    String originalCommaText = widget.desc + ',' + widget.postedBy;
+    String translatedCommaText = await TranslationUtility.translate(originalCommaText);
+    List<String> listOfValues = [];
+    if (translatedCommaText.contains("،")) {
+      listOfValues = translatedCommaText.split("،");
+    } else {
+      listOfValues = translatedCommaText.split(",");
+    }
+    desc = listOfValues[0];
+    postedBy = listOfValues[1];
     isLoading = false;
     setState(() {});
   }

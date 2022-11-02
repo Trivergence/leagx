@@ -153,10 +153,19 @@ class _PlanWidgetState extends State<PlanWidget> {
   }
 
   Future<void> translateData() async {
-    feature1 = await TranslationUtility.translate(widget.plan.feature1);
-    feature2 = await TranslationUtility.translate(widget.plan.feature2);
-    feature3 = await TranslationUtility.translate(widget.plan.feature3);
-    title = await TranslationUtility.translate(widget.plan.title);
+    String originalCommaText = widget.plan.feature1 + ',' + widget.plan.feature2 + ',' + widget.plan.feature3 + "," + widget.plan.title;
+    String translatedCommaText =
+        await TranslationUtility.translate(originalCommaText);
+    List<String> listOfValues = [];
+    if (translatedCommaText.contains("،")) {
+      listOfValues = translatedCommaText.split("،");
+    } else {
+      listOfValues = translatedCommaText.split(",");
+    }
+    feature1 = listOfValues[0];
+    feature2 = listOfValues[1];
+    feature3 = listOfValues[2];
+    title = listOfValues[3];
     isLoading = false;
     setState(() {});
   }
