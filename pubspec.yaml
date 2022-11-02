@@ -41,6 +41,8 @@ dependencies:
   shimmer: ^2.0.0
   flame: ^1.4.0
   webview_flutter: ^3.0.4
+  country_codes: ^2.2.0
+  flutter_native_timezone: ^2.0.0
 
   payments:
     path: ./packages/payments

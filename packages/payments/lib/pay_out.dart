@@ -10,10 +10,10 @@ import 'package:payments/payments.dart';
 
 class PayOut{
 
-  static Future<Result<String, ExpressAccount>> createExpressAccount() async {
+  static Future<Result<String, ExpressAccount>> createExpressAccount({required String countryCode}) async {
     var body = {
       "type": 'express',
-      "country": "SA",
+      "country": countryCode,
       "business_type": 'individual',
       "capabilities": {
       "transfers": {
