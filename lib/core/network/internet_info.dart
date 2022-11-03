@@ -29,6 +29,9 @@ class InternetInfo {
         connection = false;
         showToast();
         break;
+      case ConnectivityResult.vpn:
+        connection = true;
+        break;
     }
     return connection;
   }

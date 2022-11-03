@@ -103,8 +103,19 @@ class _PlayerTileState extends State<PlayerTile> {
   }
 
   Future<void> translateData() async {
-      playerOneName = await TranslationUtility.translate(widget.playerOneName);
-      playerTwoName = await TranslationUtility.translate(widget.playerTwoName);
+    String originalCommaText = widget.playerOneName +
+        "," +
+        widget.playerTwoName;
+    String translatedCommaText =
+        await TranslationUtility.translate(originalCommaText);
+    List<String> listOfValues = [];
+    if (translatedCommaText.contains("،")) {
+      listOfValues = translatedCommaText.split("،");
+    } else {
+      listOfValues = translatedCommaText.split(",");
+    }
+      playerOneName = listOfValues[0];
+      playerTwoName = listOfValues[1];
       isLoading = false;
       setState(() {
       });

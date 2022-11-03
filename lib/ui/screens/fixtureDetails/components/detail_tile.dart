@@ -50,9 +50,20 @@ class _DetailTileState extends State<DetailTile> {
   }
 
   Future<void> translateData() async {
-    title = await TranslationUtility.translate(widget.title);
-    leftValue = await TranslationUtility.translate(widget.leftValue);
-    rightValue = await TranslationUtility.translate(widget.rightValue);
+     String originalCommaText = widget.title + 
+        "," + widget.leftValue +
+        "," + widget.rightValue;
+    String translatedCommaText =
+        await TranslationUtility.translate(originalCommaText);
+    List<String> listOfValues = [];
+    if (translatedCommaText.contains("،")) {
+      listOfValues = translatedCommaText.split("،");
+    } else {
+      listOfValues = translatedCommaText.split(",");
+    }
+    title = listOfValues[0];
+    leftValue = listOfValues[1];
+    rightValue = listOfValues[2];
     isLoading = false;
     setState(() {});
   }

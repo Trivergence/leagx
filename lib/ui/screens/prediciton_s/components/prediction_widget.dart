@@ -149,10 +149,17 @@ class _PredictionWidgetState extends State<PredictionWidget> {
   }
 
   Future<void> getTranslatedData() async {
-    teamOneName = await TranslationUtility.translate(
-        widget.teamOneName);
-    teamTwoName = await TranslationUtility.translate(
-        widget.teamTwoName);
+    String originalCommaText = widget.teamOneName + "," + widget.teamTwoName;
+    String translatedCommaText =
+        await TranslationUtility.translate(originalCommaText);
+    List<String> listOfValues = [];
+    if (translatedCommaText.contains("،")) {
+      listOfValues = translatedCommaText.split("،");
+    } else {
+      listOfValues = translatedCommaText.split(",");
+    }
+    teamOneName = listOfValues[0];
+    teamTwoName = listOfValues[1];
     isLoading = false;
     setState(() {
     });

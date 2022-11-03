@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
@@ -54,6 +55,9 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                 UIHelper.verticalSpace(8.0),
                 TextFieldWidget(
                   textController: _messageController,
+                  listOfFormaters: [
+                    FilteringTextInputFormatter.deny(",")
+                  ],
                   inputAction: TextInputAction.newline,
                   maxLines: 10,
                   validator: (text) => ValidationHelper.validateField(text),

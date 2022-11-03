@@ -177,9 +177,19 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   }
 
   Future<void> translateData() async {
-    homeTeamName = await TranslationUtility.translate(widget.matchDetails!.matchHometeamName);
-    awayTeamName = await TranslationUtility.translate(
-        widget.matchDetails!.matchAwayteamName);
+    String originalCommaText = widget.matchDetails!.matchHometeamName +
+        "," +
+        widget.matchDetails!.matchAwayteamName; 
+    String translatedCommaText =
+        await TranslationUtility.translate(originalCommaText);
+    List<String> listOfValues = [];
+    if (translatedCommaText.contains("،")) {
+      listOfValues = translatedCommaText.split("،");
+    } else {
+      listOfValues = translatedCommaText.split(",");
+    }
+    homeTeamName = listOfValues[0];
+    awayTeamName = listOfValues[1];
     isLoading = false;
     setState(() {
     });
