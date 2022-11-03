@@ -66,6 +66,8 @@
 	"authForgotPasswordTxtEnterEmailDesc": "Enter your email or phone number to retrieve your password.",
 	"authForgotPasswordTxtemailOrPhone": "Email or Phone Number",
 	"authForgotPasswordBtnResetPassword": "Reset Password",
+	"authForgotPasswordSuccessMsg1": "Please check your email",
+	"authForgotPasswordSuccessMsg2": "for password reset instructions",
 
 	"authResetPasswordTxtResetPassword": "Reset Password",
 	"authResetPasswordTxtCheckEmailDes": "Check your email or phone number to retrieve your password.",

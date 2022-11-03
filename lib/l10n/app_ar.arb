@@ -44,6 +44,8 @@
 	"authForgotPasswordTxtEnterEmailDesc": "أدخل بريدك الإلكتروني أو رقم هاتفك لاسترداد كلمة المرور الخاصة بك.",
 	"authForgotPasswordTxtForgotPassword": "هل نسيت كلمة المرور",
 	"authForgotPasswordTxtemailOrPhone": "البريد الإلكتروني أو رقم الهاتف",
+	"authForgotPasswordSuccessMsg1": "من فضلك تفقد بريدك الالكتروني",
+	"authForgotPasswordSuccessMsg2": "للحصول على تعليمات إعادة تعيين كلمة المرور",
 
 	"authResetPasswordBtnResetPassword": "إعادة تعيين كلمة المرور",
 	"authResetPasswordTxtCheckEmailDes": "تحقق من بريدك الإلكتروني أو رقم هاتفك لاسترداد كلمة المرور الخاصة بك.",
