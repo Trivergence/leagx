@@ -19,4 +19,7 @@ class AppUrl{
   static const String getPaymentAccounts = "/payment_accounts";
   static const String addPaymentToken = "/payments";
   static const String setupStripeCred = "/get_stripe_cred";
+
+  static const String translationUrl =
+      "http://54.211.12.135:5000/api/translation";
 }
