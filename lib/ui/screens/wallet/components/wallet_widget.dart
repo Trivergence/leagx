@@ -52,10 +52,10 @@ class WalletWidget extends StatelessWidget {
                 textSize: 27,
                 fontWeight: FontWeight.w700,
               ),
-              UIHelper.verticalSpaceMedium,
-              MainButton(
-                width: 150,
-                text: loc.walletBtnAddCoins, onPressed: _showDialog)
+              // UIHelper.verticalSpaceMedium,
+              // MainButton(
+              //   width: 150,
+              //   text: loc.walletBtnAddCoins, onPressed: _showDialog)
             ],
           ),
         ),
