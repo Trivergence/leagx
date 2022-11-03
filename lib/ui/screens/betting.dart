@@ -17,6 +17,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// ignore: must_be_immutable
 class Betting extends StatelessWidget {
   final SharedPreferences prefs;
   late LocalizationProvider _localizationProvider;
@@ -66,7 +67,7 @@ class Betting extends StatelessWidget {
                   case LoginStatus.error:
                     return SigninScreen();
                   case LoginStatus.loggedIn:
-                    return DashBoardScreen();
+                    return const DashBoardScreen();
                 }
               },
             ),

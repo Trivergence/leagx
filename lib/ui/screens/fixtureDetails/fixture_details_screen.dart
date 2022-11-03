@@ -1,6 +1,5 @@
 import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/colors.dart';
-import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/match_args.dart';
 import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/screens/base_widget.dart';

@@ -23,6 +23,7 @@ import '../../util/app_dialogs/confirmation_dialog.dart';
 import '../../util/utility/image_utitlity.dart';
 import '../../widgets/gradient/gradient_border_widget.dart';
 
+// ignore: must_be_immutable
 class DrawerScreen extends StatelessWidget {
   DrawerScreen({Key? key}) : super(key: key);
 

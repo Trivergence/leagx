@@ -1,4 +1,4 @@
-import 'dart:async' as MyAsync;
+import 'dart:async' as my_async;
 
 import 'package:flutter/material.dart';
 
@@ -37,7 +37,7 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
   int minute = 0;
   int seconds = 0;
   String timeString = "--:--:--";
-  MyAsync.Timer? timer;
+  my_async.Timer? timer;
 
     @override
   void initState() {
@@ -46,7 +46,7 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
         minute = Utility.isMatchOver(widget.matchDetails.matchStatus!)
             ? 0
             : int.parse(widget.matchDetails.matchStatus!);
-          timer = MyAsync.Timer.periodic(
+          timer = my_async.Timer.periodic(
             const Duration(seconds: 1),
             (timer) {
               setState(() {

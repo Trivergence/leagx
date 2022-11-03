@@ -6,6 +6,7 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 
+// ignore: must_be_immutable
 class UserTile extends StatelessWidget {
   final String imageUrl;
   final String title;

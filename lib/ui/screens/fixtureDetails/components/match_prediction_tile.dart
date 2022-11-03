@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/util/utility/string_utility.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/shimmer_widget.dart';
 

@@ -27,7 +27,7 @@ import '../../util/ui/keyboardoverlay.dart';
 class ProfileInfoUpdateScreen extends StatefulWidget {
   final UpdateProfileArgs payload;
 
-  ProfileInfoUpdateScreen({Key? key, required this.payload}) : super(key: key);
+  const ProfileInfoUpdateScreen({Key? key, required this.payload}) : super(key: key);
 
   @override
   State<ProfileInfoUpdateScreen> createState() => _ProfileInfoUpdateScreenState();

@@ -4,7 +4,6 @@ import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/ui/validation_helper.dart';
-import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
@@ -16,7 +15,7 @@ import 'package:provider/provider.dart';
 
 class AddNewsScreen extends StatefulWidget {
 
-  AddNewsScreen({Key? key}) : super(key: key);
+  const AddNewsScreen({Key? key}) : super(key: key);
 
   @override
   State<AddNewsScreen> createState() => _AddNewsScreenState();

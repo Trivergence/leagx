@@ -19,6 +19,7 @@ import '../../util/locale/localization.dart';
 import 'components/card_info.dart';
 import 'components/wallet_widget.dart';
 
+// ignore: must_be_immutable
 class WalletScreen extends StatelessWidget {
   WalletScreen({ Key? key }) : super(key: key);
 

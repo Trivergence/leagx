@@ -16,6 +16,7 @@ import '../../../../widgets/main_button.dart';
 import '../../../../widgets/text_widget.dart';
 import '../../components/match_prediction_tile.dart';
 
+// ignore: must_be_immutable
 class OfflineMatchWidget extends StatelessWidget {
   final Fixture matchDetails;
   final Prediction? prediction;

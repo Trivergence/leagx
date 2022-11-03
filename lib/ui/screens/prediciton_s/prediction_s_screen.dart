@@ -1,10 +1,8 @@
-import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/screens/prediciton_s/components/prediction_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/widgets/placeholder_tile.dart';
@@ -13,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
 
+// ignore: must_be_immutable
 class PredicitonsScreen extends StatelessWidget {
   PredicitonsScreen({Key? key}) : super(key: key);
 

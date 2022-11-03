@@ -137,6 +137,7 @@ class DashBoardViewModel extends BaseModel {
       }
     } on Exception catch (_) {
       setBusy(false);
+      return null;
     }
   }
 
@@ -196,7 +197,7 @@ class DashBoardViewModel extends BaseModel {
         },
       );
       _leaders = tempList.cast<Leader>();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       setBusy(false);
     }
   }

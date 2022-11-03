@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 
 class ImageWidget extends StatelessWidget {

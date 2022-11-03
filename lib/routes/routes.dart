@@ -92,7 +92,7 @@ class Routes {
       case adminFixture:
         return generateRoute(routeSettings.name!, const AdminFixtureScreen());
       case adminFixtureDetail:
-        return generateRoute(routeSettings.name!, AdminFixtureDetailScreen());
+        return generateRoute(routeSettings.name!, const AdminFixtureDetailScreen());
       case adminAnnounce:
         return generateRoute(routeSettings.name!, AdmiinAnnounceScreen());
       case chooseLeague:
@@ -111,12 +111,12 @@ class Routes {
       case predictions:
         return generateRoute(routeSettings.name!, PredicitonsScreen());
       case dashboard:
-        return generateRoute(routeSettings.name!, DashBoardScreen());
+        return generateRoute(routeSettings.name!, const DashBoardScreen());
       case setting:
         return generateRoute(routeSettings.name!, SettingScreen());
       case profileSettings:
         return generateRoute(
-            routeSettings.name!, ProfileSettingsScreen());
+            routeSettings.name!, const ProfileSettingsScreen());
       case profileInfoUpdate:
         return generateRoute(routeSettings.name!, ProfileInfoUpdateScreen(payload: routeSettings.arguments as UpdateProfileArgs,));
       case admin:

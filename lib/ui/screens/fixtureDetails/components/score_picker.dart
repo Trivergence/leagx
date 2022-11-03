@@ -11,7 +11,7 @@ class ScorePicker extends StatefulWidget {
   final Function(int) onChanged;
   final int initialScore;
   final bool isSelected;
-  ScorePicker({
+  const ScorePicker({
     Key? key, required this.onChanged,required this.initialScore, required this.isSelected,
   }) : super(key: key);
 

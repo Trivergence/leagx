@@ -6,7 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class AddPayoutDetails extends StatefulWidget {
   final String accountLink;
-  AddPayoutDetails({ Key? key, required  this.accountLink }) : super(key: key);
+  const AddPayoutDetails({ Key? key, required  this.accountLink }) : super(key: key);
 
   @override
   State<AddPayoutDetails> createState() => _AddPayoutDetailsState();

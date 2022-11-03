@@ -11,6 +11,7 @@ import '../../view_models/dashboard_view_model.dart';
 import '../util/locale/localization.dart';
 import 'dashboard/components/fixture_widget.dart';
 
+// ignore: must_be_immutable
 class UpcomingMatches extends StatelessWidget {
   UpcomingMatches({ Key? key }) : super(key: key);
   List<Fixture> upcomingMatches = [];

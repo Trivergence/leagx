@@ -2,6 +2,8 @@
 //
 //     final events = eventsFromJson(jsonString);
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 List<Fixture> fixturesFromJson(String str) =>

@@ -5,23 +5,18 @@ import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
-import '../../../../constants/dimens.dart';
 import '../../../../models/dashboard/fixture.dart';
 import '../../../../models/players.dart';
 import '../../../util/size/size_config.dart';
 import '../../../util/ui/ui_helper.dart';
-import '../../../util/utility/date_utility.dart';
 import '../../../util/validation/validation_utils.dart';
 import '../../../widgets/icon_container.dart';
 import '../../../widgets/main_button.dart';
-import '../../../widgets/text_widget.dart';
-import '../../../widgets/score_chip.dart';
 import '../components/fixture_vs_widget.dart';
 import '../components/match_prediction_tile.dart';
-import '../components/team_vs_widget.dart';
 
+// ignore: must_be_immutable
 class PlayersView extends StatelessWidget {
   final Fixture matchDetails;
   final Prediction? prediction;
