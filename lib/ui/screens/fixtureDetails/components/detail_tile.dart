@@ -10,9 +10,9 @@ class DetailTile extends StatefulWidget {
     Key? key,required this.title, required this.leftValue, required this.rightValue,required this.tileColor,
   }) : super(key: key);
   final String title;
+  final Color tileColor;
   final String leftValue;
   final String rightValue;
-  final Color tileColor;
 
   @override
   State<DetailTile> createState() => _DetailTileState();
@@ -20,8 +20,6 @@ class DetailTile extends StatefulWidget {
 
 class _DetailTileState extends State<DetailTile> {
   String? title;
-  String? leftValue;
-  String? rightValue;
   bool isLoading = true;
 
   @override
@@ -37,9 +35,9 @@ class _DetailTileState extends State<DetailTile> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextWidget(text: leftValue!, color: AppColors.colorYellow,),
+          TextWidget(text: widget.leftValue, color: AppColors.colorYellow,),
           TextWidget(text: title!),
-          TextWidget(text: rightValue!,
+          TextWidget(text: widget.rightValue,
             color: AppColors.colorRed,
             textAlign: TextAlign.end,
           ),
@@ -50,20 +48,8 @@ class _DetailTileState extends State<DetailTile> {
   }
 
   Future<void> translateData() async {
-     String originalCommaText = widget.title + 
-        "," + widget.leftValue +
-        "," + widget.rightValue;
-    String translatedCommaText =
-        await TranslationUtility.translate(originalCommaText);
-    List<String> listOfValues = [];
-    if (translatedCommaText.contains("،")) {
-      listOfValues = translatedCommaText.split("،");
-    } else {
-      listOfValues = translatedCommaText.split(",");
-    }
-    title = listOfValues[0];
-    leftValue = listOfValues[1];
-    rightValue = listOfValues[2];
+    title =
+        await TranslationUtility.translate(widget.title);
     isLoading = false;
     setState(() {});
   }
