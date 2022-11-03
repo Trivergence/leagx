@@ -229,7 +229,7 @@ class DashBoardViewModel extends BaseModel {
     }
   }
 
-  void getPaymentCredentials(BuildContext context) async {
+  Future<void> getPaymentCredentials(BuildContext context) async {
     User? user = preferenceHelper.getUser();
     if (user != null && locator<PaymentConfig>().getCustomerCred == null) {
       List<dynamic> tempList = await ApiService.getListRequest(
