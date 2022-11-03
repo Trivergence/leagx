@@ -1,5 +1,3 @@
-import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';

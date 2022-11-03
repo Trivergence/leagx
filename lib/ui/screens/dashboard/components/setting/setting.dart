@@ -1,8 +1,6 @@
 
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
-import 'package:leagx/constants/strings.dart';
-import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
@@ -16,7 +14,7 @@ import '../../../../../view_models/dashboard_view_model.dart';
 import '../home/components/analytics_widget.dart';
 
 class SettingScreen extends StatefulWidget {
-  SettingScreen({Key? key}) : super(key: key);
+  const SettingScreen({Key? key}) : super(key: key);
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();

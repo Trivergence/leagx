@@ -50,7 +50,7 @@ class PayoutDialogWidget extends StatefulWidget {
   final String negativeBtnTitle;
   final String positiveBtnTitle;
   final Function(String) onPositiveBtnPressed;
-  PayoutDialogWidget({
+  const PayoutDialogWidget({
     Key? key, 
     required this.title, 
     required this.body, 
@@ -171,7 +171,7 @@ class AddCoinsDialogWidget extends StatefulWidget {
   final String negativeBtnTitle;
   final String positiveBtnTitle;
   final Function(String) onPositiveBtnPressed;
-  AddCoinsDialogWidget({
+  const AddCoinsDialogWidget({
     Key? key,
     required this.title,
     required this.body,

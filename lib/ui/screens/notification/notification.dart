@@ -16,7 +16,7 @@ class NotificationScreen extends StatelessWidget {
         itemCount: 15,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return NotificationTile(
+          return const NotificationTile(
             firstText: 'Barcelona win the match and You have',
             secondText: 'Earned 100 points',
             time: '2 hours ago',

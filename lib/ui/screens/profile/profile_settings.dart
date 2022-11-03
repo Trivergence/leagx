@@ -1,6 +1,5 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
-import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/core/network/internet_info.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
@@ -14,7 +13,6 @@ import 'package:leagx/ui/util/utility/image_utitlity.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
-import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/settings_tile.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';

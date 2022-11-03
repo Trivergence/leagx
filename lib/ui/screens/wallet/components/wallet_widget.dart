@@ -13,6 +13,7 @@ import '../../../util/ui/ui_helper.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 
+// ignore: must_be_immutable
 class WalletWidget extends StatelessWidget {
  WalletWidget({
     Key? key,

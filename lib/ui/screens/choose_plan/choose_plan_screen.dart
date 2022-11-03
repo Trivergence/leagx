@@ -20,6 +20,7 @@ import '../../util/app_dialogs/confirmation_dialog.dart';
 import '../../widgets/bar/app_bar_widget.dart';
 import 'components/plan_listing.dart';
 
+// ignore: must_be_immutable
 class ChoosePlanScreen extends StatelessWidget {
   final ChoosePlanArgs leagueData;
   ChoosePlanScreen({Key? key, required this.leagueData}) : super(key: key);

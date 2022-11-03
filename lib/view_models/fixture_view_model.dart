@@ -20,7 +20,6 @@ import '../models/user/user.dart';
 import '../service/service_locator.dart';
 import '../ui/screens/fixtureDetails/components/prediction_bottom_sheet.dart';
 import '../ui/util/loader/loader.dart';
-import '../ui/util/utility/date_utility.dart';
 
 class FixtureDetailViewModel extends BaseModel {
   List<Fixture> _matchDetails = [];
@@ -150,7 +149,7 @@ class FixtureDetailViewModel extends BaseModel {
       ) ;
       _homeTeamPlayers = tempList.cast<Player>();
       notifyListeners();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       setBusy(false);
     }
   }
@@ -166,7 +165,7 @@ class FixtureDetailViewModel extends BaseModel {
           modelName: ApiModels.getTeams);
           _awayTeamPlayers = tempList.cast<Player>();
           notifyListeners();
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       setBusy(false);
     }
   }

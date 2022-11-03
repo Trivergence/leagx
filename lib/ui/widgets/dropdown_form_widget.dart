@@ -43,7 +43,6 @@ class DropDownFormWidget extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: const Icon(Icons.perm_contact_cal, color: AppColors.colorWhite, size: 25,),
         ),
-        //TODO localization
           focusedErrorBorder: focusedErrorBorder,),
             items: [
               DropdownMenuItem<String>(

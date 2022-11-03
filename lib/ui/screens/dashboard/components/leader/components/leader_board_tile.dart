@@ -1,4 +1,3 @@
-import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/colors.dart';

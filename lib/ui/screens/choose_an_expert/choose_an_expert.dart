@@ -1,4 +1,3 @@
-import 'package:leagx/constants/strings.dart';
 import 'package:leagx/ui/screens/choose_an_expert/components/choose_an_expert_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
@@ -8,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../models/leader.dart';
 
+// ignore: must_be_immutable
 class ChooseAnExpertScreen extends StatelessWidget {
   ChooseAnExpertScreen({Key? key}) : super(key: key);
 

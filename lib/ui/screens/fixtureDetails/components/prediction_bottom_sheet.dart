@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/shimmer_widget.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
@@ -13,11 +12,9 @@ import '../../../../constants/colors.dart';
 import '../../../../core/network/internet_info.dart';
 import '../../../../models/dashboard/fixture.dart';
 import '../../../util/ui/ui_helper.dart';
-import '../../../widgets/gradient/gradient_border_button.dart';
 import '../../../widgets/gradient/gradient_widget.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
-import 'check_box_widget.dart';
 import 'score_picker.dart';
 
 class PredictionSheetWidget extends StatefulWidget {

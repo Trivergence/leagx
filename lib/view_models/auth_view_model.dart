@@ -5,8 +5,6 @@ import 'package:leagx/core/network/api/api_service.dart';
 import 'package:leagx/core/network/app_url.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/auth/forgot_password.dart';
-import 'package:leagx/models/auth/signin.dart';
-import 'package:leagx/models/auth/signup.dart';
 import 'package:leagx/models/user/user.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -14,7 +12,6 @@ import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/entity/user.dart' as twitter;
 
-import '../ui/util/validation/validation_utils.dart';
 
 class AuthViewModel {
   static Future<User?>? signup({

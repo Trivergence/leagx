@@ -2,7 +2,6 @@
 //
 //     final userSummary = userSummaryFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 UserSummary userSummaryFromJson(String str) =>

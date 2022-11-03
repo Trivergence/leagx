@@ -6,7 +6,7 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
-import 'package:leagx/ui/widgets/ai_widgets/ai_widgets.dart' as MainWidget;
+import 'package:leagx/ui/widgets/ai_widgets/ai_widgets.dart' as main_widget;
 import 'package:provider/provider.dart';
 
 import '../../../../../constants/assets.dart';
@@ -16,6 +16,7 @@ import '../../../../widgets/main_button.dart';
 import '../../components/detail_tile.dart';
 import '../../components/match_prediction_tile.dart';
 
+// ignore: must_be_immutable
 class LiveMatchWidget extends StatelessWidget {
   final Fixture matchDetails;
   final Prediction? prediction;
@@ -31,7 +32,7 @@ class LiveMatchWidget extends StatelessWidget {
     statistics = matchDetails.statistics;
     return Column(
       children: [
-        matchDetails.matchLive == "1" ? MainWidget.Animation():
+        matchDetails.matchLive == "1" ? const main_widget.Animation():
         Image.asset(
           Assets.stadiumImage,
           width: SizeConfig.width * 100,

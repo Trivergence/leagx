@@ -24,6 +24,7 @@ import '../../../core/network/internet_info.dart';
 import '../../widgets/text_widget.dart';
 import 'components/bank_info.dart';
 
+// ignore: must_be_immutable
 class PayoutScreen extends StatelessWidget {
   PayoutScreen({ Key? key }) : super(key: key);
 

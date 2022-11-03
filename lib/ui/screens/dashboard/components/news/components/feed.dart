@@ -1,4 +1,3 @@
-import 'package:leagx/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/models/dashboard/news.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -8,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../widgets/news_tile.dart';
 
+// ignore: must_be_immutable
 class Feed extends StatelessWidget {
   Feed({Key? key}) : super(key: key);
 

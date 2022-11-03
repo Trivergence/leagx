@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:leagx/constants/assets.dart';
-import 'package:leagx/constants/enums.dart';
 
 class ImageUtitlity {
   // static String getPlachoder({required ImageTpye type}) {
@@ -34,7 +31,7 @@ class ImageUtitlity {
   // }
   static String getRandomProfileAvatar() {
     List<String> listOfAvatars = [Assets.icMaleProfile, Assets.icLeaderMale, Assets.icExpertMale];
-    final _random = Random();
+    //final _random = Random();
     //String image = listOfAvatars[_random.nextInt(listOfAvatars.length)];
     String image = listOfAvatars[0];
     return image;

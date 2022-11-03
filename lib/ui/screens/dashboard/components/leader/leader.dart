@@ -1,4 +1,3 @@
-import 'package:leagx/constants/strings.dart';
 import 'package:leagx/models/leader.dart';
 import 'package:leagx/ui/screens/dashboard/components/leader/components/leader_board_tile.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 import 'components/expanded_leader_tile.dart';
 
+// ignore: must_be_immutable
 class LeaderScreen extends StatelessWidget {
   LeaderScreen({Key? key}) : super(key: key);
 

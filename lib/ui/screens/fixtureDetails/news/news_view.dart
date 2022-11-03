@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../models/dashboard/news.dart';
 
+// ignore: must_be_immutable
 class NewsView extends StatelessWidget {
   final String leagueId;
   NewsView({Key? key, required this.leagueId}) : super(key: key);

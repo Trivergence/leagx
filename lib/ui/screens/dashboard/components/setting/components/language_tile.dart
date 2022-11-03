@@ -1,8 +1,6 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
-import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 

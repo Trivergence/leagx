@@ -12,6 +12,7 @@ import 'package:leagx/ui/widgets/textfield/password_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/auth_view_model.dart';
 
+// ignore: must_be_immutable
 class ResetPasswordScreen extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =

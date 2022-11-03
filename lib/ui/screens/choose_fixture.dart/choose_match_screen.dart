@@ -20,14 +20,12 @@ class ChooseFixtureScreen extends StatefulWidget {
 class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
   final TextEditingController _searchController = TextEditingController();
 
-  BuildContext? _context;
   bool isFiltering = false;
   List<Fixture> filteredList = [];
   List<Fixture> availableMatches = [];
 
   @override
   Widget build(BuildContext context) {
-    _context = context;
     availableMatches = getMatches(context);
     return Scaffold(
         appBar: AppBarWidget(

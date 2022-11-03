@@ -1,10 +1,7 @@
 import 'package:leagx/constants/enums.dart';
 import 'package:leagx/routes/routes.dart';
-import 'package:leagx/ui/screens/dashboard/components/news/components/approvals.dart';
 import 'package:leagx/ui/screens/dashboard/components/news/components/feed.dart';
-import 'package:leagx/ui/screens/dashboard/components/news/components/my_feed.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/widgets/bar/tab_bar/tab_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../widgets/bar/tab_bar/model/tab_bar_item_model.dart';

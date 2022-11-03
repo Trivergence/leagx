@@ -58,7 +58,7 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show("${errorResponse.error ?? loc.errorUndefined}",TOAST_TYPE.error );
+            ToastMessage.show(errorResponse.error ?? loc.errorUndefined,TOAST_TYPE.error );
         return null;
       } else {
         DioExceptions.fromDioError(ex);
@@ -115,7 +115,7 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show("${errorResponse.error ?? loc.errorUndefined}",TOAST_TYPE.error );
+            ToastMessage.show(errorResponse.error ?? loc.errorUndefined,TOAST_TYPE.error );
         return null;
       } else {
         DioExceptions.fromDioError(ex);
@@ -174,7 +174,7 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show("${errorResponse.error ?? loc.errorUndefined}",TOAST_TYPE.error );
+            ToastMessage.show(errorResponse.error ?? loc.errorUndefined,TOAST_TYPE.error );
         return null;
       } else {
         DioExceptions.fromDioError(ex);
@@ -231,7 +231,7 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show("${errorResponse.error ?? loc.errorUndefined}",TOAST_TYPE.error );
+            ToastMessage.show(errorResponse.error ?? loc.errorUndefined,TOAST_TYPE.error );
         return null;
       } else {
         DioExceptions.fromDioError(ex);
@@ -294,7 +294,7 @@ class ApiService {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
         ToastMessage.show(
-            "${errorResponse.error ?? loc.errorUndefined}",
+            errorResponse.error ?? loc.errorUndefined,
             TOAST_TYPE.error);
         }
         return [];
@@ -348,7 +348,7 @@ class ApiService {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
         ToastMessage.show(
-            "${errorResponse.error ?? loc.errorUndefined}",
+            errorResponse.error ?? loc.errorUndefined,
             TOAST_TYPE.error);
         return false;
       } else {
@@ -405,7 +405,7 @@ class ApiService {
       Loader.hideLoader();
       if (ex.response != null) {
         ToastMessage.show(
-            "${loc.errorUndefined}", TOAST_TYPE.error);
+            loc.errorUndefined, TOAST_TYPE.error);
         return null;
       } else {
         DioExceptions.fromDioError(ex);

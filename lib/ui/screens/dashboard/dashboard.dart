@@ -28,7 +28,7 @@ import '../../widgets/loading_widget.dart';
 import '../base_widget.dart';
 
 class DashBoardScreen extends StatefulWidget {
-  DashBoardScreen({Key? key}) : super(key: key);
+  const DashBoardScreen({Key? key}) : super(key: key);
 
   @override
   State<DashBoardScreen> createState() => _DashBoardScreenState();
@@ -36,9 +36,9 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
+  List<Widget> widgetOptions = <Widget>[
     HomeScreen(),
-    FixtureScreen(),
+    const FixtureScreen(),
     LeaderScreen(),
     const NewsScreen(
       userType: UserType.admin,
@@ -110,7 +110,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
                 ),
               ),
-              child: _widgetOptions.elementAt(_selectedIndex),
+              child: widgetOptions.elementAt(_selectedIndex),
             ) : const LoadingWidget(),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: AppColors.colorBackground,
