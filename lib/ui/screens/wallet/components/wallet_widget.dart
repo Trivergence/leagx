@@ -63,21 +63,21 @@ class WalletWidget extends StatelessWidget {
     );
   }
 
-  void _showDialog() {
-    FormDialog.show(
-      context: _context, 
-      type: DialogType.addCoins,
-      title: loc.walletAddCoinDialogTitle,
-      body: loc.walletAddCoinDialogBody,
-      negativeBtnTitle: loc.walletAddCoinDialogBtnNegative, 
-      positiveBtnTitle: loc.walletAddCoinDialogBtnPositive, 
-      onPositiveBtnPressed: (coins) async {
-        Loader.showLoader();
-        bool success = await _context.read<WalletViewModel>().purchaseCoin(coins);
-        if(success == true) {
-          await _context.read<DashBoardViewModel>().getUserSummary();
-        }
-        Loader.hideLoader();
-      });
-  }
+  // void _showDialog() {
+  //   FormDialog.show(
+  //     context: _context, 
+  //     type: DialogType.addCoins,
+  //     title: loc.walletAddCoinDialogTitle,
+  //     body: loc.walletAddCoinDialogBody,
+  //     negativeBtnTitle: loc.walletAddCoinDialogBtnNegative, 
+  //     positiveBtnTitle: loc.walletAddCoinDialogBtnPositive, 
+  //     onPositiveBtnPressed: (coins,_) async {
+  //       Loader.showLoader();
+  //       bool success = await _context.read<WalletViewModel>().purchaseCoin(coins);
+  //       if(success == true) {
+  //         await _context.read<DashBoardViewModel>().getUserSummary();
+  //       }
+  //       Loader.hideLoader();
+  //     });
+  // }
 }

@@ -271,12 +271,16 @@
 	"payoutTxtLessCoins": "ليس لديك عملات كافية",
 	"payoutTxtAttachedBank": "البنك المرفق",
 	"payoutBtnAddBank": "إضافة بنك",
+	"payoutTxtAttachedCard": "البطاقة المرفقة",
 	"payoutDialogTitle": "ينسحب",
-	"payoutDialogBody": "أدخل المبلغ المطلوب",
+	"payoutDialogBody": "اختر المبلغ الذي تريد سحبه",
 	"payoutDialogBtnNegative": "يلغي",
 	"payoutDialogBtnPositive": "ينسحب",
 	"payoutDialogTxtSuccessTitle": "تم بنجاح",
 	"payoutDialogTxtSuccessDesc": "لقد انسحبت بنجاح",
+	"payoutDialogWithdrawTypeMinimum": "الحد الأدنى",
+	"payoutDialogWithdrawTypeMaximum": "أقصى",
+	"payoutDialogWithdrawTypeCustom": "العادة",
 
 	"addPayoutTxtTitle": "أضف التفاصيل",
 	

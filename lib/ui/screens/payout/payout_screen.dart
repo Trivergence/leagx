@@ -118,24 +118,37 @@ class PayoutScreen extends StatelessWidget {
     body: loc.payoutDialogBody,
     negativeBtnTitle: loc.payoutDialogBtnNegative, 
     positiveBtnTitle: loc.payoutDialogBtnPositive, 
-    onPositiveBtnPressed: (amount) async {
+    onPositiveBtnPressed: (enteredAmount, withdrawType) async {
       bool isConnected = await InternetInfo.isConnected();
       if(isConnected) {
-        if (double.parse(amount).round() <= userSummary!.coinEarned!.round() ) {
+        String withdrawAmount;
+        switch(withdrawType) {
+          case WithdrawType.minimum:
+            withdrawAmount = AppConstants.minimumWithdraw.toString();
+            break;
+          case WithdrawType.maximum:
+            withdrawAmount = userSummary!.coinEarned!.round().toString();
+            break;
+          case WithdrawType.custom:
+            withdrawAmount = enteredAmount;
+            break;
+        }
+        if (double.parse(withdrawAmount).round() <= userSummary!.coinEarned!.round() ) {
           Loader.showLoader();
-          bool isTransfered = await _payoutViewModel!.transferToUser(amount);
+          bool isTransfered = await _payoutViewModel!.transferToUser(withdrawAmount);
           if (isTransfered == true) {
-            PayoutModel? payoutModel = await _payoutViewModel!.payoutMoney(amount, currency!, listOfExtAccounts.first.id!);
+            PayoutModel? payoutModel = await _payoutViewModel!.payoutMoney(
+                    withdrawAmount, currency!, listOfExtAccounts.first.id!);
             if(payoutModel != null) {
               bool success = await _payoutViewModel!.withdrawCoins(
-                amountInDollars: amount, 
+                amountInDollars: withdrawAmount, 
                 payoutToken: payoutModel.id);
               if(success == true) {
                 FancyDialog.showSuccess(
                   context: _context!,
                   title: loc.payoutDialogTxtSuccessTitle,
                   onOkPressed: () async => await _payoutViewModel!.updateCoins(_dashBoardViewModel),
-                  description: "${loc.payoutDialogTxtSuccessDesc} $amount\$");
+                  description: "${loc.payoutDialogTxtSuccessDesc} $withdrawAmount\$");
               } else {
                 ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
               }

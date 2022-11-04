@@ -3,4 +3,5 @@ class AppConstants {
   static const String currencyApiKey = "a0d1ba6ca4msh0cee33fc17988aap1bdc63jsn0c046f446546";
   
   static const int networkTimeout = 60000;
+  static const int minimumWithdraw = 50;
 }
