@@ -120,15 +120,15 @@ class SignupScreen extends StatelessWidget {
                         if (dashBoardModel.subscribedLeagues.isEmpty) {
                           await AuthViewModel.subscribeOneLeague(userData.id);
                         }
+                        if (StripeConfig().getSecretKey.isNotEmpty) {
+                          WalletViewModel walletModel =
+                              context.read<WalletViewModel>();
+                          await walletModel.createCustomer(userData: userData);
+                        }
                         Loader.hideLoader();
                         ToastMessage.show(
                             loc.authSignupTxtSignedupSuccessfully, TOAST_TYPE.success);
                         Navigator.pushNamed(context, Routes.dashboard);
-                        if(StripeConfig().getSecretKey.isNotEmpty) {
-                          WalletViewModel walletModel =
-                            context.read<WalletViewModel>();
-                          walletModel.createCustomer(userData: userData);
-                        }
                       } else {
                         Loader.hideLoader();
                       }

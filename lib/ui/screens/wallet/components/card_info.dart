@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
-import '../../../../view_models/wallet_view_model.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../widgets/text_widget.dart';
 
 class CardInfoWidget extends StatelessWidget {
-  final WalletViewModel walletModel;
+  final String last4;
+  final String expMonth;
+  final String expYear;
   const CardInfoWidget({
     Key? key,
-    required this.walletModel,
+    required this.last4, required this.expMonth, required this.expYear,
   }) : super(key: key);
 
   @override
@@ -40,16 +41,14 @@ class CardInfoWidget extends StatelessWidget {
                   + UIHelper.bullet 
                   + UIHelper.bullet 
                   + UIHelper.bullet + " "
-                  + walletModel.getPayementMethods.first.card!.last4!),
+                  + last4),
             ],
           ),
           UIHelper.horizontalSpaceSmall,
           TextWidget(
-              text: walletModel.getPayementMethods.first.card!.expMonth!
-                      .toString() +
+              text: expMonth +
                   "/" +
-                  walletModel.getPayementMethods.first.card!.expYear!
-                      .toString())
+                  expYear)
         ]),
       ),
     );

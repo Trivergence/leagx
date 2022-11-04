@@ -11,18 +11,30 @@ import 'package:payments/payments.dart';
 class PayOut{
 
   static Future<Result<String, ExpressAccount>> createExpressAccount({required String countryCode}) async {
-    var body = {
-      "type": 'express',
-      "country": countryCode,
-      "business_type": 'individual',
-      "capabilities": {
-      "transfers": {
-        "requested": true}
-      },
-      "tos_acceptance": {
-      "service_agreement": 'recipient',
-    },
-    };
+    Map<String , dynamic> body;
+    if(countryCode == "US") {
+      body = {
+        "type": 'express',
+        "country": "US",
+        "business_type": 'individual',
+        "capabilities": {
+          "card_payments": {"requested": false},
+          "transfers": {"requested": true}
+        },
+      };
+    } else {
+      body = {
+        "type": 'express',
+        "country": countryCode,
+        "business_type": 'individual',
+        "capabilities": {
+          "transfers": {"requested": true}
+        },
+        "tos_acceptance": {
+          "service_agreement": 'recipient',
+        },
+      };
+    }
     Result<ErrorModel,dynamic> result = await ApiService.callPostApi(
       url: PaymentUrl.accounts,
       body: body,
