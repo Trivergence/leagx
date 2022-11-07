@@ -77,7 +77,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     Loader.hideLoader();
                     if (ValidationUtils.isValid(forgotPasswordResponse)) {
                       ToastMessage.show(
-                          forgotPasswordResponse!.success!, TOAST_TYPE.msg);
+                          loc.authForgotPasswordSuccessMsg1 + " " + _emailController.text + " " + loc.authForgotPasswordSuccessMsg2, TOAST_TYPE.msg);
                       Navigator.pushReplacementNamed(context, Routes.signin);
                     }
                   }

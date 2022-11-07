@@ -43,7 +43,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     const NewsScreen(
       userType: UserType.admin,
     ),
-    SettingScreen(),
+    const SettingScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -67,7 +67,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               await context.read<SubscriptionViewModel>().getLeagues();
               await context.read<FixtureDetailViewModel>().getUserPredictions();
               await context.read<WalletViewModel>().setupStripeCredentials();
-              context.read<DashBoardViewModel>().getPaymentCredentials(context);
+              await context.read<DashBoardViewModel>().getPaymentCredentials(context);
+              await context.read<WalletViewModel>().getUserPaymentMethods();
             }
           });
         },

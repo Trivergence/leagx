@@ -66,6 +66,8 @@
 	"authForgotPasswordTxtEnterEmailDesc": "Enter your email or phone number to retrieve your password.",
 	"authForgotPasswordTxtemailOrPhone": "Email or Phone Number",
 	"authForgotPasswordBtnResetPassword": "Reset Password",
+	"authForgotPasswordSuccessMsg1": "Please check your email",
+	"authForgotPasswordSuccessMsg2": "for password reset instructions",
 
 	"authResetPasswordTxtResetPassword": "Reset Password",
 	"authResetPasswordTxtCheckEmailDes": "Check your email or phone number to retrieve your password.",
@@ -267,14 +269,18 @@
 	"payoutTxtTotalAmount": "Total Amount",
 	"payoutBtnWithdraw": "Withdraw",
 	"payoutTxtAttachedBank": "Attached Bank",
+	"payoutTxtAttachedCard": "Attached Card",
 	"payoutTxtLessCoins": "You don't have enough coins",
 	"payoutBtnAddBank": "Add Bank",
 	"payoutDialogTitle": "Withdraw",
-	"payoutDialogBody": "Enter required amount",
+	"payoutDialogBody": "Choose the amount you want to withdraw",
 	"payoutDialogBtnNegative": "Cancel",
 	"payoutDialogBtnPositive": "Withdraw",
 	"payoutDialogTxtSuccessTitle": "Completed Successfully",
 	"payoutDialogTxtSuccessDesc": "You have successfully withdrawn",
+	"payoutDialogWithdrawTypeMinimum": "Minimum",
+	"payoutDialogWithdrawTypeMaximum": "Maximum",
+	"payoutDialogWithdrawTypeCustom": "Custom",
 
 	"addPayoutTxtTitle": "Add Details",
 

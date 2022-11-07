@@ -185,4 +185,6 @@ class PayoutViewModel extends BaseModel{
     await dashBoardViewModel.getUserSummary();
     setBusy(false);
   }
+
+  clearData() => _expressAccount = null;
 }

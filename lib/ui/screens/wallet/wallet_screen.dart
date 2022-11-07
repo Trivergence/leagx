@@ -64,7 +64,14 @@ class WalletScreen extends StatelessWidget {
             :  Column(
               children: [
                 CardInfoWidget(
-                  walletModel: walletModel,
+                  last4: walletModel
+                                        .getPayementMethods.first.card!.last4!,
+                  expMonth: walletModel.getPayementMethods
+                                        .first.card!.expMonth!
+                                        .toString(),
+                  expYear: walletModel
+                                        .getPayementMethods.first.card!.expYear!
+                                        .toString(),
                 ),
                 TextButton(
                   onPressed: _showConfirmationDialog, 

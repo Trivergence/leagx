@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:leagx/constants/app_constants.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
+import 'package:leagx/ui/screens/wallet/components/card_info.dart';
 import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
 import 'package:leagx/ui/util/app_dialogs/form_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
@@ -56,30 +58,79 @@ class PayoutScreen extends StatelessWidget {
         _payoutViewModel = model;
         _context = context;
         getData();
-        return !_payoutViewModel!.busy ? Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal : 15.0, vertical: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-              TextWidget(text: loc.payoutTxtTotalAmount, textSize: Dimens.textMedium, fontWeight: FontWeight.bold,),
-              TextWidget(text: (userSummary != null 
-              ? userSummary!.coinEarned!.round().toString()
-              : "0.0") + "\$", textSize: Dimens.textMedium)
-            ],),
-          ),
-          if (listOfExtAccounts.isNotEmpty) SizedBox(
-            width: 200,
-            child: MainButton(text: loc.payoutBtnWithdraw, onPressed: _withdraw)),
-          UIHelper.verticalSpaceLarge,
-          if (listOfExtAccounts.isNotEmpty) BankInfoWidget(bankName: bankName, 
-              currency: currency,
-              routingNumber: routingNumber, 
-              last4: last4),
-          if(listOfExtAccounts.isEmpty) MainButton(text: loc.payoutBtnAddBank, onPressed: _addBank)
-        ],
-      )
+        return !_payoutViewModel!.busy ? Stack(
+          children: [
+            Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextWidget(
+                                  text: loc.payoutTxtTotalAmount,
+                                  textSize: Dimens.textMedium,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                TextWidget(
+                                    text: (userSummary != null
+                                            ? userSummary!.coinEarned!
+                                                .round()
+                                                .toString()
+                                            : "0.0") +
+                                        "\$",
+                                    textSize: Dimens.textMedium)
+                              ],
+                            ),
+                          ),
+                          if (listOfExtAccounts.isNotEmpty)
+                            SizedBox(
+                                width: 200,
+                                child: MainButton(
+                                    text: loc.payoutBtnWithdraw,
+                                    onPressed: _withdraw)),
+                          UIHelper.verticalSpaceLarge,
+                          if (listOfExtAccounts.isNotEmpty)
+                            listOfExtAccounts.first.object == "bank_account"
+                                ? BankInfoWidget(
+                                    bankName: bankName,
+                                    currency: currency,
+                                    routingNumber: routingNumber,
+                                    last4: last4)
+                                : Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0, vertical: 15),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        TextWidget(
+                                          text: loc.payoutTxtAttachedCard,
+                                          textSize: 27,
+                                          fontWeight: FontWeight.w700,
+                                          textAlign: TextAlign.start,
+                                        ),
+                                        UIHelper.verticalSpaceSmall,
+                                        CardInfoWidget(
+                                          last4: listOfExtAccounts.first.last4!,
+                                          expMonth: listOfExtAccounts
+                                              .first.expMonth!
+                                              .toString(),
+                                          expYear: listOfExtAccounts
+                                              .first.expYear!
+                                              .toString(),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                          if (listOfExtAccounts.isEmpty)
+                            MainButton(
+                                text: loc.payoutBtnAddBank, onPressed: _addBank)
+                        ],
+                      )
+          ],
+        )
       : const LoadingWidget();
         },
         )
@@ -118,24 +169,37 @@ class PayoutScreen extends StatelessWidget {
     body: loc.payoutDialogBody,
     negativeBtnTitle: loc.payoutDialogBtnNegative, 
     positiveBtnTitle: loc.payoutDialogBtnPositive, 
-    onPositiveBtnPressed: (amount) async {
+    onPositiveBtnPressed: (enteredAmount, withdrawType) async {
       bool isConnected = await InternetInfo.isConnected();
       if(isConnected) {
-        if (double.parse(amount).round() <= userSummary!.coinEarned!.round() ) {
+        String withdrawAmount;
+        switch(withdrawType) {
+          case WithdrawType.minimum:
+            withdrawAmount = AppConstants.minimumWithdraw.toString();
+            break;
+          case WithdrawType.maximum:
+            withdrawAmount = userSummary!.coinEarned!.round().toString();
+            break;
+          case WithdrawType.custom:
+            withdrawAmount = enteredAmount;
+            break;
+        }
+        if (double.parse(withdrawAmount).round() <= userSummary!.coinEarned!.round() ) {
           Loader.showLoader();
-          bool isTransfered = await _payoutViewModel!.transferToUser(amount);
+          bool isTransfered = await _payoutViewModel!.transferToUser(withdrawAmount);
           if (isTransfered == true) {
-            PayoutModel? payoutModel = await _payoutViewModel!.payoutMoney(amount, currency!, listOfExtAccounts.first.id!);
+            PayoutModel? payoutModel = await _payoutViewModel!.payoutMoney(
+                    withdrawAmount, currency!, listOfExtAccounts.first.id!);
             if(payoutModel != null) {
               bool success = await _payoutViewModel!.withdrawCoins(
-                amountInDollars: amount, 
+                amountInDollars: withdrawAmount, 
                 payoutToken: payoutModel.id);
               if(success == true) {
                 FancyDialog.showSuccess(
                   context: _context!,
                   title: loc.payoutDialogTxtSuccessTitle,
                   onOkPressed: () async => await _payoutViewModel!.updateCoins(_dashBoardViewModel),
-                  description: "${loc.payoutDialogTxtSuccessDesc} $amount\$");
+                  description: "${loc.payoutDialogTxtSuccessDesc} $withdrawAmount\$");
               } else {
                 ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
               }

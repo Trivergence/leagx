@@ -351,6 +351,8 @@ class Datum {
     this.fingerprint,
     this.last4,
     this.routingNumber,
+    this.expMonth,
+    this.expYear,
     this.status,
   });
 
@@ -368,6 +370,8 @@ class Datum {
   String? fingerprint;
   String? last4;
   String? routingNumber;
+  int? expMonth;
+  int? expYear;
   String? status;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -386,6 +390,8 @@ class Datum {
         fingerprint: json["fingerprint"],
         last4: json["last4"],
         routingNumber: json["routing_number"],
+        expMonth: json["exp_month"],
+        expYear: json["exp_year"],
         status: json["status"],
       );
 

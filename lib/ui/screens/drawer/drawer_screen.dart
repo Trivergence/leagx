@@ -13,6 +13,7 @@ import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:leagx/view_models/payout_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:payments/payments.dart';
 import 'package:provider/provider.dart';
@@ -166,8 +167,8 @@ class DrawerScreen extends StatelessWidget {
       await preferenceHelper.removeUser();
       context.read<DashBoardViewModel>().clearData();
       context.read<WalletViewModel>().clearData();
+      context.read<PayoutViewModel>().clearData();
       locator<PaymentConfig>().setCustomerCred = null;
-      StripeConfig().setSecretkey(key: "");
       Navigator.pushNamedAndRemoveUntil(
           context, Routes.signin, (_) => false);
     }

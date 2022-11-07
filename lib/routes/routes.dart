@@ -29,7 +29,7 @@ import 'package:leagx/ui/screens/terms_service/terms_service_screen.dart';
 import 'package:leagx/ui/screens/upcoming_matches.dart';
 import 'package:leagx/ui/screens/user/user.dart';
 import 'package:flutter/material.dart';
-import 'package:leagx/ui/screens/wallet/wallet.dart';
+import 'package:leagx/ui/screens/wallet/wallet_screen.dart';
 
 import '../ui/screens/choose_fixture.dart/choose_match_screen.dart';
 import '../ui/screens/choose_plan/choose_plan_screen.dart';
