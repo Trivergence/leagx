@@ -9,7 +9,8 @@ import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:multiple_result/multiple_result.dart';
-import 'package:payments/payments.dart' hide ApiModels, ApiService;
+import 'package:payments/models/error_model.dart';
+import 'package:payments/payments.dart' hide ApiModels, ApiService ;
 
 import '../core/network/api/api_models.dart';
 import '../core/network/api/api_service.dart';
@@ -44,9 +45,9 @@ class WalletViewModel extends BaseModel {
   Future<void> getUserPaymentMethods({save = false}) async {
     CustomerCred? customerCred = locator<PaymentConfig>().getCustomerCred;
     if (customerCred != null) {
-      Result<String, List<PayMethod>> result = await PayIn.getPaymentMethods(customerId: customerCred.customerId.toString());
-      result.when((errorCode) {
-        PaymentExceptions.handleException(errorCode: errorCode);
+      Result<ErrorModel, List<PayMethod>> result = await PayIn.getPaymentMethods(customerId: customerCred.customerId.toString());
+      result.when((errorModel) {
+        handleError(errorModel);
         setBusy(false);
       }, (paymentMethods) async {
         _paymentMethods = paymentMethods;
@@ -96,12 +97,12 @@ class WalletViewModel extends BaseModel {
       String? _secretKey;
       String? customerId = locator<PaymentConfig>().getCustomerCred!.customerId;
       if (customerId != null) {
-        Result<String, String?> result = await PayIn.createIndirectPaymentIntent(
+        Result<ErrorModel, String?> result = await PayIn.createIndirectPaymentIntent(
           customerId: customerId, 
           amount: amount, 
           currency: currency);
-        result.when((errorCode) {
-          PaymentExceptions.handleException(errorCode: errorCode);
+        result.when((errorModel) {
+          handleError(errorModel);
           success = false;
         }, (secretKey) async {
           if (secretKey != null) {
@@ -138,14 +139,13 @@ class WalletViewModel extends BaseModel {
     bool success = false;
     String? customerId = locator<PaymentConfig>().getCustomerCred!.customerId;
     if (customerId != null) {
-      Result<String, bool> result = await PayIn.createDirectPaymentIntent(
+      Result<ErrorModel, bool> result = await PayIn.createDirectPaymentIntent(
           customerId: customerId, amount: amount, currency: currency, paymentMethodId: _paymentMethods.first.id!);
-      result.when((errorCode) {
+      result.when((errorModel) {
+        handleError(errorModel);
         success = false;
-        PaymentExceptions.handleException(errorCode: errorCode);
-      }, (isSuccessfull) {
-        success = isSuccessfull;
-      });
+      }, (isSuccessfull) => success = isSuccessfull,
+      );
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
@@ -155,10 +155,9 @@ class WalletViewModel extends BaseModel {
   Future<void> addPaymentMethod() async {
     String? customerId = locator<PaymentConfig>().getCustomerCred!.customerId;
     if (customerId != null) {
-      Result<String, String?> result = await PayIn.createSetupIntent(customerId: customerId);
-      result.when((errorCode) {
-        PaymentExceptions.handleException(errorCode: errorCode);
-      }, (secretKey) async {
+      Result<ErrorModel, String?> result = await PayIn.createSetupIntent(customerId: customerId);
+      result.when((errorModel) => handleError(errorModel), 
+      (secretKey) async {
         if (secretKey != null) {
           try {
             await Stripe.instance.initPaymentSheet(
@@ -181,13 +180,12 @@ class WalletViewModel extends BaseModel {
 
   Future<void> createCustomer({required User userData}) async {
     if(StripeConfig().getSecretKey.isNotEmpty) {
-        Result<String, Customer> customer =
+        Result<ErrorModel, Customer> customer =
           await PayIn.createCustomer(userId: userData.id.toString(), userName: userData.firstName!, userEmail: userData.email);
-      customer.when((errorCode) {
-        PaymentExceptions.handleException(errorCode: errorCode);
-      }, (customer) async {
-        await saveCustomerId(userData.id, customer.id);
-      });
+      customer.when((errorModel) {
+        handleError(errorModel);
+      }, (customer) async => await saveCustomerId(userData.id, customer.id)
+      );
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
       await setupStripeCredentials();
@@ -276,5 +274,12 @@ class WalletViewModel extends BaseModel {
     return success;
   }
 
+  void handleError(ErrorModel errorModel) {
+    if (errorModel.error!.code != null) {
+      PaymentExceptions.handleException(errorCode: errorModel.error!.code!);
+    } else {
+      ToastMessage.show(errorModel.error!.message!, TOAST_TYPE.error);
+    }
+  }
   clearData() => _paymentMethods = [];
 }
