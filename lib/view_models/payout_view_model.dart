@@ -22,9 +22,11 @@ import '../service/payment_service/payment_config.dart';
 import '../ui/util/locale/localization.dart';
 
 class PayoutViewModel extends BaseModel{
-  ExpressAccount? _expressAccount ;
+  ExpressAccount? _expressAccount;
+  bool _payoutAvailable = true;
 
   ExpressAccount? get expressAccount => _expressAccount;
+  bool get isPayoutAvailble => _payoutAvailable;
 
   Future<void>initializeData() async {
     setBusy(true);
@@ -41,8 +43,13 @@ class PayoutViewModel extends BaseModel{
         Result<String?, ExpressAccount> result =
             await PayOut.createExpressAccount(countryCode: countryCode);
         result.when(
-            (errorCode) =>
-                PaymentExceptions.handleException(errorCode: errorCode!),
+            (errorCode) {
+              if(errorCode == "country_unsupported") {
+                _payoutAvailable = false;
+              } else {
+                PaymentExceptions.handleException(errorCode: errorCode!);
+              }
+            },
             (expressAccount) async {
               await updateAccountId(accountId: expressAccount.id);
         });

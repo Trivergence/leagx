@@ -4,4 +4,6 @@ class AppConstants {
   
   static const int networkTimeout = 60000;
   static const int minimumWithdraw = 50;
+
+  static const String payoutUrl = "https://stripe.com/docs/connect/cross-border-payouts";
 }

@@ -2,8 +2,13 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:country_codes/country_codes.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:intl/intl.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../ui/util/locale/localization.dart';
 
 class Utility{
   static bool isMatchOver(String status) {
@@ -51,5 +56,27 @@ class Utility{
       timeZone = "Asia/Riyadh";
     }
     return timeZone;
+  }
+
+    static Future<void> openUrl({required String url}) async {
+    Uri? parsedUrl = Uri.tryParse(url);
+    if (parsedUrl != null) {
+      try {
+        if (!await launchUrl(
+          parsedUrl,
+          mode: LaunchMode.inAppWebView,
+        )) {
+          ToastMessage.show(
+              loc.errorInvalidUrl, TOAST_TYPE.error);
+        }
+      } on PlatformException catch (_) {
+      } catch (_) {
+        ToastMessage.show(
+              loc.errorInvalidUrl, TOAST_TYPE.error);
+      }
+    } else {
+      ToastMessage.show(
+              loc.errorInvalidUrl, TOAST_TYPE.error);
+    }
   }
 }
