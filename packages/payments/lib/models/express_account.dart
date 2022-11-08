@@ -99,7 +99,7 @@ class Requirements {
   });
 
   List<dynamic> alternatives;
-  dynamic currentDeadline;
+  int? currentDeadline;
   List<String> currentlyDue;
   String? disabledReason;
   List<dynamic> errors;

@@ -46,4 +46,9 @@ class DateUtility {
         DateTime(hour, minutes);
     return parsedDateTime;
   }
+
+  static DateTime getDateFronStamp({required int timeStamp}) {
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+    return dateTime;
+  }
 }
