@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/core/utility.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/currency.dart';
 import 'package:leagx/service/payment_service/payment_exception.dart';
 import 'package:leagx/service/service_locator.dart';
+import 'package:leagx/ui/util/app_dialogs/verify_alert_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
@@ -197,4 +199,17 @@ class PayoutViewModel extends BaseModel{
   }
 
   clearData() => _expressAccount = null;
+  
+  void showVerificationDialog(BuildContext context) {
+    if(_expressAccount != null  
+    && _expressAccount!.requirements  != null 
+    && _expressAccount!.requirements!.eventuallyDue.isNotEmpty) {
+      VerificationAlertDialog.show(
+        context: context,
+        title: "Verification Required",
+        listOfRequirements: _expressAccount!.requirements!.eventuallyDue, 
+        negativeBtnTitle: "Later", 
+        positiveBtnTitle: "Upload Now", onPositiveBtnPressed: (dialogContext){});
+    }
+  }
 }

@@ -51,6 +51,7 @@ class PayoutScreen extends StatelessWidget {
         onModelReady: (PayoutViewModel model) async {
           SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
             await model.initializeData();
+            model.showVerificationDialog(context);
           });
         },
         builder: (context, PayoutViewModel model,_ ) {
