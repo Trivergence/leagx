@@ -31,15 +31,21 @@ class _DetailTileState extends State<DetailTile> {
   Widget build(BuildContext context) {
     return !isLoading ? Container(
       color: widget.tileColor,
-      padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 40),
+      padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextWidget(text: widget.leftValue, color: AppColors.colorYellow,),
+          SizedBox(
+            width: 40,
+            child: TextWidget(text: widget.leftValue, color: AppColors.colorYellow, textAlign: TextAlign.right,)),
           TextWidget(text: title!),
-          TextWidget(text: widget.rightValue,
-            color: AppColors.colorRed,
-            textAlign: TextAlign.end,
+          SizedBox(
+            width: 40,
+            child: TextWidget(
+              text: widget.rightValue,
+              color: AppColors.colorRed,
+              textAlign: TextAlign.left,
+            ),
           ),
       ],),
     )

@@ -152,7 +152,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               color: AppColors.colorGrey,
                             ),
                             ProfileDetailWidget(
-                              value: "0",
+                              value: userSummary != null ? userSummary.remainingPredictions!.toString() : "0",
                               title: loc.profileProfileSettingsTxtPrediction,
                               buttonTitle: loc.profileProfileSettingsTxtAddPredictions,
                               onBtnPressed: () async {
