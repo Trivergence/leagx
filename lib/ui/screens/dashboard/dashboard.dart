@@ -2,7 +2,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/enums.dart';
-import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture/fixture.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
 import 'package:leagx/ui/screens/dashboard/components/leader/leader.dart';
@@ -22,8 +21,10 @@ import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
+import '../../../models/user_summary.dart';
 import '../../../view_models/subscription_viewmodel.dart';
 import '../../../view_models/dashboard_view_model.dart';
+import '../../widgets/appbar_chip.dart';
 import '../../widgets/loading_widget.dart';
 import '../base_widget.dart';
 
@@ -73,30 +74,23 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           });
         },
         builder: (context, DashBoardViewModel dashboardModel, _) {
+          UserSummary? _userSummary = context.select<DashBoardViewModel, UserSummary?>(
+              (dasboardModel) => dasboardModel.userSummary);
           return Scaffold(
             appBar: AppBarWidget(
               isIcon: true,
               isDrawer: true,
               trailing: [
-                IconButton(
-                icon: const IconWidget(
-                  iconData: Icons.refresh,
+                AppBarChip(
+                  totalValue: _userSummary != null ? _userSummary.remainingPredictions.toString() : "0",
+                  leading: "P",
                 ),
-                onPressed: () async { 
-                  bool isConnected = await InternetInfo.isConnected();
-                  if(isConnected) {
-                    dashboardModel.getData(context);
-                  }
-                }),
-                IconButton(
-                icon: const IconWidget(
-                  iconData: Icons.notifications_outlined,
+                AppBarChip(
+                  totalValue: _userSummary != null
+                      ? _userSummary.coinEarned!.round().toString()
+                      : "0",
+                  leading: "\$",
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.notification);
-                },
-              ),
-              
               ],
             ),
             drawer: DrawerScreen(),
