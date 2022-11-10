@@ -45,6 +45,7 @@ class MainButton extends StatelessWidget {
           primary: Colors.transparent,
           shadowColor: Colors.transparent,
           elevation: 0.0,
+          padding: const EdgeInsets.symmetric(horizontal: 3)
         ),
         onPressed: onPressed,
       ),
