@@ -87,6 +87,10 @@
 	"chooseLeagueTxtSearch": "Search",
 	"chooseLeagueBtnUnsubscribe": "Unsubscribe",
 	"chooseLeagueBtnSubscribe": "Subscribe",
+	"chooseLeagueDialogTitle": "Confirmation",
+	"chooseLeagueDialogbody": "Are you sure you want to unsubscribe this league?",
+	"chooseLeagueDialogBtnCancel": "Cancel",
+	"chooseLeagueDialogBtnConfirm": "Confirm",
 
 	"choosePlanTxtChooseAPlan": "Choose a Package",
 	"choosePlanDialogSuccessTitle": "Purchase Successful",

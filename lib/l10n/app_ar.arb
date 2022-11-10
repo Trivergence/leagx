@@ -86,6 +86,10 @@
 	"chooseLeagueBtnUnsubscribe": "إلغاء الاشتراك",
 	"chooseLeagueTxtChooseALeague": "اختر الدوري",
 	"chooseLeagueTxtSearch": "بحث",
+	"chooseLeagueDialogTitle": "تأكيد",
+	"chooseLeagueDialogbody": "هل أنت متأكد أنك تريد إلغاء الاشتراك في هذا الدوري؟",
+	"chooseLeagueDialogBtnCancel": "يلغي",
+	"chooseLeagueDialogBtnConfirm": "يتأكد",
 
 	"choosePlanTxtChooseAPlan": "اختر الباقة",
 	"choosePlanDialogSelectPayment": "اختار طريقة الدفع",
