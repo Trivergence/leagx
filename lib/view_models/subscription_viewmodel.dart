@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/api/api_service.dart';
 import 'package:leagx/core/network/app_url.dart';
+import 'package:leagx/core/network/internet_info.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/subscription_plan.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
+import 'package:leagx/ui/util/app_dialogs/confirmation_dialog.dart';
 import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +44,7 @@ class SubscriptionViewModel extends BaseModel {
     }
   }
 
-  loadData(BuildContext context) async {
+  Future<void> loadData(BuildContext context) async {
     DashBoardViewModel dashBoardViewModel = context.read<DashBoardViewModel>();
     setBusy(true);
     try {
@@ -80,8 +83,8 @@ class SubscriptionViewModel extends BaseModel {
           context: context,
           title: loc.choosePlanDialogSuccessTitle,
           description: loc.choosePlanDialogSuccessDesc,
-          onOkPressed: () {
-            loadData(context); 
+          onOkPressed: () async {
+            await loadData(context);
             Navigator.of(context).popUntil((route) {
               return route.settings.name == Routes.chooseLeague;
             });
@@ -135,6 +138,46 @@ class SubscriptionViewModel extends BaseModel {
       }
     } else {
       Loader.hideLoader();
+    }
+  }
+
+  void showUnsubscribeDialog({required  BuildContext context, required int leagueId}) {
+    ConfirmationDialog.show(context: context, 
+    title: loc.chooseLeagueDialogTitle, 
+    body: loc.chooseLeagueDialogbody, 
+    negativeBtnTitle: loc.chooseLeagueDialogBtnCancel,
+    positiveBtnTitle: loc.chooseLeagueDialogBtnConfirm, 
+    onPositiveBtnPressed: (dialogContext) async {
+      bool isConnnected = await InternetInfo.isConnected();
+      if (isConnnected == true) {
+        Navigator.of(dialogContext).pop();
+        await unsubscribeLeague(context: context, leagueId: leagueId);
+      }
+    });
+  }
+
+  Future<void> unsubscribeLeague({
+    required BuildContext context,
+    required int leagueId,}) async {
+    Loader.showLoader();
+    User? user = locator<SharedPreferenceHelper>().getUser();
+    if (user != null) {
+    bool success = await ApiService.callPutApiWoResponce(
+      body: {
+       "league_id": leagueId, 
+       "user_id": user.id
+      },
+      url: AppUrl.unsubscribeLeague
+     );
+    if (success == true) {
+       Loader.hideLoader();
+       loadData(context);
+      } else {
+        Loader.hideLoader();
+        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+     }
+    } else {
+      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
   }
 

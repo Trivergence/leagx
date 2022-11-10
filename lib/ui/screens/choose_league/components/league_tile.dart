@@ -2,9 +2,13 @@ import 'package:leagx/models/choose_plan_args.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/shimmer_widget.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:leagx/view_models/subscription_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
@@ -61,8 +65,8 @@ class _LeagueTileState extends State<LeagueTile> {
             width: 88,
             child: widget.hasSubscribed
                 ? MainButton(
-                    text: loc.chooseLeagueBtnSubscribed,
-                    onPressed: () {},
+                    text: loc.chooseLeagueBtnUnsubscribe,
+                    onPressed: _unSubscribe,
                     fontWeight: FontWeight.w400,
                     fontSize: 10,
                   )
@@ -84,5 +88,16 @@ class _LeagueTileState extends State<LeagueTile> {
     isLoading = false;
     setState(() {
     });
+  }
+
+  Future<void> _unSubscribe() async {
+    int? leagueId = context.read<DashBoardViewModel>().getLeagueInternalId(widget.leagueId);
+    if(leagueId != null) {
+      context.read<SubscriptionViewModel>().showUnsubscribeDialog(
+        context: context,
+        leagueId: leagueId);
+    } else {
+      ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+    }
   }
 }

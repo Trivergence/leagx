@@ -58,13 +58,13 @@ class ChoosePlanScreen extends StatelessWidget {
                           Navigator.of(context).pop();
                           switch(paymentType) {
                             case PaymentType.wallet:
-                              showConfirmationDialog(
+                              showConfirmSubscriptionDialog(
                                 type: PaymentType.wallet,
                                 price: price,
                                 planId: planId);
                               break;
                             case PaymentType.card:
-                              showConfirmationDialog(
+                              showConfirmSubscriptionDialog(
                                   type: PaymentType.card,
                                   price: price,
                                   planId: planId);
@@ -72,7 +72,7 @@ class ChoosePlanScreen extends StatelessWidget {
                           }
                         });
                   } else {
-                    showConfirmationDialog(
+                    showConfirmSubscriptionDialog(
                         type: PaymentType.card, price: price, planId: planId);
                   }
                 },
@@ -125,8 +125,8 @@ class ChoosePlanScreen extends StatelessWidget {
   }
 
   
-  void showConfirmationDialog({
-    required PaymentType type, 
+  void showConfirmSubscriptionDialog({
+    required PaymentType type,
     required int planId, 
     required String price}) {
     ConfirmationDialog.show(
