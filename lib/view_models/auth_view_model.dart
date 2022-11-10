@@ -48,7 +48,8 @@ class AuthViewModel {
   static Future<bool> subscribeOneLeague(int userId) async {
     Map<String,dynamic> body = {
       "user_id": userId,
-      "plan_id": 1,
+      "plan_id": 5,
+      "pay_by_wallet": false,
       "league": {
         "title": "King's Cup",
         "logo": "",

@@ -26,7 +26,7 @@ class AccountLink {
         object: json["object"],
         created: json["created"] ?? "",
         expiresAt: json["expires_at"] ?? "",
-        url: json["url"],
+        url: json["url"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

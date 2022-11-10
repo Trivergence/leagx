@@ -281,6 +281,8 @@
 	"payoutDialogWithdrawTypeMinimum": "الحد الأدنى",
 	"payoutDialogWithdrawTypeMaximum": "أقصى",
 	"payoutDialogWithdrawTypeCustom": "العادة",
+	"payoutBtnDetails": "تفاصيل",
+	"errorPayoutNotAvailable": "العائد غير متوفر في منطقتك",
 
 	"addPayoutTxtTitle": "أضف التفاصيل",
 	
@@ -300,7 +302,8 @@
 	"errorRequestForbidden": "ممنوع",
 	"errorInternalServer": "خطأ في الخادم الداخلي",
 	"errorBadGateway": "مدخل خاطأ",
-	"errorWithdrawLimit": "",
+	"errorWithdrawLimit": "حد سحب المبلغ هو 50 دولارًا",
+	"errorInvalidUrl": "يبدو أن عنوان Url غير صالح ، ولا يمكن فتحه.",
 
 	"errorStripeAccountAlreadyExists": "",
     "errorStripeAccountCountryInvalidAddress": "",

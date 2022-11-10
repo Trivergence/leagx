@@ -1,13 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/core/utility.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/currency.dart';
 import 'package:leagx/service/payment_service/payment_exception.dart';
 import 'package:leagx/service/service_locator.dart';
+import 'package:leagx/ui/util/app_dialogs/verify_alert_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:payments/models/error_model.dart';
 import 'package:payments/models/express_account.dart';
 import 'package:payments/models/payout_model.dart';
 import 'package:payments/models/transfer.dart';
@@ -22,9 +25,11 @@ import '../service/payment_service/payment_config.dart';
 import '../ui/util/locale/localization.dart';
 
 class PayoutViewModel extends BaseModel{
-  ExpressAccount? _expressAccount ;
+  ExpressAccount? _expressAccount;
+  bool _payoutAvailable = true;
 
   ExpressAccount? get expressAccount => _expressAccount;
+  bool get isPayoutAvailble => _payoutAvailable;
 
   Future<void>initializeData() async {
     setBusy(true);
@@ -38,14 +43,12 @@ class PayoutViewModel extends BaseModel{
     if( customerCred != null && locator<PaymentConfig>().getAccountId == null) {
       String? countryCode = Utility.getCountryCode();
       if (countryCode != null) {
-        Result<String?, ExpressAccount> result =
+        Result<ErrorModel, ExpressAccount> result =
             await PayOut.createExpressAccount(countryCode: countryCode);
         result.when(
-            (errorCode) =>
-                PaymentExceptions.handleException(errorCode: errorCode!),
-            (expressAccount) async {
-              await updateAccountId(accountId: expressAccount.id);
-        });
+            (errorModel) => handleError(errorModel),
+            (expressAccount) async => await updateAccountId(accountId: expressAccount.id),
+          );
       }
     }
   }
@@ -53,10 +56,9 @@ class PayoutViewModel extends BaseModel{
   Future<void> getAccountDetails() async {
     String? accountId = locator<PaymentConfig>().getAccountId;
     if(accountId != null) {
-     Result<String, ExpressAccount> result = await PayOut.getAccount(accountId);
-     result.when((errorCode) => PaymentExceptions.handleException(errorCode: errorCode), (expressAccount) {
-        _expressAccount = expressAccount;
-     });
+     Result<ErrorModel, ExpressAccount> result = await PayOut.getAccount(accountId);
+     result.when((errorModel) => handleError(errorModel), 
+     (expressAccount) => _expressAccount = expressAccount,);
     }
   }
 
@@ -91,11 +93,10 @@ class PayoutViewModel extends BaseModel{
     await createAccount();
     String? accountId = locator<PaymentConfig>().getAccountId;
     if(accountId != null) {
-      Result<String? , String> result = await PayOut.createAccountLink(accountId);
-      result.when((errorCode) => PaymentExceptions.handleException(errorCode: errorCode!), 
-      (link) {
-        accountLink = link;
-      });
+      Result<ErrorModel , String> result = await PayOut.createAccountLink(accountId);
+      result.when((errorModel) =>  handleError(errorModel),
+      (link) =>  accountLink = link,
+      );
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
@@ -126,13 +127,13 @@ class PayoutViewModel extends BaseModel{
     String? convertedAmount = await convertAmount(from: "usd", to: currency, withdrawlAmount: amount);
     CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
     if(savedCred != null && savedCred.accountId != null && convertedAmount != null) {
-      Result<String, PayoutModel> result = await PayOut.payout(convertedAmount, currency, bankId, savedCred.accountId!);
-      result.when((errorCode) {
+      Result<ErrorModel, PayoutModel> result = await PayOut.payout(convertedAmount, currency, bankId, savedCred.accountId!);
+      result.when((errorModel) {
+        handleError(errorModel);
         Loader.hideLoader();
-        PaymentExceptions.handleException(errorCode: errorCode);
-      }, (payoutModel) {
-          _payoutModel = payoutModel;
-      });
+      }, (payoutModel) =>
+        _payoutModel = payoutModel,
+      );
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
@@ -145,16 +146,15 @@ class PayoutViewModel extends BaseModel{
     bool success = false;
     CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
     if (savedCred != null && savedCred.accountId != null) {
-      Result<String, Transfer> result =
+      Result<ErrorModel, Transfer> result =
           await PayOut.transfer(amount, savedCred.accountId!);
       result.when(
-          (errorCode) {
+          (errorModel) {
             Loader.hideLoader();
-            PaymentExceptions.handleException(errorCode: errorCode);
+            handleError(errorModel);
           },
-          (_) {
-        success = true;
-      });
+          (_) => success = true
+        );
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
@@ -186,5 +186,30 @@ class PayoutViewModel extends BaseModel{
     setBusy(false);
   }
 
+  void handleError(ErrorModel errorModel) {
+    if (errorModel.error!.code != null) {
+      if (errorModel.error!.code == "country_unsupported") {
+        _payoutAvailable = false;
+      } else {
+        PaymentExceptions.handleException(errorCode: errorModel.error!.code!);
+      }
+    } else {
+      ToastMessage.show(errorModel.error!.message!, TOAST_TYPE.error);
+    }
+  }
+
   clearData() => _expressAccount = null;
+  
+  void showVerificationDialog(BuildContext context) {
+    if(_expressAccount != null  
+    && _expressAccount!.requirements  != null 
+    && _expressAccount!.requirements!.eventuallyDue.isNotEmpty) {
+      VerificationAlertDialog.show(
+        context: context,
+        title: "Verification Required",
+        listOfRequirements: _expressAccount!.requirements!.eventuallyDue, 
+        negativeBtnTitle: "Later", 
+        positiveBtnTitle: "Upload Now", onPositiveBtnPressed: (dialogContext){});
+    }
+  }
 }

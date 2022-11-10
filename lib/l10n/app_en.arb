@@ -281,6 +281,8 @@
 	"payoutDialogWithdrawTypeMinimum": "Minimum",
 	"payoutDialogWithdrawTypeMaximum": "Maximum",
 	"payoutDialogWithdrawTypeCustom": "Custom",
+	"payoutBtnDetails": "Details",
+	"errorPayoutNotAvailable": "Payout is not available in your region",
 
 	"addPayoutTxtTitle": "Add Details",
 
@@ -300,7 +302,8 @@
 	"errorRequestForbidden": "Forbidden",
 	"errorInternalServer": "Internal server error",
 	"errorBadGateway": "Bad gateway",
-	"errorWithdrawLimit": "Wihtdraw amount limit is 50$",
+	"errorWithdrawLimit": "Withdraw amount limit is 50$",
+	"errorInvalidUrl": "Url seems invalid, unable to open.",
 
 	"errorStripeAccountAlreadyExists": "The email address provided for the creation of a deferred account already has an account associated with it.",
     "errorStripeAccountCountryInvalidAddress": "The country of the business address provided does not match the country of the account.",

@@ -25,6 +25,7 @@ import '../../../constants/enums.dart';
 import '../../../core/network/internet_info.dart';
 import '../../widgets/text_widget.dart';
 import 'components/bank_info.dart';
+import 'components/payout_footer.dart';
 
 // ignore: must_be_immutable
 class PayoutScreen extends StatelessWidget {
@@ -50,6 +51,7 @@ class PayoutScreen extends StatelessWidget {
         onModelReady: (PayoutViewModel model) async {
           SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
             await model.initializeData();
+            //model.showVerificationDialog(context);
           });
         },
         builder: (context, PayoutViewModel model,_ ) {
@@ -61,74 +63,75 @@ class PayoutScreen extends StatelessWidget {
         return !_payoutViewModel!.busy ? Stack(
           children: [
             Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15.0, vertical: 20.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextWidget(
-                                  text: loc.payoutTxtTotalAmount,
-                                  textSize: Dimens.textMedium,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                TextWidget(
-                                    text: (userSummary != null
-                                            ? userSummary!.coinEarned!
-                                                .round()
-                                                .toString()
-                                            : "0.0") +
-                                        "\$",
-                                    textSize: Dimens.textMedium)
-                              ],
-                            ),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0, vertical: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextWidget(
+                        text: loc.payoutTxtTotalAmount,
+                        textSize: Dimens.textMedium,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      TextWidget(
+                        text: (userSummary != null
+                          ? userSummary!.coinEarned!
+                              .round()
+                              .toString()
+                          : "0.0") +
+                      "\$",
+                        textSize: Dimens.textMedium)
+                    ],
+                  ),
+                ),
+                if (listOfExtAccounts.isNotEmpty && _payoutViewModel!.isPayoutAvailble)
+                  SizedBox(
+                      width: 200,
+                      child: MainButton(
+                          text: loc.payoutBtnWithdraw,
+                          onPressed: _withdraw)),
+                UIHelper.verticalSpaceLarge,
+                if (listOfExtAccounts.isNotEmpty && _payoutViewModel!.isPayoutAvailble)
+                  listOfExtAccounts.first.object == "bank_account"
+                      ? BankInfoWidget(
+                          bankName: bankName,
+                          currency: currency,
+                          routingNumber: routingNumber,
+                          last4: last4)
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 15),
+                          child: Column(
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                            children: [
+                              TextWidget(
+                                text: loc.payoutTxtAttachedCard,
+                                textSize: 27,
+                                fontWeight: FontWeight.w700,
+                                textAlign: TextAlign.start,
+                              ),
+                              UIHelper.verticalSpaceSmall,
+                              CardInfoWidget(
+                                last4: listOfExtAccounts.first.last4!,
+                                expMonth: listOfExtAccounts
+                                    .first.expMonth!
+                                    .toString(),
+                                expYear: listOfExtAccounts
+                                    .first.expYear!
+                                    .toString(),
+                              ),
+                            ],
                           ),
-                          if (listOfExtAccounts.isNotEmpty)
-                            SizedBox(
-                                width: 200,
-                                child: MainButton(
-                                    text: loc.payoutBtnWithdraw,
-                                    onPressed: _withdraw)),
-                          UIHelper.verticalSpaceLarge,
-                          if (listOfExtAccounts.isNotEmpty)
-                            listOfExtAccounts.first.object == "bank_account"
-                                ? BankInfoWidget(
-                                    bankName: bankName,
-                                    currency: currency,
-                                    routingNumber: routingNumber,
-                                    last4: last4)
-                                : Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15.0, vertical: 15),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        TextWidget(
-                                          text: loc.payoutTxtAttachedCard,
-                                          textSize: 27,
-                                          fontWeight: FontWeight.w700,
-                                          textAlign: TextAlign.start,
-                                        ),
-                                        UIHelper.verticalSpaceSmall,
-                                        CardInfoWidget(
-                                          last4: listOfExtAccounts.first.last4!,
-                                          expMonth: listOfExtAccounts
-                                              .first.expMonth!
-                                              .toString(),
-                                          expYear: listOfExtAccounts
-                                              .first.expYear!
-                                              .toString(),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                          if (listOfExtAccounts.isEmpty)
-                            MainButton(
-                                text: loc.payoutBtnAddBank, onPressed: _addBank)
-                        ],
-                      )
+                        ),
+                if (listOfExtAccounts.isEmpty && _payoutViewModel!.isPayoutAvailble)
+                  MainButton(
+                      text: loc.payoutBtnAddBank, onPressed: _addBank)
+              ],
+            ),
+           if(!_payoutViewModel!.isPayoutAvailble) const PayoutFooter(), 
           ],
         )
       : const LoadingWidget();

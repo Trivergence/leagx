@@ -56,6 +56,10 @@ class DashBoardViewModel extends BaseModel {
     }
   }
 
+  Future<void> getAllFixtures() async {
+    await getSubscribedMatches();
+  }
+
   Future<void> getSubscribedMatches() async {
     // "from": DateUtility.getApiFormat(now),
     //       "to": DateUtility.getApiFormat(now.add(const Duration(days: 3))),
@@ -236,6 +240,9 @@ class DashBoardViewModel extends BaseModel {
         baseUrl: AppUrl.baseUrl,
         url: AppUrl.getPaymentAccounts,
         modelName: ApiModels.paymentAccounts,
+        headers: {
+          "apitoken": preferenceHelper.authToken,
+        }
       );
       List<CustomerCred> listOfCred = tempList.cast<CustomerCred>().where((userCred) => userCred.userId == user.id).toList();
       if (listOfCred.isNotEmpty) {

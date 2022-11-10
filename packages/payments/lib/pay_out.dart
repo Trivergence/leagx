@@ -10,7 +10,7 @@ import 'package:payments/payments.dart';
 
 class PayOut{
 
-  static Future<Result<String, ExpressAccount>> createExpressAccount({required String countryCode}) async {
+  static Future<Result<ErrorModel, ExpressAccount>> createExpressAccount({required String countryCode}) async {
     Map<String , dynamic> body;
     if(countryCode == "US") {
       body = {
@@ -40,25 +40,25 @@ class PayOut{
       body: body,
       modelName: ApiModels.createExpressAccount
     );
-    return result.when((errorModel) => Error(errorModel.error!.code!), (responceModel) {
+    return result.when((errorModel) => Error(errorModel), (responceModel) {
       ExpressAccount expressAccount = responceModel;
       return Success(expressAccount);
     });
   }
 
-  static Future<Result<String, ExpressAccount>> getAccount(String accountId) async {
+  static Future<Result<ErrorModel, ExpressAccount>> getAccount(String accountId) async {
     String completeUrl = PaymentUrl.accounts + "/" + accountId;
     Result<ErrorModel,dynamic> result = await ApiService.callPostApi(
       url: completeUrl,
       modelName: ApiModels.createExpressAccount
     );
-    return result.when((errorModel) => Error(errorModel.error!.code!), (responceModel) {
+    return result.when((errorModel) => Error(errorModel), (responceModel) {
       ExpressAccount expressAccount = responceModel;
       return Success(expressAccount);
     });
   }
 
-  static Future<Result<String?, String>> createAccountLink(String accountId) async{
+  static Future<Result<ErrorModel, String>> createAccountLink(String accountId) async{
     var body = {
       "account": accountId,
       "refresh_url": PaymentConstants.refreshUrl,
@@ -71,13 +71,13 @@ class PayOut{
       modelName: ApiModels.createAccountLink
     );
 
-    return result.when((errorModel) => Error(errorModel.error!.code), (responceModel) {
+    return result.when((errorModel) => Error(errorModel), (responceModel) {
       AccountLink accountLink = responceModel;
       return Success(accountLink.url!);
     });
   }
 
-  static Future<Result<String, Transfer>> transfer(String amount, String accountId) async {
+  static Future<Result<ErrorModel, Transfer>> transfer(String amount, String accountId) async {
     var body = {
       "amount": (int.parse(amount) * 100).toString(),
       "currency": 'usd',
@@ -88,13 +88,13 @@ class PayOut{
       body: body,
       modelName: ApiModels.createTransfer
     );
-    return result.when((errorModel) => Error(errorModel.error!.code!), (responceModel) {
+    return result.when((errorModel) => Error(errorModel), (responceModel) {
       Transfer transfer = responceModel;
       return Success(transfer);
     });
   }
 
-  static Future<Result<String, PayoutModel>> payout(
+  static Future<Result<ErrorModel, PayoutModel>> payout(
       String amount, String currency , String cardId, String accountId) async {
     var body = {
       "amount": double.parse(amount).round().toString(),
@@ -108,11 +108,10 @@ class PayOut{
           "Stripe-Account" : accountId
         }
       );
-    return result.when((errorModel) => Error(errorModel.error!.code!),
+    return result.when((errorModel) => Error(errorModel),
         (responceModel) {
       PayoutModel payoutModel = responceModel;
       return Success(payoutModel);
     });
   }
-
 }

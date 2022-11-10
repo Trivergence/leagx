@@ -2,7 +2,7 @@ part of payments;
 
 
 class PayIn {
-  static Future<Result<String, Customer>> createCustomer({
+  static Future<Result<ErrorModel, Customer>> createCustomer({
      String? userId, 
      String? userName, 
      String? userEmail, 
@@ -21,16 +21,16 @@ class PayIn {
         modelName: ApiModels.customer
       );
       return result.when((errorModel) {
-        return Error(errorModel.error!.code!);
+        return Error(errorModel);
       }, (customerModel) {
         Customer? customer = customerModel;
         if(customer != null) {
          return Success(customer);
         }
-        return const Error("custom_code");
+        return Error(ErrorModel(error: ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
       });
   }
-  static Future<Result<String, List<PayMethod>>> getPaymentMethods({required String customerId}) async {
+  static Future<Result<ErrorModel, List<PayMethod>>> getPaymentMethods({required String customerId}) async {
     String completeUrl = PaymentUrl.customer + "/" + customerId + "/" + PaymentUrl.paymentMethods;
     var params = {"type": "card"};
      Result<ErrorModel, dynamic> result = await  ApiService.callGetApi(
@@ -38,7 +38,7 @@ class PayIn {
       modelName: ApiModels.getPaymentMethods,
       parameters: params
     );
-    return result.when((errorModel) => Error(errorModel.error!.code!), (paymentModel) {
+    return result.when((errorModel) => Error(errorModel), (paymentModel) {
       PaymentMethods? paymentMethods = paymentModel;
       if (paymentMethods != null) {
         return Success(paymentMethods.data!);
@@ -58,7 +58,7 @@ class PayIn {
       );
     return result.when((errorModel) => Error(errorModel.error!.code!), (isSuccessfull) => Success(isSuccessfull));
   }
-  static Future<Result<String, String?>> createSetupIntent(
+  static Future<Result<ErrorModel, String?>> createSetupIntent(
       {required String customerId}) async {
     Map<String,dynamic> body = {
      "payment_method_types[]": "card",
@@ -69,7 +69,7 @@ class PayIn {
       body: body,
       modelName: ApiModels.createSetupIntent);
       return result.when((errorModel) {
-        return Error(errorModel.error!.code!);
+        return Error(errorModel);
       }, (setupIntentModel) {
       SetupIntent? setupIntent = setupIntentModel;
       if(setupIntent != null) {
@@ -78,7 +78,7 @@ class PayIn {
        return const Success(null);
       });
   }
-    static Future<Result<String, String?>> createIndirectPaymentIntent({
+    static Future<Result<ErrorModel, String?>> createIndirectPaymentIntent({
       required String customerId,
       required String amount, 
       required String currency}) async {
@@ -94,7 +94,7 @@ class PayIn {
         body: body,
         modelName: ApiModels.createPaymentIntent);
         return result.when((errorModel) {
-          return Error(errorModel.error!.code!);
+          return Error(errorModel);
         }, (paymentIntentModel) {
           PaymentIntent? paymentIntent = paymentIntentModel;
           if (paymentIntent != null) {
@@ -103,7 +103,7 @@ class PayIn {
           return const Success(null);
         });
   }
-  static Future<Result<String, bool>> createDirectPaymentIntent(
+  static Future<Result<ErrorModel, bool>> createDirectPaymentIntent(
       {required String customerId,
       required String amount,
       required String currency,
@@ -123,7 +123,7 @@ class PayIn {
         body: body,
         modelName: ApiModels.createPaymentIntent);
     return result.when((errorModel) {
-      return Error(errorModel.error!.code!);
+      return Error(errorModel);
     }, (paymentIntentModel) {
       PaymentIntent? paymentIntent = paymentIntentModel;
       if (paymentIntent != null) {
