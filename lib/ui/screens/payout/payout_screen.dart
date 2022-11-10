@@ -44,7 +44,7 @@ class PayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: loc.payoutTxtPayout),
+      appBar: AppBarWidget(title: loc.payoutTxtWithdraw),
       body: BaseWidget<PayoutViewModel>(
         create: false,
         model: context.read<PayoutViewModel>(),
@@ -109,7 +109,7 @@ class PayoutScreen extends StatelessWidget {
                             children: [
                               TextWidget(
                                 text: loc.payoutTxtAttachedCard,
-                                textSize: 27,
+                                textSize: 18,
                                 fontWeight: FontWeight.w700,
                                 textAlign: TextAlign.start,
                               ),

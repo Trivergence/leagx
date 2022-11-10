@@ -29,7 +29,7 @@ class BankInfoWidget extends StatelessWidget {
         children: [
           TextWidget(
             text: loc.payoutTxtAttachedBank,
-            textSize: 27,
+            textSize: 18,
             fontWeight: FontWeight.w700,
             textAlign: TextAlign.start,
           ),

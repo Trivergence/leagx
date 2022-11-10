@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:leagx/constants/enums.dart';
-import 'package:leagx/ui/util/app_dialogs/form_dialog.dart';
-import 'package:leagx/ui/util/loader/loader.dart';
-import 'package:leagx/view_models/dashboard_view_model.dart';
-import 'package:leagx/view_models/wallet_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_button.dart';
 
 import '../../../../constants/colors.dart';
+import '../../../../core/network/internet_info.dart';
 import '../../../../models/user_summary.dart';
+import '../../../../routes/routes.dart';
 import '../../../util/locale/localization.dart';
 import '../../../util/ui/ui_helper.dart';
-import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 
 // ignore: must_be_immutable
@@ -39,18 +36,51 @@ class WalletWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextWidget(
-                text: loc.walletTxtTotalCoins,
-                color: AppColors.colorWhite,
-                fontWeight: FontWeight.w700,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextWidget(
+                    text: loc.walletTxtTotalCoins,
+                    color: AppColors.colorWhite,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  GradientBorderButton(
+                    fontSize: Dimens.textXS,
+                    height: 25,
+                    width: 100,
+                    text: loc.walletBtnRedeem, 
+                    onPressed: () async {
+                      bool isConnected = await InternetInfo.isConnected();
+                      if (isConnected) {
+                        Navigator.pushNamed(context, Routes.chooseLeague);
+                      }
+                    },
+                  )
+                ],
               ),
               UIHelper.verticalSpaceSmall,
-              TextWidget(
-                text: userSummary != null
-                    ? userSummary!.coinEarned!.round().toString()
-                    : "0.0",
-                textSize: 27,
-                fontWeight: FontWeight.w700,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextWidget(
+                    text: userSummary != null
+                        ? userSummary!.coinEarned!.round().toString()
+                        : "0.0",
+                    textSize: 27,
+                    fontWeight: FontWeight.w700,
+                  ),
+                   GradientBorderButton(
+                      fontSize: Dimens.textXS,
+                      height: 25,
+                      width: 100,
+                      text: loc.walletBtnWithdraw,
+                      onPressed: () async {
+                        bool isConnected = await InternetInfo.isConnected();
+                        if (isConnected) {
+                          Navigator.of(context).pushNamed(Routes.payout);
+                        }
+                      })
+                ],
               ),
               // UIHelper.verticalSpaceMedium,
               // MainButton(

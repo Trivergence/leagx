@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/user_summary.dart';
-import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/app_dialogs/confirmation_dialog.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
@@ -50,15 +49,19 @@ class WalletScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children:  [
             TextWidget(
-            text: loc.walletTxtWallet, 
-            textSize: 30, 
-            fontWeight: FontWeight.bold,),
+              text: loc.walletTxtWallet, 
+              textSize: 30, 
+              fontWeight: FontWeight.bold,
+              textAlign: TextAlign.center,
+            ),
             UIHelper.verticalSpaceSmall,
             WalletWidget(userSummary: _userSummary),
-            if(walletModel.getPayementMethods.isNotEmpty) TextWidget(text: loc.walletTxtAttachedCard, textSize: 27,
-            fontWeight: FontWeight.w700),
             UIHelper.verticalSpaceSmall,
-            UIHelper.verticalSpaceSmall,
+            if(walletModel.getPayementMethods.isNotEmpty) TextWidget(
+              text: loc.walletTxtAttachedMethod, 
+              textSize: 18,
+              fontWeight: FontWeight.w700),
+            UIHelper.verticalSpace(5.0),
             walletModel.getPayementMethods.isEmpty 
             ? MainButton(text: loc.walletBtnaddMethod, onPressed: _addPaymentMethod)
             :  Column(
@@ -79,15 +82,6 @@ class WalletScreen extends StatelessWidget {
             ],
           ),
           UIHelper.verticalSpaceLarge,
-          MainButton(
-            text: loc.walletBtnPayout,
-            onPressed: () async {
-              bool isConnected = await InternetInfo.isConnected();
-              if(isConnected) {
-                Navigator.of(context).pushNamed(Routes.payout);
-              }
-            }
-          ),
         ]),
       )
       : const LoadingWidget(),

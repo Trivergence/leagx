@@ -24,7 +24,7 @@ class GradientBorderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeConfig.width * 100,
+      width: width ?? SizeConfig.width * 100,
       height: height ?? 48.0,
       padding: const EdgeInsets.all(2.0),
       decoration: const BoxDecoration(
