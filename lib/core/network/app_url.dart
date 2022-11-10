@@ -3,6 +3,8 @@ class AppUrl{
   static const String baseUrl = "http://54.197.94.1/api/v1/";
   static const String currencyBaseUrl = "https://currency-converter5.p.rapidapi.com/currency/";
   static const String footballBaseUrl = "https://apiv3.apifootball.com/";
+  static const String translationUrl =
+      "http://54.211.12.135:5000/api/translation";
   static const String signup = "users/";
   static const String login = "sessions";
   static const String socialLogin = "users/social_auth";
@@ -19,7 +21,7 @@ class AppUrl{
   static const String getPaymentAccounts = "/payment_accounts";
   static const String addPaymentToken = "/payments";
   static const String setupStripeCred = "/get_stripe_cred";
+  static const String unsubscribeLeague = "leagues/un_subscribe";
 
-  static const String translationUrl =
-      "http://54.211.12.135:5000/api/translation";
+
 }
