@@ -189,7 +189,64 @@ class ApiService {
       Loader.hideLoader();
       return null;
     }
+  } 
+
+  static Future<bool> callPutApiWoResponce({
+    required String url,
+    dynamic body,
+    Map<String, dynamic>? parameters,
+    Map<String, dynamic>? headers,
+    dynamic modelName,
+  }) async {
+    try {
+      BaseOptions options = BaseOptions(
+          contentType: 'application/json',
+          baseUrl: AppUrl.baseUrl,
+          headers: {
+            "apitoken": preferenceHelper.authToken,
+          },
+          connectTimeout: AppConstants.networkTimeout,
+          receiveTimeout: AppConstants.networkTimeout,
+          sendTimeout: AppConstants.networkTimeout);
+
+      var dio = Dio(options);
+      bool isConnected = await InternetInfo.isConnected();
+      if (isConnected) {
+        Response _response = await dio.put(
+          url,
+          options: Options(headers: headers),
+          data: body,
+          queryParameters: parameters,
+        );
+        debugPrint('put response: ${_response.data}');
+        if (_response.statusCode == 200 || _response.statusCode == 201) {
+          return true;
+        }
+      }
+      return false;
+    } on DioError catch (ex) {
+      Loader.hideLoader();
+      if (ex.response != null) {
+        ErrorModel errorResponse =
+            ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
+        ToastMessage.show(
+            errorResponse.error ?? loc.errorUndefined, TOAST_TYPE.error);
+        return false;
+      } else {
+        DioExceptions.fromDioError(ex);
+        return false;
+      }
+    } on Exception {
+      Loader.hideLoader();
+      ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
+      return false;
+    } catch (e) {
+      debugPrint(e.toString());
+      Loader.hideLoader();
+      return false;
+    }
   }
+
   static Future<dynamic> callDeleteApi({
     required String url,
     dynamic body,

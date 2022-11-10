@@ -138,6 +138,10 @@ class SubscriptionViewModel extends BaseModel {
     }
   }
 
+  // void unsubscribeLeague() {
+  //   ApiService.
+  // }
+
   Future<void> getLeagues() async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(

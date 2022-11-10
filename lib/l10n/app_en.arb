@@ -85,7 +85,7 @@
 
 	"chooseLeagueTxtChooseALeague": "Choose a League",
 	"chooseLeagueTxtSearch": "Search",
-	"chooseLeagueBtnSubscribed": "Subscribed",
+	"chooseLeagueBtnUnsubscribe": "Unsubscribe",
 	"chooseLeagueBtnSubscribe": "Subscribe",
 
 	"choosePlanTxtChooseAPlan": "Choose a Package",

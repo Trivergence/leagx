@@ -105,6 +105,7 @@ class DashBoardViewModel extends BaseModel {
           modelName: ApiModels.getSubscribedLeagues);
       _subscribedLeagues = tempList.cast<SubscribedLeague>();
       _subscribedLeagueIds = getSubscribedIds();
+      print(subscribedLeagueIds);
       if (subscribedLeagueIds.isEmpty) {
         await subscribeDefaultLeague(user.id);
       }

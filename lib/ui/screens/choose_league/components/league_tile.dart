@@ -61,7 +61,7 @@ class _LeagueTileState extends State<LeagueTile> {
             width: 88,
             child: widget.hasSubscribed
                 ? MainButton(
-                    text: loc.chooseLeagueBtnSubscribed,
+                    text: loc.chooseLeagueBtnUnsubscribe,
                     onPressed: () {},
                     fontWeight: FontWeight.w400,
                     fontSize: 10,
