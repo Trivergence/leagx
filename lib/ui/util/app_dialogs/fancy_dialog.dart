@@ -17,4 +17,23 @@ class FancyDialog {
       btnOkOnPress: onOkPressed,
     ).show();
   }
+
+  static void showInfo(
+      {required BuildContext context,
+      required String title,
+      required String description,
+      required String okTitle,
+      required String cancelTitle,
+      required VoidCallback onOkPressed}) {
+    AwesomeDialog(
+      context: context,
+      animType: AnimType.rightSlide,
+      title: title,
+      desc: description,
+      btnOkOnPress: onOkPressed,
+      btnOkText: okTitle,
+      btnCancelText: cancelTitle,
+      btnCancelOnPress: () {},
+    ).show();
+  }
 }

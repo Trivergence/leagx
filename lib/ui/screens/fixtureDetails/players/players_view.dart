@@ -78,7 +78,7 @@ class PlayersView extends StatelessWidget {
   }
 
   void _showSheet() {
-   _fixtureModel.showPredictionSheet(_context!, matchDetails);
+   _fixtureModel.predictMatch(context: _context!, matchDetails: matchDetails);
   }
 
   int getLength() {

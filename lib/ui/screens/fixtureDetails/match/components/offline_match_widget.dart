@@ -7,7 +7,10 @@ import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/dimens.dart';
 import '../../../../../models/dashboard/fixture.dart';
+import '../../../../../models/user_summary.dart';
+import '../../../../../view_models/dashboard_view_model.dart';
 import '../../../../../view_models/fixture_view_model.dart';
+import '../../../../util/app_dialogs/fancy_dialog.dart';
 import '../../../../util/size/size_config.dart';
 import '../../../../util/ui/ui_helper.dart';
 import '../../../../util/validation/validation_utils.dart';
@@ -69,7 +72,6 @@ class OfflineMatchWidget extends StatelessWidget {
 
   void _showSheet() {
     _context
-        .read<FixtureDetailViewModel>()
-        .showPredictionSheet(_context, matchDetails);
+          .read<FixtureDetailViewModel>().predictMatch(context: _context, matchDetails: matchDetails);
   }
 }

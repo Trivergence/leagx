@@ -91,9 +91,9 @@ class _FixtureDetailsState extends State<FixtureDetails> {
                             : const SizedBox.shrink(),
               ],
             ) : const LoadingWidget(),
-                  ),
-          );
-        },);
+          ),
+        );
+      },);
   }
 
 }

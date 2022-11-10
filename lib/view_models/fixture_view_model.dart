@@ -13,12 +13,16 @@ import '../constants/colors.dart';
 import '../core/network/api/api_models.dart';
 import '../core/network/api/api_service.dart';
 import '../core/network/app_url.dart';
+import '../core/network/internet_info.dart';
 import '../core/utility.dart';
 import '../core/viewmodels/base_model.dart';
 import '../models/dashboard/fixture.dart';
 import '../models/user/user.dart';
+import '../models/user_summary.dart';
+import '../routes/routes.dart';
 import '../service/service_locator.dart';
 import '../ui/screens/fixtureDetails/components/prediction_bottom_sheet.dart';
+import '../ui/util/app_dialogs/fancy_dialog.dart';
 import '../ui/util/loader/loader.dart';
 
 class FixtureDetailViewModel extends BaseModel {
@@ -188,5 +192,25 @@ class FixtureDetailViewModel extends BaseModel {
       return userPredictions[0];
     }
     return null;
+  }
+
+  void predictMatch({required BuildContext context, required Fixture matchDetails}) {
+      UserSummary? userSummary = context.read<DashBoardViewModel>().userSummary;
+    if (userSummary != null && userSummary.remainingPredictions! > 0) {
+      showPredictionSheet(context, matchDetails);
+    } else {
+      FancyDialog.showInfo(
+          context: context,
+          title: loc.fixtureDetailsPredictionDialogTitle,
+          description: loc.fixtureDetailsPredictionDialogDesc,
+          okTitle: loc.fixtureDetailsPredictionDialogBtnAdd,
+          cancelTitle: loc.fixtureDetailsPredictionDialogBtnCancel,
+          onOkPressed: () async {
+            bool isConnected = await InternetInfo.isConnected();
+            if (isConnected) {
+              Navigator.pushNamed(context, Routes.chooseLeague);
+            }
+          });
+    }
   }
 }
