@@ -69,7 +69,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
                         isCircular: true,
                         iconData: Icons.add,
                         onPressed: () async {
-                            await Navigator.of(context).pushNamed(Routes.chooseLeague);
+                            await Navigator.of(context).pushNamed(Routes.chooseLeague, arguments: false);
                             setState(() {});
                         },
                       ),
