@@ -17,7 +17,7 @@ class DescWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         GradientWidget(
@@ -27,9 +27,11 @@ class DescWidget extends StatelessWidget {
               size: 14,
             )),
         UIHelper.horizontalSpace(8),
-        TextWidget(
-          text: text,
-          textSize: Dimens.textSmall,
+        Expanded(
+          child: TextWidget(
+            text: text,
+            textSize: Dimens.textSmall,
+          ),
         )
       ],
     );
