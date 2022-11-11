@@ -199,9 +199,9 @@
 	"fixtureDetailsPlayersBtnPredict": "Predict",
 	"fixtureDetailsNewsTxtEmptyList": "No news to show today",
 	"fixtureDetailsPredictionSuccess": "Prediction submitted successfully",
-	"fixtureDetailsPredictionDialogTitle": "Not Enough Predictions",
+	"fixtureDetailsPredictionDialogTitle": "Not enough balance",
 	"fixtureDetailsPredictionDialogDesc": "You have zero predictions left",
-	"fixtureDetailsPredictionDialogBtnAdd": "Add Predicitons",
+	"fixtureDetailsPredictionDialogBtnAdd": "Upgrade",
 	"fixtureDetailsPredictionDialogBtnCancel": "Cancel",
 
 	"notificationTxtNotification": "Notification",
