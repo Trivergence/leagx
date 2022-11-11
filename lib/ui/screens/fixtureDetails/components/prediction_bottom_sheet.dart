@@ -3,11 +3,13 @@ import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
+import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/shimmer_widget.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
 import '../../../../core/network/internet_info.dart';
 import '../../../../models/dashboard/fixture.dart';
@@ -73,16 +75,27 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
                 text: homeTeamName,
                 fontWeight: FontWeight.w600,
               ),
-              ScorePicker(
-                initialScore: 1,
-                isSelected: firstSelected,
-                onChanged: (score) {
-                  setState(() {
-                    secondSelected = false;
-                    firstSelected = true;
-                    homeScore = score;
-                  });
-                },
+              Row(
+                children: [
+                  ScorePicker(
+                    initialScore: 1,
+                    isSelected: firstSelected,
+                    onChanged: (score) {
+                      setState(() {
+                        secondSelected = false;
+                        firstSelected = true;
+                        homeScore = score;
+                      });
+                    },
+                  ),
+                  UIHelper.horizontalSpace(2),
+                  ImageWidget(
+                    height: 30,
+                    width: 30,
+                    placeholder: Assets.icTeamAvatar,
+                    imageUrl: widget.matchDetails!.teamHomeBadge,
+                  )
+                ],
               )
             ],
           ) : const ShimmerWidget(height: 20),
@@ -94,16 +107,26 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
                 text: awayTeamName,
                 fontWeight: FontWeight.w600,
               ),
-              ScorePicker(
-                initialScore: 2,
-                isSelected: secondSelected,
-                onChanged: (score) {
-                  setState(() {
-                    secondSelected = true;
-                    firstSelected = false;
-                    awayScore = score;
-                  });
-                },
+              Row(
+                children: [
+                  ScorePicker(
+                    initialScore: 2,
+                    isSelected: secondSelected,
+                    onChanged: (score) {
+                      setState(() {
+                        secondSelected = true;
+                        firstSelected = false;
+                        awayScore = score;
+                      });
+                    },
+                  ),
+                  UIHelper.horizontalSpace(2),
+                  ImageWidget(
+                    height: 30,
+                    width: 30,
+                    placeholder: Assets.icTeamAvatar,
+                    imageUrl: widget.matchDetails!.teamAwayBadge,)
+                ],
               )
             ],
           ) : const ShimmerWidget(height: 20),
