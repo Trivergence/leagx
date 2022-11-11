@@ -26,7 +26,7 @@ class MatchView extends StatelessWidget {
         child: Column(
           children: [
             FixtureVsWidget(matchDetails: matchDetails),
-            IconContainer(
+            if(!Utility.isMatchOver(matchDetails.matchStatus!)) IconContainer(
               height: SizeConfig.height * 7,
               title: loc.faqsTxtFrequentlyAskedQuestions,
             ),
