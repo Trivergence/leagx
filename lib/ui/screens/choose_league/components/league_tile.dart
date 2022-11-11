@@ -22,8 +22,10 @@ class LeagueTile extends StatefulWidget {
     required this.leagueId,
     required this.imgUrl,
     required this.leagueTitle,
-    required this.hasSubscribed
+    required this.hasSubscribed, 
+    this.isRedeeming = false,
   }) : super(key: key);
+  final bool isRedeeming;
   final String leagueId;
   final String imgUrl;
   final String leagueTitle;
@@ -73,7 +75,11 @@ class _LeagueTileState extends State<LeagueTile> {
                 : GradientBorderButton(
                     text: loc.chooseLeagueBtnSubscribe,
                     onPressed: () => Navigator.of(context)
-                        .pushNamed(Routes.choosePlan, arguments: ChoosePlanArgs(leagueId: widget.leagueId, leagueImg: widget.imgUrl, leagueTitle: leagueTitle!)),
+                        .pushNamed(Routes.choosePlan, arguments: ChoosePlanArgs(
+                          leagueId: widget.leagueId, 
+                          leagueImg: widget.imgUrl,
+                          leagueTitle: leagueTitle!,
+                          isRedeeming: widget.isRedeeming)),
                     fontWeight: FontWeight.w400,
                     fontSize: 10,
                   )),

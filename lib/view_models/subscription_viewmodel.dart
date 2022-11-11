@@ -84,10 +84,10 @@ class SubscriptionViewModel extends BaseModel {
           title: loc.choosePlanDialogSuccessTitle,
           description: loc.choosePlanDialogSuccessDesc,
           onOkPressed: () async {
-            await loadData(context);
             Navigator.of(context).popUntil((route) {
               return route.settings.name == Routes.chooseLeague;
             });
+            await loadData(context);
           },
         );
       } else {

@@ -48,11 +48,11 @@ class WalletWidget extends StatelessWidget {
                     fontSize: Dimens.textXS,
                     height: 25,
                     width: 100,
-                    text: loc.walletBtnRedeem, 
+                    text: loc.walletBtnRedeem,
                     onPressed: () async {
                       bool isConnected = await InternetInfo.isConnected();
                       if (isConnected) {
-                        Navigator.pushNamed(context, Routes.chooseLeague);
+                        Navigator.pushNamed(context, Routes.chooseLeague, arguments: true);
                       }
                     },
                   )

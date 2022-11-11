@@ -41,7 +41,7 @@ class ChoosePlanScreen extends StatelessWidget {
               ImageWidget(
                 imageUrl: leagueData.leagueImg,
                 placeholder: Assets.icPlayerAvatar
-                ),
+              ),
               UIHelper.verticalSpace(8),
               TextWidget(text: leagueData.leagueTitle),
               UIHelper.verticalSpace(70),
@@ -49,28 +49,35 @@ class ChoosePlanScreen extends StatelessWidget {
                 isAdmin: true,
                 onItemPressed: (planId, price) {
                   if(_userSummary != null && _userSummary!.coinEarned!.round() >= int.parse(price) ) {
-                    PaymentMethodDialog.show(
-                        context: context,
-                        title: loc.choosePlanDialogSelectPayment,
-                        negativeBtnTitle: loc.choosePlanDialogBtnNegative,
-                        positiveBtnTitle: loc.choosePlanDialogBtnPositive,
-                        onPositiveBtnPressed: (ctx, paymentType) {
-                          Navigator.of(context).pop();
-                          switch(paymentType) {
-                            case PaymentType.wallet:
-                              showConfirmSubscriptionDialog(
-                                type: PaymentType.wallet,
-                                price: price,
-                                planId: planId);
-                              break;
-                            case PaymentType.card:
-                              showConfirmSubscriptionDialog(
-                                  type: PaymentType.card,
-                                  price: price,
-                                  planId: planId);
-                              break;
-                          }
-                        });
+                    if(leagueData.isRedeeming == true) {
+                      showConfirmSubscriptionDialog(
+                          type: PaymentType.wallet,
+                          price: price,
+                          planId: planId);
+                    } else {
+                      PaymentMethodDialog.show(
+                          context: context,
+                          title: loc.choosePlanDialogSelectPayment,
+                          negativeBtnTitle: loc.choosePlanDialogBtnNegative,
+                          positiveBtnTitle: loc.choosePlanDialogBtnPositive,
+                          onPositiveBtnPressed: (ctx, paymentType) {
+                            Navigator.of(context).pop();
+                            switch (paymentType) {
+                              case PaymentType.wallet:
+                                showConfirmSubscriptionDialog(
+                                    type: PaymentType.wallet,
+                                    price: price,
+                                    planId: planId);
+                                break;
+                              case PaymentType.card:
+                                showConfirmSubscriptionDialog(
+                                    type: PaymentType.card,
+                                    price: price,
+                                    planId: planId);
+                                break;
+                            }
+                          });
+                    }
                   } else {
                     showConfirmSubscriptionDialog(
                         type: PaymentType.card, price: price, planId: planId);

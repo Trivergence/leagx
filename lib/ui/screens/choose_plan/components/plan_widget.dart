@@ -94,31 +94,38 @@ class _PlanWidgetState extends State<PlanWidget> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              DescWidget(
-                                  text: feature1!,
-                                  gradient: gradient,
-                              ),
-                              DescWidget(
-                                  text: feature2!,
-                                  gradient: gradient,
-                              ),
-                              DescWidget(
-                                  text: feature3!,
-                                  gradient: gradient,
-                                )
-                            ]
+                          Expanded(
+                            flex: 7,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DescWidget(
+                                    text: feature1!,
+                                    gradient: gradient,
+                                ),
+                                DescWidget(
+                                    text: feature2!,
+                                    gradient: gradient,
+                                ),
+                                DescWidget(
+                                    text: feature3!,
+                                    gradient: gradient,
+                                  )
+                              ]
+                            ),
                           ),
-                          GradientWidget(
-                              gradient: gradient,
-                              child: TextWidget(
-                                text:
-                                    "\$${widget.plan.price}",
-                                textSize: Dimens.textLarge,
-                                fontWeight: FontWeight.w600,
-                              ))
+                          Expanded(
+                            flex: 2,
+                            child: GradientWidget(
+                                gradient: gradient,
+                                child: TextWidget(
+                                  text:
+                                      "\$${widget.plan.price}",
+                                  textSize: Dimens.textLarge,
+                                  fontWeight: FontWeight.w600,
+                                  textAlign: TextAlign.end,
+                                )),
+                          )
                         ],
                       )
                     ]),

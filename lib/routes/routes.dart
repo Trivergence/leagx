@@ -96,7 +96,7 @@ class Routes {
       case adminAnnounce:
         return generateRoute(routeSettings.name!, AdmiinAnnounceScreen());
       case chooseLeague:
-        return generateRoute(routeSettings.name!, const ChooseLeagueScreen());
+        return generateRoute(routeSettings.name!, ChooseLeagueScreen(isRedeeming: routeSettings.arguments as bool,));
       case chooseFixture:
         return generateRoute(routeSettings.name!, const ChooseFixtureScreen());
       case choosePlan:

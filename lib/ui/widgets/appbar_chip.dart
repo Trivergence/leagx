@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/core/sharedpref/sharedpref.dart';
+import 'package:leagx/providers/localization_provider.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 
 import '../../constants/colors.dart';
@@ -13,6 +16,7 @@ class AppBarChip extends StatelessWidget {
     required this.leading,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,10 +30,27 @@ class AppBarChip extends StatelessWidget {
             textSize: 15,
             fontWeight: FontWeight.bold,
           ),
-          label: TextWidget(
-            text: "x $totalValue",
-            textSize: 13,
+          label: Row(
+            children: [
+              const TextWidget(
+                text: "x",
+                textSize: 13,
+              ),
+              UIHelper.horizontalSpace(2),
+              TextWidget(
+                text: totalValue,
+                textSize: 13,
+              ),
+            ],
           )),
     );
+  }
+  
+  bool isArabic() {
+    String? currentLanguage = preferenceHelper.currentLanguage;
+    if(currentLanguage == "en") {
+      return false;
+    }
+    return true;
   }
 }

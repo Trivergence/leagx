@@ -15,7 +15,8 @@ import 'package:provider/provider.dart';
 import 'components/league_tile.dart';
 
 class ChooseLeagueScreen extends StatefulWidget {
-  const ChooseLeagueScreen({Key? key}) : super(key: key);
+  final bool isRedeeming;
+  const ChooseLeagueScreen({Key? key, this.isRedeeming = false}) : super(key: key);
 
   @override
   State<ChooseLeagueScreen> createState() => _ChooseLeagueScreenState();
@@ -66,6 +67,7 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
                         leagueTitle: league.leagueName,
                         imgUrl: league.leagueLogo,
                         hasSubscribed: subscribedIds.contains(int.parse(league.leagueId)),
+                        isRedeeming: widget.isRedeeming,
                       );
                     }),
               )

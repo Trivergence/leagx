@@ -1,16 +1,20 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/prediction.dart';
+import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:leagx/ui/widgets/ai_widgets/ai_widgets.dart' as main_widget;
 import 'package:provider/provider.dart';
 
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
+import '../../../../../models/user_summary.dart';
 import '../../../../widgets/icon_container.dart';
 import '../../../../widgets/main_button.dart';
 import '../../components/detail_tile.dart';
@@ -70,6 +74,8 @@ class LiveMatchWidget extends StatelessWidget {
   }
 
   void _showSheet() {
-    _context!.read<FixtureDetailViewModel>().showPredictionSheet(_context!, matchDetails);
+    _context!
+        .read<FixtureDetailViewModel>()
+        .predictMatch(context: _context!, matchDetails: matchDetails);
   }
 }
