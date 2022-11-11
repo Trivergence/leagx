@@ -13,6 +13,12 @@ class Assets {
   static const String icLeaderMale = "assets/icons/ic_leaderMale.png";
   static const String icExpertMale = "assets/icons/ic_expertMale.png";
   static const String icLeague = "assets/icons/ic_league.png";
+
+  
+  static const String icBullsEye = "assets/icons/ic_bullseye.png";
+  static const String icCoin = "assets/icons/ic_coin.png";
+  static const String icDartBasket = "assets/icons/ic_dart_basket.png";
+  static const String icYellowCrown = "assets/icons/ic_yellow_crown.png";
   
   
   

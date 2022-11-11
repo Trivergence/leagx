@@ -83,13 +83,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               trailing: [
                 AppBarChip(
                   totalValue: _userSummary != null ? _userSummary.remainingPredictions.toString() : "0",
-                  leading: "P",
+                  leadingIcon: Assets.icDartBasket,
                 ),
                 AppBarChip(
                   totalValue: _userSummary != null
                       ? _userSummary.coinEarned!.round().toString()
                       : "0",
-                  leading: "\$",
+                  leadingIcon: Assets.icCoin,
                 ),
               ],
             ),
