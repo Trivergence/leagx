@@ -1,3 +1,5 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/constants/font_family.dart';
@@ -21,6 +23,7 @@ class GradientBorderWidget extends StatelessWidget {
   final String? imageAsset;
   final String? placeHolderImg;
   final EdgeInsetsGeometry? padding;
+  final bool textWithIcon;
   const GradientBorderWidget({
     Key? key,
     this.width,
@@ -35,6 +38,7 @@ class GradientBorderWidget extends StatelessWidget {
     this.imageUrl,
     this.imageAsset,
     this.padding, this.placeHolderImg,
+    this.textWithIcon = false,
   }) : super(key: key);
 
   @override
@@ -58,7 +62,7 @@ class GradientBorderWidget extends StatelessWidget {
             shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: iconData != null
+          child: textWithIcon == false ? (iconData != null
               ? IconWidget(
                   iconData: iconData!,
                   size: iconSize,
@@ -79,7 +83,22 @@ class GradientBorderWidget extends StatelessWidget {
                         )
                       : imageAsset != null
                           ? Image.asset(imageAsset!)
-                          : const SizedBox(),
+                          : const SizedBox())
+                          : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                            Image.asset(
+                              imageAsset!,
+                              height: 25,
+                              width: 25,
+                            ),
+                            TextWidget(
+                              text: text!,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: FontFamily.raleway,
+                              textSize: textSize ?? Dimens.textRegular,
+                            )
+                          ],),
         ),
       ),
     );

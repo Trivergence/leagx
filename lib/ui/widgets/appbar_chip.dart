@@ -8,12 +8,12 @@ import '../../constants/colors.dart';
 
 class AppBarChip extends StatelessWidget {
   final String totalValue;
-  final String leading;
+  final String leadingIcon;
 
   const AppBarChip({
     Key? key,
     required this.totalValue,
-    required this.leading,
+    required this.leadingIcon,
   }) : super(key: key);
 
 
@@ -25,10 +25,8 @@ class AppBarChip extends StatelessWidget {
           side: const BorderSide(),
           labelPadding: const EdgeInsets.only(right: 4),
           backgroundColor: AppColors.textFieldColor,
-          avatar: TextWidget(
-            text: leading,
-            textSize: 15,
-            fontWeight: FontWeight.bold,
+          avatar: Image.asset(
+            leadingIcon
           ),
           label: Row(
             children: [
@@ -44,13 +42,5 @@ class AppBarChip extends StatelessWidget {
             ],
           )),
     );
-  }
-  
-  bool isArabic() {
-    String? currentLanguage = preferenceHelper.currentLanguage;
-    if(currentLanguage == "en") {
-      return false;
-    }
-    return true;
   }
 }

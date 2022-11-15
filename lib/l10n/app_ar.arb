@@ -200,9 +200,9 @@
 	"fixtureDetailsNewsTxtEmptyList": "لا توجد أخبار لتظهر اليوم",
 	"fixtureDetailsPlayersTxtTeamPlayers": "لاعبو الفريق",
 	"fixtureDetailsPredictionSuccess": "تم إرسال التنبؤ بنجاح",
-	"fixtureDetailsPredictionDialogTitle": "توقعات غير كافية",
+	"fixtureDetailsPredictionDialogTitle": "لا يوجد توازن كافٍ",
 	"fixtureDetailsPredictionDialogDesc": "لم يتبق لديك أي تنبؤات",
-	"fixtureDetailsPredictionDialogBtnAdd": "أضف التوقعات",
+	"fixtureDetailsPredictionDialogBtnAdd": "رفع مستوى",
 	"fixtureDetailsPredictionDialogBtnCancel": "يلغي",
 
 	"notificationTxtNotification": "إعلام",

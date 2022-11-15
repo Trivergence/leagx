@@ -31,6 +31,7 @@ class DescWidget extends StatelessWidget {
           child: TextWidget(
             text: text,
             textSize: Dimens.textSmall,
+            textAlign: TextAlign.start,
           ),
         )
       ],

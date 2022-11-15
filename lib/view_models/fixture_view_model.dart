@@ -208,7 +208,7 @@ class FixtureDetailViewModel extends BaseModel {
           onOkPressed: () async {
             bool isConnected = await InternetInfo.isConnected();
             if (isConnected) {
-              Navigator.pushNamed(context, Routes.chooseLeague);
+              Navigator.pushNamed(context, Routes.chooseLeague, arguments: false);
             }
           });
     }

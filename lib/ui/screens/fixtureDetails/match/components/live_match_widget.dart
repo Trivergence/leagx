@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
+import '../../../../../core/utility.dart';
 import '../../../../../models/user_summary.dart';
 import '../../../../widgets/icon_container.dart';
 import '../../../../widgets/main_button.dart';
@@ -37,12 +38,12 @@ class LiveMatchWidget extends StatelessWidget {
     return Column(
       children: [
         matchDetails.matchLive == "1" ? const main_widget.Animation():
-        Image.asset(
+        !Utility.isMatchOver(matchDetails.matchStatus!) ? Image.asset(
           Assets.stadiumImage,
           width: SizeConfig.width * 100,
           height: SizeConfig.height * 25,
           fit: BoxFit.cover,
-        ),
+        ) : const SizedBox.shrink(),
         if(matchDetails.statistics.isNotEmpty) IconContainer(
           height: SizeConfig.height * 7,
           title: loc.fixtureDetailsMatchTxtMatchDetails,

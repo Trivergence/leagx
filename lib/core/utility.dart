@@ -5,6 +5,7 @@ import 'package:country_codes/country_codes.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:intl/intl.dart';
+import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -78,5 +79,13 @@ class Utility{
       ToastMessage.show(
               loc.errorInvalidUrl, TOAST_TYPE.error);
     }
+  }
+
+  static bool isArabic() {
+    String? currentLanguage = preferenceHelper.currentLanguage;
+    if (currentLanguage == "en") {
+      return false;
+    }
+    return true;
   }
 }
