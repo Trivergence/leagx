@@ -88,14 +88,14 @@
 	"chooseLeagueTxtSearch": "بحث",
 	"chooseLeagueDialogTitle": "تأكيد",
 	"chooseLeagueDialogbody": "هل أنت متأكد أنك تريد إلغاء الاشتراك في هذا الدوري؟",
-	"chooseLeagueDialogBtnCancel": "يلغي",
+	"chooseLeagueDialogBtnCancel": "إلغاء",
 	"chooseLeagueDialogBtnConfirm": "يتأكد",
 
 	"choosePlanTxtChooseAPlan": "اختر الباقة",
 	"choosePlanDialogSelectPayment": "اختار طريقة الدفع",
 	"choosePlanDialogSelectCard": "بطاقة",
 	"choosePlanDialogSelectWallet": "محفظة",
-	"choosePlanDialogBtnNegative": "يلغي",
+	"choosePlanDialogBtnNegative": "إلغاء",
 	"choosePlanDialogBtnPositive": "يختار",
 	"choosePlanDialogSuccessTitle": "تم الشراء بنجاح",
 	"choosePlanDialogSuccessDesc": "لقد نجحت في الاشتراك في الحزمة",
@@ -253,7 +253,7 @@
 
 	"subscribeConfirmTitle": "تأكيد الاشتراك",
 	"subscribeConfirmBody": " هل أنت متأكد أنك تريد الاشتراك في هذا الدوري. هذا سوف تهمة",
-	"subscribeConfirmCancel": "يلغي",
+	"subscribeConfirmCancel": "إلغاء",
 	"subscribeConfirmSubscribe": "الإشتراك",
 
 	"walletTxtWallet": "محفظة",
@@ -270,7 +270,7 @@
 	"walletRemoveDialogBtnPositive": "نعم",
 	"walletAddCoinDialogTitle": "إضافة النقود",
 	"walletAddCoinDialogBody": "كم عدد العملات التي تريد إضافتها؟",
-	"walletAddCoinDialogBtnNegative": "يلغي",
+	"walletAddCoinDialogBtnNegative": "إلغاء",
 	"walletAddCoinDialogBtnPositive": "يضيف",
 
 	"payoutTxtWithdraw": "ينسحب",
@@ -282,7 +282,7 @@
 	"payoutTxtAttachedCard": "البطاقة المرفقة",
 	"payoutDialogTitle": "ينسحب",
 	"payoutDialogBody": "اختر المبلغ الذي تريد سحبه",
-	"payoutDialogBtnNegative": "يلغي",
+	"payoutDialogBtnNegative": "إلغاء",
 	"payoutDialogBtnPositive": "ينسحب",
 	"payoutDialogTxtSuccessTitle": "تم بنجاح",
 	"payoutDialogTxtSuccessDesc": "لقد انسحبت بنجاح",
