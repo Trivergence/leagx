@@ -112,10 +112,14 @@ class DrawerScreen extends StatelessWidget {
               bool isConnected = await InternetInfo.isConnected();
               if(isConnected == true) {
                 if(StripeConfig().getSecretKey.isNotEmpty) {
-                  Navigator.popAndPushNamed(context, Routes.wallet);
+                  if(context.read<DashBoardViewModel>().isInitialized == true) {
+                    Navigator.popAndPushNamed(context, Routes.wallet);
+                  } else {
+                    ToastMessage.show(loc.msgPleaseWait, TOAST_TYPE.msg);
+                  }
                 } else {
                   ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.msg);
-                  context.read<WalletViewModel>().setupStripeCredentials();
+                  await context.read<WalletViewModel>().setupStripeCredentials();
                 }
               }
             },

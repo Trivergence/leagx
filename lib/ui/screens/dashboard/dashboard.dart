@@ -70,6 +70,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               await context.read<WalletViewModel>().setupStripeCredentials();
               await context.read<DashBoardViewModel>().getPaymentCredentials(context);
               await context.read<WalletViewModel>().getUserPaymentMethods();
+              context.read<DashBoardViewModel>().initializationComplete();
             }
           });
         },

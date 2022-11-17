@@ -33,6 +33,9 @@ class DashBoardViewModel extends BaseModel {
   List<News> _news = [];
   List<Leader> _leaders = [];
   List<int> _subscribedLeagueIds = [];
+  bool _isInitialized = false;
+
+
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
   List<Fixture> get subscribedMatches => _subscribedMatches;
   List<Fixture> get filteredMatches => _filteredMatches;
@@ -40,6 +43,8 @@ class DashBoardViewModel extends BaseModel {
   List<News> get getNews => _news;
   List<Leader> get getLeaders => _leaders;
   UserSummary? get userSummary => _userSummary;
+  bool get isInitialized => _isInitialized;
+
   Future<void> getData(BuildContext context) async {
     setBusy(true);
     try {
@@ -54,6 +59,10 @@ class DashBoardViewModel extends BaseModel {
     } on Exception catch (_) {
       setBusy(false);
     }
+  }
+
+  void initializationComplete() {
+    _isInitialized = true;
   }
 
   Future<void> getAllFixtures() async {

@@ -1,6 +1,7 @@
 {
 	"appName": "LeagX",
 	"today": "Today",
+	"msgPleaseWait": "Please wait...",
 
 	"loginTitle": "Login",
 	"onboardingTxtTitle1":"LOREM IPSUM DOLOR",
