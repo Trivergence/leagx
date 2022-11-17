@@ -67,7 +67,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               text: loc.authForgotPasswordBtnResetPassword,
               onPressed: () async {
                 bool isConnected = await InternetInfo.isConnected();
-                if (isConnected) {
+                if (isConnected == true) {
                   if (_formKey.currentState!.validate()) {
                     Loader.showLoader();
                     ForgotPassword? forgotPasswordResponse =

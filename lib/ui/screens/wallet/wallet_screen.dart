@@ -92,7 +92,7 @@ class WalletScreen extends StatelessWidget {
 
   Future<void> _addPaymentMethod() async {
     bool isConnected = await InternetInfo.isConnected();
-    if(isConnected) {
+    if(isConnected == true) {
       await _walletViewModel.addPaymentMethod();
     }
   }
@@ -109,7 +109,7 @@ class WalletScreen extends StatelessWidget {
 
   Future<void> _removeCard(BuildContext context) async {
     bool isConnected = await InternetInfo.isConnected();
-    if(isConnected){
+    if(isConnected == true){
     Navigator.of(context).pop();
     await _walletViewModel.removePaymentMethod();
     }

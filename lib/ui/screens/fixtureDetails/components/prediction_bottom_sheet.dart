@@ -159,7 +159,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
 
   Future<void> _predictMatch() async {
     bool isConnected = await InternetInfo.isConnected();
-    if (isConnected) {
+    if (isConnected == true) {
       if(leagueId != null) {
         _context!.read<FixtureDetailViewModel>().savePrediction(
         context: _context!,

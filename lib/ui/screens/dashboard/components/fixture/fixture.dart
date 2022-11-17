@@ -191,7 +191,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
                         teamTwoScore: match.matchAwayteamScore,
                         onTap: (leagueName) async {
                           bool isConnected = await InternetInfo.isConnected();
-                          if (isConnected) {
+                          if (isConnected == true) {
                             Navigator.pushNamed(context, Routes.fixtureDetails,
                             arguments: MatchArgs(
                               matchId: match.matchId,

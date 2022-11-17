@@ -202,12 +202,11 @@ class FixtureDetailViewModel extends BaseModel {
       FancyDialog.showInfo(
           context: context,
           title: loc.fixtureDetailsPredictionDialogTitle,
-          description: loc.fixtureDetailsPredictionDialogDesc,
           okTitle: loc.fixtureDetailsPredictionDialogBtnAdd,
           cancelTitle: loc.fixtureDetailsPredictionDialogBtnCancel,
           onOkPressed: () async {
             bool isConnected = await InternetInfo.isConnected();
-            if (isConnected) {
+            if (isConnected == true) {
               Navigator.pushNamed(context, Routes.chooseLeague, arguments: false);
             }
           });

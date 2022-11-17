@@ -124,7 +124,7 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
     if (translatedCommaText.contains("،")) {
       listOfValues = translatedCommaText.split("،");
     } else {
-      listOfValues = translatedCommaText.split(",،");
+      listOfValues = translatedCommaText.split(",");
     }
     homeName = listOfValues[0];
     awayName = listOfValues[1];

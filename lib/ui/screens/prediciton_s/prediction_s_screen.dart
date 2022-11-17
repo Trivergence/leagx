@@ -25,7 +25,7 @@ class PredicitonsScreen extends StatelessWidget {
       backgroundColor: AppColors.textFieldColor,
       onRefresh: () async {
         bool isConnected = await InternetInfo.isConnected();
-        if (isConnected) {
+        if (isConnected == true) {
           await fixtureModel.getUserPredictions();
         }
       },

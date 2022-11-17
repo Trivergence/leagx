@@ -93,7 +93,7 @@ class ChoosePlanScreen extends StatelessWidget {
 
   _subscribeByCard(BuildContext context, int planId, String price, BuildContext dialogContext) async {
     bool isConnected = await InternetInfo.isConnected();
-    if (isConnected) {
+    if (isConnected == true) {
       if (StripeConfig().getSecretKey.isNotEmpty) {
           Navigator.of(dialogContext).pop();
           context.read<SubscriptionViewModel>().subscribeLeagueByCard(
@@ -114,7 +114,7 @@ class ChoosePlanScreen extends StatelessWidget {
   _subscribeByCoin(BuildContext context, int planId, String price,
       BuildContext dialogContext) async {
     bool isConnected = await InternetInfo.isConnected();
-    if (isConnected) {
+    if (isConnected == true) {
       if (StripeConfig().getSecretKey.isNotEmpty) {
         Navigator.of(dialogContext).pop();
         context.read<SubscriptionViewModel>().subscribeLeagueByCoin(

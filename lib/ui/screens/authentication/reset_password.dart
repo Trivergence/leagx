@@ -88,7 +88,7 @@ class ResetPasswordScreen extends StatelessWidget {
     if(_formKey.currentState!.validate()) {
       if (_passwordController.text == _confirmPasswordController.text) {
         bool isConnected = await InternetInfo.isConnected();
-        if (isConnected) {
+        if (isConnected == true) {
           bool success = await AuthViewModel.changePassword(
               password: _passwordController.text);
           if (success == true) {

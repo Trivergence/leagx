@@ -200,7 +200,6 @@
 	"fixtureDetailsNewsTxtEmptyList": "No news to show today",
 	"fixtureDetailsPredictionSuccess": "Prediction submitted successfully",
 	"fixtureDetailsPredictionDialogTitle": "Not enough balance",
-	"fixtureDetailsPredictionDialogDesc": "You have zero predictions left",
 	"fixtureDetailsPredictionDialogBtnAdd": "Upgrade",
 	"fixtureDetailsPredictionDialogBtnCancel": "Cancel",
 
