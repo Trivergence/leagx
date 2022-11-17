@@ -21,7 +21,7 @@ class FancyDialog {
   static void showInfo(
       {required BuildContext context,
       required String title,
-      required String description,
+      String? description,
       required String okTitle,
       required String cancelTitle,
       required VoidCallback onOkPressed}) {

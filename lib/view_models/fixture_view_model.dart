@@ -202,7 +202,6 @@ class FixtureDetailViewModel extends BaseModel {
       FancyDialog.showInfo(
           context: context,
           title: loc.fixtureDetailsPredictionDialogTitle,
-          description: loc.fixtureDetailsPredictionDialogDesc,
           okTitle: loc.fixtureDetailsPredictionDialogBtnAdd,
           cancelTitle: loc.fixtureDetailsPredictionDialogBtnCancel,
           onOkPressed: () async {
