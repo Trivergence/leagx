@@ -103,7 +103,7 @@
 	"chooseFixtureTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
 	"chooseFixtureTxtTitle": "اختر تطابق",
 
-	"dashboardBtnFixture": "المباراة",
+	"dashboardBtnFixture": "الرئيسية",
 	"dashboardBtnHome": "الصفحة الرئيسية",
 	"dashboardBtnLeader": "الخبراء",
 	"dashboardBtnNews": "التحليلات",
@@ -121,7 +121,7 @@
 	"dashboardHomeTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
 	"dashboardHomeTxtPredictions": "التنبؤات",
 	"dashboardHomeTxtWiningRatio": "نسبة الفوز",
-	"dashboardHomeTxtEarnedCoid": "عملة مكتسبة",
+	"dashboardHomeTxtEarnedCoid": "نقاطي",
 
 	"dashboardLeaderTxtPredictions": "التوقعات",
 	"dashboardLeaderTxtSuccess": "نجاح",
@@ -200,10 +200,9 @@
 	"fixtureDetailsNewsTxtEmptyList": "لا توجد أخبار لتظهر اليوم",
 	"fixtureDetailsPlayersTxtTeamPlayers": "لاعبو الفريق",
 	"fixtureDetailsPredictionSuccess": "تم إرسال التنبؤ بنجاح",
-	"fixtureDetailsPredictionDialogTitle": "لا يوجد توازن كافٍ",
-	"fixtureDetailsPredictionDialogDesc": "لم يتبق لديك أي تنبؤات",
-	"fixtureDetailsPredictionDialogBtnAdd": "رفع مستوى",
-	"fixtureDetailsPredictionDialogBtnCancel": "يلغي",
+	"fixtureDetailsPredictionDialogTitle": "لا يوجد رصيد كافٍ",
+	"fixtureDetailsPredictionDialogBtnAdd": "ترقية الاشتراك",
+	"fixtureDetailsPredictionDialogBtnCancel": "إلغاء",
 
 	"notificationTxtNotification": "إعلام",
 	"onboardingBtnGetStarted": "ابدأ",
