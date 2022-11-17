@@ -99,7 +99,7 @@ class SigninScreen extends StatelessWidget {
               text: loc.authSigninBtnSignin,
               onPressed: () async {
                 bool isConnected = await InternetInfo.isConnected();
-                if (isConnected) {
+                if (isConnected == true) {
                   if (_formKey.currentState!.validate()) {
                     Loader.showLoader();
                     User? userData = await AuthViewModel.login(
@@ -166,7 +166,7 @@ class SigninScreen extends StatelessWidget {
 
   _loginWithTwitter(BuildContext context) async {
     bool isConnected = await InternetInfo.isConnected();
-    if (isConnected) {
+    if (isConnected == true) {
       final twitterLogin = TwitterLogin(
         apiKey: Strings.apiKeyTwitter,
         apiSecretKey: Strings.apiSecretKeyTwitter,
@@ -202,7 +202,7 @@ class SigninScreen extends StatelessWidget {
   Future<void> _logInWithApple(BuildContext context) async {
     bool isAvailable = await SignInWithApple.isAvailable();
     bool isConnected = await InternetInfo.isConnected();
-    if (isConnected) {
+    if (isConnected == true) {
       if (isAvailable) {
         try {
           AuthorizationCredentialAppleID credential =

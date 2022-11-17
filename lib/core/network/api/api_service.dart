@@ -38,7 +38,7 @@ class ApiService {
 
       var dio = Dio(options);
       bool isConnected = await InternetInfo.isConnected();
-      if (isConnected) {
+      if (isConnected == true) {
         Response _response = await dio.post(
           url,
           options: Options(headers: headers),
@@ -96,7 +96,7 @@ class ApiService {
 
       var dio = Dio(options);
       bool isConnected = await InternetInfo.isConnected();
-      if (isConnected) {
+      if (isConnected == true) {
         Response _response = await dio.get(
           url,
           options: Options(headers: headers),
@@ -154,7 +154,7 @@ class ApiService {
 
       var dio = Dio(options);
       bool isConnected = await InternetInfo.isConnected();
-      if (isConnected) {
+      if (isConnected == true) {
         Response _response = await dio.put(
           url,
           options: Options(headers: headers),
@@ -211,7 +211,7 @@ class ApiService {
 
       var dio = Dio(options);
       bool isConnected = await InternetInfo.isConnected();
-      if (isConnected) {
+      if (isConnected == true) {
         Response _response = await dio.put(
           url,
           options: Options(headers: headers),
@@ -268,7 +268,7 @@ class ApiService {
 
       var dio = Dio(options);
       bool isConnected = await InternetInfo.isConnected();
-      if (isConnected) {
+      if (isConnected == true) {
         Response _response = await dio.delete(
           url,
           options: Options(headers: headers),
@@ -322,7 +322,7 @@ class ApiService {
       );
       var dio = Dio(options);
       bool isConnected = await InternetInfo.isConnected();
-      if (isConnected) {
+      if (isConnected == true) {
         Response _response = await dio.get(
           url,
           options: Options(headers: headers),
@@ -386,7 +386,7 @@ class ApiService {
 
       var dio = Dio(options);
       bool isConnected = await InternetInfo.isConnected();
-      if (isConnected) {
+      if (isConnected == true) {
         Response _response = await dio.post(
           url,
           options: Options(headers: headers),
@@ -444,7 +444,7 @@ class ApiService {
       var dio = Dio(options);
       dio.interceptors.add(PrettyDioLogger());
       bool isConnected = await InternetInfo.isConnected();
-      if (isConnected) {
+      if (isConnected == true) {
         Response _response = await dio.get(
           url,
           options: Options(headers: headers),

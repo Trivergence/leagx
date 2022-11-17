@@ -110,7 +110,7 @@ class DrawerScreen extends StatelessWidget {
             title: loc.drawerBtnWalllet,
             onTap: () async {
               bool isConnected = await InternetInfo.isConnected();
-              if(isConnected) {
+              if(isConnected == true) {
                 if(StripeConfig().getSecretKey.isNotEmpty) {
                   Navigator.popAndPushNamed(context, Routes.wallet);
                 } else {
@@ -162,7 +162,7 @@ class DrawerScreen extends StatelessWidget {
 
   logout(BuildContext context) async {
     bool isConnected = await InternetInfo.isConnected();
-    if (isConnected) {
+    if (isConnected == true) {
       await preferenceHelper.removeAuthToken();
       await preferenceHelper.removeUser();
       context.read<DashBoardViewModel>().clearData();

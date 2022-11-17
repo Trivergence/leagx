@@ -168,7 +168,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
 
   _pickImage(ImageSource pickerType) async {
     bool isConnected = await InternetInfo.isConnected();
-    if (isConnected) {
+    if (isConnected == true) {
       Navigator.of(context).pop();
       XFile? image = await _picker.pickImage(
         source: pickerType,
@@ -186,7 +186,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
 
   Future<void> _updateProfile() async {
     bool isConnected = await InternetInfo.isConnected();
-    if (isConnected) {
+    if (isConnected == true) {
       if (_formKey.currentState!.validate()) {
         if(file != null) {
           await profileModel.updateProfile(

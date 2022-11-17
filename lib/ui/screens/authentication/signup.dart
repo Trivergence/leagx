@@ -100,7 +100,7 @@ class SignupScreen extends StatelessWidget {
               text: loc.authSignupBtnSignup,
               onPressed: () async {
                 bool isConnected = await InternetInfo.isConnected();
-                if (isConnected) {
+                if (isConnected == true) {
                   if (_formKey.currentState!.validate()) {
                     if (_passwordController.text ==
                         _confirmPasswordController.text) {

@@ -51,7 +51,7 @@ class WalletWidget extends StatelessWidget {
                     text: loc.walletBtnRedeem,
                     onPressed: () async {
                       bool isConnected = await InternetInfo.isConnected();
-                      if (isConnected) {
+                      if (isConnected == true) {
                         Navigator.pushNamed(context, Routes.chooseLeague, arguments: true);
                       }
                     },
@@ -76,7 +76,7 @@ class WalletWidget extends StatelessWidget {
                       text: loc.walletBtnWithdraw,
                       onPressed: () async {
                         bool isConnected = await InternetInfo.isConnected();
-                        if (isConnected) {
+                        if (isConnected == true) {
                           Navigator.of(context).pushNamed(Routes.payout);
                         }
                       })

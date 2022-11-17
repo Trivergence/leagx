@@ -51,7 +51,7 @@ class _FixtureDetailsState extends State<FixtureDetails> {
             backgroundColor: AppColors.textFieldColor,
             onRefresh: () async {
               bool isConnected = await InternetInfo.isConnected();
-              if(isConnected) {
+              if(isConnected == true) {
                fixtureModel.refreshData(matchId: widget.matchData.matchId);
               }
             },

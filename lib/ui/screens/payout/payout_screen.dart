@@ -142,7 +142,7 @@ class PayoutScreen extends StatelessWidget {
 
   Future<void> _addBank() async {
     bool isConnected = await InternetInfo.isConnected();
-    if (isConnected) {
+    if (isConnected == true) {
       String? linkUrl = await _payoutViewModel!.addBank();
       if(linkUrl != null) {
         Navigator.pushNamed(_context!, Routes.addPayoutDetails, arguments: linkUrl).then((_) {
@@ -174,7 +174,7 @@ class PayoutScreen extends StatelessWidget {
     positiveBtnTitle: loc.payoutDialogBtnPositive, 
     onPositiveBtnPressed: (enteredAmount, withdrawType) async {
       bool isConnected = await InternetInfo.isConnected();
-      if(isConnected) {
+      if(isConnected == true) {
         String withdrawAmount;
         switch(withdrawType) {
           case WithdrawType.minimum:

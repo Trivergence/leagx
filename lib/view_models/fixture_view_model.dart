@@ -207,7 +207,7 @@ class FixtureDetailViewModel extends BaseModel {
           cancelTitle: loc.fixtureDetailsPredictionDialogBtnCancel,
           onOkPressed: () async {
             bool isConnected = await InternetInfo.isConnected();
-            if (isConnected) {
+            if (isConnected == true) {
               Navigator.pushNamed(context, Routes.chooseLeague, arguments: false);
             }
           });

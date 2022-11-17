@@ -129,7 +129,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               buttonTitle: loc.profileProfileSettingsTxtWithdraw,
                               onBtnPressed: () async {
                                 bool isConnected = await InternetInfo.isConnected();
-                                if(isConnected) {
+                                if(isConnected == true) {
                                   if (StripeConfig()
                                         .getSecretKey
                                         .isNotEmpty) {
@@ -157,7 +157,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               buttonTitle: loc.profileProfileSettingsTxtAddPredictions,
                               onBtnPressed: () async {
                                 bool isConnected = await InternetInfo.isConnected();
-                                if(isConnected) {
+                                if(isConnected == true) {
                                   Navigator.pushNamed(context, Routes.chooseLeague, arguments: false);
                                 }
                               },
