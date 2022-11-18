@@ -40,7 +40,7 @@ class SubscriptionViewModel extends BaseModel {
           modelName: ApiModels.getPlans);
       _listOfPlan = tempList.cast<SubscriptionPlan>();
     } on Exception catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       setBusy(false);
     }
   }

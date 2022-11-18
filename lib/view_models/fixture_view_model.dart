@@ -70,7 +70,9 @@ class FixtureDetailViewModel extends BaseModel {
         "from": "2022-01-01",
         "to": "2022-12-30",
         "timezone": currentTimeZone,
-      },
+       },
+        cache: true,
+        cacheBoxName: AppConstants.matchDetailsBoxName + matchId
       );
       _matchDetails = tempList.cast<Fixture>();
     } on Exception catch (_) {

@@ -115,7 +115,7 @@ class DashBoardViewModel extends BaseModel {
           },
           modelName: ApiModels.getSubscribedLeagues,
           cache: true,
-          cacheBoxName: "SubscribedLeagues"
+          cacheBoxName: AppConstants.subscribedLeaguesBoxName
         );
       _subscribedLeagues = tempList.cast<SubscribedLeague>();
       _subscribedLeagueIds = getSubscribedIds();
@@ -195,7 +195,10 @@ class DashBoardViewModel extends BaseModel {
             headers: {
               "apitoken": preferenceHelper.authToken,
             },
-            modelName: ApiModels.getNews);
+            modelName: ApiModels.getNews,
+            cache: true,
+            cacheBoxName: AppConstants.getNewsBoxName
+          );
         _news = tempList.cast<News>();
       } on Exception catch (_) {
         setBusy(false);
@@ -213,6 +216,8 @@ class DashBoardViewModel extends BaseModel {
         headers: {
           "apitoken": preferenceHelper.authToken,
         },
+        cache: true,
+        cacheBoxName: AppConstants.getLeadersBoxName
       );
       _leaders = tempList.cast<Leader>();
     } on Exception catch (_) {
@@ -242,7 +247,12 @@ class DashBoardViewModel extends BaseModel {
     User? user = preferenceHelper.getUser();
     if (user != null) {
       String completeUrl = AppUrl.getUser + user.id.toString();
-      _userSummary = await ApiService.callGetApi(url: completeUrl, modelName: ApiModels.userSummary);
+      _userSummary = await ApiService.callGetApi(
+        url: completeUrl, 
+        modelName: ApiModels.userSummary,
+        cache: true,
+        cacheBoxName: AppConstants.userSummaryBoxName
+        );
       notify();
     }
   }

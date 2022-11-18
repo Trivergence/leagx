@@ -4,6 +4,11 @@ class AppConstants {
 
   static const String hiveKey = "cachedData";
   static const String subscribedMatchesBoxName = "SubscribedMatchesBox";
+  static const String subscribedLeaguesBoxName = "SubscribedLeaguesBox";
+  static const String getNewsBoxName = "GetNewsBox";
+  static const String getLeadersBoxName = "GetLeadersBox";
+  static const String matchDetailsBoxName = "MatchDetailsBox";
+  static const String userSummaryBoxName = "UserSummaryBox";
   
   static const int networkTimeout = 60000;
   static const int minimumWithdraw = 50;

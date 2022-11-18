@@ -38,8 +38,6 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      bool isConnected = await InternetInfo.isConnected();
-      if (isConnected == true) {
         Response _response = await dio.post(
           url,
           options: Options(headers: headers),
@@ -52,7 +50,6 @@ class ApiService {
               await ApiModels.getModelObjects(modelName, _response.data);
           return modelObj;
         }
-      } 
       return null;
     } on DioError catch (ex) {
       Loader.hideLoader();
@@ -82,6 +79,8 @@ class ApiService {
     Map<String, dynamic>? parameters,
     Map<String, dynamic>? headers,
     dynamic modelName,
+    bool cache = false,
+    String? cacheBoxName
   }) async {
     try {
       BaseOptions options = BaseOptions(
@@ -96,8 +95,6 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      bool isConnected = await InternetInfo.isConnected();
-      if (isConnected == true) {
         Response _response = await dio.get(
           url,
           options: Options(headers: headers),
@@ -107,28 +104,38 @@ class ApiService {
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           dynamic modelObj =
               await ApiModels.getModelObjects(modelName, _response.data);
+          if (cache == true) {
+            await HiveService.addBoxes(_response.data, cacheBoxName!);
+          }
           return modelObj;
+        } else {
+          if (cache == true) {
+          return await getCachedObject(cacheBoxName, modelName);
+         }
         }
-      }
-      return null;
     } on DioError catch (ex) {
+      if (cache == true) {
+        return await getCachedObject(cacheBoxName, modelName);
+      }
       Loader.hideLoader();
       if (ex.response != null) {
         ErrorModel errorResponse =
-            ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
+          ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
+          if (cache == false) {
             ToastMessage.show(errorResponse.error ?? loc.errorUndefined,TOAST_TYPE.error );
-        return null;
+          }
       } else {
-        DioExceptions.fromDioError(ex);
-        return null;
+        if (cache == false) {
+          DioExceptions.fromDioError(ex);
+        }
       }
-    } on Exception {
-      Loader.hideLoader();
-      ToastMessage.show(loc.errorUndefined,TOAST_TYPE.error );
       return null;
     } catch(e){
       if (kDebugMode) {
         print(e.toString());
+      }
+      if(cache == false) {
+        ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
       }
       Loader.hideLoader();
       return null;
@@ -154,8 +161,6 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      bool isConnected = await InternetInfo.isConnected();
-      if (isConnected == true) {
         Response _response = await dio.put(
           url,
           options: Options(headers: headers),
@@ -168,7 +173,6 @@ class ApiService {
               await ApiModels.getModelObjects(modelName, _response.data);
           return modelObj;
         }
-      }
       return null;
     } on DioError catch (ex) {
       Loader.hideLoader();
@@ -211,8 +215,6 @@ class ApiService {
           sendTimeout: AppConstants.networkTimeout);
 
       var dio = Dio(options);
-      bool isConnected = await InternetInfo.isConnected();
-      if (isConnected == true) {
         Response _response = await dio.put(
           url,
           options: Options(headers: headers),
@@ -223,7 +225,6 @@ class ApiService {
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           return true;
         }
-      }
       return false;
     } on DioError catch (ex) {
       Loader.hideLoader();
@@ -268,8 +269,6 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      bool isConnected = await InternetInfo.isConnected();
-      if (isConnected == true) {
         Response _response = await dio.delete(
           url,
           options: Options(headers: headers),
@@ -282,7 +281,6 @@ class ApiService {
               await ApiModels.getModelObjects(modelName, _response.data);
           return modelObj;
         }
-      } 
       return null;
     } on DioError catch (ex) {
       Loader.hideLoader();
@@ -367,9 +365,7 @@ class ApiService {
         }
         return [];
       } else {
-        if (cache == true) {
-          return await getCachedList(cacheBoxName, modelName);
-        } else {
+        if (cache == false) {
           DioExceptions.fromDioError(ex);
         }
         return [];
@@ -404,8 +400,6 @@ class ApiService {
       );
 
       var dio = Dio(options);
-      bool isConnected = await InternetInfo.isConnected();
-      if (isConnected == true) {
         Response _response = await dio.post(
           url,
           options: Options(headers: headers),
@@ -416,7 +410,6 @@ class ApiService {
         if (_response.statusCode == 200 || _response.statusCode == 201) {
           return true;
         }
-      } 
       return false;
     } on DioError catch (ex) {
       Loader.hideLoader();
@@ -462,8 +455,6 @@ class ApiService {
 
       var dio = Dio(options);
       dio.interceptors.add(PrettyDioLogger());
-      bool isConnected = await InternetInfo.isConnected();
-      if (isConnected == true) {
         Response _response = await dio.get(
           url,
           options: Options(headers: headers),
@@ -475,7 +466,6 @@ class ApiService {
               await ApiModels.getModelObjects(modelName, _response.data);
           return modelObj;
         }
-      }
       return null;
     } on DioError catch (ex) {
       Loader.hideLoader();
@@ -503,10 +493,19 @@ class ApiService {
   static Future<dynamic> getCachedList(String? cacheBoxName, modelName) async {
     bool isExist = await HiveService.isExists(boxName: cacheBoxName!);
       if(isExist == true) {
-        String encodedString = await HiveService.getBoxes(cacheBoxName);
-        dynamic listOfData = ApiModels.getListOfObjects(modelName, encodedString);
+        dynamic cachedResponce = await HiveService.getBoxes(cacheBoxName);
+        //String encodedString = jsonEncode(cachedResponce);
+        dynamic listOfData = ApiModels.getListOfObjects(modelName, cachedResponce);
         return listOfData;
       }
+  }
+  static Future<dynamic> getCachedObject(String? cacheBoxName, modelName) async {
+    bool isExist = await HiveService.isExists(boxName: cacheBoxName!);
+    if (isExist == true) {
+      dynamic cachedResponce = await HiveService.getBoxes(cacheBoxName);
+      dynamic listOfData = ApiModels.getModelObjects(modelName, Map<String,dynamic>.from(cachedResponce));
+      return listOfData;
+    }
   }
 }
 

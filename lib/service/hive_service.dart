@@ -8,13 +8,13 @@ class HiveService {
     return length != 0;
   }
 
-  static Future<void> addBoxes(String responceString, String boxName) async {
+  static Future<void> addBoxes(dynamic responceString, String boxName) async {
     final openBox = await Hive.openBox(boxName);
     openBox.put(AppConstants.hiveKey, responceString);
   }
 
-  static Future<String> getBoxes(String boxName) async {
+  static Future<dynamic> getBoxes(String boxName) async {
     final openBox = await Hive.openBox(boxName);
-    return openBox.get(AppConstants.hiveKey).toString();
+    return openBox.get(AppConstants.hiveKey);
   }
 }
