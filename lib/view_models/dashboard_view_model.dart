@@ -87,6 +87,8 @@ class DashBoardViewModel extends BaseModel {
             "from": "2022-01-01",
             "to": "2022-12-30",
           },
+          cache: true,
+          cacheBoxName: AppConstants.subscribedMatchesBoxName
         );
         _subscribedMatches = tempList.cast<Fixture>();
         _subscribedMatches.sort((fixture1, fixture2) => sortMatches(fixture1, fixture2));
@@ -111,7 +113,10 @@ class DashBoardViewModel extends BaseModel {
           headers: {
             "apitoken": preferenceHelper.authToken,
           },
-          modelName: ApiModels.getSubscribedLeagues);
+          modelName: ApiModels.getSubscribedLeagues,
+          cache: true,
+          cacheBoxName: "SubscribedLeagues"
+        );
       _subscribedLeagues = tempList.cast<SubscribedLeague>();
       _subscribedLeagueIds = getSubscribedIds();
       if (subscribedLeagueIds.isEmpty) {
