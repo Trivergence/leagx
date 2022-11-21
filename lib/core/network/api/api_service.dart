@@ -80,7 +80,8 @@ class ApiService {
     Map<String, dynamic>? headers,
     dynamic modelName,
     bool cache = false,
-    String? cacheBoxName
+    String? cacheBoxName,
+    bool showToast = true
   }) async {
     try {
       BaseOptions options = BaseOptions(
@@ -121,11 +122,11 @@ class ApiService {
       if (ex.response != null) {
         ErrorModel errorResponse =
           ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-          if (cache == false) {
+          if (cache == false && showToast == true) {
             ToastMessage.show(errorResponse.error ?? loc.errorUndefined,TOAST_TYPE.error );
           }
       } else {
-        if (cache == false) {
+        if (cache == false && showToast == true) {
           DioExceptions.fromDioError(ex);
         }
       }
@@ -134,7 +135,7 @@ class ApiService {
       if (kDebugMode) {
         print(e.toString());
       }
-      if(cache == false) {
+      if(cache == false && showToast == true) {
         ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
       }
       Loader.hideLoader();
@@ -311,7 +312,8 @@ class ApiService {
     Map<String, dynamic>? headers,
     required dynamic modelName,
     bool cache = false,
-    String? cacheBoxName
+    String? cacheBoxName,
+    bool showToast = true
   }) async {
     try {
       BaseOptions options = BaseOptions(
@@ -349,7 +351,7 @@ class ApiService {
       }
       if (ex.response != null) {
         if(baseUrl == AppUrl.footballBaseUrl) {
-          if (cache == false) {
+          if (cache == false && showToast == true) {
             ToastMessage.show(
               loc.errorUndefined,
               TOAST_TYPE.error);
@@ -357,7 +359,7 @@ class ApiService {
         } else {
         ErrorModel errorResponse =
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-        if (cache == false) {
+        if (cache == false && showToast == true) {
           ToastMessage.show(
               errorResponse.error ?? loc.errorUndefined,
               TOAST_TYPE.error);
@@ -365,17 +367,17 @@ class ApiService {
         }
         return [];
       } else {
-        if (cache == false) {
+        if (cache == false && showToast == true) {
           DioExceptions.fromDioError(ex);
         }
         return [];
       }
     } catch (e) {
       debugPrint(e.toString());
-      if (cache == true) {
-        return await getCachedList(cacheBoxName, modelName);
-      } else {
+      if (cache == false && showToast == true) {
         ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
+      } else {
+        return await getCachedList(cacheBoxName, modelName);
       }
       Loader.hideLoader();
       return [];

@@ -29,7 +29,7 @@ class SubscriptionViewModel extends BaseModel {
   List<League> get leagues => _leagues;
   List<SubscriptionPlan> get getPlans => _listOfPlan;
 
-  Future<void> getSubscriptionPlans() async {
+  Future<void> getSubscriptionPlans({bool showToast = true}) async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.baseUrl,
@@ -37,7 +37,9 @@ class SubscriptionViewModel extends BaseModel {
           headers: {
             "apitoken": preferenceHelper.authToken,
           },
-          modelName: ApiModels.getPlans);
+          modelName: ApiModels.getPlans,
+          showToast: showToast
+        );
       _listOfPlan = tempList.cast<SubscriptionPlan>();
     } on Exception catch (e) {
       debugPrint(e.toString());
@@ -182,12 +184,17 @@ class SubscriptionViewModel extends BaseModel {
     }
   }
 
-  Future<void> getLeagues() async {
+  Future<void> getLeagues({bool showToast = true}) async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.footballBaseUrl,
-          parameters: {"action": "get_leagues", "APIkey": AppConstants.footballApiKey},
-          modelName: ApiModels.getLeagues);
+          parameters: {
+            "action": "get_leagues", 
+            "APIkey": AppConstants.footballApiKey
+          },
+          modelName: ApiModels.getLeagues,
+          showToast: showToast
+        );
       _leagues = tempList.cast<League>();
     } on Exception catch (_) {
       setBusy(false);

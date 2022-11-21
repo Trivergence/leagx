@@ -128,14 +128,16 @@ class FixtureDetailViewModel extends BaseModel {
     }
   }
 
-  Future<void> getUserPredictions() async {
+  Future<void> getUserPredictions({bool showToast = true}) async {
     User? user = preferenceHelper.getUser();
     if(user != null) {
       String completeUrl = AppUrl.getUser + user.id.toString() + AppUrl.getPredictions;
       List<dynamic> tempList = await ApiService.getListRequest(
         url: completeUrl,
         baseUrl: AppUrl.baseUrl,
-        modelName: ApiModels.getPredictions);
+        modelName: ApiModels.getPredictions,
+        showToast: showToast
+      );
       _predictions = tempList.cast<Prediction>();
       notifyListeners();
       } else {

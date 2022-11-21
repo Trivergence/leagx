@@ -45,16 +45,16 @@ class DashBoardViewModel extends BaseModel {
   UserSummary? get userSummary => _userSummary;
   bool get isInitialized => _isInitialized;
 
-  Future<void> getData(BuildContext context) async {
+  Future<void> getData(BuildContext context,{bool showToast = true}) async {
     setBusy(true);
     try {
-      await getSubscribedLeagues();
-      await getAllLeaders();
-      await getUserSummary();
-      await getSubscribedMatches();
+      await getSubscribedLeagues(showToast: showToast);
+      await getAllLeaders(showToast: showToast);
+      await getUserSummary(showToast: showToast);
+      await getSubscribedMatches(showToast: showToast);
       setBusy(false);
       if (subscribedLeagues.isNotEmpty) {
-        await getAllNews();
+        await getAllNews(showToast: showToast);
       }
     } on Exception catch (_) {
       setBusy(false);
@@ -69,7 +69,7 @@ class DashBoardViewModel extends BaseModel {
     await getSubscribedMatches();
   }
 
-  Future<void> getSubscribedMatches() async {
+  Future<void> getSubscribedMatches({bool showToast = true}) async {
     // "from": DateUtility.getApiFormat(now),
     //       "to": DateUtility.getApiFormat(now.add(const Duration(days: 3))),
     if (subscribedLeagueIds.isNotEmpty) {
@@ -88,7 +88,8 @@ class DashBoardViewModel extends BaseModel {
             "to": "2022-12-30",
           },
           cache: true,
-          cacheBoxName: AppConstants.subscribedMatchesBoxName
+          cacheBoxName: AppConstants.subscribedMatchesBoxName,
+          showToast: showToast
         );
         _subscribedMatches = tempList.cast<Fixture>();
         _subscribedMatches.sort((fixture1, fixture2) => sortMatches(fixture1, fixture2));
@@ -103,7 +104,7 @@ class DashBoardViewModel extends BaseModel {
     notifyListeners();
   }
 
-  Future<void> getSubscribedLeagues() async {
+  Future<void> getSubscribedLeagues({bool showToast = true}) async {
     try {
       User? user = locator<SharedPreferenceHelper>().getUser();
       String completeUrl = AppUrl.getUser + "${user!.id}" + "/subscribed_leagues";
@@ -115,7 +116,8 @@ class DashBoardViewModel extends BaseModel {
           },
           modelName: ApiModels.getSubscribedLeagues,
           cache: true,
-          cacheBoxName: AppConstants.subscribedLeaguesBoxName
+          cacheBoxName: AppConstants.subscribedLeaguesBoxName,
+          showToast: showToast
         );
       _subscribedLeagues = tempList.cast<SubscribedLeague>();
       _subscribedLeagueIds = getSubscribedIds();
@@ -184,7 +186,7 @@ class DashBoardViewModel extends BaseModel {
     }
   }
 
-  Future<void> getAllNews() async {
+  Future<void> getAllNews({bool showToast = true}) async {
     User? user = locator<SharedPreferenceHelper>().getUser();
     if (user != null) {
       try {
@@ -197,7 +199,8 @@ class DashBoardViewModel extends BaseModel {
             },
             modelName: ApiModels.getNews,
             cache: true,
-            cacheBoxName: AppConstants.getNewsBoxName
+            cacheBoxName: AppConstants.getNewsBoxName,
+            showToast: showToast
           );
         _news = tempList.cast<News>();
       } on Exception catch (_) {
@@ -206,7 +209,7 @@ class DashBoardViewModel extends BaseModel {
     }
   }
 
-  Future<void> getAllLeaders() async {
+  Future<void> getAllLeaders({bool showToast = true}) async {
     try {
       String completeUrl = AppUrl.getUser + AppUrl.getLeaders;
       List<dynamic> tempList = await ApiService.getListRequest(
@@ -217,7 +220,8 @@ class DashBoardViewModel extends BaseModel {
           "apitoken": preferenceHelper.authToken,
         },
         cache: true,
-        cacheBoxName: AppConstants.getLeadersBoxName
+        cacheBoxName: AppConstants.getLeadersBoxName,
+        showToast: showToast
       );
       _leaders = tempList.cast<Leader>();
     } on Exception catch (_) {
@@ -243,7 +247,7 @@ class DashBoardViewModel extends BaseModel {
     }
   }
 
-  getUserSummary() async {
+  getUserSummary({bool showToast = true}) async {
     User? user = preferenceHelper.getUser();
     if (user != null) {
       String completeUrl = AppUrl.getUser + user.id.toString();
@@ -251,13 +255,13 @@ class DashBoardViewModel extends BaseModel {
         url: completeUrl, 
         modelName: ApiModels.userSummary,
         cache: true,
-        cacheBoxName: AppConstants.userSummaryBoxName
-        );
+        cacheBoxName: AppConstants.userSummaryBoxName,
+      );
       notify();
     }
   }
 
-  Future<void> getPaymentCredentials(BuildContext context) async {
+  Future<void> getPaymentCredentials(BuildContext context, {bool showToast = true}) async {
     User? user = preferenceHelper.getUser();
     if (user != null && locator<PaymentConfig>().getCustomerCred == null) {
       List<dynamic> tempList = await ApiService.getListRequest(
@@ -266,13 +270,14 @@ class DashBoardViewModel extends BaseModel {
         modelName: ApiModels.paymentAccounts,
         headers: {
           "apitoken": preferenceHelper.authToken,
-        }
+        },
+        showToast: showToast
       );
       List<CustomerCred> listOfCred = tempList.cast<CustomerCred>().where((userCred) => userCred.userId == user.id).toList();
       if (listOfCred.isNotEmpty) {
         locator<PaymentConfig>().setCustomerCred = listOfCred.where((userCred) => userCred.userId == user.id).toList().first;
       } else {
-        context.read<WalletViewModel>().createCustomer(userData: user);
+        context.read<WalletViewModel>().createCustomer(userData: user, showToast: showToast);
       }
     }
   }
