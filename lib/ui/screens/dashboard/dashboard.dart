@@ -152,34 +152,30 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           children: [
             IconWidget(
               iconData: iconData,
-              color: AppColors.colorWhite.withOpacity(0.5),
+              color: AppColors.colorCyan.withOpacity(0.5),
             ),
             UIHelper.verticalSpace(5.0),
             TextWidget(
               text: title,
               textSize: 10,
               fontWeight: FontWeight.w400,
-              color: AppColors.colorWhite.withOpacity(0.5),
+              color: AppColors.colorCyan.withOpacity(0.5),
             ),
           ],
         ),
         activeIcon: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            GradientWidget(
-              child: IconWidget(
-                iconData: iconData,
-                color: AppColors.colorWhite.withOpacity(0.5),
-              ),
+            IconWidget(
+              iconData: iconData,
+              color: AppColors.colorCyan,
             ),
             UIHelper.verticalSpace(5.0),
-            GradientWidget(
-              child: TextWidget(
-                text: title,
-                textSize: 12,
-                fontWeight: FontWeight.w400,
-                color: AppColors.colorWhite.withOpacity(0.5),
-              ),
+            TextWidget(
+              text: title,
+              textSize: 10,
+              fontWeight: FontWeight.w400,
+              color: AppColors.colorCyan,
             ),
           ],
         ),
