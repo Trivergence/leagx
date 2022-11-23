@@ -82,7 +82,7 @@ class _LeaderBoardTileState extends State<LeaderBoardTile> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextWidget(text: leaderName!),
+                    TextWidget(text: leaderName!, fontWeight: FontWeight.bold,),
                     TextWidget(
                       text: '${widget.successRate}%',
                       color: AppColors.colorGreen,

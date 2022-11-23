@@ -1,6 +1,7 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/utility/image_utitlity.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/shimmer_widget.dart';
@@ -52,7 +53,6 @@ class _ExpandedLeaderTileState extends State<ExpandedLeaderTile> {
               children: [
                 Positioned(
                     top: -10,
-                    //left: 10,
                     child: Image.asset(Assets.icSmallCrown)),
                 GradientBorderWidget(
                   width: 60.0,
@@ -66,9 +66,10 @@ class _ExpandedLeaderTileState extends State<ExpandedLeaderTile> {
                 ),
               ],
             ),
+            UIHelper.verticalSpace(4),
             TextWidget(
               text: leaderName!,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
             ),
             TextWidget(
               text: "${widget.numberOfPrediciton} ${loc.dashboardLeaderTxtPredictions}",

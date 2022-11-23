@@ -1,3 +1,4 @@
+import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/models/choose_plan_args.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -61,7 +62,7 @@ class _LeagueTileState extends State<LeagueTile> {
           backgroundColor: AppColors.textFieldColor,
           radius: 25,
         ),
-        title: TextWidget(text: leagueTitle!),
+        title: TextWidget(text: leagueTitle!, textSize: Dimens.textSmall,),
         trailing: SizedBox(
             height: 26,
             width: 88,

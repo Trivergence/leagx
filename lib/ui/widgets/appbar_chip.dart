@@ -22,17 +22,13 @@ class AppBarChip extends StatelessWidget {
       padding: const EdgeInsets.only(right: 2.0),
       child: Chip(
           side: const BorderSide(),
-          labelPadding: const EdgeInsets.only(right: 4),
+          labelPadding: const EdgeInsets.only(left: 4, right: 4),
           backgroundColor: AppColors.textFieldColor,
           avatar: SvgPicture.asset(leadingIcon),
-          label: Row(
-            children: [
-              UIHelper.horizontalSpace(2),
-              TextWidget(
-                text: totalValue,
-                textSize: 13,
-              ),
-            ],
+          label: TextWidget(
+            text: totalValue,
+            textSize: 12,
+            textAlign: TextAlign.center,
           )),
     );
   }

@@ -58,7 +58,8 @@ class _FixtureDetailsState extends State<FixtureDetails> {
             child: Scaffold(
             appBar:  fixtureModel.matchDetails.isNotEmpty ? AppBarWidget(
               title: widget.matchData.leagueName,
-              trailing: [Padding(
+              trailing: [
+                Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: DotWidget(
                   size: 22,

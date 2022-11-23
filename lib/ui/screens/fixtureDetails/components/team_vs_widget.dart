@@ -22,19 +22,24 @@ class TeamVsWidget extends StatelessWidget {
       children: [
         ImageWidget(
           imageUrl: image,
-          placeholder: Assets.icTeamAvatar
+          placeholder: Assets.icTeamAvatar,
         ),
         SizedBox(
           width: SizeConfig.width * 20,
           height: 40,
-          child: Center(child: TextWidget(text: teamName,
-          textAlign: TextAlign.center,
-          overflow: TextOverflow.clip,
+          child: Center(
+            child: TextWidget(
+            text: teamName,
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.clip,
+            fontWeight: FontWeight.bold,
           ))),
         UIHelper.verticalSpaceSmall,
-        TextWidget(text: groupPosition,
-        textSize: Dimens.textXS,
-        color: AppColors.colorGrey,),
+        TextWidget(
+          text: groupPosition,
+          textSize: Dimens.textXS,
+          color: AppColors.colorWhite,
+        ),
       ]
     );
   }

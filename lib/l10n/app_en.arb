@@ -2,6 +2,7 @@
 	"appName": "LeagX",
 	"today": "Today",
 	"msgPleaseWait": "Please wait...",
+	"vs": "VS",
 
 	"loginTitle": "Login",
 	"onboardingTxtTitle1":"LOREM IPSUM DOLOR",
@@ -121,14 +122,14 @@
 	"dashboardBtnNews": "Analytics",
 	"dashboardBtnSetting": "My Profile",
 
-	"dashboardFixtureTxtLeagues": "Leagues",
+	"dashboardFixtureTxtLeagues": "LEAGUES",
 	"dashboardFixtureTxtAll": "All",
-	"dashboardFixtureTxtUpcomingMatches": "Upcoming Matches",
+	"dashboardFixtureTxtUpcomingMatches": "UPCOMING MATCHES",
 	"dashboardFixtureTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
 
 	"dashboardHomeTxtLeaders": "Experts",
-	"dashboardHomeTxtAnalytics": "My Stats",
-	"dashboardHomeTxtUpcomingMatches": "Upcoming Matches",
+	"dashboardHomeTxtAnalytics": "MY STATS",
+	"dashboardHomeTxtUpcomingMatches": "UPCOMING MATCHES",
 	"dashboardHomeTxtViewAll": "View all matches",
 	"dashboardHomeTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
 	"dashboardHomeTxtPredictions": "Predictions",
@@ -176,8 +177,8 @@
 	"faqsTxtFaqs": "FAQs",
 	"faqsTxtFrequentlyAskedQuestions": "Frequently Asked Questions",
 
-	"fixtureDetailsBtnMatch": "MATCH",
-	"fixtureDetailsBtnPlayers": "PLAYERS",
+	"fixtureDetailsBtnMatch": "Match",
+	"fixtureDetailsBtnPlayers": "Players",
 	"fixtureDetailsBtnNews": "Analytics",
 	"fixtureDetailsTxtPredictMatchResult": "Predict Match Result",
 	"fixtureDetailsTxtMakeMyPredictPublic": "Make my predict public",

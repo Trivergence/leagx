@@ -12,6 +12,7 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../constants/colors.dart';
+import '../../../../../constants/dimens.dart';
 import '../../../../../core/network/internet_info.dart';
 import '../../../../../models/dashboard/fixture.dart';
 import '../../../../../models/leader.dart';
@@ -59,7 +60,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                    TextWidget(
                     text: loc.dashboardHomeTxtUpcomingMatches,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.bold,
+                    letterSpace: 4,
+                    textSize: Dimens.textSM,
                   ),
                   UIHelper.verticalSpaceSmall,
                   upcomingMatches.isNotEmpty ? Column(

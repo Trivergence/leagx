@@ -44,12 +44,12 @@ class TabBarWidget extends StatelessWidget {
                               ? TextWidget(
                                 text: tabItem.title!,
                                 color: AppColors.colorCyan,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.bold,
                               )
                               : TextWidget(
                                   text: tabItem.title!,
                                   color: AppColors.colorCyan.withOpacity(0.5),
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.bold,
                                 ),
                         ),
                       ),

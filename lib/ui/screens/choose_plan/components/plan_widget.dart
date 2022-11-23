@@ -51,10 +51,12 @@ class _PlanWidgetState extends State<PlanWidget> {
         padding: widget.index != 3
             ? const EdgeInsets.only(bottom: 60.0)
             : const EdgeInsets.only(bottom: 30.0),
-        child: Stack(clipBehavior: Clip.none, children: [
+        child: Stack(
+          clipBehavior: Clip.none, 
+          children: [
           Container(
             decoration: BoxDecoration(
-                gradient: widget.isSelected ? gradient : null,
+                color: widget.isSelected ? AppColors.colorPink : null,
                 borderRadius: BorderRadius.circular(8)),
             padding: const EdgeInsets.all(1.5),
             child: Card(

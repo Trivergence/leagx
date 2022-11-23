@@ -90,22 +90,23 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                     width: SizeConfig.width * 50,
                     child: TextWidget(
                       text: translatedLeagueName!, 
-                      textSize: Dimens.textSmall, 
+                      textSize: Dimens.textXS, 
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
-                      )),
+                      fontWeight: FontWeight.bold,
+                    )),
                   widget.isLive
                       ? LiveWidget(isLive: widget.isLive,)
                       : widget.withText
                           ? Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SvgPicture.asset(Assets.icCalender),
-                                UIHelper.horizontalSpace(4.0),
+                                UIHelper.horizontalSpace(8.0),
                                 TextWidget(
                                     text: isToday ? "${loc.today}, " + widget.scheduledTime! : DateUtility.getUiFormat(widget.scheduledDate),
-                                    textSize: Dimens.textSmall),
+                                    textSize: Dimens.textXS,
+                                    ),
                               ],
                             )
                           : DotWidget(
@@ -132,15 +133,17 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Expanded(
-                                child: TextWidget(
+                              child: TextWidget(
                               text: teamOneName!,
                               textAlign: TextAlign.center,
+                              fontWeight: FontWeight.bold,
                             )),
                             UIHelper.horizontalSpace(5),
                             ClipOval(
                               child: ImageWidget(
                                   imageUrl: widget.teamOneFlag,
-                                  placeholder: Assets.icTeamAvatar),
+                                  placeholder: Assets.icTeamAvatar,
+                                ),
                             ),
                           ],
                         ),
@@ -158,12 +161,17 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                                   text: translatedStatus!,
                                   color: AppColors.colorGrey,
                                   textSize: Dimens.textSmall,
+                                  fontWeight: FontWeight.bold,
                                 )
                               ],
                             )
                           : Padding(
                             padding: const EdgeInsets.symmetric(horizontal : 5.0),
-                            child: Image.asset(Assets.vs),
+                            child: TextWidget(
+                              text: loc.vs,
+                              textSize: Dimens.textLarge,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                       Expanded(
                         flex: 2,
@@ -176,9 +184,10 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                             ),
                             UIHelper.horizontalSpace(5),
                             Expanded(
-                                child: TextWidget(
+                              child: TextWidget(
                               text: teamTwoName!,
                               textAlign: TextAlign.center,
+                              fontWeight: FontWeight.bold,
                             )),
                           ],
                         ),

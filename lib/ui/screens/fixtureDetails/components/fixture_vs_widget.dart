@@ -7,6 +7,7 @@ import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
 import '../../../../core/utility.dart';
 import '../../../../models/dashboard/fixture.dart';
+import '../../../util/locale/localization.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../util/utility/date_utility.dart';
 import '../../../util/utility/translation_utility.dart';
@@ -117,19 +118,23 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                       )
                     : Column(
                         children: [
-                          Image.asset(Assets.vs),
+                          TextWidget(
+                            text: loc.vs,
+                            textSize: Dimens.textLarge,
+                            fontWeight: FontWeight.bold,
+                          ),
                           UIHelper.verticalSpaceSmall,
                           TextWidget(
                             text: DateUtility.getUiFormat(
                                 widget.matchDetails.matchDate),
-                            color: AppColors.colorGrey,
-                            textSize: Dimens.textSmall,
+                            color: AppColors.colorWhite,
+                            textSize: Dimens.textXS,
                           ),
                           UIHelper.verticalSpaceSmall,
                           TextWidget(
                             text: widget.matchDetails.matchTime,
-                            color: AppColors.colorGrey,
-                            textSize: Dimens.textSmall,
+                            color: AppColors.colorWhite,
+                            textSize: Dimens.textXS,
                           )
                         ],
                       ),

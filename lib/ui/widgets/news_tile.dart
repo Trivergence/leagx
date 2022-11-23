@@ -74,7 +74,7 @@ class _NewsTileState extends State<NewsTile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                TextWidget(text: postedBy!),
+                TextWidget(text: postedBy!, fontWeight: FontWeight.bold,),
                 TextWidget(text: DateUtility.getRemainingTime(widget.when, locale),
                 textSize: Dimens.textXS,
                 color: widget.isApproval == true ? AppColors.colorCyan : AppColors.colorYellow,)

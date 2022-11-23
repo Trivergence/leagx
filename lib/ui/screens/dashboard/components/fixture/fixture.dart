@@ -11,6 +11,7 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../constants/dimens.dart';
 import '../../../../../core/network/internet_info.dart';
 import '../../../../../models/dashboard/fixture.dart';
 import '../../../../../models/match_args.dart';
@@ -54,7 +55,9 @@ class _FixtureScreenState extends State<FixtureScreen> {
           UIHelper.verticalSpaceSmall,
           TextWidget(
             text: loc.dashboardFixtureTxtLeagues,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.bold,
+            letterSpace: 4,
+            textSize: Dimens.textSM,
           ),
           UIHelper.verticalSpaceSmall,
           Container(
@@ -140,7 +143,9 @@ class _FixtureScreenState extends State<FixtureScreen> {
                       children: [
                         TextWidget(
                           text: loc.dashboardFixtureTxtUpcomingMatches,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.bold,
+                          letterSpace: 4,
+                          textSize: Dimens.textSM,
                         ),
                         UIHelper.verticalSpaceSmall,
                         Expanded(

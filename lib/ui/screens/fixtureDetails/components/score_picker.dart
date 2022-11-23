@@ -36,8 +36,7 @@ class _ScorePickerState extends State<ScorePicker> {
       decoration: BoxDecoration(
           //border: Border.all(color: AppColors.colorDarkGrey, width: 2),
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.colorDarkGrey,
-          gradient: widget.isSelected ? AppColors.pinkishGradient : null
+          color: widget.isSelected ? AppColors.colorPink : AppColors.colorDarkGrey
         ),
       child: Container(
         height: SizeConfig.height * 5,

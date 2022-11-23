@@ -35,7 +35,9 @@ class AnalyticsWidget extends StatelessWidget {
         UIHelper.verticalSpaceSmall,
         TextWidget(
           text: loc.dashboardHomeTxtAnalytics,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.bold,
+          letterSpace: 4,
+          textSize: Dimens.textSM,
         ),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
