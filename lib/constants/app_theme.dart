@@ -6,7 +6,7 @@ final ThemeData themeLight = ThemeData(
     brightness: Brightness.light,
     primarySwatch: MaterialColor(AppColors.blue[500]!.value, AppColors.blue),
     primaryColor: AppColors.colorBackground,
-    fontFamily: FontFamily.openSans,
+    fontFamily: FontFamily.gilroy,
     unselectedWidgetColor: AppColors.colorWhite,
     scaffoldBackgroundColor: AppColors.colorBackground,
     appBarTheme: const AppBarTheme(color: AppColors.colorBackground),
@@ -17,5 +17,5 @@ final ThemeData themeLight = ThemeData(
 final ThemeData themeDark = ThemeData(
   brightness: Brightness.dark,
   primaryColor: AppColors.colorBackground,
-  fontFamily: FontFamily.openSans,
+  fontFamily: FontFamily.gilroy,
 );

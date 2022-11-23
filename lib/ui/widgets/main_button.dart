@@ -39,7 +39,6 @@ class MainButton extends StatelessWidget {
             color: AppColors.colorWhite,
             fontSize: fontSize,
             fontWeight: fontWeight,
-            fontFamily: FontFamily.raleway,
           ),
         ),
         style: ElevatedButton.styleFrom(

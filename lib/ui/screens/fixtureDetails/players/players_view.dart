@@ -68,9 +68,7 @@ class PlayersView extends StatelessWidget {
               homeScore: prediction!.firstTeamScore ?? 0,
               awayScore: prediction!.secondTeamScore ?? 0,
             ),
-            if (!ValidationUtils.isValid(prediction)) SizedBox(
-              width: SizeConfig.width * 90,
-              child: MainButton(text: loc.fixtureDetailsMatchBtnPredict, onPressed: _showSheet)),
+            if (!ValidationUtils.isValid(prediction)) MainButton(text: loc.fixtureDetailsMatchBtnPredict, onPressed: _showSheet),
           ],
         ),
       ),

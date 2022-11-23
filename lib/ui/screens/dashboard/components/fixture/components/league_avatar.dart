@@ -72,7 +72,6 @@ class LeagueAvatarWidget extends StatelessWidget {
                         child: TextWidget(
                           text: text!,
                           fontWeight: FontWeight.w600,
-                          fontFamily: FontFamily.raleway,
                           textSize: textSize ?? Dimens.textRegular,
                         ),
                       )

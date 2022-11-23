@@ -31,17 +31,15 @@ class NotificationTile extends StatelessWidget {
           RichText(
             text: TextSpan(
                 text: "$firstText ",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16.0,
-                  fontFamily: FontFamily.raleway,
                   color: AppColors.colorWhite,
                 ),
                 children: [
                   TextSpan(
                     text: secondText,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontFamily: FontFamily.openSans,
                       fontSize: 14.0,
                       color: AppColors.colorYellow,
                     ),

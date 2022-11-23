@@ -38,7 +38,6 @@ class SearchTextField extends StatelessWidget {
         hintText: hint,
         hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
               color: AppColors.colorWhite,
-              fontFamily: FontFamily.openSans,
               fontWeight: FontWeight.w400,
             ),
         counterText: '',
@@ -47,7 +46,6 @@ class SearchTextField extends StatelessWidget {
         labelText: hint,
         labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
               color: AppColors.colorWhite,
-              fontFamily: FontFamily.openSans,
               fontWeight: FontWeight.w400,
             ),
         errorStyle: const TextStyle(color: Colors.red),

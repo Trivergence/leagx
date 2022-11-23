@@ -88,7 +88,7 @@ class AnalyticsWidget extends StatelessWidget {
                       GradientBorderWidget(
                         onPressed: () {},
                         gradient: AppColors.blueishTopBottomGradient,
-                        text: secondValue,
+                        text: secondValue + "%",
                         height: 80.0,
                         width: 80.0,
                         isCircular: true,

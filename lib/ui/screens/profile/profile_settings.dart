@@ -115,7 +115,6 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                           text: userName,
                           fontWeight: FontWeight.w600,
                           textSize: 18.0,
-                          fontFamily: FontFamily.raleway,
                         ),
                         UIHelper.verticalSpace(
                           35.0,
