@@ -74,6 +74,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
                     Padding(
                         padding: const EdgeInsets.only(right: 18.0),
                         child: LeagueAvatarWidget(
+                          addLeague: true,
                           onPressed: () async {
                             await Navigator.of(context).pushNamed(
                                 Routes.chooseLeague,
@@ -119,7 +120,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
                           ),
                         ),
                       ),
-                    InkWell(
+                    if(subscribedLeagues.isNotEmpty) InkWell(
                         onTap: () => _scrollToTheNextItemView(),
                         child: const Icon(Icons.arrow_forward_ios_rounded))
                   ],
@@ -135,7 +136,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
                       vertical: 20.0,
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         TextWidget(
                           text: loc.dashboardFixtureTxtUpcomingMatches,

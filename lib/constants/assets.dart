@@ -4,7 +4,6 @@ class Assets {
   // app icon assets
   static const String appLogo = "assets/icons/ic_logo.png";
   static const String icPlayer = "assets/icons/ic_player.png";
-  static const String icSoccer = "assets/icons/ic_soccer.png";
   //static const String icPlayerAvatar = "assets/icons/ic_playerAvatar.png";
   static const String icMaleProfile = "assets/icons/ic_maleProfile.png";
   static const String icFemaleProfile = "assets/icons/ic_femaleProfile.png";
@@ -18,6 +17,8 @@ class Assets {
   static const String icBullsEye = "assets/svg/ic_bullseye.svg";
   static const String icCoin = "assets/svg/ic_coin.svg";
   static const String icBlackCrown = "assets/svg/ic_black_crown.svg";
+  static const String icCalender = "assets/svg/ic_calender.svg";
+  static const String icSoccer = "assets/svg/ic_soccer.svg";
   
   static const String icCrown = "assets/icons/ic_crown.png";
   static const String icSmallCrown = "assets/icons/ic_small_crown.png";

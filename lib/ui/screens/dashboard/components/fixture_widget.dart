@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
@@ -97,10 +98,10 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                       ? LiveWidget(isLive: widget.isLive,)
                       : widget.withText
                           ? Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const GradientWidget(
-                                    child: Icon(Icons.access_time_outlined)),
+                                SvgPicture.asset(Assets.icCalender),
                                 UIHelper.horizontalSpace(4.0),
                                 TextWidget(
                                     text: isToday ? "${loc.today}, " + widget.scheduledTime! : DateUtility.getUiFormat(widget.scheduledDate),
@@ -129,7 +130,6 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                         flex: 2,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          // crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
                                 child: TextWidget(
@@ -154,7 +154,6 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                                   secondScore: widget.teamTwoScore!,
                                   hasGradient: false,
                                 ),
-                                // UIHelper.verticalSpaceSmall,
                                 TextWidget(
                                   text: translatedStatus!,
                                   color: AppColors.colorGrey,
@@ -170,7 +169,6 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                         flex: 2,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ImageWidget(
                               imageUrl: widget.teamTwoFlag,
@@ -187,11 +185,6 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                       ),
                     ],
                   ),
-                  // isLive
-                  //     ? TextWidget(
-                  //         text: liveTime!,
-                  //         color: AppColors.colorWhite.withOpacity(0.6))
-                  //     : const SizedBox(),
                   widget.isLive
                       ? UIHelper.verticalSpace(8.0)
                       : UIHelper.verticalSpace(20.0)

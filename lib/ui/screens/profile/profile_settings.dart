@@ -124,6 +124,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ProfileDetailWidget(
+                              assetIcon: Assets.icCoin,
                               value: userSummary != null ? userSummary.coinEarned!.round().toString() : "0",
                               title: loc.profileProfileSettingsTxtCoins,
                               buttonTitle: loc.profileProfileSettingsTxtWithdraw,
@@ -152,6 +153,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               color: AppColors.colorGrey,
                             ),
                             ProfileDetailWidget(
+                              assetIcon: Assets.icBullsEye,
                               value: userSummary != null ? userSummary.remainingPredictions!.toString() : "0",
                               title: loc.profileProfileSettingsTxtPrediction,
                               buttonTitle: loc.profileProfileSettingsTxtAddPredictions,

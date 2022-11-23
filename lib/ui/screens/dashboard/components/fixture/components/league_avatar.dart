@@ -21,6 +21,7 @@ class LeagueAvatarWidget extends StatelessWidget {
   final bool isSelected;
   final IconData? iconData;
   final double? iconSize;
+  final bool addLeague;
   const LeagueAvatarWidget({
     Key? key,
     this.width,
@@ -34,7 +35,8 @@ class LeagueAvatarWidget extends StatelessWidget {
     this.placeHolderImg, 
     this.isSelected = false, 
     this.iconData,
-    this.iconSize,
+    this.iconSize, 
+    this.addLeague = false,
   }) : super(key: key);
 
   @override
@@ -42,7 +44,7 @@ class LeagueAvatarWidget extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Opacity(
-        opacity: isSelected == true ? 1 : 0.7,
+        opacity: isSelected == true ? 1 : 0.6,
         child: Container(
           width: width ?? SizeConfig.width * 100,
           height: height ?? 48.0,
@@ -50,10 +52,10 @@ class LeagueAvatarWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected == true ? AppColors.colorPink.withOpacity(0.2) : AppColors.colorBackground,
             shape: BoxShape.circle,
-            border: Border.all(color: isSelected == true
+            border: Border.all(color: isSelected == true || addLeague == true
               ? AppColors.colorPink
               : AppColors.colorWhite,
-              width: 1.7)
+              width: 1.3)
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: iconData != null
