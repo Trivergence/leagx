@@ -52,6 +52,7 @@ class _PlayerTileState extends State<PlayerTile> {
                   placeHolderImg: Assets.icPlayerAvatar,
                   onPressed: () {},
                   gradient: AppColors.orangishGradient,
+                  isBorderSolid: true,
                 ),
                 UIHelper.verticalSpaceSmall,
                 TextWidget(
@@ -87,6 +88,7 @@ class _PlayerTileState extends State<PlayerTile> {
                   placeHolderImg: Assets.icPlayerAvatar,
                   onPressed: () {},
                   gradient: AppColors.orangishGradient,
+                  isBorderSolid: true,
                 ),
                 UIHelper.verticalSpaceSmall,
                 TextWidget(

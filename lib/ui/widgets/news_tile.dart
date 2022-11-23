@@ -63,6 +63,7 @@ class _NewsTileState extends State<NewsTile> {
             onPressed: () {},
             gradient: AppColors.orangishGradient,
             placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
+            isBorderSolid: true,
           ),
           ],
         ),

@@ -60,6 +60,7 @@ class _LeaderBoardTileState extends State<LeaderBoardTile> {
             text: widget.number.toString(),
             textSize: 12.0,
             onPressed: () {},
+            isBorderSolid: true,
           ),
           UIHelper.horizontalSpace(15.0),
           GradientBorderWidget(
@@ -70,6 +71,7 @@ class _LeaderBoardTileState extends State<LeaderBoardTile> {
             placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
             onPressed: () {},
             gradient: AppColors.orangishGradient,
+            isBorderSolid: true,
           ),
           UIHelper.horizontalSpace(15.0),
           Expanded(

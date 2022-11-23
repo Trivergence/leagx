@@ -50,6 +50,7 @@ class DrawerScreen extends StatelessWidget {
                   width: 80.0,
                   isCircular: true,
                   placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
+                  isBorderSolid: true,
                 ),
                 UIHelper.verticalSpaceSmall,
                 TextWidget(
@@ -138,15 +139,12 @@ class DrawerScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20.0),
               child: Row(
                 children: [
-                  const GradientWidget(
-                    child: Icon(Icons.logout),
-                  ),
+                  const Icon(Icons.logout, color: AppColors.colorPink,),
                   UIHelper.horizontalSpace(26.0),
-                   GradientWidget(
-                    child: TextWidget(
-                      text: loc.drawerBtnLogout,
-                    ),
-                  ),
+                   TextWidget(
+                     text: loc.drawerBtnLogout,
+                     color: AppColors.colorPink,
+                   ),
                 ],
               ),
             ),

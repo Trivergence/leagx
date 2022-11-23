@@ -179,6 +179,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                       width: 80.0,
                       isCircular: true,
                       placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
+                      isBorderSolid: true,
                     ),
                   ),
                 ],

@@ -62,6 +62,7 @@ class _ExpandedLeaderTileState extends State<ExpandedLeaderTile> {
                   onPressed: () {},
                   placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
                   gradient: AppColors.orangishGradient,
+                  isBorderSolid: true,
                 ),
               ],
             ),

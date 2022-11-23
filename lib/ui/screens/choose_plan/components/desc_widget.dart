@@ -1,8 +1,8 @@
 import 'package:leagx/constants/dimens.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../constants/colors.dart';
 import '../../../util/ui/ui_helper.dart';
-import '../../../widgets/gradient/gradient_widget.dart';
 import '../../../widgets/text_widget.dart';
 
 class DescWidget extends StatelessWidget {
@@ -20,12 +20,11 @@ class DescWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        GradientWidget(
-            gradient: gradient,
-            child: const Icon(
-              Icons.done,
-              size: 14,
-            )),
+        const Icon(
+          Icons.done,
+          size: 14,
+          color: AppColors.colorPink,
+        ),
         UIHelper.horizontalSpace(8),
         Expanded(
           child: TextWidget(

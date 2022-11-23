@@ -62,10 +62,9 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
             height: 3,
             color: AppColors.colorWhite.withOpacity(0.4),
           ),
-          GradientWidget(
-            child: TextWidget(
-              text: loc.fixtureDetailsTxtPredictMatchResult,
-            ),
+          TextWidget(
+            text: loc.fixtureDetailsTxtPredictMatchResult,
+            color: AppColors.colorPink,
           ),
           UIHelper.verticalSpace(34),
           !isLoading ? Row(

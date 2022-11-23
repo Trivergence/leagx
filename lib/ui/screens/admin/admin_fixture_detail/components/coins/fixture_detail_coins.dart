@@ -39,29 +39,25 @@ class FixtureDetailCoinsScreen extends StatelessWidget {
                   textController: _coinsController,
                   inputType: TextInputType.number,
                   hint: loc.adminFixtureDetailCoinTxt1000,
-                  suffix: const GradientWidget(
-                    child: Icon(
-                      Icons.info_outline_rounded,
-                      size: 24.0,
-                    ),
+                  suffix: const Icon(
+                    Icons.info_outline_rounded,
+                    size: 24.0,
+                    color: AppColors.colorPink,
                   ),
                 ),
-                const GradientWidget(
-                    gradient: AppColors.blueishGradient,
-                    child: Divider(
-                      height: 3,
-                      thickness: 3,
-                      color: Colors.white,
-                    ))
+                const Divider(
+                  height: 3,
+                  thickness: 3,
+                  color: Colors.white,
+                )
               ],
             ),
           ),
           UIHelper.verticalSpace(8.0),
-          GradientWidget(
-            child: TextWidget(
-              text: loc.adminFixtureDetailCoinTxtCoins,
-              textSize: 20.0,
-            ),
+          TextWidget(
+            text: loc.adminFixtureDetailCoinTxtCoins,
+            textSize: 20.0,
+            color: AppColors.colorPink,
           ),
           UIHelper.verticalSpace(60.0),
           Row(

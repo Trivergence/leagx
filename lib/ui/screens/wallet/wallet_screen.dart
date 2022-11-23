@@ -4,6 +4,7 @@ import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
 import 'package:leagx/ui/util/app_dialogs/confirmation_dialog.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/loading_widget.dart';
@@ -46,10 +47,9 @@ class WalletScreen extends StatelessWidget {
       body: !walletModel.busy ? SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children:  [
             TextWidget(
-              text: loc.walletTxtWallet, 
+              text: loc.walletTxtWallet,
               textSize: 30, 
               fontWeight: FontWeight.bold,
               textAlign: TextAlign.center,
@@ -63,7 +63,9 @@ class WalletScreen extends StatelessWidget {
               fontWeight: FontWeight.w700),
             UIHelper.verticalSpace(5.0),
             walletModel.getPayementMethods.isEmpty 
-            ? MainButton(text: loc.walletBtnaddMethod, onPressed: _addPaymentMethod)
+            ? MainButton(
+              text: loc.walletBtnaddMethod, 
+              onPressed: _addPaymentMethod)
             :  Column(
               children: [
                 CardInfoWidget(

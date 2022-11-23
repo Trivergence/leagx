@@ -64,13 +64,11 @@ class _ScorePickerState extends State<ScorePicker> {
         
         items: [
           for(int i = 0; i < totalScores.length ; i++) Center(
-            child: i == currentIndex ? GradientWidget(
-              gradient: AppColors.pinkishGradient,
-              child: TextWidget(text: totalScores[i].toString(),
-                   textSize: Dimens.textMedium,
-                   fontWeight: FontWeight.bold
-                   ),
-            )
+            child: i == currentIndex ? TextWidget(text: totalScores[i].toString(),
+                 textSize: Dimens.textMedium,
+                 fontWeight: FontWeight.bold,
+                 color: AppColors.colorPink,
+                 )
             : TextWidget(
                 text: totalScores[i].toString(),
                 textSize: Dimens.textRegular,
