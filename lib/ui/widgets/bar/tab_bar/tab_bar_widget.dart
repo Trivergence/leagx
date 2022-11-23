@@ -41,16 +41,14 @@ class TabBarWidget extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: tabItem.index == selectedIndex
-                              ? GradientWidget(
-                                  child: TextWidget(
-                                    text: tabItem.title!,
-                                    color: AppColors.colorGrey,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
+                              ? TextWidget(
+                                text: tabItem.title!,
+                                color: AppColors.colorCyan,
+                                fontWeight: FontWeight.w600,
+                              )
                               : TextWidget(
                                   text: tabItem.title!,
-                                  color: AppColors.colorGrey,
+                                  color: AppColors.colorCyan.withOpacity(0.5),
                                   fontWeight: FontWeight.w600,
                                 ),
                         ),
@@ -59,11 +57,8 @@ class TabBarWidget extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      gradient: tabItem.index == selectedIndex
-                          ? AppColors.orangishGradient
-                          : null,
                       color: tabItem.index == selectedIndex
-                          ? null
+                          ? AppColors.colorCyan
                           : AppColors.textFieldColor,
                     ),
                     height: 2,
