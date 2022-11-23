@@ -492,7 +492,7 @@ class ApiService {
     }
   }
   
-  static Future<dynamic> getCachedList(String? cacheBoxName, modelName) async {
+  static Future<List<dynamic>> getCachedList(String? cacheBoxName, modelName) async {
     bool isExist = await HiveService.isExists(boxName: cacheBoxName!);
       if(isExist == true) {
         dynamic cachedResponce = await HiveService.getBoxes(cacheBoxName);
@@ -500,6 +500,7 @@ class ApiService {
         dynamic listOfData = ApiModels.getListOfObjects(modelName, cachedResponce);
         return listOfData;
       }
+      return [];
   }
   static Future<dynamic> getCachedObject(String? cacheBoxName, modelName) async {
     bool isExist = await HiveService.isExists(boxName: cacheBoxName!);
