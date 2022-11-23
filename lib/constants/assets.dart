@@ -15,13 +15,9 @@ class Assets {
   static const String icLeague = "assets/icons/ic_league.png";
 
   
-  static const String icBullsEye = "assets/icons/ic_bullseye.png";
-  static const String icCoin = "assets/icons/ic_coin.png";
-  static const String icDartBasket = "assets/icons/ic_dart_basket.png";
-  static const String icYellowCrown = "assets/icons/ic_yellow_crown.png";
-  
-  
-  
+  static const String icBullsEye = "assets/svg/ic_bullseye.svg";
+  static const String icCoin = "assets/svg/ic_coin.svg";
+  static const String icBlackCrown = "assets/svg/ic_black_crown.svg";
   
   static const String icCrown = "assets/icons/ic_crown.png";
   static const String icSmallCrown = "assets/icons/ic_small_crown.png";

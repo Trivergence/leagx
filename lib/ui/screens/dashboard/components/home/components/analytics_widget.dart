@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -29,33 +30,47 @@ class AnalyticsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: Dimens.verticalPadding),
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      decoration: BoxDecoration(
-          gradient: AppColors.blackishGradient,
-          borderRadius: const BorderRadius.all(Radius.circular(8.0))),
-      child: Column(
-        children: [
-           TextWidget(
-            text: loc.dashboardHomeTxtAnalytics,
-            fontWeight: FontWeight.w700,
-          ),
-          UIHelper.verticalSpace(35.0),
-          Row(
+    return Column(
+      children: [
+        UIHelper.verticalSpaceSmall,
+        TextWidget(
+          text: loc.dashboardHomeTxtAnalytics,
+          fontWeight: FontWeight.w700,
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.only(bottom: 30.0, top: 40),
+          decoration: BoxDecoration(
+              gradient: AppColors.blackishGradient,
+              borderRadius: const BorderRadius.all(Radius.circular(8.0))),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
                 children: [
-                  GradientBorderWidget(
-                    onPressed: () {},
-                    gradient: AppColors.blueishGradient,
-                    text: firstValue,
-                    height: 80.0,
-                    width: 80.0,
-                    isCircular: true,
-                    textWithIcon: true,
-                    imageAsset: Assets.icBullsEye,
+                  Stack(
+                    alignment: Alignment.topCenter,
+                    clipBehavior: Clip.none,
+                    children: [
+                      GradientBorderWidget(
+                        onPressed: () {},
+                        gradient: AppColors.pinkishGradient,
+                        text: firstValue,
+                        height: 80.0,
+                        width: 80.0,
+                        isCircular: true,
+                      ),
+                      Positioned(
+                        top: -15,
+                        child: CircleAvatar(
+                          backgroundColor: const Color(0xFFF67599),
+                          radius: 15,
+                          child: SvgPicture.asset(
+                            Assets.icBullsEye, 
+                            color: AppColors.colorBlack,),
+                        ),
+                      ),
+                    ],
                   ),
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
@@ -66,15 +81,29 @@ class AnalyticsWidget extends StatelessWidget {
               ),
               Column(
                 children: [
-                  GradientBorderWidget(
-                    onPressed: () {},
-                    gradient: AppColors.pinkishGradient,
-                    text: secondValue,
-                    height: 80.0,
-                    width: 80.0,
-                    isCircular: true,
-                    imageAsset: Assets.icYellowCrown,
-                    textWithIcon: true,
+                  Stack(
+                    alignment: Alignment.topCenter,
+                    clipBehavior: Clip.none,
+                    children: [
+                      GradientBorderWidget(
+                        onPressed: () {},
+                        gradient: AppColors.blueishTopBottomGradient,
+                        text: secondValue,
+                        height: 80.0,
+                        width: 80.0,
+                        isCircular: true,
+                      ),
+                      Positioned(
+                        top: -15,
+                        child: CircleAvatar(
+                          backgroundColor: const Color(0xFFA7E6D7),
+                          radius: 15,
+                          child: SvgPicture.asset(
+                            Assets.icBlackCrown,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
@@ -85,15 +114,30 @@ class AnalyticsWidget extends StatelessWidget {
               ),
               Column(
                 children: [
-                  GradientBorderWidget(
-                    onPressed: () {},
-                    gradient: AppColors.orangishGradient,
-                    text: thirdValue,
-                    height: 80.0,
-                    width: 80.0,
-                    isCircular: true,
-                    imageAsset: Assets.icCoin,
-                    textWithIcon: true,
+                  Stack(
+                    alignment: Alignment.topCenter,
+                    clipBehavior: Clip.none,
+                    children: [
+                      GradientBorderWidget(
+                        onPressed: () {},
+                        gradient: AppColors.orangishGradient,
+                        text: thirdValue,
+                        height: 80.0,
+                        width: 80.0,
+                        isCircular: true,
+                      ),
+                      Positioned(
+                        top: -15,
+                        child: CircleAvatar(
+                          backgroundColor: const Color(0xFFFFC56E),
+                          radius: 15,
+                          child: SvgPicture.asset(
+                            Assets.icCoin,
+                            color: AppColors.colorBlack,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
@@ -104,8 +148,8 @@ class AnalyticsWidget extends StatelessWidget {
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

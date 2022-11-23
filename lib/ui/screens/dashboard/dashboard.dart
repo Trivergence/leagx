@@ -84,7 +84,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               trailing: [
                 AppBarChip(
                   totalValue: _userSummary != null ? _userSummary.remainingPredictions.toString() : "0",
-                  leadingIcon: Assets.icDartBasket,
+                  leadingIcon: Assets.icBullsEye,
                 ),
                 AppBarChip(
                   totalValue: _userSummary != null
