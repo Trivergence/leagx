@@ -26,14 +26,15 @@ class MainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? SizeConfig.width * 100,
+      width: width ?? SizeConfig.width * 70,
       height: height ?? 48.0,
       decoration: BoxDecoration(
-          gradient: gradient,
-          borderRadius: const BorderRadius.all(Radius.circular(5.0))),
+          color: AppColors.colorPink,
+          borderRadius: BorderRadius.circular(100)
+        ),
       child: ElevatedButton(
         child: Text(
-          text,
+          text.toUpperCase(),
           style: TextStyle(
             color: AppColors.colorWhite,
             fontSize: fontSize,

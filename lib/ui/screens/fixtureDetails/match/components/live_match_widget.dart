@@ -67,7 +67,6 @@ class LiveMatchWidget extends StatelessWidget {
         ),
         if(statistics.isEmpty) UIHelper.verticalSpaceXL,
         if (!ValidationUtils.isValid(prediction)) SizedBox(
-            width: SizeConfig.width * 90,
             child: MainButton(text: loc.fixtureDetailsMatchBtnPredict, onPressed: _showSheet)),
         UIHelper.verticalSpaceMedium
       ],

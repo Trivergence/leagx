@@ -3,6 +3,7 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_button.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
@@ -74,7 +75,7 @@ Morbi non dui dui. Donec elementum neque blandit, pulvinar leo ut, placerat tort
                 ),
                 UIHelper.horizontalSpaceMedium,
                 Flexible(
-                  child: GradientBorderWidget(
+                  child: GradientBorderButton(
                     text: loc.privacyPolicyBtnDeny,
                     onPressed: () {},
                   ),

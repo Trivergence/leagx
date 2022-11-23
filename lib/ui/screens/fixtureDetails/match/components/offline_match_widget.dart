@@ -61,7 +61,6 @@ class OfflineMatchWidget extends StatelessWidget {
             awayScore: prediction!.secondTeamScore ?? 0,
           ),
         if (!ValidationUtils.isValid(prediction)) SizedBox(
-            width: SizeConfig.width * 90,
             child: MainButton(
               text: loc.fixtureDetailsMatchBtnPredict,
               onPressed: _showSheet,
