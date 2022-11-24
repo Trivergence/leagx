@@ -1,4 +1,5 @@
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/enums.dart';
@@ -114,23 +115,28 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               items: [
                 _bettingNavBarItem(
                   title: loc.dashboardBtnHome,
-                  iconData: Icons.home_outlined,
+                  iconAsset: Assets.icHome,
+                  activeIconAsset: Assets.icHomeFill
                 ),
                 _bettingNavBarItem(
                   title: loc.dashboardBtnFixture,
-                  iconData: Icons.format_list_bulleted,
+                  iconAsset: Assets.icMatches,
+                  activeIconAsset: Assets.icMatches
                 ),
                 _bettingNavBarItem(
                   title: loc.dashboardBtnLeader,
-                  iconData: Icons.leaderboard,
+                  iconAsset: Assets.icExperts,
+                  activeIconAsset: Assets.icExpertsFill
                 ),
                 _bettingNavBarItem(
                   title: loc.dashboardBtnNews,
-                  iconData: Icons.rss_feed,
+                  iconAsset: Assets.icNews,
+                  activeIconAsset: Assets.icNewsFill
                 ),
                 _bettingNavBarItem(
                   title: loc.dashboardBtnSetting,
-                  iconData: Icons.settings,
+                  iconAsset: Assets.icMyProfile,
+                  activeIconAsset: Assets.icMyProfileFill
                 ),
               ],
               currentIndex: _selectedIndex,
@@ -143,22 +149,23 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   }
 
   BottomNavigationBarItem _bettingNavBarItem(
-          {required String title, required IconData iconData}) =>
+          {required String title, 
+          required String iconAsset,
+          required String activeIconAsset,
+          }) =>
       BottomNavigationBarItem(
         backgroundColor: AppColors.colorBackground,
         label: '',
         icon: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            IconWidget(
-              iconData: iconData,
+            SvgPicture.asset(iconAsset, height: 18,
               color: AppColors.colorCyan.withOpacity(0.5),
             ),
-            UIHelper.verticalSpace(5.0),
+            UIHelper.verticalSpace(8.0),
             TextWidget(
               text: title,
-              textSize: 10,
-              fontWeight: FontWeight.w400,
+              textSize: 13,
               color: AppColors.colorCyan.withOpacity(0.5),
             ),
           ],
@@ -166,14 +173,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         activeIcon: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            IconWidget(
-              iconData: iconData,
+            SvgPicture.asset(
+              activeIconAsset,
               color: AppColors.colorCyan,
-            ),
-            UIHelper.verticalSpace(5.0),
+              height: 18),
+            UIHelper.verticalSpace(8.0),
             TextWidget(
               text: title,
-              textSize: 10,
+              textSize: 13,
               fontWeight: FontWeight.w400,
               color: AppColors.colorCyan,
             ),

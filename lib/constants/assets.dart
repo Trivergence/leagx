@@ -13,12 +13,21 @@ class Assets {
   static const String icExpertMale = "assets/icons/ic_expertMale.png";
   static const String icLeague = "assets/icons/ic_league.png";
 
-  
+  //SVG Images
   static const String icBullsEye = "assets/svg/ic_bullseye.svg";
   static const String icCoin = "assets/svg/ic_coin.svg";
   static const String icBlackCrown = "assets/svg/ic_black_crown.svg";
   static const String icCalender = "assets/svg/ic_calender.svg";
   static const String icSoccer = "assets/svg/ic_soccer.svg";
+  static const String icExperts = "assets/svg/ic_experts.svg";
+  static const String icHome = "assets/svg/ic_home.svg";
+  static const String icMatches = "assets/svg/ic_matches.svg";
+  static const String icMyProfile = "assets/svg/ic_myProfile.svg";
+  static const String icNews = "assets/svg/ic_news.svg";
+  static const String icExpertsFill = "assets/svg/ic_experts_fill.svg";
+  static const String icHomeFill = "assets/svg/ic_home_fill.svg";
+  static const String icMyProfileFill = "assets/svg/ic_myProfile_fill.svg";
+  static const String icNewsFill = "assets/svg/ic_news_fill.svg";
   
   static const String icCrown = "assets/icons/ic_crown.png";
   static const String icSmallCrown = "assets/icons/ic_small_crown.png";
