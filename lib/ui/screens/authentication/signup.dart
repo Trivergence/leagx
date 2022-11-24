@@ -128,7 +128,7 @@ class SignupScreen extends StatelessWidget {
                         Loader.hideLoader();
                         ToastMessage.show(
                             loc.authSignupTxtSignedupSuccessfully, TOAST_TYPE.success);
-                        Navigator.pushNamed(context, Routes.dashboard);
+                        Navigator.pushReplacementNamed(context, Routes.dashboard);
                       } else {
                         Loader.hideLoader();
                       }

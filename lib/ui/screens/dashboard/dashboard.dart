@@ -78,71 +78,74 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         builder: (context, DashBoardViewModel dashboardModel, _) {
           UserSummary? _userSummary = context.select<DashBoardViewModel, UserSummary?>(
               (dasboardModel) => dasboardModel.userSummary);
-          return Scaffold(
-            appBar: AppBarWidget(
-              isIcon: true,
-              isDrawer: true,
-              trailing: [
-                AppBarChip(
-                  totalValue: _userSummary != null ? _userSummary.remainingPredictions.toString() : "0",
-                  leadingIcon: Assets.icBullsEye,
-                ),
-                AppBarChip(
-                  totalValue: _userSummary != null
-                      ? _userSummary.coinEarned!.round().toString()
-                      : "0",
-                  leadingIcon: Assets.icCoin,
-                ),
-              ],
-            ),
-            drawer: DrawerScreen(),
-            body: !dashboardModel.busy ? Container(
-              width: SizeConfig.width * 100,
-              height: SizeConfig.height * 100,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                    Assets.homeBackground,
+          return WillPopScope(
+            onWillPop: () => Future.value(false),
+            child: Scaffold(
+              appBar: AppBarWidget(
+                isIcon: true,
+                isDrawer: true,
+                trailing: [
+                  AppBarChip(
+                    totalValue: _userSummary != null ? _userSummary.remainingPredictions.toString() : "0",
+                    leadingIcon: Assets.icBullsEye,
+                  ),
+                  AppBarChip(
+                    totalValue: _userSummary != null
+                        ? _userSummary.coinEarned!.round().toString()
+                        : "0",
+                    leadingIcon: Assets.icCoin,
+                  ),
+                ],
+              ),
+              drawer: DrawerScreen(),
+              body: !dashboardModel.busy ? Container(
+                width: SizeConfig.width * 100,
+                height: SizeConfig.height * 100,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage(
+                      Assets.homeBackground,
+                    ),
                   ),
                 ),
+                child: widgetOptions.elementAt(_selectedIndex),
+              ) : const LoadingWidget(),
+              bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: AppColors.colorBackground,
+                type: BottomNavigationBarType.fixed,
+                items: [
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnHome,
+                    iconAsset: Assets.icHome,
+                    activeIconAsset: Assets.icHomeFill
+                  ),
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnFixture,
+                    iconAsset: Assets.icMatches,
+                    activeIconAsset: Assets.icMatches
+                  ),
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnLeader,
+                    iconAsset: Assets.icExperts,
+                    activeIconAsset: Assets.icExpertsFill
+                  ),
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnNews,
+                    iconAsset: Assets.icNews,
+                    activeIconAsset: Assets.icNewsFill
+                  ),
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnSetting,
+                    iconAsset: Assets.icMyProfile,
+                    activeIconAsset: Assets.icMyProfileFill
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
               ),
-              child: widgetOptions.elementAt(_selectedIndex),
-            ) : const LoadingWidget(),
-            bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: AppColors.colorBackground,
-              type: BottomNavigationBarType.fixed,
-              items: [
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnHome,
-                  iconAsset: Assets.icHome,
-                  activeIconAsset: Assets.icHomeFill
-                ),
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnFixture,
-                  iconAsset: Assets.icMatches,
-                  activeIconAsset: Assets.icMatches
-                ),
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnLeader,
-                  iconAsset: Assets.icExperts,
-                  activeIconAsset: Assets.icExpertsFill
-                ),
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnNews,
-                  iconAsset: Assets.icNews,
-                  activeIconAsset: Assets.icNewsFill
-                ),
-                _bettingNavBarItem(
-                  title: loc.dashboardBtnSetting,
-                  iconAsset: Assets.icMyProfile,
-                  activeIconAsset: Assets.icMyProfileFill
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              onTap: _onItemTapped,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
             ),
           );
         });
@@ -158,6 +161,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         label: '',
         icon: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(iconAsset, height: 18,
               color: AppColors.colorCyan.withOpacity(0.5),
@@ -167,11 +172,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               text: title,
               textSize: 13,
               color: AppColors.colorCyan.withOpacity(0.5),
+              textAlign: TextAlign.center,
             ),
           ],
         ),
         activeIcon: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SvgPicture.asset(
               activeIconAsset,
@@ -183,6 +191,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               textSize: 13,
               fontWeight: FontWeight.w400,
               color: AppColors.colorCyan,
+              textAlign: TextAlign.center,
             ),
           ],
         ),
