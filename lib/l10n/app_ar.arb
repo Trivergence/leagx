@@ -119,7 +119,7 @@
 	"dashboardHomeTxtViewAll": "عرض جميع المباريات",
 	"dashboardHomeTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
 	"dashboardHomeTxtPredictions": "التنبؤات",
-	"dashboardHomeTxtWiningRatio": "نسبة الفوز",
+	"dashboardHomeTxtWiningRatio": "يفوز من",
 	"dashboardHomeTxtEarnedCoid": "نقاطي",
 
 	"dashboardLeaderTxtPredictions": "التوقعات",
@@ -177,7 +177,7 @@
 	"settingTxtLanguage": "لغة",
 	"settingTxtNotification": "تنبيه",
 	"settingTxtPassword": "كلمه السر",
-	"settingTxtMyPredictions": "توقعاتي",
+	"settingTxtMyPredictions": "التوقعات لا تزال",
 	"settingChooseLanguageTxtChooseLanguage":"اختر اللغة",
 	"settingChooseLanguageTxtEnglish":"إنجليزي",
 	"settingChooseLanguageTxtArabic":"عربي",

@@ -78,8 +78,8 @@ class _SettingScreenState extends State<SettingScreen> {
           if (_userSummary != null)
             AnalyticsWidget(
               firstLabel: loc.dashboardHomeTxtPredictions,
-              firstValue: _userSummary!.totalPredictions.toString(),
-              secondLabel: loc.dashboardHomeTxtWiningRatio,
+              firstValue: _userSummary!.remainingPredictions.toString(),
+              secondLabel: loc.dashboardHomeTxtWiningRatio + " " + _userSummary!.totalPredictions.toString(),
               secondValue:
                   _userSummary!.predictionSuccessRate.toString() != "100.0"
                       ? _userSummary!.predictionSuccessRate!.toStringAsFixed(1)

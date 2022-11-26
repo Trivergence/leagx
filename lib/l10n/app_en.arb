@@ -129,8 +129,8 @@
 	"dashboardHomeTxtUpcomingMatches": "UPCOMING MATCHES",
 	"dashboardHomeTxtViewAll": "View all matches",
 	"dashboardHomeTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
-	"dashboardHomeTxtPredictions": "Predictions",
-	"dashboardHomeTxtWiningRatio": "Winning Ratio",
+	"dashboardHomeTxtPredictions": "Predictions Remain",
+	"dashboardHomeTxtWiningRatio": "Wins out of",
 	"dashboardHomeTxtEarnedCoid": "Earned Coin",
 
 	"dashboardLeaderTxtPredictions": "predictions",

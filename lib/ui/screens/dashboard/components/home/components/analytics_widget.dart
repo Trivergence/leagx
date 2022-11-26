@@ -86,8 +86,9 @@ class AnalyticsWidget extends StatelessWidget {
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
                       text: firstLabel,
-                      textSize: SizeConfig.width * 3.5,
-                      color: AppColors.colorWhite.withOpacity(0.6)),
+                      textSize: 11,
+                      color: AppColors.colorWhite.withOpacity(0.6),
+                      fontWeight: FontWeight.bold,),
                   UIHelper.verticalSpace(5),
                   MainButton(
                     width: 80.0,
@@ -133,9 +134,9 @@ class AnalyticsWidget extends StatelessWidget {
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
                       text: secondLabel,
-                      textSize: SizeConfig.width * 3.5,
+                      textSize: 11,
+                      fontWeight: FontWeight.bold,
                       color: AppColors.colorWhite.withOpacity(0.6)),
-                  
                 ],
               ),
               Column(
@@ -168,7 +169,8 @@ class AnalyticsWidget extends StatelessWidget {
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
                       text: thirdLabel,
-                      textSize: SizeConfig.width * 3.5,
+                      textSize: 11,
+                      fontWeight: FontWeight.bold,
                       color: AppColors.colorWhite.withOpacity(0.6)),
                   UIHelper.verticalSpace(5),
                   MainButton(
