@@ -2,7 +2,6 @@ import 'package:leagx/ui/widgets/bar/tab_bar/model/tab_bar_item_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
-import '../../gradient/gradient_widget.dart';
 import '../../text_widget.dart';
 
 class TabBarWidget extends StatelessWidget {
@@ -21,7 +20,7 @@ class TabBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 52,
       child: GridView.count(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -36,22 +35,20 @@ class TabBarWidget extends StatelessWidget {
                     onTap: () => onTabChanged(tabItem.index),
                     child: Container(
                       width: double.infinity,
+                      height: 50,
                       color: AppColors.textFieldColor,
                       child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: tabItem.index == selectedIndex
-                              ? TextWidget(
+                        child: tabItem.index == selectedIndex
+                            ? TextWidget(
+                              text: tabItem.title!,
+                              color: AppColors.colorCyan,
+                              fontWeight: FontWeight.bold,
+                            )
+                            : TextWidget(
                                 text: tabItem.title!,
-                                color: AppColors.colorCyan,
+                                color: AppColors.colorCyan.withOpacity(0.5),
                                 fontWeight: FontWeight.bold,
-                              )
-                              : TextWidget(
-                                  text: tabItem.title!,
-                                  color: AppColors.colorCyan.withOpacity(0.5),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                        ),
+                              ),
                       ),
                     ),
                   ),

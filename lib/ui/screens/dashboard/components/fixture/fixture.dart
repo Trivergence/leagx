@@ -96,6 +96,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
                           isSelected: !isFiltering,
                           width: 40,
                           text: loc.dashboardFixtureTxtAll,
+                          textSize: Dimens.textXS,
                         ),
                       ),
                     if (subscribedLeagues.isNotEmpty)

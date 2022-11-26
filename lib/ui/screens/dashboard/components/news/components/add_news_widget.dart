@@ -18,7 +18,7 @@ class AddNewsWidget extends StatelessWidget {
          child: Container(
           padding: const EdgeInsets.all(8),
           decoration: const BoxDecoration(
-            gradient: AppColors.orangishGradient,
+            color: AppColors.colorYellow,
             shape: BoxShape.circle
           ),
           child: const Icon(Icons.add),

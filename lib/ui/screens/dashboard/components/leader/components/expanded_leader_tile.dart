@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:leagx/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -53,7 +54,12 @@ class _ExpandedLeaderTileState extends State<ExpandedLeaderTile> {
               children: [
                 Positioned(
                     top: -10,
-                    child: Image.asset(Assets.icSmallCrown)),
+                    child: SvgPicture.asset(
+                      Assets.icBlackCrown,
+                      color: AppColors.colorPink,
+                    )
+                    //Image.asset(Assets.icSmallCrown),
+                  ),
                 GradientBorderWidget(
                   width: 60.0,
                   height: 60.0,

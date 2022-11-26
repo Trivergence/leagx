@@ -30,7 +30,7 @@ class Assets {
   static const String icNewsFill = "assets/svg/ic_news_fill.svg";
   
   static const String icCrown = "assets/icons/ic_crown.png";
-  static const String icSmallCrown = "assets/icons/ic_small_crown.png";
+  //static const String icSmallCrown = "assets/icons/ic_small_crown.png";
   static const String icNotification = "assets/icons/ic_notification.png";
   static const String icSwitch = "assets/icons/ic_switch.png";
   static const String icEdit = "assets/icons/ic_edit.png";
