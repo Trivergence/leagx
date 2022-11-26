@@ -31,12 +31,9 @@
 	"adminHomeTxtWithdraw": "سحب",
 
 	
-	"onboardingTxtDesc1": "Donec finibus et lorem في تيمبوس. معرف Etiam ، في scelerisque dolor.",
-	"onboardingTxtDesc2": "Donec finibus et lorem في تيمبوس. معرف Etiam ، في scelerisque dolor.",
-	"onboardingTxtDesc3": "Donec finibus et lorem في تيمبوس. معرف Etiam ، في scelerisque dolor.",
-	"onboardingTxtTitle1": "لوريم ايبسوم دولور",
-	"onboardingTxtTitle2": "لوريم ايبسوم دولور",
-	"onboardingTxtTitle3": "لوريم ايبسوم دولور",
+	"onboardingTxtDesc1": "تابع الدوريات والأندية واللاعبين والمحللين المفضلين لديك.",
+	"onboardingTxtDesc2": "شارك بتعليقاتك في الوقت الفعلي واحصل على أموال مقابل ذلك.",
+	"onboardingTxtDesc3": "توقع وبناء استراتيجية الفوز لأنديةك.",
 
 	"adminFixtureDetailCoinBtnSave": "حفظ",
 	"adminFixtureDetailCoinTxtPrimaryMatch": "المباراة الأساسية",

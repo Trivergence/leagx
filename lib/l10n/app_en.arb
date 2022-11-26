@@ -5,12 +5,9 @@
 	"vs": "VS",
 
 	"loginTitle": "Login",
-	"onboardingTxtTitle1":"LOREM IPSUM DOLOR",
-	"onboardingTxtDesc1":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
-	"onboardingTxtTitle2":"LOREM IPSUM DOLOR",
-	"onboardingTxtDesc2":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
-	"onboardingTxtTitle3":"LOREM IPSUM DOLOR",
-	"onboardingTxtDesc3":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
+	"onboardingTxtDesc1": "Follow your favorite leagues, clubs, players, and analysts.",
+	"onboardingTxtDesc2": "Share your feedback in real-time and get paid for it.",
+	"onboardingTxtDesc3": "Predict and build your clubs' winning strategy.",
 
 	"adminHomeTxtAdmin": "Admin",
 	"adminHomeBtnToday": "today",
