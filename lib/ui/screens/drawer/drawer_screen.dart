@@ -149,6 +149,7 @@ class DrawerScreen extends StatelessWidget {
               ),
             ),
           ),
+          UIHelper.verticalSpaceSmall
         ],
       ),
     );

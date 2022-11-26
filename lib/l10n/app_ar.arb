@@ -172,11 +172,12 @@
 	"fixtureDetailsTxtPredictMatchResult": "توقع نتيجة المباراة",
 
 	"settingTxtAdmin": "مشرف",
+	"settingTxtProfileInfo": "معلومات الشخصي",
 	"settingTxtGeneral": "عام",
 	"settingTxtLanguage": "لغة",
 	"settingTxtNotification": "تنبيه",
 	"settingTxtPassword": "كلمه السر",
-	"settingTxtProfile": "الملف الشخصي",
+	"settingTxtMyPredictions": "توقعاتي",
 	"settingChooseLanguageTxtChooseLanguage":"اختر اللغة",
 	"settingChooseLanguageTxtEnglish":"إنجليزي",
 	"settingChooseLanguageTxtArabic":"عربي",

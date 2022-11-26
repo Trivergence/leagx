@@ -7,8 +7,16 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:payments/payments.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../../constants/assets.dart';
+import '../../../../../../core/network/internet_info.dart';
+import '../../../../../../routes/routes.dart';
+import '../../../../../../view_models/dashboard_view_model.dart';
+import '../../../../../../view_models/wallet_view_model.dart';
+import '../../../../../util/toast/toast.dart';
+import '../../../../../widgets/main_button.dart';
 
 class AnalyticsWidget extends StatelessWidget {
   final String firstLabel;
@@ -47,6 +55,7 @@ class AnalyticsWidget extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(8.0))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
                 children: [
@@ -79,6 +88,20 @@ class AnalyticsWidget extends StatelessWidget {
                       text: firstLabel,
                       textSize: SizeConfig.width * 3.5,
                       color: AppColors.colorWhite.withOpacity(0.6)),
+                  UIHelper.verticalSpace(5),
+                  MainButton(
+                    width: 80.0,
+                    height: 22.0,
+                    text: loc.profileProfileSettingsTxtAddPredictions,
+                    fontSize: 8.0,
+                    onPressed: () async {
+                      bool isConnected = await InternetInfo.isConnected();
+                      if (isConnected == true) {
+                        Navigator.pushNamed(context, Routes.chooseLeague,
+                            arguments: false);
+                      }
+                    },
+                  ),
                 ],
               ),
               Column(
@@ -112,6 +135,7 @@ class AnalyticsWidget extends StatelessWidget {
                       text: secondLabel,
                       textSize: SizeConfig.width * 3.5,
                       color: AppColors.colorWhite.withOpacity(0.6)),
+                  
                 ],
               ),
               Column(
@@ -146,6 +170,38 @@ class AnalyticsWidget extends StatelessWidget {
                       text: thirdLabel,
                       textSize: SizeConfig.width * 3.5,
                       color: AppColors.colorWhite.withOpacity(0.6)),
+                  UIHelper.verticalSpace(5),
+                  MainButton(
+                    width: 80.0,
+                    height: 22.0,
+                    text: loc.profileProfileSettingsTxtWithdraw,
+                    fontSize: 8.0,
+                    onPressed: () async {
+                      bool isConnected = await InternetInfo.isConnected();
+                      if(isConnected == true) {
+                        if (StripeConfig()
+                              .getSecretKey
+                              .isNotEmpty) {
+                            if (context
+                                  .read<DashBoardViewModel>()
+                                  .isInitialized ==
+                              true) {
+                            Navigator.pushNamed(context, Routes.payout);
+                          } else {
+                            ToastMessage.show(
+                                loc.msgPleaseWait, TOAST_TYPE.msg);
+                          }
+                            
+                          } else {
+                            ToastMessage.show(
+                                loc.errorTryAgain, TOAST_TYPE.msg);
+                            context
+                                .read<WalletViewModel>()
+                                .setupStripeCredentials();
+                          }
+                      }
+                    },
+                  ),
                 ],
               ),
             ],

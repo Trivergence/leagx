@@ -150,7 +150,8 @@
 	"dashboardNewsAddNewsTxtSuccess": "News added succesfully",
 	"dashboardNewsAddNewsTxtRequiredFixture": "Please choose a fixture to proceed forward",
 
-	"settingTxtProfile": "Profile",
+	"settingTxtMyPredictions": "My Predictions",
+	"settingTxtProfileInfo": "PROFILE INFO",
 	"settingTxtGeneral": "GENERAL",
 	"settingTxtNotification": "Notification",
 	"settingTxtPassword": "Password",
