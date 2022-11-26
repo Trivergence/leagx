@@ -36,15 +36,14 @@ class WalletScreen extends StatelessWidget {
       create: false,
       model: context.read<WalletViewModel>(), 
       onModelReady: (WalletViewModel walletModel) async {
-        SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
-          await walletModel.getData();
-        });
+        // SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
+        //   await walletModel.getUserPaymentMethods();
+        // });
       },
       builder: (context, WalletViewModel walletModel, _) {
         _walletViewModel = walletModel;
-      return  Scaffold(
-      appBar: AppBarWidget(),
-      body: !walletModel.busy ? SingleChildScrollView(
+      return  Container(
+      child: !walletModel.busy ? SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children:  [
