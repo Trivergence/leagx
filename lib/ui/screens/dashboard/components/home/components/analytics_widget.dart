@@ -121,7 +121,7 @@ class AnalyticsWidget extends StatelessWidget {
                       Positioned(
                         top: -15,
                         child: CircleAvatar(
-                          backgroundColor: const Color(0xFFA7E6D7),
+                          backgroundColor: const Color(0xFF71DBD4),
                           radius: 15,
                           child: SvgPicture.asset(
                             Assets.icBlackCrown,

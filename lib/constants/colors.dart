@@ -41,11 +41,13 @@ class AppColors {
 
   static const Gradient pinkishGradient = LinearGradient(colors: [
     Color(0xFFF67599),
-    Color(0xFFF36995),
-    Color(0xFFEB3F86),
-    Color(0xFFE5267C),
+    Color(0xFFEA3F85),
+    Color(0xFFEA3F85),
+    Color(0xFFEA3F85),
+    Color(0xFFE5257C),
     Color(0xFFE31C79),
-    Color(0xFF8F2291),
+    Color(0xFF8E2191),
+    Color(0xFF8E2191),
     Color(0xFF5F259F),
   ],
   begin: Alignment.topCenter,
@@ -54,8 +56,13 @@ class AppColors {
   static const Gradient orangishGradient = LinearGradient(
     colors: [
       Color(0xFFFFC56E),
-      Color(0xFFFFB36E),
       Color(0xFFFF8D6D),
+      Color(0xFFFF8D6D),
+      Color(0xFFFF8D6D),
+      Color(0xFFFF8D6D),
+      Color(0xFFFF8D6D),
+      Color(0xFFFF8D6D),
+      Color(0xFFF8485E),
       Color(0xFFF8485E),
     ],
     begin: Alignment.topCenter,
@@ -86,10 +93,12 @@ class AppColors {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [
-      Color(0xFFA7E6D7),
       Color(0xFF71DBD4),
+      Color(0xFF4AA2BE),
+      Color(0xFF4AA2BE),
       Color(0xFF1554A0),
-      Color(0xFF003594),
+      Color(0xFF1554A0),
+      Color(0xFF1554A0),
       Color(0xFF003594),
     ],
   );
