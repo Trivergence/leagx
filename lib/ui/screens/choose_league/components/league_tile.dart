@@ -68,8 +68,8 @@ class _LeagueTileState extends State<LeagueTile> {
             width: 88,
             child: widget.hasSubscribed
                 ? MainButton(
-                    text: loc.chooseLeagueBtnUnsubscribe,
-                    onPressed: _unSubscribe,
+                    text: loc.chooseLeagueBtnUpgrade,
+                    onPressed: _upgrade,
                     fontWeight: FontWeight.w400,
                     fontSize: 10,
                   )
@@ -97,14 +97,15 @@ class _LeagueTileState extends State<LeagueTile> {
     });
   }
 
-  Future<void> _unSubscribe() async {
-    int? leagueId = context.read<DashBoardViewModel>().getLeagueInternalId(widget.leagueId);
-    if(leagueId != null) {
-      context.read<SubscriptionViewModel>().showUnsubscribeDialog(
-        context: context,
-        leagueId: leagueId);
-    } else {
-      ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
-    }
+  Future<void> _upgrade() async {
+    Navigator.of(context).pushNamed(
+    Routes.choosePlan, 
+    arguments: ChoosePlanArgs(
+      leagueId: widget.leagueId,
+      leagueImg: widget.imgUrl,
+      leagueTitle: leagueTitle!,
+      isRedeeming: widget.isRedeeming,
+      isUpgrading: true
+    ));
   }
 }

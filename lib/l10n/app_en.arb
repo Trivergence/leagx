@@ -84,7 +84,7 @@
 
 	"chooseLeagueTxtChooseALeague": "Choose a League",
 	"chooseLeagueTxtSearch": "Search",
-	"chooseLeagueBtnUnsubscribe": "Unsubscribe",
+	"chooseLeagueBtnUpgrade": "Upgrade",
 	"chooseLeagueBtnSubscribe": "Subscribe",
 	"chooseLeagueDialogTitle": "Confirmation",
 	"chooseLeagueDialogbody": "Are you sure you want to unsubscribe this league?",
@@ -92,13 +92,15 @@
 	"chooseLeagueDialogBtnConfirm": "Confirm",
 
 	"choosePlanTxtChooseAPlan": "Choose a Package",
-	"choosePlanDialogSuccessTitle": "Purchase Successful",
 	"choosePlanDialogSelectPayment": "Select Payment Method",
 	"choosePlanDialogSelectCard": "Card",
 	"choosePlanDialogSelectWallet": "Wallet",
 	"choosePlanDialogBtnNegative": "Cancel",
 	"choosePlanDialogBtnPositive": "Select",
+	"choosePlanDialogSuccessTitle": "Purchase Successful",
+	"choosePlanDialogUpgradeSuccessTitle": "Upgrade Successful",
 	"choosePlanDialogSuccessDesc": "You have succesfully subscribed the package",
+	"choosePlanDialogUpgradeSuccessDesc": "You have succesfully upgraded the package",
 
 	"chooseFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
 	"chooseFixtureTxtTitle": "Choose A Match",
@@ -131,7 +133,7 @@
 	"dashboardHomeTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
 	"dashboardHomeTxtPredictions": "Predictions Remain",
 	"dashboardHomeTxtWiningRatio": "Wins out of",
-	"dashboardHomeTxtEarnedCoid": "Earned Coin",
+	"dashboardHomeTxtEarnedCoid": "Credit",
 
 	"dashboardLeaderTxtPredictions": "predictions",
 	"dashboardLeaderTxtWin": "Champion",
@@ -255,6 +257,10 @@
 	"subscribeConfirmBody": "Are your sure you want to subscribe this league. This will charge ",
 	"subscribeConfirmCancel": "Cancel",
 	"subscribeConfirmSubscribe": "Subscribe",
+	"upgradeConfirmTitle": "Confirm upgrade",
+	"upgradeConfirmBody": "Are your sure you want to upgrade this league. This will charge ",
+	"upgradeConfirmCancel": "Cancel",
+	"upgradeConfirmUpgrade": "Upgrade",
 
 	"walletTxtWallet": "Wallet",
 	"walletTxtTotalCoins": "Total Coins",

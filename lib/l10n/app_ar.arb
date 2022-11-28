@@ -82,7 +82,7 @@
 	"chooseAnExpertTxtSuccess": "نجاح",
 
 	"chooseLeagueBtnSubscribe": "الاشتراك",
-	"chooseLeagueBtnUnsubscribe": "إلغاء الاشتراك",
+	"chooseLeagueBtnUpgrade": "رفع مستوى",
 	"chooseLeagueTxtChooseALeague": "اختر الدوري",
 	"chooseLeagueTxtSearch": "بحث",
 	"chooseLeagueDialogTitle": "تأكيد",
@@ -97,13 +97,15 @@
 	"choosePlanDialogBtnNegative": "إلغاء",
 	"choosePlanDialogBtnPositive": "يختار",
 	"choosePlanDialogSuccessTitle": "تم الشراء بنجاح",
+	"choosePlanDialogUpgradeSuccessTitle": "تمت الترقية بنجاح",
 	"choosePlanDialogSuccessDesc": "لقد نجحت في الاشتراك في الحزمة",
+	"choosePlanDialogUpgradeSuccessDesc": "لقد قمت بترقية الحزمة بنجاح",
 
 	"chooseFixtureTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
 	"chooseFixtureTxtTitle": "اختر تطابق",
 
 	"dashboardBtnWallet": "محفظة",
-	"dashboardBtnHome": "الصفحة الرئيسية",
+	"dashboardBtnHome": "الرئيسية",
 	"dashboardBtnLeader": "الخبراء",
 	"dashboardBtnNews": "التحليلات",
 	"dashboardBtnSetting": "ملفي",
@@ -120,7 +122,7 @@
 	"dashboardHomeTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
 	"dashboardHomeTxtPredictions": "التنبؤات",
 	"dashboardHomeTxtWiningRatio": "يفوز من",
-	"dashboardHomeTxtEarnedCoid": "نقاطي",
+	"dashboardHomeTxtEarnedCoid": "تنسب إليه",
 
 	"dashboardLeaderTxtPredictions": "التوقعات",
 	"dashboardLeaderTxtSuccess": "نجاح",
@@ -255,6 +257,10 @@
 	"subscribeConfirmBody": " هل أنت متأكد أنك تريد الاشتراك في هذا الدوري. هذا سوف تهمة",
 	"subscribeConfirmCancel": "إلغاء",
 	"subscribeConfirmSubscribe": "الإشتراك",
+	"upgradeConfirmTitle": "قم بتأكيد الترقية",
+	"upgradeConfirmBody": "هل أنت متأكد أنك تريد ترقية هذا الدوري. هذا سوف تهمة",
+	"upgradeConfirmCancel": "إلغاء",
+	"upgradeConfirmUpgrade": "رفع مستوى",
 
 	"walletTxtWallet": "محفظة",
 	"walletTxtTotalCoins": "مجموع العملات",
