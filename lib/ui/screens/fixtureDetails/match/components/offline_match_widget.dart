@@ -1,19 +1,30 @@
-import 'package:leagx/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/models/prediction.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/dimens.dart';
+import '../../../../../models/dashboard/fixture.dart';
+import '../../../../../models/user_summary.dart';
+import '../../../../../view_models/dashboard_view_model.dart';
+import '../../../../../view_models/fixture_view_model.dart';
+import '../../../../util/app_dialogs/fancy_dialog.dart';
 import '../../../../util/size/size_config.dart';
 import '../../../../util/ui/ui_helper.dart';
+import '../../../../util/validation/validation_utils.dart';
 import '../../../../widgets/divider_widget.dart';
 import '../../../../widgets/main_button.dart';
 import '../../../../widgets/text_widget.dart';
-import '../../components/prediction_bottom_sheet.dart';
+import '../../components/match_prediction_tile.dart';
 
+// ignore: must_be_immutable
 class OfflineMatchWidget extends StatelessWidget {
+  final Fixture matchDetails;
+  final Prediction? prediction;
   OfflineMatchWidget({
-    Key? key,
+    Key? key, required this.matchDetails, required this.prediction,
   }) : super(key: key);
 
   late BuildContext _context;
@@ -34,18 +45,25 @@ class OfflineMatchWidget extends StatelessWidget {
             children: [
               Image.asset(Assets.icSoccer),
               UIHelper.verticalSpaceMedium,
-              const TextWidget(
-                text: "Match to start yet",
+              TextWidget(
+                text: loc.fixtureDetailsMatchTxtMatchToStartYet,
                 textSize: Dimens.textSM,
                 color: AppColors.colorGrey,
               )
             ],
           ),
         ),
-        SizedBox(
+        if (ValidationUtils.isValid(prediction))
+          MatchPredictionTile(
+            homeTeamName: prediction!.match.firstTeamName,
+            awayTeamName: prediction!.match.secondTeamName,
+            homeScore: prediction!.firstTeamScore ?? 0,
+            awayScore: prediction!.secondTeamScore ?? 0,
+          ),
+        if (!ValidationUtils.isValid(prediction)) SizedBox(
             width: SizeConfig.width * 90,
             child: MainButton(
-              text: "Predict",
+              text: loc.fixtureDetailsMatchBtnPredict,
               onPressed: _showSheet,
             ))
       ],
@@ -53,16 +71,7 @@ class OfflineMatchWidget extends StatelessWidget {
   }
 
   void _showSheet() {
-    showModalBottomSheet(
-        context: _context,
-        backgroundColor: AppColors.colorBackground,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        builder: (context) {
-          return PredictionSheetWidget(
-              onSubmit: (context) =>
-                  Navigator.pushNamed(context, Routes.chooseAnExpert));
-        });
+    _context
+          .read<FixtureDetailViewModel>().predictMatch(context: _context, matchDetails: matchDetails);
   }
 }

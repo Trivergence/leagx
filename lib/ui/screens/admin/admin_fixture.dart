@@ -5,8 +5,8 @@ import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
-import 'package:leagx/ui/widgets/app_bar_widget.dart';
-import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -75,97 +75,19 @@ class AdminFixtureScreen extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                   UIHelper.verticalSpaceSmall,
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.adminFixtureDetail);
-                    },
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamOneScore: 3,
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    teamTwoScore: 5,
-                    isLive: true,
-                    liveTime: '00:45:35',
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.adminFixtureDetail);
-                    },
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.adminFixtureDetail);
-                    },
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.adminFixtureDetail);
-                    },
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.adminFixtureDetail);
-                    },
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.adminFixtureDetail);
-                    },
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.adminFixtureDetail);
-                    },
-                  ),
-                  FixtureWidget(
-                    leagueName: 'UEFA Champion League',
-                    teamOneFlag: Assets.ufcFlag,
-                    teamOneName: 'UFC',
-                    teamTwoFlag: Assets.arsFlag,
-                    teamTwoName: 'ARS',
-                    scheduledTime: 'Today, 20:00',
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.adminFixtureDetail);
-                    },
-                  )
+                  for(int i = 0; i<5 ; i++) FixtureWidget(
+                      isOver: true,
+                      leagueName: 'UEFA Champion League',
+                      scheduledDate: DateTime(2022,01,01),
+                      teamOneFlag: Assets.ufcFlag,
+                      teamOneName: 'UFC',
+                      teamTwoFlag: Assets.arsFlag,
+                      teamTwoName: 'ARS',
+                      scheduledTime: 'Today, 20:00',
+                      onTap: (leagueName) {
+                        Navigator.pushNamed(context, Routes.adminFixtureDetail);
+                      },
+                    ),
                 ],
               ),
             ),

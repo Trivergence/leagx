@@ -1,4 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:leagx/models/user/user.dart';
+import 'package:leagx/ui/util/validation/validation_utils.dart';
+
 import 'constants/preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +22,14 @@ class SharedPreferenceHelper {
     return _sharedPreference.remove(Preferences.authToken);
   }
 
+  Future<void> setFirstTime(bool value) async {
+    await _sharedPreference.setBool(Preferences.firstTime, value);
+  }
+
+  bool isFirstTime() {
+    return _sharedPreference.getBool(Preferences.firstTime) ?? true;
+  }
+
   //Username
   String? get username => _sharedPreference.getString(Preferences.username);
 
@@ -27,6 +39,25 @@ class SharedPreferenceHelper {
 
   Future<bool> removeUsername() async {
     return _sharedPreference.remove(Preferences.username);
+  }
+
+  //User
+  User? getUser() {
+    if (ValidationUtils.isValid(
+        _sharedPreference.getString(Preferences.user))) {
+      return User.fromJson(
+          jsonDecode(_sharedPreference.getString(Preferences.user)!));
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool> saveUser(User user){
+    return _sharedPreference.setString(Preferences.user, jsonEncode(user));
+  }
+
+  Future<bool> removeUser() async {
+    return _sharedPreference.remove(Preferences.user);
   }
 
   // Login
@@ -48,7 +79,7 @@ class SharedPreferenceHelper {
 
   // Language
   String? get currentLanguage {
-    return _sharedPreference.getString(Preferences.currentLanguage);
+    return _sharedPreference.getString(Preferences.currentLanguage) ?? "en";
   }
 
   Future<void> changeLanguage(String language) {

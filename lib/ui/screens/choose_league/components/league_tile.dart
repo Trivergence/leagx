@@ -1,26 +1,52 @@
+import 'package:leagx/models/choose_plan_args.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
+import 'package:leagx/ui/util/utility/translation_utility.dart';
+import 'package:leagx/ui/widgets/image_widget.dart';
+import 'package:leagx/ui/widgets/shimmer_widget.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:leagx/view_models/subscription_viewmodel.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
-import '../../../util/ui_model/choose_league_model.dart';
-import '../../../widgets/gradient_border_button.dart';
+import '../../../widgets/gradient/gradient_border_button.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 
-class LeagueTile extends StatelessWidget {
+class LeagueTile extends StatefulWidget {
   const LeagueTile({
     Key? key,
-    required this.listOfLeagues,
-    required this.index,
+    required this.leagueId,
+    required this.imgUrl,
+    required this.leagueTitle,
+    required this.hasSubscribed, 
+    this.isRedeeming = false,
   }) : super(key: key);
-
-  final List<ChooseLeague> listOfLeagues;
-  final int index;
+  final bool isRedeeming;
+  final String leagueId;
+  final String imgUrl;
+  final String leagueTitle;
+  final bool hasSubscribed;
 
   @override
+  State<LeagueTile> createState() => _LeagueTileState();
+}
+
+class _LeagueTileState extends State<LeagueTile> {
+  String? leagueTitle;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    translateData();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    return Padding(
+    return !isLoading ? Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: ListTile(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -28,28 +54,56 @@ class LeagueTile extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         tileColor: AppColors.textFieldColor,
         leading: CircleAvatar(
-          backgroundImage: AssetImage(listOfLeagues[index].leagueImage!),
+          child: ImageWidget(
+            imageUrl: widget.imgUrl,
+             placeholder: Assets.icLeague
+            ),
+          backgroundColor: AppColors.textFieldColor,
           radius: 25,
         ),
-        title: TextWidget(text: listOfLeagues[index].leagueName!),
+        title: TextWidget(text: leagueTitle!),
         trailing: SizedBox(
             height: 26,
             width: 88,
-            child: listOfLeagues[index].hasSubscribed!
+            child: widget.hasSubscribed
                 ? MainButton(
-                    text: loc.chooseLeagueBtnSubscribed,
-                    onPressed: () {},
+                    text: loc.chooseLeagueBtnUnsubscribe,
+                    onPressed: _unSubscribe,
                     fontWeight: FontWeight.w400,
                     fontSize: 10,
                   )
                 : GradientBorderButton(
                     text: loc.chooseLeagueBtnSubscribe,
                     onPressed: () => Navigator.of(context)
-                        .pushNamed(Routes.choosePlan, arguments: true),
+                        .pushNamed(Routes.choosePlan, arguments: ChoosePlanArgs(
+                          leagueId: widget.leagueId, 
+                          leagueImg: widget.imgUrl,
+                          leagueTitle: leagueTitle!,
+                          isRedeeming: widget.isRedeeming)),
                     fontWeight: FontWeight.w400,
                     fontSize: 10,
                   )),
       ),
-    );
+    )
+    : const ShimmerWidget(height: 100)
+    ;
+  }
+
+  Future<void> translateData() async {
+    leagueTitle = await TranslationUtility.translate(widget.leagueTitle);
+    isLoading = false;
+    setState(() {
+    });
+  }
+
+  Future<void> _unSubscribe() async {
+    int? leagueId = context.read<DashBoardViewModel>().getLeagueInternalId(widget.leagueId);
+    if(leagueId != null) {
+      context.read<SubscriptionViewModel>().showUnsubscribeDialog(
+        context: context,
+        leagueId: leagueId);
+    } else {
+      ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+    }
   }
 }

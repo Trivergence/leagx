@@ -1,10 +1,13 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/gradient_border_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../constants/assets.dart';
 
 class AnalyticsWidget extends StatelessWidget {
   final String firstLabel;
@@ -34,8 +37,8 @@ class AnalyticsWidget extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8.0))),
       child: Column(
         children: [
-          const TextWidget(
-            text: 'Analytics',
+           TextWidget(
+            text: loc.dashboardHomeTxtAnalytics,
             fontWeight: FontWeight.w700,
           ),
           UIHelper.verticalSpace(35.0),
@@ -48,9 +51,11 @@ class AnalyticsWidget extends StatelessWidget {
                     onPressed: () {},
                     gradient: AppColors.blueishGradient,
                     text: firstValue,
-                    height: 60.0,
-                    width: 60.0,
+                    height: 80.0,
+                    width: 80.0,
                     isCircular: true,
+                    textWithIcon: true,
+                    imageAsset: Assets.icBullsEye,
                   ),
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
@@ -65,9 +70,11 @@ class AnalyticsWidget extends StatelessWidget {
                     onPressed: () {},
                     gradient: AppColors.pinkishGradient,
                     text: secondValue,
-                    height: 60.0,
-                    width: 60.0,
+                    height: 80.0,
+                    width: 80.0,
                     isCircular: true,
+                    imageAsset: Assets.icYellowCrown,
+                    textWithIcon: true,
                   ),
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
@@ -82,9 +89,11 @@ class AnalyticsWidget extends StatelessWidget {
                     onPressed: () {},
                     gradient: AppColors.orangishGradient,
                     text: thirdValue,
-                    height: 60.0,
-                    width: 60.0,
+                    height: 80.0,
+                    width: 80.0,
                     isCircular: true,
+                    imageAsset: Assets.icCoin,
+                    textWithIcon: true,
                   ),
                   UIHelper.verticalSpaceSmall,
                   TextWidget(

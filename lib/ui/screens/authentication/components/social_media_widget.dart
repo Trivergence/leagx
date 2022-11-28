@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 
 class SocialMediaWidget extends StatelessWidget {
   final IconData iconData;
-  const SocialMediaWidget({Key? key, required this.iconData}) : super(key: key);
+  final VoidCallback onTap;
+  const SocialMediaWidget({
+    Key? key,
+    required this.iconData,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         height: 44.0,
         width: 44.0,
