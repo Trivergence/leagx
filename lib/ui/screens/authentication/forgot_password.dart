@@ -1,16 +1,25 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/models/auth/forgot_password.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/app_bar_widget.dart';
+import 'package:leagx/ui/util/ui/validation_helper.dart';
+import 'package:leagx/ui/util/validation/validation_utils.dart';
+import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:leagx/ui/widgets/textfield/textfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/auth_view_model.dart';
+
+import '../../../core/network/internet_info.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   ForgotPasswordScreen({Key? key}) : super(key: key);
 
@@ -41,18 +50,38 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ),
             UIHelper.verticalSpaceLarge,
-            TextFieldWidget(
-              textController: _emailController,
-              hint: loc.authForgotPasswordTxtemailOrPhone,
-              prefix: const IconWidget(
-                iconData: Icons.drafts_outlined,
+            Form(
+              key: _formKey,
+              child: TextFieldWidget(
+                textController: _emailController,
+                hint: loc.authForgotPasswordTxtemailOrPhone,
+                prefix: const IconWidget(
+                  iconData: Icons.drafts_outlined,
+                ),
+                validator: (value) => ValidationHelper.validateEmail(value),
+                inputType: TextInputType.emailAddress,
               ),
             ),
             UIHelper.verticalSpaceLarge,
             MainButton(
               text: loc.authForgotPasswordBtnResetPassword,
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.resetPassword);
+              onPressed: () async {
+                bool isConnected = await InternetInfo.isConnected();
+                if (isConnected == true) {
+                  if (_formKey.currentState!.validate()) {
+                    Loader.showLoader();
+                    ForgotPassword? forgotPasswordResponse =
+                        await AuthViewModel.forgotPassword(
+                      email: _emailController.text,
+                    );
+                    Loader.hideLoader();
+                    if (ValidationUtils.isValid(forgotPasswordResponse)) {
+                      ToastMessage.show(
+                          loc.authForgotPasswordSuccessMsg1 + " " + _emailController.text + " " + loc.authForgotPasswordSuccessMsg2, TOAST_TYPE.msg);
+                      Navigator.pushReplacementNamed(context, Routes.signin);
+                    }
+                  }
+                }
               },
             ),
             /*UIHelper.verticalSpaceMedium,

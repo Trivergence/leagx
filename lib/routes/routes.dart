@@ -1,3 +1,7 @@
+import 'package:leagx/models/choose_plan_args.dart';
+import 'package:leagx/models/match_args.dart';
+import 'package:leagx/models/update_profile_args.dart';
+import 'package:leagx/ui/screens/add_payout_details.dart/add_payout_details.dart';
 import 'package:leagx/ui/screens/admin/admin_announce.dart';
 import 'package:leagx/ui/screens/admin/admin_fixture.dart';
 import 'package:leagx/ui/screens/admin/admin_fixture_detail/admin_fixture_detail.dart';
@@ -10,19 +14,24 @@ import 'package:leagx/ui/screens/choose_an_expert/choose_an_expert.dart';
 import 'package:leagx/ui/screens/choose_league/choose_league_screen.dart';
 import 'package:leagx/ui/screens/choose_plan/edit_choose_plan.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
+import 'package:leagx/ui/screens/dashboard/components/setting/components/choose_language.dart';
 import 'package:leagx/ui/screens/dashboard/components/setting/setting.dart';
-import 'package:leagx/ui/screens/dashboard/dashbard.dart';
+import 'package:leagx/ui/screens/dashboard/dashboard.dart';
 import 'package:leagx/ui/screens/faq/faqs_screen.dart';
 import 'package:leagx/ui/screens/notification/notification.dart';
 import 'package:leagx/ui/screens/onboarding/onboarding_screen.dart';
+import 'package:leagx/ui/screens/payout/payout_screen.dart';
 import 'package:leagx/ui/screens/prediciton_s/prediction_s_screen.dart';
 import 'package:leagx/ui/screens/privacy_policy/privacy_policy_screen.dart';
 import 'package:leagx/ui/screens/profile/profile_info_update.dart';
 import 'package:leagx/ui/screens/profile/profile_settings.dart';
 import 'package:leagx/ui/screens/terms_service/terms_service_screen.dart';
+import 'package:leagx/ui/screens/upcoming_matches.dart';
 import 'package:leagx/ui/screens/user/user.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/screens/wallet/wallet_screen.dart';
 
+import '../ui/screens/choose_fixture.dart/choose_match_screen.dart';
 import '../ui/screens/choose_plan/choose_plan_screen.dart';
 import '../ui/screens/dashboard/components/news/add_news.dart';
 import '../ui/screens/fixtureDetails/fixture_details_screen.dart';
@@ -42,6 +51,7 @@ class Routes {
   static const String adminFixtureDetail = '/adminFixtureDetail';
   static const String adminAnnounce = '/adminAnnounce';
   static const String chooseLeague = '/chooseLeague';
+  static const String chooseFixture = '/chooseFixture';
   static const String choosePlan = '/choosePlan';
   static const String home = '/home';
   static const String predictions = '/predicitons';
@@ -55,6 +65,11 @@ class Routes {
   static const String chooseAnExpert = "/chooseAnExpert";
   static const String addNews = "/addNews";
   static const String editChoosePlan = "/editChoosePlan";
+  static const String chooseLanguage = "/chooseLanguage";
+  static const String upcomingMatches = "/upcomingMatches";
+  static const String wallet = "/wallet";
+  static const String payout = "/payout";
+  static const String addPayoutDetails = "/addPayoutDetails";
 
   Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -73,35 +88,37 @@ class Routes {
       case faqs:
         return generateRoute(routeSettings.name!, const FaqsScreen());
       case fixtureDetails:
-        return generateRoute(routeSettings.name!, const FixtureDetails());
+        return generateRoute(routeSettings.name!, FixtureDetails(matchData: routeSettings.arguments as MatchArgs,));
       case adminFixture:
-        return generateRoute(routeSettings.name!, AdminFixtureScreen());
+        return generateRoute(routeSettings.name!, const AdminFixtureScreen());
       case adminFixtureDetail:
-        return generateRoute(routeSettings.name!, AdminFixtureDetailScreen());
+        return generateRoute(routeSettings.name!, const AdminFixtureDetailScreen());
       case adminAnnounce:
         return generateRoute(routeSettings.name!, AdmiinAnnounceScreen());
       case chooseLeague:
-        return generateRoute(routeSettings.name!, ChooseLeagueScreen());
+        return generateRoute(routeSettings.name!, ChooseLeagueScreen(isRedeeming: routeSettings.arguments as bool,));
+      case chooseFixture:
+        return generateRoute(routeSettings.name!, const ChooseFixtureScreen());
       case choosePlan:
         return generateRoute(
           routeSettings.name!,
           ChoosePlanScreen(
-            isAdmin: routeSettings.arguments as bool,
+            leagueData: routeSettings.arguments as ChoosePlanArgs,
           ),
         );
       case home:
-        return generateRoute(routeSettings.name!, const HomeScreen());
+        return generateRoute(routeSettings.name!, HomeScreen());
       case predictions:
-        return generateRoute(routeSettings.name!, const PredicitonsScreen());
+        return generateRoute(routeSettings.name!, PredicitonsScreen());
       case dashboard:
-        return generateRoute(routeSettings.name!, DashBoardScreen());
+        return generateRoute(routeSettings.name!, const DashBoardScreen());
       case setting:
         return generateRoute(routeSettings.name!, SettingScreen());
       case profileSettings:
         return generateRoute(
             routeSettings.name!, const ProfileSettingsScreen());
       case profileInfoUpdate:
-        return generateRoute(routeSettings.name!, ProfileInfoUpdateScreen());
+        return generateRoute(routeSettings.name!, ProfileInfoUpdateScreen(payload: routeSettings.arguments as UpdateProfileArgs,));
       case admin:
         return generateRoute(routeSettings.name!, AdminHomeScreen());
       case privacyPolicy:
@@ -109,13 +126,23 @@ class Routes {
       case user:
         return generateRoute(routeSettings.name!, UserScreen());
       case notification:
-        return generateRoute(routeSettings.name!, NotificationScreen());
+        return generateRoute(routeSettings.name!, const NotificationScreen());
       case chooseAnExpert:
         return generateRoute(routeSettings.name!, ChooseAnExpertScreen());
       case addNews:
         return generateRoute(routeSettings.name!, AddNewsScreen());
       case editChoosePlan:
         return generateRoute(routeSettings.name!, EditChoosePlanScreen());
+      case chooseLanguage:
+        return generateRoute(routeSettings.name!, const ChooseLanguageScreen());
+      case upcomingMatches:
+        return generateRoute(routeSettings.name!, UpcomingMatches());
+      case wallet:
+        return generateRoute(routeSettings.name!, WalletScreen());
+      case payout:
+      return generateRoute(routeSettings.name!, PayoutScreen());
+      case addPayoutDetails:
+        return generateRoute(routeSettings.name!, AddPayoutDetails(accountLink: routeSettings.arguments as String,)); 
 
       default:
         return generateRoute(

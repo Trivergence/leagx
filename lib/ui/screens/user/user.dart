@@ -3,9 +3,10 @@ import 'package:leagx/constants/strings.dart';
 import 'package:leagx/ui/screens/user/components/user_roles_widget.dart';
 import 'package:leagx/ui/screens/user/components/user_setting_button.dart';
 import 'package:leagx/ui/screens/user/components/user_tile.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/app_bar_widget.dart';
-import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
@@ -19,14 +20,14 @@ class UserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: 'Users'),
+      appBar: AppBarWidget(title: loc.userTxtUsers),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
             TextFieldWidget(
               textController: _searchController,
-              hint: 'Search',
+              hint: loc.userTxtSearch,
               suffix: const IconWidget(
                 iconData: Icons.search,
               ),
@@ -47,7 +48,7 @@ class UserScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             UserSettingButton(
-                              title: 'Change Role',
+                              title: loc.userBtnChangeRole,
                               onTap: () {
                                 Navigator.pop(context);
                                 _showSettingSheet(
@@ -66,7 +67,7 @@ class UserScreen extends StatelessWidget {
                             ),
                             UIHelper.verticalSpace(15.0),
                             UserSettingButton(
-                              title: 'Block User',
+                              title: loc.userBtnBlockUser,
                               onTap: () {},
                             ),
                           ],
@@ -79,7 +80,7 @@ class UserScreen extends StatelessWidget {
             ),
             UIHelper.verticalSpaceXL,
             MainButton(
-              text: 'Invite a User',
+              text: loc.userBtnInviteAUser,
               onPressed: () {},
             ),
           ],
@@ -102,9 +103,9 @@ class UserScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               UIHelper.verticalSpace(23.0),
-              const GradientWidget(
+               GradientWidget(
                 child: TextWidget(
-                  text: 'User Role Setting',
+                  text: loc.userTxtUserRoleSetting,
                   textSize: 18.0,
                   fontWeight: FontWeight.w600,
                 ),

@@ -1,6 +1,8 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/onboarding/components/onboarding_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
@@ -29,23 +31,23 @@ class OnBoardingScreen extends StatelessWidget {
         child: PageView(
           controller: controller,
           onPageChanged: (index) {},
-          children: const [
+          children:  [
             OnBoardingWidget(
-              title: 'LOREM IPSUM DOLOR',
+              title: loc.onboardingTxtTitle1,
               subtitle:
-                  'Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.',
+                  loc.onboardingTxtDesc1,
               imageAsset: Assets.onBoard1,
             ),
             OnBoardingWidget(
-              title: 'LOREM IPSUM DOLOR',
+              title: loc.onboardingTxtTitle2,
               subtitle:
-                  'Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.',
+                  loc.onboardingTxtDesc2,
               imageAsset: Assets.onBoard2,
             ),
             OnBoardingWidget(
-              title: 'LOREM IPSUM DOLOR',
+              title: loc.onboardingTxtTitle3,
               subtitle:
-                  'Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.',
+                  loc.onboardingTxtDesc3,
               imageAsset: Assets.onBoard3,
             ),
           ],
@@ -71,8 +73,9 @@ class OnBoardingScreen extends StatelessWidget {
   Widget _button(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 70.0, vertical: 50.0),
         child: MainButton(
-          text: 'Get Started',
+          text: loc.onboardingBtnGetStarted,
           onPressed: () {
+            locator<SharedPreferenceHelper>().setFirstTime(false);
             Navigator.pushNamed(context, Routes.signin);
           },
         ),

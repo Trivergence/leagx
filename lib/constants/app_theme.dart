@@ -7,6 +7,7 @@ final ThemeData themeLight = ThemeData(
     primarySwatch: MaterialColor(AppColors.blue[500]!.value, AppColors.blue),
     primaryColor: AppColors.colorBackground,
     fontFamily: FontFamily.openSans,
+    unselectedWidgetColor: AppColors.colorWhite,
     scaffoldBackgroundColor: AppColors.colorBackground,
     appBarTheme: const AppBarTheme(color: AppColors.colorBackground),
     iconTheme: const IconThemeData(

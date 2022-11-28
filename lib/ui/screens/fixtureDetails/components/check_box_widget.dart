@@ -29,12 +29,14 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
             return Colors.transparent;
         }),
         side: const BorderSide(color: AppColors.colorCyan, width: 1),
-        value: isSelected, onChanged: (value) {
-          widget.onPressed(value!);
-          setState(() {
-            isSelected = value;
-          });
-        }),
+        value: isSelected, onChanged: null
+        // (value) {
+        //   widget.onPressed(value!);
+        //   setState(() {
+        //     isSelected = value;
+        //   });
+        // }
+        ),
     );
   }
 }

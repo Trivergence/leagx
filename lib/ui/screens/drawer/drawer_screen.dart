@@ -1,17 +1,39 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
+import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/service/payment_service/payment_config.dart';
+import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/drawer/components/drawer_tile.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/dashboard_view_model.dart';
+import 'package:leagx/view_models/payout_view_model.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:payments/payments.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/network/internet_info.dart';
+import '../../../models/user/user.dart';
+import '../../util/app_dialogs/confirmation_dialog.dart';
+import '../../util/utility/image_utitlity.dart';
+import '../../widgets/gradient/gradient_border_widget.dart';
+
+// ignore: must_be_immutable
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
+  DrawerScreen({Key? key}) : super(key: key);
+
+  String userName = '';
+  String userImage = '';
 
   @override
   Widget build(BuildContext context) {
+    getUserName();
     return Drawer(
       backgroundColor: AppColors.colorBackground,
       child: ListView(
@@ -20,21 +42,24 @@ class DrawerScreen extends StatelessWidget {
           Center(
             child: Column(
               children: [
-                Container(
-                  height: 85.0,
-                  width: 85.0,
-                  decoration: const BoxDecoration(shape: BoxShape.circle),
-                  child: Image.asset(Assets.appLogo),
+                GradientBorderWidget(
+                  onPressed: () {},
+                  gradient: AppColors.orangishGradient,
+                  imageUrl: userImage,
+                  height: 80.0,
+                  width: 80.0,
+                  isCircular: true,
+                  placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
                 ),
                 UIHelper.verticalSpaceSmall,
-                const TextWidget(
-                  text: 'John Aly',
+                TextWidget(
+                  text: userName,
                   fontWeight: FontWeight.w700,
                   textSize: 18,
                 ),
                 UIHelper.verticalSpaceSmall,
                 const TextWidget(
-                  text: '@Johne39',
+                  text: '',
                 ),
               ],
             ),
@@ -42,51 +67,72 @@ class DrawerScreen extends StatelessWidget {
           UIHelper.verticalSpace(60.0),
           DrawerTile(
             icon: Icons.account_circle_outlined,
-            title: 'Profile',
-            onTap: () {
-              Navigator.pushNamed(context, Routes.profileSettings);
-            },
+            title: loc.drawerBtnProfile,
+            onTap: () => Navigator.popAndPushNamed(context, Routes.profileSettings),
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerPredictions,
-            title: 'My Predictions',
+            title: loc.drawerBtnMyPredictions,
             onTap: () {
-              Navigator.pushNamed(context, Routes.predictions);
+              Navigator.popAndPushNamed(context, Routes.predictions);
             },
           ),
           DrawerTile(
             icon: Icons.help_outline,
-            title: 'FAQs',
+            title: loc.drawerBtnFaqs,
             onTap: () {
-              Navigator.pushNamed(context, Routes.faqs);
+              Navigator.popAndPushNamed(context, Routes.faqs);
             },
           ),
           DrawerTile(
             icon: Icons.gpp_good_outlined,
-            title: 'Privacy Policy',
+            title: loc.drawerBtnPrivacyPolicy,
             onTap: () {
-              Navigator.pushNamed(context, Routes.privacyPolicy);
+              Navigator.popAndPushNamed(context, Routes.privacyPolicy);
             },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerTermsAndService,
-            title: 'Terms of Services',
+            title: loc.drawerBtnTermsOfServices,
             onTap: () {
-              Navigator.pushNamed(context, Routes.termsService);
+              Navigator.popAndPushNamed(context, Routes.termsService);
             },
           ),
           DrawerTile(
             imageAsset: Assets.icDrawerAdmin,
-            title: 'Admin',
+            title: loc.drawerBtnAdmin,
             onTap: () {
-              Navigator.pushNamed(context, Routes.admin);
+              Navigator.popAndPushNamed(context, Routes.admin);
+            },
+          ),
+          DrawerTile(
+            icon: Icons.account_balance_wallet_outlined,
+            title: loc.drawerBtnWalllet,
+            onTap: () async {
+              bool isConnected = await InternetInfo.isConnected();
+              if(isConnected == true) {
+                if(StripeConfig().getSecretKey.isNotEmpty) {
+                  if(context.read<DashBoardViewModel>().isInitialized == true) {
+                    Navigator.popAndPushNamed(context, Routes.wallet);
+                  } else {
+                    ToastMessage.show(loc.msgPleaseWait, TOAST_TYPE.msg);
+                  }
+                } else {
+                  ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.msg);
+                  await context.read<WalletViewModel>().setupStripeCredentials();
+                }
+              }
             },
           ),
           UIHelper.verticalSpaceXL,
           GestureDetector(
-            onTap: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, Routes.onboarding, (route) => false);
+            onTap: () async {
+              ConfirmationDialog.show(context: context,
+               title: loc.logoutConfirmTitle,
+               positiveBtnTitle: loc.logoutConfirmYes,
+               negativeBtnTitle: loc.logoutConfirmNo,
+               body:loc.logoutConfirmBody, 
+               onPositiveBtnPressed: (_) => logout(context));
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
@@ -96,9 +142,9 @@ class DrawerScreen extends StatelessWidget {
                     child: Icon(Icons.logout),
                   ),
                   UIHelper.horizontalSpace(26.0),
-                  const GradientWidget(
+                   GradientWidget(
                     child: TextWidget(
-                      text: 'Logout',
+                      text: loc.drawerBtnLogout,
                     ),
                   ),
                 ],
@@ -108,5 +154,27 @@ class DrawerScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  getUserName() {
+    User? user = locator<SharedPreferenceHelper>().getUser();
+    if(user != null) {
+      userName = user.firstName!;
+      userImage = user.profileImg!;
+    }
+  }
+
+  logout(BuildContext context) async {
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected == true) {
+      await preferenceHelper.removeAuthToken();
+      await preferenceHelper.removeUser();
+      context.read<DashBoardViewModel>().clearData();
+      context.read<WalletViewModel>().clearData();
+      context.read<PayoutViewModel>().clearData();
+      locator<PaymentConfig>().setCustomerCred = null;
+      Navigator.pushNamedAndRemoveUntil(
+          context, Routes.signin, (_) => false);
+    }
   }
 }

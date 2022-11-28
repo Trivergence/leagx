@@ -2,10 +2,10 @@ import 'package:leagx/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class DotWidget extends StatelessWidget {
-  final Color color;
   final double size;
+  final bool isLive;
   const DotWidget(
-      {Key? key, this.color = AppColors.colorGreen, this.size = 12.0})
+      {Key? key, this.size = 12.0, this.isLive = false})
       : super(key: key);
 
   @override
@@ -13,7 +13,7 @@ class DotWidget extends StatelessWidget {
     return Icon(
       Icons.fiber_manual_record_rounded,
       size: size,
-      color: color,
+      color: isLive ? AppColors.colorGreen : AppColors.colorGrey,
     );
   }
 }

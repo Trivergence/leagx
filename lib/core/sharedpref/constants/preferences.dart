@@ -6,4 +6,6 @@ class Preferences {
   static const String isDarkMode = "is_dark_mode";
   static const String currentLanguage = "current_language";
   static const String username = "username";
+  static const String user = "user";
+  static const String firstTime = "first_time";
 }

@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:provider/provider.dart';
 
-import '../../../util/ui_model/subscription_plan.dart';
+import '../../../../models/subscription_plan.dart';
+import '../../../../view_models/subscription_viewmodel.dart';
+import '../../../widgets/placeholder_tile.dart';
 import 'plan_widget.dart';
 
 class PlanListing extends StatefulWidget {
   final bool isAdmin;
+  final Function(int, String) onItemPressed;
 
   const PlanListing({
     required this.isAdmin,
-    Key? key,
+    Key? key, required this.onItemPressed,
   }) : super(key: key);
 
   @override
@@ -17,19 +22,32 @@ class PlanListing extends StatefulWidget {
 
 class _PlanListingState extends State<PlanListing> {
   int selectedIndex = 1;
+  late List<SubscriptionPlan> listOfPlans;
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    listOfPlans = context.read<SubscriptionViewModel>().getPlans;
+    return listOfPlans.isNotEmpty ? ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       itemCount: listOfPlans.length,
       itemBuilder: (context, index) {
-        return PlanWidget(isAdmin:widget.isAdmin,index: index, isSelected: index == selectedIndex, onPlanSelected: () {
+        return PlanWidget(
+        plan: listOfPlans[index],
+         isAdmin: false,
+         index: index,
+         isSelected: index == selectedIndex, onPlanSelected: () {
           setState(() {
             selectedIndex = index;
           });
+          widget.onItemPressed(listOfPlans[index].id, listOfPlans[index].price.toStringAsFixed(0));
         },);
-    });
+    })
+    :Padding(
+        padding: const EdgeInsets.only(top: 100.0),
+        child: PlaceHolderTile(height: 60, msgText: loc.errorCheckNetwork),
+      )
+    ;
   }
 }

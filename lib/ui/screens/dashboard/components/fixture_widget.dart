@@ -1,47 +1,76 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/util/utility/date_utility.dart';
+import 'package:leagx/ui/util/utility/translation_utility.dart';
+import 'package:leagx/ui/widgets/score_chip.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/dot_widget.dart';
-import 'package:leagx/ui/widgets/gradient_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/live_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
-class FixtureWidget extends StatelessWidget {
+import '../../../widgets/shimmer_widget.dart';
+
+class FixtureWidget extends StatefulWidget {
   final String leagueName;
   final String teamOneFlag;
   final String teamOneName;
-  final int? teamOneScore;
+  final String? teamOneScore;
   final String teamTwoFlag;
   final String teamTwoName;
-  final int? teamTwoScore;
+  final String? teamTwoScore;
   final String? scheduledTime;
+  final DateTime scheduledDate;
   final String? liveTime;
+  final String? matchStatus;
   final bool isLive;
+  final bool isOver;
   final bool withText;
-  final VoidCallback? onTap;
-  const FixtureWidget({
+  final Function(String) onTap;
+   const FixtureWidget({
     Key? key,
     required this.leagueName,
     required this.teamOneFlag,
     required this.teamOneName,
-    this.teamOneScore,
+    this.teamOneScore = "0",
     required this.teamTwoFlag,
     required this.teamTwoName,
-    this.teamTwoScore,
+    this.teamTwoScore = "0",
     this.scheduledTime,
     this.liveTime,
     this.isLive = false,
     this.withText = true,
-    this.onTap,
+    required this.onTap, this.matchStatus,
+    required this.scheduledDate, 
+    required this.isOver,
   }) : super(key: key);
 
   @override
+  State<FixtureWidget> createState() => _FixtureWidgetState();
+}
+
+class _FixtureWidgetState extends State<FixtureWidget> {
+  String? translatedLeagueName;
+  String? translatedStatus;
+  String? teamOneName;
+  String? teamTwoName;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    translateData();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
+    bool isToday = DateUtility.isToday(widget.scheduledDate);
+    return !isLoading ? GestureDetector(
+      onTap: () => widget.onTap(translatedLeagueName!),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5.0),
         padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -54,11 +83,19 @@ class FixtureWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextWidget(text: leagueName, textSize: Dimens.textSmall),
-                  isLive
-                      ? const LiveWidget()
-                      : withText
+                  SizedBox(
+                    width: SizeConfig.width * 50,
+                    child: TextWidget(
+                      text: translatedLeagueName!, 
+                      textSize: Dimens.textSmall, 
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
+                      )),
+                  widget.isLive
+                      ? LiveWidget(isLive: widget.isLive,)
+                      : widget.withText
                           ? Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -66,12 +103,12 @@ class FixtureWidget extends StatelessWidget {
                                     child: Icon(Icons.access_time_outlined)),
                                 UIHelper.horizontalSpace(4.0),
                                 TextWidget(
-                                    text: scheduledTime!,
+                                    text: isToday ? "${loc.today}, " + widget.scheduledTime! : DateUtility.getUiFormat(widget.scheduledDate),
                                     textSize: Dimens.textSmall),
                               ],
                             )
-                          : const DotWidget(
-                              color: AppColors.colorGrey,
+                          : DotWidget(
+                              isLive: !widget.isLive,
                             )
                 ],
               ),
@@ -80,72 +117,82 @@ class FixtureWidget extends StatelessWidget {
               color: AppColors.colorWhite.withOpacity(0.07),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
                   UIHelper.verticalSpace(15.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          ImageWidget(
-                            imageAsset: teamOneFlag,
-                            placeholder: Assets.ufcFlag,
-                          ),
-                          TextWidget(text: teamOneName),
-                        ],
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                                child: TextWidget(
+                              text: teamOneName!,
+                              textAlign: TextAlign.center,
+                            )),
+                            UIHelper.horizontalSpace(5),
+                            ClipOval(
+                              child: ImageWidget(
+                                  imageUrl: widget.teamOneFlag,
+                                  placeholder: Assets.icTeamAvatar),
+                            ),
+                          ],
+                        ),
                       ),
-                      isLive
+                      widget.isLive || widget.isOver
                           ? Column(
                               children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 5.0),
-                                  decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(4.0)),
-                                      gradient: LinearGradient(colors: [
-                                        Color(0xFF2A3041),
-                                        Color(0xFF2B344D),
-                                        Color(0xFF2A3041),
-                                      ])),
-                                  child: Row(
-                                    children: [
-                                      TextWidget(
-                                        text: teamOneScore.toString(),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      UIHelper.horizontalSpace(10.0),
-                                      const TextWidget(text: '-'),
-                                      UIHelper.horizontalSpace(10.0),
-                                      TextWidget(
-                                        text: teamTwoScore.toString(),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ],
-                                  ),
+                                UIHelper.verticalSpace(20),
+                                ScoreChip(
+                                  firstScore: widget.teamOneScore!,
+                                  secondScore: widget.teamTwoScore!,
+                                  hasGradient: false,
                                 ),
+                                // UIHelper.verticalSpaceSmall,
+                                TextWidget(
+                                  text: translatedStatus!,
+                                  color: AppColors.colorGrey,
+                                  textSize: Dimens.textSmall,
+                                )
                               ],
                             )
-                          : Image.asset(Assets.vs),
-                      Row(
-                        children: [
-                          ImageWidget(
-                            imageAsset: teamTwoFlag,
-                            placeholder: Assets.arsFlag,
+                          : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal : 5.0),
+                            child: Image.asset(Assets.vs),
                           ),
-                          TextWidget(text: teamTwoName),
-                        ],
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ImageWidget(
+                              imageUrl: widget.teamTwoFlag,
+                              placeholder: Assets.icTeamAvatar,
+                            ),
+                            UIHelper.horizontalSpace(5),
+                            Expanded(
+                                child: TextWidget(
+                              text: teamTwoName!,
+                              textAlign: TextAlign.center,
+                            )),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                  isLive
-                      ? TextWidget(
-                          text: liveTime!,
-                          color: AppColors.colorWhite.withOpacity(0.6))
-                      : const SizedBox(),
-                  isLive
+                  // isLive
+                  //     ? TextWidget(
+                  //         text: liveTime!,
+                  //         color: AppColors.colorWhite.withOpacity(0.6))
+                  //     : const SizedBox(),
+                  widget.isLive
                       ? UIHelper.verticalSpace(8.0)
                       : UIHelper.verticalSpace(20.0)
                 ],
@@ -154,6 +201,26 @@ class FixtureWidget extends StatelessWidget {
           ],
         ),
       ),
-    );
+    )
+    : const ShimmerWidget(height: 130,);
+  }
+
+  Future<void> translateData() async {
+      String originalCommaText = widget.leagueName + ',' + widget.teamOneName + ',' + widget.teamTwoName + "," + widget.matchStatus!;
+      String translatedCommaText = await TranslationUtility.translate(originalCommaText);
+      List<String> listOfValues = [];
+      if(translatedCommaText.contains("،")) {
+         listOfValues = translatedCommaText.split("،");
+      } else {
+        listOfValues = translatedCommaText.split(",");
+      }
+        translatedLeagueName = listOfValues[0];
+        teamOneName = listOfValues[1];
+        teamTwoName = listOfValues[2];
+        translatedStatus = widget.matchStatus!.isNotEmpty ? listOfValues[3] : widget.matchStatus;
+        isLoading = false;
+      setState(() {});
   }
 }
+
+
