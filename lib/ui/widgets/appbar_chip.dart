@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 
 import '../../constants/colors.dart';
@@ -27,8 +26,9 @@ class AppBarChip extends StatelessWidget {
           avatar: SvgPicture.asset(leadingIcon),
           label: TextWidget(
             text: totalValue,
-            textSize: 12,
+            textSize: 10,
             textAlign: TextAlign.center,
+            fontWeight: FontWeight.w600,
           )),
     );
   }

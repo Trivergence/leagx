@@ -5,10 +5,13 @@ import 'package:country_codes/country_codes.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:intl/intl.dart';
+import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
+import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../constants/strings.dart';
 import '../ui/util/locale/localization.dart';
 
 class Utility{
@@ -87,5 +90,14 @@ class Utility{
       return false;
     }
     return true;
+  }
+  static String getFont(LocalizationProvider localizationProvider) {
+    if(localizationProvider.locale ==  const Locale(
+        Strings.english,
+      )) {
+        return FontFamily.gilroy;
+    } else {
+      return FontFamily.cairo;
+    }
   }
 }

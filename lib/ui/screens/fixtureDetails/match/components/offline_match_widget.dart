@@ -51,6 +51,7 @@ class OfflineMatchWidget extends StatelessWidget {
                 text: loc.fixtureDetailsMatchTxtMatchToStartYet,
                 textSize: Dimens.textSM,
                 color: AppColors.colorYellow,
+                fontWeight: FontWeight.w100,
               )
             ],
           ),

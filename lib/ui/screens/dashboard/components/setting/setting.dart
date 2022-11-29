@@ -100,6 +100,7 @@ class _SettingScreenState extends State<SettingScreen> {
             text: loc.settingTxtProfileInfo,
             textSize: 14.0,
             color: AppColors.colorGrey,
+            fontWeight: FontWeight.w500,
           ),
           UIHelper.verticalSpace(15.0),
           SettingsTile(
@@ -132,6 +133,7 @@ class _SettingScreenState extends State<SettingScreen> {
             text: loc.settingTxtGeneral,
             textSize: 14.0,
             color: AppColors.colorGrey,
+            fontWeight: FontWeight.w500,
           ),
           UIHelper.verticalSpace(15.0),
           SettingsTile(

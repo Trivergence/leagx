@@ -55,9 +55,9 @@ class _FixtureScreenState extends State<FixtureScreen> {
           UIHelper.verticalSpaceSmall,
           TextWidget(
             text: loc.dashboardFixtureTxtLeagues,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
             letterSpace: 4,
-            textSize: Dimens.textSM,
+            textSize: Dimens.textRegular,
           ),
           UIHelper.verticalSpaceSmall,
           Container(
@@ -144,9 +144,9 @@ class _FixtureScreenState extends State<FixtureScreen> {
                       children: [
                         TextWidget(
                           text: loc.dashboardFixtureTxtUpcomingMatches,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                           letterSpace: 4,
-                          textSize: Dimens.textSM,
+                          textSize: Dimens.textRegular,
                         ),
                         UIHelper.verticalSpaceSmall,
                         Expanded(

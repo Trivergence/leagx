@@ -2,7 +2,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
@@ -43,9 +42,9 @@ class AnalyticsWidget extends StatelessWidget {
         UIHelper.verticalSpaceSmall,
         TextWidget(
           text: loc.dashboardHomeTxtAnalytics,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w600,
           letterSpace: 4,
-          textSize: Dimens.textSM,
+          textSize: Dimens.textRegular,
         ),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
@@ -88,7 +87,7 @@ class AnalyticsWidget extends StatelessWidget {
                       text: firstLabel,
                       textSize: 11,
                       color: AppColors.colorWhite.withOpacity(0.6),
-                      fontWeight: FontWeight.bold,),
+                      fontWeight: FontWeight.w500,),
                   UIHelper.verticalSpace(5),
                   MainButton(
                     width: 80.0,
@@ -135,7 +134,7 @@ class AnalyticsWidget extends StatelessWidget {
                   TextWidget(
                       text: secondLabel,
                       textSize: 11,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       color: AppColors.colorWhite.withOpacity(0.6)),
                 ],
               ),
@@ -170,7 +169,7 @@ class AnalyticsWidget extends StatelessWidget {
                   TextWidget(
                       text: thirdLabel,
                       textSize: 11,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       color: AppColors.colorWhite.withOpacity(0.6)),
                   UIHelper.verticalSpace(5),
                   MainButton(

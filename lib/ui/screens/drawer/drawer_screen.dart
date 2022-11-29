@@ -60,7 +60,7 @@ class DrawerScreen extends StatelessWidget {
                       UIHelper.verticalSpaceSmall,
                       TextWidget(
                         text: userName,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w100,
                         textSize: 18,
                       ),
                       UIHelper.verticalSpaceSmall,

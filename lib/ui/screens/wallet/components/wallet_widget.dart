@@ -18,11 +18,9 @@ class WalletWidget extends StatelessWidget {
   }) : super(key: key);
 
   final UserSummary? userSummary;
-  late BuildContext _context;
 
   @override
   Widget build(BuildContext context) {
-    _context = context;
     return SizedBox(
       height: 200,
       child: Card(
@@ -42,7 +40,7 @@ class WalletWidget extends StatelessWidget {
                   TextWidget(
                     text: loc.walletTxtTotalCoins,
                     color: AppColors.colorWhite,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w600,
                   ),
                   GradientBorderButton(
                     fontSize: Dimens.textXS,
@@ -66,8 +64,8 @@ class WalletWidget extends StatelessWidget {
                     text: userSummary != null
                         ? userSummary!.coinEarned!.round().toString()
                         : "0.0",
-                    textSize: 27,
-                    fontWeight: FontWeight.w700,
+                    textSize: 22,
+                    fontWeight: FontWeight.w400,
                   ),
                    GradientBorderButton(
                       fontSize: Dimens.textXS,

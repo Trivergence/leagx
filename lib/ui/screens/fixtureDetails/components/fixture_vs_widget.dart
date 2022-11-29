@@ -128,13 +128,15 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                             text: DateUtility.getUiFormat(
                                 widget.matchDetails.matchDate),
                             color: AppColors.colorWhite,
-                            textSize: Dimens.textXS,
+                            textSize: 11,
+                            fontWeight: FontWeight.w400,
                           ),
                           UIHelper.verticalSpaceSmall,
                           TextWidget(
                             text: widget.matchDetails.matchTime,
                             color: AppColors.colorWhite,
-                            textSize: Dimens.textXS,
+                            textSize: 11,
+                            fontWeight: FontWeight.w400,
                           )
                         ],
                       ),

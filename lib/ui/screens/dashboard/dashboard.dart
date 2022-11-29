@@ -188,14 +188,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(iconAsset, height: 18,
-              color: AppColors.colorCyan.withOpacity(0.2),
+              color: AppColors.colorCyan40,
             ),
             UIHelper.verticalSpace(8.0),
             TextWidget(
               text: title,
               textSize: 13,
-              color: AppColors.colorCyan.withOpacity(0.2),
+              color: AppColors.colorCyan40,
               textAlign: TextAlign.center,
+              fontWeight: FontWeight.w400,
             ),
           ],
         ),

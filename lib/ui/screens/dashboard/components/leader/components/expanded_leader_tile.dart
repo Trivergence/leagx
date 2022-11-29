@@ -75,17 +75,19 @@ class _ExpandedLeaderTileState extends State<ExpandedLeaderTile> {
             UIHelper.verticalSpace(4),
             TextWidget(
               text: leaderName!,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
             ),
             TextWidget(
               text: "${widget.numberOfPrediciton} ${loc.dashboardLeaderTxtPredictions}",
-              textSize: Dimens.textSmall,
+              textSize: Dimens.textXS,
               color: AppColors.colorWhite.withOpacity(0.5),
+              fontWeight: FontWeight.w400,
             ),
             TextWidget(
                 text: "${loc.dashboardLeaderTxtWin} ${widget.successRate}%",
                 color: AppColors.colorGreen,
-                textSize: Dimens.textSmall),
+                fontWeight: FontWeight.w400,
+                textSize: Dimens.textXS),
           ],
         ),
       ),
