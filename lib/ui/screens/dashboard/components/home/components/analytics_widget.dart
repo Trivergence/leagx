@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../constants/assets.dart';
 import '../../../../../../core/network/internet_info.dart';
+import '../../../../../../core/utility.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../view_models/dashboard_view_model.dart';
 import '../../../../../../view_models/wallet_view_model.dart';
@@ -43,7 +44,7 @@ class AnalyticsWidget extends StatelessWidget {
         TextWidget(
           text: loc.dashboardHomeTxtAnalytics,
           fontWeight: FontWeight.w600,
-          letterSpace: 4,
+           letterSpace: Utility.isArabic() ? 0 : 4,
           textSize: Dimens.textRegular,
         ),
         Container(

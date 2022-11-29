@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/dimens.dart';
 import '../../../core/network/internet_info.dart';
+import '../../../core/utility.dart';
 import '../../util/locale/localization.dart';
 import 'components/card_info.dart';
 import 'components/wallet_widget.dart';
@@ -48,7 +49,7 @@ class WalletScreen extends StatelessWidget {
             TextWidget(
               text: loc.walletTxtWallet.toUpperCase(),
               fontWeight: FontWeight.w600,
-              letterSpace: 4,
+              letterSpace: Utility.isArabic() ? 0 : 4,
               textSize: Dimens.textRegular,
               textAlign: TextAlign.center,
             ),
@@ -58,7 +59,7 @@ class WalletScreen extends StatelessWidget {
             if(walletModel.getPayementMethods.isNotEmpty) TextWidget(
               text: loc.walletTxtAttachedMethod.toUpperCase(), 
               fontWeight: FontWeight.w600,
-              letterSpace: 4,
+               letterSpace: Utility.isArabic() ? 0 : 4,
               textSize: Dimens.textRegular),
             UIHelper.verticalSpace(5.0),
             walletModel.getPayementMethods.isEmpty 
