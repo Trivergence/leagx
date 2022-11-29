@@ -101,6 +101,7 @@
 	"choosePlanDialogUpgradeSuccessTitle": "Upgrade Successful",
 	"choosePlanDialogSuccessDesc": "You have succesfully subscribed the package",
 	"choosePlanDialogUpgradeSuccessDesc": "You have succesfully upgraded the package",
+	"choosePlanTxtLessCoins": "You don't have enough coins",
 
 	"chooseFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
 	"chooseFixtureTxtTitle": "Choose A Match",

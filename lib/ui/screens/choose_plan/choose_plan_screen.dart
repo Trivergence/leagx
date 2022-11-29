@@ -100,12 +100,16 @@ class ChoosePlanScreen extends StatelessWidget {
                           });
                     }
                   } else {
+                    if(leagueData.isRedeeming == false) {
                       if (leagueData.isUpgrading == true) {
                       showUpgradeSubscriptionDialog(
                           type: PaymentType.card, price: price, planId: planId);
+                      } else {
+                        showConfirmSubscriptionDialog(
+                            type: PaymentType.card, price: price, planId: planId);
+                      }
                     } else {
-                      showConfirmSubscriptionDialog(
-                          type: PaymentType.card, price: price, planId: planId);
+                      ToastMessage.show(loc.choosePlanTxtLessCoins, TOAST_TYPE.msg);
                     }
                   }
                 },
