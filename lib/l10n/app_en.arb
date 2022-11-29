@@ -133,7 +133,16 @@
 	"dashboardHomeTxtViewAll": "View all matches",
 	"dashboardHomeTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
 	"dashboardHomeTxtPredictions": "Predictions Remain",
-	"dashboardHomeTxtWiningRatio": "Wins out of",
+	"dashboardHomeTxtWiningRatio": "Wins out of {totalPredictions}",
+	"@dashboardHomeTxtWiningRatio": {
+		"placeholders": {
+			"totalPredictions": {
+				"type": "String",
+				"description": "Number of Predictions",
+				"example": "4"
+			}
+		}
+	},
 	"dashboardHomeTxtEarnedCoid": "Credit",
 
 	"dashboardLeaderTxtPredictions": "predictions",
