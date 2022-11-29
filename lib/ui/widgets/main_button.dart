@@ -1,5 +1,6 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,7 @@ class MainButton extends StatelessWidget {
             color: AppColors.colorWhite,
             fontSize: fontSize,
             fontWeight: fontWeight,
-            letterSpacing: 1
+            letterSpacing: Utility.isArabic() ? 0 : 1
           ),
         ),
         style: ElevatedButton.styleFrom(

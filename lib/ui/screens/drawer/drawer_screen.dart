@@ -92,13 +92,13 @@ class DrawerScreen extends StatelessWidget {
                     Navigator.popAndPushNamed(context, Routes.termsService);
                   },
                 ),
-                DrawerTile(
-                  imageAsset: Assets.icDrawerAdmin,
-                  title: loc.drawerBtnAdmin,
-                  onTap: () {
-                    Navigator.popAndPushNamed(context, Routes.admin);
-                  },
-                ),
+                // DrawerTile(
+                //   imageAsset: Assets.icDrawerAdmin,
+                //   title: loc.drawerBtnAdmin,
+                //   onTap: () {
+                //     Navigator.popAndPushNamed(context, Routes.admin);
+                //   },
+                // ),
             ],),
             GestureDetector(
               onTap: () async {

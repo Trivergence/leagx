@@ -79,7 +79,8 @@ class _SettingScreenState extends State<SettingScreen> {
             AnalyticsWidget(
               firstLabel: loc.dashboardHomeTxtPredictions,
               firstValue: _userSummary!.remainingPredictions.toString(),
-              secondLabel: loc.dashboardHomeTxtWiningRatio + " " + _userSummary!.totalPredictions.toString(),
+              secondLabel: loc.dashboardHomeTxtWiningRatio(
+                  _userSummary!.totalPredictions.toString()),
               secondValue:
                   _userSummary!.predictionSuccessRate.toString() != "100.0"
                       ? _userSummary!.predictionSuccessRate!.toStringAsFixed(1)
@@ -172,14 +173,14 @@ class _SettingScreenState extends State<SettingScreen> {
             iconData: Icons.language,
           ),
           UIHelper.verticalSpace(15.0),
-          SettingsTile(
-            onTap: () {
-              Navigator.pushNamed(context, Routes.admin);
-            },
-            text: loc.settingTxtAdmin,
-            imageAsset: Assets.icDrawerAdmin,
-          ),
-          UIHelper.verticalSpace(15.0),
+          // SettingsTile(
+          //   onTap: () {
+          //     Navigator.pushNamed(context, Routes.admin);
+          //   },
+          //   text: loc.settingTxtAdmin,
+          //   imageAsset: Assets.icDrawerAdmin,
+          // ),
+          // UIHelper.verticalSpace(15.0),
         ],
       ),
     );
