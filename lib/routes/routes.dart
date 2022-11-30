@@ -13,9 +13,7 @@ import 'package:leagx/ui/screens/authentication/signup.dart';
 import 'package:leagx/ui/screens/choose_an_expert/choose_an_expert.dart';
 import 'package:leagx/ui/screens/choose_league/choose_league_screen.dart';
 import 'package:leagx/ui/screens/choose_plan/edit_choose_plan.dart';
-import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
-import 'package:leagx/ui/screens/dashboard/components/setting/components/choose_language.dart';
-import 'package:leagx/ui/screens/dashboard/components/setting/setting.dart';
+import 'package:leagx/ui/screens/dashboard/components/my_profile/components/choose_language.dart';
 import 'package:leagx/ui/screens/dashboard/dashboard.dart';
 import 'package:leagx/ui/screens/faq/faqs_screen.dart';
 import 'package:leagx/ui/screens/notification/notification.dart';
@@ -24,7 +22,6 @@ import 'package:leagx/ui/screens/payout/payout_screen.dart';
 import 'package:leagx/ui/screens/prediciton_s/prediction_s_screen.dart';
 import 'package:leagx/ui/screens/privacy_policy/privacy_policy_screen.dart';
 import 'package:leagx/ui/screens/profile/profile_info_update.dart';
-import 'package:leagx/ui/screens/profile/profile_settings.dart';
 import 'package:leagx/ui/screens/terms_service/terms_service_screen.dart';
 import 'package:leagx/ui/screens/upcoming_matches.dart';
 import 'package:leagx/ui/screens/user/user.dart';
@@ -33,6 +30,7 @@ import 'package:leagx/ui/screens/wallet/wallet_screen.dart';
 
 import '../ui/screens/choose_fixture.dart/choose_match_screen.dart';
 import '../ui/screens/choose_plan/choose_plan_screen.dart';
+import '../ui/screens/dashboard/components/my_profile/my_profile.dart';
 import '../ui/screens/dashboard/components/news/add_news.dart';
 import '../ui/screens/fixtureDetails/fixture_details_screen.dart';
 
@@ -53,10 +51,8 @@ class Routes {
   static const String chooseLeague = '/chooseLeague';
   static const String chooseFixture = '/chooseFixture';
   static const String choosePlan = '/choosePlan';
-  static const String home = '/home';
   static const String predictions = '/predicitons';
   static const String setting = '/setting';
-  static const String profileSettings = '/profileSettings';
   static const String profileInfoUpdate = '/profileInfoUpdate';
   static const String admin = "/admin";
   static const String privacyPolicy = "/privacyPolicy";
@@ -106,21 +102,16 @@ class Routes {
             leagueData: routeSettings.arguments as ChoosePlanArgs,
           ),
         );
-      case home:
-        return generateRoute(routeSettings.name!, HomeScreen());
       case predictions:
         return generateRoute(routeSettings.name!, PredicitonsScreen());
       case dashboard:
         return generateRoute(routeSettings.name!, const DashBoardScreen());
       case setting:
-        return generateRoute(routeSettings.name!, SettingScreen());
-      case profileSettings:
-        return generateRoute(
-            routeSettings.name!, const ProfileSettingsScreen());
+        return generateRoute(routeSettings.name!, const MyProfileScreen());
       case profileInfoUpdate:
         return generateRoute(routeSettings.name!, ProfileInfoUpdateScreen(payload: routeSettings.arguments as UpdateProfileArgs,));
       case admin:
-        return generateRoute(routeSettings.name!, AdminHomeScreen());
+        return generateRoute(routeSettings.name!, const AdminHomeScreen());
       case privacyPolicy:
         return generateRoute(routeSettings.name!, const PrivacyPolicyScreen());
       case user:
@@ -130,7 +121,7 @@ class Routes {
       case chooseAnExpert:
         return generateRoute(routeSettings.name!, ChooseAnExpertScreen());
       case addNews:
-        return generateRoute(routeSettings.name!, AddNewsScreen());
+        return generateRoute(routeSettings.name!, const AddNewsScreen());
       case editChoosePlan:
         return generateRoute(routeSettings.name!, EditChoosePlanScreen());
       case chooseLanguage:

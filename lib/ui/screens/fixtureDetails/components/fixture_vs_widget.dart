@@ -135,7 +135,7 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                     SizedBox(
                       width: SizeConfig.width * 30,
                       child: TextWidget(
-                        text: widget.matchDetails.matchHometeamName,
+                        text: homeTeamName!,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.clip,
                         fontWeight: FontWeight.bold,
@@ -159,7 +159,7 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                     SizedBox(
                       width: SizeConfig.width * 30,
                       child: TextWidget(
-                        text: widget.matchDetails.matchAwayteamName,
+                        text: awayTeamName!,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.clip,
                         fontWeight: FontWeight.bold,

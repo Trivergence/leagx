@@ -5,6 +5,8 @@ import 'package:leagx/ui/widgets/shimmer_widget.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
+import '../../../../constants/dimens.dart';
+import '../../../util/locale/localization.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../widgets/text_widget.dart';
 
@@ -85,9 +87,13 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                child: Image.asset(Assets.vs),
-                              ),
+                                  padding: const EdgeInsets.symmetric(horizontal : 5.0),
+                                  child: TextWidget(
+                                    text: loc.vs,
+                                    textSize: Dimens.textLarge,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               Expanded(
                                   flex: 2,
                                   child: Row(

@@ -4,7 +4,7 @@ import 'package:leagx/constants/colors.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/settings_tile.dart';
+import 'package:leagx/ui/widgets/my_profile_tile.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,16 +17,16 @@ import '../../../../../service/service_locator.dart';
 import '../../../../../view_models/dashboard_view_model.dart';
 import '../../../../util/utility/image_utitlity.dart';
 import '../../../../widgets/gradient/gradient_border_widget.dart';
-import '../home/components/analytics_widget.dart';
+import 'components/analytics_widget.dart';
 
-class SettingScreen extends StatefulWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+class MyProfileScreen extends StatefulWidget {
+  const MyProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<SettingScreen> createState() => _SettingScreenState();
+  State<MyProfileScreen> createState() => _MyProfileScreenState();
 }
 
-class _SettingScreenState extends State<SettingScreen> {
+class _MyProfileScreenState extends State<MyProfileScreen> {
   bool _switchValue = false;
   UserSummary? _userSummary;
 
@@ -77,69 +77,69 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           if (_userSummary != null)
             AnalyticsWidget(
-              firstLabel: loc.dashboardHomeTxtPredictions,
+              firstLabel: loc.myProfileTxtPredictions,
               firstValue: _userSummary!.remainingPredictions.toString(),
-              secondLabel: loc.dashboardHomeTxtWiningRatio(
+              secondLabel: loc.myProfileTxtWiningRatio(
                   _userSummary!.totalPredictions.toString()),
               secondValue:
                   _userSummary!.predictionSuccessRate.toString() != "100.0"
                       ? _userSummary!.predictionSuccessRate!.toStringAsFixed(1)
                       : _userSummary!.predictionSuccessRate!.toStringAsFixed(0),
-              thirdLabel: loc.dashboardHomeTxtEarnedCoid,
+              thirdLabel: loc.myProfileTxtEarnedCoid,
               thirdValue: _userSummary!.coinEarned!.round().toString(),
             ),
           UIHelper.verticalSpace(15.0),
-          SettingsTile(
+          MyProfileTile(
             onTap: () {
               Navigator.pushNamed(context, Routes.predictions);
             },
-            text: loc.settingTxtMyPredictions,
+            text: loc.myProfileTxtMyPredictions,
             imageAsset: Assets.icDrawerPredictions,
           ),
           UIHelper.verticalSpace(15.0),
           TextWidget(
-            text: loc.settingTxtProfileInfo,
+            text: loc.myProfileTxtProfileInfo,
             textSize: 14.0,
             color: AppColors.colorGrey,
             fontWeight: FontWeight.w500,
           ),
           UIHelper.verticalSpace(15.0),
-          SettingsTile(
+          MyProfileTile(
             text: userName,
             iconData: Icons.account_circle_outlined,
             onTap: _goToProfileInfoUpdate,
           ),
           UIHelper.verticalSpace(15.0),
-          SettingsTile(
+          MyProfileTile(
             text: userEmail,
             iconData: Icons.drafts_outlined,
             onTap: _goToProfileInfoUpdate,
           ),
           UIHelper.verticalSpace(15.0),
           if (phone.isNotEmpty)
-            SettingsTile(
+            MyProfileTile(
               text: phone,
               iconData: Icons.smartphone,
               onTap: _goToProfileInfoUpdate,
             ),
           UIHelper.verticalSpace(15.0),
           if (gender.isNotEmpty)
-            SettingsTile(
+            MyProfileTile(
               text: genders[gender]!,
               iconData: Icons.perm_contact_cal,
               onTap: _goToProfileInfoUpdate,
             ),
-          UIHelper.verticalSpace(15.0),
+          UIHelper.verticalSpace(10.0),
           TextWidget(
-            text: loc.settingTxtGeneral,
+            text: loc.myProfileTxtGeneral,
             textSize: 14.0,
             color: AppColors.colorGrey,
             fontWeight: FontWeight.w500,
           ),
           UIHelper.verticalSpace(15.0),
-          SettingsTile(
+          MyProfileTile(
             onTap: () {},
-            text: loc.settingTxtNotification,
+            text: loc.myProfileTxtNotification,
             imageAsset: Assets.icNotification,
             trailing: Switch(
               value: _switchValue,
@@ -157,19 +157,19 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           ),
           UIHelper.verticalSpace(15.0),
-          SettingsTile(
+          MyProfileTile(
             onTap: () {
               Navigator.pushNamed(context, Routes.resetPassword);
             },
-            text: loc.settingTxtPassword,
+            text: loc.myProfileTxtPassword,
             iconData: Icons.lock_outline,
           ),
           UIHelper.verticalSpace(15.0),
-          SettingsTile(
+          MyProfileTile(
             onTap: () {
               Navigator.pushNamed(context, Routes.chooseLanguage);
             },
-            text: loc.settingTxtLanguage,
+            text: loc.myProfileTxtLanguage,
             iconData: Icons.language,
           ),
           UIHelper.verticalSpace(15.0),
@@ -177,7 +177,7 @@ class _SettingScreenState extends State<SettingScreen> {
           //   onTap: () {
           //     Navigator.pushNamed(context, Routes.admin);
           //   },
-          //   text: loc.settingTxtAdmin,
+          //   text: loc.myProfileTxtAdmin,
           //   imageAsset: Assets.icDrawerAdmin,
           // ),
           // UIHelper.verticalSpace(15.0),

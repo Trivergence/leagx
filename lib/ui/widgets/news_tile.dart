@@ -88,6 +88,7 @@ class _NewsTileState extends State<NewsTile> {
                   overflow: TextOverflow.ellipsis,
                   fontWeight: FontWeight.w300,
                   textSize: Dimens.textXS,
+                  textAlign: TextAlign.start,
                   color: AppColors.colorWhite.withOpacity(0.7),
                   text: desc!)),
                 if (widget.isApproval) UIHelper.horizontalSpace(9),

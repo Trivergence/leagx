@@ -122,28 +122,10 @@
 	"dashboardBtnNews": "Analytics",
 	"dashboardBtnSetting": "My Profile",
 
-	"dashboardFixtureTxtLeagues": "LEAGUES",
-	"dashboardFixtureTxtAll": "All",
+	"dashboardHomeTxtLeagues": "LEAGUES",
+	"dashboardHomeTxtAll": "All",
 	"dashboardFixtureTxtUpcomingMatches": "UPCOMING MATCHES",
-	"dashboardFixtureTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
-
-	"dashboardHomeTxtLeaders": "Experts",
-	"dashboardHomeTxtAnalytics": "MY STATS",
-	"dashboardHomeTxtUpcomingMatches": "UPCOMING MATCHES",
-	"dashboardHomeTxtViewAll": "View all matches",
-	"dashboardHomeTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
-	"dashboardHomeTxtPredictions": "Predictions Remain",
-	"dashboardHomeTxtWiningRatio": "Wins out of {totalPredictions}",
-	"@dashboardHomeTxtWiningRatio": {
-		"placeholders": {
-			"totalPredictions": {
-				"type": "String",
-				"description": "Number of Predictions",
-				"example": "4"
-			}
-		}
-	},
-	"dashboardHomeTxtEarnedCoid": "Credit",
+	"dashboardHomeTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
 
 	"dashboardLeaderTxtPredictions": "predictions",
 	"dashboardLeaderTxtWin": "Champion",
@@ -162,16 +144,31 @@
 	"dashboardNewsAddNewsTxtSuccess": "News added succesfully",
 	"dashboardNewsAddNewsTxtRequiredFixture": "Please choose a fixture to proceed forward",
 
-	"settingTxtMyPredictions": "My Predictions",
-	"settingTxtProfileInfo": "PROFILE INFO",
-	"settingTxtGeneral": "GENERAL",
-	"settingTxtNotification": "Notification",
-	"settingTxtPassword": "Password",
-	"settingTxtLanguage": "Language",
-	"settingTxtAdmin": "Admin",
-	"settingChooseLanguageTxtChooseLanguage":"Choose Language",
-	"settingChooseLanguageTxtEnglish":"English",
-	"settingChooseLanguageTxtArabic":"Arabic",
+	"myProfileTxtMyPredictions": "My Predictions",
+	"myProfileTxtAnalytics": "MY STATS",
+	"myProfileTxtProfileInfo": "PROFILE INFO",
+	"myProfileTxtGeneral": "GENERAL",
+	"myProfileTxtNotification": "Notification",
+	"myProfileTxtPassword": "Password",
+	"myProfileTxtLanguage": "Language",
+	"myProfileTxtAdmin": "Admin",
+	"myProfileChooseLanguageTxtChooseLanguage":"Choose Language",
+	"myProfileChooseLanguageTxtEnglish":"English",
+	"myProfileChooseLanguageTxtArabic":"Arabic",
+	"myProfileTxtPredictions": "Predictions Remain",
+	"myProfileTxtWiningRatio": "Wins out of {totalPredictions}",
+	"@myProfileTxtWiningRatio": {
+		"placeholders": {
+			"totalPredictions": {
+				"type": "String",
+				"description": "Number of Predictions",
+				"example": "4"
+			}
+		}
+	},
+	"myProfileTxtEarnedCoid": "Credit",
+	"myProfileTxtAddPredictions": "Add",
+	"myProfileTxtWithdraw": "Withdraw",
 
 	"upcomingMatchesTitle": "Upcoming Matches",
 
@@ -229,9 +226,7 @@
 
 	"profileProfileSettingsTxtProfileSettings": "Profile Settings",
 	"profileProfileSettingsTxtCoins": "Coins",
-	"profileProfileSettingsTxtWithdraw": "Withdraw",
 	"profileProfileSettingsTxtPrediction": "Remaining Predictions",
-	"profileProfileSettingsTxtAddPredictions": "Add",
 	"profileProfileInfoUpdateTxtEditProfile": "Edit Profile",
 	"profileProfileInfoUpdateBtnSave": "Save",
 	"profileProfileInfoHintGender": "Gender",

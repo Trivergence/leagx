@@ -58,7 +58,6 @@ class _ExpandedLeaderTileState extends State<ExpandedLeaderTile> {
                       Assets.icBlackCrown,
                       color: AppColors.colorPink,
                     )
-                    //Image.asset(Assets.icSmallCrown),
                   ),
                 GradientBorderWidget(
                   width: 60.0,
