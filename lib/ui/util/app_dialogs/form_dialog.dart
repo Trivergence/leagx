@@ -86,7 +86,7 @@ class PayoutDialogWidget extends StatelessWidget {
           RadioGroup(
             amountController: amountController,
             onRadioChanged: (type) {
-              withdrawType == type;
+              withdrawType = type;
           },),
         ],),
       ),
