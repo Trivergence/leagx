@@ -93,7 +93,8 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
               )),
             margin: const EdgeInsets.only(bottom: 10, top: 5),
             padding: const EdgeInsets.all(20),
-            child: Column(
+            child: 
+            Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -178,15 +179,9 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    widget.matchDetails.matchLive == "1" ||
-                            Utility.isMatchOver(
-                                widget.matchDetails.matchStatus!)
-                        ? TextWidget(
-                            text: !Utility.isMatchOver(widget.matchDetails.matchStatus!) && Utility.isTimeValid(widget.matchDetails.matchStatus!)
-                            ? timeString : matchStatus!,
-                            color: AppColors.colorGrey,
-                            textSize: Dimens.textSmall,
-                          )
+                    Utility.isMatchOver(
+                                widget.matchDetails.matchStatus!) || widget.matchDetails.matchLive == "1"
+                        ? const SizedBox.shrink()
                         : TextWidget(
                             text: widget.matchDetails.matchTime,
                             color: AppColors.colorWhite,
@@ -206,6 +201,7 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                 ),
               ],
             )
+
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: [
