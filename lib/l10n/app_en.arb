@@ -2,14 +2,12 @@
 	"appName": "LeagX",
 	"today": "Today",
 	"msgPleaseWait": "Please wait...",
+	"vs": "VS",
 
 	"loginTitle": "Login",
-	"onboardingTxtTitle1":"LOREM IPSUM DOLOR",
-	"onboardingTxtDesc1":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
-	"onboardingTxtTitle2":"LOREM IPSUM DOLOR",
-	"onboardingTxtDesc2":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
-	"onboardingTxtTitle3":"LOREM IPSUM DOLOR",
-	"onboardingTxtDesc3":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
+	"onboardingTxtDesc1": "Follow your favorite leagues, clubs, players, and analysts.",
+	"onboardingTxtDesc2": "Share your feedback in real-time and get paid for it.",
+	"onboardingTxtDesc3": "Predict and build your clubs' winning strategy.",
 
 	"adminHomeTxtAdmin": "Admin",
 	"adminHomeBtnToday": "today",
@@ -86,7 +84,7 @@
 
 	"chooseLeagueTxtChooseALeague": "Choose a League",
 	"chooseLeagueTxtSearch": "Search",
-	"chooseLeagueBtnUnsubscribe": "Unsubscribe",
+	"chooseLeagueBtnUpgrade": "Upgrade",
 	"chooseLeagueBtnSubscribe": "Subscribe",
 	"chooseLeagueDialogTitle": "Confirmation",
 	"chooseLeagueDialogbody": "Are you sure you want to unsubscribe this league?",
@@ -94,13 +92,16 @@
 	"chooseLeagueDialogBtnConfirm": "Confirm",
 
 	"choosePlanTxtChooseAPlan": "Choose a Package",
-	"choosePlanDialogSuccessTitle": "Purchase Successful",
 	"choosePlanDialogSelectPayment": "Select Payment Method",
 	"choosePlanDialogSelectCard": "Card",
 	"choosePlanDialogSelectWallet": "Wallet",
 	"choosePlanDialogBtnNegative": "Cancel",
 	"choosePlanDialogBtnPositive": "Select",
+	"choosePlanDialogSuccessTitle": "Purchase Successful",
+	"choosePlanDialogUpgradeSuccessTitle": "Upgrade Successful",
 	"choosePlanDialogSuccessDesc": "You have succesfully subscribed the package",
+	"choosePlanDialogUpgradeSuccessDesc": "You have succesfully upgraded the package",
+	"choosePlanTxtLessCoins": "You don't have enough coins",
 
 	"chooseFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
 	"chooseFixtureTxtTitle": "Choose A Match",
@@ -116,24 +117,33 @@
 	"editChoosePlanBtnSave": "Save",
 
 	"dashboardBtnHome": "Home",
-	"dashboardBtnFixture": "Matches",
+	"dashboardBtnWallet": "Wallet",
 	"dashboardBtnLeader": "Experts",
 	"dashboardBtnNews": "Analytics",
 	"dashboardBtnSetting": "My Profile",
 
-	"dashboardFixtureTxtLeagues": "Leagues",
+	"dashboardFixtureTxtLeagues": "LEAGUES",
 	"dashboardFixtureTxtAll": "All",
-	"dashboardFixtureTxtUpcomingMatches": "Upcoming Matches",
+	"dashboardFixtureTxtUpcomingMatches": "UPCOMING MATCHES",
 	"dashboardFixtureTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
 
 	"dashboardHomeTxtLeaders": "Experts",
-	"dashboardHomeTxtAnalytics": "My Stats",
-	"dashboardHomeTxtUpcomingMatches": "Upcoming Matches",
+	"dashboardHomeTxtAnalytics": "MY STATS",
+	"dashboardHomeTxtUpcomingMatches": "UPCOMING MATCHES",
 	"dashboardHomeTxtViewAll": "View all matches",
 	"dashboardHomeTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
-	"dashboardHomeTxtPredictions": "Predictions",
-	"dashboardHomeTxtWiningRatio": "Winning Ratio",
-	"dashboardHomeTxtEarnedCoid": "Earned Coin",
+	"dashboardHomeTxtPredictions": "Predictions Remain",
+	"dashboardHomeTxtWiningRatio": "Wins out of {totalPredictions}",
+	"@dashboardHomeTxtWiningRatio": {
+		"placeholders": {
+			"totalPredictions": {
+				"type": "String",
+				"description": "Number of Predictions",
+				"example": "4"
+			}
+		}
+	},
+	"dashboardHomeTxtEarnedCoid": "Credit",
 
 	"dashboardLeaderTxtPredictions": "predictions",
 	"dashboardLeaderTxtWin": "Champion",
@@ -152,7 +162,8 @@
 	"dashboardNewsAddNewsTxtSuccess": "News added succesfully",
 	"dashboardNewsAddNewsTxtRequiredFixture": "Please choose a fixture to proceed forward",
 
-	"settingTxtProfile": "Profile",
+	"settingTxtMyPredictions": "My Predictions",
+	"settingTxtProfileInfo": "PROFILE INFO",
 	"settingTxtGeneral": "GENERAL",
 	"settingTxtNotification": "Notification",
 	"settingTxtPassword": "Password",
@@ -176,8 +187,8 @@
 	"faqsTxtFaqs": "FAQs",
 	"faqsTxtFrequentlyAskedQuestions": "Frequently Asked Questions",
 
-	"fixtureDetailsBtnMatch": "MATCH",
-	"fixtureDetailsBtnPlayers": "PLAYERS",
+	"fixtureDetailsBtnMatch": "Match",
+	"fixtureDetailsBtnPlayers": "Players",
 	"fixtureDetailsBtnNews": "Analytics",
 	"fixtureDetailsTxtPredictMatchResult": "Predict Match Result",
 	"fixtureDetailsTxtMakeMyPredictPublic": "Make my predict public",
@@ -256,6 +267,10 @@
 	"subscribeConfirmBody": "Are your sure you want to subscribe this league. This will charge ",
 	"subscribeConfirmCancel": "Cancel",
 	"subscribeConfirmSubscribe": "Subscribe",
+	"upgradeConfirmTitle": "Confirm upgrade",
+	"upgradeConfirmBody": "Are your sure you want to upgrade this league. This will charge ",
+	"upgradeConfirmCancel": "Cancel",
+	"upgradeConfirmUpgrade": "Upgrade",
 
 	"walletTxtWallet": "Wallet",
 	"walletTxtTotalCoins": "Total Coins",

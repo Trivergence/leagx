@@ -42,12 +42,11 @@ class TermsServiceScreen extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
-                      GradientWidget(
-                        child: TextWidget(
-                          text: 'How Lorem ipsum dolor  ',
-                          fontWeight: FontWeight.w600,
-                          textSize: 20.0,
-                        ),
+                      TextWidget(
+                        text: 'How Lorem ipsum dolor  ',
+                        fontWeight: FontWeight.w600,
+                        textSize: 20.0,
+                        color: AppColors.colorPink,
                       ),
                       UIHelper.verticalSpaceMedium,
                       TextWidget(
@@ -77,6 +76,7 @@ Morbi non dui dui. Donec elementum neque blandit, pulvinar leo ut, placerat tort
                   child: GradientBorderWidget(
                     text: loc.termsOfServiceBtnDeny,
                     onPressed: () {},
+                    isBorderSolid: true,
                   ),
                 ),
               ],

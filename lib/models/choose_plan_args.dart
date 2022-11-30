@@ -3,5 +3,11 @@ class ChoosePlanArgs {
   String leagueImg;
   String leagueTitle;
   bool isRedeeming;
-  ChoosePlanArgs({required this.leagueId,required this.leagueImg, required this.leagueTitle, required this.isRedeeming});
+  bool isUpgrading;
+  ChoosePlanArgs({
+    required this.leagueId,
+    required this.leagueImg, 
+    required this.leagueTitle, 
+    required this.isRedeeming,
+    this.isUpgrading = false});
 }

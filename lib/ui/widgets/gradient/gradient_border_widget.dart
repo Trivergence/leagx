@@ -23,7 +23,7 @@ class GradientBorderWidget extends StatelessWidget {
   final String? imageAsset;
   final String? placeHolderImg;
   final EdgeInsetsGeometry? padding;
-  final bool textWithIcon;
+  final bool isBorderSolid;
   const GradientBorderWidget({
     Key? key,
     this.width,
@@ -37,8 +37,8 @@ class GradientBorderWidget extends StatelessWidget {
     this.iconSize,
     this.imageUrl,
     this.imageAsset,
-    this.padding, this.placeHolderImg,
-    this.textWithIcon = false,
+    this.padding, this.placeHolderImg, 
+    this.isBorderSolid = false,
   }) : super(key: key);
 
   @override
@@ -50,7 +50,8 @@ class GradientBorderWidget extends StatelessWidget {
         height: height ?? 48.0,
         padding: const EdgeInsets.all(2.0),
         decoration: BoxDecoration(
-            gradient: gradient,
+            gradient: isBorderSolid == true ? null : gradient,
+            color: isBorderSolid == true ? AppColors.colorPink : null,
             shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
             borderRadius: isCircular
                 ? null
@@ -62,7 +63,7 @@ class GradientBorderWidget extends StatelessWidget {
             shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: textWithIcon == false ? (iconData != null
+          child: iconData != null
               ? IconWidget(
                   iconData: iconData!,
                   size: iconSize,
@@ -77,28 +78,12 @@ class GradientBorderWidget extends StatelessWidget {
                           child: TextWidget(
                             text: text!,
                             fontWeight: FontWeight.w600,
-                            fontFamily: FontFamily.raleway,
                             textSize: textSize ?? Dimens.textRegular,
                           ),
                         )
                       : imageAsset != null
                           ? Image.asset(imageAsset!)
-                          : const SizedBox())
-                          : Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                            Image.asset(
-                              imageAsset!,
-                              height: 25,
-                              width: 25,
-                            ),
-                            TextWidget(
-                              text: text!,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: FontFamily.raleway,
-                              textSize: textSize ?? Dimens.textRegular,
-                            )
-                          ],),
+                          : const SizedBox()
         ),
       ),
     );

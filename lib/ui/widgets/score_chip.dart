@@ -26,18 +26,19 @@ class ScoreChip extends StatelessWidget {
           ])) : null,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextWidget(
             text: firstScore.isEmpty ? "0" : firstScore,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
           ),
           const TextWidget(
             text: "-",
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
           ),
           TextWidget(
             text: secondScore.isEmpty ? "0" : secondScore,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/models/choose_plan_args.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -61,14 +62,14 @@ class _LeagueTileState extends State<LeagueTile> {
           backgroundColor: AppColors.textFieldColor,
           radius: 25,
         ),
-        title: TextWidget(text: leagueTitle!),
+        title: TextWidget(text: leagueTitle!, textSize: Dimens.textSmall,),
         trailing: SizedBox(
             height: 26,
             width: 88,
             child: widget.hasSubscribed
                 ? MainButton(
-                    text: loc.chooseLeagueBtnUnsubscribe,
-                    onPressed: _unSubscribe,
+                    text: loc.chooseLeagueBtnUpgrade,
+                    onPressed: _upgrade,
                     fontWeight: FontWeight.w400,
                     fontSize: 10,
                   )
@@ -96,14 +97,15 @@ class _LeagueTileState extends State<LeagueTile> {
     });
   }
 
-  Future<void> _unSubscribe() async {
-    int? leagueId = context.read<DashBoardViewModel>().getLeagueInternalId(widget.leagueId);
-    if(leagueId != null) {
-      context.read<SubscriptionViewModel>().showUnsubscribeDialog(
-        context: context,
-        leagueId: leagueId);
-    } else {
-      ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
-    }
+  Future<void> _upgrade() async {
+    Navigator.of(context).pushNamed(
+    Routes.choosePlan, 
+    arguments: ChoosePlanArgs(
+      leagueId: widget.leagueId,
+      leagueImg: widget.imgUrl,
+      leagueTitle: leagueTitle!,
+      isRedeeming: widget.isRedeeming,
+      isUpgrading: true
+    ));
   }
 }

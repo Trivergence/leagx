@@ -68,7 +68,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           onPressed: () async {
             Navigator.pushNamed(context, Routes.profileInfoUpdate,
             arguments: UpdateProfileArgs(imgUrl: imagUrl,
-            userName: userName, 
+            userName: userName,
             userEmail: userEmail,
             phone: phone, 
             gender: gender)).then((_) {
@@ -115,7 +115,6 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                           text: userName,
                           fontWeight: FontWeight.w600,
                           textSize: 18.0,
-                          fontFamily: FontFamily.raleway,
                         ),
                         UIHelper.verticalSpace(
                           35.0,
@@ -124,6 +123,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ProfileDetailWidget(
+                              assetIcon: Assets.icCoin,
                               value: userSummary != null ? userSummary.coinEarned!.round().toString() : "0",
                               title: loc.profileProfileSettingsTxtCoins,
                               buttonTitle: loc.profileProfileSettingsTxtWithdraw,
@@ -152,6 +152,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               color: AppColors.colorGrey,
                             ),
                             ProfileDetailWidget(
+                              assetIcon: Assets.icBullsEye,
                               value: userSummary != null ? userSummary.remainingPredictions!.toString() : "0",
                               title: loc.profileProfileSettingsTxtPrediction,
                               buttonTitle: loc.profileProfileSettingsTxtAddPredictions,
@@ -178,6 +179,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                       width: 80.0,
                       isCircular: true,
                       placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
+                      isBorderSolid: true,
                     ),
                   ),
                 ],

@@ -4,7 +4,6 @@ class Assets {
   // app icon assets
   static const String appLogo = "assets/icons/ic_logo.png";
   static const String icPlayer = "assets/icons/ic_player.png";
-  static const String icSoccer = "assets/icons/ic_soccer.png";
   //static const String icPlayerAvatar = "assets/icons/ic_playerAvatar.png";
   static const String icMaleProfile = "assets/icons/ic_maleProfile.png";
   static const String icFemaleProfile = "assets/icons/ic_femaleProfile.png";
@@ -14,17 +13,25 @@ class Assets {
   static const String icExpertMale = "assets/icons/ic_expertMale.png";
   static const String icLeague = "assets/icons/ic_league.png";
 
-  
-  static const String icBullsEye = "assets/icons/ic_bullseye.png";
-  static const String icCoin = "assets/icons/ic_coin.png";
-  static const String icDartBasket = "assets/icons/ic_dart_basket.png";
-  static const String icYellowCrown = "assets/icons/ic_yellow_crown.png";
-  
-  
-  
+  //SVG Images
+  static const String icBullsEye = "assets/svg/ic_bullseye.svg";
+  static const String icCoin = "assets/svg/ic_coin.svg";
+  static const String icBlackCrown = "assets/svg/ic_black_crown.svg";
+  static const String icCalender = "assets/svg/ic_calender.svg";
+  static const String icSoccer = "assets/svg/ic_soccer.svg";
+  static const String icExperts = "assets/svg/ic_experts.svg";
+  static const String icHome = "assets/svg/ic_home.svg";
+  static const String icMyProfile = "assets/svg/ic_myProfile.svg";
+  static const String icNews = "assets/svg/ic_news.svg";
+  static const String icExpertsFill = "assets/svg/ic_experts_fill.svg";
+  static const String icHomeFill = "assets/svg/ic_home_fill.svg";
+  static const String icMyProfileFill = "assets/svg/ic_myProfile_fill.svg";
+  static const String icNewsFill = "assets/svg/ic_news_fill.svg";
+  static const String icWallet = "assets/svg/ic_wallet.svg";
+  static const String icWalletFill = "assets/svg/ic_wallet_fill.svg";
   
   static const String icCrown = "assets/icons/ic_crown.png";
-  static const String icSmallCrown = "assets/icons/ic_small_crown.png";
+  //static const String icSmallCrown = "assets/icons/ic_small_crown.png";
   static const String icNotification = "assets/icons/ic_notification.png";
   static const String icSwitch = "assets/icons/ic_switch.png";
   static const String icEdit = "assets/icons/ic_edit.png";

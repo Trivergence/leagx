@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/constants/dimens.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../util/ui/ui_helper.dart';
@@ -41,14 +42,17 @@ class CardInfoWidget extends StatelessWidget {
                   + UIHelper.bullet 
                   + UIHelper.bullet 
                   + UIHelper.bullet + " "
-                  + last4),
+                  + last4,
+                  fontWeight: FontWeight.w600,
+                  textSize: Dimens.textSmall,),
             ],
           ),
           UIHelper.horizontalSpaceSmall,
           TextWidget(
               text: expMonth +
                   "/" +
-                  expYear)
+                  expYear, fontWeight: FontWeight.w600,
+                  textSize: Dimens.textSmall)
         ]),
       ),
     );

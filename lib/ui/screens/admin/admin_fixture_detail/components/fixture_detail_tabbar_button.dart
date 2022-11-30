@@ -26,23 +26,22 @@ class FixtureDetailTabbarButton extends StatelessWidget {
             gradient: AppColors.blackishGradient,
           ),
           child: isTapped
-              ? GradientWidget(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                        width: 2.0,
-                      )),
-                    ),
-                    child: Center(
-                      child: TextWidget(
-                        text: title.toUpperCase(),
-                        color: AppColors.colorWhite,
-                        textSize: 16.0,
-                      ),
-                    ),
+              ? Container(
+                color: AppColors.colorPink,
+                decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                    width: 2.0,
+                  )),
+                ),
+                child: Center(
+                  child: TextWidget(
+                    text: title.toUpperCase(),
+                    color: AppColors.colorWhite,
+                    textSize: 16.0,
                   ),
-                )
+                ),
+              )
               : Center(
                   child: TextWidget(
                     text: title.toUpperCase(),

@@ -12,6 +12,7 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../constants/colors.dart';
+import '../../../../../constants/dimens.dart';
 import '../../../../../core/network/internet_info.dart';
 import '../../../../../models/dashboard/fixture.dart';
 import '../../../../../models/leader.dart';
@@ -39,55 +40,18 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Column(
           children: [
-            // Container(
-            //   padding: const EdgeInsets.all(16.0),
-            //   decoration: BoxDecoration(
-            //     gradient: AppColors.blackishGradient,
-            //   ),
-            //   child: Column(
-            //     mainAxisSize: MainAxisSize.min,
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //        TextWidget(
-            //         text: loc.dashboardHomeTxtLeaders,
-            //         fontWeight: FontWeight.w700,
-            //       ),
-            //       UIHelper.verticalSpaceSmall,
-            //       SizedBox(
-            //         height: 40.0,
-            //         child: ListView.builder(
-            //           scrollDirection: Axis.horizontal,
-            //           itemCount: listOfLeaders.length,
-            //           itemBuilder: (context, index) {
-            //             Leader leader = listOfLeaders[index];
-            //             return Padding(
-            //               padding: const EdgeInsets.only(right: 20.0),
-            //               child: GradientBorderWidget(
-            //                 width: 40.0,
-            //                 height: 40.0,
-            //                 isCircular: true,
-            //                 imageUrl: leader.profileImg,
-            //                 placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
-            //                 onPressed: () {},
-            //               ),
-            //             );
-            //           },
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16.0,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   if (_userSummary != null) AnalyticsWidget(
                     firstLabel: loc.dashboardHomeTxtPredictions,
                     firstValue: _userSummary!.totalPredictions.toString(),
-                    secondLabel: loc.dashboardHomeTxtWiningRatio,
+                    secondLabel: loc.dashboardHomeTxtWiningRatio(
+                          _userSummary!.totalPredictions.toString()),
                     secondValue: _userSummary!
                         .predictionSuccessRate.toString() != "100.0" 
                         ? _userSummary!.predictionSuccessRate!.toStringAsFixed(1) 
@@ -97,7 +61,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                    TextWidget(
                     text: loc.dashboardHomeTxtUpcomingMatches,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.bold,
+                     letterSpace: Utility.isArabic() ? 0 : 4,
+                    textSize: Dimens.textSM,
                   ),
                   UIHelper.verticalSpaceSmall,
                   upcomingMatches.isNotEmpty ? Column(

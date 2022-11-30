@@ -55,6 +55,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                   child: TextWidget(
                       text: title!,
                       overflow: TextOverflow.fade,
+                      fontWeight: FontWeight.bold,
                     ),
                 ),
               )

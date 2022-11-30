@@ -35,11 +35,10 @@ class _FaqTileState extends State<FaqTile> {
                 overflow: TextOverflow.ellipsis,
               ),
               isShow
-                  ? const GradientWidget(
-                      child: Icon(
-                        Icons.keyboard_arrow_down,
-                      ),
-                    )
+                  ? const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: AppColors.colorPink,
+                  )
                   : const IconWidget(
                       iconData: Icons.keyboard_arrow_right,
                     ),

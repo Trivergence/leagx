@@ -38,6 +38,7 @@ class PredictionsTile extends StatelessWidget {
             imageUrl: imageUrl,
             onPressed: () {},
             gradient: AppColors.orangishGradient,
+            isBorderSolid: true,
           ),
           UIHelper.horizontalSpace(15.0),
           Expanded(

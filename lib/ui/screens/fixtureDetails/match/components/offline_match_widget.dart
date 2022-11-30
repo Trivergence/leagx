@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../constants/assets.dart';
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/dimens.dart';
@@ -43,12 +45,13 @@ class OfflineMatchWidget extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(Assets.icSoccer),
+              SvgPicture.asset(Assets.icSoccer),
               UIHelper.verticalSpaceMedium,
               TextWidget(
                 text: loc.fixtureDetailsMatchTxtMatchToStartYet,
                 textSize: Dimens.textSM,
-                color: AppColors.colorGrey,
+                color: AppColors.colorYellow,
+                fontWeight: FontWeight.w100,
               )
             ],
           ),
@@ -61,7 +64,6 @@ class OfflineMatchWidget extends StatelessWidget {
             awayScore: prediction!.secondTeamScore ?? 0,
           ),
         if (!ValidationUtils.isValid(prediction)) SizedBox(
-            width: SizeConfig.width * 90,
             child: MainButton(
               text: loc.fixtureDetailsMatchBtnPredict,
               onPressed: _showSheet,

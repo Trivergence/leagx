@@ -3,6 +3,7 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_button.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
@@ -42,12 +43,11 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
-                      GradientWidget(
-                        child: TextWidget(
-                          text: 'How Lorem ipsum dolor  ',
-                          fontWeight: FontWeight.w600,
-                          textSize: 20.0,
-                        ),
+                      TextWidget(
+                        text: 'How Lorem ipsum dolor  ',
+                        fontWeight: FontWeight.w600,
+                        textSize: 20.0,
+                        color: AppColors.colorPink,
                       ),
                       UIHelper.verticalSpaceMedium,
                       TextWidget(
@@ -74,7 +74,7 @@ Morbi non dui dui. Donec elementum neque blandit, pulvinar leo ut, placerat tort
                 ),
                 UIHelper.horizontalSpaceMedium,
                 Flexible(
-                  child: GradientBorderWidget(
+                  child: GradientBorderButton(
                     text: loc.privacyPolicyBtnDeny,
                     onPressed: () {},
                   ),

@@ -6,12 +6,10 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingWidget extends StatelessWidget {
-  final String title;
   final String subtitle;
   final String imageAsset;
   const OnBoardingWidget(
       {Key? key,
-      required this.title,
       required this.subtitle,
       required this.imageAsset})
       : super(key: key);
@@ -44,12 +42,12 @@ class OnBoardingWidget extends StatelessWidget {
           ),
           child: Column(
             children: [
-              TextWidget(
-                text: title,
-                textSize: Dimens.textLarge,
-                fontWeight: FontWeight.w700,
-              ),
-              UIHelper.verticalSpaceMedium,
+              // TextWidget(
+              //   text: title,
+              //   textSize: Dimens.textLarge,
+              //   fontWeight: FontWeight.w700,
+              // ),
+              // UIHelper.verticalSpaceMedium,
               TextWidget(
                 text: subtitle,
                 textAlign: TextAlign.center,

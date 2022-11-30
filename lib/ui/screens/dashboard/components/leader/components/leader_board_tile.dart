@@ -52,15 +52,34 @@ class _LeaderBoardTileState extends State<LeaderBoardTile> {
       ),
       child: Row(
         children: [
-          GradientBorderWidget(
-            width: 20.0,
-            height: 20.0,
-            isCircular: true,
-            gradient: AppColors.grayishGradient,
-            text: widget.number.toString(),
-            textSize: 12.0,
-            onPressed: () {},
+          Container(
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              border: Border.all(
+              color: AppColors.colorPink,
+              width: 2
+            ),
+            shape: BoxShape.circle
+            ),
+            child: Center(
+              child: TextWidget(
+                text: widget.number.toString(),
+                textSize: Dimens.textXS,
+                fontWeight: FontWeight.w600,
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
+          // GradientBorderWidget(
+          //   width: 25.0,
+          //   height: 25.0,
+          //   isCircular: true,
+          //   gradient: AppColors.grayishGradient,
+          //   text: widget.number.toString(),
+          //   textSize: 12.0,
+          //   onPressed: () {},
+          //   isBorderSolid: true,
+          // ),
           UIHelper.horizontalSpace(15.0),
           GradientBorderWidget(
             width: 44.0,
@@ -70,6 +89,7 @@ class _LeaderBoardTileState extends State<LeaderBoardTile> {
             placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
             onPressed: () {},
             gradient: AppColors.orangishGradient,
+            isBorderSolid: true,
           ),
           UIHelper.horizontalSpace(15.0),
           Expanded(
@@ -80,11 +100,14 @@ class _LeaderBoardTileState extends State<LeaderBoardTile> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextWidget(text: leaderName!),
+                    TextWidget(
+                      text: leaderName!, 
+                      fontWeight: FontWeight.w500,),
                     TextWidget(
                       text: '${widget.successRate}%',
                       color: AppColors.colorGreen,
                       textSize: Dimens.textXM,
+                      fontWeight: FontWeight.w400
                     ),
                   ],
                 ),
@@ -94,12 +117,14 @@ class _LeaderBoardTileState extends State<LeaderBoardTile> {
                   children: [
                     TextWidget(
                       text: '${widget.numberOfPrediciton} ${loc.dashboardLeaderTxtPredictions}',
-                      textSize: Dimens.textSmall,
+                      textSize: Dimens.textXS,
                       color: AppColors.colorWhite.withOpacity(0.5),
+                      fontWeight: FontWeight.w400
                     ),
                      TextWidget(
                       text: loc.dashboardLeaderTxtSuccess,
-                      textSize: Dimens.textSmall,
+                      textSize: Dimens.textXS,
+                      fontWeight: FontWeight.w400
                     ),
                   ],
                 ),

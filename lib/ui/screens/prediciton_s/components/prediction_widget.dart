@@ -68,12 +68,12 @@ class _PredictionWidgetState extends State<PredictionWidget> {
                         flex: 2,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
-                           //crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
                                 child: TextWidget(
                               text: teamOneName!,
                               textAlign: TextAlign.center,
+                              fontWeight: FontWeight.bold,
                             )),
                             UIHelper.horizontalSpace(5),
                             ClipOval(
@@ -122,7 +122,6 @@ class _PredictionWidgetState extends State<PredictionWidget> {
                         flex: 2,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ImageWidget(
                               imageUrl: widget.teamTwoFlag,
@@ -133,6 +132,7 @@ class _PredictionWidgetState extends State<PredictionWidget> {
                                 child: TextWidget(
                               text: teamTwoName!,
                               textAlign: TextAlign.center,
+                              fontWeight: FontWeight.bold,
                             )),
                           ],
                         )
