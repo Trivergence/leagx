@@ -68,7 +68,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           onPressed: () async {
             Navigator.pushNamed(context, Routes.profileInfoUpdate,
             arguments: UpdateProfileArgs(imgUrl: imagUrl,
-            userName: userName, 
+            userName: userName,
             userEmail: userEmail,
             phone: phone, 
             gender: gender)).then((_) {

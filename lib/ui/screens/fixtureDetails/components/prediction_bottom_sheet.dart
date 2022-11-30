@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/shimmer_widget.dart';
@@ -14,7 +15,6 @@ import '../../../../constants/colors.dart';
 import '../../../../core/network/internet_info.dart';
 import '../../../../models/dashboard/fixture.dart';
 import '../../../util/ui/ui_helper.dart';
-import '../../../widgets/gradient/gradient_widget.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 import 'score_picker.dart';
@@ -70,10 +70,18 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
           !isLoading ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-                TextWidget(
-                text: homeTeamName,
-                fontWeight: FontWeight.w600,
-              ),
+                SizedBox(
+                  width: SizeConfig.width * 30,
+                  child: Column(
+                    children: [
+                      TextWidget(
+                      text: homeTeamName,
+                      fontWeight: FontWeight.w600,
+                      textAlign: TextAlign.center,
+                     ),
+                    ],
+                  ),
+                ),
               Row(
                 children: [
                   ScorePicker(
@@ -102,10 +110,18 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
           !isLoading ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-                TextWidget(
-                text: awayTeamName,
-                fontWeight: FontWeight.w600,
-              ),
+                SizedBox(
+                  width: SizeConfig.width * 30,
+                  child: Column(
+                    children: [
+                      TextWidget(
+                      text: awayTeamName,
+                      fontWeight: FontWeight.w600,
+                      textAlign: TextAlign.center,
+                     ),
+                    ],
+                  ),
+                ),
               Row(
                 children: [
                   ScorePicker(

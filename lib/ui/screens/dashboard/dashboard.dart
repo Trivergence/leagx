@@ -4,27 +4,27 @@ import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/enums.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture/fixture.dart';
-import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
 import 'package:leagx/ui/screens/dashboard/components/leader/leader.dart';
 import 'package:leagx/ui/screens/dashboard/components/news/news.dart';
 import 'package:leagx/ui/screens/dashboard/components/setting/setting.dart';
 import 'package:leagx/ui/screens/drawer/drawer_screen.dart';
+import 'package:leagx/ui/screens/wallet/wallet_screen.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
-import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:payments/payments.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
 import '../../../models/user_summary.dart';
 import '../../../view_models/subscription_viewmodel.dart';
 import '../../../view_models/dashboard_view_model.dart';
+import '../../util/toast/toast.dart';
 import '../../widgets/appbar_chip.dart';
 import '../../widgets/loading_widget.dart';
 import '../base_widget.dart';
@@ -39,19 +39,39 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int _selectedIndex = 0;
   List<Widget> widgetOptions = <Widget>[
-    HomeScreen(),
+    //HomeScreen(),
     const FixtureScreen(),
     LeaderScreen(),
     const NewsScreen(
       userType: UserType.admin,
     ),
     const SettingScreen(),
+    WalletScreen()
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  Future<void> _onItemTapped(int index) async {
+    bool isConnected = await InternetInfo.isConnected();
+    if(isConnected == true) {
+      if (index == 4) {
+         if (StripeConfig().getSecretKey.isNotEmpty) {
+          if (context.read<DashBoardViewModel>().isInitialized == true) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          } else {
+            ToastMessage.show(loc.msgPleaseWait, TOAST_TYPE.msg);
+          }
+        } else {
+          ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.msg);
+          await context.read<WalletViewModel>().setupStripeCredentials();
+        }
+      } else {
+         setState(() {
+          _selectedIndex = index;
+        });
+      }
+    }
+   
   }
 
   @override
@@ -71,6 +91,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               await context.read<WalletViewModel>().setupStripeCredentials();
               await context.read<DashBoardViewModel>().getPaymentCredentials(context);
               await context.read<WalletViewModel>().getUserPaymentMethods();
+              if (StripeConfig().getSecretKey.isEmpty) {
+                await context.read<WalletViewModel>().setupStripeCredentials();
+              }
               context.read<DashBoardViewModel>().initializationComplete();
             }
           });
@@ -121,11 +144,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     activeIconAsset: Assets.icHomeFill
                   ),
                   _bettingNavBarItem(
-                    title: loc.dashboardBtnFixture,
-                    iconAsset: Assets.icMatches,
-                    activeIconAsset: Assets.icMatches
-                  ),
-                  _bettingNavBarItem(
                     title: loc.dashboardBtnLeader,
                     iconAsset: Assets.icExperts,
                     activeIconAsset: Assets.icExpertsFill
@@ -139,6 +157,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     title: loc.dashboardBtnSetting,
                     iconAsset: Assets.icMyProfile,
                     activeIconAsset: Assets.icMyProfileFill
+                  ),
+                  _bettingNavBarItem(
+                    title: loc.dashboardBtnWallet,
+                    iconAsset: Assets.icWallet,
+                    activeIconAsset: Assets.icWalletFill
                   ),
                 ],
                 currentIndex: _selectedIndex,
@@ -165,14 +188,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(iconAsset, height: 18,
-              color: AppColors.colorCyan.withOpacity(0.5),
+              color: AppColors.colorCyan40,
             ),
             UIHelper.verticalSpace(8.0),
             TextWidget(
               text: title,
               textSize: 13,
-              color: AppColors.colorCyan.withOpacity(0.5),
+              color: AppColors.colorCyan40,
               textAlign: TextAlign.center,
+              fontWeight: FontWeight.w400,
             ),
           ],
         ),

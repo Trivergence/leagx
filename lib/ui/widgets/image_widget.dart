@@ -11,6 +11,7 @@ class ImageWidget extends StatelessWidget {
   final String? imageAsset;
   final File? fileAsset;
   final String placeholder;
+  final BoxFit? boxFit;
   const ImageWidget(
       {Key? key,
       this.height = 48.0,
@@ -18,25 +19,26 @@ class ImageWidget extends StatelessWidget {
       this.imageUrl,
       this.imageAsset,
       required this.placeholder,
-      this.fileAsset})
+      this.fileAsset, 
+      this.boxFit = BoxFit.fill})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return fileAsset!= null ? Image.file(fileAsset!, fit: BoxFit.fill) : imageUrl != null ? CachedNetworkImage(
+    return fileAsset!= null ? Image.file(fileAsset!, fit: boxFit) : imageUrl != null ? CachedNetworkImage(
       width: width,
       height: height,
       imageUrl: imageUrl!,
-      fit: BoxFit.fill,
+      fit: boxFit,
       imageBuilder: (context, imageProvider) => Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          image: DecorationImage(image: imageProvider, fit: BoxFit.fill),
+          image: DecorationImage(image: imageProvider, fit: boxFit),
         ),),
-      errorWidget: (_, __,___) => Image.asset(placeholder, fit: BoxFit.fill),
+      errorWidget: (_, __,___) => Image.asset(placeholder, fit: boxFit),
       placeholder: (_,__) => CircleAvatar(radius: height,backgroundColor: AppColors.textFieldColor,),
-    ): imageAsset != null ? Image.asset(imageAsset!, fit: BoxFit.fill) : Image.asset(placeholder, fit: BoxFit.fill);
+    ): imageAsset != null ? Image.asset(imageAsset!, fit: boxFit) : Image.asset(placeholder, fit: boxFit);
   }
 }

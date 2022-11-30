@@ -33,19 +33,16 @@ class OnBoardingScreen extends StatelessWidget {
           onPageChanged: (index) {},
           children:  [
             OnBoardingWidget(
-              title: loc.onboardingTxtTitle1,
               subtitle:
                   loc.onboardingTxtDesc1,
               imageAsset: Assets.onBoard1,
             ),
             OnBoardingWidget(
-              title: loc.onboardingTxtTitle2,
               subtitle:
                   loc.onboardingTxtDesc2,
               imageAsset: Assets.onBoard2,
             ),
             OnBoardingWidget(
-              title: loc.onboardingTxtTitle3,
               subtitle:
                   loc.onboardingTxtDesc3,
               imageAsset: Assets.onBoard3,

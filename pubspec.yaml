@@ -69,24 +69,28 @@ flutter:
     - assets/images/
     - assets/svg/
   fonts:
-    - family: Raleway
+    - family: Cairo
       fonts:
-        - asset: assets/fonts/Raleway-SemiBold.ttf
+        - asset: assets/fonts/arabic/Cairo-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/arabic/Cairo-Light.ttf
+          weight: 300
+        - asset: assets/fonts/arabic/Cairo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/arabic/Cairo-SemiBold.ttf
           weight: 600
+        - asset: assets/fonts/arabic/Cairo-Bold.ttf
+          weight: 700
     
     - family: Gilroy
       fonts:
-        # - asset: assets/fonts/Gilroy-Regular.ttf
-        #   weight: 300
-        - asset: assets/fonts/Gilroy-Medium.ttf
-          # weight: 700
-        # - asset: assets/fonts/Gilroy-Bold.ttf
-        # - asset: assets/fonts/Gilroy-Medium.ttf
-        # - asset: assets/fonts/Gilroy-Regular.ttf
-        #   weight: 500
-          # weight: 900
-
-    - family: OpenSans
-      fonts:
-        - asset: assets/fonts/OpenSans-Bold.ttf
-        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/english/Gilroy-UltraLight.ttf
+          weight: 200
+        - asset: assets/fonts/english/Gilroy-Light.ttf
+          weight: 300
+        - asset: assets/fonts/english/Gilroy-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/english/Gilroy-Medium.ttf
+          weight: 600
+        - asset: assets/fonts/english/Gilroy-Bold.ttf
+          weight: 700

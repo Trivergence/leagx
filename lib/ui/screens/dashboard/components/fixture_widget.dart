@@ -9,7 +9,6 @@ import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/score_chip.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/dot_widget.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/live_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
@@ -90,28 +89,31 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                     width: SizeConfig.width * 50,
                     child: TextWidget(
                       text: translatedLeagueName!, 
-                      textSize: Dimens.textXS, 
+                      textSize: 10, 
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w400,
                     )),
                   widget.isLive
                       ? LiveWidget(isLive: widget.isLive,)
                       : widget.withText
-                          ? Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SvgPicture.asset(Assets.icCalender),
-                                UIHelper.horizontalSpace(8.0),
-                                TextWidget(
-                                    text: isToday ? "${loc.today}, " + widget.scheduledTime! : DateUtility.getUiFormat(widget.scheduledDate),
-                                    textSize: Dimens.textXS,
-                                    ),
-                              ],
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              Assets.icCalender,
+                              alignment: Alignment.topCenter,),
+                            UIHelper.horizontalSpace(8.0),
+                            TextWidget(
+                              text: isToday ? "${loc.today}, " + widget.scheduledTime! : DateUtility.getUiFormat(widget.scheduledDate),
+                              textSize: 10,
+                              fontWeight: FontWeight.w400,
                             )
-                          : DotWidget(
-                              isLive: !widget.isLive,
-                            )
+                          ],
+                        )
+                      : DotWidget(
+                          isLive: !widget.isLive,
+                    )
                 ],
               ),
             ),
@@ -136,7 +138,8 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                               child: TextWidget(
                               text: teamOneName!,
                               textAlign: TextAlign.center,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
+                              textSize: Dimens.textSmall,
                             )),
                             UIHelper.horizontalSpace(5),
                             ClipOval(
@@ -160,8 +163,8 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                                 TextWidget(
                                   text: translatedStatus!,
                                   color: AppColors.colorGrey,
-                                  textSize: Dimens.textSmall,
-                                  fontWeight: FontWeight.bold,
+                                  textSize: Dimens.textXS,
+                                  fontWeight: FontWeight.w400,
                                 )
                               ],
                             )
@@ -170,7 +173,7 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                             child: TextWidget(
                               text: loc.vs,
                               textSize: Dimens.textLarge,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                       Expanded(
@@ -187,7 +190,8 @@ class _FixtureWidgetState extends State<FixtureWidget> {
                               child: TextWidget(
                               text: teamTwoName!,
                               textAlign: TextAlign.center,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
+                              textSize: Dimens.textSmall,
                             )),
                           ],
                         ),

@@ -210,6 +210,8 @@ class DashBoardViewModel extends BaseModel {
         },
       );
       _leaders = tempList.cast<Leader>();
+      //_subscribedMatches.sort((fixture1, fixture2) => sortMatches(fixture1, fixture2));
+      _leaders.sort((leader1,leader2) => sortLeader(leader1,leader2));
     } on Exception catch (_) {
       setBusy(false);
     }
@@ -298,5 +300,9 @@ class DashBoardViewModel extends BaseModel {
         return 0;
       }
     }
+  }
+  
+  int sortLeader(Leader leader1, Leader leader2) {
+     return leader2.predictionSuccessRate!.compareTo(leader1.predictionSuccessRate!);
   }
 }

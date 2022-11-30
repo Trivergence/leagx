@@ -1,6 +1,7 @@
 import 'dart:async' as my_async;
 
 import 'package:flutter/material.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
@@ -11,6 +12,7 @@ import '../../../util/locale/localization.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../util/utility/date_utility.dart';
 import '../../../util/utility/translation_utility.dart';
+import '../../../widgets/image_widget.dart';
 import '../../../widgets/score_chip.dart';
 import '../../../widgets/shimmer_widget.dart';
 import '../../../widgets/text_widget.dart';
@@ -91,60 +93,172 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
               )),
             margin: const EdgeInsets.only(bottom: 10, top: 5),
             padding: const EdgeInsets.all(20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: 
+            Column(
               children: [
-                TeamVsWidget(
-                  teamName: homeTeamName!,
-                  groupPosition: 'Top 1 group A',
-                  image: widget.matchDetails.teamHomeBadge,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: SizeConfig.width * 30,
+                      child: ImageWidget(
+                        imageUrl: widget.matchDetails.teamHomeBadge,
+                        placeholder: Assets.icTeamAvatar,
+                        boxFit: null,
+                      ),
+                    ),
+                    widget.matchDetails.matchLive == "1" ||
+                                Utility.isMatchOver(widget.matchDetails.matchStatus!)
+                            ? ScoreChip(
+                              firstScore: widget.matchDetails.matchHometeamScore,
+                              secondScore: widget.matchDetails.matchAwayteamScore,
+                            )
+                            : TextWidget(
+                              text: loc.vs,
+                              textSize: Dimens.textLarge,
+                              fontWeight: FontWeight.bold,
+                            ),
+                     SizedBox(
+                       width: SizeConfig.width * 30,
+                       child: ImageWidget(
+                        imageUrl: widget.matchDetails.teamAwayBadge,
+                        placeholder: Assets.icTeamAvatar,
+                        boxFit: null,
+                    ),
+                     ),
+                  ],
                 ),
-                widget.matchDetails.matchLive == "1" ||
-                        Utility.isMatchOver(widget.matchDetails.matchStatus!)
-                    ? Column(
-                        children: [
-                          ScoreChip(
-                            firstScore: widget.matchDetails.matchHometeamScore,
-                            secondScore: widget.matchDetails.matchAwayteamScore,
-                          ),
-                          UIHelper.verticalSpaceSmall,
-                          TextWidget(
-                            text: !Utility.isMatchOver(widget.matchDetails.matchStatus!) && Utility.isTimeValid(widget.matchDetails.matchStatus!)
-                            ? timeString : matchStatus!,
-                            color: AppColors.colorGrey,
-                            textSize: Dimens.textSmall,
-                          )
-                        ],
-                      )
-                    : Column(
-                        children: [
-                          TextWidget(
-                            text: loc.vs,
-                            textSize: Dimens.textLarge,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          UIHelper.verticalSpaceSmall,
-                          TextWidget(
-                            text: DateUtility.getUiFormat(
-                                widget.matchDetails.matchDate),
-                            color: AppColors.colorWhite,
-                            textSize: Dimens.textXS,
-                          ),
-                          UIHelper.verticalSpaceSmall,
-                          TextWidget(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: SizeConfig.width * 30,
+                      child: TextWidget(
+                        text: widget.matchDetails.matchHometeamName,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.clip,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    widget.matchDetails.matchLive == "1" ||
+                            Utility.isMatchOver(widget.matchDetails.matchStatus!)
+                        ? TextWidget(
+                          text: !Utility.isMatchOver(widget.matchDetails.matchStatus!) && Utility.isTimeValid(widget.matchDetails.matchStatus!)
+                          ? timeString : matchStatus!,
+                          color: AppColors.colorGrey,
+                          textSize: Dimens.textSmall,
+                        )
+                        : TextWidget(
+                          text: DateUtility.getUiFormat(
+                              widget.matchDetails.matchDate),
+                          color: AppColors.colorWhite,
+                          textSize: 11,
+                          fontWeight: FontWeight.w400,
+                        ),
+                    SizedBox(
+                      width: SizeConfig.width * 30,
+                      child: TextWidget(
+                        text: widget.matchDetails.matchAwayteamName,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.clip,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: SizeConfig.width * 30,
+                      child: const TextWidget(
+                        text: "Top 1 group A",
+                        textSize: Dimens.textXS,
+                        color: AppColors.colorWhite,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Utility.isMatchOver(
+                                widget.matchDetails.matchStatus!) || widget.matchDetails.matchLive == "1"
+                        ? const SizedBox.shrink()
+                        : TextWidget(
                             text: widget.matchDetails.matchTime,
                             color: AppColors.colorWhite,
-                            textSize: Dimens.textXS,
-                          )
-                        ],
+                            textSize: 11,
+                            fontWeight: FontWeight.w400,
+                          ),
+                    SizedBox(
+                      width: SizeConfig.width * 30,
+                      child: const TextWidget(
+                        text: "Top 2 Group B",
+                        textSize: Dimens.textXS,
+                        color: AppColors.colorWhite,
+                        textAlign: TextAlign.center,
                       ),
-                TeamVsWidget(
-                  teamName: awayTeamName!,
-                  groupPosition: 'Top 2 Group B',
-                  image: widget.matchDetails.teamAwayBadge,
+                    ),
+                  ],
                 ),
               ],
-            ))
+            )
+
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     TeamVsWidget(
+            //       teamName: homeTeamName!,
+            //       groupPosition: 'Top 1 group A',
+            //       image: widget.matchDetails.teamHomeBadge,
+            //     ),
+            //     widget.matchDetails.matchLive == "1" ||
+            //             Utility.isMatchOver(widget.matchDetails.matchStatus!)
+            //         ? Column(
+            //             children: [
+            //               ScoreChip(
+            //                 firstScore: widget.matchDetails.matchHometeamScore,
+            //                 secondScore: widget.matchDetails.matchAwayteamScore,
+            //               ),
+            //               UIHelper.verticalSpaceSmall,
+            //               TextWidget(
+            //                 text: !Utility.isMatchOver(widget.matchDetails.matchStatus!) && Utility.isTimeValid(widget.matchDetails.matchStatus!)
+            //                 ? timeString : matchStatus!,
+            //                 color: AppColors.colorGrey,
+            //                 textSize: Dimens.textSmall,
+            //               )
+            //             ],
+            //           )
+            //         : Column(
+            //             children: [
+            //               TextWidget(
+            //                 text: loc.vs,
+            //                 textSize: Dimens.textLarge,
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //               UIHelper.verticalSpaceSmall,
+            //               TextWidget(
+            //                 text: DateUtility.getUiFormat(
+            //                     widget.matchDetails.matchDate),
+            //                 color: AppColors.colorWhite,
+            //                 textSize: 11,
+            //                 fontWeight: FontWeight.w400,
+            //               ),
+            //               UIHelper.verticalSpaceSmall,
+            //               TextWidget(
+            //                 text: widget.matchDetails.matchTime,
+            //                 color: AppColors.colorWhite,
+            //                 textSize: 11,
+            //                 fontWeight: FontWeight.w400,
+            //               )
+            //             ],
+            //           ),
+            //     TeamVsWidget(
+            //       teamName: awayTeamName!,
+            //       groupPosition: 'Top 2 Group B',
+            //       image: widget.matchDetails.teamAwayBadge,
+            //     ),
+            //   ],
+            // ),
+          )
         : const ShimmerWidget(height: 150, horizontalPadding: 0,);
   }
 

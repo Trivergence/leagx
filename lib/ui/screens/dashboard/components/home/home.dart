@@ -50,7 +50,8 @@ class HomeScreen extends StatelessWidget {
                   if (_userSummary != null) AnalyticsWidget(
                     firstLabel: loc.dashboardHomeTxtPredictions,
                     firstValue: _userSummary!.totalPredictions.toString(),
-                    secondLabel: loc.dashboardHomeTxtWiningRatio,
+                    secondLabel: loc.dashboardHomeTxtWiningRatio(
+                          _userSummary!.totalPredictions.toString()),
                     secondValue: _userSummary!
                         .predictionSuccessRate.toString() != "100.0" 
                         ? _userSummary!.predictionSuccessRate!.toStringAsFixed(1) 
@@ -61,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                    TextWidget(
                     text: loc.dashboardHomeTxtUpcomingMatches,
                     fontWeight: FontWeight.bold,
-                    letterSpace: 4,
+                     letterSpace: Utility.isArabic() ? 0 : 4,
                     textSize: Dimens.textSM,
                   ),
                   UIHelper.verticalSpaceSmall,
