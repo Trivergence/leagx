@@ -29,7 +29,6 @@ class NewsTile extends StatefulWidget {
 
 class _NewsTileState extends State<NewsTile> {
   String? desc;
-  String? postedBy;
   bool isLoading = true;
 
   @override
@@ -74,7 +73,7 @@ class _NewsTileState extends State<NewsTile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                TextWidget(text: postedBy!, fontWeight: FontWeight.bold,),
+                TextWidget(text: widget.postedBy, fontWeight: FontWeight.bold),
                 TextWidget(text: DateUtility.getRemainingTime(widget.when, locale),
                 textSize: Dimens.textXS,
                 color: widget.isApproval == true ? AppColors.colorCyan : AppColors.colorYellow,)
@@ -108,16 +107,8 @@ class _NewsTileState extends State<NewsTile> {
   }
 
   Future<void> translateData() async {
-    String originalCommaText = widget.desc + ',' + widget.postedBy;
-    String translatedCommaText = await TranslationUtility.translate(originalCommaText);
-    List<String> listOfValues = [];
-    if (translatedCommaText.contains("،")) {
-      listOfValues = translatedCommaText.split("،");
-    } else {
-      listOfValues = translatedCommaText.split(",");
-    }
-    desc = listOfValues[0];
-    postedBy = listOfValues[1];
+    String translatedText = await TranslationUtility.translate(widget.desc);
+    desc = translatedText;
     isLoading = false;
     setState(() {});
   }

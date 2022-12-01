@@ -44,14 +44,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     const NewsScreen(
       userType: UserType.admin,
     ),
+    WalletScreen(),
     const MyProfileScreen(),
-    WalletScreen()
   ];
 
   Future<void> _onItemTapped(int index) async {
     bool isConnected = await InternetInfo.isConnected();
     if(isConnected == true) {
-      if (index == 4) {
+      if (index == 3) {
          if (StripeConfig().getSecretKey.isNotEmpty) {
           if (context.read<DashBoardViewModel>().isInitialized == true) {
             setState(() {
@@ -153,14 +153,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     activeIconAsset: Assets.icNewsFill
                   ),
                   _bettingNavBarItem(
+                      title: loc.dashboardBtnWallet,
+                      iconAsset: Assets.icWallet,
+                      activeIconAsset: Assets.icWalletFill),
+                  _bettingNavBarItem(
                     title: loc.dashboardBtnSetting,
                     iconAsset: Assets.icMyProfile,
                     activeIconAsset: Assets.icMyProfileFill
-                  ),
-                  _bettingNavBarItem(
-                    title: loc.dashboardBtnWallet,
-                    iconAsset: Assets.icWallet,
-                    activeIconAsset: Assets.icWalletFill
                   ),
                 ],
                 currentIndex: _selectedIndex,

@@ -24,7 +24,7 @@ class ImagePickerSheet extends StatelessWidget {
          Padding(
           padding: EdgeInsets.all(15.0),
           child: Text(
-            loc.profileProfileInfoUpdateSelectOption,
+            loc.profileProfileInfoUpdateSelectSource,
             style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,

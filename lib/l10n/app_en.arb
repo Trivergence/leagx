@@ -3,6 +3,7 @@
 	"today": "Today",
 	"msgPleaseWait": "Please wait...",
 	"vs": "VS",
+	"ok": "Ok",
 
 	"loginTitle": "Login",
 	"onboardingTxtDesc1": "Follow your favorite leagues, clubs, players, and analysts.",
@@ -120,7 +121,7 @@
 	"dashboardBtnWallet": "Wallet",
 	"dashboardBtnLeader": "Experts",
 	"dashboardBtnNews": "Analytics",
-	"dashboardBtnSetting": "My Profile",
+	"dashboardBtnSetting": "Account",
 
 	"dashboardHomeTxtLeagues": "LEAGUES",
 	"dashboardHomeTxtAll": "All",
@@ -233,7 +234,7 @@
 	"profileProfileInfoMale": "Male",
 	"profileProfileInfoFemale": "Female",
 	"profileProfileInfoUpdateSuccesful": "Profile udpated successfully",
-	"profileProfileInfoUpdateSelectOption": "Select Option",
+	"profileProfileInfoUpdateSelectSource": "Select Source",
 	"profileProfileInfoUpdateCamera": "Camera",
 	"profileProfileInfoUpdateGallery": "Gallery",
 
@@ -296,7 +297,16 @@
 	"payoutDialogBtnNegative": "Cancel",
 	"payoutDialogBtnPositive": "Withdraw",
 	"payoutDialogTxtSuccessTitle": "Completed Successfully",
-	"payoutDialogTxtSuccessDesc": "You have successfully withdrawn",
+	"payoutDialogTxtSuccessDesc": "You have successfully withdrawn {withdrawLimit}",
+	"@payoutDialogTxtSuccessDesc": {
+		"placeholders": {
+			"withdrawLimit": {
+				"type": "String",
+				"description": "Amount limit of Withdraw",
+				"example": "4"
+			}
+		}
+	},
 	"payoutDialogWithdrawTypeMinimum": "Minimum",
 	"payoutDialogWithdrawTypeMaximum": "Maximum",
 	"payoutDialogWithdrawTypeCustom": "Custom",

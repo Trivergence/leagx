@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/app_constants.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
@@ -76,12 +77,14 @@ class PayoutScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                       TextWidget(
-                        text: (userSummary != null
+                        text: (Utility.isArabic() == true
+                                                ? "\$"
+                                                : "") + (userSummary != null
                           ? userSummary!.coinEarned!
                               .round()
                               .toString()
                           : "0.0") +
-                      "\$",
+                      (Utility.isArabic() == false ? "\$" : ""),
                         textSize: Dimens.textMedium)
                     ],
                   ),
@@ -203,7 +206,7 @@ class PayoutScreen extends StatelessWidget {
                     context: _context!,
                     title: loc.payoutDialogTxtSuccessTitle,
                     onOkPressed: () async => await _payoutViewModel!.updateCoins(_dashBoardViewModel),
-                    description: "${loc.payoutDialogTxtSuccessDesc} $withdrawAmount\$");
+                    description: loc.payoutDialogTxtSuccessDesc(withdrawAmount + "\$"));
                 } else {
                   ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
                 }
