@@ -135,7 +135,7 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                     SizedBox(
                       width: SizeConfig.width * 30,
                       child: TextWidget(
-                        text: widget.matchDetails.matchHometeamName,
+                        text: homeTeamName!,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.clip,
                         fontWeight: FontWeight.bold,
@@ -149,17 +149,34 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                           color: AppColors.colorGrey,
                           textSize: Dimens.textSmall,
                         )
-                        : TextWidget(
-                          text: DateUtility.getUiFormat(
-                              widget.matchDetails.matchDate),
-                          color: AppColors.colorWhite,
-                          textSize: 11,
-                          fontWeight: FontWeight.w400,
+                        : Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Column(
+                            children: [
+                              TextWidget(
+                                text: DateUtility.getUiFormat(
+                                    widget.matchDetails.matchDate),
+                                color: AppColors.colorWhite,
+                                textSize: 11,
+                                fontWeight: FontWeight.w400,
+                              ),
+                               Utility.isMatchOver(
+                                            widget.matchDetails.matchStatus!) ||
+                                        widget.matchDetails.matchLive == "1"
+                                    ? const SizedBox.shrink()
+                                    : TextWidget(
+                                        text: widget.matchDetails.matchTime,
+                                        color: AppColors.colorWhite,
+                                        textSize: 11,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                            ],
+                          ),
                         ),
                     SizedBox(
                       width: SizeConfig.width * 30,
                       child: TextWidget(
-                        text: widget.matchDetails.matchAwayteamName,
+                        text: awayTeamName!,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.clip,
                         fontWeight: FontWeight.bold,
@@ -179,15 +196,6 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    Utility.isMatchOver(
-                                widget.matchDetails.matchStatus!) || widget.matchDetails.matchLive == "1"
-                        ? const SizedBox.shrink()
-                        : TextWidget(
-                            text: widget.matchDetails.matchTime,
-                            color: AppColors.colorWhite,
-                            textSize: 11,
-                            fontWeight: FontWeight.w400,
-                          ),
                     SizedBox(
                       width: SizeConfig.width * 30,
                       child: const TextWidget(

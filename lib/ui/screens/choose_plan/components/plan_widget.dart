@@ -132,11 +132,11 @@ class _PlanWidgetState extends State<PlanWidget> {
             ),
           ),
           Positioned(
-              left: 29,
-              top: -28,
-              child: Image.asset(Assets.icCrown,
-                      color: AppColors.colorPink,
-                    ))
+            left: 29,
+            top: -28,
+            child: Image.asset(Assets.icCrown,
+              color: AppColors.colorPink,
+          ))
         ]),
       ),
     )

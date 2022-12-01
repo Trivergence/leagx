@@ -51,8 +51,8 @@ class LiveMatchWidget extends StatelessWidget {
             for(int i = 0; i < statistics.length; i++) DetailTile(
                 title: statistics[i].type,
                 tileColor: i % 2 == 0 ?AppColors.colorBackground : AppColors.textFieldColor,
-                leftValue: statistics[i].home,
-                rightValue: statistics[i].away,
+                leftValue: statistics[i].home.isEmpty ? "0" : statistics[i].home,
+                rightValue: statistics[i].away.isEmpty ? "0" : statistics[i].away,
               ),
               UIHelper.verticalSpaceLarge
           ],

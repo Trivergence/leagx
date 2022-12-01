@@ -3,10 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/enums.dart';
-import 'package:leagx/ui/screens/dashboard/components/fixture/fixture.dart';
+import 'package:leagx/ui/screens/dashboard/components/home/home.dart';
 import 'package:leagx/ui/screens/dashboard/components/leader/leader.dart';
 import 'package:leagx/ui/screens/dashboard/components/news/news.dart';
-import 'package:leagx/ui/screens/dashboard/components/setting/setting.dart';
 import 'package:leagx/ui/screens/drawer/drawer_screen.dart';
 import 'package:leagx/ui/screens/wallet/wallet_screen.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -28,6 +27,7 @@ import '../../util/toast/toast.dart';
 import '../../widgets/appbar_chip.dart';
 import '../../widgets/loading_widget.dart';
 import '../base_widget.dart';
+import 'components/my_profile/my_profile.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
@@ -39,13 +39,12 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   int _selectedIndex = 0;
   List<Widget> widgetOptions = <Widget>[
-    //HomeScreen(),
-    const FixtureScreen(),
+    const HomeScreen(),
     LeaderScreen(),
     const NewsScreen(
       userType: UserType.admin,
     ),
-    const SettingScreen(),
+    const MyProfileScreen(),
     WalletScreen()
   ];
 

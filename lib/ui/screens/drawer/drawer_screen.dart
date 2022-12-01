@@ -100,26 +100,28 @@ class DrawerScreen extends StatelessWidget {
                 //   },
                 // ),
             ],),
-            GestureDetector(
-              onTap: () async {
-                ConfirmationDialog.show(context: context,
-                 title: loc.logoutConfirmTitle,
-                 positiveBtnTitle: loc.logoutConfirmYes,
-                 negativeBtnTitle: loc.logoutConfirmNo,
-                 body:loc.logoutConfirmBody, 
-                 onPositiveBtnPressed: (_) => logout(context));
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Row(
-                  children: [
-                    const Icon(Icons.logout, color: AppColors.colorPink,),
-                    UIHelper.horizontalSpace(26.0),
-                     TextWidget(
-                       text: loc.drawerBtnLogout,
-                       color: AppColors.colorPink,
-                     ),
-                  ],
+            SafeArea(
+              child: GestureDetector(
+                onTap: () async {
+                  ConfirmationDialog.show(context: context,
+                   title: loc.logoutConfirmTitle,
+                   positiveBtnTitle: loc.logoutConfirmYes,
+                   negativeBtnTitle: loc.logoutConfirmNo,
+                   body:loc.logoutConfirmBody, 
+                   onPositiveBtnPressed: (_) => logout(context));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.logout, color: AppColors.colorPink,),
+                      UIHelper.horizontalSpace(26.0),
+                       TextWidget(
+                         text: loc.drawerBtnLogout,
+                         color: AppColors.colorPink,
+                       ),
+                    ],
+                  ),
                 ),
               ),
             ),

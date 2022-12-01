@@ -6,13 +6,13 @@ import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
-class SettingsTile extends StatelessWidget {
+class MyProfileTile extends StatelessWidget {
   final IconData? iconData;
   final String? imageAsset;
   final Widget? trailing;
   final String text;
   final VoidCallback onTap;
-  const SettingsTile(
+  const MyProfileTile(
       {Key? key,
       this.iconData,
       this.imageAsset,

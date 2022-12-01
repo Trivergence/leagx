@@ -42,7 +42,7 @@ class AnalyticsWidget extends StatelessWidget {
       children: [
         UIHelper.verticalSpaceSmall,
         TextWidget(
-          text: loc.dashboardHomeTxtAnalytics,
+          text: loc.myProfileTxtAnalytics,
           fontWeight: FontWeight.w600,
            letterSpace: Utility.isArabic() ? 0 : 4,
           textSize: Dimens.textRegular,
@@ -93,7 +93,7 @@ class AnalyticsWidget extends StatelessWidget {
                   MainButton(
                     width: 80.0,
                     height: 22.0,
-                    text: loc.profileProfileSettingsTxtAddPredictions,
+                    text: loc.myProfileTxtAddPredictions,
                     fontSize: 8.0,
                     onPressed: () async {
                       bool isConnected = await InternetInfo.isConnected();
@@ -176,7 +176,7 @@ class AnalyticsWidget extends StatelessWidget {
                   MainButton(
                     width: 80.0,
                     height: 22.0,
-                    text: loc.profileProfileSettingsTxtWithdraw,
+                    text: loc.myProfileTxtWithdraw,
                     fontSize: 8.0,
                     onPressed: () async {
                       bool isConnected = await InternetInfo.isConnected();
