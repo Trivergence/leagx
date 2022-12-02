@@ -12,6 +12,7 @@ class ImageWidget extends StatelessWidget {
   final File? fileAsset;
   final String placeholder;
   final BoxFit? boxFit;
+  final bool shouldClip;
   const ImageWidget(
       {Key? key,
       this.height = 48.0,
@@ -20,7 +21,8 @@ class ImageWidget extends StatelessWidget {
       this.imageAsset,
       required this.placeholder,
       this.fileAsset, 
-      this.boxFit = BoxFit.fill})
+      this.boxFit = BoxFit.fill,
+      this.shouldClip = false})
       : super(key: key);
 
   @override
@@ -30,15 +32,31 @@ class ImageWidget extends StatelessWidget {
       height: height,
       imageUrl: imageUrl!,
       fit: boxFit,
-      imageBuilder: (context, imageProvider) => Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(image: imageProvider, fit: boxFit),
-        ),),
+      imageBuilder: (context, imageProvider) => ClipOval(
+        clipper: shouldClip == true ? CustomClipperImage() : null,
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider, 
+              fit: boxFit),
+          ),),
+      ),
       errorWidget: (_, __,___) => Image.asset(placeholder, fit: boxFit),
       placeholder: (_,__) => CircleAvatar(radius: height,backgroundColor: AppColors.textFieldColor,),
     ): imageAsset != null ? Image.asset(imageAsset!, fit: boxFit) : Image.asset(placeholder, fit: boxFit);
   }
+}
+
+class CustomClipperImage extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) {
+    return Rect.fromPoints( const Offset(1,1), Offset(size.width - 1, size.height - 1));
+  }
+
+  @override
+  bool shouldReclip(CustomClipper oldClipper) {
+    return false;
+  } 
 }

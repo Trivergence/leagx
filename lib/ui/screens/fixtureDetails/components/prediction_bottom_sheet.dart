@@ -101,6 +101,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
                     width: 30,
                     placeholder: Assets.icTeamAvatar,
                     imageUrl: widget.matchDetails!.teamHomeBadge,
+                    shouldClip: true,
                   )
                 ],
               )
@@ -140,7 +141,9 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
                     height: 30,
                     width: 30,
                     placeholder: Assets.icTeamAvatar,
-                    imageUrl: widget.matchDetails!.teamAwayBadge,)
+                    imageUrl: widget.matchDetails!.teamAwayBadge,
+                    shouldClip: true,
+                    )
                 ],
               )
             ],

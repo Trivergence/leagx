@@ -81,7 +81,8 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
                                     ClipOval(
                                       child: ImageWidget(
                                           imageUrl: widget.teamOneFlag,
-                                          placeholder: Assets.icTeamAvatar),
+                                          placeholder: Assets.icTeamAvatar,
+                                          shouldClip: true,),
                                     ),
                                   ],
                                 ),
@@ -102,6 +103,7 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
                                       ImageWidget(
                                         imageUrl: widget.teamTwoFlag,
                                         placeholder: Assets.icTeamAvatar,
+                                        shouldClip: true,
                                       ),
                                       UIHelper.horizontalSpace(5),
                                       Expanded(
