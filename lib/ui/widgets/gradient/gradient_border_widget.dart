@@ -1,8 +1,5 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
@@ -24,6 +21,7 @@ class GradientBorderWidget extends StatelessWidget {
   final String? placeHolderImg;
   final EdgeInsetsGeometry? padding;
   final bool isBorderSolid;
+  final bool shouldClip;
   const GradientBorderWidget({
     Key? key,
     this.width,
@@ -38,7 +36,8 @@ class GradientBorderWidget extends StatelessWidget {
     this.imageUrl,
     this.imageAsset,
     this.padding, this.placeHolderImg, 
-    this.isBorderSolid = false,
+    this.isBorderSolid = false, 
+    this.shouldClip = false,
   }) : super(key: key);
 
   @override
@@ -71,7 +70,8 @@ class GradientBorderWidget extends StatelessWidget {
               : imageUrl != null
                   ? ImageWidget(
                       imageUrl: imageUrl!,
-                      placeholder: placeHolderImg ?? ''
+                      placeholder: placeHolderImg ?? '',
+                      shouldClip: shouldClip,
                     )
                   : text != null
                       ? Center(

@@ -16,7 +16,6 @@ import '../../../widgets/image_widget.dart';
 import '../../../widgets/score_chip.dart';
 import '../../../widgets/shimmer_widget.dart';
 import '../../../widgets/text_widget.dart';
-import 'team_vs_widget.dart';
 
 class FixtureVsWidget extends StatefulWidget {
   const FixtureVsWidget({
@@ -101,10 +100,15 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                   children: [
                     SizedBox(
                       width: SizeConfig.width * 30,
-                      child: ImageWidget(
-                        imageUrl: widget.matchDetails.teamHomeBadge,
-                        placeholder: Assets.icTeamAvatar,
-                        boxFit: null,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ImageWidget(
+                            imageUrl: widget.matchDetails.teamHomeBadge,
+                            placeholder: Assets.icTeamAvatar,
+                            shouldClip: true,
+                          ),
+                        ],
                       ),
                     ),
                     widget.matchDetails.matchLive == "1" ||
@@ -120,14 +124,20 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                             ),
                      SizedBox(
                        width: SizeConfig.width * 30,
-                       child: ImageWidget(
-                        imageUrl: widget.matchDetails.teamAwayBadge,
-                        placeholder: Assets.icTeamAvatar,
-                        boxFit: null,
-                    ),
+                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                         children: [
+                           ImageWidget(
+                            imageUrl: widget.matchDetails.teamAwayBadge,
+                            placeholder: Assets.icTeamAvatar,
+                            shouldClip: true,
+                          ),
+                         ],
+                       ),
                      ),
                   ],
                 ),
+                UIHelper.verticalSpace(1),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,6 +194,7 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                     )
                   ],
                 ),
+                UIHelper.verticalSpace(1),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

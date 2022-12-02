@@ -76,11 +76,11 @@ class _PredictionWidgetState extends State<PredictionWidget> {
                               fontWeight: FontWeight.bold,
                             )),
                             UIHelper.horizontalSpace(5),
-                            ClipOval(
-                              child: ImageWidget(
-                                  imageUrl: widget.teamOneFlag,
-                                  placeholder: Assets.icTeamAvatar),
-                            ),
+                            ImageWidget(
+                                imageUrl: widget.teamOneFlag,
+                                placeholder: Assets.icTeamAvatar,
+                                shouldClip: true,
+                              ),
                           ],
                         ),
                       ),
@@ -126,6 +126,7 @@ class _PredictionWidgetState extends State<PredictionWidget> {
                             ImageWidget(
                               imageUrl: widget.teamTwoFlag,
                               placeholder: Assets.icTeamAvatar,
+                              shouldClip: true,
                             ),
                             UIHelper.horizontalSpace(5),
                             Expanded(
