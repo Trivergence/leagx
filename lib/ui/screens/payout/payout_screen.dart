@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:leagx/constants/app_constants.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
@@ -76,12 +77,14 @@ class PayoutScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                       TextWidget(
-                        text: (userSummary != null
+                        text: (Utility.isArabic() == true
+                                                ? "\$"
+                                                : "") + (userSummary != null
                           ? userSummary!.coinEarned!
                               .round()
                               .toString()
                           : "0.0") +
-                      "\$",
+                      (Utility.isArabic() == false ? "\$" : ""),
                         textSize: Dimens.textMedium)
                     ],
                   ),
@@ -165,57 +168,61 @@ class PayoutScreen extends StatelessWidget {
   }
 
   void _withdraw() async {
-    FormDialog.show(
-    context: _context!, 
-    type: DialogType.payout,
-    title: loc.payoutDialogTitle, 
-    body: loc.payoutDialogBody,
-    negativeBtnTitle: loc.payoutDialogBtnNegative, 
-    positiveBtnTitle: loc.payoutDialogBtnPositive, 
-    onPositiveBtnPressed: (enteredAmount, withdrawType) async {
-      bool isConnected = await InternetInfo.isConnected();
-      if(isConnected == true) {
-        String withdrawAmount;
-        switch(withdrawType) {
-          case WithdrawType.minimum:
-            withdrawAmount = AppConstants.minimumWithdraw.toString();
-            break;
-          case WithdrawType.maximum:
-            withdrawAmount = userSummary!.coinEarned!.round().toString();
-            break;
-          case WithdrawType.custom:
-            withdrawAmount = enteredAmount;
-            break;
-        }
-        if (double.parse(withdrawAmount).round() <= userSummary!.coinEarned!.round() ) {
-          Loader.showLoader();
-          bool isTransfered = await _payoutViewModel!.transferToUser(withdrawAmount);
-          if (isTransfered == true) {
-            PayoutModel? payoutModel = await _payoutViewModel!.payoutMoney(
-                    withdrawAmount, currency!, listOfExtAccounts.first.id!);
-            if(payoutModel != null) {
-              bool success = await _payoutViewModel!.withdrawCoins(
-                amountInDollars: withdrawAmount, 
-                payoutToken: payoutModel.id);
-              if(success == true) {
-                FancyDialog.showSuccess(
-                  context: _context!,
-                  title: loc.payoutDialogTxtSuccessTitle,
-                  onOkPressed: () async => await _payoutViewModel!.updateCoins(_dashBoardViewModel),
-                  description: "${loc.payoutDialogTxtSuccessDesc} $withdrawAmount\$");
-              } else {
-                ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+    if (userSummary!.coinEarned!.round() >= AppConstants.minimumWithdraw) {
+      FormDialog.show(
+      context: _context!, 
+      type: DialogType.payout,
+      title: loc.payoutDialogTitle, 
+      body: loc.payoutDialogBody,
+      negativeBtnTitle: loc.payoutDialogBtnNegative, 
+      positiveBtnTitle: loc.payoutDialogBtnPositive, 
+      onPositiveBtnPressed: (enteredAmount, withdrawType) async {
+        bool isConnected = await InternetInfo.isConnected();
+        if(isConnected == true) {
+          String withdrawAmount;
+          switch(withdrawType) {
+            case WithdrawType.minimum:
+              withdrawAmount = AppConstants.minimumWithdraw.toString();
+              break;
+            case WithdrawType.maximum:
+              withdrawAmount = userSummary!.coinEarned!.round().toString();
+              break;
+            case WithdrawType.custom:
+              withdrawAmount = enteredAmount;
+              break;
+          }
+          if (double.parse(withdrawAmount).round() <= userSummary!.coinEarned!.round() ) {
+            Loader.showLoader();
+            bool isTransfered = await _payoutViewModel!.transferToUser(withdrawAmount);
+            if (isTransfered == true) {
+              PayoutModel? payoutModel = await _payoutViewModel!.payoutMoney(
+                      withdrawAmount, currency!, listOfExtAccounts.first.id!);
+              if(payoutModel != null) {
+                bool success = await _payoutViewModel!.withdrawCoins(
+                  amountInDollars: withdrawAmount, 
+                  payoutToken: payoutModel.id);
+                if(success == true) {
+                  FancyDialog.showSuccess(
+                    context: _context!,
+                    title: loc.payoutDialogTxtSuccessTitle,
+                    onOkPressed: () async => await _payoutViewModel!.updateCoins(_dashBoardViewModel),
+                    description: loc.payoutDialogTxtSuccessDesc(withdrawAmount + "\$"));
+                } else {
+                  ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+                }
+                Loader.hideLoader();
               }
+            } else {
               Loader.hideLoader();
             }
-          } else {
-            Loader.hideLoader();
-          }
-          } else {
-            ToastMessage.show(loc.payoutTxtLessCoins, TOAST_TYPE.error);
-          }
+            } else {
+              ToastMessage.show(loc.payoutTxtLessCoins, TOAST_TYPE.error);
+            }
+        }
       }
-     }
-    );
+      );
+    } else {
+      ToastMessage.show(loc.payoutTxtLessCoins + ". " + loc.errorWithdrawLimit, TOAST_TYPE.error);
+    }
   }
 }

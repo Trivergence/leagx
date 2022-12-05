@@ -2,7 +2,7 @@ import 'package:leagx/constants/colors.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/admin/components/admin_tab_bar.dart';
 import 'package:leagx/ui/screens/admin/components/legend_widget.dart';
-import 'package:leagx/ui/screens/dashboard/components/home/components/analytics_widget.dart';
+import 'package:leagx/ui/screens/dashboard/components/my_profile/components/analytics_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';

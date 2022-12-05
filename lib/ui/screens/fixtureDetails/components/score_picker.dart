@@ -36,8 +36,7 @@ class _ScorePickerState extends State<ScorePicker> {
       decoration: BoxDecoration(
           //border: Border.all(color: AppColors.colorDarkGrey, width: 2),
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.colorDarkGrey,
-          gradient: widget.isSelected ? AppColors.pinkishGradient : null
+          color: widget.isSelected ? AppColors.colorPink : AppColors.colorDarkGrey
         ),
       child: Container(
         height: SizeConfig.height * 5,
@@ -64,13 +63,11 @@ class _ScorePickerState extends State<ScorePicker> {
         
         items: [
           for(int i = 0; i < totalScores.length ; i++) Center(
-            child: i == currentIndex ? GradientWidget(
-              gradient: AppColors.pinkishGradient,
-              child: TextWidget(text: totalScores[i].toString(),
-                   textSize: Dimens.textMedium,
-                   fontWeight: FontWeight.bold
-                   ),
-            )
+            child: i == currentIndex ? TextWidget(text: totalScores[i].toString(),
+                 textSize: Dimens.textMedium,
+                 fontWeight: FontWeight.bold,
+                 color: AppColors.colorPink,
+                 )
             : TextWidget(
                 text: totalScores[i].toString(),
                 textSize: Dimens.textRegular,

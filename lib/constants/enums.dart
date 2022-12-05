@@ -3,6 +3,7 @@ enum AuthType { apple, twitter, local}
 enum DialogType { payout, addCoins }
 enum PaymentType { wallet, card }
 enum WithdrawType { minimum, maximum, custom }
+enum RequestType {clientSideApi, selfHostedApi, footballApi}
 // enum ImageTpye { 
 //  profileMale,
 //  profileFemale, 

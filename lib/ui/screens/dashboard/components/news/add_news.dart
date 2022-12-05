@@ -74,9 +74,11 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                   onTap: _chooseFixture,
                 ),
                 UIHelper.verticalSpaceXL,
-                MainButton(
-                  text: loc.dashboardNewsAddNewsBtnSubmit,
-                  onPressed: _addNews
+                Center(
+                  child: MainButton(
+                    text: loc.dashboardNewsAddNewsBtnSubmit,
+                    onPressed: _addNews
+                  ),
                 ),
               ],
             ),

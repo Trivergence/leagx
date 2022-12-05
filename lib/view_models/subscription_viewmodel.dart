@@ -101,6 +101,63 @@ class SubscriptionViewModel extends BaseModel {
     }
   }
 
+    upgradeLeagueByCard(
+      {required BuildContext context,
+      required int planId,
+      required String leagueId,
+      required String leagueTitle,
+      required String leagueImg,
+      required String price}) async {
+    Loader.showLoader();
+    WalletViewModel walletModel = context.read<WalletViewModel>();
+    bool isPurchased = await purchaseModel(walletModel, price);
+    if (isPurchased == true) {
+      User? user = locator<SharedPreferenceHelper>().getUser();
+      int? internalLeagueId = context
+          .read<DashBoardViewModel>()
+          .getLeagueInternalId(leagueId.toString());
+      if (user != null && internalLeagueId != null) {
+        bool isUnsubscribed = await unsubscribeLeague(
+            context: context, leagueId: internalLeagueId);
+        if (isUnsubscribed == true) {
+          Map<String, dynamic> body = {
+          "user_id": user.id,
+          "plan_id": planId,
+          "league": {
+            "title": leagueTitle,
+            "logo": leagueImg,
+            "external_league_id": int.parse(leagueId)
+          }
+          };
+          bool success = await ApiService.postWoResponce(
+            url: AppUrl.subscribeLeague, body: body);
+          if (success) {
+          Loader.hideLoader();
+          FancyDialog.showSuccess(
+            context: context,
+            title: loc.choosePlanDialogUpgradeSuccessTitle,
+            description: loc.choosePlanDialogUpgradeSuccessDesc,
+            onOkPressed: () async {
+              Navigator.of(context).popUntil((route) {
+                return route.settings.name == Routes.chooseLeague;
+              });
+              await loadData(context);
+            },
+          );
+          } else {
+           Loader.hideLoader();
+          }
+        } else {
+          ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+        }
+      } else {
+        ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+      }
+    } else {
+      Loader.hideLoader();
+    }
+  }
+
   subscribeLeagueByCoin(
       {required BuildContext context,
       required int planId,
@@ -144,44 +201,94 @@ class SubscriptionViewModel extends BaseModel {
     }
   }
 
-  void showUnsubscribeDialog({required  BuildContext context, required int leagueId}) {
-    ConfirmationDialog.show(context: context, 
-    title: loc.chooseLeagueDialogTitle, 
-    body: loc.chooseLeagueDialogbody, 
-    negativeBtnTitle: loc.chooseLeagueDialogBtnCancel,
-    positiveBtnTitle: loc.chooseLeagueDialogBtnConfirm, 
-    onPositiveBtnPressed: (dialogContext) async {
-      bool isConnnected = await InternetInfo.isConnected();
-      if (isConnnected == true) {
-        Navigator.of(dialogContext).pop();
-        await unsubscribeLeague(context: context, leagueId: leagueId);
-      }
-    });
-  }
-
-  Future<void> unsubscribeLeague({
-    required BuildContext context,
-    required int leagueId,}) async {
+  upgradeLeagueByCoin(
+      {required BuildContext context,
+      required int planId,
+      required String leagueId,
+      required String leagueTitle,
+      required String leagueImg,
+      required String price}) async {
     Loader.showLoader();
     User? user = locator<SharedPreferenceHelper>().getUser();
     if (user != null) {
-    bool success = await ApiService.callPutApiWoResponce(
+      int? internalLeagueId = context.read<DashBoardViewModel>().getLeagueInternalId(leagueId.toString());
+      if(internalLeagueId != null) {
+        bool isUnsubscribed = await unsubscribeLeague(context: context, leagueId: internalLeagueId);
+        if(isUnsubscribed == true) {
+          Map<String, dynamic> body = {
+            "user_id": user.id,
+            "plan_id": planId,
+            "pay_by_wallet": true,
+            "league": {
+              "title": leagueTitle,
+              "logo": leagueImg,
+              "external_league_id": int.parse(leagueId)
+            }
+          };
+          bool success = await ApiService.postWoResponce(
+              url: AppUrl.subscribeLeague, body: body);
+          if (success == true) {
+            Loader.hideLoader();
+            FancyDialog.showSuccess(
+              context: context,
+              title: loc.choosePlanDialogUpgradeSuccessTitle,
+              description: loc.choosePlanDialogUpgradeSuccessDesc,
+              onOkPressed: () {
+                loadData(context);
+                Navigator.of(context).popUntil((route) {
+                  return route.settings.name == Routes.chooseLeague;
+                });
+              },
+            );
+          } else {
+            Loader.hideLoader();
+          }
+        } else {
+          ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+        }
+      } else {
+        ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
+      }
+      
+    } else {
+      Loader.hideLoader();
+    }
+  }
+
+  // void showUnsubscribeDialog({required  BuildContext context, required int leagueId}) {
+  //   ConfirmationDialog.show(context: context, 
+  //   title: loc.chooseLeagueDialogTitle, 
+  //   body: loc.chooseLeagueDialogbody, 
+  //   negativeBtnTitle: loc.chooseLeagueDialogBtnCancel,
+  //   positiveBtnTitle: loc.chooseLeagueDialogBtnConfirm, 
+  //   onPositiveBtnPressed: (dialogContext) async {
+  //     bool isConnnected = await InternetInfo.isConnected();
+  //     if (isConnnected == true) {
+  //       Navigator.of(dialogContext).pop();
+  //       await unsubscribeLeague(context: context, leagueId: leagueId);
+  //     }
+  //   });
+  // }
+
+  Future<bool> unsubscribeLeague({
+    required BuildContext context,
+    required int leagueId,}) async {
+      bool success = false;
+    Loader.showLoader();
+    User? user = locator<SharedPreferenceHelper>().getUser();
+    if (user != null) {
+    success = await ApiService.callPutApiWoResponce(
       body: {
        "league_id": leagueId, 
        "user_id": user.id
       },
       url: AppUrl.unsubscribeLeague
      );
-    if (success == true) {
-       Loader.hideLoader();
-       loadData(context);
-      } else {
-        Loader.hideLoader();
-        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
-     }
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+      success = false;
     }
+    return success;
   }
 
   Future<void> getLeagues({bool showToast = true}) async {

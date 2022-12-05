@@ -7,6 +7,8 @@ import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants/colors.dart';
+
 class FaqsScreen extends StatelessWidget {
   const FaqsScreen({Key? key}) : super(key: key);
 
@@ -36,13 +38,12 @@ class FaqsScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-             GradientWidget(
-              child: TextWidget(
-                text: loc.faqsTxtFrequentlyAskedQuestions,
-                fontWeight: FontWeight.w600,
-                textSize: 20.0,
-              ),
-            ),
+             TextWidget(
+               text: loc.faqsTxtFrequentlyAskedQuestions,
+               fontWeight: FontWeight.w600,
+               textSize: 20.0,
+               color: AppColors.colorPink,
+             ),
             UIHelper.verticalSpaceMedium,
             Expanded(
               child: SingleChildScrollView(

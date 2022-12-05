@@ -24,31 +24,28 @@ class GradientBorderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? SizeConfig.width * 100,
+      width: width ?? SizeConfig.width * 70,
       height: height ?? 48.0,
-      padding: const EdgeInsets.all(2.0),
-      decoration: const BoxDecoration(
-          gradient: AppColors.pinkishGradient,
-          borderRadius: BorderRadius.all(Radius.circular(5.0))),
-      child: Container(
-        color: AppColors.colorBackground,
-        child: ElevatedButton(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: AppColors.colorWhite,
-              fontSize: fontSize,
-              fontWeight: fontWeight,
-              fontFamily: FontFamily.raleway,
-            ),
+      decoration: BoxDecoration(
+          color: AppColors.colorBackground,
+          border: Border.all(color: AppColors.colorPink,),
+          borderRadius: BorderRadius.circular(100)),
+      child: ElevatedButton(
+        child: Text(
+          text.toUpperCase(),
+          style: TextStyle(
+            color: AppColors.colorWhite,
+            fontSize: fontSize,
+            fontWeight: fontWeight,
           ),
-          style: ElevatedButton.styleFrom(
-            primary: Colors.transparent,
-            shadowColor: Colors.transparent,
-            elevation: 0.0,
-          ),
-          onPressed: onPressed,
         ),
+        style: ElevatedButton.styleFrom(
+          primary: Colors.transparent,
+          shadowColor: Colors.transparent,
+          elevation: 0.0,
+          padding: const EdgeInsets.symmetric(horizontal: 3)
+        ),
+        onPressed: onPressed,
       ),
     );
   }

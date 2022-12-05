@@ -44,6 +44,7 @@ class UserTile extends StatelessWidget {
             placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
             onPressed: () {},
             gradient: AppColors.orangishGradient,
+            isBorderSolid: true,
           ),
           UIHelper.horizontalSpace(15.0),
           Expanded(

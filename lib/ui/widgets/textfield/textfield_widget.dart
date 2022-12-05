@@ -57,7 +57,6 @@ class TextFieldWidget extends StatelessWidget {
           hintText: hint,
           hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
                 color: hintColor,
-                fontFamily: FontFamily.openSans,
                 fontWeight: FontWeight.w400,
               ),
           counterText: '',

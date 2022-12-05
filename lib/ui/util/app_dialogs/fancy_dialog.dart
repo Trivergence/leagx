@@ -1,6 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
+import '../locale/localization.dart';
+
 class FancyDialog {
   static void showSuccess({
     required BuildContext context, 
@@ -15,6 +17,7 @@ class FancyDialog {
       title: title,
       desc: description,
       btnOkOnPress: onOkPressed,
+      btnOkText: loc.ok
     ).show();
   }
 

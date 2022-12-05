@@ -12,7 +12,10 @@ class SharedPreferenceHelper {
   SharedPreferenceHelper(this._sharedPreference);
 
   // Token
-  String? get authToken => _sharedPreference.getString(Preferences.authToken);
+  String? get authToken {
+    String? token = _sharedPreference.getString(Preferences.authToken);
+    return token;
+  }
 
   Future<bool> saveAuthToken(String authToken) async {
     return await _sharedPreference.setString(Preferences.authToken, authToken);

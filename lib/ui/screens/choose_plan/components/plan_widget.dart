@@ -51,10 +51,12 @@ class _PlanWidgetState extends State<PlanWidget> {
         padding: widget.index != 3
             ? const EdgeInsets.only(bottom: 60.0)
             : const EdgeInsets.only(bottom: 30.0),
-        child: Stack(clipBehavior: Clip.none, children: [
+        child: Stack(
+          clipBehavior: Clip.none, 
+          children: [
           Container(
             decoration: BoxDecoration(
-                gradient: widget.isSelected ? gradient : null,
+                color: widget.isSelected ? AppColors.colorPink : null,
                 borderRadius: BorderRadius.circular(8)),
             padding: const EdgeInsets.all(1.5),
             child: Card(
@@ -71,13 +73,11 @@ class _PlanWidgetState extends State<PlanWidget> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GradientWidget(
-                            gradient: gradient,
-                            child: TextWidget(
-                              text: title!,
-                              fontWeight: FontWeight.w700,
-                              textSize: Dimens.textMedium,
-                            ),
+                          TextWidget(
+                            text: title!,
+                            fontWeight: FontWeight.w700,
+                            textSize: Dimens.textMedium,
+                            color: AppColors.colorPink,
                           ),
                           widget.isAdmin
                               ? GestureDetector(
@@ -116,15 +116,14 @@ class _PlanWidgetState extends State<PlanWidget> {
                           ),
                           Expanded(
                             flex: 2,
-                            child: GradientWidget(
-                                gradient: gradient,
-                                child: TextWidget(
-                                  text:
-                                      "\$${widget.plan.price}",
-                                  textSize: Dimens.textLarge,
-                                  fontWeight: FontWeight.w600,
-                                  textAlign: TextAlign.end,
-                                )),
+                            child: TextWidget(
+                              text:
+                                  "\$${widget.plan.price}",
+                              textSize: Dimens.textLarge,
+                              fontWeight: FontWeight.w600,
+                              textAlign: TextAlign.end,
+                              color: AppColors.colorPink,
+                            ),
                           )
                         ],
                       )
@@ -133,11 +132,11 @@ class _PlanWidgetState extends State<PlanWidget> {
             ),
           ),
           Positioned(
-              left: 29,
-              top: -28,
-              child: GradientWidget(
-                  gradient: gradient,
-                  child: Image.asset(Assets.icCrown)))
+            left: 29,
+            top: -28,
+            child: Image.asset(Assets.icCrown,
+              color: AppColors.colorPink,
+          ))
         ]),
       ),
     )

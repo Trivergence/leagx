@@ -2,14 +2,13 @@
 	"appName": "LeagX",
 	"today": "Today",
 	"msgPleaseWait": "Please wait...",
+	"vs": "VS",
+	"ok": "Ok",
 
 	"loginTitle": "Login",
-	"onboardingTxtTitle1":"LOREM IPSUM DOLOR",
-	"onboardingTxtDesc1":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
-	"onboardingTxtTitle2":"LOREM IPSUM DOLOR",
-	"onboardingTxtDesc2":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
-	"onboardingTxtTitle3":"LOREM IPSUM DOLOR",
-	"onboardingTxtDesc3":"Donec finibus et lorem in tempus. Etiam id, vel scelerisque dolor.",
+	"onboardingTxtDesc1": "Follow your favorite leagues, clubs, players, and analysts.",
+	"onboardingTxtDesc2": "Share your feedback in real-time and get paid for it.",
+	"onboardingTxtDesc3": "Predict and build your clubs' winning strategy.",
 
 	"adminHomeTxtAdmin": "Admin",
 	"adminHomeBtnToday": "today",
@@ -86,7 +85,7 @@
 
 	"chooseLeagueTxtChooseALeague": "Choose a League",
 	"chooseLeagueTxtSearch": "Search",
-	"chooseLeagueBtnUnsubscribe": "Unsubscribe",
+	"chooseLeagueBtnUpgrade": "Upgrade",
 	"chooseLeagueBtnSubscribe": "Subscribe",
 	"chooseLeagueDialogTitle": "Confirmation",
 	"chooseLeagueDialogbody": "Are you sure you want to unsubscribe this league?",
@@ -94,13 +93,16 @@
 	"chooseLeagueDialogBtnConfirm": "Confirm",
 
 	"choosePlanTxtChooseAPlan": "Choose a Package",
-	"choosePlanDialogSuccessTitle": "Purchase Successful",
 	"choosePlanDialogSelectPayment": "Select Payment Method",
 	"choosePlanDialogSelectCard": "Card",
 	"choosePlanDialogSelectWallet": "Wallet",
 	"choosePlanDialogBtnNegative": "Cancel",
 	"choosePlanDialogBtnPositive": "Select",
+	"choosePlanDialogSuccessTitle": "Purchase Successful",
+	"choosePlanDialogUpgradeSuccessTitle": "Upgrade Successful",
 	"choosePlanDialogSuccessDesc": "You have succesfully subscribed the package",
+	"choosePlanDialogUpgradeSuccessDesc": "You have succesfully upgraded the package",
+	"choosePlanTxtLessCoins": "You don't have enough coins",
 
 	"chooseFixtureTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
 	"chooseFixtureTxtTitle": "Choose A Match",
@@ -116,24 +118,15 @@
 	"editChoosePlanBtnSave": "Save",
 
 	"dashboardBtnHome": "Home",
-	"dashboardBtnFixture": "Matches",
+	"dashboardBtnWallet": "Wallet",
 	"dashboardBtnLeader": "Experts",
 	"dashboardBtnNews": "Analytics",
-	"dashboardBtnSetting": "My Profile",
+	"dashboardBtnSetting": "Account",
 
-	"dashboardFixtureTxtLeagues": "Leagues",
-	"dashboardFixtureTxtAll": "All",
-	"dashboardFixtureTxtUpcomingMatches": "Upcoming Matches",
-	"dashboardFixtureTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
-
-	"dashboardHomeTxtLeaders": "Experts",
-	"dashboardHomeTxtAnalytics": "My Stats",
-	"dashboardHomeTxtUpcomingMatches": "Upcoming Matches",
-	"dashboardHomeTxtViewAll": "View all matches",
-	"dashboardHomeTxtEmptyList": "No match scheduled today.Please make sure to subscribe at least one league",
-	"dashboardHomeTxtPredictions": "Predictions",
-	"dashboardHomeTxtWiningRatio": "Winning Ratio",
-	"dashboardHomeTxtEarnedCoid": "Earned Coin",
+	"dashboardHomeTxtLeagues": "LEAGUES",
+	"dashboardHomeTxtAll": "All",
+	"dashboardFixtureTxtUpcomingMatches": "UPCOMING MATCHES",
+	"dashboardHomeTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
 
 	"dashboardLeaderTxtPredictions": "predictions",
 	"dashboardLeaderTxtWin": "Champion",
@@ -152,15 +145,31 @@
 	"dashboardNewsAddNewsTxtSuccess": "News added succesfully",
 	"dashboardNewsAddNewsTxtRequiredFixture": "Please choose a fixture to proceed forward",
 
-	"settingTxtProfile": "Profile",
-	"settingTxtGeneral": "GENERAL",
-	"settingTxtNotification": "Notification",
-	"settingTxtPassword": "Password",
-	"settingTxtLanguage": "Language",
-	"settingTxtAdmin": "Admin",
-	"settingChooseLanguageTxtChooseLanguage":"Choose Language",
-	"settingChooseLanguageTxtEnglish":"English",
-	"settingChooseLanguageTxtArabic":"Arabic",
+	"myProfileTxtMyPredictions": "My Predictions",
+	"myProfileTxtAnalytics": "MY STATS",
+	"myProfileTxtProfileInfo": "PROFILE INFO",
+	"myProfileTxtGeneral": "GENERAL",
+	"myProfileTxtNotification": "Notification",
+	"myProfileTxtPassword": "Password",
+	"myProfileTxtLanguage": "Language",
+	"myProfileTxtAdmin": "Admin",
+	"myProfileChooseLanguageTxtChooseLanguage":"Choose Language",
+	"myProfileChooseLanguageTxtEnglish":"English",
+	"myProfileChooseLanguageTxtArabic":"Arabic",
+	"myProfileTxtPredictions": "Predictions Remain",
+	"myProfileTxtWiningRatio": "Wins out of {totalPredictions}",
+	"@myProfileTxtWiningRatio": {
+		"placeholders": {
+			"totalPredictions": {
+				"type": "String",
+				"description": "Number of Predictions",
+				"example": "4"
+			}
+		}
+	},
+	"myProfileTxtEarnedCoid": "Credit",
+	"myProfileTxtAddPredictions": "Add",
+	"myProfileTxtWithdraw": "Withdraw",
 
 	"upcomingMatchesTitle": "Upcoming Matches",
 
@@ -176,8 +185,8 @@
 	"faqsTxtFaqs": "FAQs",
 	"faqsTxtFrequentlyAskedQuestions": "Frequently Asked Questions",
 
-	"fixtureDetailsBtnMatch": "MATCH",
-	"fixtureDetailsBtnPlayers": "PLAYERS",
+	"fixtureDetailsBtnMatch": "Match",
+	"fixtureDetailsBtnPlayers": "Players",
 	"fixtureDetailsBtnNews": "Analytics",
 	"fixtureDetailsTxtPredictMatchResult": "Predict Match Result",
 	"fixtureDetailsTxtMakeMyPredictPublic": "Make my predict public",
@@ -203,6 +212,8 @@
 	"fixtureDetailsPredictionDialogTitle": "Not enough balance",
 	"fixtureDetailsPredictionDialogBtnAdd": "Upgrade",
 	"fixtureDetailsPredictionDialogBtnCancel": "Cancel",
+	"fixtureDetailsMsgStreamNotAvailable": "Live animation is not available for this match",
+	"fixtureDetailsMsgStreamError": "An error has occured while displaying live animation",
 
 	"notificationTxtNotification": "Notification",
 	"onboardingBtnGetStarted": "Get Started",
@@ -218,16 +229,14 @@
 
 	"profileProfileSettingsTxtProfileSettings": "Profile Settings",
 	"profileProfileSettingsTxtCoins": "Coins",
-	"profileProfileSettingsTxtWithdraw": "Withdraw",
 	"profileProfileSettingsTxtPrediction": "Remaining Predictions",
-	"profileProfileSettingsTxtAddPredictions": "Add",
 	"profileProfileInfoUpdateTxtEditProfile": "Edit Profile",
 	"profileProfileInfoUpdateBtnSave": "Save",
 	"profileProfileInfoHintGender": "Gender",
 	"profileProfileInfoMale": "Male",
 	"profileProfileInfoFemale": "Female",
 	"profileProfileInfoUpdateSuccesful": "Profile udpated successfully",
-	"profileProfileInfoUpdateSelectOption": "Select Option",
+	"profileProfileInfoUpdateSelectSource": "Select Source",
 	"profileProfileInfoUpdateCamera": "Camera",
 	"profileProfileInfoUpdateGallery": "Gallery",
 
@@ -256,6 +265,10 @@
 	"subscribeConfirmBody": "Are your sure you want to subscribe this league. This will charge ",
 	"subscribeConfirmCancel": "Cancel",
 	"subscribeConfirmSubscribe": "Subscribe",
+	"upgradeConfirmTitle": "Confirm upgrade",
+	"upgradeConfirmBody": "Are your sure you want to upgrade this league. This will charge ",
+	"upgradeConfirmCancel": "Cancel",
+	"upgradeConfirmUpgrade": "Upgrade",
 
 	"walletTxtWallet": "Wallet",
 	"walletTxtTotalCoins": "Total Coins",
@@ -286,7 +299,16 @@
 	"payoutDialogBtnNegative": "Cancel",
 	"payoutDialogBtnPositive": "Withdraw",
 	"payoutDialogTxtSuccessTitle": "Completed Successfully",
-	"payoutDialogTxtSuccessDesc": "You have successfully withdrawn",
+	"payoutDialogTxtSuccessDesc": "You have successfully withdrawn {withdrawLimit}",
+	"@payoutDialogTxtSuccessDesc": {
+		"placeholders": {
+			"withdrawLimit": {
+				"type": "String",
+				"description": "Amount limit of Withdraw",
+				"example": "4"
+			}
+		}
+	},
 	"payoutDialogWithdrawTypeMinimum": "Minimum",
 	"payoutDialogWithdrawTypeMaximum": "Maximum",
 	"payoutDialogWithdrawTypeCustom": "Custom",

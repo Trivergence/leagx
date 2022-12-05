@@ -36,122 +36,97 @@ class DrawerScreen extends StatelessWidget {
     getUserName();
     return Drawer(
       backgroundColor: AppColors.colorBackground,
-      child: ListView(
-        children: [
-          UIHelper.verticalSpaceXL,
-          Center(
-            child: Column(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom:10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
               children: [
-                GradientBorderWidget(
-                  onPressed: () {},
-                  gradient: AppColors.orangishGradient,
-                  imageUrl: userImage,
-                  height: 80.0,
-                  width: 80.0,
-                  isCircular: true,
-                  placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
-                ),
-                UIHelper.verticalSpaceSmall,
-                TextWidget(
-                  text: userName,
-                  fontWeight: FontWeight.w700,
-                  textSize: 18,
-                ),
-                UIHelper.verticalSpaceSmall,
-                const TextWidget(
-                  text: '',
-                ),
-              ],
-            ),
-          ),
-          UIHelper.verticalSpace(60.0),
-          DrawerTile(
-            icon: Icons.account_circle_outlined,
-            title: loc.drawerBtnProfile,
-            onTap: () => Navigator.popAndPushNamed(context, Routes.profileSettings),
-          ),
-          DrawerTile(
-            imageAsset: Assets.icDrawerPredictions,
-            title: loc.drawerBtnMyPredictions,
-            onTap: () {
-              Navigator.popAndPushNamed(context, Routes.predictions);
-            },
-          ),
-          DrawerTile(
-            icon: Icons.help_outline,
-            title: loc.drawerBtnFaqs,
-            onTap: () {
-              Navigator.popAndPushNamed(context, Routes.faqs);
-            },
-          ),
-          DrawerTile(
-            icon: Icons.gpp_good_outlined,
-            title: loc.drawerBtnPrivacyPolicy,
-            onTap: () {
-              Navigator.popAndPushNamed(context, Routes.privacyPolicy);
-            },
-          ),
-          DrawerTile(
-            imageAsset: Assets.icDrawerTermsAndService,
-            title: loc.drawerBtnTermsOfServices,
-            onTap: () {
-              Navigator.popAndPushNamed(context, Routes.termsService);
-            },
-          ),
-          DrawerTile(
-            imageAsset: Assets.icDrawerAdmin,
-            title: loc.drawerBtnAdmin,
-            onTap: () {
-              Navigator.popAndPushNamed(context, Routes.admin);
-            },
-          ),
-          DrawerTile(
-            icon: Icons.account_balance_wallet_outlined,
-            title: loc.drawerBtnWalllet,
-            onTap: () async {
-              bool isConnected = await InternetInfo.isConnected();
-              if(isConnected == true) {
-                if(StripeConfig().getSecretKey.isNotEmpty) {
-                  if(context.read<DashBoardViewModel>().isInitialized == true) {
-                    Navigator.popAndPushNamed(context, Routes.wallet);
-                  } else {
-                    ToastMessage.show(loc.msgPleaseWait, TOAST_TYPE.msg);
-                  }
-                } else {
-                  ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.msg);
-                  await context.read<WalletViewModel>().setupStripeCredentials();
-                }
-              }
-            },
-          ),
-          UIHelper.verticalSpaceXL,
-          GestureDetector(
-            onTap: () async {
-              ConfirmationDialog.show(context: context,
-               title: loc.logoutConfirmTitle,
-               positiveBtnTitle: loc.logoutConfirmYes,
-               negativeBtnTitle: loc.logoutConfirmNo,
-               body:loc.logoutConfirmBody, 
-               onPositiveBtnPressed: (_) => logout(context));
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: Row(
-                children: [
-                  const GradientWidget(
-                    child: Icon(Icons.logout),
+              UIHelper.verticalSpaceXL,
+                Center(
+                  child: Column(
+                    children: [
+                      GradientBorderWidget(
+                        onPressed: () {},
+                        gradient: AppColors.orangishGradient,
+                        imageUrl: userImage,
+                        height: 80.0,
+                        width: 80.0,
+                        isCircular: true,
+                        placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
+                        isBorderSolid: true,
+                      ),
+                      UIHelper.verticalSpaceSmall,
+                      TextWidget(
+                        text: userName,
+                        fontWeight: FontWeight.w100,
+                        textSize: 18,
+                      ),
+                      UIHelper.verticalSpaceSmall,
+                      const TextWidget(
+                        text: '',
+                      ),
+                    ],
                   ),
-                  UIHelper.horizontalSpace(26.0),
-                   GradientWidget(
-                    child: TextWidget(
-                      text: loc.drawerBtnLogout,
-                    ),
+                ),
+                UIHelper.verticalSpace(60.0),
+                DrawerTile(
+                  icon: Icons.help_outline,
+                  title: loc.drawerBtnFaqs,
+                  onTap: () {
+                    Navigator.popAndPushNamed(context, Routes.faqs);
+                  },
+                ),
+                DrawerTile(
+                  icon: Icons.gpp_good_outlined,
+                  title: loc.drawerBtnPrivacyPolicy,
+                  onTap: () {
+                    Navigator.popAndPushNamed(context, Routes.privacyPolicy);
+                  },
+                ),
+                DrawerTile(
+                  imageAsset: Assets.icDrawerTermsAndService,
+                  title: loc.drawerBtnTermsOfServices,
+                  onTap: () {
+                    Navigator.popAndPushNamed(context, Routes.termsService);
+                  },
+                ),
+                // DrawerTile(
+                //   imageAsset: Assets.icDrawerAdmin,
+                //   title: loc.drawerBtnAdmin,
+                //   onTap: () {
+                //     Navigator.popAndPushNamed(context, Routes.admin);
+                //   },
+                // ),
+            ],),
+            SafeArea(
+              child: GestureDetector(
+                onTap: () async {
+                  ConfirmationDialog.show(context: context,
+                   title: loc.logoutConfirmTitle,
+                   positiveBtnTitle: loc.logoutConfirmYes,
+                   negativeBtnTitle: loc.logoutConfirmNo,
+                   body:loc.logoutConfirmBody, 
+                   onPositiveBtnPressed: (_) => logout(context));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.logout, color: AppColors.colorPink,),
+                      UIHelper.horizontalSpace(26.0),
+                       TextWidget(
+                         text: loc.drawerBtnLogout,
+                         color: AppColors.colorPink,
+                       ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

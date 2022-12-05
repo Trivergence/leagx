@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leagx/constants/enums.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/models/players.dart';
@@ -17,6 +18,7 @@ import '../core/network/internet_info.dart';
 import '../core/utility.dart';
 import '../core/viewmodels/base_model.dart';
 import '../models/dashboard/fixture.dart';
+import '../models/live_match.dart';
 import '../models/user/user.dart';
 import '../models/user_summary.dart';
 import '../routes/routes.dart';
@@ -26,11 +28,14 @@ import '../ui/util/app_dialogs/fancy_dialog.dart';
 import '../ui/util/loader/loader.dart';
 
 class FixtureDetailViewModel extends BaseModel {
+  LiveMatch? _liveMatch;
+  Map<String, LiveMatch> _cachedLink = {};
   List<Fixture> _matchDetails = [];
   List<Player> _awayTeamPlayers = [];
   List<Player> _homeTeamPlayers = [];
   List<Prediction> _predictions = [];
 
+  LiveMatch? get liveMatch => _liveMatch;
   List<Fixture> get matchDetails => _matchDetails;
   List<Player> get awayTeamPlayers => _awayTeamPlayers;
   List<Player> get homeTeamPlayers => _homeTeamPlayers;
@@ -40,6 +45,7 @@ class FixtureDetailViewModel extends BaseModel {
     setBusy(true);
     try {
       await getMatchDetails(matchId);
+      await getLiveMatchData(matchId);
       setBusy(false);
       if(matchDetails.isNotEmpty) {
         await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
@@ -216,5 +222,27 @@ class FixtureDetailViewModel extends BaseModel {
             }
           });
     }
+  }
+  Future<void> getLiveMatchData(String matchId) async {
+    if(!_cachedLink.containsKey(matchId)) {
+      String completeUrl = AppUrl.liveAnimation + "/" + matchId;
+      _liveMatch = await ApiService.callGetApi(
+          baseUrl: AppUrl.clientUrl,
+          url: completeUrl,
+          modelName: ApiModels.liveMatch,
+          requestType: RequestType.clientSideApi);
+    } else {
+      _liveMatch = _cachedLink[matchId];
+    }
+    notifyListeners();
+    if(liveMatch != null && liveMatch!.url.isNotEmpty) {
+      cacheStreamLink(matchId : matchId, liveMatch : liveMatch!);
+    }
+  }
+  
+  void cacheStreamLink({
+    required String matchId,
+    required LiveMatch liveMatch}) {
+      _cachedLink[matchId] = liveMatch;
   }
 }
