@@ -58,8 +58,6 @@ class FixtureDetailViewModel extends BaseModel {
   }
     Future<void> refreshData({required String matchId}) async {
     await getMatchDetails(matchId);
-    await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
-    await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
     notifyListeners();
   }
 
