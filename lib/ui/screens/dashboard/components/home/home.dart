@@ -41,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     _leagueController = ScrollController();
     _matchController = ScrollController();
+    subscribedMatches = context.select<DashBoardViewModel, List<Fixture>>((dashboardModel) => dashboardModel.subscribedMatches);
     _dashBoardViewModel = context.read<DashBoardViewModel>();
     subscribedMatches = isFiltering == true
         ? _dashBoardViewModel.filteredMatches
@@ -209,19 +210,25 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   filterByLeague(int index) {
-    goToStart(_matchController);
-    if (selectedIndex != index) {
-      _dashBoardViewModel.filterByLeague(
+      goToStart(_matchController);
+      if (selectedIndex != index) {
+        context.read<DashBoardViewModel>().filterByLeague(
+            leagueId: subscribedLeagues[index].externalLeagueId.toString());
+        setState(() {
+          isFiltering = true;
+          selectedIndex = index;
+        });
+      } else {
+        context.read<DashBoardViewModel>().filterByLeague(
           leagueId: subscribedLeagues[index].externalLeagueId.toString());
-      setState(() {
-        isFiltering = true;
-        selectedIndex = index;
-      });
-    }
+      }
   }
 
   Future<void> _refreshData() async {
     await _dashBoardViewModel.getAllFixtures();
+    filterByLeague(selectedIndex);
+    setState(() {
+    });
   }
   
   void goToStart(ScrollController matchController) {

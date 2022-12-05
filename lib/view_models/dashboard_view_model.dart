@@ -110,7 +110,6 @@ class DashBoardViewModel extends BaseModel {
     } else {
       _subscribedMatches = [];
     }
-    notifyListeners();
   }
 
   Future<void> getSubscribedLeagues({bool showToast = true}) async {
