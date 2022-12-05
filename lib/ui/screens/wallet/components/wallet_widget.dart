@@ -12,7 +12,7 @@ import '../../../widgets/text_widget.dart';
 
 // ignore: must_be_immutable
 class WalletWidget extends StatelessWidget {
- WalletWidget({
+ const WalletWidget({
     Key? key,
     required this.userSummary,
   }) : super(key: key);

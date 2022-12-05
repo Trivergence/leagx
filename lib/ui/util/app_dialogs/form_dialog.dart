@@ -51,6 +51,7 @@ class FormDialog {
   }
 }
 
+// ignore: must_be_immutable
 class PayoutDialogWidget extends StatelessWidget {
   final String title;
   final String body;

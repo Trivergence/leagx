@@ -8,7 +8,6 @@ import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';
 import '../../../../models/subscription_plan.dart';
 import '../../../util/ui/ui_helper.dart';
-import '../../../widgets/gradient/gradient_widget.dart';
 import '../../../widgets/text_widget.dart';
 import 'desc_widget.dart';
 

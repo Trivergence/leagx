@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/font_family.dart';
 
 class CoinsTextField extends StatelessWidget {
   final IconData? icon;

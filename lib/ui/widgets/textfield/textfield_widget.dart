@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/font_family.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {

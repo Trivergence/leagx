@@ -29,6 +29,7 @@ import '../ui/util/loader/loader.dart';
 
 class FixtureDetailViewModel extends BaseModel {
   LiveMatch? _liveMatch;
+  // ignore: prefer_final_fields
   Map<String, LiveMatch> _cachedLink = {};
   List<Fixture> _matchDetails = [];
   List<Player> _awayTeamPlayers = [];
