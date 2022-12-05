@@ -12,6 +12,7 @@ import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../../../constants/enums.dart';
 import '../../../ui/util/locale/localization.dart';
 import '../internet_info.dart';
 
@@ -81,11 +82,13 @@ class ApiService {
     Map<String, dynamic>? parameters,
     Map<String, dynamic>? headers,
     dynamic modelName,
+    String baseUrl = AppUrl.baseUrl,
+    RequestType requestType = RequestType.selfHostedApi
   }) async {
     try {
       BaseOptions options = BaseOptions(
         contentType: 'application/json',
-        baseUrl: AppUrl.baseUrl,
+        baseUrl: baseUrl,
         headers: {
           "apitoken": preferenceHelper.authToken,
         },
@@ -113,10 +116,15 @@ class ApiService {
     } on DioError catch (ex) {
       Loader.hideLoader();
       if (ex.response != null) {
-        ErrorModel errorResponse =
-            ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-            ToastMessage.show(errorResponse.error ?? loc.errorUndefined,TOAST_TYPE.error );
-        return null;
+        if(requestType == RequestType.selfHostedApi) {
+          ErrorModel errorResponse =
+          ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
+          ToastMessage.show(
+              errorResponse.error ?? loc.errorUndefined, TOAST_TYPE.error);
+              return null;
+        } else {
+          return null;
+        }
       } else {
         DioExceptions.fromDioError(ex);
         return null;

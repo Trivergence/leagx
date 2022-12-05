@@ -212,6 +212,8 @@
 	"fixtureDetailsPredictionDialogTitle": "Not enough balance",
 	"fixtureDetailsPredictionDialogBtnAdd": "Upgrade",
 	"fixtureDetailsPredictionDialogBtnCancel": "Cancel",
+	"fixtureDetailsMsgStreamNotAvailable": "Live animation is not available for this match",
+	"fixtureDetailsMsgStreamError": "An error has occured while displaying live animation",
 
 	"notificationTxtNotification": "Notification",
 	"onboardingBtnGetStarted": "Get Started",

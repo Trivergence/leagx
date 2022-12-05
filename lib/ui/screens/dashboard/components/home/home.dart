@@ -135,9 +135,10 @@ class _HomeScreenState extends State<HomeScreen> {
           subscribedMatches.isNotEmpty
               ? Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 20.0,
+                    padding: const EdgeInsets.only(
+                      right: 16.0,
+                      left: 16.0,
+                      top: 20.0,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -151,38 +152,38 @@ class _HomeScreenState extends State<HomeScreen> {
                         UIHelper.verticalSpaceSmall,
                         Expanded(
                           child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: subscribedMatches.length,
-                              itemBuilder: (context, index) {
-                                Fixture match = subscribedMatches[index];
-                                return FixtureWidget(
-                                    key: UniqueKey(),
-                                    leagueName: match.leagueName,
-                                    teamOneFlag: match.teamHomeBadge,
-                                    teamOneName: match.matchHometeamName,
-                                    teamTwoFlag: match.teamAwayBadge,
-                                    teamTwoName: match.matchAwayteamName,
-                                    scheduledTime: match.matchTime,
-                                    scheduledDate: match.matchDate,
-                                    isLive: match.matchLive == "1",
-                                    isOver:
-                                        Utility.isMatchOver(match.matchStatus!),
-                                    matchStatus: match.matchStatus,
-                                    teamOneScore: match.matchHometeamScore,
-                                    teamTwoScore: match.matchAwayteamScore,
-                                    onTap: (leagueName) async {
-                                      bool isConnected =
-                                          await InternetInfo.isConnected();
-                                      if (isConnected == true) {
-                                        Navigator.pushNamed(
-                                            context, Routes.fixtureDetails,
-                                            arguments: MatchArgs(
-                                              matchId: match.matchId,
-                                              leagueName: leagueName,
-                                            ));
-                                      }
-                                    });
-                              }),
+                            shrinkWrap: true,
+                            itemCount: subscribedMatches.length,
+                            itemBuilder: (context, index) {
+                              Fixture match = subscribedMatches[index];
+                              return FixtureWidget(
+                                  key: UniqueKey(),
+                                  leagueName: match.leagueName,
+                                  teamOneFlag: match.teamHomeBadge,
+                                  teamOneName: match.matchHometeamName,
+                                  teamTwoFlag: match.teamAwayBadge,
+                                  teamTwoName: match.matchAwayteamName,
+                                  scheduledTime: match.matchTime,
+                                  scheduledDate: match.matchDate,
+                                  isLive: match.matchLive == "1",
+                                  isOver:
+                                      Utility.isMatchOver(match.matchStatus!),
+                                  matchStatus: match.matchStatus,
+                                  teamOneScore: match.matchHometeamScore,
+                                  teamTwoScore: match.matchAwayteamScore,
+                                  onTap: (leagueName) async {
+                                    bool isConnected =
+                                        await InternetInfo.isConnected();
+                                    if (isConnected == true) {
+                                      Navigator.pushNamed(
+                                        context, Routes.fixtureDetails,
+                                        arguments: MatchArgs(
+                                        matchId: match.matchId,
+                                        leagueName: leagueName,
+                                      ));
+                                    }
+                                  });
+                            }),
                         )
                       ],
                     ),

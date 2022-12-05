@@ -204,6 +204,8 @@
 	"fixtureDetailsPredictionDialogTitle": "لا يوجد رصيد كافٍ",
 	"fixtureDetailsPredictionDialogBtnAdd": "ترقية الاشتراك",
 	"fixtureDetailsPredictionDialogBtnCancel": "إلغاء",
+	"fixtureDetailsMsgStreamNotAvailable": "الرسوم المتحركة الحية غير متوفرة لهذه المباراة",
+	"fixtureDetailsMsgStreamError": "حدث خطأ أثناء عرض الرسوم المتحركة الحية",
 
 	"notificationTxtNotification": "إعلام",
 	"onboardingBtnGetStarted": "ابدأ",
