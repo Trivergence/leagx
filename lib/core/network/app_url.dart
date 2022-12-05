@@ -5,6 +5,8 @@ class AppUrl{
   static const String footballBaseUrl = "https://apiv3.apifootball.com/";
   static const String translationUrl =
       "http://54.211.12.135:5000/api/translation";
+  static const String clientUrl =
+      "http://54.211.12.135:5000/api/";
   static const String signup = "users/";
   static const String login = "sessions";
   static const String socialLogin = "users/social_auth";
@@ -22,6 +24,7 @@ class AppUrl{
   static const String addPaymentToken = "/payments";
   static const String setupStripeCred = "/get_stripe_cred";
   static const String unsubscribeLeague = "leagues/un_subscribe";
+  static const String liveAnimation = "isports/live";
 
 
 }

@@ -5,6 +5,7 @@ import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/dashboard/league.dart';
 import 'package:leagx/models/error_model.dart';
 import 'package:leagx/models/leader.dart';
+import 'package:leagx/models/live_match.dart';
 import 'package:leagx/models/players.dart';
 import 'package:leagx/models/prediction.dart';
 import 'package:leagx/models/stripe_cred.dart';
@@ -34,6 +35,7 @@ class ApiModels {
   static const String userData = "USERDATA";
   static const String getCurrencyAmount = "GET_CURRENCY_AMOUNT";
   static const String getStripeCred = "GET_STRIPE_CRED";
+  static const String liveMatch = "LIVE_MATCH";
   static dynamic getModelObjects(String modelName, dynamic json) {
     switch (modelName) {
       case error:
@@ -52,6 +54,8 @@ class ApiModels {
         return Currency.fromJson(json);
       case getStripeCred:
       return StripeCred.fromJson(json);
+      case liveMatch:
+      return LiveMatch.fromJson(json);
     }
   }
   static dynamic getListOfObjects(String modelName, dynamic json) {

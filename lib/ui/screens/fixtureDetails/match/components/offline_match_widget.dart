@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:leagx/models/prediction.dart';
+import 'package:leagx/ui/screens/fixtureDetails/components/stream_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../constants/assets.dart';
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/dimens.dart';
@@ -37,11 +37,7 @@ class OfflineMatchWidget extends StatelessWidget {
     return Column(
       children: [
         const DividerWidget(),
-        Container(
-          width: SizeConfig.width * 100,
-          margin: const EdgeInsets.only(bottom: 40),
-          height: SizeConfig.height * 30,
-          color: AppColors.textFieldColor,
+        StreamWidget(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
