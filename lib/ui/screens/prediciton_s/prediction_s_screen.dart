@@ -1,5 +1,6 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
+import 'package:leagx/constants/enums.dart';
 import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/screens/prediciton_s/components/prediction_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -69,7 +70,7 @@ class PredicitonsScreen extends StatelessWidget {
   }
 
   isPending(String? status) {
-    if( status == "Finished" || status == "After ET" || status == "After Pen.") {
+    if( status == MatchStatus.finished.value || status == MatchStatus.afterExTime.value || status == MatchStatus.afterPanalty.value) {
       return false;
     } else {
       return true;

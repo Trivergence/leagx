@@ -34,9 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = -1;
   late ScrollController _leagueController;
   late ScrollController _matchController;
-  final int baseScrollPoint = 3;
-  double scrollWidth = 0.0;
-  int move = 1;
 
   late DashBoardViewModel _dashBoardViewModel;
 
@@ -127,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     if(subscribedLeagues.isNotEmpty) InkWell(
-                        onTap: () => _scrollToTheNextItemView(),
+                        onTap: () => _dashBoardViewModel.scrollList(scrollController: _leagueController),
                         child: const Icon(Icons.arrow_forward_ios_rounded))
                   ],
                 ),
@@ -226,29 +223,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _refreshData() async {
     await _dashBoardViewModel.getAllFixtures();
   }
-
-  _scrollToTheNextItemView(
-      {ScrollDirection scrollDirection = ScrollDirection.forward}) async {
-    if (scrollDirection == ScrollDirection.forward) {
-      if (_leagueController.position.pixels <
-              _leagueController.position.maxScrollExtent &&
-          !_leagueController.position.outOfRange) {
-        await _leagueController.animateTo(
-            _leagueController.position.pixels + 100,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeOut);
-      }
-    } else {
-      if (_leagueController.position.pixels >
-              _leagueController.position.minScrollExtent &&
-          !_leagueController.position.outOfRange) {
-        await _leagueController.animateTo(
-            _leagueController.position.pixels - 100,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeOut);
-      }
-    }
-  }
   
   void goToStart(ScrollController matchController) {
     if(_matchController.offset > 50) {
@@ -256,4 +230,3 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 }
-enum ScrollDirection { forward, backward }
