@@ -251,7 +251,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   
   void goToStart(ScrollController matchController) {
-    _matchController.jumpTo(-500);
+    if(_matchController.offset > 50) {
+      _matchController.jumpTo(-500);
+    }
   }
 }
 enum ScrollDirection { forward, backward }
