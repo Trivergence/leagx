@@ -210,7 +210,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   filterByLeague(int index) {
-      goToStart(_matchController);
+      if(_matchController.hasClients) {
+        goToStart(_matchController);
+      }
       if (selectedIndex != index) {
         context.read<DashBoardViewModel>().filterByLeague(
             leagueId: subscribedLeagues[index].externalLeagueId.toString());
