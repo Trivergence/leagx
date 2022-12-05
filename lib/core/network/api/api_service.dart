@@ -15,7 +15,6 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../constants/enums.dart';
 import '../../../ui/util/locale/localization.dart';
-import '../internet_info.dart';
 
 class ApiService {
   

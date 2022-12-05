@@ -32,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<SubscribedLeague> subscribedLeagues = [];
   bool isFiltering = false;
   int selectedIndex = -1;
-  late ScrollController _scrollController;
+  late ScrollController _leagueController;
+  late ScrollController _matchController;
   final int baseScrollPoint = 3;
   double scrollWidth = 0.0;
   int move = 1;
@@ -41,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _scrollController = ScrollController();
+    _leagueController = ScrollController();
+    _matchController = ScrollController();
     _dashBoardViewModel = context.read<DashBoardViewModel>();
     subscribedMatches = isFiltering == true
         ? _dashBoardViewModel.filteredMatches
@@ -104,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: SizedBox(
                           height: 40.0,
                           child: ListView.builder(
-                            controller: _scrollController,
+                            controller: _leagueController,
                             scrollDirection: Axis.horizontal,
                             itemCount: subscribedLeagues.length,
                             shrinkWrap: true,
@@ -152,6 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         UIHelper.verticalSpaceSmall,
                         Expanded(
                           child: ListView.builder(
+                            controller: _matchController,
                             shrinkWrap: true,
                             itemCount: subscribedMatches.length,
                             itemBuilder: (context, index) {
@@ -200,6 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void showAll() {
+    goToStart(_matchController);
     if (isFiltering != false) {
       selectedIndex = -1;
       isFiltering = false;
@@ -208,6 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   filterByLeague(int index) {
+    goToStart(_matchController);
     if (selectedIndex != index) {
       _dashBoardViewModel.filterByLeague(
           leagueId: subscribedLeagues[index].externalLeagueId.toString());
@@ -225,24 +230,28 @@ class _HomeScreenState extends State<HomeScreen> {
   _scrollToTheNextItemView(
       {ScrollDirection scrollDirection = ScrollDirection.forward}) async {
     if (scrollDirection == ScrollDirection.forward) {
-      if (_scrollController.position.pixels <
-              _scrollController.position.maxScrollExtent &&
-          !_scrollController.position.outOfRange) {
-        await _scrollController.animateTo(
-            _scrollController.position.pixels + 100,
+      if (_leagueController.position.pixels <
+              _leagueController.position.maxScrollExtent &&
+          !_leagueController.position.outOfRange) {
+        await _leagueController.animateTo(
+            _leagueController.position.pixels + 100,
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeOut);
       }
     } else {
-      if (_scrollController.position.pixels >
-              _scrollController.position.minScrollExtent &&
-          !_scrollController.position.outOfRange) {
-        await _scrollController.animateTo(
-            _scrollController.position.pixels - 100,
+      if (_leagueController.position.pixels >
+              _leagueController.position.minScrollExtent &&
+          !_leagueController.position.outOfRange) {
+        await _leagueController.animateTo(
+            _leagueController.position.pixels - 100,
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeOut);
       }
     }
+  }
+  
+  void goToStart(ScrollController matchController) {
+    _matchController.jumpTo(-500);
   }
 }
 enum ScrollDirection { forward, backward }
