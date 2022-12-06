@@ -210,9 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   filterByLeague(int index) {
-      if(_matchController.hasClients) {
-        goToStart(_matchController);
-      }
+      goToStart(_matchController);
       if (selectedIndex != index) {
         context.read<DashBoardViewModel>().filterByLeague(
             leagueId: subscribedLeagues[index].externalLeagueId.toString());
@@ -234,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   
   void goToStart(ScrollController matchController) {
-    if(_matchController.offset > 50) {
+    if(matchController.hasClients && matchController.offset > 50) {
       _matchController.jumpTo(-500);
     }
   }
