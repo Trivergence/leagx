@@ -79,9 +79,13 @@
 
 	"authTxtDontHaveAccount": "Don't have an account? ",
 
-	"chooseAnExpertTxtChooseAnExpert": "Choose an Expert",
+	"chooseAnExpertTxtChooseAnExpert": "Choose an Analyst",
 	"chooseAnExpertTxtPredictions": "predictions",
 	"chooseAnExpertTxtSuccess": "Success",
+	"chooseAnExpertDialogTitle": "Confirm Selection",
+	"chooseAnExpertDialogBody": "Are you sure you want to choose this analyst?",
+	"chooseAnExpertDialogYes": "Yes",
+	"chooseAnExpertDialogNo": "No",
 
 	"chooseLeagueTxtChooseALeague": "Choose a League",
 	"chooseLeagueTxtSearch": "Search",

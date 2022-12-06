@@ -1,3 +1,4 @@
+import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,7 @@ class ConsultAnalystTile extends StatelessWidget {
               isCircular: true,
               imageUrl: imageUrl,
               onPressed: () {},
+              placeHolderImg: Assets.icPlayerAvatar,
               gradient: AppColors.orangishGradient,
               isBorderSolid: true,
             ),

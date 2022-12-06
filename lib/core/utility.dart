@@ -101,4 +101,13 @@ class Utility{
       return FontFamily.cairo;
     }
   }
+  static bool isPredictionPending(String? status) {
+    if (status == MatchStatus.finished.value ||
+        status == MatchStatus.afterExTime.value ||
+        status == MatchStatus.afterPanalty.value) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

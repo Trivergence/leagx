@@ -25,6 +25,5 @@ class AppUrl{
   static const String setupStripeCred = "/get_stripe_cred";
   static const String unsubscribeLeague = "leagues/un_subscribe";
   static const String liveAnimation = "isports/live";
-
-
+  static const String analystPredictions = "matches/experts_match_list";
 }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
@@ -11,8 +13,14 @@ class MatchPredictionTile extends StatefulWidget {
   final String? awayTeamName;
   final int homeScore;
   final int awayScore;
+  final bool isLocked;
   const MatchPredictionTile({
-    Key? key, required this.homeTeamName, required this.awayTeamName, required this.homeScore, required this.awayScore,
+    Key? key,
+    required this.homeTeamName, 
+    required this.awayTeamName, 
+    required this.homeScore, 
+    required this.awayScore, 
+    required this.isLocked,
   }) : super(key: key);
 
   @override
@@ -30,30 +38,52 @@ class _MatchPredictionTileState extends State<MatchPredictionTile> {
   }
   @override
   Widget build(BuildContext context) {
-    return !isLoading ? Container(
-      color: AppColors.textFieldColor,
-      padding: const EdgeInsets.all(15),
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextWidget(
-            text: loc.fixtureDetailsMatchTxtYourPredictions,
+    return !isLoading ? Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [          
+          Container(
+            color: AppColors.textFieldColor.withOpacity(0.3),
+            padding: const EdgeInsets.all(15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextWidget(
+                  text: loc.fixtureDetailsMatchTxtYourPredictions,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextWidget(
+                      text: "$homeTeamName - ${widget.homeScore}",
+                      color: AppColors.colorCyan,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    TextWidget(
+                      text: "$awayTeamName - ${widget.awayScore}",
+                      color: AppColors.colorYellow,
+                      fontWeight: FontWeight.w600),
+                  ],
+                )
+              ],
+            ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              TextWidget(
-                text: "$homeTeamName - ${widget.homeScore}",
-                color: AppColors.colorCyan,
-                fontWeight: FontWeight.w600,
+          if(widget.isLocked) Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                child: Container(
+                  color: Colors.transparent,
+                ),
               ),
-              TextWidget(
-                  text: "$awayTeamName - ${widget.awayScore}",
-                  color: AppColors.colorYellow,
-                  fontWeight: FontWeight.w600),
-            ],
-          )
+            ),
+          ),
+          if(widget.isLocked) const Icon(Icons.lock),
         ],
       ),
     )

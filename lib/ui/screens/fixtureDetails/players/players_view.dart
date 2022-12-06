@@ -6,6 +6,7 @@ import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/colors.dart';
+import '../../../../core/utility.dart';
 import '../../../../models/dashboard/fixture.dart';
 import '../../../../models/players.dart';
 import '../../../util/size/size_config.dart';
@@ -67,6 +68,7 @@ class PlayersView extends StatelessWidget {
               awayTeamName: prediction!.match.secondTeamName,
               homeScore: prediction!.firstTeamScore ?? 0,
               awayScore: prediction!.secondTeamScore ?? 0,
+              isLocked: prediction!.expertId != null,
             ),
             if (!ValidationUtils.isValid(prediction)) MainButton(text: loc.fixtureDetailsMatchBtnPredict, onPressed: _showSheet),
           ],

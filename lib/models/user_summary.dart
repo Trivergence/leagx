@@ -33,7 +33,7 @@ class UserSummary {
     required this.predictionSuccessRate,
     required this.coinEarned,
     required this.remainingPredictions,
-    required this.userDevices,
+    //required this.userDevices,
   });
 
   int id;
@@ -58,7 +58,7 @@ class UserSummary {
   num? predictionSuccessRate;
   num? coinEarned;
   int? remainingPredictions;
-  List<dynamic> userDevices;
+  //List<dynamic> userDevices;
 
   factory UserSummary.fromJson(Map<String, dynamic> json) => UserSummary(
         id: json["id"],
@@ -83,7 +83,7 @@ class UserSummary {
         predictionSuccessRate: json["prediction_success_rate"] ?? 0.0,
         coinEarned: json["coin_earned"] ?? 0,
         remainingPredictions: json["remaining_prediction_count"] ?? 0,
-        userDevices: List<dynamic>.from(json["user_devices"].map((x) => x)),
+        //userDevices: List<dynamic>.from(json["user_devices"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -109,6 +109,6 @@ class UserSummary {
         "prediction_success_rate": predictionSuccessRate,
         "coin_earned": coinEarned,
         "remaining_prediction_count": remainingPredictions,
-        "user_devices": List<dynamic>.from(userDevices.map((x) => x)),
+        //"user_devices": List<dynamic>.from(userDevices.map((x) => x)),
       };
 }

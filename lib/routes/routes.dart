@@ -1,4 +1,5 @@
 import 'package:leagx/models/choose_plan_args.dart';
+import 'package:leagx/models/dashboard/fixture.dart';
 import 'package:leagx/models/match_args.dart';
 import 'package:leagx/models/update_profile_args.dart';
 import 'package:leagx/ui/screens/add_payout_details.dart/add_payout_details.dart';
@@ -119,7 +120,7 @@ class Routes {
       case notification:
         return generateRoute(routeSettings.name!, const NotificationScreen());
       case chooseAnalyst:
-        return generateRoute(routeSettings.name!, ConsultAnalystScreen());
+        return generateRoute(routeSettings.name!, ConsultAnalystScreen(matchDetails: routeSettings.arguments as Fixture,));
       case addNews:
         return generateRoute(routeSettings.name!, const AddNewsScreen());
       case editChoosePlan:

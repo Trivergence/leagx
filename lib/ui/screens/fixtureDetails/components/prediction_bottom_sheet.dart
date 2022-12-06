@@ -51,7 +51,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    leagueId = getMatchId();
+    leagueId = getIntLeageId();
     return Padding(
       padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 25.0),
       child: Column(
@@ -196,7 +196,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
     }
   }
 
-  int? getMatchId() {
+  int? getIntLeageId() {
      List<SubscribedLeague> subscribedLeagues = context.read<DashBoardViewModel>()
     .subscribedLeagues
     .where((league) => league.externalLeagueId.toString() == widget.matchDetails!.leagueId).toList();
@@ -205,10 +205,9 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
     } else {
       return null;
     }
-
   }
 
-  Future<void> _chooseExpert() async => await Navigator.of(_context!).pushNamed(Routes.chooseAnalyst);
+  Future<void> _chooseExpert() async => await Navigator.of(_context!).pushReplacementNamed(Routes.chooseAnalyst, arguments: widget.matchDetails);
   
 
   Future<void> translateData() async {

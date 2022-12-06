@@ -35,12 +35,14 @@ class FixtureDetailViewModel extends BaseModel {
   List<Player> _awayTeamPlayers = [];
   List<Player> _homeTeamPlayers = [];
   List<Prediction> _predictions = [];
+  List<UserSummary> _analyst = [];
 
   LiveMatch? get liveMatch => _liveMatch;
   List<Fixture> get matchDetails => _matchDetails;
   List<Player> get awayTeamPlayers => _awayTeamPlayers;
   List<Player> get homeTeamPlayers => _homeTeamPlayers;
   List<Prediction> get getPredictions => _predictions;
+  List<UserSummary> get getAnalysts => _analyst;
 
   Future<void> getData({required String matchId}) async {
     setBusy(true);
@@ -52,11 +54,12 @@ class FixtureDetailViewModel extends BaseModel {
         await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
         await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
       }
+      await getAnalystPredictions(matchId: matchId);
     } on Exception catch (_) {
       setBusy(false);
     }
   }
-    Future<void> refreshData({required String matchId}) async {
+  Future<void> refreshData({required String matchId}) async {
     await getMatchDetails(matchId);
     notifyListeners();
   }
@@ -243,5 +246,25 @@ class FixtureDetailViewModel extends BaseModel {
     required String matchId,
     required LiveMatch liveMatch}) {
       _cachedLink[matchId] = liveMatch;
+  }
+
+  Future<void> getAnalystPredictions({required String matchId}) async {
+    List<dynamic> tempList = await ApiService.getListRequest(
+      showToast: false,
+      baseUrl: AppUrl.baseUrl,
+      url: AppUrl.analystPredictions,
+      modelName: ApiModels.userSummary,
+      headers: {
+        "apitoken": preferenceHelper.authToken
+      },
+      parameters: {
+        "external_match_id": matchId,
+      });
+    _analyst = tempList.cast<UserSummary>();
+    _analyst.sort((analyst1, analyst2) => sortAnalyst(analyst1, analyst2));
+  }
+  int sortAnalyst(UserSummary analyst1, UserSummary analyst2) {
+    return analyst2.predictionSuccessRate!.round()
+        .compareTo(analyst1.predictionSuccessRate!.round());
   }
 }
