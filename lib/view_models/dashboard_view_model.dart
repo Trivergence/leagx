@@ -17,6 +17,7 @@ import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/app_constants.dart';
+import '../constants/enums.dart';
 import '../core/network/app_url.dart';
 import '../core/sharedpref/sharedpref.dart';
 import '../models/customer_cred.dart';
@@ -34,8 +35,9 @@ class DashBoardViewModel extends BaseModel {
   List<Leader> _leaders = [];
   List<int> _subscribedLeagueIds = [];
   bool _isInitialized = false;
+  bool _isLoading = true;
 
-
+  bool get isLoading => _isLoading;
   List<SubscribedLeague> get subscribedLeagues => _subscribedLeagues;
   List<Fixture> get subscribedMatches => _subscribedMatches;
   List<Fixture> get filteredMatches => _filteredMatches;
@@ -45,19 +47,26 @@ class DashBoardViewModel extends BaseModel {
   UserSummary? get userSummary => _userSummary;
   bool get isInitialized => _isInitialized;
 
+  setLoading(bool value) {
+    _isLoading = value;
+    notify();
+  }
+
   Future<void> getData(BuildContext context,{bool showToast = true}) async {
-    setBusy(true);
+    if(_isLoading == false) {
+      setLoading(true);
+    }
     try {
       await getSubscribedLeagues(showToast: showToast);
       await getAllLeaders(showToast: showToast);
       await getUserSummary(showToast: showToast);
       await getSubscribedMatches(showToast: showToast);
-      setBusy(false);
+      setLoading(false);
       if (subscribedLeagues.isNotEmpty) {
         await getAllNews(showToast: showToast);
       }
     } on Exception catch (_) {
-      setBusy(false);
+      setLoading(false);
     }
   }
 
@@ -96,12 +105,11 @@ class DashBoardViewModel extends BaseModel {
         // _subscribedMatches =
         //     _subscribedMatches.where((match) => isValid(match, now)).toList();
       } on Exception catch (_) {
-        setBusy(false);
+        setLoading(false);
       }
     } else {
       _subscribedMatches = [];
     }
-    notifyListeners();
   }
 
   Future<void> getSubscribedLeagues({bool showToast = true}) async {
@@ -125,7 +133,7 @@ class DashBoardViewModel extends BaseModel {
         await subscribeDefaultLeague(user.id);
       }
     } on Exception catch (_) {
-      setBusy(false);
+      setLoading(false);
     }
   }
 
@@ -135,11 +143,11 @@ class DashBoardViewModel extends BaseModel {
 
   bool isValid(Fixture match, DateTime now) {
     String matchStatus = match.matchStatus!;
-    if (matchStatus == "Fisnished" ||
-            matchStatus == "After ET" ||
-            matchStatus == "After Pen." ||
-            matchStatus == "Cancelled" ||
-            matchStatus == "Awarded"
+    if (matchStatus == MatchStatus.finished.value ||
+            matchStatus == MatchStatus.afterExTime.value ||
+            matchStatus == MatchStatus.afterPanalty.value ||
+            matchStatus == MatchStatus.cancelled.value ||
+            matchStatus == MatchStatus.awarded.value
         //match.matchDate.isBefore(now)
         ) {
       return false;
@@ -156,7 +164,7 @@ class DashBoardViewModel extends BaseModel {
         return null;
       }
     } on Exception catch (_) {
-      setBusy(false);
+      setLoading(false);
       return null;
     }
   }
@@ -181,7 +189,7 @@ class DashBoardViewModel extends BaseModel {
           ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
         }
       } on Exception catch (_) {
-        setBusy(false);
+        setLoading(false);
       }
     }
   }
@@ -204,7 +212,7 @@ class DashBoardViewModel extends BaseModel {
           );
         _news = tempList.cast<News>();
       } on Exception catch (_) {
-        setBusy(false);
+        setLoading(false);
       }
     }
   }
@@ -227,7 +235,7 @@ class DashBoardViewModel extends BaseModel {
       //_subscribedMatches.sort((fixture1, fixture2) => sortMatches(fixture1, fixture2));
       _leaders.sort((leader1,leader2) => sortLeader(leader1,leader2));
     } on Exception catch (_) {
-      setBusy(false);
+      setLoading(false);
     }
   }
 
@@ -244,7 +252,7 @@ class DashBoardViewModel extends BaseModel {
         return _news.where((newsItems) => newsItems.leagueId == id).toList();
       }
     } on Exception catch (_) {
-      setBusy(false);
+      setLoading(false);
       return [];
     }
   }
@@ -324,5 +332,27 @@ class DashBoardViewModel extends BaseModel {
   
   int sortLeader(Leader leader1, Leader leader2) {
      return leader2.predictionSuccessRate!.compareTo(leader1.predictionSuccessRate!);
+  }
+
+  scrollList({required ScrollController scrollController, ScrollDirection scrollDirection = ScrollDirection.forward}) async {
+        if (scrollDirection == ScrollDirection.forward) {
+      if (scrollController.position.pixels <
+              scrollController.position.maxScrollExtent &&
+          !scrollController.position.outOfRange) {
+        await scrollController.animateTo(
+            scrollController.position.pixels + 100,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeOut);
+      }
+    } else {
+      if (scrollController.position.pixels >
+              scrollController.position.minScrollExtent &&
+          !scrollController.position.outOfRange) {
+        await scrollController.animateTo(
+            scrollController.position.pixels - 100,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeOut);
+      }
+    }
   }
 }

@@ -29,6 +29,7 @@ import '../ui/util/loader/loader.dart';
 
 class FixtureDetailViewModel extends BaseModel {
   LiveMatch? _liveMatch;
+  // ignore: prefer_final_fields
   Map<String, LiveMatch> _cachedLink = {};
   List<Fixture> _matchDetails = [];
   List<Player> _awayTeamPlayers = [];
@@ -57,8 +58,6 @@ class FixtureDetailViewModel extends BaseModel {
   }
     Future<void> refreshData({required String matchId}) async {
     await getMatchDetails(matchId);
-    await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
-    await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
     notifyListeners();
   }
 

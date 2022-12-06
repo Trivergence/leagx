@@ -32,16 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
   List<SubscribedLeague> subscribedLeagues = [];
   bool isFiltering = false;
   int selectedIndex = -1;
-  late ScrollController _scrollController;
-  final int baseScrollPoint = 3;
-  double scrollWidth = 0.0;
-  int move = 1;
+  late ScrollController _leagueController;
+  late ScrollController _matchController;
 
   late DashBoardViewModel _dashBoardViewModel;
 
   @override
   Widget build(BuildContext context) {
-    _scrollController = ScrollController();
+    _leagueController = ScrollController();
+    _matchController = ScrollController();
+    subscribedMatches = context.select<DashBoardViewModel, List<Fixture>>((dashboardModel) => dashboardModel.subscribedMatches);
     _dashBoardViewModel = context.read<DashBoardViewModel>();
     subscribedMatches = isFiltering == true
         ? _dashBoardViewModel.filteredMatches
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: SizedBox(
                           height: 40.0,
                           child: ListView.builder(
-                            controller: _scrollController,
+                            controller: _leagueController,
                             scrollDirection: Axis.horizontal,
                             itemCount: subscribedLeagues.length,
                             shrinkWrap: true,
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     if(subscribedLeagues.isNotEmpty) InkWell(
-                        onTap: () => _scrollToTheNextItemView(),
+                        onTap: () => _dashBoardViewModel.scrollList(scrollController: _leagueController),
                         child: const Icon(Icons.arrow_forward_ios_rounded))
                   ],
                 ),
@@ -152,6 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         UIHelper.verticalSpaceSmall,
                         Expanded(
                           child: ListView.builder(
+                            controller: _matchController,
                             shrinkWrap: true,
                             itemCount: subscribedMatches.length,
                             itemBuilder: (context, index) {
@@ -200,6 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void showAll() {
+    goToStart(_matchController);
     if (isFiltering != false) {
       selectedIndex = -1;
       isFiltering = false;
@@ -208,41 +210,30 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   filterByLeague(int index) {
-    if (selectedIndex != index) {
-      _dashBoardViewModel.filterByLeague(
+      goToStart(_matchController);
+      if (selectedIndex != index) {
+        context.read<DashBoardViewModel>().filterByLeague(
+            leagueId: subscribedLeagues[index].externalLeagueId.toString());
+        setState(() {
+          isFiltering = true;
+          selectedIndex = index;
+        });
+      } else {
+        context.read<DashBoardViewModel>().filterByLeague(
           leagueId: subscribedLeagues[index].externalLeagueId.toString());
-      setState(() {
-        isFiltering = true;
-        selectedIndex = index;
-      });
-    }
+      }
   }
 
   Future<void> _refreshData() async {
     await _dashBoardViewModel.getAllFixtures();
+    filterByLeague(selectedIndex);
+    setState(() {
+    });
   }
-
-  _scrollToTheNextItemView(
-      {ScrollDirection scrollDirection = ScrollDirection.forward}) async {
-    if (scrollDirection == ScrollDirection.forward) {
-      if (_scrollController.position.pixels <
-              _scrollController.position.maxScrollExtent &&
-          !_scrollController.position.outOfRange) {
-        await _scrollController.animateTo(
-            _scrollController.position.pixels + 100,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeOut);
-      }
-    } else {
-      if (_scrollController.position.pixels >
-              _scrollController.position.minScrollExtent &&
-          !_scrollController.position.outOfRange) {
-        await _scrollController.animateTo(
-            _scrollController.position.pixels - 100,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeOut);
-      }
+  
+  void goToStart(ScrollController matchController) {
+    if(matchController.hasClients && matchController.offset > 50) {
+      _matchController.jumpTo(-500);
     }
   }
 }
-enum ScrollDirection { forward, backward }
