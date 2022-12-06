@@ -1,4 +1,4 @@
-import 'package:leagx/ui/screens/choose_an_expert/components/choose_an_expert_tile.dart';
+import 'package:leagx/ui/screens/choose_analyst/components/choose_analyst_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 import '../../../models/leader.dart';
 
 // ignore: must_be_immutable
-class ChooseAnExpertScreen extends StatelessWidget {
-  ChooseAnExpertScreen({Key? key}) : super(key: key);
+class ConsultAnalystScreen extends StatelessWidget {
+  ConsultAnalystScreen({Key? key}) : super(key: key);
 
   List<Leader> expertList = [];
 
@@ -25,7 +25,7 @@ class ChooseAnExpertScreen extends StatelessWidget {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           Leader expert = expertList[index];
-          return ChooseAnExpertTile(
+          return ConsultAnalystTile(
             number: index + 1,
             imageUrl: expert.profileImg,
             title: expert.firstName! + expert.lastName!,

@@ -10,7 +10,7 @@ import 'package:leagx/ui/screens/authentication/forgot_password.dart';
 import 'package:leagx/ui/screens/authentication/reset_password.dart';
 import 'package:leagx/ui/screens/authentication/signin.dart';
 import 'package:leagx/ui/screens/authentication/signup.dart';
-import 'package:leagx/ui/screens/choose_an_expert/choose_an_expert.dart';
+import 'package:leagx/ui/screens/choose_analyst/choose_analyst.dart';
 import 'package:leagx/ui/screens/choose_league/choose_league_screen.dart';
 import 'package:leagx/ui/screens/choose_plan/edit_choose_plan.dart';
 import 'package:leagx/ui/screens/dashboard/components/my_profile/components/choose_language.dart';
@@ -58,7 +58,7 @@ class Routes {
   static const String privacyPolicy = "/privacyPolicy";
   static const String user = "/user";
   static const String notification = "/notification";
-  static const String chooseAnExpert = "/chooseAnExpert";
+  static const String chooseAnalyst = "/chooseAnExpert";
   static const String addNews = "/addNews";
   static const String editChoosePlan = "/editChoosePlan";
   static const String chooseLanguage = "/chooseLanguage";
@@ -118,8 +118,8 @@ class Routes {
         return generateRoute(routeSettings.name!, UserScreen());
       case notification:
         return generateRoute(routeSettings.name!, const NotificationScreen());
-      case chooseAnExpert:
-        return generateRoute(routeSettings.name!, ChooseAnExpertScreen());
+      case chooseAnalyst:
+        return generateRoute(routeSettings.name!, ConsultAnalystScreen());
       case addNews:
         return generateRoute(routeSettings.name!, const AddNewsScreen());
       case editChoosePlan:

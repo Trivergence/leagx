@@ -6,7 +6,7 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 
-class ChooseAnExpertTile extends StatelessWidget {
+class ConsultAnalystTile extends StatelessWidget {
   final int number;
   final String? imageUrl;
   final String title;
@@ -14,7 +14,7 @@ class ChooseAnExpertTile extends StatelessWidget {
   final String successRate;
   final VoidCallback onTileTap;
 
-  const ChooseAnExpertTile({
+  const ConsultAnalystTile({
     Key? key,
     required this.number,
     required this.imageUrl,

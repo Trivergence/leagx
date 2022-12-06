@@ -15,6 +15,7 @@ import '../../../../constants/colors.dart';
 import '../../../../core/network/internet_info.dart';
 import '../../../../models/dashboard/fixture.dart';
 import '../../../util/ui/ui_helper.dart';
+import '../../../widgets/gradient/gradient_border_button.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 import 'score_picker.dart';
@@ -166,10 +167,10 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
             onPressed: _predictMatch,
           ),
           UIHelper.verticalSpace(20),
-          // GradientBorderButton(
-          //   text: loc.fixtureDetailsBtnExpertAdvise,
-          //   onPressed: () => _chooseExpert(),
-          // ),
+          GradientBorderButton(
+            text: loc.fixtureDetailsBtnConsultAdvisor,
+            onPressed: _chooseExpert,
+          ),
         ],
       ),
     );
@@ -207,12 +208,8 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
 
   }
 
-  Future<void> _chooseExpert() async {
-    dynamic id = await Navigator.of(_context!).pushNamed(Routes.chooseAnExpert);
-    if(id != null) {
-      expertId = id;
-    }
-  }
+  Future<void> _chooseExpert() async => await Navigator.of(_context!).pushNamed(Routes.chooseAnalyst);
+  
 
   Future<void> translateData() async {
     String originalCommaText = widget.matchDetails!.matchHometeamName +
