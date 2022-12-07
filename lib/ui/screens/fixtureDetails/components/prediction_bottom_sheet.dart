@@ -15,6 +15,7 @@ import '../../../../constants/colors.dart';
 import '../../../../core/network/internet_info.dart';
 import '../../../../models/dashboard/fixture.dart';
 import '../../../util/ui/ui_helper.dart';
+import '../../../widgets/gradient/gradient_border_button.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/text_widget.dart';
 import 'score_picker.dart';
@@ -50,7 +51,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    leagueId = getMatchId();
+    leagueId = getIntLeageId();
     return Padding(
       padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 25.0),
       child: Column(
@@ -166,10 +167,10 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
             onPressed: _predictMatch,
           ),
           UIHelper.verticalSpace(20),
-          // GradientBorderButton(
-          //   text: loc.fixtureDetailsBtnExpertAdvise,
-          //   onPressed: () => _chooseExpert(),
-          // ),
+          GradientBorderButton(
+            text: loc.fixtureDetailsBtnConsultAdvisor,
+            onPressed: _chooseExpert,
+          ),
         ],
       ),
     );
@@ -195,7 +196,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
     }
   }
 
-  int? getMatchId() {
+  int? getIntLeageId() {
      List<SubscribedLeague> subscribedLeagues = context.read<DashBoardViewModel>()
     .subscribedLeagues
     .where((league) => league.externalLeagueId.toString() == widget.matchDetails!.leagueId).toList();
@@ -204,15 +205,10 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
     } else {
       return null;
     }
-
   }
 
-  Future<void> _chooseExpert() async {
-    dynamic id = await Navigator.of(_context!).pushNamed(Routes.chooseAnExpert);
-    if(id != null) {
-      expertId = id;
-    }
-  }
+  Future<void> _chooseExpert() async => await Navigator.of(_context!).pushReplacementNamed(Routes.chooseAnalyst, arguments: widget.matchDetails);
+  
 
   Future<void> translateData() async {
     String originalCommaText = widget.matchDetails!.matchHometeamName +

@@ -11,6 +11,7 @@ import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
+import '../../../core/utility.dart';
 
 // ignore: must_be_immutable
 class PredicitonsScreen extends StatelessWidget {
@@ -56,7 +57,7 @@ class PredicitonsScreen extends StatelessWidget {
                 predictionRate: prediction.accuratePercentage != null 
                   ? prediction.accuratePercentage.toString()
                   : "0.0",
-                isPending: isPending(prediction.status),
+                isPending: Utility.isPredictionPending(prediction.status),
               );
             },
           ),
@@ -67,13 +68,5 @@ class PredicitonsScreen extends StatelessWidget {
         )),
       ),
     );
-  }
-
-  isPending(String? status) {
-    if( status == MatchStatus.finished.value || status == MatchStatus.afterExTime.value || status == MatchStatus.afterPanalty.value) {
-      return false;
-    } else {
-      return true;
-    }
   }
 }

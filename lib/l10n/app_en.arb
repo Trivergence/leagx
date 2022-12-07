@@ -79,9 +79,13 @@
 
 	"authTxtDontHaveAccount": "Don't have an account? ",
 
-	"chooseAnExpertTxtChooseAnExpert": "Choose an Expert",
+	"chooseAnExpertTxtChooseAnExpert": "Choose an Analyst",
 	"chooseAnExpertTxtPredictions": "predictions",
 	"chooseAnExpertTxtSuccess": "Success",
+	"chooseAnExpertDialogTitle": "Confirm Selection",
+	"chooseAnExpertDialogBody": "Are you sure you want to choose this analyst?",
+	"chooseAnExpertDialogYes": "Yes",
+	"chooseAnExpertDialogNo": "No",
 
 	"chooseLeagueTxtChooseALeague": "Choose a League",
 	"chooseLeagueTxtSearch": "Search",
@@ -191,7 +195,7 @@
 	"fixtureDetailsTxtPredictMatchResult": "Predict Match Result",
 	"fixtureDetailsTxtMakeMyPredictPublic": "Make my predict public",
 	"fixtureDetailsBtnSubmit": "SUBMIT",
-	"fixtureDetailsBtnExpertAdvise": "Expert Advise",
+	"fixtureDetailsBtnConsultAdvisor": "Consult Advisor",
 	"fixtureDetailsMatchTxtRealTImeMatchPreview": "Live match",
 	"fixtureDetailsMatchTxtMatchDetails": "Match Details",
 	"fixtureDetailsMatchTxtShooting": "Shooting",

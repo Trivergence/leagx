@@ -96,6 +96,7 @@ class LiveMatchWidget extends StatelessWidget {
           awayTeamName: prediction!.match.secondTeamName,
           homeScore: prediction!.firstTeamScore ?? 0,
           awayScore: prediction!.secondTeamScore ?? 0,
+          isLocked: prediction!.expertId != null,
         ),
         if(statistics.isEmpty) UIHelper.verticalSpaceXL,
         if (!ValidationUtils.isValid(prediction)) SizedBox(

@@ -78,9 +78,13 @@
 	"authSignupTxtPasswordNotMatch":"كلمة المرور غير متطابقة",
 	"authTxtDontHaveAccount": "ليس لديك حساب؟",
 
-	"chooseAnExpertTxtChooseAnExpert": "اختر خبيرًا",
+	"chooseAnExpertTxtChooseAnExpert": "اختر محلل",
 	"chooseAnExpertTxtPredictions": "التوقعات",
 	"chooseAnExpertTxtSuccess": "نجاح",
+	"chooseAnExpertDialogTitle": "تأكيد الاختيار",
+	"chooseAnExpertDialogBody": "هل أنت متأكد أنك تريد اختيار هذا المحلل؟",
+	"chooseAnExpertDialogYes": "نعم",
+	"chooseAnExpertDialogNo": "رقم",
 
 	"chooseLeagueBtnSubscribe": "الاشتراك",
 	"chooseLeagueBtnUpgrade": "رفع مستوى",
@@ -157,7 +161,7 @@
 	"faqsTxtFaqs": "أسئلة وأجوبة",
 	"faqsTxtFrequentlyAskedQuestions": "أسئلة مكررة",
 
-	"fixtureDetailsBtnExpertAdvise": "مشورة الخبراء",
+	"fixtureDetailsBtnConsultAdvisor": "الاستعانة بخبير",
 	"fixtureDetailsBtnMatch": "مباراة",
 	"fixtureDetailsBtnNews": "التحليلات",
 	"fixtureDetailsBtnPlayers": "اللاعبون",

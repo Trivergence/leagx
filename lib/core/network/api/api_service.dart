@@ -379,16 +379,17 @@ class ApiService {
         }
         return [];
       }
-    } catch (e) {
-      debugPrint(e.toString());
-      if (cache == false && showToast == true) {
-        ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
-      } else {
-        return await getCachedList(cacheBoxName, modelName);
-      }
-      Loader.hideLoader();
-      return [];
-    }
+    } 
+    // catch (e) {
+    //   debugPrint(e.toString());
+    //   if (cache == false && showToast == true) {
+    //     ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
+    //   } else {
+    //     return await getCachedList(cacheBoxName, modelName);
+    //   }
+    //   Loader.hideLoader();
+    //   return [];
+    // }
   }
   static Future<bool> postWoResponce({
     required String url,
