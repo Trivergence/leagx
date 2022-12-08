@@ -14,7 +14,6 @@ class AppBarChip extends StatelessWidget {
     required this.leadingIcon,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(

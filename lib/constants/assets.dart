@@ -23,7 +23,6 @@ class Assets {
   static const String icDrawerAdmin = "assets/icons/ic_drawer_admin.png";
   static const String splashIcon = "assets/icons/ic_splash.png";
 
-
   //SVG Images
   static const String icBullsEye = "assets/svg/ic_bullseye.svg";
   static const String icCoin = "assets/svg/ic_coin.svg";

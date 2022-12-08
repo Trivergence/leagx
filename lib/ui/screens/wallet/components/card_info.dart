@@ -11,7 +11,9 @@ class CardInfoWidget extends StatelessWidget {
   final String expYear;
   const CardInfoWidget({
     Key? key,
-    required this.last4, required this.expMonth, required this.expYear,
+    required this.last4,
+    required this.expMonth,
+    required this.expYear,
   }) : super(key: key);
 
   @override
@@ -24,35 +26,38 @@ class CardInfoWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
         child:
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Row(
             children: [
               const Icon(Icons.payment),
               UIHelper.horizontalSpaceSmall,
               TextWidget(
-                  text: UIHelper.bullet 
-                  + UIHelper.bullet 
-                  + UIHelper.bullet 
-                  + UIHelper.bullet + " " 
-                  + UIHelper.bullet 
-                  + UIHelper.bullet
-                  + UIHelper.bullet 
-                  + UIHelper.bullet + " "
-                  + UIHelper.bullet 
-                  + UIHelper.bullet 
-                  + UIHelper.bullet 
-                  + UIHelper.bullet + " "
-                  + last4,
-                  fontWeight: FontWeight.w600,
-                  textSize: Dimens.textSmall,),
+                text: UIHelper.bullet +
+                    UIHelper.bullet +
+                    UIHelper.bullet +
+                    UIHelper.bullet +
+                    " " +
+                    UIHelper.bullet +
+                    UIHelper.bullet +
+                    UIHelper.bullet +
+                    UIHelper.bullet +
+                    " " +
+                    UIHelper.bullet +
+                    UIHelper.bullet +
+                    UIHelper.bullet +
+                    UIHelper.bullet +
+                    " " +
+                    last4,
+                fontWeight: FontWeight.w600,
+                textSize: Dimens.textSmall,
+              ),
             ],
           ),
           UIHelper.horizontalSpaceSmall,
           TextWidget(
-              text: expMonth +
-                  "/" +
-                  expYear, fontWeight: FontWeight.w600,
-                  textSize: Dimens.textSmall)
+              text: expMonth + "/" + expYear,
+              fontWeight: FontWeight.w600,
+              textSize: Dimens.textSmall)
         ]),
       ),
     );

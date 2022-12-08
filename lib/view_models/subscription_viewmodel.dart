@@ -36,8 +36,7 @@ class SubscriptionViewModel extends BaseModel {
             "apitoken": preferenceHelper.authToken,
           },
           modelName: ApiModels.getPlans,
-          showToast: showToast
-        );
+          showToast: showToast);
       _listOfPlan = tempList.cast<SubscriptionPlan>();
     } on Exception catch (e) {
       debugPrint(e.toString());
@@ -75,9 +74,14 @@ class SubscriptionViewModel extends BaseModel {
       Map<String, dynamic> body = {
         "user_id": user!.id,
         "plan_id": planId,
-        "league": {"title": leagueTitle, "logo": leagueImg, "external_league_id": int.parse(leagueId)}
+        "league": {
+          "title": leagueTitle,
+          "logo": leagueImg,
+          "external_league_id": int.parse(leagueId)
+        }
       };
-      bool success = await ApiService.postWoResponce(url: AppUrl.subscribeLeague, body: body);
+      bool success = await ApiService.postWoResponce(
+          url: AppUrl.subscribeLeague, body: body);
       if (success) {
         Loader.hideLoader();
         FancyDialog.showSuccess(
@@ -99,7 +103,7 @@ class SubscriptionViewModel extends BaseModel {
     }
   }
 
-    upgradeLeagueByCard(
+  upgradeLeagueByCard(
       {required BuildContext context,
       required int planId,
       required String leagueId,
@@ -119,31 +123,31 @@ class SubscriptionViewModel extends BaseModel {
             context: context, leagueId: internalLeagueId);
         if (isUnsubscribed == true) {
           Map<String, dynamic> body = {
-          "user_id": user.id,
-          "plan_id": planId,
-          "league": {
-            "title": leagueTitle,
-            "logo": leagueImg,
-            "external_league_id": int.parse(leagueId)
-          }
+            "user_id": user.id,
+            "plan_id": planId,
+            "league": {
+              "title": leagueTitle,
+              "logo": leagueImg,
+              "external_league_id": int.parse(leagueId)
+            }
           };
           bool success = await ApiService.postWoResponce(
-            url: AppUrl.subscribeLeague, body: body);
+              url: AppUrl.subscribeLeague, body: body);
           if (success) {
-          Loader.hideLoader();
-          FancyDialog.showSuccess(
-            context: context,
-            title: loc.choosePlanDialogUpgradeSuccessTitle,
-            description: loc.choosePlanDialogUpgradeSuccessDesc,
-            onOkPressed: () async {
-              Navigator.of(context).popUntil((route) {
-                return route.settings.name == Routes.chooseLeague;
-              });
-              await loadData(context);
-            },
-          );
+            Loader.hideLoader();
+            FancyDialog.showSuccess(
+              context: context,
+              title: loc.choosePlanDialogUpgradeSuccessTitle,
+              description: loc.choosePlanDialogUpgradeSuccessDesc,
+              onOkPressed: () async {
+                Navigator.of(context).popUntil((route) {
+                  return route.settings.name == Routes.chooseLeague;
+                });
+                await loadData(context);
+              },
+            );
           } else {
-           Loader.hideLoader();
+            Loader.hideLoader();
           }
         } else {
           ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
@@ -209,10 +213,13 @@ class SubscriptionViewModel extends BaseModel {
     Loader.showLoader();
     User? user = locator<SharedPreferenceHelper>().getUser();
     if (user != null) {
-      int? internalLeagueId = context.read<DashBoardViewModel>().getLeagueInternalId(leagueId.toString());
-      if(internalLeagueId != null) {
-        bool isUnsubscribed = await unsubscribeLeague(context: context, leagueId: internalLeagueId);
-        if(isUnsubscribed == true) {
+      int? internalLeagueId = context
+          .read<DashBoardViewModel>()
+          .getLeagueInternalId(leagueId.toString());
+      if (internalLeagueId != null) {
+        bool isUnsubscribed = await unsubscribeLeague(
+            context: context, leagueId: internalLeagueId);
+        if (isUnsubscribed == true) {
           Map<String, dynamic> body = {
             "user_id": user.id,
             "plan_id": planId,
@@ -247,18 +254,17 @@ class SubscriptionViewModel extends BaseModel {
       } else {
         ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.error);
       }
-      
     } else {
       Loader.hideLoader();
     }
   }
 
   // void showUnsubscribeDialog({required  BuildContext context, required int leagueId}) {
-  //   ConfirmationDialog.show(context: context, 
-  //   title: loc.chooseLeagueDialogTitle, 
-  //   body: loc.chooseLeagueDialogbody, 
+  //   ConfirmationDialog.show(context: context,
+  //   title: loc.chooseLeagueDialogTitle,
+  //   body: loc.chooseLeagueDialogbody,
   //   negativeBtnTitle: loc.chooseLeagueDialogBtnCancel,
-  //   positiveBtnTitle: loc.chooseLeagueDialogBtnConfirm, 
+  //   positiveBtnTitle: loc.chooseLeagueDialogBtnConfirm,
   //   onPositiveBtnPressed: (dialogContext) async {
   //     bool isConnnected = await InternetInfo.isConnected();
   //     if (isConnnected == true) {
@@ -270,18 +276,15 @@ class SubscriptionViewModel extends BaseModel {
 
   Future<bool> unsubscribeLeague({
     required BuildContext context,
-    required int leagueId,}) async {
-      bool success = false;
+    required int leagueId,
+  }) async {
+    bool success = false;
     Loader.showLoader();
     User? user = locator<SharedPreferenceHelper>().getUser();
     if (user != null) {
-    success = await ApiService.callPutApiWoResponce(
-      body: {
-       "league_id": leagueId, 
-       "user_id": user.id
-      },
-      url: AppUrl.unsubscribeLeague
-     );
+      success = await ApiService.callPutApiWoResponce(
+          body: {"league_id": leagueId, "user_id": user.id},
+          url: AppUrl.unsubscribeLeague);
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
       success = false;
@@ -294,12 +297,11 @@ class SubscriptionViewModel extends BaseModel {
       List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.footballBaseUrl,
           parameters: {
-            "action": "get_leagues", 
+            "action": "get_leagues",
             "APIkey": AppConstants.footballApiKey
           },
           modelName: ApiModels.getLeagues,
-          showToast: showToast
-        );
+          showToast: showToast);
       _leagues = tempList.cast<League>();
     } on Exception catch (_) {
       setBusy(false);
@@ -307,15 +309,20 @@ class SubscriptionViewModel extends BaseModel {
   }
 
   List<League> searchLeague(String value) {
-    return _leagues.where((league) => league.leagueName.toLowerCase().contains(value.toLowerCase())).toList();
+    return _leagues
+        .where((league) =>
+            league.leagueName.toLowerCase().contains(value.toLowerCase()))
+        .toList();
   }
 
   Future<bool> purchaseModel(WalletViewModel walletModel, String price) async {
     bool success = false;
     if (walletModel.getPayementMethods.isEmpty) {
-      success = await walletModel.purchaseIndirectly(amount: price, currency: "usd");
+      success =
+          await walletModel.purchaseIndirectly(amount: price, currency: "usd");
     } else {
-      success = await walletModel.purchaseDirectly(amount: price, currency: "usd");
+      success =
+          await walletModel.purchaseDirectly(amount: price, currency: "usd");
     }
     return success;
   }

@@ -25,8 +25,8 @@ class TextWidget extends StatelessWidget {
     this.isRich = false,
     this.overflow = TextOverflow.visible,
     this.fontFamily,
-    this.maxLines, 
-    this.letterSpace, 
+    this.maxLines,
+    this.letterSpace,
     this.textDirection,
   }) : super(key: key);
 
@@ -51,8 +51,8 @@ class TextWidget extends StatelessWidget {
         : Text(
             text,
             style: TextStyle(
-                color: color, 
-                fontSize: textSize, 
+                color: color,
+                fontSize: textSize,
                 fontWeight: fontWeight,
                 letterSpacing: letterSpace),
             textAlign: textAlign,

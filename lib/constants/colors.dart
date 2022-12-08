@@ -17,7 +17,6 @@ class AppColors {
   static const Color colorPink = Color(0xFFEE4A80);
   static const Color colorPink500 = Color(0x50EE4A80);
 
-
   static const Color colorPrimary = Color(0xFF4DACFF);
   static const Color primaryColorDark = Color(0xFF0066C0);
   static const Color colorPrimaryLight = Color(0xFF86C4FA);
@@ -40,19 +39,20 @@ class AppColors {
     900: Color(0xFF0066C0)
   };
 
-  static const Gradient pinkishGradient = LinearGradient(colors: [
-    Color(0xFFF67599),
-    Color(0xFFEA3F85),
-    Color(0xFFEA3F85),
-    Color(0xFFEA3F85),
-    Color(0xFFE5257C),
-    Color(0xFFE31C79),
-    Color(0xFF8E2191),
-    Color(0xFF8E2191),
-    Color(0xFF5F259F),
-  ],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
+  static const Gradient pinkishGradient = LinearGradient(
+    colors: [
+      Color(0xFFF67599),
+      Color(0xFFEA3F85),
+      Color(0xFFEA3F85),
+      Color(0xFFEA3F85),
+      Color(0xFFE5257C),
+      Color(0xFFE31C79),
+      Color(0xFF8E2191),
+      Color(0xFF8E2191),
+      Color(0xFF5F259F),
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
   );
   static const Gradient orangishGradient = LinearGradient(
     colors: [
@@ -67,7 +67,7 @@ class AppColors {
       Color(0xFFF8485E),
     ],
     begin: Alignment.topCenter,
-    end: Alignment.bottomCenter, 
+    end: Alignment.bottomCenter,
   );
   static const Gradient blueishGradient = LinearGradient(
     colors: [
@@ -90,7 +90,7 @@ class AppColors {
     ],
   );
 
-    static const Gradient blueishTopBottomGradient = LinearGradient(
+  static const Gradient blueishTopBottomGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [
@@ -111,7 +111,7 @@ class AppColors {
       const Color(0xFF1B1F2A).withOpacity(.76),
     ],
     begin: Alignment.bottomCenter,
-    end: Alignment.topCenter, 
+    end: Alignment.topCenter,
   );
   static Gradient grayishGradient = LinearGradient(
     colors: [
@@ -120,6 +120,6 @@ class AppColors {
       const Color(0xFF2A3041)
     ],
     begin: Alignment.bottomCenter,
-    end: Alignment.topCenter, 
-  ); 
+    end: Alignment.topCenter,
+  );
 }

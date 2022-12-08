@@ -36,29 +36,28 @@ class ConsultAnalystScreen extends StatelessWidget {
     analystList = _fixtureViewModel.getAnalysts;
     leagueId = getIntLeageId();
     return Scaffold(
-      appBar: AppBarWidget(
-        title: loc.chooseAnExpertTxtChooseAnExpert,
-      ),
-      body: ListView.builder(
-        itemCount: analystList.length > 10 ? 10 : analystList.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          UserSummary expert = analystList[index];
-          return ConsultAnalystTile(
-            number: index + 1,
-            imageUrl: expert.profileImg,
-            title: expert.firstName! + expert.lastName!,
-            numberOfPrediciton: expert.totalPredictions!.round(),
-            successRate: expert.predictionSuccessRate!.toStringAsFixed(1),
-            onTileTap: () => _showConfirmationDialog(context, expert.id),
-          );
-        },
-      )
-    );
+        appBar: AppBarWidget(
+          title: loc.chooseAnExpertTxtChooseAnExpert,
+        ),
+        body: ListView.builder(
+          itemCount: analystList.length > 10 ? 10 : analystList.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            UserSummary expert = analystList[index];
+            return ConsultAnalystTile(
+              number: index + 1,
+              imageUrl: expert.profileImg,
+              title: expert.firstName! + expert.lastName!,
+              numberOfPrediciton: expert.totalPredictions!.round(),
+              successRate: expert.predictionSuccessRate!.toStringAsFixed(1),
+              onTileTap: () => _showConfirmationDialog(context, expert.id),
+            );
+          },
+        ));
   }
-  
+
   _showConfirmationDialog(BuildContext context, int analystId) async {
-      ConfirmationDialog.show(
+    ConfirmationDialog.show(
         context: context,
         title: loc.chooseAnExpertDialogTitle,
         positiveBtnTitle: loc.chooseAnExpertDialogYes,
@@ -66,25 +65,27 @@ class ConsultAnalystScreen extends StatelessWidget {
         body: loc.chooseAnExpertDialogBody,
         onPositiveBtnPressed: (_) => predict(context, analystId));
   }
+
   predict(BuildContext context, int analystId) async {
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected == true) {
       if (leagueId != null) {
-      context.read<FixtureDetailViewModel>().savePrediction(
-        context: context,
-        matchId: int.parse(matchDetails.matchId),
-        leagueId: leagueId!,
-        homeScore: 0,
-        awayScore: 0,
-        awayTeamLogo: matchDetails.teamAwayBadge,
-        homeTeamLogo: matchDetails.teamHomeBadge,
-        expertId: analystId,
-        awayTeamName: matchDetails.matchAwayteamName,
-        homeTeamName: matchDetails.matchHometeamName,
-        isPublic: false);
+        context.read<FixtureDetailViewModel>().savePrediction(
+            context: context,
+            matchId: int.parse(matchDetails.matchId),
+            leagueId: leagueId!,
+            homeScore: 0,
+            awayScore: 0,
+            awayTeamLogo: matchDetails.teamAwayBadge,
+            homeTeamLogo: matchDetails.teamHomeBadge,
+            expertId: analystId,
+            awayTeamName: matchDetails.matchAwayteamName,
+            homeTeamName: matchDetails.matchHometeamName,
+            isPublic: false);
       }
     }
   }
+
   int? getIntLeageId() {
     List<SubscribedLeague> subscribedLeagues = _dashBoardViewModel
         .subscribedLeagues

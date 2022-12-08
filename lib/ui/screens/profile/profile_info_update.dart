@@ -23,14 +23,15 @@ import 'package:provider/provider.dart';
 import '../../../core/network/internet_info.dart';
 import '../../util/ui/keyboardoverlay.dart';
 
-
 class ProfileInfoUpdateScreen extends StatefulWidget {
   final UpdateProfileArgs payload;
 
-  const ProfileInfoUpdateScreen({Key? key, required this.payload}) : super(key: key);
+  const ProfileInfoUpdateScreen({Key? key, required this.payload})
+      : super(key: key);
 
   @override
-  State<ProfileInfoUpdateScreen> createState() => _ProfileInfoUpdateScreenState();
+  State<ProfileInfoUpdateScreen> createState() =>
+      _ProfileInfoUpdateScreenState();
 }
 
 class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
@@ -73,73 +74,80 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
             Stack(
               children: [
                 InkWell(
-                  onTap: () => profileModel.pickImage(context: context,
-                  onCameraClick: () => _pickImage(ImageSource.camera),
-                  onGalleryClick: () => _pickImage(ImageSource.gallery)),
+                  onTap: () => profileModel.pickImage(
+                      context: context,
+                      onCameraClick: () => _pickImage(ImageSource.camera),
+                      onGalleryClick: () => _pickImage(ImageSource.gallery)),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(180),
                     child: SizedBox(
                       width: 80.0,
                       height: 80.0,
                       child: ImageWidget(
-                        imageUrl: widget.payload.imgUrl.isNotEmpty ? widget.payload.imgUrl : null,
-                        fileAsset: file != null ? File(file!.path) : null,
-                        placeholder: ImageUtitlity.getRandomProfileAvatar()
-                      ),
+                          imageUrl: widget.payload.imgUrl.isNotEmpty
+                              ? widget.payload.imgUrl
+                              : null,
+                          fileAsset: file != null ? File(file!.path) : null,
+                          placeholder: ImageUtitlity.getRandomProfileAvatar()),
                     ),
                   ),
                 ),
                 const Positioned(
                   bottom: 1.0,
                   right: 1.0,
-                  child: Icon(Icons.camera_alt, size: 30, color: AppColors.colorWhite,),
+                  child: Icon(
+                    Icons.camera_alt,
+                    size: 30,
+                    color: AppColors.colorWhite,
+                  ),
                 )
               ],
             ),
             UIHelper.verticalSpace(50.0),
             Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                TextFieldWidget(
-                  textController: _nameController,
-                  hint: 'John Smith',
-                  prefix:
-                      const IconWidget(iconData: Icons.account_circle_outlined),
-                  inputAction: TextInputAction.next,
-                  validator: (value) => ValidationHelper.validateField(value),
-                ),
-                UIHelper.verticalSpace(15.0),
-                TextFieldWidget(
-                  textController: _emailController,
-                  prefix: const IconWidget(iconData: Icons.drafts_outlined),
-                  inputAction: TextInputAction.next,
-                  inputType: TextInputType.emailAddress,
-                  readOnly: true,
-                ),
-                UIHelper.verticalSpace(15.0),
-                TextFieldWidget(
-                  textController: _phoneController,
-                  focusNode: _passwordNode,
-                  hint: '1234567890',
-                  prefix: const IconWidget(iconData: Icons.smartphone),
-                  inputAction: TextInputAction.done,
-                  inputType: TextInputType.number,
-                  validator: (value) => ValidationHelper.validatePhone(value),
-                ),
-                UIHelper.verticalSpace(15.0),
-                DropDownFormWidget(
-                  defaultGender: widget.payload.gender.isEmpty
-                      ? null
-                      : widget.payload.gender,
-                  onChanged: (value) {
-                    selectedGender = value;
-                  },
-                  validator: (value) => ValidationHelper.validateField(value)
-                )
-              ],)
-            
-            ),
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFieldWidget(
+                      textController: _nameController,
+                      hint: 'John Smith',
+                      prefix: const IconWidget(
+                          iconData: Icons.account_circle_outlined),
+                      inputAction: TextInputAction.next,
+                      validator: (value) =>
+                          ValidationHelper.validateField(value),
+                    ),
+                    UIHelper.verticalSpace(15.0),
+                    TextFieldWidget(
+                      textController: _emailController,
+                      prefix: const IconWidget(iconData: Icons.drafts_outlined),
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.emailAddress,
+                      readOnly: true,
+                    ),
+                    UIHelper.verticalSpace(15.0),
+                    TextFieldWidget(
+                      textController: _phoneController,
+                      focusNode: _passwordNode,
+                      hint: '1234567890',
+                      prefix: const IconWidget(iconData: Icons.smartphone),
+                      inputAction: TextInputAction.done,
+                      inputType: TextInputType.number,
+                      validator: (value) =>
+                          ValidationHelper.validatePhone(value),
+                    ),
+                    UIHelper.verticalSpace(15.0),
+                    DropDownFormWidget(
+                        defaultGender: widget.payload.gender.isEmpty
+                            ? null
+                            : widget.payload.gender,
+                        onChanged: (value) {
+                          selectedGender = value;
+                        },
+                        validator: (value) =>
+                            ValidationHelper.validateField(value))
+                  ],
+                )),
             UIHelper.verticalSpace(90.0),
             MainButton(
               text: loc.profileProfileInfoUpdateBtnSave,
@@ -150,12 +158,13 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
       ),
     );
   }
+
   @override
   void dispose() {
     if (Platform.isIOS) {
       keyboardSubscription.cancel();
       _passwordNode.dispose();
-    } 
+    }
     super.dispose();
   }
 
@@ -163,7 +172,8 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
     _nameController.text = widget.payload.userName;
     _emailController.text = widget.payload.userEmail;
     _phoneController.text = widget.payload.phone;
-    selectedGender = widget.payload.gender.isEmpty ? null : widget.payload.gender;
+    selectedGender =
+        widget.payload.gender.isEmpty ? null : widget.payload.gender;
   }
 
   _pickImage(ImageSource pickerType) async {
@@ -175,7 +185,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
       );
       if (image != null) {
         CroppedFile? croppedFile = await profileModel.compressImage(image);
-        if(croppedFile != null) {
+        if (croppedFile != null) {
           setState(() {
             file = croppedFile;
           });
@@ -188,27 +198,28 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected == true) {
       if (_formKey.currentState!.validate()) {
-        if(file != null) {
+        if (file != null) {
           await profileModel.updateProfile(
-            context: context,
-            imgFile: File(file!.path),
-            userName: _nameController.text,
-            userEmail: _emailController.text,
-            userPhone: _phoneController.text,
-            userGender: selectedGender!);
+              context: context,
+              imgFile: File(file!.path),
+              userName: _nameController.text,
+              userEmail: _emailController.text,
+              userPhone: _phoneController.text,
+              userGender: selectedGender!);
         } else {
           await profileModel.updateProfileWoImage(
-            context: context,
-            userName: _nameController.text,
-            userEmail: _emailController.text,
-            userPhone: _phoneController.text,
-            userGender: selectedGender!);
+              context: context,
+              userName: _nameController.text,
+              userEmail: _emailController.text,
+              userPhone: _phoneController.text,
+              userGender: selectedGender!);
         }
       }
     }
   }
 
-  void startkeyboardListener(KeyboardVisibilityController keyboardVisibilityController) {
+  void startkeyboardListener(
+      KeyboardVisibilityController keyboardVisibilityController) {
     if (Platform.isIOS) {
       keyboardSubscription = keyboardVisibilityController.onChange.listen(
         (visible) {

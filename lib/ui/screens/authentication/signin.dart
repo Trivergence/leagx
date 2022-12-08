@@ -153,6 +153,7 @@ class SigninScreen extends StatelessWidget {
             ),
             UIHelper.verticalSpaceMedium,
             HaveAccountButton(
+              mainText: loc.authTxtDontHaveAccount,
               subText: loc.authSigninBtnSignup,
               onTap: () {
                 Navigator.pushNamed(context, Routes.signup);

@@ -23,7 +23,9 @@ class OfflineMatchWidget extends StatelessWidget {
   final Fixture matchDetails;
   final Prediction? prediction;
   OfflineMatchWidget({
-    Key? key, required this.matchDetails, required this.prediction,
+    Key? key,
+    required this.matchDetails,
+    required this.prediction,
   }) : super(key: key);
 
   late BuildContext _context;
@@ -55,20 +57,22 @@ class OfflineMatchWidget extends StatelessWidget {
             awayTeamName: prediction!.match.secondTeamName,
             homeScore: prediction!.firstTeamScore ?? 0,
             awayScore: prediction!.secondTeamScore ?? 0,
-            isLocked:  prediction!.expertId != null &&
+            isLocked: prediction!.expertId != null &&
                 Utility.isPredictionPending(prediction!.status),
           ),
-        if (!ValidationUtils.isValid(prediction)) SizedBox(
-            child: MainButton(
-              text: loc.fixtureDetailsMatchBtnPredict,
-              onPressed: _showSheet,
-            ))
+        if (!ValidationUtils.isValid(prediction))
+          SizedBox(
+              child: MainButton(
+            text: loc.fixtureDetailsMatchBtnPredict,
+            onPressed: _showSheet,
+          ))
       ],
     );
   }
 
   void _showSheet() {
     _context
-          .read<FixtureDetailViewModel>().predictMatch(context: _context, matchDetails: matchDetails);
+        .read<FixtureDetailViewModel>()
+        .predictMatch(context: _context, matchDetails: matchDetails);
   }
 }

@@ -54,11 +54,12 @@ class ApiModels {
       case getCurrencyAmount:
         return Currency.fromJson(json);
       case getStripeCred:
-      return StripeCred.fromJson(json);
+        return StripeCred.fromJson(json);
       case liveMatch:
-      return LiveMatch.fromJson(json);
+        return LiveMatch.fromJson(json);
     }
   }
+
   static dynamic getListOfObjects(String modelName, dynamic json) {
     switch (modelName) {
       case upcomingMatches:
@@ -70,7 +71,7 @@ class ApiModels {
       case getPlans:
         return subscriptionPlanFromJson(json);
       case getNews:
-      return newsFromJson(json);
+        return newsFromJson(json);
       case getLeaders:
         return leaderFromJson(json);
       case getSubscribedLeagues:

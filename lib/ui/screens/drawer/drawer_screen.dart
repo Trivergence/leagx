@@ -34,13 +34,13 @@ class DrawerScreen extends StatelessWidget {
     return Drawer(
       backgroundColor: AppColors.colorBackground,
       child: Padding(
-        padding: const EdgeInsets.only(bottom:10.0),
+        padding: const EdgeInsets.only(bottom: 10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               children: [
-              UIHelper.verticalSpaceXL,
+                UIHelper.verticalSpaceXL,
                 Center(
                   child: Column(
                     children: [
@@ -96,27 +96,32 @@ class DrawerScreen extends StatelessWidget {
                 //     Navigator.popAndPushNamed(context, Routes.admin);
                 //   },
                 // ),
-            ],),
+              ],
+            ),
             SafeArea(
               child: GestureDetector(
                 onTap: () async {
-                  ConfirmationDialog.show(context: context,
-                   title: loc.logoutConfirmTitle,
-                   positiveBtnTitle: loc.logoutConfirmYes,
-                   negativeBtnTitle: loc.logoutConfirmNo,
-                   body:loc.logoutConfirmBody, 
-                   onPositiveBtnPressed: (_) => logout(context));
+                  ConfirmationDialog.show(
+                      context: context,
+                      title: loc.logoutConfirmTitle,
+                      positiveBtnTitle: loc.logoutConfirmYes,
+                      negativeBtnTitle: loc.logoutConfirmNo,
+                      body: loc.logoutConfirmBody,
+                      onPositiveBtnPressed: (_) => logout(context));
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     children: [
-                      const Icon(Icons.logout, color: AppColors.colorPink,),
+                      const Icon(
+                        Icons.logout,
+                        color: AppColors.colorPink,
+                      ),
                       UIHelper.horizontalSpace(26.0),
-                       TextWidget(
-                         text: loc.drawerBtnLogout,
-                         color: AppColors.colorPink,
-                       ),
+                      TextWidget(
+                        text: loc.drawerBtnLogout,
+                        color: AppColors.colorPink,
+                      ),
                     ],
                   ),
                 ),
@@ -130,7 +135,7 @@ class DrawerScreen extends StatelessWidget {
 
   getUserName() {
     User? user = locator<SharedPreferenceHelper>().getUser();
-    if(user != null) {
+    if (user != null) {
       userName = user.firstName!;
       userImage = user.profileImg!;
     }
@@ -145,8 +150,7 @@ class DrawerScreen extends StatelessWidget {
       context.read<WalletViewModel>().clearData();
       context.read<PayoutViewModel>().clearData();
       locator<PaymentConfig>().setCustomerCred = null;
-      Navigator.pushNamedAndRemoveUntil(
-          context, Routes.signin, (_) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Routes.signin, (_) => false);
     }
   }
 }

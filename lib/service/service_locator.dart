@@ -7,8 +7,10 @@ final locator = GetIt.I;
 
 Future<void> setupLocator() async {
   //Shared Preferences
-  locator.registerSingleton<SharedPreferences>((await SharedPreferences.getInstance()));
+  locator.registerSingleton<SharedPreferences>(
+      (await SharedPreferences.getInstance()));
 
-  locator.registerSingleton<SharedPreferenceHelper>(SharedPreferenceHelper(GetIt.I.get<SharedPreferences>()));
+  locator.registerSingleton<SharedPreferenceHelper>(
+      SharedPreferenceHelper(GetIt.I.get<SharedPreferences>()));
   locator.registerSingleton<PaymentConfig>(PaymentConfig());
 }

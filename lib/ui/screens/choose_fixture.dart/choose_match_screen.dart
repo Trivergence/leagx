@@ -32,8 +32,8 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
           title: loc.chooseFixtureTxtTitle,
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-          child: Column(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            child: Column(
               children: [
                 SizedBox(
                   height: 48,
@@ -44,48 +44,57 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                   ),
                 ),
                 UIHelper.verticalSpace(30),
-                availableMatches.isNotEmpty ? Expanded(
-                  child: ListView.builder(
-                  itemCount: isFiltering ? filteredList.length : availableMatches.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    Fixture match = isFiltering ? filteredList[index] : availableMatches[index];
-                    return ChooseFixtureTile(
-                      key: UniqueKey(),
-                      leagueId: match.leagueId,
-                      teamOneFlag: match.teamHomeBadge,
-                      teamTwoFlag: match.teamAwayBadge,
-                      matchId: match.matchId,
-                      awayTeamName: match.matchAwayteamName,
-                      homeTeamName: match.matchHometeamName);
-                  }),
-                )
-                : Center(child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal :8.0, vertical: 100),
-                  child: PlaceHolderTile(height: 80, msgText: loc.chooseFixtureTxtEmptyList),
-                )),
+                availableMatches.isNotEmpty
+                    ? Expanded(
+                        child: ListView.builder(
+                            itemCount: isFiltering
+                                ? filteredList.length
+                                : availableMatches.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              Fixture match = isFiltering
+                                  ? filteredList[index]
+                                  : availableMatches[index];
+                              return ChooseFixtureTile(
+                                  key: UniqueKey(),
+                                  leagueId: match.leagueId,
+                                  teamOneFlag: match.teamHomeBadge,
+                                  teamTwoFlag: match.teamAwayBadge,
+                                  matchId: match.matchId,
+                                  awayTeamName: match.matchAwayteamName,
+                                  homeTeamName: match.matchHometeamName);
+                            }),
+                      )
+                    : Center(
+                        child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 100),
+                        child: PlaceHolderTile(
+                            height: 80, msgText: loc.chooseFixtureTxtEmptyList),
+                      )),
               ],
-            )
-        ));
+            )));
   }
 
   void _onTextEntered(String enteredText) {
     setState(() {
       isFiltering = true;
       filteredList = availableMatches
-      .where((matchItem) => filterMatches(matchItem, enteredText))
-      .toList();
+          .where((matchItem) => filterMatches(matchItem, enteredText))
+          .toList();
     });
   }
 
   bool filterMatches(Fixture matchItem, String enteredText) {
-    return matchItem.matchAwayteamName.toLowerCase().contains(enteredText.toLowerCase()) 
-    || matchItem.matchHometeamName.toLowerCase().contains(enteredText.toLowerCase());
+    return matchItem.matchAwayteamName
+            .toLowerCase()
+            .contains(enteredText.toLowerCase()) ||
+        matchItem.matchHometeamName
+            .toLowerCase()
+            .contains(enteredText.toLowerCase());
   }
 
   List<Fixture> getMatches(BuildContext context) {
-    return context
-        .read<DashBoardViewModel>()
-        .subscribedMatches;
+    return context.read<DashBoardViewModel>().subscribedMatches;
   }
 }

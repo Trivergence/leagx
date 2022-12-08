@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 class DotWidget extends StatelessWidget {
   final double size;
   final bool isLive;
-  const DotWidget(
-      {Key? key, this.size = 12.0, this.isLive = false})
+  const DotWidget({Key? key, this.size = 12.0, this.isLive = false})
       : super(key: key);
 
   @override

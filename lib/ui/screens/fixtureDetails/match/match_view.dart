@@ -12,7 +12,9 @@ class MatchView extends StatelessWidget {
   final Prediction? prediction;
 
   const MatchView({
-    Key? key, required this.matchDetails, required this.prediction,
+    Key? key,
+    required this.matchDetails,
+    required this.prediction,
   }) : super(key: key);
 
   @override
@@ -27,9 +29,16 @@ class MatchView extends StatelessWidget {
             //   height: SizeConfig.height * 7,
             //   title: loc.faqsTxtFrequentlyAskedQuestions,
             // ),
-            matchDetails.matchLive == "1" || Utility.isMatchOver(matchDetails.matchStatus!)
-            ? LiveMatchWidget(matchDetails: matchDetails, prediction: prediction,) 
-            : OfflineMatchWidget(matchDetails: matchDetails, prediction: prediction,)
+            matchDetails.matchLive == "1" ||
+                    Utility.isMatchOver(matchDetails.matchStatus!)
+                ? LiveMatchWidget(
+                    matchDetails: matchDetails,
+                    prediction: prediction,
+                  )
+                : OfflineMatchWidget(
+                    matchDetails: matchDetails,
+                    prediction: prediction,
+                  )
           ],
         ),
       ),

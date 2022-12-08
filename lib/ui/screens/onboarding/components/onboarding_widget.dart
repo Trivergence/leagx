@@ -7,9 +7,7 @@ class OnBoardingWidget extends StatelessWidget {
   final String subtitle;
   final String imageAsset;
   const OnBoardingWidget(
-      {Key? key,
-      required this.subtitle,
-      required this.imageAsset})
+      {Key? key, required this.subtitle, required this.imageAsset})
       : super(key: key);
 
   @override

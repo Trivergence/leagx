@@ -20,7 +20,7 @@ import 'components/wallet_widget.dart';
 
 // ignore: must_be_immutable
 class WalletScreen extends StatelessWidget {
-  WalletScreen({ Key? key }) : super(key: key);
+  WalletScreen({Key? key}) : super(key: key);
 
   late WalletViewModel _walletViewModel;
   UserSummary? _userSummary;
@@ -33,7 +33,7 @@ class WalletScreen extends StatelessWidget {
         (dasboardModel) => dasboardModel.userSummary);
     return BaseWidget<WalletViewModel>(
       create: false,
-      model: context.read<WalletViewModel>(), 
+      model: context.read<WalletViewModel>(),
       onModelReady: (WalletViewModel walletModel) async {
         // SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
         //   await walletModel.getUserPaymentMethods();
@@ -41,63 +41,65 @@ class WalletScreen extends StatelessWidget {
       },
       builder: (context, WalletViewModel walletModel, _) {
         _walletViewModel = walletModel;
-      return  Container(
-      child: !walletModel.busy ? SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children:  [
-            TextWidget(
-              text: loc.walletTxtWallet.toUpperCase(),
-              fontWeight: FontWeight.w600,
-              letterSpace: Utility.isArabic() ? 0 : 4,
-              textSize: Dimens.textRegular,
-              textAlign: TextAlign.center,
-            ),
-            UIHelper.verticalSpaceSmall,
-            WalletWidget(userSummary: _userSummary),
-            UIHelper.verticalSpaceSmall,
-            if(walletModel.getPayementMethods.isNotEmpty) TextWidget(
-              text: loc.walletTxtAttachedMethod.toUpperCase(), 
-              fontWeight: FontWeight.w600,
-               letterSpace: Utility.isArabic() ? 0 : 4,
-              textSize: Dimens.textRegular),
-            UIHelper.verticalSpace(5.0),
-            walletModel.getPayementMethods.isEmpty 
-            ? MainButton(
-              text: loc.walletBtnaddMethod, 
-              onPressed: _addPaymentMethod)
-            :  Column(
-              children: [
-                CardInfoWidget(
-                  last4: walletModel
-                                        .getPayementMethods.first.card!.last4!,
-                  expMonth: walletModel.getPayementMethods
-                                        .first.card!.expMonth!
-                                        .toString(),
-                  expYear: walletModel
-                                        .getPayementMethods.first.card!.expYear!
-                                        .toString(),
-                ),
-                TextButton(
-                  onPressed: _showConfirmationDialog, 
-                  child: TextWidget(
-                   text : loc.walletBtnRemove,
-                   color: AppColors.colorRed,
-                   fontWeight: FontWeight.w600,)),
-            ],
-          ),
-          UIHelper.verticalSpaceLarge,
-        ]),
-      )
-      : const LoadingWidget(),
+        return Container(
+          child: !walletModel.busy
+              ? SingleChildScrollView(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(children: [
+                    TextWidget(
+                      text: loc.walletTxtWallet.toUpperCase(),
+                      fontWeight: FontWeight.w600,
+                      letterSpace: Utility.isArabic() ? 0 : 4,
+                      textSize: Dimens.textRegular,
+                      textAlign: TextAlign.center,
+                    ),
+                    UIHelper.verticalSpaceSmall,
+                    WalletWidget(userSummary: _userSummary),
+                    UIHelper.verticalSpaceSmall,
+                    if (walletModel.getPayementMethods.isNotEmpty)
+                      TextWidget(
+                          text: loc.walletTxtAttachedMethod.toUpperCase(),
+                          fontWeight: FontWeight.w600,
+                          letterSpace: Utility.isArabic() ? 0 : 4,
+                          textSize: Dimens.textRegular),
+                    UIHelper.verticalSpace(5.0),
+                    walletModel.getPayementMethods.isEmpty
+                        ? MainButton(
+                            text: loc.walletBtnaddMethod,
+                            onPressed: _addPaymentMethod)
+                        : Column(
+                            children: [
+                              CardInfoWidget(
+                                last4: walletModel
+                                    .getPayementMethods.first.card!.last4!,
+                                expMonth: walletModel
+                                    .getPayementMethods.first.card!.expMonth!
+                                    .toString(),
+                                expYear: walletModel
+                                    .getPayementMethods.first.card!.expYear!
+                                    .toString(),
+                              ),
+                              TextButton(
+                                  onPressed: _showConfirmationDialog,
+                                  child: TextWidget(
+                                    text: loc.walletBtnRemove,
+                                    color: AppColors.colorRed,
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ],
+                          ),
+                    UIHelper.verticalSpaceLarge,
+                  ]),
+                )
+              : const LoadingWidget(),
+        );
+      },
     );
-      }, 
-      );
   }
 
   Future<void> _addPaymentMethod() async {
     bool isConnected = await InternetInfo.isConnected();
-    if(isConnected == true) {
+    if (isConnected == true) {
       await _walletViewModel.addPaymentMethod();
     }
   }
@@ -114,10 +116,9 @@ class WalletScreen extends StatelessWidget {
 
   Future<void> _removeCard(BuildContext context) async {
     bool isConnected = await InternetInfo.isConnected();
-    if(isConnected == true){
-    Navigator.of(context).pop();
-    await _walletViewModel.removePaymentMethod();
+    if (isConnected == true) {
+      Navigator.of(context).pop();
+      await _walletViewModel.removePaymentMethod();
     }
   }
 }
-

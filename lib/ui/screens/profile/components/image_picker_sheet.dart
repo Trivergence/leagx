@@ -21,7 +21,7 @@ class ImagePickerSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-         Padding(
+        Padding(
           padding: EdgeInsets.all(15.0),
           child: Text(
             loc.profileProfileInfoUpdateSelectSource,

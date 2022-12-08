@@ -102,12 +102,12 @@ class UserScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               UIHelper.verticalSpace(23.0),
-               TextWidget(
-                 text: loc.userTxtUserRoleSetting,
-                 textSize: 18.0,
-                 fontWeight: FontWeight.w600,
-                 color: AppColors.colorPink,
-               ),
+              TextWidget(
+                text: loc.userTxtUserRoleSetting,
+                textSize: 18.0,
+                fontWeight: FontWeight.w600,
+                color: AppColors.colorPink,
+              ),
               UIHelper.verticalSpace(36.0),
               child,
               UIHelper.verticalSpaceXL,

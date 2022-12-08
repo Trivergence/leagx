@@ -58,7 +58,7 @@
 	"authSignupTxtPassword": "Password",
 	"authSignupTxtConfirmPassword": "Confirm Password",
 	"authSignupBtnSignup": "Sign Up",
-	"authSignupBtnSignin": "Sign In",
+	"authSignupBtnSignin": "Sign-In",
 	"authSignupTxtSignedupSuccessfully":"Signed up successfully",
 	"authSignupTxtPasswordNotMatch":"Password doesn't match",
 
@@ -78,6 +78,7 @@
 	"authResetPasswordSameMsg": "Passwords must be same",
 
 	"authTxtDontHaveAccount": "Don't have an account? ",
+	"authTxtAlreadyHaveAccount": "Already have an account? ",
 
 	"chooseAnExpertTxtChooseAnExpert": "Choose an Analyst",
 	"chooseAnExpertTxtPredictions": "predictions",

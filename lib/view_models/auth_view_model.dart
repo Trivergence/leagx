@@ -12,7 +12,6 @@ import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/entity/user.dart' as twitter;
 
-
 class AuthViewModel {
   static Future<User?>? signup({
     required String name,
@@ -45,27 +44,21 @@ class AuthViewModel {
       modelName: ApiModels.user,
     );
   }
+
   static Future<bool> subscribeOneLeague(int userId) async {
-    Map<String,dynamic> body = {
+    Map<String, dynamic> body = {
       "user_id": userId,
       "plan_id": 8,
       "pay_by_wallet": false,
-      "league": {
-        "title": "King's Cup",
-        "logo": "",
-        "external_league_id": "604"
-      }
+      "league": {"title": "King's Cup", "logo": "", "external_league_id": "604"}
     };
     bool success = await ApiService.postWoResponce(
-      url: AppUrl.subscribeLeague,
-      body: body);
+        url: AppUrl.subscribeLeague, body: body);
     return success;
   }
 
-    static Future<User?>? twitterLogin({
-    required AuthType authType,
-    required twitter.User user
-  }) async {
+  static Future<User?>? twitterLogin(
+      {required AuthType authType, required twitter.User user}) async {
     Loader.showLoader();
     int userId = user.id;
     dynamic responce = await ApiService.callPostApi(
@@ -82,12 +75,13 @@ class AuthViewModel {
     return responce;
   }
 
-    static Future<User?>? appleLogin(
-      {required AuthType authType, required AuthorizationCredentialAppleID userCredentials}) async {
-        dynamic responce;
-        Loader.showLoader();
-      if(userCredentials.email != null && userCredentials.givenName != null) {
-        responce = await ApiService.callPostApi(
+  static Future<User?>? appleLogin(
+      {required AuthType authType,
+      required AuthorizationCredentialAppleID userCredentials}) async {
+    dynamic responce;
+    Loader.showLoader();
+    if (userCredentials.email != null && userCredentials.givenName != null) {
+      responce = await ApiService.callPostApi(
         url: AppUrl.socialLogin,
         parameters: {
           "user[email]": userCredentials.email,
@@ -97,8 +91,8 @@ class AuthViewModel {
         },
         modelName: ApiModels.user,
       );
-      } else {
-        responce = await ApiService.callPostApi(
+    } else {
+      responce = await ApiService.callPostApi(
         url: AppUrl.socialLogin,
         parameters: {
           "user[uid]": userCredentials.userIdentifier,
@@ -110,8 +104,6 @@ class AuthViewModel {
     Loader.hideLoader();
     return responce;
   }
-
-
 
   static Future<ForgotPassword?>? forgotPassword({
     required String email,
@@ -129,22 +121,21 @@ class AuthViewModel {
     required String password,
   }) async {
     User? user = preferenceHelper.getUser();
-    if(user != null) {
+    if (user != null) {
       String completeUrl = AppUrl.getUser + user.id.toString();
       FormData formData = FormData.fromMap({
         "user[password]": password,
         "user[password_confirmation]": password
       });
-      User? userData =  await ApiService.callPutApi(
+      User? userData = await ApiService.callPutApi(
         url: completeUrl,
         body: formData,
         modelName: ApiModels.user,
       );
-      if(userData != null) {
-          preferenceHelper.saveAuthToken(userData.apiToken);
-          preferenceHelper.saveUser(userData);
-          ToastMessage.show(
-              loc.authResetPasswordSuccessfull, TOAST_TYPE.success);
+      if (userData != null) {
+        preferenceHelper.saveAuthToken(userData.apiToken);
+        preferenceHelper.saveUser(userData);
+        ToastMessage.show(loc.authResetPasswordSuccessfull, TOAST_TYPE.success);
         return true;
       }
       return false;

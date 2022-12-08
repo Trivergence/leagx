@@ -27,7 +27,9 @@ class GradientBorderButton extends StatelessWidget {
       height: height ?? 48.0,
       decoration: BoxDecoration(
           color: AppColors.colorBackground,
-          border: Border.all(color: AppColors.colorPink,),
+          border: Border.all(
+            color: AppColors.colorPink,
+          ),
           borderRadius: BorderRadius.circular(100)),
       child: ElevatedButton(
         child: Text(
@@ -39,11 +41,10 @@ class GradientBorderButton extends StatelessWidget {
           ),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          elevation: 0.0,
-          padding: const EdgeInsets.symmetric(horizontal: 3)
-        ),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            elevation: 0.0,
+            padding: const EdgeInsets.symmetric(horizontal: 3)),
         onPressed: onPressed,
       ),
     );

@@ -4,21 +4,20 @@ import 'package:flutter/material.dart';
 import '../locale/localization.dart';
 
 class FancyDialog {
-  static void showSuccess({
-    required BuildContext context, 
-    required String title,
-    required String description,
-    VoidCallback? onOkPressed
-    }) {
+  static void showSuccess(
+      {required BuildContext context,
+      required String title,
+      required String description,
+      VoidCallback? onOkPressed}) {
     AwesomeDialog(
-      context: context,
-      dialogType: DialogType.success,
-      animType: AnimType.rightSlide,
-      title: title,
-      desc: description,
-      btnOkOnPress: onOkPressed,
-      btnOkText: loc.ok
-    ).show();
+            context: context,
+            dialogType: DialogType.success,
+            animType: AnimType.rightSlide,
+            title: title,
+            desc: description,
+            btnOkOnPress: onOkPressed,
+            btnOkText: loc.ok)
+        .show();
   }
 
   static void showInfo(

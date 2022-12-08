@@ -40,10 +40,10 @@ class TabBarWidget extends StatelessWidget {
                       child: Center(
                         child: tabItem.index == selectedIndex
                             ? TextWidget(
-                              text: tabItem.title!,
-                              color: AppColors.colorCyan,
-                              fontWeight: FontWeight.bold,
-                            )
+                                text: tabItem.title!,
+                                color: AppColors.colorCyan,
+                                fontWeight: FontWeight.bold,
+                              )
                             : TextWidget(
                                 text: tabItem.title!,
                                 color: AppColors.colorCyan.withOpacity(0.5),

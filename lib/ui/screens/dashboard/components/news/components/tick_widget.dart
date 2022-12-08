@@ -21,6 +21,7 @@ class _TickWidgetState extends State<TickWidget> {
     approved = widget.isApproved;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -30,24 +31,25 @@ class _TickWidgetState extends State<TickWidget> {
         });
       },
       child: Container(
-        height: 18,
-        width: 18,
-        decoration: BoxDecoration(
-          border: Border.all(color: approved == true 
-          ? AppColors.colorCyan 
-          : AppColors.colorCyan.withOpacity(0.6),
-          width: 1.5
-          ),
-          borderRadius: BorderRadius.circular(30)
-        ),
-        child: Visibility(
-          visible: approved,
-          child: const Center(
-            child: Icon(Icons.done,
-             size: 13,
-             color: AppColors.colorCyan,),
-          ),
-        )),
+          height: 18,
+          width: 18,
+          decoration: BoxDecoration(
+              border: Border.all(
+                  color: approved == true
+                      ? AppColors.colorCyan
+                      : AppColors.colorCyan.withOpacity(0.6),
+                  width: 1.5),
+              borderRadius: BorderRadius.circular(30)),
+          child: Visibility(
+            visible: approved,
+            child: const Center(
+              child: Icon(
+                Icons.done,
+                size: 13,
+                color: AppColors.colorCyan,
+              ),
+            ),
+          )),
     );
   }
 }

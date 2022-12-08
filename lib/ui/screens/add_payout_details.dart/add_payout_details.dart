@@ -6,7 +6,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class AddPayoutDetails extends StatefulWidget {
   final String accountLink;
-  const AddPayoutDetails({ Key? key, required  this.accountLink }) : super(key: key);
+  const AddPayoutDetails({Key? key, required this.accountLink})
+      : super(key: key);
 
   @override
   State<AddPayoutDetails> createState() => _AddPayoutDetailsState();
@@ -23,7 +24,9 @@ class _AddPayoutDetailsState extends State<AddPayoutDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(title: loc.addPayoutTxtTitle,),
+      appBar: AppBarWidget(
+        title: loc.addPayoutTxtTitle,
+      ),
       body: WebView(
         javascriptMode: JavascriptMode.unrestricted,
         initialUrl: widget.accountLink,
@@ -31,11 +34,11 @@ class _AddPayoutDetailsState extends State<AddPayoutDetails> {
           _webViewController = controller;
         },
         onProgress: (_) async {
-          if( _webViewController != null) {
-          String? url = await _webViewController!.currentUrl();
-          if(url != null && url == PaymentConstants.returnUrl) {
-            Navigator.of(context).pop();
-          }
+          if (_webViewController != null) {
+            String? url = await _webViewController!.currentUrl();
+            if (url != null && url == PaymentConstants.returnUrl) {
+              Navigator.of(context).pop();
+            }
           }
         },
       ),

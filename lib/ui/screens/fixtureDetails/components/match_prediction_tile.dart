@@ -16,10 +16,10 @@ class MatchPredictionTile extends StatefulWidget {
   final bool isLocked;
   const MatchPredictionTile({
     Key? key,
-    required this.homeTeamName, 
-    required this.awayTeamName, 
-    required this.homeScore, 
-    required this.awayScore, 
+    required this.homeTeamName,
+    required this.awayTeamName,
+    required this.homeScore,
+    required this.awayScore,
     required this.isLocked,
   }) : super(key: key);
 
@@ -36,64 +36,66 @@ class _MatchPredictionTileState extends State<MatchPredictionTile> {
     translateData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return !isLoading ? Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [          
-          Container(
-            color: AppColors.textFieldColor.withOpacity(0.3),
-            padding: const EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return !isLoading
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+            child: Stack(
+              alignment: Alignment.center,
               children: [
-                TextWidget(
-                  text: loc.fixtureDetailsMatchTxtYourPredictions,
+                Container(
+                  color: AppColors.textFieldColor.withOpacity(0.3),
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextWidget(
+                        text: loc.fixtureDetailsMatchTxtYourPredictions,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          TextWidget(
+                            text: "$homeTeamName - ${widget.homeScore}",
+                            color: AppColors.colorCyan,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          TextWidget(
+                              text: "$awayTeamName - ${widget.awayScore}",
+                              color: AppColors.colorYellow,
+                              fontWeight: FontWeight.w600),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    TextWidget(
-                      text: "$homeTeamName - ${widget.homeScore}",
-                      color: AppColors.colorCyan,
-                      fontWeight: FontWeight.w600,
+                if (widget.isLocked)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                        child: Container(
+                          color: Colors.transparent,
+                        ),
+                      ),
                     ),
-                    TextWidget(
-                      text: "$awayTeamName - ${widget.awayScore}",
-                      color: AppColors.colorYellow,
-                      fontWeight: FontWeight.w600),
-                  ],
-                )
+                  ),
+                if (widget.isLocked) const Icon(Icons.lock),
               ],
             ),
-          ),
-          if(widget.isLocked) Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                child: Container(
-                  color: Colors.transparent,
-                ),
-              ),
-            ),
-          ),
-          if(widget.isLocked) const Icon(Icons.lock),
-        ],
-      ),
-    )
-    : const ShimmerWidget(height: 70);
+          )
+        : const ShimmerWidget(height: 70);
   }
 
   Future<void> translateData() async {
-    String originalCommaText = widget.awayTeamName! +
-        ',' +
-        widget.homeTeamName!;
+    String originalCommaText =
+        widget.awayTeamName! + ',' + widget.homeTeamName!;
     String translatedCommaText =
         await TranslationUtility.translate(originalCommaText);
     List<String> listOfValues = [];
@@ -102,8 +104,8 @@ class _MatchPredictionTileState extends State<MatchPredictionTile> {
     } else {
       listOfValues = translatedCommaText.split(",");
     }
-     awayTeamName = listOfValues[0];
-     homeTeamName = listOfValues[1];
+    awayTeamName = listOfValues[0];
+    homeTeamName = listOfValues[1];
     isLoading = false;
     setState(() {});
   }

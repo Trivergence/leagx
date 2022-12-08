@@ -1,4 +1,3 @@
-
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/routes/routes.dart';
@@ -185,7 +184,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       ),
     );
   }
-    void getUserData() {
+
+  void getUserData() {
     User? user = locator<SharedPreferenceHelper>().getUser();
     userName = user!.firstName!;
     imagUrl = user.profileImg!;
@@ -196,12 +196,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   void _goToProfileInfoUpdate() {
     Navigator.pushNamed(context, Routes.profileInfoUpdate,
-      arguments: UpdateProfileArgs(
-          imgUrl: imagUrl,
-          userName: userName,
-          userEmail: userEmail,
-          phone: phone,
-          gender: gender))
+            arguments: UpdateProfileArgs(
+                imgUrl: imagUrl,
+                userName: userName,
+                userEmail: userEmail,
+                phone: phone,
+                gender: gender))
         .then((_) {
       setState(() {});
     });

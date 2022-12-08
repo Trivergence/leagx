@@ -76,7 +76,9 @@
 	"authSignupTxtSignup": "تسجيل جديد",
 	"authSignupTxtSignedupSuccessfully":"تم التسجيل بنجاح",
 	"authSignupTxtPasswordNotMatch":"كلمة المرور غير متطابقة",
+
 	"authTxtDontHaveAccount": "ليس لديك حساب؟",
+	"authTxtAlreadyHaveAccount": "هل لديك حساب؟",
 
 	"chooseAnExpertTxtChooseAnExpert": "اختر محلل",
 	"chooseAnExpertTxtPredictions": "التوقعات",
@@ -100,7 +102,7 @@
 	"choosePlanDialogSelectCard": "بطاقة",
 	"choosePlanDialogSelectWallet": "محفظة",
 	"choosePlanDialogBtnNegative": "إلغاء",
-	"choosePlanDialogBtnPositive": "يختار",
+	"choosePlanDialogBtnPositive": "إختيار",
 	"choosePlanDialogSuccessTitle": "تم الشراء بنجاح",
 	"choosePlanDialogUpgradeSuccessTitle": "تمت الترقية بنجاح",
 	"choosePlanDialogSuccessDesc": "لقد نجحت في الاشتراك في الحزمة",

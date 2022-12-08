@@ -39,12 +39,8 @@ class LeaderBoardTile extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-              border: Border.all(
-              color: AppColors.colorPink,
-              width: 2
-            ),
-            shape: BoxShape.circle
-            ),
+                border: Border.all(color: AppColors.colorPink, width: 2),
+                shape: BoxShape.circle),
             child: Center(
               child: TextWidget(
                 text: number.toString(),
@@ -85,14 +81,14 @@ class LeaderBoardTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextWidget(
-                      text: title, 
-                      fontWeight: FontWeight.w500,),
-                    TextWidget(
-                      text: '$successRate%',
-                      color: AppColors.colorGreen,
-                      textSize: Dimens.textXM,
-                      fontWeight: FontWeight.w400
+                      text: title,
+                      fontWeight: FontWeight.w500,
                     ),
+                    TextWidget(
+                        text: '$successRate%',
+                        color: AppColors.colorGreen,
+                        textSize: Dimens.textXM,
+                        fontWeight: FontWeight.w400),
                   ],
                 ),
                 UIHelper.verticalSpace(5.0),
@@ -100,16 +96,15 @@ class LeaderBoardTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextWidget(
-                      text: '$numberOfPrediciton ${loc.dashboardLeaderTxtPredictions}',
-                      textSize: Dimens.textXS,
-                      color: AppColors.colorWhite.withOpacity(0.5),
-                      fontWeight: FontWeight.w400
-                    ),
-                     TextWidget(
-                      text: loc.dashboardLeaderTxtSuccess,
-                      textSize: Dimens.textXS,
-                      fontWeight: FontWeight.w400
-                    ),
+                        text:
+                            '$numberOfPrediciton ${loc.dashboardLeaderTxtPredictions}',
+                        textSize: Dimens.textXS,
+                        color: AppColors.colorWhite.withOpacity(0.5),
+                        fontWeight: FontWeight.w400),
+                    TextWidget(
+                        text: loc.dashboardLeaderTxtSuccess,
+                        textSize: Dimens.textXS,
+                        fontWeight: FontWeight.w400),
                   ],
                 ),
               ],
