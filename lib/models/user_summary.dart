@@ -83,6 +83,7 @@ class UserSummary {
         predictionSuccessRate: json["prediction_success_rate"] ?? 0.0,
         coinEarned: json["coin_earned"] ?? 0,
         remainingPredictions: json["remaining_prediction_count"] ?? 0,
+        currentPlan: json["current_plan"] != null ? SubscriptionPlan.fromJson(json["current_plan"]) : null
         //userDevices: List<dynamic>.from(json["user_devices"].map((x) => x)),
       );
 
