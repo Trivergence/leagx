@@ -10,11 +10,9 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 
 import '../../../core/network/internet_info.dart';
 import '../../../models/dashboard/fixture.dart';
-import '../../../models/leader.dart';
 import '../../../models/subscribed_league.dart';
 import '../../../view_models/fixture_view_model.dart';
 import '../../util/app_dialogs/confirmation_dialog.dart';
-import '../../widgets/placeholder_tile.dart';
 
 // ignore: must_be_immutable
 class ConsultAnalystScreen extends StatelessWidget {

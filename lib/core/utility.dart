@@ -108,4 +108,8 @@ class Utility {
       return true;
     }
   }
+
+  static bool isRTL(String text) {
+    return Bidi.detectRtlDirectionality(text);
+  }
 }
