@@ -249,6 +249,7 @@ class FixtureDetailViewModel extends BaseModel {
   }
 
   Future<void> getAnalystPredictions({required String matchId}) async {
+    _analyst = [];
     List<dynamic> tempList = await ApiService.getListRequest(
       showToast: false,
       baseUrl: AppUrl.baseUrl,

@@ -68,7 +68,8 @@ class PlayersView extends StatelessWidget {
               awayTeamName: prediction!.match.secondTeamName,
               homeScore: prediction!.firstTeamScore ?? 0,
               awayScore: prediction!.secondTeamScore ?? 0,
-              isLocked: prediction!.expertId != null,
+              isLocked: prediction!.expertId != null &&
+                    Utility.isPredictionPending(prediction!.status),
             ),
             if (!ValidationUtils.isValid(prediction)) MainButton(text: loc.fixtureDetailsMatchBtnPredict, onPressed: _showSheet),
           ],

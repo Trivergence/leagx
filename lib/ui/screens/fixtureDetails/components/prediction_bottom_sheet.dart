@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/models/subscribed_league.dart';
+import 'package:leagx/models/user_summary.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/shimmer_widget.dart';
@@ -207,13 +209,22 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
     }
   }
 
-  Future<void> _chooseExpert() async => await Navigator.of(_context!).pushReplacementNamed(Routes.chooseAnalyst, arguments: widget.matchDetails);
+  Future<void> _chooseExpert() async {
+     List<UserSummary> listOfAnalysts = _context!.read<FixtureDetailViewModel>().getAnalysts;
+     if(listOfAnalysts.isNotEmpty) {
+     await Navigator.of(_context!).pushReplacementNamed(Routes.chooseAnalyst,
+          arguments: widget.matchDetails);
+     } else {
+      ToastMessage.show(loc.fixtureDetailsMsgAdvisorUnavailable, 
+        TOAST_TYPE.msg);
+     }
+  }
   
 
   Future<void> translateData() async {
     String originalCommaText = widget.matchDetails!.matchHometeamName +
         "," +
-        widget.matchDetails!.matchAwayteamName; 
+        widget.matchDetails!.matchAwayteamName;
     String translatedCommaText =
         await TranslationUtility.translate(originalCommaText);
     List<String> listOfValues = [];

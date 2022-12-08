@@ -124,6 +124,7 @@
 	"dashboardLeaderTxtPredictions": "توقعات",
 	"dashboardLeaderTxtSuccess": "نجاح",
 	"dashboardLeaderTxtWin": "البروفسور",
+	"dashboardLeaderMsgEmpty": "لا يوجد خبراء لعرضهم الآن",
 
 	"dashboardNewsTxtFeed": "الموجز",
 	"dashboardNewsTxtEmptyList": "لا توجد أخبار للعرض. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
@@ -169,6 +170,7 @@
 	"fixtureDetailsMatchTxtRealTImeMatchPreview": "مشاهدة مباشرة",
 	"fixtureDetailsTxtMakeMyPredictPublic": "اجعل توقعاتي عامة",
 	"fixtureDetailsTxtPredictMatchResult": "توقع نتيجة المباراة",
+	"fixtureDetailsMsgAdvisorUnavailable": "الخدمة غير متوفرة الآن لهذه المباراة ، حاول مرة أخرى لاحقًا.",
 
 	"myProfileTxtAdmin": "مشرف",
 	"myProfileTxtProfileInfo": "المعلومات الشخصية",
