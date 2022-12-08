@@ -111,7 +111,10 @@ class PayoutDialogWidget extends StatelessWidget {
   }
 
   void _withdraw() {
-    if (_formKey.currentState!.validate()) {
+    if (withdrawType != WithdrawType.custom) {
+      Navigator.of(_context).pop();
+      onPositiveBtnPressed(amountController.text, withdrawType);
+    } else if (_formKey.currentState!.validate()) {
       Navigator.of(_context).pop();
       onPositiveBtnPressed(amountController.text, withdrawType);
     }
