@@ -135,6 +135,7 @@
 	"dashboardLeaderTxtPredictions": "predictions",
 	"dashboardLeaderTxtWin": "Champion",
 	"dashboardLeaderTxtSuccess": "Success",
+	"dashboardLeaderMsgEmpty": "There are no experts to show right now",
 
 	"dashboardNewsTxtFeed": "FEED",
 	"dashboardNewsTxtEmptyList": "No news to show. Please make sure to subscribe at least one league",
@@ -196,6 +197,7 @@
 	"fixtureDetailsTxtMakeMyPredictPublic": "Make my predict public",
 	"fixtureDetailsBtnSubmit": "SUBMIT",
 	"fixtureDetailsBtnConsultAdvisor": "Consult Advisor",
+	"fixtureDetailsMsgAdvisorUnavailable": "The service is not available right now for this match, try again later.",
 	"fixtureDetailsMatchTxtRealTImeMatchPreview": "Live match",
 	"fixtureDetailsMatchTxtMatchDetails": "Match Details",
 	"fixtureDetailsMatchTxtShooting": "Shooting",

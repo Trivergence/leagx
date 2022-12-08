@@ -4,6 +4,9 @@
 
 import 'dart:convert';
 
+import 'package:leagx/models/subscription_plan.dart';
+import 'package:leagx/ui/screens/choose_plan/components/plan_listing.dart';
+
 UserSummary userSummaryFromJson(String str) =>
     UserSummary.fromJson(json.decode(str));
 
@@ -33,6 +36,7 @@ class UserSummary {
     required this.predictionSuccessRate,
     required this.coinEarned,
     required this.remainingPredictions,
+    required this.currentPlan
     //required this.userDevices,
   });
 
@@ -58,6 +62,7 @@ class UserSummary {
   num? predictionSuccessRate;
   num? coinEarned;
   int? remainingPredictions;
+  SubscriptionPlan? currentPlan; 
   //List<dynamic> userDevices;
 
   factory UserSummary.fromJson(Map<String, dynamic> json) => UserSummary(

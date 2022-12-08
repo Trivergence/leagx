@@ -14,6 +14,7 @@ import '../../../models/leader.dart';
 import '../../../models/subscribed_league.dart';
 import '../../../view_models/fixture_view_model.dart';
 import '../../util/app_dialogs/confirmation_dialog.dart';
+import '../../widgets/placeholder_tile.dart';
 
 // ignore: must_be_immutable
 class ConsultAnalystScreen extends StatelessWidget {
@@ -52,7 +53,7 @@ class ConsultAnalystScreen extends StatelessWidget {
             onTileTap: () => _showConfirmationDialog(context, expert.id),
           );
         },
-      ),
+      )
     );
   }
   

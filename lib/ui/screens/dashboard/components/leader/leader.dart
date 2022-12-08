@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 import '../../../../../constants/colors.dart';
+import '../../../../util/locale/localization.dart';
+import '../../../../widgets/placeholder_tile.dart';
 import 'components/expanded_leader_tile.dart';
 
 // ignore: must_be_immutable
@@ -21,7 +23,7 @@ class LeaderScreen extends StatelessWidget {
     return RefreshIndicator(
       backgroundColor: AppColors.textFieldColor,
       onRefresh: _refreshData,
-      child: ListView.builder(
+      child: listOfLeader.isNotEmpty ? ListView.builder(
           itemCount: listOfLeader.length,
           itemBuilder: (context, index) {
             Leader leader = listOfLeader[index];
@@ -38,7 +40,15 @@ class LeaderScreen extends StatelessWidget {
                     numberOfPrediciton: leader.totalPredictions,
                     successRate: leader.predictionSuccessRate!.toStringAsFixed(1),
                   );
-          }),
+          })
+          : Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: PlaceHolderTile(
+                  height: 80,
+                  msgText: loc.dashboardLeaderMsgEmpty),
+            ),
+          ),
     );
   }
 
