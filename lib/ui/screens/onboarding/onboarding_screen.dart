@@ -31,20 +31,17 @@ class OnBoardingScreen extends StatelessWidget {
         child: PageView(
           controller: controller,
           onPageChanged: (index) {},
-          children:  [
+          children: [
             OnBoardingWidget(
-              subtitle:
-                  loc.onboardingTxtDesc1,
+              subtitle: loc.onboardingTxtDesc1,
               imageAsset: Assets.onBoard1,
             ),
             OnBoardingWidget(
-              subtitle:
-                  loc.onboardingTxtDesc2,
+              subtitle: loc.onboardingTxtDesc2,
               imageAsset: Assets.onBoard2,
             ),
             OnBoardingWidget(
-              subtitle:
-                  loc.onboardingTxtDesc3,
+              subtitle: loc.onboardingTxtDesc3,
               imageAsset: Assets.onBoard3,
             ),
           ],

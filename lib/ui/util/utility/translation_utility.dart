@@ -10,22 +10,21 @@ class TranslationUtility {
       var body = {"q": text};
       Map<String, dynamic> header = {'Content-Type': 'application/json'};
       try {
-          Dio dio = Dio();
-          Response response = await dio.post(
-              AppUrl.translationUrl,
-              options: Options(
-                headers: header,
-                responseType: ResponseType.plain,
-                ),
-              data: body);
-          if(response.statusCode == 200) {
-            value = response.data;
-          }
-        } on DioError catch (_) {
-          return value;
-        } on Exception catch(_) {
-          return value;
+        Dio dio = Dio();
+        Response response = await dio.post(AppUrl.translationUrl,
+            options: Options(
+              headers: header,
+              responseType: ResponseType.plain,
+            ),
+            data: body);
+        if (response.statusCode == 200) {
+          value = response.data;
         }
+      } on DioError catch (_) {
+        return value;
+      } on Exception catch (_) {
+        return value;
+      }
     }
     return value;
   }

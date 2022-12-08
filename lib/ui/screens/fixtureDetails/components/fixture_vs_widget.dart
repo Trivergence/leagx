@@ -41,27 +41,28 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
   String timeString = "--:--:--";
   my_async.Timer? timer;
 
-    @override
+  @override
   void initState() {
     super.initState();
-    if (!Utility.isMatchOver(widget.matchDetails.matchStatus!) && Utility.isTimeValid(widget.matchDetails.matchStatus!)) {
-        minute = Utility.isMatchOver(widget.matchDetails.matchStatus!)
-            ? 0
-            : int.parse(widget.matchDetails.matchStatus!);
-          timer = my_async.Timer.periodic(
-            const Duration(seconds: 1),
-            (timer) {
-              setState(() {
-                seconds = seconds + 1;
-                if (seconds % 60 == 0) {
-                  seconds = 0;
-                  minute = minute + 1;
-                  if (minute % 60 == 0) {
-                    minute = 0;
-                    hour = hour + 1;
-                  }
+    if (!Utility.isMatchOver(widget.matchDetails.matchStatus!) &&
+        Utility.isTimeValid(widget.matchDetails.matchStatus!)) {
+      minute = Utility.isMatchOver(widget.matchDetails.matchStatus!)
+          ? 0
+          : int.parse(widget.matchDetails.matchStatus!);
+      timer = my_async.Timer.periodic(
+        const Duration(seconds: 1),
+        (timer) {
+          setState(() {
+            seconds = seconds + 1;
+            if (seconds % 60 == 0) {
+              seconds = 0;
+              minute = minute + 1;
+              if (minute % 60 == 0) {
+                minute = 0;
+                hour = hour + 1;
+              }
             }
-          
+
             if (widget.matchDetails.matchLive == "1") {
               String hrs = "0" + hour.toString();
               String mts =
@@ -72,10 +73,10 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
             }
           });
         },
-          );
-      } else {
-        timeString = widget.matchDetails.matchStatus!;
-      }
+      );
+    } else {
+      timeString = widget.matchDetails.matchStatus!;
+    }
 
     translateData();
   }
@@ -86,14 +87,13 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
         ? Container(
             width: double.infinity,
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(Assets.homeBackground),
-                fit: BoxFit.fill,
-              )),
+                image: DecorationImage(
+              image: AssetImage(Assets.homeBackground),
+              fit: BoxFit.fill,
+            )),
             margin: const EdgeInsets.only(bottom: 10, top: 5),
             padding: const EdgeInsets.all(20),
-            child: 
-            Column(
+            child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,29 +112,30 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                       ),
                     ),
                     widget.matchDetails.matchLive == "1" ||
-                                Utility.isMatchOver(widget.matchDetails.matchStatus!)
-                            ? ScoreChip(
-                              firstScore: widget.matchDetails.matchHometeamScore,
-                              secondScore: widget.matchDetails.matchAwayteamScore,
-                            )
-                            : TextWidget(
-                              text: loc.vs,
-                              textSize: Dimens.textLarge,
-                              fontWeight: FontWeight.bold,
-                            ),
-                     SizedBox(
-                       width: SizeConfig.width * 30,
-                       child: Row(
+                            Utility.isMatchOver(
+                                widget.matchDetails.matchStatus!)
+                        ? ScoreChip(
+                            firstScore: widget.matchDetails.matchHometeamScore,
+                            secondScore: widget.matchDetails.matchAwayteamScore,
+                          )
+                        : TextWidget(
+                            text: loc.vs,
+                            textSize: Dimens.textLarge,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    SizedBox(
+                      width: SizeConfig.width * 30,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                         children: [
-                           ImageWidget(
+                        children: [
+                          ImageWidget(
                             imageUrl: widget.matchDetails.teamAwayBadge,
                             placeholder: Assets.icTeamAvatar,
                             shouldClip: true,
                           ),
-                         ],
-                       ),
-                     ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
                 UIHelper.verticalSpace(1),
@@ -152,25 +153,30 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                       ),
                     ),
                     widget.matchDetails.matchLive == "1" ||
-                            Utility.isMatchOver(widget.matchDetails.matchStatus!)
+                            Utility.isMatchOver(
+                                widget.matchDetails.matchStatus!)
                         ? TextWidget(
-                          text: !Utility.isMatchOver(widget.matchDetails.matchStatus!) && Utility.isTimeValid(widget.matchDetails.matchStatus!)
-                          ? timeString : matchStatus!,
-                          color: AppColors.colorGrey,
-                          textSize: Dimens.textSmall,
-                        )
+                            text: !Utility.isMatchOver(
+                                        widget.matchDetails.matchStatus!) &&
+                                    Utility.isTimeValid(
+                                        widget.matchDetails.matchStatus!)
+                                ? timeString
+                                : matchStatus!,
+                            color: AppColors.colorGrey,
+                            textSize: Dimens.textSmall,
+                          )
                         : Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Column(
-                            children: [
-                              TextWidget(
-                                text: DateUtility.getUiFormat(
-                                    widget.matchDetails.matchDate),
-                                color: AppColors.colorWhite,
-                                textSize: 11,
-                                fontWeight: FontWeight.w400,
-                              ),
-                               Utility.isMatchOver(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: Column(
+                              children: [
+                                TextWidget(
+                                  text: DateUtility.getUiFormat(
+                                      widget.matchDetails.matchDate),
+                                  color: AppColors.colorWhite,
+                                  textSize: 11,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                Utility.isMatchOver(
                                             widget.matchDetails.matchStatus!) ||
                                         widget.matchDetails.matchLive == "1"
                                     ? const SizedBox.shrink()
@@ -180,9 +186,9 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                                         textSize: 11,
                                         fontWeight: FontWeight.w400,
                                       ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
                     SizedBox(
                       width: SizeConfig.width * 30,
                       child: TextWidget(
@@ -277,14 +283,19 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
             //     ),
             //   ],
             // ),
-          )
-        : const ShimmerWidget(height: 150, horizontalPadding: 0,);
+            )
+        : const ShimmerWidget(
+            height: 150,
+            horizontalPadding: 0,
+          );
   }
 
   Future<void> translateData() async {
-    String originalCommaText = widget.matchDetails.matchAwayteamName + 
-      "," + widget.matchDetails.matchHometeamName +
-      "," + widget.matchDetails.matchStatus!;
+    String originalCommaText = widget.matchDetails.matchAwayteamName +
+        "," +
+        widget.matchDetails.matchHometeamName +
+        "," +
+        widget.matchDetails.matchStatus!;
     String translatedCommaText =
         await TranslationUtility.translate(originalCommaText);
     List<String> listOfValues = [];
@@ -295,7 +306,9 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
     }
     awayTeamName = listOfValues[0];
     homeTeamName = listOfValues[1];
-    matchStatus = widget.matchDetails.matchStatus!.isNotEmpty ? listOfValues[2] : widget.matchDetails.matchStatus!;
+    matchStatus = widget.matchDetails.matchStatus!.isNotEmpty
+        ? listOfValues[2]
+        : widget.matchDetails.matchStatus!;
     isLoading = false;
     setState(() {});
   }

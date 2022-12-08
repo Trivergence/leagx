@@ -38,63 +38,75 @@ class _FixtureDetailsState extends State<FixtureDetails> {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<FixtureDetailViewModel>(
-        create: false,
-        model: context.read<FixtureDetailViewModel>(),
-        onModelReady: (FixtureDetailViewModel model) async {
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            model.getData(matchId: widget.matchData.matchId);
-          });
-        },
-        builder: (context, FixtureDetailViewModel fixtureModel, _) {
-          userPrediction = fixtureModel.getMatchPrediction(matchId: widget.matchData.matchId);
-          return RefreshIndicator(
-            backgroundColor: AppColors.textFieldColor,
-            onRefresh: () async {
-              bool isConnected = await InternetInfo.isConnected();
-              if(isConnected == true) {
-                 await fixtureModel.refreshData(matchId: widget.matchData.matchId);
-              }
-            },
-            child: Scaffold(
-            appBar:  fixtureModel.matchDetails.isNotEmpty ? AppBarWidget(
-              title: widget.matchData.leagueName,
-              trailing: [
-                Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: DotWidget(
-                  size: 22,
-                  isLive: fixtureModel.matchDetails.isEmpty ? false : fixtureModel.matchDetails[0].matchLive == "1",
-                ),
-              )],
-            ) : null,
-            body: !fixtureModel.busy && fixtureModel.matchDetails.isNotEmpty ? Column(
-              children: [
-                TabBarWidget(
-                    totalTabs: 3,
-                    selectedIndex: index,
-                    tabs: listOfTabs,
-                    onTabChanged: (selectedIndex) {
-                      setState(() {
-                        index = selectedIndex!;
-                      });
-                    }),
-                index == 0
-                    ? MatchView(
-                      prediction: userPrediction,
-                      matchDetails: fixtureModel.matchDetails.first,)
-                    : index == 1
-                        ? PlayersView(
-                            prediction: userPrediction,
-                            matchDetails: fixtureModel.matchDetails.first,
-                          )
-                        : index == 2
-                            ? NewsView(leagueId: fixtureModel.matchDetails.first.leagueId,)
-                            : const SizedBox.shrink(),
-              ],
-            ) : const LoadingWidget(),
+      create: false,
+      model: context.read<FixtureDetailViewModel>(),
+      onModelReady: (FixtureDetailViewModel model) async {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          model.getData(matchId: widget.matchData.matchId);
+        });
+      },
+      builder: (context, FixtureDetailViewModel fixtureModel, _) {
+        userPrediction =
+            fixtureModel.getMatchPrediction(matchId: widget.matchData.matchId);
+        return RefreshIndicator(
+          backgroundColor: AppColors.textFieldColor,
+          onRefresh: () async {
+            bool isConnected = await InternetInfo.isConnected();
+            if (isConnected == true) {
+              await fixtureModel.refreshData(matchId: widget.matchData.matchId);
+            }
+          },
+          child: Scaffold(
+            appBar: fixtureModel.matchDetails.isNotEmpty
+                ? AppBarWidget(
+                    title: widget.matchData.leagueName,
+                    trailing: [
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: DotWidget(
+                          size: 22,
+                          isLive: fixtureModel.matchDetails.isEmpty
+                              ? false
+                              : fixtureModel.matchDetails[0].matchLive == "1",
+                        ),
+                      )
+                    ],
+                  )
+                : null,
+            body: !fixtureModel.busy && fixtureModel.matchDetails.isNotEmpty
+                ? Column(
+                    children: [
+                      TabBarWidget(
+                          totalTabs: 3,
+                          selectedIndex: index,
+                          tabs: listOfTabs,
+                          onTabChanged: (selectedIndex) {
+                            setState(() {
+                              index = selectedIndex!;
+                            });
+                          }),
+                      index == 0
+                          ? MatchView(
+                              prediction: userPrediction,
+                              matchDetails: fixtureModel.matchDetails.first,
+                            )
+                          : index == 1
+                              ? PlayersView(
+                                  prediction: userPrediction,
+                                  matchDetails: fixtureModel.matchDetails.first,
+                                )
+                              : index == 2
+                                  ? NewsView(
+                                      leagueId: fixtureModel
+                                          .matchDetails.first.leagueId,
+                                    )
+                                  : const SizedBox.shrink(),
+                    ],
+                  )
+                : const LoadingWidget(),
           ),
         );
-      },);
+      },
+    );
   }
-
 }

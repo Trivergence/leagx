@@ -35,9 +35,9 @@ class _FaqTileState extends State<FaqTile> {
               ),
               isShow
                   ? const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: AppColors.colorPink,
-                  )
+                      Icons.keyboard_arrow_down,
+                      color: AppColors.colorPink,
+                    )
                   : const IconWidget(
                       iconData: Icons.keyboard_arrow_right,
                     ),

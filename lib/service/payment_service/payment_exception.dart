@@ -4,7 +4,7 @@ import 'package:leagx/ui/util/toast/toast.dart';
 class PaymentExceptions {
   static void handleException({required String errorCode}) {
     String message = "";
-    switch(errorCode) {
+    switch (errorCode) {
       case "account_already_exists":
         message = loc.errorStripeAccountAlreadyExists;
         break;
@@ -102,7 +102,7 @@ class PaymentExceptions {
         message = loc.errorStripeCountryUnsupported;
         break;
       default:
-      message = loc.errorTryAgain;
+        message = loc.errorTryAgain;
     }
     ToastMessage.show(message, TOAST_TYPE.error);
   }

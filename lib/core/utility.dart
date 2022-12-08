@@ -15,26 +15,25 @@ import 'package:url_launcher/url_launcher.dart';
 import '../constants/strings.dart';
 import '../ui/util/locale/localization.dart';
 
-class Utility{
+class Utility {
   static bool isMatchOver(String status) {
-      if (status == MatchStatus.finished.value ||
-          status == MatchStatus.afterExTime.value ||
-          status == MatchStatus.afterPanalty.value ||
-          status == MatchStatus.postponed.value ||
-          status == MatchStatus.delayed.value ||
-          status == MatchStatus.cancelled.value ||
-          status == MatchStatus.awarded.value
-        ) {
-        return true;
-      } else {
-        return false;
-      }
+    if (status == MatchStatus.finished.value ||
+        status == MatchStatus.afterExTime.value ||
+        status == MatchStatus.afterPanalty.value ||
+        status == MatchStatus.postponed.value ||
+        status == MatchStatus.delayed.value ||
+        status == MatchStatus.cancelled.value ||
+        status == MatchStatus.awarded.value) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   static bool isTimeValid(String matchStatus) {
-    if(matchStatus == MatchStatus.halfTime.value) {
+    if (matchStatus == MatchStatus.halfTime.value) {
       return false;
-    } else if(matchStatus.contains("+")) {
+    } else if (matchStatus.contains("+")) {
       return false;
     } else if (matchStatus.isEmpty) {
       return false;
@@ -52,18 +51,17 @@ class Utility{
     return deviceLocale!.countryCode;
   }
 
-   static Future<String> getTzName() async {
+  static Future<String> getTzName() async {
     String timeZone;
     try {
-      timeZone =
-              await FlutterNativeTimezone.getLocalTimezone();
+      timeZone = await FlutterNativeTimezone.getLocalTimezone();
     } on Exception catch (_) {
       timeZone = "Asia/Riyadh";
     }
     return timeZone;
   }
 
-    static Future<void> openUrl({required String url}) async {
+  static Future<void> openUrl({required String url}) async {
     Uri? parsedUrl = Uri.tryParse(url);
     if (parsedUrl != null) {
       try {
@@ -71,17 +69,14 @@ class Utility{
           parsedUrl,
           mode: LaunchMode.inAppWebView,
         )) {
-          ToastMessage.show(
-              loc.errorInvalidUrl, TOAST_TYPE.error);
+          ToastMessage.show(loc.errorInvalidUrl, TOAST_TYPE.error);
         }
       } on PlatformException catch (_) {
       } catch (_) {
-        ToastMessage.show(
-              loc.errorInvalidUrl, TOAST_TYPE.error);
+        ToastMessage.show(loc.errorInvalidUrl, TOAST_TYPE.error);
       }
     } else {
-      ToastMessage.show(
-              loc.errorInvalidUrl, TOAST_TYPE.error);
+      ToastMessage.show(loc.errorInvalidUrl, TOAST_TYPE.error);
     }
   }
 
@@ -92,15 +87,18 @@ class Utility{
     }
     return true;
   }
+
   static String getFont(LocalizationProvider localizationProvider) {
-    if(localizationProvider.locale ==  const Locale(
-        Strings.english,
-      )) {
-        return FontFamily.gilroy;
+    if (localizationProvider.locale ==
+        const Locale(
+          Strings.english,
+        )) {
+      return FontFamily.gilroy;
     } else {
       return FontFamily.cairo;
     }
   }
+
   static bool isPredictionPending(String? status) {
     if (status == MatchStatus.finished.value ||
         status == MatchStatus.afterExTime.value ||

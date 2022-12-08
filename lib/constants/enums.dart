@@ -1,10 +1,17 @@
 enum UserType { user, expert, admin }
-enum AuthType { apple, twitter, local}
+
+enum AuthType { apple, twitter, local }
+
 enum DialogType { payout, addCoins }
+
 enum PaymentType { wallet, card }
+
 enum WithdrawType { minimum, maximum, custom }
-enum RequestType {clientSideApi, selfHostedApi, footballApi}
+
+enum RequestType { clientSideApi, selfHostedApi, footballApi }
+
 enum ScrollDirection { forward, backward }
+
 enum MatchStatus {
   finished("Finished"),
   afterExTime("After ET"),

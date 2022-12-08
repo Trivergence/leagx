@@ -8,23 +8,23 @@ import '../../widgets/text_widget.dart';
 import '../locale/localization.dart';
 
 class PaymentMethodDialog {
-  static void show({required BuildContext context,
-   required String title, 
-   required String negativeBtnTitle,
-   required String positiveBtnTitle,
-   required Function(BuildContext, PaymentType) onPositiveBtnPressed
-   } ) {
+  static void show(
+      {required BuildContext context,
+      required String title,
+      required String negativeBtnTitle,
+      required String positiveBtnTitle,
+      required Function(BuildContext, PaymentType) onPositiveBtnPressed}) {
     showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (ctx) {
-      return PaymentMethodDialogWidget(
-        title: title,
-        negativeBtnTitle: negativeBtnTitle,
-        positiveBtnTitle: positiveBtnTitle,
-        onPositiveBtnPressed: onPositiveBtnPressed,
-      );
-    });
+        context: context,
+        barrierDismissible: false,
+        builder: (ctx) {
+          return PaymentMethodDialogWidget(
+            title: title,
+            negativeBtnTitle: negativeBtnTitle,
+            positiveBtnTitle: positiveBtnTitle,
+            onPositiveBtnPressed: onPositiveBtnPressed,
+          );
+        });
   }
 }
 
@@ -34,17 +34,17 @@ class PaymentMethodDialogWidget extends StatefulWidget {
   final String positiveBtnTitle;
   final Function(BuildContext, PaymentType) onPositiveBtnPressed;
 
-
   const PaymentMethodDialogWidget({
-    Key? key, 
-    required this.title, 
-    required this.negativeBtnTitle, 
-    required this.positiveBtnTitle, 
+    Key? key,
+    required this.title,
+    required this.negativeBtnTitle,
+    required this.positiveBtnTitle,
     required this.onPositiveBtnPressed,
   }) : super(key: key);
 
   @override
-  State<PaymentMethodDialogWidget> createState() => _PaymentMethodDialogWidgetState();
+  State<PaymentMethodDialogWidget> createState() =>
+      _PaymentMethodDialogWidgetState();
 }
 
 class _PaymentMethodDialogWidgetState extends State<PaymentMethodDialogWidget> {
@@ -55,7 +55,8 @@ class _PaymentMethodDialogWidgetState extends State<PaymentMethodDialogWidget> {
       title: TextWidget(
         text: widget.title,
         fontWeight: FontWeight.w700,
-        textSize:  Dimens.textMedium,),
+        textSize: Dimens.textMedium,
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -66,9 +67,13 @@ class _PaymentMethodDialogWidgetState extends State<PaymentMethodDialogWidget> {
               });
             },
             tileColor: AppColors.textFieldColor,
-            title: TextWidget(text : loc.choosePlanDialogSelectWallet),
-            trailing: selectedType == PaymentType.wallet ? const Icon(Icons.done, 
-             color: AppColors.primaryColorDark,) : null,
+            title: TextWidget(text: loc.choosePlanDialogSelectWallet),
+            trailing: selectedType == PaymentType.wallet
+                ? const Icon(
+                    Icons.done,
+                    color: AppColors.primaryColorDark,
+                  )
+                : null,
           ),
           UIHelper.verticalSpaceSmall,
           ListTile(
@@ -79,8 +84,12 @@ class _PaymentMethodDialogWidgetState extends State<PaymentMethodDialogWidget> {
             },
             tileColor: AppColors.textFieldColor,
             title: TextWidget(text: loc.choosePlanDialogSelectCard),
-            trailing: selectedType ==
-                PaymentType.card ? const Icon(Icons.done, color: AppColors.primaryColorDark,) : null,
+            trailing: selectedType == PaymentType.card
+                ? const Icon(
+                    Icons.done,
+                    color: AppColors.primaryColorDark,
+                  )
+                : null,
           )
         ],
       ),

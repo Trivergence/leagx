@@ -15,7 +15,12 @@ class PlayerTile extends StatefulWidget {
   final String playerTwoImg;
   final Color tileColor;
   const PlayerTile({
-    Key? key, required this.playerOneName, required this.playerOneImg, required this.playerTwoName, required this.playerTwoImg,required this.tileColor,
+    Key? key,
+    required this.playerOneName,
+    required this.playerOneImg,
+    required this.playerTwoName,
+    required this.playerTwoImg,
+    required this.tileColor,
   }) : super(key: key);
 
   @override
@@ -32,82 +37,84 @@ class _PlayerTileState extends State<PlayerTile> {
     translateData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return !isLoading ? Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      color: widget.tileColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 4,
-            child: Column(
+    return !isLoading
+        ? Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            color: widget.tileColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GradientBorderWidget(
-                  width: 44.0,
-                  height: 44.0,
-                  isCircular: true,
-                  imageUrl: widget.playerOneImg,
-                  placeHolderImg: Assets.icPlayerAvatar,
-                  onPressed: () {},
-                  gradient: AppColors.orangishGradient,
-                  isBorderSolid: true,
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    children: [
+                      GradientBorderWidget(
+                        width: 44.0,
+                        height: 44.0,
+                        isCircular: true,
+                        imageUrl: widget.playerOneImg,
+                        placeHolderImg: Assets.icPlayerAvatar,
+                        onPressed: () {},
+                        gradient: AppColors.orangishGradient,
+                        isBorderSolid: true,
+                      ),
+                      UIHelper.verticalSpaceSmall,
+                      TextWidget(
+                        text: playerOneName!,
+                        color: AppColors.colorYellow,
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
-                UIHelper.verticalSpaceSmall,
-                TextWidget(
-                  text: playerOneName!,
-                  color: AppColors.colorYellow,
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
+                Expanded(
+                  flex: 1,
+                  child: SizedBox(
+                    child: Center(
+                      child: Container(
+                        height: 3,
+                        width: 15,
+                        color: AppColors.colorWhite,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    children: [
+                      GradientBorderWidget(
+                        width: 44.0,
+                        height: 44.0,
+                        isCircular: true,
+                        imageUrl: widget.playerTwoImg,
+                        placeHolderImg: Assets.icPlayerAvatar,
+                        onPressed: () {},
+                        gradient: AppColors.orangishGradient,
+                        isBorderSolid: true,
+                      ),
+                      UIHelper.verticalSpaceSmall,
+                      TextWidget(
+                        text: playerTwoName!,
+                        color: AppColors.colorRed,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: SizedBox(
-              child: Center(
-                child: Container(
-                  height: 3,
-                  width: 15,
-                  color: AppColors.colorWhite,
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: Column(
-              children: [
-                GradientBorderWidget(
-                  width: 44.0,
-                  height: 44.0,
-                  isCircular: true,
-                  imageUrl: widget.playerTwoImg,
-                  placeHolderImg: Assets.icPlayerAvatar,
-                  onPressed: () {},
-                  gradient: AppColors.orangishGradient,
-                  isBorderSolid: true,
-                ),
-                UIHelper.verticalSpaceSmall,
-                TextWidget(
-                  text: playerTwoName!,
-                  color: AppColors.colorRed,
-                  textAlign: TextAlign.center,
-                ),                
-              ],
-            ),
-          ),
-        ],
-      ),
-    ): const ShimmerWidget(height: 100);
+          )
+        : const ShimmerWidget(height: 100);
   }
 
   Future<void> translateData() async {
-    String originalCommaText = widget.playerOneName +
-        "," +
-        widget.playerTwoName;
+    String originalCommaText =
+        widget.playerOneName + "," + widget.playerTwoName;
     String translatedCommaText =
         await TranslationUtility.translate(originalCommaText);
     List<String> listOfValues = [];
@@ -116,10 +123,9 @@ class _PlayerTileState extends State<PlayerTile> {
     } else {
       listOfValues = translatedCommaText.split(",");
     }
-      playerOneName = listOfValues[0];
-      playerTwoName = listOfValues[1];
-      isLoading = false;
-      setState(() {
-      });
+    playerOneName = listOfValues[0];
+    playerTwoName = listOfValues[1];
+    isLoading = false;
+    setState(() {});
   }
 }

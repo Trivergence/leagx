@@ -117,7 +117,7 @@ class TextFieldWidget extends StatelessWidget {
     this.enabled = true,
     this.readOnly = false,
     this.onTap,
-    this.maxLines = 1, 
+    this.maxLines = 1,
     this.listOfFormaters,
   }) : super(key: key);
 

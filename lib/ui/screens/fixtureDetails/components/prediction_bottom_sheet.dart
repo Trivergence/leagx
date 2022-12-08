@@ -25,7 +25,8 @@ import 'score_picker.dart';
 class PredictionSheetWidget extends StatefulWidget {
   final Fixture? matchDetails;
   const PredictionSheetWidget({
-    Key? key, this.matchDetails,
+    Key? key,
+    this.matchDetails,
   }) : super(key: key);
 
   @override
@@ -50,6 +51,7 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
     translateData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     _context = context;
@@ -70,87 +72,91 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
             color: AppColors.colorPink,
           ),
           UIHelper.verticalSpace(34),
-          !isLoading ? Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-                SizedBox(
-                  width: SizeConfig.width * 30,
-                  child: Column(
-                    children: [
-                      TextWidget(
-                      text: homeTeamName,
-                      fontWeight: FontWeight.w600,
-                      textAlign: TextAlign.center,
-                     ),
-                    ],
-                  ),
-                ),
-              Row(
-                children: [
-                  ScorePicker(
-                    initialScore: 1,
-                    isSelected: firstSelected,
-                    onChanged: (score) {
-                      setState(() {
-                        secondSelected = false;
-                        firstSelected = true;
-                        homeScore = score;
-                      });
-                    },
-                  ),
-                  UIHelper.horizontalSpace(2),
-                  ImageWidget(
-                    height: 30,
-                    width: 30,
-                    placeholder: Assets.icTeamAvatar,
-                    imageUrl: widget.matchDetails!.teamHomeBadge,
-                    shouldClip: true,
-                  )
-                ],
-              )
-            ],
-          ) : const ShimmerWidget(height: 20),
-          UIHelper.verticalSpace(22),
-          !isLoading ? Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-                SizedBox(
-                  width: SizeConfig.width * 30,
-                  child: Column(
-                    children: [
-                      TextWidget(
-                      text: awayTeamName,
-                      fontWeight: FontWeight.w600,
-                      textAlign: TextAlign.center,
-                     ),
-                    ],
-                  ),
-                ),
-              Row(
-                children: [
-                  ScorePicker(
-                    initialScore: 2,
-                    isSelected: secondSelected,
-                    onChanged: (score) {
-                      setState(() {
-                        secondSelected = true;
-                        firstSelected = false;
-                        awayScore = score;
-                      });
-                    },
-                  ),
-                  UIHelper.horizontalSpace(2),
-                  ImageWidget(
-                    height: 30,
-                    width: 30,
-                    placeholder: Assets.icTeamAvatar,
-                    imageUrl: widget.matchDetails!.teamAwayBadge,
-                    shouldClip: true,
+          !isLoading
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: SizeConfig.width * 30,
+                      child: Column(
+                        children: [
+                          TextWidget(
+                            text: homeTeamName,
+                            fontWeight: FontWeight.w600,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        ScorePicker(
+                          initialScore: 1,
+                          isSelected: firstSelected,
+                          onChanged: (score) {
+                            setState(() {
+                              secondSelected = false;
+                              firstSelected = true;
+                              homeScore = score;
+                            });
+                          },
+                        ),
+                        UIHelper.horizontalSpace(2),
+                        ImageWidget(
+                          height: 30,
+                          width: 30,
+                          placeholder: Assets.icTeamAvatar,
+                          imageUrl: widget.matchDetails!.teamHomeBadge,
+                          shouldClip: true,
+                        )
+                      ],
                     )
-                ],
-              )
-            ],
-          ) : const ShimmerWidget(height: 20),
+                  ],
+                )
+              : const ShimmerWidget(height: 20),
+          UIHelper.verticalSpace(22),
+          !isLoading
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: SizeConfig.width * 30,
+                      child: Column(
+                        children: [
+                          TextWidget(
+                            text: awayTeamName,
+                            fontWeight: FontWeight.w600,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        ScorePicker(
+                          initialScore: 2,
+                          isSelected: secondSelected,
+                          onChanged: (score) {
+                            setState(() {
+                              secondSelected = true;
+                              firstSelected = false;
+                              awayScore = score;
+                            });
+                          },
+                        ),
+                        UIHelper.horizontalSpace(2),
+                        ImageWidget(
+                          height: 30,
+                          width: 30,
+                          placeholder: Assets.icTeamAvatar,
+                          imageUrl: widget.matchDetails!.teamAwayBadge,
+                          shouldClip: true,
+                        )
+                      ],
+                    )
+                  ],
+                )
+              : const ShimmerWidget(height: 20),
           UIHelper.verticalSpace(20),
           // Row(
           //   children: [
@@ -181,28 +187,31 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   Future<void> _predictMatch() async {
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected == true) {
-      if(leagueId != null) {
+      if (leagueId != null) {
         _context!.read<FixtureDetailViewModel>().savePrediction(
-        context: _context!,
-        matchId: int.parse(widget.matchDetails!.matchId),
-        leagueId: leagueId!,
-        homeScore: homeScore,
-        awayScore: awayScore,
-        awayTeamLogo: widget.matchDetails!.teamAwayBadge,
-        homeTeamLogo: widget.matchDetails!.teamHomeBadge,
-        expertId: expertId,
-        awayTeamName: widget.matchDetails!.matchAwayteamName,
-        homeTeamName: widget.matchDetails!.matchHometeamName,
-        isPublic: isPublic);
+            context: _context!,
+            matchId: int.parse(widget.matchDetails!.matchId),
+            leagueId: leagueId!,
+            homeScore: homeScore,
+            awayScore: awayScore,
+            awayTeamLogo: widget.matchDetails!.teamAwayBadge,
+            homeTeamLogo: widget.matchDetails!.teamHomeBadge,
+            expertId: expertId,
+            awayTeamName: widget.matchDetails!.matchAwayteamName,
+            homeTeamName: widget.matchDetails!.matchHometeamName,
+            isPublic: isPublic);
       }
     }
   }
 
   int? getIntLeageId() {
-     List<SubscribedLeague> subscribedLeagues = context.read<DashBoardViewModel>()
-    .subscribedLeagues
-    .where((league) => league.externalLeagueId.toString() == widget.matchDetails!.leagueId).toList();
-    if(subscribedLeagues.isNotEmpty) {
+    List<SubscribedLeague> subscribedLeagues = context
+        .read<DashBoardViewModel>()
+        .subscribedLeagues
+        .where((league) =>
+            league.externalLeagueId.toString() == widget.matchDetails!.leagueId)
+        .toList();
+    if (subscribedLeagues.isNotEmpty) {
       return subscribedLeagues.first.id;
     } else {
       return null;
@@ -210,16 +219,16 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
   }
 
   Future<void> _chooseExpert() async {
-     List<UserSummary> listOfAnalysts = _context!.read<FixtureDetailViewModel>().getAnalysts;
-     if(listOfAnalysts.isNotEmpty) {
-     await Navigator.of(_context!).pushReplacementNamed(Routes.chooseAnalyst,
+    List<UserSummary> listOfAnalysts =
+        _context!.read<FixtureDetailViewModel>().getAnalysts;
+    if (listOfAnalysts.isNotEmpty) {
+      await Navigator.of(_context!).pushReplacementNamed(Routes.chooseAnalyst,
           arguments: widget.matchDetails);
-     } else {
-      ToastMessage.show(loc.fixtureDetailsMsgAdvisorUnavailable, 
-        TOAST_TYPE.msg);
-     }
+    } else {
+      ToastMessage.show(
+          loc.fixtureDetailsMsgAdvisorUnavailable, TOAST_TYPE.msg);
+    }
   }
-  
 
   Future<void> translateData() async {
     String originalCommaText = widget.matchDetails!.matchHometeamName +
@@ -236,7 +245,6 @@ class _PredictionSheetWidgetState extends State<PredictionSheetWidget> {
     homeTeamName = listOfValues[0];
     awayTeamName = listOfValues[1];
     isLoading = false;
-    setState(() {
-    });
+    setState(() {});
   }
 }

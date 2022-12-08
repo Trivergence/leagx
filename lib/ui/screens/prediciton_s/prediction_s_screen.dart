@@ -20,7 +20,8 @@ class PredicitonsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    listOfPrediction = context.select<FixtureDetailViewModel, List<Prediction>>((fixtureModel) => fixtureModel.getPredictions);
+    listOfPrediction = context.select<FixtureDetailViewModel, List<Prediction>>(
+        (fixtureModel) => fixtureModel.getPredictions);
     return RefreshIndicator(
       backgroundColor: AppColors.textFieldColor,
       onRefresh: () async {
@@ -34,38 +35,42 @@ class PredicitonsScreen extends StatelessWidget {
         appBar: AppBarWidget(
           title: loc.predictionSTxtPredictions,
         ),
-        body: listOfPrediction.isNotEmpty ? SizedBox(
-          height: double.infinity,
-          child: ListView.builder(
-            itemCount: listOfPrediction.length,
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(
-                horizontal: Dimens.horizontalPadding,
-                vertical: Dimens.verticalPadding),
-            itemBuilder: (context, index) {
-              Prediction prediction = listOfPrediction[index];
-              Match match = prediction.match;
-              return PredictionWidget(
-                teamOneFlag: match.firstTeamLogo!,
-                teamOneName: match.firstTeamName!,
-                teamOneScore: prediction.firstTeamScore,
-                teamTwoFlag: match.secondTeamLogo!,
-                teamTwoName: match.secondTeamName!,
-                teamTwoScore: prediction.secondTeamScore,
-                predictionRate: prediction.accuratePercentage != null 
-                  ? prediction.accuratePercentage.toString()
-                  : "0.0",
-                isPending: Utility.isPredictionPending(prediction.status),
-                isLocked: Utility.isPredictionPending(prediction.status) && prediction.expertId != null,
-              );
-            },
-          ),
-        )
-        : Center(
-          child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: PlaceHolderTile(height: 60, msgText: loc.predictionSTxtEmptyList),
-        )),
+        body: listOfPrediction.isNotEmpty
+            ? SizedBox(
+                height: double.infinity,
+                child: ListView.builder(
+                  itemCount: listOfPrediction.length,
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: Dimens.horizontalPadding,
+                      vertical: Dimens.verticalPadding),
+                  itemBuilder: (context, index) {
+                    Prediction prediction = listOfPrediction[index];
+                    Match match = prediction.match;
+                    return PredictionWidget(
+                      teamOneFlag: match.firstTeamLogo!,
+                      teamOneName: match.firstTeamName!,
+                      teamOneScore: prediction.firstTeamScore,
+                      teamTwoFlag: match.secondTeamLogo!,
+                      teamTwoName: match.secondTeamName!,
+                      teamTwoScore: prediction.secondTeamScore,
+                      predictionRate: prediction.accuratePercentage != null
+                          ? prediction.accuratePercentage.toString()
+                          : "0.0",
+                      isPending: Utility.isPredictionPending(prediction.status),
+                      isLocked:
+                          Utility.isPredictionPending(prediction.status) &&
+                              prediction.expertId != null,
+                    );
+                  },
+                ),
+              )
+            : Center(
+                child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: PlaceHolderTile(
+                    height: 60, msgText: loc.predictionSTxtEmptyList),
+              )),
       ),
     );
   }

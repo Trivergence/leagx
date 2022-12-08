@@ -43,7 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     _leagueController = ScrollController();
     _matchController = ScrollController();
-    subscribedMatches = context.select<DashBoardViewModel, List<Fixture>>((dashboardModel) => dashboardModel.subscribedMatches);
+    subscribedMatches = context.select<DashBoardViewModel, List<Fixture>>(
+        (dashboardModel) => dashboardModel.subscribedMatches);
     _dashBoardViewModel = context.read<DashBoardViewModel>();
     subscribedMatches = isFiltering == true
         ? _dashBoardViewModel.filteredMatches
@@ -81,13 +82,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: LeagueAvatarWidget(
                           addLeague: true,
                           onPressed: () async {
-                            if(context.read<SubscriptionViewModel>().leagues.isNotEmpty) {
+                            if (context
+                                .read<SubscriptionViewModel>()
+                                .leagues
+                                .isNotEmpty) {
                               await Navigator.of(context).pushNamed(
                                   Routes.chooseLeague,
                                   arguments: false);
                               setState(() {});
                             } else {
-                              ToastMessage.show(loc.msgPleaseWait, TOAST_TYPE.msg);
+                              ToastMessage.show(
+                                  loc.msgPleaseWait, TOAST_TYPE.msg);
                             }
                           },
                           isSelected: false,
@@ -130,9 +135,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                    if(subscribedLeagues.isNotEmpty) InkWell(
-                        onTap: () => _dashBoardViewModel.scrollList(scrollController: _leagueController),
-                        child: const Icon(Icons.arrow_forward_ios_rounded))
+                    if (subscribedLeagues.isNotEmpty)
+                      InkWell(
+                          onTap: () => _dashBoardViewModel.scrollList(
+                              scrollController: _leagueController),
+                          child: const Icon(Icons.arrow_forward_ios_rounded))
                   ],
                 ),
               ],
@@ -158,39 +165,39 @@ class _HomeScreenState extends State<HomeScreen> {
                         UIHelper.verticalSpaceSmall,
                         Expanded(
                           child: ListView.builder(
-                            controller: _matchController,
-                            shrinkWrap: true,
-                            itemCount: subscribedMatches.length,
-                            itemBuilder: (context, index) {
-                              Fixture match = subscribedMatches[index];
-                              return FixtureWidget(
-                                  key: UniqueKey(),
-                                  leagueName: match.leagueName,
-                                  teamOneFlag: match.teamHomeBadge,
-                                  teamOneName: match.matchHometeamName,
-                                  teamTwoFlag: match.teamAwayBadge,
-                                  teamTwoName: match.matchAwayteamName,
-                                  scheduledTime: match.matchTime,
-                                  scheduledDate: match.matchDate,
-                                  isLive: match.matchLive == "1",
-                                  isOver:
-                                      Utility.isMatchOver(match.matchStatus!),
-                                  matchStatus: match.matchStatus,
-                                  teamOneScore: match.matchHometeamScore,
-                                  teamTwoScore: match.matchAwayteamScore,
-                                  onTap: (leagueName) async {
-                                    bool isConnected =
-                                        await InternetInfo.isConnected();
-                                    if (isConnected == true) {
-                                      Navigator.pushNamed(
-                                        context, Routes.fixtureDetails,
-                                        arguments: MatchArgs(
-                                        matchId: match.matchId,
-                                        leagueName: leagueName,
-                                      ));
-                                    }
-                                  });
-                            }),
+                              controller: _matchController,
+                              shrinkWrap: true,
+                              itemCount: subscribedMatches.length,
+                              itemBuilder: (context, index) {
+                                Fixture match = subscribedMatches[index];
+                                return FixtureWidget(
+                                    key: UniqueKey(),
+                                    leagueName: match.leagueName,
+                                    teamOneFlag: match.teamHomeBadge,
+                                    teamOneName: match.matchHometeamName,
+                                    teamTwoFlag: match.teamAwayBadge,
+                                    teamTwoName: match.matchAwayteamName,
+                                    scheduledTime: match.matchTime,
+                                    scheduledDate: match.matchDate,
+                                    isLive: match.matchLive == "1",
+                                    isOver:
+                                        Utility.isMatchOver(match.matchStatus!),
+                                    matchStatus: match.matchStatus,
+                                    teamOneScore: match.matchHometeamScore,
+                                    teamTwoScore: match.matchAwayteamScore,
+                                    onTap: (leagueName) async {
+                                      bool isConnected =
+                                          await InternetInfo.isConnected();
+                                      if (isConnected == true) {
+                                        Navigator.pushNamed(
+                                            context, Routes.fixtureDetails,
+                                            arguments: MatchArgs(
+                                              matchId: match.matchId,
+                                              leagueName: leagueName,
+                                            ));
+                                      }
+                                    });
+                              }),
                         )
                       ],
                     ),
@@ -216,29 +223,28 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   filterByLeague(int index) {
-      goToStart(_matchController);
-      if (selectedIndex != index) {
-        context.read<DashBoardViewModel>().filterByLeague(
-            leagueId: subscribedLeagues[index].externalLeagueId.toString());
-        setState(() {
-          isFiltering = true;
-          selectedIndex = index;
-        });
-      } else {
-        context.read<DashBoardViewModel>().filterByLeague(
+    goToStart(_matchController);
+    if (selectedIndex != index) {
+      context.read<DashBoardViewModel>().filterByLeague(
           leagueId: subscribedLeagues[index].externalLeagueId.toString());
-      }
+      setState(() {
+        isFiltering = true;
+        selectedIndex = index;
+      });
+    } else {
+      context.read<DashBoardViewModel>().filterByLeague(
+          leagueId: subscribedLeagues[index].externalLeagueId.toString());
+    }
   }
 
   Future<void> _refreshData() async {
     await _dashBoardViewModel.getAllFixtures();
     filterByLeague(selectedIndex);
-    setState(() {
-    });
+    setState(() {});
   }
-  
+
   void goToStart(ScrollController matchController) {
-    if(matchController.hasClients && matchController.offset > 50) {
+    if (matchController.hasClients && matchController.offset > 50) {
       _matchController.jumpTo(-500);
     }
   }

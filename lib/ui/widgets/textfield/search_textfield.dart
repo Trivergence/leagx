@@ -78,7 +78,8 @@ class SearchTextField extends StatelessWidget {
     this.onFieldSubmitted,
     this.inputAction,
     this.onTap,
-    this.isDisabled = false, this.onTextEntered,
+    this.isDisabled = false,
+    this.onTextEntered,
   }) : super(key: key);
 
   //Styles

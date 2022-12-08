@@ -50,9 +50,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   Future<void> _onItemTapped(int index) async {
     bool isConnected = await InternetInfo.isConnected();
-    if(isConnected == true) {
+    if (isConnected == true) {
       if (index == 3) {
-         if (StripeConfig().getSecretKey.isNotEmpty) {
+        if (StripeConfig().getSecretKey.isNotEmpty) {
           if (context.read<DashBoardViewModel>().isInitialized == true) {
             setState(() {
               _selectedIndex = index;
@@ -65,12 +65,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           await context.read<WalletViewModel>().setupStripeCredentials();
         }
       } else {
-         setState(() {
+        setState(() {
           _selectedIndex = index;
         });
       }
     }
-   
   }
 
   @override
@@ -81,22 +80,37 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         model: context.read<DashBoardViewModel>(),
         onModelReady: (DashBoardViewModel dashboardModel) {
           SchedulerBinding.instance.addPostFrameCallback((_) async {
-              await dashboardModel.getData(context, showToast: false);
-              await context.read<SubscriptionViewModel>().getSubscriptionPlans(showToast: false);
-              await context.read<SubscriptionViewModel>().getLeagues(showToast: false);
-              await context.read<FixtureDetailViewModel>().getUserPredictions(showToast: false);
-              await context.read<WalletViewModel>().setupStripeCredentials(showToast: false);
-              await context.read<DashBoardViewModel>().getPaymentCredentials(context, showToast: false);
-              await context.read<WalletViewModel>().getUserPaymentMethods(showToast: false);
-              if (StripeConfig().getSecretKey.isEmpty) {
-                await context.read<WalletViewModel>().setupStripeCredentials(showToast: false);
-              }
-              context.read<DashBoardViewModel>().initializationComplete();
+            await dashboardModel.getData(context, showToast: false);
+            await context
+                .read<SubscriptionViewModel>()
+                .getSubscriptionPlans(showToast: false);
+            await context
+                .read<SubscriptionViewModel>()
+                .getLeagues(showToast: false);
+            await context
+                .read<FixtureDetailViewModel>()
+                .getUserPredictions(showToast: false);
+            await context
+                .read<WalletViewModel>()
+                .setupStripeCredentials(showToast: false);
+            await context
+                .read<DashBoardViewModel>()
+                .getPaymentCredentials(context, showToast: false);
+            await context
+                .read<WalletViewModel>()
+                .getUserPaymentMethods(showToast: false);
+            if (StripeConfig().getSecretKey.isEmpty) {
+              await context
+                  .read<WalletViewModel>()
+                  .setupStripeCredentials(showToast: false);
+            }
+            context.read<DashBoardViewModel>().initializationComplete();
           });
         },
         builder: (context, DashBoardViewModel dashboardModel, _) {
-          UserSummary? _userSummary = context.select<DashBoardViewModel, UserSummary?>(
-              (dasboardModel) => dasboardModel.userSummary);
+          UserSummary? _userSummary =
+              context.select<DashBoardViewModel, UserSummary?>(
+                  (dasboardModel) => dasboardModel.userSummary);
           return WillPopScope(
             onWillPop: () => Future.value(false),
             child: Scaffold(
@@ -105,7 +119,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 isDrawer: true,
                 trailing: [
                   AppBarChip(
-                    totalValue: _userSummary != null ? _userSummary.remainingPredictions.toString() : "0",
+                    totalValue: _userSummary != null
+                        ? _userSummary.remainingPredictions.toString()
+                        : "0",
                     leadingIcon: Assets.icBullsEye,
                   ),
                   AppBarChip(
@@ -117,47 +133,45 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 ],
               ),
               drawer: DrawerScreen(),
-              body: !dashboardModel.isLoading ? Container(
-                width: SizeConfig.width * 100,
-                height: SizeConfig.height * 100,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage(
-                      Assets.homeBackground,
-                    ),
-                  ),
-                ),
-                child: widgetOptions.elementAt(_selectedIndex),
-              ) : const LoadingWidget(),
+              body: !dashboardModel.isLoading
+                  ? Container(
+                      width: SizeConfig.width * 100,
+                      height: SizeConfig.height * 100,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: AssetImage(
+                            Assets.homeBackground,
+                          ),
+                        ),
+                      ),
+                      child: widgetOptions.elementAt(_selectedIndex),
+                    )
+                  : const LoadingWidget(),
               bottomNavigationBar: BottomNavigationBar(
                 backgroundColor: AppColors.colorBackground,
                 type: BottomNavigationBarType.fixed,
                 items: [
                   _bettingNavBarItem(
-                    title: loc.dashboardBtnHome,
-                    iconAsset: Assets.icHome,
-                    activeIconAsset: Assets.icHomeFill
-                  ),
+                      title: loc.dashboardBtnHome,
+                      iconAsset: Assets.icHome,
+                      activeIconAsset: Assets.icHomeFill),
                   _bettingNavBarItem(
-                    title: loc.dashboardBtnLeader,
-                    iconAsset: Assets.icExperts,
-                    activeIconAsset: Assets.icExpertsFill
-                  ),
+                      title: loc.dashboardBtnLeader,
+                      iconAsset: Assets.icExperts,
+                      activeIconAsset: Assets.icExpertsFill),
                   _bettingNavBarItem(
-                    title: loc.dashboardBtnNews,
-                    iconAsset: Assets.icNews,
-                    activeIconAsset: Assets.icNewsFill
-                  ),
+                      title: loc.dashboardBtnNews,
+                      iconAsset: Assets.icNews,
+                      activeIconAsset: Assets.icNewsFill),
                   _bettingNavBarItem(
                       title: loc.dashboardBtnWallet,
                       iconAsset: Assets.icWallet,
                       activeIconAsset: Assets.icWalletFill),
                   _bettingNavBarItem(
-                    title: loc.dashboardBtnSetting,
-                    iconAsset: Assets.icMyProfile,
-                    activeIconAsset: Assets.icMyProfileFill
-                  ),
+                      title: loc.dashboardBtnSetting,
+                      iconAsset: Assets.icMyProfile,
+                      activeIconAsset: Assets.icMyProfileFill),
                 ],
                 currentIndex: _selectedIndex,
                 onTap: _onItemTapped,
@@ -169,11 +183,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         });
   }
 
-  BottomNavigationBarItem _bettingNavBarItem(
-          {required String title, 
-          required String iconAsset,
-          required String activeIconAsset,
-          }) =>
+  BottomNavigationBarItem _bettingNavBarItem({
+    required String title,
+    required String iconAsset,
+    required String activeIconAsset,
+  }) =>
       BottomNavigationBarItem(
         backgroundColor: AppColors.colorBackground,
         label: '',
@@ -182,7 +196,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(iconAsset, height: 18,
+            SvgPicture.asset(
+              iconAsset,
+              height: 18,
               color: AppColors.colorCyan40,
             ),
             UIHelper.verticalSpace(8.0),
@@ -200,10 +216,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SvgPicture.asset(
-              activeIconAsset,
-              color: AppColors.colorCyan,
-              height: 18),
+            SvgPicture.asset(activeIconAsset,
+                color: AppColors.colorCyan, height: 18),
             UIHelper.verticalSpace(8.0),
             TextWidget(
               text: title,
@@ -216,5 +230,3 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
       );
 }
-
-

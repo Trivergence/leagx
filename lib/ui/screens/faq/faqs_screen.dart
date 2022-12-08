@@ -37,12 +37,12 @@ class FaqsScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-             TextWidget(
-               text: loc.faqsTxtFrequentlyAskedQuestions,
-               fontWeight: FontWeight.w600,
-               textSize: 20.0,
-               color: AppColors.colorPink,
-             ),
+            TextWidget(
+              text: loc.faqsTxtFrequentlyAskedQuestions,
+              fontWeight: FontWeight.w600,
+              textSize: 20.0,
+              color: AppColors.colorPink,
+            ),
             UIHelper.verticalSpaceMedium,
             Expanded(
               child: SingleChildScrollView(

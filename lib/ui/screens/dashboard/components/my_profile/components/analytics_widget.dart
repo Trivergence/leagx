@@ -44,7 +44,7 @@ class AnalyticsWidget extends StatelessWidget {
         TextWidget(
           text: loc.myProfileTxtAnalytics,
           fontWeight: FontWeight.w600,
-           letterSpace: Utility.isArabic() ? 0 : 4,
+          letterSpace: Utility.isArabic() ? 0 : 4,
           textSize: Dimens.textRegular,
         ),
         Container(
@@ -77,18 +77,20 @@ class AnalyticsWidget extends StatelessWidget {
                           backgroundColor: const Color(0xFFF67599),
                           radius: 15,
                           child: SvgPicture.asset(
-                            Assets.icBullsEye, 
-                            color: AppColors.colorBlack,),
+                            Assets.icBullsEye,
+                            color: AppColors.colorBlack,
+                          ),
                         ),
                       ),
                     ],
                   ),
                   UIHelper.verticalSpaceSmall,
                   TextWidget(
-                      text: firstLabel,
-                      textSize: 11,
-                      color: AppColors.colorWhite.withOpacity(0.6),
-                      fontWeight: FontWeight.w500,),
+                    text: firstLabel,
+                    textSize: 11,
+                    color: AppColors.colorWhite.withOpacity(0.6),
+                    fontWeight: FontWeight.w500,
+                  ),
                   UIHelper.verticalSpace(5),
                   MainButton(
                     width: 80.0,
@@ -180,11 +182,9 @@ class AnalyticsWidget extends StatelessWidget {
                     fontSize: 8.0,
                     onPressed: () async {
                       bool isConnected = await InternetInfo.isConnected();
-                      if(isConnected == true) {
-                        if (StripeConfig()
-                              .getSecretKey
-                              .isNotEmpty) {
-                            if (context
+                      if (isConnected == true) {
+                        if (StripeConfig().getSecretKey.isNotEmpty) {
+                          if (context
                                   .read<DashBoardViewModel>()
                                   .isInitialized ==
                               true) {
@@ -193,14 +193,12 @@ class AnalyticsWidget extends StatelessWidget {
                             ToastMessage.show(
                                 loc.msgPleaseWait, TOAST_TYPE.msg);
                           }
-                            
-                          } else {
-                            ToastMessage.show(
-                                loc.errorTryAgain, TOAST_TYPE.msg);
-                            context
-                                .read<WalletViewModel>()
-                                .setupStripeCredentials();
-                          }
+                        } else {
+                          ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.msg);
+                          context
+                              .read<WalletViewModel>()
+                              .setupStripeCredentials();
+                        }
                       }
                     },
                   ),

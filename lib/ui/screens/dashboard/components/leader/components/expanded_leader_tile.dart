@@ -23,7 +23,6 @@ class ExpandedLeaderTile extends StatelessWidget {
     required this.successRate,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,8 +43,7 @@ class ExpandedLeaderTile extends StatelessWidget {
                     child: SvgPicture.asset(
                       Assets.icBlackCrown,
                       color: AppColors.colorPink,
-                    )
-                  ),
+                    )),
                 GradientBorderWidget(
                   width: 60.0,
                   height: 60.0,

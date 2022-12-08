@@ -25,12 +25,18 @@ class VerificationAlertDialog {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: listOfRequirements
-              .map((requirements) => Column(
-                children: [
-                  TextWidget(text: UIHelper.bullet + "  " + requirements),
-                  TextWidget(text: "Due Data :" + DateUtility.getDateFronStamp(timeStamp: 123344).toString())
-                ],
-              )).toList(),
+                  .map((requirements) => Column(
+                        children: [
+                          TextWidget(
+                              text: UIHelper.bullet + "  " + requirements),
+                          TextWidget(
+                              text: "Due Data :" +
+                                  DateUtility.getDateFronStamp(
+                                          timeStamp: 123344)
+                                      .toString())
+                        ],
+                      ))
+                  .toList(),
             ),
             backgroundColor: AppColors.colorBackground,
             actions: <Widget>[

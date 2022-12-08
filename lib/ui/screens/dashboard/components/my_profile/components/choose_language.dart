@@ -20,14 +20,18 @@ class ChooseLanguageScreen extends StatelessWidget {
         children: [
           LanguageTile(
             onTap: () {
-              context.read<LocalizationProvider>().changeLanguage(Strings.english);
+              context
+                  .read<LocalizationProvider>()
+                  .changeLanguage(Strings.english);
               Navigator.pushNamed(context, Routes.dashboard);
             },
             text: loc.myProfileChooseLanguageTxtEnglish,
           ),
           LanguageTile(
             onTap: () {
-              context.read<LocalizationProvider>().changeLanguage(Strings.arabic);
+              context
+                  .read<LocalizationProvider>()
+                  .changeLanguage(Strings.arabic);
               Navigator.pushNamed(context, Routes.dashboard);
             },
             text: loc.myProfileChooseLanguageTxtArabic,

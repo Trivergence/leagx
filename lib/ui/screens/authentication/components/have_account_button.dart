@@ -8,7 +8,10 @@ class HaveAccountButton extends StatelessWidget {
   final String subText;
   final VoidCallback onTap;
   const HaveAccountButton(
-      {Key? key, required this.subText, required this.onTap, required this.mainText})
+      {Key? key,
+      required this.subText,
+      required this.onTap,
+      required this.mainText})
       : super(key: key);
 
   @override

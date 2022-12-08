@@ -8,8 +8,8 @@ import 'package:leagx/view_models/wallet_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 enum LoginStatus { none, loggingIn, loggedIn, error }
+
 enum SignupStatus { none, loading }
 
 class SessionProvider extends ChangeNotifier {
@@ -26,9 +26,8 @@ class SessionProvider extends ChangeNotifier {
 
   Future<void> _loadSession(BuildContext context) async {
     if (ValidationUtils.isValid(locator<SharedPreferenceHelper>().authToken)) {
-     _loginStatus = LoginStatus.loggedIn;
-    }
-    else if(!locator<SharedPreferenceHelper>().isFirstTime()) {
+      _loginStatus = LoginStatus.loggedIn;
+    } else if (!locator<SharedPreferenceHelper>().isFirstTime()) {
       _loginStatus = LoginStatus.error;
     }
     context.read<WalletViewModel>().setupStripeCredentials(showToast: false);

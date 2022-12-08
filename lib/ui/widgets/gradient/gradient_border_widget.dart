@@ -35,8 +35,9 @@ class GradientBorderWidget extends StatelessWidget {
     this.iconSize,
     this.imageUrl,
     this.imageAsset,
-    this.padding, this.placeHolderImg, 
-    this.isBorderSolid = false, 
+    this.padding,
+    this.placeHolderImg,
+    this.isBorderSolid = false,
     this.shouldClip = false,
   }) : super(key: key);
 
@@ -56,35 +57,34 @@ class GradientBorderWidget extends StatelessWidget {
                 ? null
                 : const BorderRadius.all(Radius.circular(5.0))),
         child: Container(
-          padding: padding,
-          decoration: BoxDecoration(
-            color: AppColors.colorBackground,
-            shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
-          ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: iconData != null
-              ? IconWidget(
-                  iconData: iconData!,
-                  size: iconSize,
-                )
-              : imageUrl != null
-                  ? ImageWidget(
-                      imageUrl: imageUrl!,
-                      placeholder: placeHolderImg ?? '',
-                      shouldClip: shouldClip,
-                    )
-                  : text != null
-                      ? Center(
-                          child: TextWidget(
-                            text: text!,
-                            fontWeight: FontWeight.w600,
-                            textSize: textSize ?? Dimens.textRegular,
-                          ),
-                        )
-                      : imageAsset != null
-                          ? Image.asset(imageAsset!)
-                          : const SizedBox()
-        ),
+            padding: padding,
+            decoration: BoxDecoration(
+              color: AppColors.colorBackground,
+              shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+            ),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: iconData != null
+                ? IconWidget(
+                    iconData: iconData!,
+                    size: iconSize,
+                  )
+                : imageUrl != null
+                    ? ImageWidget(
+                        imageUrl: imageUrl!,
+                        placeholder: placeHolderImg ?? '',
+                        shouldClip: shouldClip,
+                      )
+                    : text != null
+                        ? Center(
+                            child: TextWidget(
+                              text: text!,
+                              fontWeight: FontWeight.w600,
+                              textSize: textSize ?? Dimens.textRegular,
+                            ),
+                          )
+                        : imageAsset != null
+                            ? Image.asset(imageAsset!)
+                            : const SizedBox()),
       ),
     );
   }

@@ -36,23 +36,22 @@ void main() async {
     await setupLocator();
     await CountryCodes.init();
     Hive.init((await getApplicationDocumentsDirectory()).path);
-    
+
     runApp(
       LayoutBuilder(
         builder: (context, constraints) => OrientationBuilder(
           builder: (context, orientation) {
             SizeConfig().init(constraints, orientation);
-            return MultiProvider(
-              providers: [
-                ChangeNotifierProvider<LocalizationProvider>(create: (_) => LocalizationProvider(preferences: prefs)),
-                ChangeNotifierProvider(create: (_) => DashBoardViewModel()),
-                ChangeNotifierProvider(create: (_) => FixtureDetailViewModel()),
-                ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
-                ChangeNotifierProvider(create: (_) => SubscriptionViewModel()),
-                ChangeNotifierProvider(create: (_) => WalletViewModel()),
-                ChangeNotifierProvider(create: (_) => PayoutViewModel()),
-              ],
-              child: Betting(prefs: prefs));
+            return MultiProvider(providers: [
+              ChangeNotifierProvider<LocalizationProvider>(
+                  create: (_) => LocalizationProvider(preferences: prefs)),
+              ChangeNotifierProvider(create: (_) => DashBoardViewModel()),
+              ChangeNotifierProvider(create: (_) => FixtureDetailViewModel()),
+              ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
+              ChangeNotifierProvider(create: (_) => SubscriptionViewModel()),
+              ChangeNotifierProvider(create: (_) => WalletViewModel()),
+              ChangeNotifierProvider(create: (_) => PayoutViewModel()),
+            ], child: Betting(prefs: prefs));
           },
         ),
       ),

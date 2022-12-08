@@ -55,7 +55,7 @@ class SharedPreferenceHelper {
     }
   }
 
-  Future<bool> saveUser(User user){
+  Future<bool> saveUser(User user) {
     return _sharedPreference.setString(Preferences.user, jsonEncode(user));
   }
 

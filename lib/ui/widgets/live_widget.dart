@@ -13,9 +13,11 @@ class LiveWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        DotWidget(isLive: isLive,),
+        DotWidget(
+          isLive: isLive,
+        ),
         UIHelper.horizontalSpace(3.0),
-         TextWidget(
+        TextWidget(
           text: loc.liveWidgetTxtLive,
           textSize: Dimens.textSmall,
         ),

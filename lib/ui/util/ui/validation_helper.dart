@@ -2,15 +2,16 @@ import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 
 class ValidationHelper {
- static String? validatePassword(String? text) {
-  if(text == null || text.isEmpty) {
-    return loc.errorRequired;
-  } else if(text.length  < 8) {
-    return loc.errorPasswordLength;
+  static String? validatePassword(String? text) {
+    if (text == null || text.isEmpty) {
+      return loc.errorRequired;
+    } else if (text.length < 8) {
+      return loc.errorPasswordLength;
+    }
+    return null;
   }
-  return null;
- }
- static String? validateEmail(String? text) {
+
+  static String? validateEmail(String? text) {
     if (text == null || text.isEmpty) {
       return loc.errorRequired;
     } else if (!ValidationUtils.isEmailValid(text)) {
@@ -18,6 +19,7 @@ class ValidationHelper {
     }
     return null;
   }
+
   static String? validatePhone(String? text) {
     if (text == null || text.isEmpty) {
       return loc.errorRequired;
@@ -26,14 +28,16 @@ class ValidationHelper {
     }
     return null;
   }
+
   static String? validateAmount(String? text) {
     if (text == null || text.isEmpty) {
       return loc.errorRequired;
-    } else if(int.parse(text) < 50) {
+    } else if (int.parse(text) < 50) {
       return loc.errorWithdrawLimit;
     }
     return null;
   }
+
   static String? validateField(String? text) {
     if (text == null || text.isEmpty) {
       return loc.errorRequired;

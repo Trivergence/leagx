@@ -85,15 +85,24 @@ class Routes {
       case faqs:
         return generateRoute(routeSettings.name!, const FaqsScreen());
       case fixtureDetails:
-        return generateRoute(routeSettings.name!, FixtureDetails(matchData: routeSettings.arguments as MatchArgs,));
+        return generateRoute(
+            routeSettings.name!,
+            FixtureDetails(
+              matchData: routeSettings.arguments as MatchArgs,
+            ));
       case adminFixture:
         return generateRoute(routeSettings.name!, const AdminFixtureScreen());
       case adminFixtureDetail:
-        return generateRoute(routeSettings.name!, const AdminFixtureDetailScreen());
+        return generateRoute(
+            routeSettings.name!, const AdminFixtureDetailScreen());
       case adminAnnounce:
         return generateRoute(routeSettings.name!, AdmiinAnnounceScreen());
       case chooseLeague:
-        return generateRoute(routeSettings.name!, ChooseLeagueScreen(isRedeeming: routeSettings.arguments as bool,));
+        return generateRoute(
+            routeSettings.name!,
+            ChooseLeagueScreen(
+              isRedeeming: routeSettings.arguments as bool,
+            ));
       case chooseFixture:
         return generateRoute(routeSettings.name!, const ChooseFixtureScreen());
       case choosePlan:
@@ -110,7 +119,11 @@ class Routes {
       case setting:
         return generateRoute(routeSettings.name!, const MyProfileScreen());
       case profileInfoUpdate:
-        return generateRoute(routeSettings.name!, ProfileInfoUpdateScreen(payload: routeSettings.arguments as UpdateProfileArgs,));
+        return generateRoute(
+            routeSettings.name!,
+            ProfileInfoUpdateScreen(
+              payload: routeSettings.arguments as UpdateProfileArgs,
+            ));
       case admin:
         return generateRoute(routeSettings.name!, const AdminHomeScreen());
       case privacyPolicy:
@@ -120,7 +133,11 @@ class Routes {
       case notification:
         return generateRoute(routeSettings.name!, const NotificationScreen());
       case chooseAnalyst:
-        return generateRoute(routeSettings.name!, ConsultAnalystScreen(matchDetails: routeSettings.arguments as Fixture,));
+        return generateRoute(
+            routeSettings.name!,
+            ConsultAnalystScreen(
+              matchDetails: routeSettings.arguments as Fixture,
+            ));
       case addNews:
         return generateRoute(routeSettings.name!, const AddNewsScreen());
       case editChoosePlan:
@@ -132,9 +149,13 @@ class Routes {
       case wallet:
         return generateRoute(routeSettings.name!, WalletScreen());
       case payout:
-      return generateRoute(routeSettings.name!, PayoutScreen());
+        return generateRoute(routeSettings.name!, PayoutScreen());
       case addPayoutDetails:
-        return generateRoute(routeSettings.name!, AddPayoutDetails(accountLink: routeSettings.arguments as String,)); 
+        return generateRoute(
+            routeSettings.name!,
+            AddPayoutDetails(
+              accountLink: routeSettings.arguments as String,
+            ));
 
       default:
         return generateRoute(

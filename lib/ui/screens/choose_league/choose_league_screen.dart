@@ -16,7 +16,8 @@ import 'components/league_tile.dart';
 
 class ChooseLeagueScreen extends StatefulWidget {
   final bool isRedeeming;
-  const ChooseLeagueScreen({Key? key, this.isRedeeming = false}) : super(key: key);
+  const ChooseLeagueScreen({Key? key, this.isRedeeming = false})
+      : super(key: key);
 
   @override
   State<ChooseLeagueScreen> createState() => _ChooseLeagueScreenState();
@@ -31,7 +32,6 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
   bool isFiltering = false;
   List<League> filteredList = [];
   List<int> subscribedIds = [];
-  
 
   @override
   Widget build(BuildContext context) {
@@ -39,46 +39,50 @@ class _ChooseLeagueScreenState extends State<ChooseLeagueScreen> {
     subscribedIds = context.read<DashBoardViewModel>().subscribedLeagueIds;
     listOfLeagues = isFiltering ? filteredList : _subscriptionViewModel.leagues;
     return Scaffold(
-      appBar: AppBarWidget(
-        title: loc.chooseLeagueTxtChooseALeague,
-      ),
-      body: !_subscriptionViewModel.busy ? Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-        child: Column(
-            children: [
-              SizedBox(
-                height: 48,
-                child: SearchTextField(
-                  textController: _searchController,
-                  hint: loc.chooseLeagueTxtSearch,
-                  onTextEntered: _onTextEntered,
-                ),
-              ),
-              UIHelper.verticalSpace(30),
-              listOfLeagues.isNotEmpty ? Expanded(
-                child: ListView.builder(
-                    itemCount: listOfLeagues.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      League league = listOfLeagues[index];
-                      return LeagueTile(
-                        key: UniqueKey(),
-                        leagueId: league.leagueId,
-                        leagueTitle: league.leagueName,
-                        imgUrl: league.leagueLogo,
-                        hasSubscribed: subscribedIds.contains(int.parse(league.leagueId)),
-                        isRedeeming: widget.isRedeeming,
-                      );
-                    }),
-              )
-              : Padding(
-                padding: const EdgeInsets.only(top: 100.0),
-                child: PlaceHolderTile(height: 60, msgText: loc.errorCheckNetwork),
-              )
-            ],
-          )
-    ) : LoadingWidget()
-    );
+        appBar: AppBarWidget(
+          title: loc.chooseLeagueTxtChooseALeague,
+        ),
+        body: !_subscriptionViewModel.busy
+            ? Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 48,
+                      child: SearchTextField(
+                        textController: _searchController,
+                        hint: loc.chooseLeagueTxtSearch,
+                        onTextEntered: _onTextEntered,
+                      ),
+                    ),
+                    UIHelper.verticalSpace(30),
+                    listOfLeagues.isNotEmpty
+                        ? Expanded(
+                            child: ListView.builder(
+                                itemCount: listOfLeagues.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  League league = listOfLeagues[index];
+                                  return LeagueTile(
+                                    key: UniqueKey(),
+                                    leagueId: league.leagueId,
+                                    leagueTitle: league.leagueName,
+                                    imgUrl: league.leagueLogo,
+                                    hasSubscribed: subscribedIds
+                                        .contains(int.parse(league.leagueId)),
+                                    isRedeeming: widget.isRedeeming,
+                                  );
+                                }),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 100.0),
+                            child: PlaceHolderTile(
+                                height: 60, msgText: loc.errorCheckNetwork),
+                          )
+                  ],
+                ))
+            : LoadingWidget());
   }
 
   void _onTextEntered(enteredText) {

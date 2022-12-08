@@ -21,7 +21,8 @@ class ConsultAnalystTile extends StatelessWidget {
     required this.imageUrl,
     required this.title,
     required this.numberOfPrediciton,
-    required this.successRate, required this.onTileTap,
+    required this.successRate,
+    required this.onTileTap,
   }) : super(key: key);
 
   @override

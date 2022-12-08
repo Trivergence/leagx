@@ -31,10 +31,10 @@ class LeagueAvatarWidget extends StatelessWidget {
     this.imageUrl,
     this.imageAsset,
     this.padding,
-    this.placeHolderImg, 
-    this.isSelected = false, 
+    this.placeHolderImg,
+    this.isSelected = false,
     this.iconData,
-    this.iconSize, 
+    this.iconSize,
     this.addLeague = false,
   }) : super(key: key);
 
@@ -45,39 +45,39 @@ class LeagueAvatarWidget extends StatelessWidget {
       child: Opacity(
         opacity: isSelected == true ? 1 : 0.6,
         child: Container(
-          width: width ?? SizeConfig.width * 100,
-          height: height ?? 48.0,
-          padding: padding,
-          decoration: BoxDecoration(
-            color: isSelected == true ? AppColors.colorPink.withOpacity(0.2) : AppColors.colorBackground,
-            shape: BoxShape.circle,
-            border: Border.all(color: isSelected == true || addLeague == true
-              ? AppColors.colorPink
-              : AppColors.colorWhite,
-              width: 1.3)
-          ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: iconData != null
+            width: width ?? SizeConfig.width * 100,
+            height: height ?? 48.0,
+            padding: padding,
+            decoration: BoxDecoration(
+                color: isSelected == true
+                    ? AppColors.colorPink.withOpacity(0.2)
+                    : AppColors.colorBackground,
+                shape: BoxShape.circle,
+                border: Border.all(
+                    color: isSelected == true || addLeague == true
+                        ? AppColors.colorPink
+                        : AppColors.colorWhite,
+                    width: 1.3)),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: iconData != null
                 ? IconWidget(
                     iconData: iconData!,
                     size: iconSize,
-                  ) 
+                  )
                 : imageUrl != null
-                ? ImageWidget(
-                    imageUrl: imageUrl!,
-                    placeholder: placeHolderImg ?? '')
-                : text != null
-                    ? Center(
-                        child: TextWidget(
-                          text: text!,
-                          fontWeight: FontWeight.w600,
-                          textSize: textSize ?? Dimens.textRegular,
-                        ),
-                      )
-                    : imageAsset != null
-                        ? Image.asset(imageAsset!)
-                        : const SizedBox()
-        ),
+                    ? ImageWidget(
+                        imageUrl: imageUrl!, placeholder: placeHolderImg ?? '')
+                    : text != null
+                        ? Center(
+                            child: TextWidget(
+                              text: text!,
+                              fontWeight: FontWeight.w600,
+                              textSize: textSize ?? Dimens.textRegular,
+                            ),
+                          )
+                        : imageAsset != null
+                            ? Image.asset(imageAsset!)
+                            : const SizedBox()),
       ),
     );
   }

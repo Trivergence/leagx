@@ -11,7 +11,8 @@ class PasswordTextField extends StatefulWidget {
     Key? key,
     required this.controller,
     required this.hint,
-    this.inputAction=TextInputAction.done, this.validator,
+    this.inputAction = TextInputAction.done,
+    this.validator,
   }) : super(key: key);
 
   @override

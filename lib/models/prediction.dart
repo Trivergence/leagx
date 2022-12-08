@@ -112,7 +112,7 @@ class Match {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         firstTeamLogo: json["first_team_logo"] ?? "",
-        secondTeamLogo: json["second_team_logo"] ?? "" ,
+        secondTeamLogo: json["second_team_logo"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
