@@ -1,6 +1,5 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/enums.dart';
 import 'package:leagx/models/prediction.dart';
 import 'package:leagx/ui/screens/prediciton_s/components/prediction_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -21,14 +20,13 @@ class PredicitonsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FixtureDetailViewModel fixtureModel = context.watch<FixtureDetailViewModel>();
-    listOfPrediction = fixtureModel.getPredictions;
+    listOfPrediction = context.select<FixtureDetailViewModel, List<Prediction>>((fixtureModel) => fixtureModel.getPredictions);
     return RefreshIndicator(
       backgroundColor: AppColors.textFieldColor,
       onRefresh: () async {
         bool isConnected = await InternetInfo.isConnected();
         if (isConnected == true) {
-          await fixtureModel.getUserPredictions();
+          await context.read<FixtureDetailViewModel>().getUserPredictions();
         }
       },
       child: Scaffold(
@@ -58,11 +56,13 @@ class PredicitonsScreen extends StatelessWidget {
                   ? prediction.accuratePercentage.toString()
                   : "0.0",
                 isPending: Utility.isPredictionPending(prediction.status),
+                isLocked: Utility.isPredictionPending(prediction.status) && prediction.expertId != null,
               );
             },
           ),
         )
-        : Center(child: Padding(
+        : Center(
+          child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: PlaceHolderTile(height: 60, msgText: loc.predictionSTxtEmptyList),
         )),
