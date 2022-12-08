@@ -32,22 +32,28 @@ class WalletViewModel extends BaseModel {
     await getUserPaymentMethods();
   }
 
-  Future<void> setupStripeCredentials() async {
+  Future<void> setupStripeCredentials({bool showToast = true}) async {
     if(StripeConfig().getSecretKey.isEmpty) {
       StripeCred? stripeCred = await ApiService.callGetApi(
-          url: AppUrl.setupStripeCred, modelName: ApiModels.getStripeCred);
+          url: AppUrl.setupStripeCred, 
+          modelName: ApiModels.getStripeCred,
+          showToast: showToast
+        );
       if (stripeCred != null) {
         StripeConfig().setSecretkey(key: stripeCred.stripeSecret);
       }
     }
   }
 
-  Future<void> getUserPaymentMethods({save = false}) async {
+  Future<void> getUserPaymentMethods({save = false, bool showToast = true}) async {
     CustomerCred? customerCred = locator<PaymentConfig>().getCustomerCred;
     if (customerCred != null) {
-      Result<ErrorModel, List<PayMethod>> result = await PayIn.getPaymentMethods(customerId: customerCred.customerId.toString());
+      Result<ErrorModel, List<PayMethod>> result = await PayIn.getPaymentMethods(
+        customerId: customerCred.customerId.toString());
       result.when((errorModel) {
-        handleError(errorModel);
+        if(showToast == true) {
+          handleError(errorModel);
+        }
         setBusy(false);
       }, (paymentMethods) async {
         _paymentMethods = paymentMethods;
@@ -61,7 +67,9 @@ class WalletViewModel extends BaseModel {
         setBusy(false);
       });
     } else {
-      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+      if(showToast == true) {
+        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+      }
       setBusy(false);
     }
   }
@@ -178,7 +186,7 @@ class WalletViewModel extends BaseModel {
     }
   }
 
-  Future<void> createCustomer({required User userData}) async {
+  Future<void> createCustomer({required User userData, bool showToast = true}) async {
     if(StripeConfig().getSecretKey.isNotEmpty) {
         Result<ErrorModel, Customer> customer =
           await PayIn.createCustomer(userId: userData.id.toString(), userName: userData.firstName!, userEmail: userData.email);
@@ -187,8 +195,10 @@ class WalletViewModel extends BaseModel {
       }, (customer) async => await saveCustomerId(userData.id, customer.id)
       );
     } else {
-      ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
-      await setupStripeCredentials();
+      if(showToast == true) {
+        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
+      }
+      await setupStripeCredentials(showToast: showToast);
      }
   }
 

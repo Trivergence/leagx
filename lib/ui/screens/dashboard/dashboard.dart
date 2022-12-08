@@ -81,20 +81,17 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         model: context.read<DashBoardViewModel>(),
         onModelReady: (DashBoardViewModel dashboardModel) {
           SchedulerBinding.instance.addPostFrameCallback((_) async {
-            bool isConnected = await InternetInfo.isConnected();
-            if (isConnected == true) {
-              await dashboardModel.getData(context);
-              await context.read<SubscriptionViewModel>().getSubscriptionPlans();
-              await context.read<SubscriptionViewModel>().getLeagues();
-              await context.read<FixtureDetailViewModel>().getUserPredictions();
-              await context.read<WalletViewModel>().setupStripeCredentials();
-              await context.read<DashBoardViewModel>().getPaymentCredentials(context);
-              await context.read<WalletViewModel>().getUserPaymentMethods();
+              await dashboardModel.getData(context, showToast: false);
+              await context.read<SubscriptionViewModel>().getSubscriptionPlans(showToast: false);
+              await context.read<SubscriptionViewModel>().getLeagues(showToast: false);
+              await context.read<FixtureDetailViewModel>().getUserPredictions(showToast: false);
+              await context.read<WalletViewModel>().setupStripeCredentials(showToast: false);
+              await context.read<DashBoardViewModel>().getPaymentCredentials(context, showToast: false);
+              await context.read<WalletViewModel>().getUserPaymentMethods(showToast: false);
               if (StripeConfig().getSecretKey.isEmpty) {
-                await context.read<WalletViewModel>().setupStripeCredentials();
+                await context.read<WalletViewModel>().setupStripeCredentials(showToast: false);
               }
               context.read<DashBoardViewModel>().initializationComplete();
-            }
           });
         },
         builder: (context, DashBoardViewModel dashboardModel, _) {
@@ -120,7 +117,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 ],
               ),
               drawer: DrawerScreen(),
-              body: !dashboardModel.busy ? Container(
+              body: !dashboardModel.isLoading ? Container(
                 width: SizeConfig.width * 100,
                 height: SizeConfig.height * 100,
                 decoration: const BoxDecoration(

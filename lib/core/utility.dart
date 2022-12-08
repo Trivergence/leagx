@@ -5,6 +5,7 @@ import 'package:country_codes/country_codes.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:intl/intl.dart';
+import 'package:leagx/constants/enums.dart';
 import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/core/sharedpref/sharedpref.dart';
 import 'package:leagx/providers/localization_provider.dart';
@@ -16,14 +17,14 @@ import '../ui/util/locale/localization.dart';
 
 class Utility{
   static bool isMatchOver(String status) {
-      if (status == "Finished" ||
-          status == "After ET" ||
-          status == "After Pen." ||
-          status == "Postponed" ||
-          status == "Delayed" ||
-          status == "Cancelled" ||
-          status == "Awarded"
-          ) {
+      if (status == MatchStatus.finished.value ||
+          status == MatchStatus.afterExTime.value ||
+          status == MatchStatus.afterPanalty.value ||
+          status == MatchStatus.postponed.value ||
+          status == MatchStatus.delayed.value ||
+          status == MatchStatus.cancelled.value ||
+          status == MatchStatus.awarded.value
+        ) {
         return true;
       } else {
         return false;
@@ -31,7 +32,7 @@ class Utility{
   }
 
   static bool isTimeValid(String matchStatus) {
-    if(matchStatus == "Half Time") {
+    if(matchStatus == MatchStatus.halfTime.value) {
       return false;
     } else if(matchStatus.contains("+")) {
       return false;
@@ -98,6 +99,15 @@ class Utility{
         return FontFamily.gilroy;
     } else {
       return FontFamily.cairo;
+    }
+  }
+  static bool isPredictionPending(String? status) {
+    if (status == MatchStatus.finished.value ||
+        status == MatchStatus.afterExTime.value ||
+        status == MatchStatus.afterPanalty.value) {
+      return false;
+    } else {
+      return true;
     }
   }
 }

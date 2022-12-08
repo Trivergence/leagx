@@ -29,17 +29,20 @@ import '../ui/util/loader/loader.dart';
 
 class FixtureDetailViewModel extends BaseModel {
   LiveMatch? _liveMatch;
+  // ignore: prefer_final_fields
   Map<String, LiveMatch> _cachedLink = {};
   List<Fixture> _matchDetails = [];
   List<Player> _awayTeamPlayers = [];
   List<Player> _homeTeamPlayers = [];
   List<Prediction> _predictions = [];
+  List<UserSummary> _analyst = [];
 
   LiveMatch? get liveMatch => _liveMatch;
   List<Fixture> get matchDetails => _matchDetails;
   List<Player> get awayTeamPlayers => _awayTeamPlayers;
   List<Player> get homeTeamPlayers => _homeTeamPlayers;
   List<Prediction> get getPredictions => _predictions;
+  List<UserSummary> get getAnalysts => _analyst;
 
   Future<void> getData({required String matchId}) async {
     setBusy(true);
@@ -51,14 +54,13 @@ class FixtureDetailViewModel extends BaseModel {
         await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
         await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
       }
+      await getAnalystPredictions(matchId: matchId);
     } on Exception catch (_) {
       setBusy(false);
     }
   }
-    Future<void> refreshData({required String matchId}) async {
+  Future<void> refreshData({required String matchId}) async {
     await getMatchDetails(matchId);
-    await getHomeTeamPlayers(_matchDetails.first.matchHometeamId);
-    await getAwayTeamPlayers(_matchDetails.first.matchAwayteamId);
     notifyListeners();
   }
 
@@ -76,7 +78,10 @@ class FixtureDetailViewModel extends BaseModel {
         "from": "2022-01-01",
         "to": "2022-12-30",
         "timezone": currentTimeZone,
-      });
+       },
+        cache: true,
+        cacheBoxName: AppConstants.matchDetailsBoxName + matchId
+      );
       _matchDetails = tempList.cast<Fixture>();
     } on Exception catch (_) {
         setBusy(false);
@@ -131,14 +136,16 @@ class FixtureDetailViewModel extends BaseModel {
     }
   }
 
-  Future<void> getUserPredictions() async {
+  Future<void> getUserPredictions({bool showToast = true}) async {
     User? user = preferenceHelper.getUser();
     if(user != null) {
       String completeUrl = AppUrl.getUser + user.id.toString() + AppUrl.getPredictions;
       List<dynamic> tempList = await ApiService.getListRequest(
         url: completeUrl,
         baseUrl: AppUrl.baseUrl,
-        modelName: ApiModels.getPredictions);
+        modelName: ApiModels.getPredictions,
+        showToast: showToast
+      );
       _predictions = tempList.cast<Prediction>();
       notifyListeners();
       } else {
@@ -239,5 +246,26 @@ class FixtureDetailViewModel extends BaseModel {
     required String matchId,
     required LiveMatch liveMatch}) {
       _cachedLink[matchId] = liveMatch;
+  }
+
+  Future<void> getAnalystPredictions({required String matchId}) async {
+    _analyst = [];
+    List<dynamic> tempList = await ApiService.getListRequest(
+      showToast: false,
+      baseUrl: AppUrl.baseUrl,
+      url: AppUrl.analystPredictions,
+      modelName: ApiModels.userSummary,
+      headers: {
+        "apitoken": preferenceHelper.authToken
+      },
+      parameters: {
+        "external_match_id": matchId,
+      });
+    _analyst = tempList.cast<UserSummary>();
+    _analyst.sort((analyst1, analyst2) => sortAnalyst(analyst1, analyst2));
+  }
+  int sortAnalyst(UserSummary analyst1, UserSummary analyst2) {
+    return analyst2.predictionSuccessRate!.round()
+        .compareTo(analyst1.predictionSuccessRate!.round());
   }
 }

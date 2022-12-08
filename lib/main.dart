@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:country_codes/country_codes.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:hive/hive.dart';
 import 'package:leagx/core/network/config/environment.dart';
 import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/service/service_locator.dart';
@@ -15,6 +16,7 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/edit_profile_viewmodel.dart';
 import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,6 +35,7 @@ void main() async {
     final prefs = await SharedPreferences.getInstance();
     await setupLocator();
     await CountryCodes.init();
+    Hive.init((await getApplicationDocumentsDirectory()).path);
     
     runApp(
       LayoutBuilder(

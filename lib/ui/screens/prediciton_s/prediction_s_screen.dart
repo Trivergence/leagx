@@ -10,6 +10,7 @@ import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';
+import '../../../core/utility.dart';
 
 // ignore: must_be_immutable
 class PredicitonsScreen extends StatelessWidget {
@@ -19,14 +20,13 @@ class PredicitonsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FixtureDetailViewModel fixtureModel = context.watch<FixtureDetailViewModel>();
-    listOfPrediction = fixtureModel.getPredictions;
+    listOfPrediction = context.select<FixtureDetailViewModel, List<Prediction>>((fixtureModel) => fixtureModel.getPredictions);
     return RefreshIndicator(
       backgroundColor: AppColors.textFieldColor,
       onRefresh: () async {
         bool isConnected = await InternetInfo.isConnected();
         if (isConnected == true) {
-          await fixtureModel.getUserPredictions();
+          await context.read<FixtureDetailViewModel>().getUserPredictions();
         }
       },
       child: Scaffold(
@@ -55,24 +55,18 @@ class PredicitonsScreen extends StatelessWidget {
                 predictionRate: prediction.accuratePercentage != null 
                   ? prediction.accuratePercentage.toString()
                   : "0.0",
-                isPending: isPending(prediction.status),
+                isPending: Utility.isPredictionPending(prediction.status),
+                isLocked: Utility.isPredictionPending(prediction.status) && prediction.expertId != null,
               );
             },
           ),
         )
-        : Center(child: Padding(
+        : Center(
+          child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: PlaceHolderTile(height: 60, msgText: loc.predictionSTxtEmptyList),
         )),
       ),
     );
-  }
-
-  isPending(String? status) {
-    if( status == "Finished" || status == "After ET" || status == "After Pen.") {
-      return false;
-    } else {
-      return true;
-    }
   }
 }

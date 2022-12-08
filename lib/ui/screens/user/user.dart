@@ -6,7 +6,6 @@ import 'package:leagx/ui/screens/user/components/user_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';

@@ -1,3 +1,4 @@
+import 'package:leagx/models/analyst_predictions.dart';
 import 'package:leagx/models/auth/forgot_password.dart';
 import 'package:leagx/models/currency.dart';
 import 'package:leagx/models/customer_cred.dart';
@@ -78,6 +79,8 @@ class ApiModels {
         return predictionFromJson(json);
       case paymentAccounts:
         return customerCredFromJson(json);
+      case userSummary:
+        return analystPredictionsFromJson(json);
     }
   }
 }

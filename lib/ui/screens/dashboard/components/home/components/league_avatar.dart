@@ -1,6 +1,5 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';

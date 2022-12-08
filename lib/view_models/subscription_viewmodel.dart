@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:leagx/core/network/api/api_models.dart';
 import 'package:leagx/core/network/api/api_service.dart';
 import 'package:leagx/core/network/app_url.dart';
-import 'package:leagx/core/network/internet_info.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/core/viewmodels/base_model.dart';
 import 'package:leagx/models/subscription_plan.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/service/service_locator.dart';
-import 'package:leagx/ui/util/app_dialogs/confirmation_dialog.dart';
 import 'package:leagx/ui/util/app_dialogs/fancy_dialog.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/util/toast/toast.dart';
@@ -29,7 +27,7 @@ class SubscriptionViewModel extends BaseModel {
   List<League> get leagues => _leagues;
   List<SubscriptionPlan> get getPlans => _listOfPlan;
 
-  Future<void> getSubscriptionPlans() async {
+  Future<void> getSubscriptionPlans({bool showToast = true}) async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.baseUrl,
@@ -37,9 +35,12 @@ class SubscriptionViewModel extends BaseModel {
           headers: {
             "apitoken": preferenceHelper.authToken,
           },
-          modelName: ApiModels.getPlans);
+          modelName: ApiModels.getPlans,
+          showToast: showToast
+        );
       _listOfPlan = tempList.cast<SubscriptionPlan>();
-    } on Exception catch (_) {
+    } on Exception catch (e) {
+      debugPrint(e.toString());
       setBusy(false);
     }
   }
@@ -288,12 +289,17 @@ class SubscriptionViewModel extends BaseModel {
     return success;
   }
 
-  Future<void> getLeagues() async {
+  Future<void> getLeagues({bool showToast = true}) async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(
           baseUrl: AppUrl.footballBaseUrl,
-          parameters: {"action": "get_leagues", "APIkey": AppConstants.footballApiKey},
-          modelName: ApiModels.getLeagues);
+          parameters: {
+            "action": "get_leagues", 
+            "APIkey": AppConstants.footballApiKey
+          },
+          modelName: ApiModels.getLeagues,
+          showToast: showToast
+        );
       _leagues = tempList.cast<League>();
     } on Exception catch (_) {
       setBusy(false);

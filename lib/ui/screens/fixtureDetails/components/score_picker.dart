@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/dimens.dart';

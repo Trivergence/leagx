@@ -31,7 +31,7 @@ class SessionProvider extends ChangeNotifier {
     else if(!locator<SharedPreferenceHelper>().isFirstTime()) {
       _loginStatus = LoginStatus.error;
     }
-    context.read<WalletViewModel>().setupStripeCredentials();
+    context.read<WalletViewModel>().setupStripeCredentials(showToast: false);
     notifyListeners();
   }
 

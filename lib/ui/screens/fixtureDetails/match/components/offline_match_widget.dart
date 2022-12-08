@@ -8,12 +8,9 @@ import 'package:provider/provider.dart';
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/dimens.dart';
+import '../../../../../core/utility.dart';
 import '../../../../../models/dashboard/fixture.dart';
-import '../../../../../models/user_summary.dart';
-import '../../../../../view_models/dashboard_view_model.dart';
 import '../../../../../view_models/fixture_view_model.dart';
-import '../../../../util/app_dialogs/fancy_dialog.dart';
-import '../../../../util/size/size_config.dart';
 import '../../../../util/ui/ui_helper.dart';
 import '../../../../util/validation/validation_utils.dart';
 import '../../../../widgets/divider_widget.dart';
@@ -58,6 +55,8 @@ class OfflineMatchWidget extends StatelessWidget {
             awayTeamName: prediction!.match.secondTeamName,
             homeScore: prediction!.firstTeamScore ?? 0,
             awayScore: prediction!.secondTeamScore ?? 0,
+            isLocked:  prediction!.expertId != null &&
+                Utility.isPredictionPending(prediction!.status),
           ),
         if (!ValidationUtils.isValid(prediction)) SizedBox(
             child: MainButton(

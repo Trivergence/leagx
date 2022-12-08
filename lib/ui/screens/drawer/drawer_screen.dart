@@ -7,15 +7,12 @@ import 'package:leagx/service/payment_service/payment_config.dart';
 import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/screens/drawer/components/drawer_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:leagx/view_models/payout_view_model.dart';
 import 'package:leagx/view_models/wallet_view_model.dart';
-import 'package:payments/payments.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/internet_info.dart';

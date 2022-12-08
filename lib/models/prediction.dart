@@ -50,7 +50,7 @@ class Prediction {
         accuratePercentage: json["accurate_percentage"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        status: json["status"] ?? "",
+        status: json["status"] ?? "OPEN",
         isPublic: json["is_public"],
         expertId: json["expert_id"],
         externalMatchId: json["external_match_id"],

@@ -52,7 +52,7 @@ class _FixtureDetailsState extends State<FixtureDetails> {
             onRefresh: () async {
               bool isConnected = await InternetInfo.isConnected();
               if(isConnected == true) {
-               fixtureModel.refreshData(matchId: widget.matchData.matchId);
+                 await fixtureModel.refreshData(matchId: widget.matchData.matchId);
               }
             },
             child: Scaffold(

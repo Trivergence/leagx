@@ -5,7 +5,6 @@ import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/utility/image_utitlity.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
-import 'package:leagx/ui/widgets/shimmer_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 
 class LeaderBoardTile extends StatelessWidget {
@@ -15,7 +14,7 @@ class LeaderBoardTile extends StatelessWidget {
   final int numberOfPrediciton;
   final String successRate;
 
-  LeaderBoardTile({
+  const LeaderBoardTile({
     Key? key,
     required this.number,
     required this.imageUrl,
