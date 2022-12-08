@@ -76,7 +76,9 @@
 	"authSignupTxtSignup": "تسجيل جديد",
 	"authSignupTxtSignedupSuccessfully":"تم التسجيل بنجاح",
 	"authSignupTxtPasswordNotMatch":"كلمة المرور غير متطابقة",
+
 	"authTxtDontHaveAccount": "ليس لديك حساب؟",
+	"authTxtAlreadyHaveAccount": "هل لديك حساب؟",
 
 	"chooseAnExpertTxtChooseAnExpert": "اختر محلل",
 	"chooseAnExpertTxtPredictions": "التوقعات",

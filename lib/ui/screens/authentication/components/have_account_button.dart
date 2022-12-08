@@ -4,10 +4,11 @@ import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:flutter/material.dart';
 
 class HaveAccountButton extends StatelessWidget {
+  final String mainText;
   final String subText;
   final VoidCallback onTap;
   const HaveAccountButton(
-      {Key? key, required this.subText, required this.onTap})
+      {Key? key, required this.subText, required this.onTap, required this.mainText})
       : super(key: key);
 
   @override
@@ -16,7 +17,7 @@ class HaveAccountButton extends StatelessWidget {
       onTap: onTap,
       child: RichText(
         text: TextSpan(
-            text: loc.authTxtDontHaveAccount,
+            text: mainText,
             style: const TextStyle(
               color: AppColors.colorGrey,
               fontSize: Dimens.textRegular,
