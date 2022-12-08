@@ -1,6 +1,8 @@
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/ui/screens/choose_fixture.dart/components/choose_match_tile.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:leagx/ui/util/utility/translation_utility.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/textfield/search_textfield.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +42,8 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
                   child: SearchTextField(
                     textController: _searchController,
                     hint: loc.chooseLeagueTxtSearch,
-                    onTextEntered: (text) => _onTextEntered(text),
+                    onFieldSubmitted: (_) => _filter(),
+                    onSeachClicked: _filter,
                   ),
                 ),
                 UIHelper.verticalSpace(30),
@@ -76,15 +79,6 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
             )));
   }
 
-  void _onTextEntered(String enteredText) {
-    setState(() {
-      isFiltering = true;
-      filteredList = availableMatches
-          .where((matchItem) => filterMatches(matchItem, enteredText))
-          .toList();
-    });
-  }
-
   bool filterMatches(Fixture matchItem, String enteredText) {
     return matchItem.matchAwayteamName
             .toLowerCase()
@@ -96,5 +90,25 @@ class _ChooseFixtureScreenState extends State<ChooseFixtureScreen> {
 
   List<Fixture> getMatches(BuildContext context) {
     return context.read<DashBoardViewModel>().subscribedMatches;
+  }
+
+  _filter() async {
+    String enteredText = _searchController.text;
+    if (enteredText.isNotEmpty) {
+      if (Utility.isRTL(enteredText)) {
+        enteredText = await TranslationUtility.translateFromArabic(enteredText);
+      }
+      setState(() {
+        isFiltering = true;
+        filteredList = availableMatches
+            .where((matchItem) => filterMatches(matchItem, enteredText))
+            .toList();
+      });
+    } else {
+      if (isFiltering) {
+        isFiltering = false;
+        setState(() {});
+      }
+    }
   }
 }

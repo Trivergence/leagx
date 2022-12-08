@@ -10,7 +10,6 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:leagx/view_models/subscription_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../constants/dimens.dart';
@@ -82,10 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: LeagueAvatarWidget(
                           addLeague: true,
                           onPressed: () async {
-                            if (context
-                                .read<SubscriptionViewModel>()
-                                .leagues
-                                .isNotEmpty) {
+                            if (_dashBoardViewModel.isInitialized) {
                               await Navigator.of(context).pushNamed(
                                   Routes.chooseLeague,
                                   arguments: false);

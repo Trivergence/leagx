@@ -4,8 +4,6 @@ class AppUrl {
   static const String currencyBaseUrl =
       "https://currency-converter5.p.rapidapi.com/currency/";
   static const String footballBaseUrl = "https://apiv3.apifootball.com/";
-  static const String translationUrl =
-      "http://54.211.12.135:5000/api/translation";
   static const String clientUrl = "http://54.211.12.135:5000/api/";
   static const String signup = "users/";
   static const String login = "sessions";
@@ -26,4 +24,6 @@ class AppUrl {
   static const String unsubscribeLeague = "leagues/un_subscribe";
   static const String liveAnimation = "isports/live";
   static const String analystPredictions = "matches/experts_match_list";
+  static const String translation = "translation";
+  static const String reverseTranslation = "lookup";
 }

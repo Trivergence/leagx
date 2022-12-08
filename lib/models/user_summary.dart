@@ -5,7 +5,6 @@
 import 'dart:convert';
 
 import 'package:leagx/models/subscription_plan.dart';
-import 'package:leagx/ui/screens/choose_plan/components/plan_listing.dart';
 
 UserSummary userSummaryFromJson(String str) =>
     UserSummary.fromJson(json.decode(str));

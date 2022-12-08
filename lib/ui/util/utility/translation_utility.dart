@@ -11,12 +11,39 @@ class TranslationUtility {
       Map<String, dynamic> header = {'Content-Type': 'application/json'};
       try {
         Dio dio = Dio();
-        Response response = await dio.post(AppUrl.translationUrl,
-            options: Options(
-              headers: header,
-              responseType: ResponseType.plain,
-            ),
-            data: body);
+        Response response =
+            await dio.post(AppUrl.clientUrl + AppUrl.translation,
+                options: Options(
+                  headers: header,
+                  responseType: ResponseType.plain,
+                ),
+                data: body);
+        if (response.statusCode == 200) {
+          value = response.data;
+        }
+      } on DioError catch (_) {
+        return value;
+      } on Exception catch (_) {
+        return value;
+      }
+    }
+    return value;
+  }
+
+  static Future<String> translateFromArabic(String text) async {
+    String value = text;
+    if (preferenceHelper.currentLanguage == "ar" && text.isNotEmpty) {
+      var body = {"q": text};
+      Map<String, dynamic> header = {'Content-Type': 'application/json'};
+      try {
+        Dio dio = Dio();
+        Response response =
+            await dio.post(AppUrl.clientUrl + AppUrl.reverseTranslation,
+                options: Options(
+                  headers: header,
+                  responseType: ResponseType.plain,
+                ),
+                data: body);
         if (response.statusCode == 200) {
           value = response.data;
         }

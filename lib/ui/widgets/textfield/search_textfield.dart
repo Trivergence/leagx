@@ -15,6 +15,7 @@ class SearchTextField extends StatelessWidget {
   final TextInputAction? inputAction;
   final bool isDisabled;
   final VoidCallback? onTap;
+  final VoidCallback? onSeachClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +53,15 @@ class SearchTextField extends StatelessWidget {
         disabledBorder: disabledBorder,
         focusedBorder: focusedBorder,
         errorBorder: errorBorder,
-        suffixIcon: Container(
-          width: Dimens.textFieldSuffixWidth,
-          alignment: Alignment.center,
-          child: const Icon(
-            Icons.search,
-            color: AppColors.colorWhite,
+        suffixIcon: GestureDetector(
+          onTap: onSeachClicked,
+          child: Container(
+            width: Dimens.textFieldSuffixWidth,
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.search,
+              color: AppColors.colorWhite,
+            ),
           ),
         ),
         errorMaxLines: 3,
@@ -76,10 +80,11 @@ class SearchTextField extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 20, right: 20),
     this.iconColor = Colors.grey,
     this.onFieldSubmitted,
-    this.inputAction,
+    this.inputAction = TextInputAction.search,
     this.onTap,
     this.isDisabled = false,
     this.onTextEntered,
+    this.onSeachClicked,
   }) : super(key: key);
 
   //Styles
