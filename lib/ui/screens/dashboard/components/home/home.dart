@@ -5,10 +5,12 @@ import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
 import 'package:leagx/ui/screens/dashboard/components/home/components/league_avatar.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
+import 'package:leagx/ui/util/toast/toast.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/screens/dashboard/components/fixture_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/subscription_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../constants/dimens.dart';
@@ -79,10 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: LeagueAvatarWidget(
                           addLeague: true,
                           onPressed: () async {
-                            await Navigator.of(context).pushNamed(
-                                Routes.chooseLeague,
-                                arguments: false);
-                            setState(() {});
+                            if(context.read<SubscriptionViewModel>().leagues.isNotEmpty) {
+                              await Navigator.of(context).pushNamed(
+                                  Routes.chooseLeague,
+                                  arguments: false);
+                              setState(() {});
+                            } else {
+                              ToastMessage.show(loc.msgPleaseWait, TOAST_TYPE.msg);
+                            }
                           },
                           isSelected: false,
                           width: 40,
