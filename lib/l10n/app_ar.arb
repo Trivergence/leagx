@@ -129,7 +129,7 @@
 	"dashboardLeaderMsgEmpty": "لا يوجد خبراء لعرضهم الآن",
 
 	"dashboardNewsTxtFeed": "الموجز",
-	"dashboardNewsTxtEmptyList": "لا توجد أخبار للعرض. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
+	"dashboardNewsTxtEmptyList": "لا توجد تحليلات رياضية حاليًا",
 	"dashboardNewsTxtMyFeed": "مفضلتي",
 
 	"editChoosePlanBtnSave": "حفظ",
@@ -182,7 +182,7 @@
 	"myProfileTxtPassword": "كلمه السر",
 	"myProfileTxtMyPredictions": "توقعاتي السابقة",
 	"myProfileChooseLanguageTxtChooseLanguage":"اختر اللغة",
-	"myProfileChooseLanguageTxtEnglish":"إنجليزي",
+	"myProfileChooseLanguageTxtEnglish":"English",
 	"myProfileChooseLanguageTxtArabic":"عربي",
 	"myProfileTxtPredictions": "التوقعات",
 	"myProfileTxtWiningRatio": "من {totalPredictions} توقعات",
@@ -206,7 +206,7 @@
 	"fixtureDetailsMatchTxtYellowCards": "البطاقات الصفراء",
 	"fixtureDetailsMatchTxtYourPredictions": "توقع",
 	"fixtureDetailsPlayersBtnPredict": "يتنبأ",
-	"fixtureDetailsNewsTxtEmptyList": "لا توجد أخبار لتظهر اليوم",
+	"fixtureDetailsNewsTxtEmptyList": "ا توجد تحليلات لهذه المباراة حاليًا",
 	"fixtureDetailsPlayersTxtTeamPlayers": "لاعبو الفريق",
 	"fixtureDetailsPredictionSuccess": "تم إرسال التنبؤ بنجاح",
 	"fixtureDetailsPredictionDialogTitle": "لا يوجد رصيد كافٍ",

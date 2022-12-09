@@ -139,7 +139,7 @@
 	"dashboardLeaderMsgEmpty": "There are no experts to show right now",
 
 	"dashboardNewsTxtFeed": "FEED",
-	"dashboardNewsTxtEmptyList": "No news to show. Please make sure to subscribe at least one league",
+	"dashboardNewsTxtEmptyList": "No analytics to show at the moment",
 	"dashboardNewsTxtMyFeed": "MY FEED",
 	"dashboardNewsTxtApprovals": "APPROVALS",
 	"dashboardNewsAddNewsTxtAddNews": "Add Analysis",
@@ -214,7 +214,7 @@
 	"fixtureDetailsMatchTxtYourPredictions": "Your Predictions",
 	"fixtureDetailsPlayersTxtTeamPlayers": "Team Players",
 	"fixtureDetailsPlayersBtnPredict": "Predict",
-	"fixtureDetailsNewsTxtEmptyList": "No news to show today",
+	"fixtureDetailsNewsTxtEmptyList": "No analytics for this match at the moment",
 	"fixtureDetailsPredictionSuccess": "Prediction submitted successfully",
 	"fixtureDetailsPredictionDialogTitle": "Not enough balance",
 	"fixtureDetailsPredictionDialogBtnAdd": "Upgrade",
