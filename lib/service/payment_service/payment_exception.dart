@@ -14,9 +14,6 @@ class PaymentExceptions {
       case "account_number_invalid":
         message = loc.errorStripeAccountNumberInvalid;
         break;
-      case "alipay_upgrade_required":
-        message = loc.errorStripeAlipayUpgradeRequired;
-        break;
       case "amount_too_large":
         message = loc.errorStripeAmountTooLarge;
         break;
