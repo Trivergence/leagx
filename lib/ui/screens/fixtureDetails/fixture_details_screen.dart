@@ -35,6 +35,14 @@ class _FixtureDetailsState extends State<FixtureDetails> {
   ];
   int index = 0;
   Prediction? userPrediction;
+  late FixtureDetailViewModel _fixtureModel;
+
+  @override
+  void dispose() {
+    _fixtureModel.disposeTimer();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseWidget<FixtureDetailViewModel>(
@@ -46,6 +54,7 @@ class _FixtureDetailsState extends State<FixtureDetails> {
         });
       },
       builder: (context, FixtureDetailViewModel fixtureModel, _) {
+        _fixtureModel = fixtureModel;
         userPrediction =
             fixtureModel.getMatchPrediction(matchId: widget.matchData.matchId);
         return RefreshIndicator(
