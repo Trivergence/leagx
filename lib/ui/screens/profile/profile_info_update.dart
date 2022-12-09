@@ -138,14 +138,13 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                     ),
                     UIHelper.verticalSpace(15.0),
                     DropDownFormWidget(
-                        defaultGender: widget.payload.gender.isEmpty
-                            ? null
-                            : widget.payload.gender,
-                        onChanged: (value) {
-                          selectedGender = value;
-                        },
-                        validator: (value) =>
-                            ValidationHelper.validateField(value))
+                      defaultGender: widget.payload.gender.isEmpty
+                          ? null
+                          : widget.payload.gender,
+                      onChanged: (value) {
+                        selectedGender = value;
+                      },
+                    )
                   ],
                 )),
             UIHelper.verticalSpace(90.0),
@@ -212,7 +211,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
               userName: _nameController.text,
               userEmail: _emailController.text,
               userPhone: _phoneController.text,
-              userGender: selectedGender!);
+              userGender: selectedGender ?? "");
         }
       }
     }

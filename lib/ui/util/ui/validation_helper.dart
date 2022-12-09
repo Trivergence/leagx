@@ -21,9 +21,10 @@ class ValidationHelper {
   }
 
   static String? validatePhone(String? text) {
-    if (text == null || text.isEmpty) {
-      return loc.errorRequired;
-    } else if (text.length < 11 || text.length > 13) {
+    // if (text == null || text.isEmpty) {
+    //   return loc.errorRequired;
+    // } else
+    if (text != null && text.length <= 11 && text.length >= 13) {
       return loc.errorInvalidPhone;
     }
     return null;
