@@ -121,7 +121,10 @@
 	"dashboardHomeTxtLeagues": "الدوريات",
 	"dashboardHomeTxtAll": "الجميع",
 	"dashboardFixtureTxtUpcomingMatches": "المباريات القادمة",
+	"dashboardFixtureTxtFinishedMatches": "المباريات المنتهية",
 	"dashboardHomeTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
+	"dashboardHomeTxtUpcoming": "القادمة",
+	"dashboardHomeTxtFinished": "تم الانتهاء من",
 
 	"dashboardLeaderTxtPredictions": "توقعات",
 	"dashboardLeaderTxtSuccess": "نجاح",

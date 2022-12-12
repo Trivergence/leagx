@@ -131,7 +131,10 @@
 	"dashboardHomeTxtLeagues": "LEAGUES",
 	"dashboardHomeTxtAll": "All",
 	"dashboardFixtureTxtUpcomingMatches": "UPCOMING MATCHES",
+	"dashboardFixtureTxtFinishedMatches": "FINISHED MATCHES",
 	"dashboardHomeTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
+	"dashboardHomeTxtUpcoming": "Upcoming",
+	"dashboardHomeTxtFinished": "Finished",
 
 	"dashboardLeaderTxtPredictions": "predictions",
 	"dashboardLeaderTxtWin": "Champion",
