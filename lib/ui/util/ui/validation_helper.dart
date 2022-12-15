@@ -21,9 +21,13 @@ class ValidationHelper {
   }
 
   static String? validatePhone(String? text) {
-    if (text == null || text.isEmpty) {
-      return loc.errorRequired;
-    } else if (text.length < 11 || text.length > 13) {
+    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp regExp = RegExp(pattern);
+
+    // if (text == null || text.isEmpty) {
+    //   return loc.errorRequired;
+    // } else
+    if (text != null && text.isNotEmpty && !regExp.hasMatch(text)) {
       return loc.errorInvalidPhone;
     }
     return null;

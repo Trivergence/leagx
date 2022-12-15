@@ -100,8 +100,8 @@ class DashBoardViewModel extends BaseModel {
             cacheBoxName: AppConstants.subscribedMatchesBoxName,
             showToast: showToast);
         _subscribedMatches = tempList.cast<Fixture>();
-        _subscribedMatches
-            .sort((fixture1, fixture2) => sortMatches(fixture1, fixture2));
+        // _subscribedMatches
+        //     .sort((fixture1, fixture2) => sortMatchesDesc(fixture1, fixture2));
         // _subscribedMatches =
         //     _subscribedMatches.where((match) => isValid(match, now)).toList();
       } on Exception catch (_) {
@@ -334,7 +334,7 @@ class DashBoardViewModel extends BaseModel {
         .toList();
   }
 
-  int sortMatches(Fixture fixture1, Fixture fixture2) {
+  int sortMatchesDesc(Fixture fixture1, Fixture fixture2) {
     DateTime refinedTime1 = DateUtility.parseTime(fixture1.matchTime);
     DateTime refinedTime2 = DateUtility.parseTime(fixture2.matchTime);
     if (fixture2.matchDate.compareTo(fixture1.matchDate) > 0) {
@@ -346,6 +346,25 @@ class DashBoardViewModel extends BaseModel {
         return 1;
       }
       if (refinedTime2.compareTo(refinedTime1) < 0) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+  }
+
+  int sortMatchesAsce(Fixture fixture1, Fixture fixture2) {
+    DateTime refinedTime1 = DateUtility.parseTime(fixture1.matchTime);
+    DateTime refinedTime2 = DateUtility.parseTime(fixture2.matchTime);
+    if (fixture1.matchDate.compareTo(fixture2.matchDate) > 0) {
+      return 1;
+    } else if (fixture1.matchDate.compareTo(fixture2.matchDate) < 0) {
+      return -1;
+    } else {
+      if (refinedTime1.compareTo(refinedTime2) > 0) {
+        return 1;
+      }
+      if (refinedTime1.compareTo(refinedTime2) < 0) {
         return -1;
       } else {
         return 0;
@@ -375,6 +394,34 @@ class DashBoardViewModel extends BaseModel {
         await scrollController.animateTo(scrollController.position.pixels - 100,
             duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
       }
+    }
+  }
+
+  List<Fixture> getFinishedMatches(List<Fixture> matches) {
+    List<Fixture> _matches;
+    _matches = matches
+        .where((matchItem) => Utility.isMatchOver(matchItem.matchStatus!))
+        .toList();
+    _matches.sort((fixture1, fixture2) => sortMatchesDesc(fixture1, fixture2));
+    return _matches;
+  }
+
+  List<Fixture> getUpcomingMatches(List<Fixture> matches) {
+    List<Fixture> _matches;
+    _matches =
+        matches.where((matchItem) => isUpcomingMatch(matchItem)).toList();
+    _matches.sort((fixture1, fixture2) => sortMatchesAsce(fixture1, fixture2));
+    return _matches;
+  }
+
+  bool isUpcomingMatch(Fixture matchItem) {
+    DateTime now = DateTime.now();
+    now = DateTime(now.year, now.month, now.day);
+    if ((matchItem.matchDate == now || matchItem.matchDate.isAfter(now)) &&
+        !Utility.isMatchOver(matchItem.matchStatus!)) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

@@ -2,6 +2,8 @@ import 'dart:async' as my_async;
 
 import 'package:flutter/material.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/view_models/fixture_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
@@ -35,54 +37,16 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
   String? matchStatus;
   bool isLoading = true;
 
-  int hour = 0;
-  int minute = 0;
-  int seconds = 0;
-  String timeString = "--:--:--";
-  my_async.Timer? timer;
-
   @override
   void initState() {
     super.initState();
-    if (!Utility.isMatchOver(widget.matchDetails.matchStatus!) &&
-        Utility.isTimeValid(widget.matchDetails.matchStatus!)) {
-      minute = Utility.isMatchOver(widget.matchDetails.matchStatus!)
-          ? 0
-          : int.parse(widget.matchDetails.matchStatus!);
-      timer = my_async.Timer.periodic(
-        const Duration(seconds: 1),
-        (timer) {
-          setState(() {
-            seconds = seconds + 1;
-            if (seconds % 60 == 0) {
-              seconds = 0;
-              minute = minute + 1;
-              if (minute % 60 == 0) {
-                minute = 0;
-                hour = hour + 1;
-              }
-            }
-
-            if (widget.matchDetails.matchLive == "1") {
-              String hrs = "0" + hour.toString();
-              String mts =
-                  minute < 10 ? "0" + minute.toString() : minute.toString();
-              String sds =
-                  seconds < 10 ? "0" + seconds.toString() : seconds.toString();
-              timeString = hrs + ":" + mts + ":" + sds;
-            }
-          });
-        },
-      );
-    } else {
-      timeString = widget.matchDetails.matchStatus!;
-    }
-
     translateData();
   }
 
   @override
   Widget build(BuildContext context) {
+    String matchTime = context.select<FixtureDetailViewModel, String>(
+        (fixtureModel) => fixtureModel.matchTime);
     return !isLoading
         ? Container(
             width: double.infinity,
@@ -160,7 +124,7 @@ class _FixtureVsWidgetState extends State<FixtureVsWidget> {
                                         widget.matchDetails.matchStatus!) &&
                                     Utility.isTimeValid(
                                         widget.matchDetails.matchStatus!)
-                                ? timeString
+                                ? matchTime
                                 : matchStatus!,
                             color: AppColors.colorGrey,
                             textSize: Dimens.textSmall,

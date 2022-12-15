@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
+import 'package:leagx/constants/enums.dart';
 import 'package:leagx/core/utility.dart';
 import 'package:leagx/models/subscribed_league.dart';
 import 'package:leagx/routes/routes.dart';
@@ -33,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<SubscribedLeague> subscribedLeagues = [];
   bool isFiltering = false;
   int selectedIndex = -1;
+  FilterType selectedFilter = FilterType.upcoming;
   late ScrollController _leagueController;
   late ScrollController _matchController;
 
@@ -48,6 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
     subscribedMatches = isFiltering == true
         ? _dashBoardViewModel.filteredMatches
         : _dashBoardViewModel.subscribedMatches;
+    subscribedMatches = selectedFilter == FilterType.finished
+        ? _dashBoardViewModel.getFinishedMatches(subscribedMatches)
+        : _dashBoardViewModel.getUpcomingMatches(subscribedMatches);
     subscribedLeagues = _dashBoardViewModel.subscribedLeagues;
     return RefreshIndicator(
       backgroundColor: AppColors.textFieldColor,
@@ -141,6 +147,30 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+          UIHelper.verticalSpaceSmall,
+          CupertinoSegmentedControl<FilterType>(
+              selectedColor: AppColors.colorPink,
+              unselectedColor: AppColors.textFieldColor,
+              borderColor: AppColors.colorGrey,
+              groupValue: selectedFilter,
+              children: {
+                FilterType.upcoming: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TextWidget(
+                      text: loc.dashboardHomeTxtUpcoming,
+                    )),
+                FilterType.finished: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: TextWidget(
+                    text: loc.dashboardHomeTxtFinished,
+                  ),
+                )
+              },
+              onValueChanged: (value) {
+                setState(() {
+                  selectedFilter = value;
+                });
+              }),
           subscribedMatches.isNotEmpty
               ? Expanded(
                   child: Padding(
@@ -153,7 +183,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         TextWidget(
-                          text: loc.dashboardFixtureTxtUpcomingMatches,
+                          text: selectedFilter == FilterType.upcoming
+                              ? loc.dashboardFixtureTxtUpcomingMatches
+                              : loc.dashboardFixtureTxtFinishedMatches,
                           fontWeight: FontWeight.w600,
                           letterSpace: Utility.isArabic() ? 0 : 4,
                           textSize: Dimens.textRegular,

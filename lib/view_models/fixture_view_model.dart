@@ -1,3 +1,5 @@
+import 'dart:async' as my_async;
+
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/enums.dart';
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
@@ -36,6 +38,8 @@ class FixtureDetailViewModel extends BaseModel {
   List<Player> _homeTeamPlayers = [];
   List<Prediction> _predictions = [];
   List<UserSummary> _analyst = [];
+  String matchTime = "--:--:--";
+  my_async.Timer? timer;
 
   LiveMatch? get liveMatch => _liveMatch;
   List<Fixture> get matchDetails => _matchDetails;
@@ -48,6 +52,9 @@ class FixtureDetailViewModel extends BaseModel {
     setBusy(true);
     try {
       await getMatchDetails(matchId);
+      if (matchDetails.isNotEmpty) {
+        matchTimer(matchDetails: _matchDetails.first);
+      }
       await getLiveMatchData(matchId);
       setBusy(false);
       if (matchDetails.isNotEmpty) {
@@ -271,5 +278,52 @@ class FixtureDetailViewModel extends BaseModel {
     return analyst2.predictionSuccessRate!
         .round()
         .compareTo(analyst1.predictionSuccessRate!.round());
+  }
+
+  void matchTimer({required Fixture matchDetails}) {
+    int hour = 0;
+    int minute = 0;
+    int seconds = 0;
+    matchTime = "--:--:--";
+    if (!Utility.isMatchOver(matchDetails.matchStatus!) &&
+        Utility.isTimeValid(matchDetails.matchStatus!)) {
+      minute = Utility.isMatchOver(matchDetails.matchStatus!)
+          ? 0
+          : int.parse(matchDetails.matchStatus!);
+      timer = my_async.Timer.periodic(
+        const Duration(seconds: 1),
+        (_) {
+          seconds = seconds + 1;
+          if (seconds % 60 == 0) {
+            seconds = 0;
+            minute = minute + 1;
+            if (minute % 60 == 0) {
+              minute = 0;
+              hour = hour + 1;
+            }
+          }
+
+          if (matchDetails.matchLive == "1") {
+            String hrs = "0" + hour.toString();
+            String mts =
+                minute < 10 ? "0" + minute.toString() : minute.toString();
+            String sds =
+                seconds < 10 ? "0" + seconds.toString() : seconds.toString();
+            matchTime = hrs + ":" + mts + ":" + sds;
+            notifyListeners();
+          }
+        },
+      );
+    } else {
+      matchTime = matchDetails.matchStatus!;
+      notifyListeners();
+    }
+  }
+
+  disposeTimer() {
+    if (timer != null && timer!.isActive) {
+      timer!.cancel();
+      matchTime = "--:--:--";
+    }
   }
 }

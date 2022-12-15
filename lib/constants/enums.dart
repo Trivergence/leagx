@@ -26,6 +26,15 @@ enum MatchStatus {
   final String value;
   const MatchStatus(this.value);
 }
+
+enum FilterType {
+  finished("Finished"),
+  upcoming("Upcoming");
+
+  const FilterType(this.value);
+
+  final String value;
+}
 // enum ImageTpye { 
 //  profileMale,
 //  profileFemale, 
