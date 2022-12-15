@@ -416,7 +416,9 @@ class DashBoardViewModel extends BaseModel {
 
   bool isUpcomingMatch(Fixture matchItem) {
     DateTime now = DateTime.now();
-    if (matchItem.matchDate.isAfter(now)) {
+    now = DateTime(now.year, now.month, now.day);
+    if ((matchItem.matchDate == now || matchItem.matchDate.isAfter(now)) &&
+        !Utility.isMatchOver(matchItem.matchStatus!)) {
       return true;
     } else {
       return false;
