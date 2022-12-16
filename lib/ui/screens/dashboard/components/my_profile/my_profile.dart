@@ -117,7 +117,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           UIHelper.verticalSpace(15.0),
           if (phone.isNotEmpty)
             MyProfileTile(
-              text: phone,
+              text: "+" + phone,
               iconData: Icons.smartphone,
               onTap: _goToProfileInfoUpdate,
             ),

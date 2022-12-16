@@ -5,12 +5,14 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:leagx/constants/app_constants.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/models/update_profile_args.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/util/ui/validation_helper.dart';
 import 'package:leagx/ui/util/utility/image_utitlity.dart';
+import 'package:leagx/ui/util/utility/picker_utility.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
 import 'package:leagx/ui/widgets/dropdown_form_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
@@ -22,8 +24,8 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/edit_profile_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-import '../../../constants/app_constants.dart';
 import '../../../core/network/internet_info.dart';
+import '../../../core/utility.dart';
 import '../../util/ui/keyboardoverlay.dart';
 
 class ProfileInfoUpdateScreen extends StatefulWidget {
@@ -48,15 +50,18 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
   final TextEditingController _phoneController = TextEditingController();
 
   String? selectedGender;
-  String? dialCode;
-  // Country selectedCountry = const Country(
-  //   name: "Saudi Arabia",
-  //   flag: "🇸🇦",
-  //   code: "SA",
-  //   dialCode: "966",
-  //   minLength: 9,
-  //   maxLength: 9,
-  // );
+  Country selectedCountry = Country(
+    phoneCode: "966",
+    countryCode: "SA",
+    e164Sc: 0,
+    geographic: true,
+    level: 1,
+    name: "Saudi Arabia",
+    example: "+966512345678",
+    displayName: "Saudi Arabia (SA) [+966]",
+    displayNameNoCountryCode: "Saudi Arabia (SA)",
+    e164Key: "966-SA-0",
+  );
 
   final ImagePicker _picker = ImagePicker();
   late EditProfileViewModel profileModel;
@@ -122,7 +127,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                   children: [
                     TextFieldWidget(
                       textController: _nameController,
-                      hint: 'John Smith',
+                      hint: AppConstants.defaultNameHint,
                       counterText: " ",
                       prefix: const IconWidget(
                           iconData: Icons.account_circle_outlined),
@@ -154,11 +159,17 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                                 borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 TextWidget(
-                                  text:
-                                      dialCode ?? AppConstants.defaultDialCode,
+                                  text: Utility.countryCodeToEmoji(
+                                      selectedCountry.countryCode),
+                                  textSize: 20,
+                                ),
+                                TextWidget(
+                                  text: "+" + selectedCountry.phoneCode,
                                   textSize: 14,
+                                  fontWeight: FontWeight.w700,
                                 ),
                                 const Icon(Icons.arrow_drop_down_outlined)
                               ],
@@ -171,7 +182,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
                             counterText: " ",
                             textController: _phoneController,
                             focusNode: _passwordNode,
-                            hint: '(000) 000000',
+                            hint: AppConstants.defaultNamePhone,
                             prefix:
                                 const IconWidget(iconData: Icons.smartphone),
                             inputAction: TextInputAction.done,
@@ -217,7 +228,6 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
     _nameController.text = widget.payload.userName;
     _emailController.text = widget.payload.userEmail;
     setCountryCredentials(widget.payload.phone);
-    //_phoneController.text = setCountry;
     selectedGender =
         widget.payload.gender.isEmpty ? null : widget.payload.gender;
   }
@@ -251,9 +261,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
               userName: _nameController.text,
               userEmail: _emailController.text,
               userPhone: _phoneController.text.isNotEmpty
-                  ? ((dialCode ?? AppConstants.defaultDialCode) +
-                      "-" +
-                      _phoneController.text)
+                  ? (selectedCountry.phoneCode + "-" + _phoneController.text)
                   : "",
               userGender: selectedGender!);
         } else {
@@ -262,9 +270,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
               userName: _nameController.text,
               userEmail: _emailController.text,
               userPhone: _phoneController.text.isNotEmpty
-                  ? ((dialCode ?? AppConstants.defaultDialCode) +
-                      "-" +
-                      _phoneController.text)
+                  ? (selectedCountry.phoneCode + "-" + _phoneController.text)
                   : "",
               userGender: selectedGender ?? "");
         }
@@ -316,9 +322,7 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
             .toList();
 
         if (_countries.isNotEmpty) {
-          Country country = _countries[0];
-          //selectedCountry = country;
-          dialCode = country.phoneCode;
+          selectedCountry = _countries[0];
         } else {}
         _phoneController.text = phoneArr[1];
       } else {
@@ -328,41 +332,10 @@ class _ProfileInfoUpdateScreenState extends State<ProfileInfoUpdateScreen> {
   }
 
   void _showPicker() {
-    showCountryPicker(
+    PickerUtility.showDatePicker(
       context: context,
-      showPhoneCode: true,
-      countryListTheme: CountryListThemeData(
-        searchTextStyle: const TextStyle(color: AppColors.colorWhite),
-        flagSize: 25,
-        backgroundColor: AppColors.colorBackground,
-        textStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey),
-        bottomSheetHeight: 500,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
-        inputDecoration: InputDecoration(
-          hintText: loc.profileProfileInfoUpdatePickerSearch,
-          hintStyle: TextStyle(color: AppColors.colorWhite.withOpacity(0.3)),
-          prefixIcon: const Icon(
-            Icons.search,
-            color: AppColors.colorWhite,
-          ),
-          fillColor: AppColors.textFieldColor,
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          ),
-          //enabledBorder:
-        ),
-      ),
-      onSelect: (Country country) {
-        dialCode = country.phoneCode;
+      onCountrySelect: (Country country) {
+        selectedCountry = country;
         setState(() {});
       },
     );
