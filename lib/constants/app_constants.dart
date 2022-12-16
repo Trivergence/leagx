@@ -17,4 +17,6 @@ class AppConstants {
 
   static const String payoutUrl =
       "https://stripe.com/docs/connect/cross-border-payouts";
+
+  static const String defaultDialCode = "966";
 }

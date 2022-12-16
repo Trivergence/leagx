@@ -120,8 +120,8 @@
 
 	"dashboardHomeTxtLeagues": "الدوريات",
 	"dashboardHomeTxtAll": "الجميع",
-	"dashboardFixtureTxtUpcomingMatches": "المباريات القادمة",
-	"dashboardFixtureTxtFinishedMatches": "المباريات المنتهية",
+	"dashboardFixtureTxtUpcomingMatches": "مباريات قادمة",
+	"dashboardFixtureTxtFinishedMatches": "مباريات انتهت",
 	"dashboardHomeTxtEmptyList": "لم يتم تحديد موعد مباراة اليوم. يرجى التأكد من الاشتراك في دوري واحد على الأقل",
 	"dashboardHomeTxtUpcoming": "القادمة",
 	"dashboardHomeTxtFinished": "تم الانتهاء من",
@@ -241,6 +241,7 @@
 	"profileProfileInfoUpdateSelectSource": "حدد المصدر",
 	"profileProfileInfoUpdateCamera": "الكاميرا",
 	"profileProfileInfoUpdateGallery": "ألبوم الصور",
+	"profileProfileInfoUpdatePickerSearch": "ابدأ الكتابة للبحث",
 
 	"termsOfServiceBtnAgree": "أوافق",
 	"termsOfServiceBtnDeny": "لا أوافق",

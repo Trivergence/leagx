@@ -50,6 +50,7 @@ dependencies:
 
   payments:
     path: ./packages/payments
+  country_picker: ^2.0.18
 
 dev_dependencies:
   flutter_lints: ^1.0.0

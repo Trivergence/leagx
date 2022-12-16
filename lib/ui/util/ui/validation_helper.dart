@@ -21,7 +21,7 @@ class ValidationHelper {
   }
 
   static String? validatePhone(String? text) {
-    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    String pattern = r'(^(?:[+0]9)?[0-9]{9,11}$)';
     RegExp regExp = RegExp(pattern);
 
     // if (text == null || text.isEmpty) {

@@ -130,8 +130,8 @@
 
 	"dashboardHomeTxtLeagues": "LEAGUES",
 	"dashboardHomeTxtAll": "All",
-	"dashboardFixtureTxtUpcomingMatches": "UPCOMING MATCHES",
-	"dashboardFixtureTxtFinishedMatches": "FINISHED MATCHES",
+	"dashboardFixtureTxtUpcomingMatches": "UPCOMING",
+	"dashboardFixtureTxtFinishedMatches": "FINISHED",
 	"dashboardHomeTxtEmptyList": "No match scheduled today. Please make sure to subscribe at least one league",
 	"dashboardHomeTxtUpcoming": "Upcoming",
 	"dashboardHomeTxtFinished": "Finished",
@@ -249,6 +249,8 @@
 	"profileProfileInfoUpdateSelectSource": "Select Source",
 	"profileProfileInfoUpdateCamera": "Camera",
 	"profileProfileInfoUpdateGallery": "Gallery",
+	"profileProfileInfoUpdatePickerSearch": "Start typing to search",
+	
 
 
 	"termsOfServiceTxtTermsOfServices": "Terms of Services",

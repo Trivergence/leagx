@@ -1,3 +1,4 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:leagx/constants/app_theme.dart';
 import 'package:leagx/constants/strings.dart';
@@ -47,6 +48,7 @@ class Betting extends StatelessWidget {
             locale: _localizationProvider.locale,
             localizationsDelegates: const [
               AppLocalizations.delegate,
+              CountryLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
