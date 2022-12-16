@@ -147,6 +147,45 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+          UIHelper.verticalSpaceSmall,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedFilter = FilterType.upcoming;
+                  });
+                },
+                child: TextWidget(
+                  text: loc.dashboardFixtureTxtUpcomingMatches,
+                  fontWeight: FontWeight.w600,
+                  letterSpace: Utility.isArabic() ? 0 : 4,
+                  textSize: Dimens.textRegular,
+                  color: selectedFilter == FilterType.upcoming
+                      ? AppColors.colorWhite
+                      : AppColors.colorWhite.withOpacity(0.3),
+                ),
+              ),
+              UIHelper.horizontalSpaceSmall,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedFilter = FilterType.finished;
+                  });
+                },
+                child: TextWidget(
+                  text: loc.dashboardFixtureTxtFinishedMatches,
+                  fontWeight: FontWeight.w600,
+                  letterSpace: Utility.isArabic() ? 0 : 4,
+                  textSize: Dimens.textRegular,
+                  color: selectedFilter == FilterType.finished
+                      ? AppColors.colorWhite
+                      : AppColors.colorWhite.withOpacity(0.3),
+                ),
+              ),
+            ],
+          ),
           subscribedMatches.isNotEmpty
               ? Expanded(
                   child: Padding(
@@ -158,45 +197,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedFilter = FilterType.upcoming;
-                                });
-                              },
-                              child: TextWidget(
-                                text: loc.dashboardFixtureTxtUpcomingMatches,
-                                fontWeight: FontWeight.w600,
-                                letterSpace: Utility.isArabic() ? 0 : 4,
-                                textSize: Dimens.textRegular,
-                                color: selectedFilter == FilterType.upcoming
-                                    ? AppColors.colorWhite
-                                    : AppColors.colorWhite.withOpacity(0.3),
-                              ),
-                            ),
-                            UIHelper.horizontalSpaceSmall,
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedFilter = FilterType.finished;
-                                });
-                              },
-                              child: TextWidget(
-                                text: loc.dashboardFixtureTxtFinishedMatches,
-                                fontWeight: FontWeight.w600,
-                                letterSpace: Utility.isArabic() ? 0 : 4,
-                                textSize: Dimens.textRegular,
-                                color: selectedFilter == FilterType.finished
-                                    ? AppColors.colorWhite
-                                    : AppColors.colorWhite.withOpacity(0.3),
-                              ),
-                            ),
-                          ],
-                        ),
-                        UIHelper.verticalSpaceSmall,
                         Expanded(
                           child: ListView.builder(
                               controller: _matchController,
