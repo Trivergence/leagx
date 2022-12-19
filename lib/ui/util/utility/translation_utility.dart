@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:leagx/core/network/app_url.dart';
+import 'package:leagx/core/utility.dart';
 
 import '../../../core/sharedpref/sharedpref.dart';
 
 class TranslationUtility {
   static Future<String> translate(String text) async {
     String value = text;
-    if (preferenceHelper.currentLanguage == "ar" && text.isNotEmpty) {
+    if (Utility.isArabic() && text.isNotEmpty) {
       var body = {"q": text};
       Map<String, dynamic> header = {'Content-Type': 'application/json'};
       try {
@@ -32,7 +33,7 @@ class TranslationUtility {
 
   static Future<String> translateFromArabic(String text) async {
     String value = text;
-    if (preferenceHelper.currentLanguage == "ar" && text.isNotEmpty) {
+    if (Utility.isArabic() && text.isNotEmpty) {
       var body = {"q": text};
       Map<String, dynamic> header = {'Content-Type': 'application/json'};
       try {

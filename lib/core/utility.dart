@@ -82,10 +82,19 @@ class Utility {
 
   static bool isArabic() {
     String? currentLanguage = preferenceHelper.currentLanguage;
-    if (currentLanguage == "en") {
-      return false;
+    if (currentLanguage == null) {
+      if (Utility.getPhoneLanguage() != Strings.arabic) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      if (currentLanguage == Strings.arabic) {
+        return true;
+      } else {
+        return false;
+      }
     }
-    return true;
   }
 
   static String getFont(LocalizationProvider localizationProvider) {
@@ -117,5 +126,9 @@ class Utility {
     final int firstLetter = countryCode.codeUnitAt(0) - 0x41 + 0x1F1E6;
     final int secondLetter = countryCode.codeUnitAt(1) - 0x41 + 0x1F1E6;
     return String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
+  }
+
+  static String getPhoneLanguage() {
+    return window.locale.languageCode;
   }
 }
