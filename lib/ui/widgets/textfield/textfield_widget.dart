@@ -27,6 +27,7 @@ class TextFieldWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final int? maxLines;
   final List<TextInputFormatter>? listOfFormaters;
+  final String counterText;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class TextFieldWidget extends StatelessWidget {
                 color: hintColor,
                 fontWeight: FontWeight.w400,
               ),
-          counterText: '',
+          counterText: counterText,
           icon: isIcon ? Icon(icon, color: iconColor) : null,
           floatingLabelBehavior: FloatingLabelBehavior.never,
           // labelText: hint,
@@ -119,6 +120,7 @@ class TextFieldWidget extends StatelessWidget {
     this.onTap,
     this.maxLines = 1,
     this.listOfFormaters,
+    this.counterText = "",
   }) : super(key: key);
 
   //Styles

@@ -148,29 +148,44 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           UIHelper.verticalSpaceSmall,
-          CupertinoSegmentedControl<FilterType>(
-              selectedColor: AppColors.colorPink,
-              unselectedColor: AppColors.textFieldColor,
-              borderColor: AppColors.colorGrey,
-              groupValue: selectedFilter,
-              children: {
-                FilterType.upcoming: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: TextWidget(
-                      text: loc.dashboardHomeTxtUpcoming,
-                    )),
-                FilterType.finished: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: TextWidget(
-                    text: loc.dashboardHomeTxtFinished,
-                  ),
-                )
-              },
-              onValueChanged: (value) {
-                setState(() {
-                  selectedFilter = value;
-                });
-              }),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedFilter = FilterType.upcoming;
+                  });
+                },
+                child: TextWidget(
+                  text: loc.dashboardFixtureTxtUpcomingMatches,
+                  fontWeight: FontWeight.w600,
+                  letterSpace: Utility.isArabic() ? 0 : 4,
+                  textSize: Dimens.textRegular,
+                  color: selectedFilter == FilterType.upcoming
+                      ? AppColors.colorWhite
+                      : AppColors.colorWhite.withOpacity(0.3),
+                ),
+              ),
+              UIHelper.horizontalSpaceSmall,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedFilter = FilterType.finished;
+                  });
+                },
+                child: TextWidget(
+                  text: loc.dashboardFixtureTxtFinishedMatches,
+                  fontWeight: FontWeight.w600,
+                  letterSpace: Utility.isArabic() ? 0 : 4,
+                  textSize: Dimens.textRegular,
+                  color: selectedFilter == FilterType.finished
+                      ? AppColors.colorWhite
+                      : AppColors.colorWhite.withOpacity(0.3),
+                ),
+              ),
+            ],
+          ),
           subscribedMatches.isNotEmpty
               ? Expanded(
                   child: Padding(
@@ -182,15 +197,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        TextWidget(
-                          text: selectedFilter == FilterType.upcoming
-                              ? loc.dashboardFixtureTxtUpcomingMatches
-                              : loc.dashboardFixtureTxtFinishedMatches,
-                          fontWeight: FontWeight.w600,
-                          letterSpace: Utility.isArabic() ? 0 : 4,
-                          textSize: Dimens.textRegular,
-                        ),
-                        UIHelper.verticalSpaceSmall,
                         Expanded(
                           child: ListView.builder(
                               controller: _matchController,

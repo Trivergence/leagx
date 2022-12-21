@@ -17,4 +17,7 @@ class AppConstants {
 
   static const String payoutUrl =
       "https://stripe.com/docs/connect/cross-border-payouts";
+
+  static const String defaultNameHint = "John Smith";
+  static const String defaultNamePhone = "(000) 000000";
 }
