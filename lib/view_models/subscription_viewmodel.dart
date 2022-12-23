@@ -295,11 +295,7 @@ class SubscriptionViewModel extends BaseModel {
   Future<void> getLeagues({bool showToast = true}) async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(
-          baseUrl: AppUrl.footballBaseUrl,
-          parameters: {
-            "action": "get_leagues",
-            "APIkey": AppConstants.footballApiKey
-          },
+          baseUrl: AppUrl.baseUrl + AppUrl.getLeaguesList,
           modelName: ApiModels.getLeagues,
           showToast: showToast);
       _leagues = tempList.cast<League>();

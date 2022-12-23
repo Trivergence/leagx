@@ -77,11 +77,10 @@ class FixtureDetailViewModel extends BaseModel {
       DateTime now = DateTime.now();
       String currentTimeZone = await Utility.getTzName();
       List<dynamic> tempList = await ApiService.getListRequest(
-          baseUrl: AppUrl.footballBaseUrl,
+          requestType: RequestType.footballApi,
+          baseUrl: AppUrl.baseUrl + AppUrl.getMatchDetails,
           modelName: ApiModels.upcomingMatches,
           parameters: {
-            "APIkey": AppConstants.footballApiKey,
-            "action": "get_events",
             "match_id": matchId,
             "from": "2022-01-01",
             "to": "2022-12-30",
@@ -162,11 +161,9 @@ class FixtureDetailViewModel extends BaseModel {
   getHomeTeamPlayers(String matchHometeamId) async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(
-          baseUrl: AppUrl.footballBaseUrl,
+          baseUrl: AppUrl.baseUrl + AppUrl.getPlayersList,
           parameters: {
-            "action": "get_teams",
             "team_id": matchHometeamId,
-            "APIkey": AppConstants.footballApiKey
           },
           modelName: ApiModels.getTeams);
       _homeTeamPlayers = tempList.cast<Player>();
@@ -179,11 +176,9 @@ class FixtureDetailViewModel extends BaseModel {
   getAwayTeamPlayers(String matchAwayteamId) async {
     try {
       List<dynamic> tempList = await ApiService.getListRequest(
-          baseUrl: AppUrl.footballBaseUrl,
+          baseUrl: AppUrl.baseUrl + AppUrl.getPlayersList,
           parameters: {
-            "action": "get_teams",
             "team_id": matchAwayteamId,
-            "APIkey": AppConstants.footballApiKey
           },
           modelName: ApiModels.getTeams);
       _awayTeamPlayers = tempList.cast<Player>();

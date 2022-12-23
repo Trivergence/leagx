@@ -311,23 +311,29 @@ class ApiService {
     }
   }
 
-  static Future<List<dynamic>> getListRequest(
-      {required String baseUrl,
-      String url = "",
-      Map<String, dynamic>? parameters,
-      Map<String, dynamic>? headers,
-      required dynamic modelName,
-      bool cache = false,
-      String? cacheBoxName,
-      bool showToast = true}) async {
+  static Future<List<dynamic>> getListRequest({
+    required String baseUrl,
+    String url = "",
+    Map<String, dynamic>? parameters,
+    Map<String, dynamic>? headers,
+    required dynamic modelName,
+    bool cache = false,
+    String? cacheBoxName,
+    bool showToast = true,
+    RequestType requestType = RequestType.selfHostedApi,
+  }) async {
     try {
       BaseOptions options = BaseOptions(
           contentType: 'application/json',
           baseUrl: baseUrl,
+          headers: {
+            "apitoken": preferenceHelper.authToken,
+          },
           connectTimeout: AppConstants.networkTimeout,
           receiveTimeout: AppConstants.networkTimeout,
           sendTimeout: AppConstants.networkTimeout);
       var dio = Dio(options);
+      //dio.interceptors.add(PrettyDioLogger());
       Response _response = await dio.get(
         url,
         options: Options(headers: headers),
@@ -355,7 +361,7 @@ class ApiService {
         return await getCachedList(cacheBoxName, modelName);
       }
       if (ex.response != null) {
-        if (baseUrl == AppUrl.footballBaseUrl) {
+        if (requestType == RequestType.footballApi) {
           if (cache == false && showToast == true) {
             ToastMessage.show(loc.errorUndefined, TOAST_TYPE.error);
           }
