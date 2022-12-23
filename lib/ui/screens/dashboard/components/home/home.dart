@@ -200,6 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: ListView.builder(
                               controller: _matchController,
+                              physics: const AlwaysScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: subscribedMatches.length,
                               itemBuilder: (context, index) {
@@ -266,8 +267,10 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedIndex = index;
       });
     } else {
-      context.read<DashBoardViewModel>().filterByLeague(
-          leagueId: subscribedLeagues[index].externalLeagueId.toString());
+      if (index != -1) {
+        context.read<DashBoardViewModel>().filterByLeague(
+            leagueId: subscribedLeagues[index].externalLeagueId.toString());
+      }
     }
   }
 
