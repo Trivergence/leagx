@@ -12,7 +12,7 @@ class AppConstants {
   static const String matchDetailsBoxName = "MatchDetailsBox";
   static const String userSummaryBoxName = "UserSummaryBox";
 
-  static const int networkTimeout = 60000;
+  static const int networkTimeout = 30000;
   static const int minimumWithdraw = 50;
 
   static const String payoutUrl =

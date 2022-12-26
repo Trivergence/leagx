@@ -86,11 +86,12 @@ class DashBoardViewModel extends BaseModel {
         DateTime now = DateTime.now();
         String currentTimeZone = await Utility.getTzName();
         List<dynamic> tempList = await ApiService.getListRequest(
-            baseUrl: AppUrl.footballBaseUrl,
+            requestType: RequestType.footballApi,
+            baseUrl: AppUrl.baseUrl + AppUrl.getSubscribedMatches,
             modelName: ApiModels.upcomingMatches,
             parameters: {
-              "APIkey": AppConstants.footballApiKey,
-              "action": "get_events",
+              //"APIkey": AppConstants.footballApiKey,
+              // "action": "get_events",
               "timezone": currentTimeZone,
               "league_id": subscribedLeagueIds.join(","),
               "from": "2022-01-01",
