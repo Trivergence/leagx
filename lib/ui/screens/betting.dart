@@ -1,6 +1,8 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:leagx/constants/app_theme.dart';
 import 'package:leagx/constants/strings.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/providers/session_provider.dart';
 import 'package:leagx/routes/routes.dart';
@@ -46,6 +48,7 @@ class Betting extends StatelessWidget {
             locale: _localizationProvider.locale,
             localizationsDelegates: const [
               AppLocalizations.delegate,
+              CountryLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
@@ -55,7 +58,7 @@ class Betting extends StatelessWidget {
               Locale('ar', ''),
             ],
             debugShowCheckedModeBanner: false,
-            theme: themeLight,
+            theme: AppTheme.getTheme(Utility.getFont(_localizationProvider)),
             onGenerateRoute: Routes().generateRoutes,
             builder: EasyLoading.init(),
             home: Builder(

@@ -118,7 +118,7 @@ class SigninScreen extends StatelessWidget {
                       Loader.hideLoader();
                       ToastMessage.show(loc.authSigninTxtSignedinSuccessfully,
                           TOAST_TYPE.success);
-                      Navigator.pushNamed(context, Routes.dashboard);
+                      Navigator.pushReplacementNamed(context, Routes.dashboard);
                     } else {
                       Loader.hideLoader();
                     }
@@ -153,6 +153,7 @@ class SigninScreen extends StatelessWidget {
             ),
             UIHelper.verticalSpaceMedium,
             HaveAccountButton(
+              mainText: loc.authTxtDontHaveAccount,
               subText: loc.authSigninBtnSignup,
               onTap: () {
                 Navigator.pushNamed(context, Routes.signup);
@@ -181,7 +182,7 @@ class SigninScreen extends StatelessWidget {
             preferenceHelper.saveAuthToken(user!.apiToken);
             preferenceHelper.saveUser(user);
             ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
-            Navigator.pushNamed(context, Routes.dashboard);
+            Navigator.pushReplacementNamed(context, Routes.dashboard);
             context.read<DashBoardViewModel>().getPaymentCredentials(context);
           }
           break;
@@ -218,7 +219,7 @@ class SigninScreen extends StatelessWidget {
             preferenceHelper.saveAuthToken(user!.apiToken);
             preferenceHelper.saveUser(user);
             ToastMessage.show(loc.authSigninTxtLoggedin, TOAST_TYPE.success);
-            Navigator.pushNamed(context, Routes.dashboard);
+            Navigator.pushReplacementNamed(context, Routes.dashboard);
             context.read<DashBoardViewModel>().getPaymentCredentials(context);
           }
         } on SignInWithAppleException catch (e) {

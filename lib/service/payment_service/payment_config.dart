@@ -5,9 +5,10 @@ class PaymentConfig {
 
   CustomerCred? get getCustomerCred => _customerCred;
 
-  set setCustomerCred(CustomerCred? customerCred) => _customerCred = customerCred;
+  set setCustomerCred(CustomerCred? customerCred) =>
+      _customerCred = customerCred;
   String? get getAccountId {
-    if(_customerCred != null) {
+    if (_customerCred != null) {
       return _customerCred!.accountId;
     }
     return null;

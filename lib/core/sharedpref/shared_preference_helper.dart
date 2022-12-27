@@ -12,7 +12,10 @@ class SharedPreferenceHelper {
   SharedPreferenceHelper(this._sharedPreference);
 
   // Token
-  String? get authToken => _sharedPreference.getString(Preferences.authToken);
+  String? get authToken {
+    String? token = _sharedPreference.getString(Preferences.authToken);
+    return token;
+  }
 
   Future<bool> saveAuthToken(String authToken) async {
     return await _sharedPreference.setString(Preferences.authToken, authToken);
@@ -52,7 +55,7 @@ class SharedPreferenceHelper {
     }
   }
 
-  Future<bool> saveUser(User user){
+  Future<bool> saveUser(User user) {
     return _sharedPreference.setString(Preferences.user, jsonEncode(user));
   }
 
@@ -79,7 +82,7 @@ class SharedPreferenceHelper {
 
   // Language
   String? get currentLanguage {
-    return _sharedPreference.getString(Preferences.currentLanguage) ?? "en";
+    return _sharedPreference.getString(Preferences.currentLanguage);
   }
 
   Future<void> changeLanguage(String language) {

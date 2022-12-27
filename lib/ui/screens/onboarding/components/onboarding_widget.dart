@@ -1,19 +1,13 @@
 import 'package:leagx/constants/colors.dart';
-import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
-import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingWidget extends StatelessWidget {
-  final String title;
   final String subtitle;
   final String imageAsset;
   const OnBoardingWidget(
-      {Key? key,
-      required this.title,
-      required this.subtitle,
-      required this.imageAsset})
+      {Key? key, required this.subtitle, required this.imageAsset})
       : super(key: key);
 
   @override
@@ -44,12 +38,12 @@ class OnBoardingWidget extends StatelessWidget {
           ),
           child: Column(
             children: [
-              TextWidget(
-                text: title,
-                textSize: Dimens.textLarge,
-                fontWeight: FontWeight.w700,
-              ),
-              UIHelper.verticalSpaceMedium,
+              // TextWidget(
+              //   text: title,
+              //   textSize: Dimens.textLarge,
+              //   fontWeight: FontWeight.w700,
+              // ),
+              // UIHelper.verticalSpaceMedium,
               TextWidget(
                 text: subtitle,
                 textAlign: TextAlign.center,

@@ -5,20 +5,21 @@ import 'package:leagx/ui/widgets/shimmer_widget.dart';
 
 import '../../../../constants/assets.dart';
 import '../../../../constants/colors.dart';
+import '../../../../constants/dimens.dart';
+import '../../../util/locale/localization.dart';
 import '../../../util/ui/ui_helper.dart';
 import '../../../widgets/text_widget.dart';
 
 class ChooseFixtureTile extends StatefulWidget {
-  const ChooseFixtureTile(
-      {Key? key,
-      required this.leagueId,
-      required this.matchId, 
-      required this.awayTeamName, 
-      required this.homeTeamName, 
-      required this.teamOneFlag, 
-      required this.teamTwoFlag,
-      })
-      : super(key: key);
+  const ChooseFixtureTile({
+    Key? key,
+    required this.leagueId,
+    required this.matchId,
+    required this.awayTeamName,
+    required this.homeTeamName,
+    required this.teamOneFlag,
+    required this.teamTwoFlag,
+  }) : super(key: key);
   final String leagueId;
   final String matchId;
   final String awayTeamName;
@@ -41,15 +42,17 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
     translateData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return !isLoading ? InkWell(
-      onTap: () => Navigator.pop(context, {
-        "matchId": widget.matchId,
-        "leagueId": widget.leagueId,
-        "vsTitle": "$homeName  -  $awayName",
-      }),
-      child: Container(
+    return !isLoading
+        ? InkWell(
+            onTap: () => Navigator.pop(context, {
+              "matchId": widget.matchId,
+              "leagueId": widget.leagueId,
+              "vsTitle": "$homeName  -  $awayName",
+            }),
+            child: Container(
               margin: const EdgeInsets.symmetric(vertical: 5.0),
               padding: const EdgeInsets.symmetric(vertical: 5.0),
               decoration: BoxDecoration(
@@ -78,15 +81,22 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
                                     UIHelper.horizontalSpace(5),
                                     ClipOval(
                                       child: ImageWidget(
-                                          imageUrl: widget.teamOneFlag,
-                                          placeholder: Assets.icTeamAvatar),
+                                        imageUrl: widget.teamOneFlag,
+                                        placeholder: Assets.icTeamAvatar,
+                                        shouldClip: true,
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                child: Image.asset(Assets.vs),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
+                                child: TextWidget(
+                                  text: loc.vs,
+                                  textSize: Dimens.textLarge,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                               Expanded(
                                   flex: 2,
@@ -96,6 +106,7 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
                                       ImageWidget(
                                         imageUrl: widget.teamTwoFlag,
                                         placeholder: Assets.icTeamAvatar,
+                                        shouldClip: true,
                                       ),
                                       UIHelper.horizontalSpace(5),
                                       Expanded(
@@ -112,8 +123,8 @@ class _ChooseFixtureTileState extends State<ChooseFixtureTile> {
                 ],
               ),
             ),
-    )
-    : const ShimmerWidget(height: 100);
+          )
+        : const ShimmerWidget(height: 100);
   }
 
   Future<void> translateData() async {

@@ -90,11 +90,12 @@ class BankInfoWidget extends StatelessWidget {
                           ),
                           UIHelper.horizontalSpaceSmall,
                           TextWidget(
-                          text: UIHelper.bullet 
-                          + UIHelper.bullet 
-                          + UIHelper.bullet 
-                          + UIHelper.bullet + " " 
-                          + last4!),
+                              text: UIHelper.bullet +
+                                  UIHelper.bullet +
+                                  UIHelper.bullet +
+                                  UIHelper.bullet +
+                                  " " +
+                                  last4!),
                         ],
                       ),
                     ],

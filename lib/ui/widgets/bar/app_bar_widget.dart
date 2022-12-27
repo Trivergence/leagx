@@ -16,7 +16,8 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
     this.title,
     this.trailing,
     this.isDrawer = false,
-    this.isIcon = false, this.hasBackButton = true,
+    this.isIcon = false,
+    this.hasBackButton = true,
   }) : super(key: key);
 
   @override
@@ -35,13 +36,15 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                 Scaffold.of(context).openDrawer();
               },
             )
-          : hasBackButton == true ? IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: AppColors.colorWhite,
-              ),
-              onPressed: () => Navigator.pop(context),
-            ) : null,
+          : hasBackButton == true
+              ? IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: AppColors.colorWhite,
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                )
+              : null,
       title: isIcon
           ? Image.asset(
               Assets.appLogo,
@@ -50,14 +53,15 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
             )
           : title != null
               ? SizedBox(
-                width: SizeConfig.width * 50,
-                child: Center(
-                  child: TextWidget(
+                  width: SizeConfig.width * 50,
+                  child: Center(
+                    child: TextWidget(
                       text: title!,
                       overflow: TextOverflow.fade,
+                      fontWeight: FontWeight.bold,
                     ),
-                ),
-              )
+                  ),
+                )
               : const SizedBox.shrink(),
       actions: trailing ?? trailing,
     );

@@ -14,7 +14,6 @@ import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 
 class AddNewsScreen extends StatefulWidget {
-
   const AddNewsScreen({Key? key}) : super(key: key);
 
   @override
@@ -22,7 +21,6 @@ class AddNewsScreen extends StatefulWidget {
 }
 
 class _AddNewsScreenState extends State<AddNewsScreen> {
-
   final TextEditingController _messageController = TextEditingController();
 
   final TextEditingController _searchController = TextEditingController();
@@ -47,36 +45,37 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 TextWidget(
+                TextWidget(
                   text: loc.dashboardNewsAddNewsTxtDetails,
                   textSize: 16.0,
                 ),
                 UIHelper.verticalSpace(8.0),
                 TextFieldWidget(
                   textController: _messageController,
-                  listOfFormaters: [
-                    FilteringTextInputFormatter.deny(",")
-                  ],
+                  listOfFormaters: [FilteringTextInputFormatter.deny(",")],
                   inputAction: TextInputAction.newline,
                   maxLines: 10,
                   validator: (text) => ValidationHelper.validateField(text),
                 ),
                 UIHelper.verticalSpace(15.0),
-                 TextWidget(
+                TextWidget(
                   text: loc.dashboardNewsAddNewsTxtChooseFixture,
                   textSize: 16.0,
                 ),
                 UIHelper.verticalSpace(8.0),
                 SearchTextField(
                   textController: _searchController,
-                  hint: fixutrePayload == null ? loc.dashboardNewsAddNewsTxtSearch : null,
+                  hint: fixutrePayload == null
+                      ? loc.dashboardNewsAddNewsTxtSearch
+                      : null,
                   isDisabled: true,
                   onTap: _chooseFixture,
                 ),
                 UIHelper.verticalSpaceXL,
-                MainButton(
-                  text: loc.dashboardNewsAddNewsBtnSubmit,
-                  onPressed: _addNews
+                Center(
+                  child: MainButton(
+                      text: loc.dashboardNewsAddNewsBtnSubmit,
+                      onPressed: _addNews),
                 ),
               ],
             ),
@@ -88,23 +87,23 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
 
   void _addNews() {
     bool isValid = _formKey.currentState!.validate();
-    if(isValid) {
-      if(fixutrePayload != null) {
+    if (isValid) {
+      if (fixutrePayload != null) {
         _context.read<DashBoardViewModel>().addNews(
-          context: _context,
-          desc: _messageController.text,
-          matchId: fixutrePayload!["matchId"]!,
-          leagueId: fixutrePayload!["leagueId"]!);
+            context: _context,
+            desc: _messageController.text,
+            matchId: fixutrePayload!["matchId"]!,
+            leagueId: fixutrePayload!["leagueId"]!);
       } else {
-        ToastMessage.show(loc.dashboardNewsAddNewsTxtRequiredFixture, TOAST_TYPE.msg);
+        ToastMessage.show(
+            loc.dashboardNewsAddNewsTxtRequiredFixture, TOAST_TYPE.msg);
       }
-
     }
   }
 
   Future<void> _chooseFixture() async {
     var payload = await Navigator.of(_context).pushNamed(Routes.chooseFixture);
-    if(payload != null) {
+    if (payload != null) {
       setState(() {
         fixutrePayload = payload as Map<String, String>;
         _searchController.text = fixutrePayload!["vsTitle"]!;

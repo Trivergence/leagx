@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:leagx/models/prediction.dart';
+import 'package:leagx/ui/screens/fixtureDetails/components/stream_widget.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../constants/assets.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/dimens.dart';
+import '../../../../../core/utility.dart';
 import '../../../../../models/dashboard/fixture.dart';
-import '../../../../../models/user_summary.dart';
-import '../../../../../view_models/dashboard_view_model.dart';
 import '../../../../../view_models/fixture_view_model.dart';
-import '../../../../util/app_dialogs/fancy_dialog.dart';
-import '../../../../util/size/size_config.dart';
 import '../../../../util/ui/ui_helper.dart';
 import '../../../../util/validation/validation_utils.dart';
 import '../../../../widgets/divider_widget.dart';
@@ -24,7 +23,9 @@ class OfflineMatchWidget extends StatelessWidget {
   final Fixture matchDetails;
   final Prediction? prediction;
   OfflineMatchWidget({
-    Key? key, required this.matchDetails, required this.prediction,
+    Key? key,
+    required this.matchDetails,
+    required this.prediction,
   }) : super(key: key);
 
   late BuildContext _context;
@@ -35,20 +36,17 @@ class OfflineMatchWidget extends StatelessWidget {
     return Column(
       children: [
         const DividerWidget(),
-        Container(
-          width: SizeConfig.width * 100,
-          margin: const EdgeInsets.only(bottom: 40),
-          height: SizeConfig.height * 30,
-          color: AppColors.textFieldColor,
+        StreamWidget(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(Assets.icSoccer),
+              SvgPicture.asset(Assets.icSoccer),
               UIHelper.verticalSpaceMedium,
               TextWidget(
                 text: loc.fixtureDetailsMatchTxtMatchToStartYet,
                 textSize: Dimens.textSM,
-                color: AppColors.colorGrey,
+                color: AppColors.colorYellow,
+                fontWeight: FontWeight.w100,
               )
             ],
           ),
@@ -59,19 +57,22 @@ class OfflineMatchWidget extends StatelessWidget {
             awayTeamName: prediction!.match.secondTeamName,
             homeScore: prediction!.firstTeamScore ?? 0,
             awayScore: prediction!.secondTeamScore ?? 0,
+            isLocked: prediction!.expertId != null &&
+                Utility.isPredictionPending(prediction!.status),
           ),
-        if (!ValidationUtils.isValid(prediction)) SizedBox(
-            width: SizeConfig.width * 90,
-            child: MainButton(
-              text: loc.fixtureDetailsMatchBtnPredict,
-              onPressed: _showSheet,
-            ))
+        if (!ValidationUtils.isValid(prediction))
+          SizedBox(
+              child: MainButton(
+            text: loc.fixtureDetailsMatchBtnPredict,
+            onPressed: _showSheet,
+          ))
       ],
     );
   }
 
   void _showSheet() {
     _context
-          .read<FixtureDetailViewModel>().predictMatch(context: _context, matchDetails: matchDetails);
+        .read<FixtureDetailViewModel>()
+        .predictMatch(context: _context, matchDetails: matchDetails);
   }
 }

@@ -54,6 +54,7 @@ class AdminFixtureScreen extends StatelessWidget {
                             // imageUrl: Strings().placeHolderUrl,
                             imageAsset: Assets.arsFlag,
                             onPressed: () {},
+                            isBorderSolid: true,
                           ),
                         );
                       },

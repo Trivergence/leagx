@@ -7,7 +7,11 @@ import '../../../widgets/text_widget.dart';
 
 class DetailTile extends StatefulWidget {
   const DetailTile({
-    Key? key,required this.title, required this.leftValue, required this.rightValue,required this.tileColor,
+    Key? key,
+    required this.title,
+    required this.leftValue,
+    required this.rightValue,
+    required this.tileColor,
   }) : super(key: key);
   final String title;
   final Color tileColor;
@@ -27,35 +31,44 @@ class _DetailTileState extends State<DetailTile> {
     translateData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return !isLoading ? Container(
-      color: widget.tileColor,
-      padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            width: 40,
-            child: TextWidget(text: widget.leftValue, color: AppColors.colorYellow, textAlign: TextAlign.right,)),
-          TextWidget(text: title!),
-          SizedBox(
-            width: 40,
-            child: TextWidget(
-              text: widget.rightValue,
-              color: AppColors.colorRed,
-              textAlign: TextAlign.left,
+    return !isLoading
+        ? Container(
+            color: widget.tileColor,
+            padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                    width: 40,
+                    child: TextWidget(
+                      text: widget.leftValue,
+                      color: AppColors.colorYellow,
+                      textAlign: TextAlign.right,
+                    )),
+                TextWidget(text: title!),
+                SizedBox(
+                  width: 40,
+                  child: TextWidget(
+                    text: widget.rightValue,
+                    color: AppColors.colorRed,
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ],
             ),
-          ),
-      ],),
-    )
-    : const ShimmerWidget(height: 40, verticalPadding: 0, horizontalPadding: 0,)
-    ;
+          )
+        : const ShimmerWidget(
+            height: 40,
+            verticalPadding: 0,
+            horizontalPadding: 0,
+          );
   }
 
   Future<void> translateData() async {
-    title =
-        await TranslationUtility.translate(widget.title);
+    title = await TranslationUtility.translate(widget.title);
     isLoading = false;
     setState(() {});
   }

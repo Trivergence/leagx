@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
@@ -19,6 +21,7 @@ class PredictionWidget extends StatefulWidget {
   final int? teamTwoScore;
   final bool isPending;
   final String? predictionRate;
+  final bool isLocked;
   const PredictionWidget({
     Key? key,
     required this.teamOneFlag,
@@ -29,6 +32,7 @@ class PredictionWidget extends StatefulWidget {
     this.teamTwoScore,
     this.isPending = false,
     this.predictionRate,
+    required this.isLocked,
   }) : super(key: key);
 
   @override
@@ -48,104 +52,130 @@ class _PredictionWidgetState extends State<PredictionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return !isLoading ? Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      decoration: BoxDecoration(
-          gradient: AppColors.blackishGradient,
-          borderRadius: const BorderRadius.all(Radius.circular(8.0))),
-      child: Column(
-        children: [
-          Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                           //crossAxisAlignment: CrossAxisAlignment.center,
+    return !isLoading
+        ? Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 5.0),
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                decoration: BoxDecoration(
+                    gradient: AppColors.blackishGradient,
+                    borderRadius: const BorderRadius.all(Radius.circular(8.0))),
+                child: Column(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
                           children: [
-                            Expanded(
-                                child: TextWidget(
-                              text: teamOneName!,
-                              textAlign: TextAlign.center,
-                            )),
-                            UIHelper.horizontalSpace(5),
-                            ClipOval(
-                              child: ImageWidget(
-                                  imageUrl: widget.teamOneFlag,
-                                  placeholder: Assets.icTeamAvatar),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          UIHelper.verticalSpace(30),
-                          ScoreChip(
-                            hasGradient: false,
-                            firstScore: widget.teamOneScore.toString(), 
-                            secondScore: widget.teamTwoScore.toString()),
-                          UIHelper.verticalSpaceSmall,
-                          widget.isPending
-                          ? Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.center,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const IconWidget(
-                                  iconData: Icons.campaign_outlined,
-                                  color: AppColors.colorYellow,
-                                  size: 18,
+                                Expanded(
+                                  flex: 2,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Expanded(
+                                          child: TextWidget(
+                                        text: teamOneName!,
+                                        textAlign: TextAlign.center,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                      UIHelper.horizontalSpace(5),
+                                      ImageWidget(
+                                        imageUrl: widget.teamOneFlag,
+                                        placeholder: Assets.icTeamAvatar,
+                                        shouldClip: true,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                UIHelper.horizontalSpace(6.0),
-                                TextWidget(
-                                  text: loc.predictionSTxtPending,
-                                  color: AppColors.colorYellow,
-                                  textSize: 14.0,
-                                  fontWeight: FontWeight.w400,
+                                Column(
+                                  children: [
+                                    UIHelper.verticalSpace(30),
+                                    ScoreChip(
+                                        hasGradient: false,
+                                        firstScore:
+                                            widget.teamOneScore.toString(),
+                                        secondScore:
+                                            widget.teamTwoScore.toString()),
+                                    UIHelper.verticalSpaceSmall,
+                                    widget.isPending
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const IconWidget(
+                                                iconData:
+                                                    Icons.campaign_outlined,
+                                                color: AppColors.colorYellow,
+                                                size: 18,
+                                              ),
+                                              UIHelper.horizontalSpace(6.0),
+                                              TextWidget(
+                                                text: loc.predictionSTxtPending,
+                                                color: AppColors.colorYellow,
+                                                textSize: 14.0,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ],
+                                          )
+                                        : widget.predictionRate != null
+                                            ? TextWidget(
+                                                text: widget.predictionRate! +
+                                                    "%",
+                                                color: AppColors.colorGreen)
+                                            : const SizedBox(),
+                                  ],
                                 ),
+                                Expanded(
+                                    flex: 2,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        ImageWidget(
+                                          imageUrl: widget.teamTwoFlag,
+                                          placeholder: Assets.icTeamAvatar,
+                                          shouldClip: true,
+                                        ),
+                                        UIHelper.horizontalSpace(5),
+                                        Expanded(
+                                            child: TextWidget(
+                                          text: teamTwoName!,
+                                          textAlign: TextAlign.center,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                      ],
+                                    )),
                               ],
-                            )
-                          : widget.predictionRate != null
-                              ? TextWidget(
-                                  text: widget.predictionRate! + "%",
-                                  color: AppColors.colorGreen)
-                              : const SizedBox(),
-                        ],
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ImageWidget(
-                              imageUrl: widget.teamTwoFlag,
-                              placeholder: Assets.icTeamAvatar,
                             ),
-                            UIHelper.horizontalSpace(5),
-                            Expanded(
-                                child: TextWidget(
-                              text: teamTwoName!,
-                              textAlign: TextAlign.center,
-                            )),
                           ],
-                        )
+                        )),
+                  ],
+                ),
+              ),
+              if (widget.isLocked)
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: ClipRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                      child: Container(
+                        color: Colors.transparent,
                       ),
-                    ],
+                    ),
                   ),
-                  
-                ],
-              )),
-        ],
-      ),
-    )
-    : const ShimmerWidget(height: 120);
+                ),
+              if (widget.isLocked) const Icon(Icons.lock),
+            ],
+          )
+        : const ShimmerWidget(height: 120);
   }
 
   Future<void> getTranslatedData() async {
@@ -161,8 +191,6 @@ class _PredictionWidgetState extends State<PredictionWidget> {
     teamOneName = listOfValues[0];
     teamTwoName = listOfValues[1];
     isLoading = false;
-    setState(() {
-    });
-
+    setState(() {});
   }
 }
