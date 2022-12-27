@@ -1,9 +1,5 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/font_family.dart';
-import 'package:leagx/ui/util/ui/ui_helper.dart';
-import 'package:leagx/ui/widgets/icon_widget.dart';
-import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class SearchTextField extends StatelessWidget {
@@ -15,15 +11,18 @@ class SearchTextField extends StatelessWidget {
   final EdgeInsets padding;
   final Color iconColor;
   final ValueChanged? onFieldSubmitted;
+  final ValueChanged? onTextEntered;
   final TextInputAction? inputAction;
   final bool isDisabled;
   final VoidCallback? onTap;
+  final VoidCallback? onSeachClicked;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: textController,
       onFieldSubmitted: onFieldSubmitted,
+      onChanged: onTextEntered,
       textInputAction: inputAction,
       readOnly: isDisabled,
       onTap: onTap,
@@ -39,7 +38,6 @@ class SearchTextField extends StatelessWidget {
         hintText: hint,
         hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
               color: AppColors.colorWhite,
-              fontFamily: FontFamily.openSans,
               fontWeight: FontWeight.w400,
             ),
         counterText: '',
@@ -48,7 +46,6 @@ class SearchTextField extends StatelessWidget {
         labelText: hint,
         labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
               color: AppColors.colorWhite,
-              fontFamily: FontFamily.openSans,
               fontWeight: FontWeight.w400,
             ),
         errorStyle: const TextStyle(color: Colors.red),
@@ -56,12 +53,15 @@ class SearchTextField extends StatelessWidget {
         disabledBorder: disabledBorder,
         focusedBorder: focusedBorder,
         errorBorder: errorBorder,
-        suffixIcon: Container(
-          width: Dimens.textFieldSuffixWidth,
-          alignment: Alignment.center,
-          child: const Icon(
-            Icons.search,
-            color: AppColors.colorWhite,
+        suffixIcon: GestureDetector(
+          onTap: onSeachClicked,
+          child: Container(
+            width: Dimens.textFieldSuffixWidth,
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.search,
+              color: AppColors.colorWhite,
+            ),
           ),
         ),
         errorMaxLines: 3,
@@ -77,12 +77,14 @@ class SearchTextField extends StatelessWidget {
     this.inputType,
     this.hint,
     this.isIcon = false,
-    this.padding = const EdgeInsets.only(left: 20),
+    this.padding = const EdgeInsets.only(left: 20, right: 20),
     this.iconColor = Colors.grey,
     this.onFieldSubmitted,
-    this.inputAction,
+    this.inputAction = TextInputAction.search,
     this.onTap,
     this.isDisabled = false,
+    this.onTextEntered,
+    this.onSeachClicked,
   }) : super(key: key);
 
   //Styles

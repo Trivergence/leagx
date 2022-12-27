@@ -1,76 +1,44 @@
-import 'package:leagx/ui/util/locale/localization.dart';
-import 'package:leagx/ui/util/size/size_config.dart';
+import 'package:leagx/core/utility.dart';
+import 'package:leagx/models/dashboard/fixture.dart';
+import 'package:leagx/models/prediction.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/assets.dart';
-import '../../../../constants/colors.dart';
-import '../../../../constants/dimens.dart';
-import '../../../util/ui/ui_helper.dart';
-import '../../../widgets/icon_container.dart';
-import '../../../widgets/text_widget.dart';
-import '../../../widgets/score_chip.dart';
+import '../components/fixture_vs_widget.dart';
 import 'components/live_match_widget.dart';
+import 'components/offline_match_widget.dart';
 
 class MatchView extends StatelessWidget {
+  final Fixture matchDetails;
+  final Prediction? prediction;
+
   const MatchView({
     Key? key,
+    required this.matchDetails,
+    required this.prediction,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
-            Container(
-                width: double.infinity,
-                color: AppColors.textFieldColor,
-                margin: const EdgeInsets.only(bottom: 10, top: 5),
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Image.asset(Assets.flagImage),
-                        const TextWidget(text: "Barcelona"),
-                        UIHelper.verticalSpaceSmall,
-                        const TextWidget(
-                          text: "Top 1 Group A",
-                          textSize: Dimens.textXS,
-                          color: AppColors.colorGrey,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: const [
-                        ScoreChip(firstScore: 1,secondScore: 4,),
-                        UIHelper.verticalSpaceSmall,
-                        TextWidget(
-                          text: "00:38:25",
-                          color: AppColors.colorGrey,
-                          textSize: Dimens.textSmall,
-                        )
-                      ],
-                    ),
-                    Column(children: [
-                      Image.asset(Assets.flagImage2),
-                      const TextWidget(text: "Man. United"),
-                      UIHelper.verticalSpaceSmall,
-                      const TextWidget(
-                        text: "Top 2 Group B",
-                        textSize: Dimens.textXS,
-                        color: AppColors.colorGrey,
-                      ),
-                    ])
-                  ],
-                )),
-            IconContainer(
-              height: SizeConfig.height * 7,
-              title: loc.faqsTxtFrequentlyAskedQuestions,
-            ),
-            LiveMatchWidget()
-            //OfflineMatchWidget()
+            FixtureVsWidget(matchDetails: matchDetails),
+            // if(!Utility.isMatchOver(matchDetails.matchStatus!)) IconContainer(
+            //   height: SizeConfig.height * 7,
+            //   title: loc.faqsTxtFrequentlyAskedQuestions,
+            // ),
+            matchDetails.matchLive == "1" ||
+                    Utility.isMatchOver(matchDetails.matchStatus!)
+                ? LiveMatchWidget(
+                    matchDetails: matchDetails,
+                    prediction: prediction,
+                  )
+                : OfflineMatchWidget(
+                    matchDetails: matchDetails,
+                    prediction: prediction,
+                  )
           ],
         ),
       ),

@@ -12,7 +12,10 @@ class SharedPreferenceHelper {
   SharedPreferenceHelper(this._sharedPreference);
 
   // Token
-  String? get authToken => _sharedPreference.getString(Preferences.authToken);
+  String? get authToken {
+    String? token = _sharedPreference.getString(Preferences.authToken);
+    return token;
+  }
 
   Future<bool> saveAuthToken(String authToken) async {
     return await _sharedPreference.setString(Preferences.authToken, authToken);
@@ -20,6 +23,14 @@ class SharedPreferenceHelper {
 
   Future<bool> removeAuthToken() async {
     return _sharedPreference.remove(Preferences.authToken);
+  }
+
+  Future<void> setFirstTime(bool value) async {
+    await _sharedPreference.setBool(Preferences.firstTime, value);
+  }
+
+  bool isFirstTime() {
+    return _sharedPreference.getBool(Preferences.firstTime) ?? true;
   }
 
   //Username
@@ -44,7 +55,7 @@ class SharedPreferenceHelper {
     }
   }
 
-  Future<bool> saveUser(User user){
+  Future<bool> saveUser(User user) {
     return _sharedPreference.setString(Preferences.user, jsonEncode(user));
   }
 

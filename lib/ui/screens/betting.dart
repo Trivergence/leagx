@@ -1,11 +1,14 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:leagx/constants/app_theme.dart';
 import 'package:leagx/constants/strings.dart';
+import 'package:leagx/core/utility.dart';
 import 'package:leagx/providers/localization_provider.dart';
 import 'package:leagx/providers/session_provider.dart';
 import 'package:leagx/routes/routes.dart';
+import 'package:leagx/ui/screens/authentication/signin.dart';
 import 'package:leagx/ui/screens/base_widget.dart';
-import 'package:leagx/ui/screens/dashboard/dashbard.dart';
+import 'package:leagx/ui/screens/dashboard/dashboard.dart';
 import 'package:leagx/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:leagx/ui/util/loader/loader.dart';
 import 'package:leagx/ui/widgets/gesture_widget.dart';
@@ -16,6 +19,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// ignore: must_be_immutable
 class Betting extends StatelessWidget {
   final SharedPreferences prefs;
   late LocalizationProvider _localizationProvider;
@@ -34,19 +38,17 @@ class Betting extends StatelessWidget {
         child: const SizedBox(),
         onModelReady: (SessionProvider sessionProvider) {
           FlutterNativeSplash.remove();
-          
-          sessionProvider.init();
-          _localizationProvider=context.watch<LocalizationProvider>();
+          sessionProvider.init(context);
+          _localizationProvider = context.watch<LocalizationProvider>();
           _localizationProvider.init();
-
         },
         builder: (context, SessionProvider sessionProvider, __) {
           return MaterialApp(
-            
             title: Strings.appName,
             locale: _localizationProvider.locale,
             localizationsDelegates: const [
               AppLocalizations.delegate,
+              CountryLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
@@ -56,18 +58,19 @@ class Betting extends StatelessWidget {
               Locale('ar', ''),
             ],
             debugShowCheckedModeBanner: false,
-            theme: themeLight,
+            theme: AppTheme.getTheme(Utility.getFont(_localizationProvider)),
             onGenerateRoute: Routes().generateRoutes,
             builder: EasyLoading.init(),
             home: Builder(
               builder: (context) {
                 switch (sessionProvider.loginStatus) {
                   case LoginStatus.none:
+                    return OnBoardingScreen();
                   case LoginStatus.loggingIn:
                   case LoginStatus.error:
-                    return OnBoardingScreen();
+                    return SigninScreen();
                   case LoginStatus.loggedIn:
-                    return DashBoardScreen();
+                    return const DashBoardScreen();
                 }
               },
             ),

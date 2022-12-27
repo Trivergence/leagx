@@ -4,10 +4,14 @@ import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../core/utility.dart';
+
 class LocalizationProvider extends ChangeNotifier {
   SharedPreferences preferences;
   late Locale _locale;
   LocalizationProvider({required this.preferences});
+
+  Locale get getLocale => _locale;
 
   init() async {
     if (ValidationUtils.isValid(
@@ -16,9 +20,13 @@ class LocalizationProvider extends ChangeNotifier {
         SharedPreferenceHelper(preferences).currentLanguage!,
       );
     } else {
-      _locale = const Locale(
-        Strings.english,
-      );
+      _locale = Utility.getPhoneLanguage() == Strings.arabic
+          ? const Locale(
+              Strings.arabic,
+            )
+          : const Locale(
+              Strings.english,
+            );
     }
   }
 

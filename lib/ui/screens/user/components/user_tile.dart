@@ -1,3 +1,4 @@
+import 'package:leagx/ui/util/utility/image_utitlity.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/colors.dart';
@@ -5,6 +6,7 @@ import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 
+// ignore: must_be_immutable
 class UserTile extends StatelessWidget {
   final String imageUrl;
   final String title;
@@ -39,8 +41,10 @@ class UserTile extends StatelessWidget {
             height: 44.0,
             isCircular: true,
             imageUrl: imageUrl,
+            placeHolderImg: ImageUtitlity.getRandomProfileAvatar(),
             onPressed: () {},
             gradient: AppColors.orangishGradient,
+            isBorderSolid: true,
           ),
           UIHelper.horizontalSpace(15.0),
           Expanded(

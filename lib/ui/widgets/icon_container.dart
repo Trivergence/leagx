@@ -8,7 +8,8 @@ import 'text_widget.dart';
 class IconContainer extends StatelessWidget {
   const IconContainer({
     Key? key,
-    required this.height, required this.title,
+    required this.height,
+    required this.title,
   }) : super(key: key);
 
   final double height;
@@ -17,7 +18,7 @@ class IconContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height, 
+      height: height,
       width: double.infinity,
       color: AppColors.textFieldColor,
       child: Row(
@@ -26,7 +27,8 @@ class IconContainer extends StatelessWidget {
           Image.asset(Assets.icPlayer),
           UIHelper.horizontalSpaceSmall,
           TextWidget(text: title)
-      ],),
+        ],
+      ),
     );
   }
 }

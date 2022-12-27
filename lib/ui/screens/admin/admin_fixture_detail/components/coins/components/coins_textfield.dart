@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/font_family.dart';
 
 class CoinsTextField extends StatelessWidget {
   final IconData? icon;
@@ -49,7 +48,6 @@ class CoinsTextField extends StatelessWidget {
         textAlignVertical: TextAlignVertical.center,
         style: Theme.of(context).textTheme.bodyText1!.copyWith(
               color: AppColors.colorWhite,
-              fontFamily: FontFamily.openSans,
               fontWeight: FontWeight.w400,
               fontSize: 30.0,
             ),
@@ -60,7 +58,6 @@ class CoinsTextField extends StatelessWidget {
             hintText: hint,
             hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
                   color: AppColors.colorWhite,
-                  fontFamily: FontFamily.openSans,
                   fontWeight: FontWeight.w400,
                   fontSize: 30.0,
                 ),
@@ -70,7 +67,6 @@ class CoinsTextField extends StatelessWidget {
             labelText: hint,
             labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
                   color: AppColors.colorWhite,
-                  fontFamily: FontFamily.openSans,
                   fontWeight: FontWeight.w400,
                   fontSize: 30.0,
                 ),

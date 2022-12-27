@@ -1,13 +1,14 @@
 import 'package:leagx/constants/assets.dart';
 import 'package:leagx/constants/colors.dart';
-import 'package:leagx/ui/util/validation/validation_utils.dart';
+import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   final String? title;
   final bool isIcon;
-  final Widget? trailing;
+  final bool hasBackButton;
+  final List<Widget>? trailing;
   final bool isDrawer;
 
   AppBarWidget({
@@ -16,6 +17,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
     this.trailing,
     this.isDrawer = false,
     this.isIcon = false,
+    this.hasBackButton = true,
   }) : super(key: key);
 
   @override
@@ -34,13 +36,15 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                 Scaffold.of(context).openDrawer();
               },
             )
-          : IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: AppColors.colorWhite,
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
+          : hasBackButton == true
+              ? IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: AppColors.colorWhite,
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                )
+              : null,
       title: isIcon
           ? Image.asset(
               Assets.appLogo,
@@ -48,13 +52,18 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
               height: 32.0,
             )
           : title != null
-              ? TextWidget(
-                  text: title!,
+              ? SizedBox(
+                  width: SizeConfig.width * 50,
+                  child: Center(
+                    child: TextWidget(
+                      text: title!,
+                      overflow: TextOverflow.fade,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 )
-              : const SizedBox(),
-      actions: [
-        trailing ?? const SizedBox(),
-      ],
+              : const SizedBox.shrink(),
+      actions: trailing ?? trailing,
     );
   }
 

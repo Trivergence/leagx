@@ -24,13 +24,13 @@ class UserDevice {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['push_token'] = this.pushToken;
-    data['is_active'] = this.isActive;
-    data['user_id'] = this.userId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['push_token'] = pushToken;
+    data['is_active'] = isActive;
+    data['user_id'] = userId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

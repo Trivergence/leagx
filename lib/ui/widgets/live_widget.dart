@@ -6,15 +6,18 @@ import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class LiveWidget extends StatelessWidget {
-  const LiveWidget({Key? key}) : super(key: key);
+  final bool isLive;
+  const LiveWidget({Key? key, required this.isLive}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const DotWidget(),
+        DotWidget(
+          isLive: isLive,
+        ),
         UIHelper.horizontalSpace(3.0),
-         TextWidget(
+        TextWidget(
           text: loc.liveWidgetTxtLive,
           textSize: Dimens.textSmall,
         ),

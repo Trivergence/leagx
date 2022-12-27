@@ -1,11 +1,10 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
+import 'package:leagx/ui/widgets/image_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class GradientBorderWidget extends StatelessWidget {
   final double? width;
@@ -19,7 +18,10 @@ class GradientBorderWidget extends StatelessWidget {
   final double? iconSize;
   final String? imageUrl;
   final String? imageAsset;
+  final String? placeHolderImg;
   final EdgeInsetsGeometry? padding;
+  final bool isBorderSolid;
+  final bool shouldClip;
   const GradientBorderWidget({
     Key? key,
     this.width,
@@ -34,6 +36,9 @@ class GradientBorderWidget extends StatelessWidget {
     this.imageUrl,
     this.imageAsset,
     this.padding,
+    this.placeHolderImg,
+    this.isBorderSolid = false,
+    this.shouldClip = false,
   }) : super(key: key);
 
   @override
@@ -45,43 +50,41 @@ class GradientBorderWidget extends StatelessWidget {
         height: height ?? 48.0,
         padding: const EdgeInsets.all(2.0),
         decoration: BoxDecoration(
-            gradient: gradient,
+            gradient: isBorderSolid == true ? null : gradient,
+            color: isBorderSolid == true ? AppColors.colorPink : null,
             shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
             borderRadius: isCircular
                 ? null
                 : const BorderRadius.all(Radius.circular(5.0))),
         child: Container(
-          padding: padding,
-          decoration: BoxDecoration(
-            color: AppColors.colorBackground,
-            shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
-          ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: iconData != null
-              ? IconWidget(
-                  iconData: iconData!,
-                  size: iconSize,
-                )
-              : imageUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: imageUrl!,
-                      fit: BoxFit.fill,
-                      height: height,
-                      width: width,
-                    )
-                  : text != null
-                      ? Center(
-                          child: TextWidget(
-                            text: text!,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: FontFamily.raleway,
-                            textSize: textSize ?? Dimens.textRegular,
-                          ),
-                        )
-                      : imageAsset != null
-                          ? Image.asset(imageAsset!)
-                          : const SizedBox(),
-        ),
+            padding: padding,
+            decoration: BoxDecoration(
+              color: AppColors.colorBackground,
+              shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+            ),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: iconData != null
+                ? IconWidget(
+                    iconData: iconData!,
+                    size: iconSize,
+                  )
+                : imageUrl != null
+                    ? ImageWidget(
+                        imageUrl: imageUrl!,
+                        placeholder: placeHolderImg ?? '',
+                        shouldClip: shouldClip,
+                      )
+                    : text != null
+                        ? Center(
+                            child: TextWidget(
+                              text: text!,
+                              fontWeight: FontWeight.w600,
+                              textSize: textSize ?? Dimens.textRegular,
+                            ),
+                          )
+                        : imageAsset != null
+                            ? Image.asset(imageAsset!)
+                            : const SizedBox()),
       ),
     );
   }

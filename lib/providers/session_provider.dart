@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:leagx/core/sharedpref/shared_preference_helper.dart';
+import 'package:leagx/service/service_locator.dart';
 import 'package:leagx/ui/util/validation/validation_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:leagx/view_models/wallet_view_model.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum LoginStatus { none, loggingIn, loggedIn, error }
+
 enum SignupStatus { none, loading }
 
 class SessionProvider extends ChangeNotifier {
@@ -15,26 +19,19 @@ class SessionProvider extends ChangeNotifier {
 
   SessionProvider({required this.prefs});
 
-  init() async {
-    if (ValidationUtils.isValid(SharedPreferenceHelper(prefs).authToken)) {
-      _loadSession();
-    }
-  }
+  init(BuildContext context) async => await _loadSession(context);
 
   LoginStatus get loginStatus => _loginStatus;
   //SignupStatus get signupStatus => _signupStatus;
 
-  void _loadSession() {
-    //_loginStatus = LoginStatus.loading;
-    //notifyListeners();
-
-    Timer(const Duration(seconds: 3), () {
+  Future<void> _loadSession(BuildContext context) async {
+    if (ValidationUtils.isValid(locator<SharedPreferenceHelper>().authToken)) {
       _loginStatus = LoginStatus.loggedIn;
-      notifyListeners();
-    });
-
-    //_loginStatus = LoginStatus.None;
-    //notifyListeners();
+    } else if (!locator<SharedPreferenceHelper>().isFirstTime()) {
+      _loginStatus = LoginStatus.error;
+    }
+    context.read<WalletViewModel>().setupStripeCredentials(showToast: false);
+    notifyListeners();
   }
 
   Future<dynamic> signIn(String username, String password) async {
