@@ -128,7 +128,7 @@ class SignupScreen extends StatelessWidget {
                         Loader.hideLoader();
                         ToastMessage.show(
                             loc.authSignupTxtSignedupSuccessfully, TOAST_TYPE.success);
-                        Navigator.pushNamed(context, Routes.dashboard);
+                        Navigator.pushReplacementNamed(context, Routes.dashboard);
                       } else {
                         Loader.hideLoader();
                       }
@@ -142,6 +142,7 @@ class SignupScreen extends StatelessWidget {
             ),
             UIHelper.verticalSpaceMedium,
             HaveAccountButton(
+              mainText: loc.authTxtAlreadyHaveAccount,
               subText: loc.authSignupBtnSignin,
               onTap: () {
                 Navigator.pushReplacementNamed(context, Routes.signin);

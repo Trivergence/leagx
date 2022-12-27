@@ -3,8 +3,7 @@ import 'package:leagx/constants/dimens.dart';
 import 'package:leagx/ui/util/locale/localization.dart';
 import 'package:leagx/ui/util/ui/ui_helper.dart';
 import 'package:leagx/ui/widgets/bar/app_bar_widget.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_border_widget.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
+import 'package:leagx/ui/widgets/gradient/gradient_border_button.dart';
 import 'package:leagx/ui/widgets/main_button.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +23,7 @@ class TermsServiceScreen extends StatelessWidget {
           horizontal: 16.0,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
               child: Container(
@@ -42,12 +42,11 @@ class TermsServiceScreen extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
-                      GradientWidget(
-                        child: TextWidget(
-                          text: 'How Lorem ipsum dolor  ',
-                          fontWeight: FontWeight.w600,
-                          textSize: 20.0,
-                        ),
+                      TextWidget(
+                        text: 'How Lorem ipsum dolor  ',
+                        fontWeight: FontWeight.w600,
+                        textSize: 20.0,
+                        color: AppColors.colorPink,
                       ),
                       UIHelper.verticalSpaceMedium,
                       TextWidget(
@@ -63,23 +62,25 @@ Morbi non dui dui. Donec elementum neque blandit, pulvinar leo ut, placerat tort
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Flexible(
-                  child: MainButton(
-                    text: loc.termsOfServiceBtnAgree,
-                    onPressed: () {},
+            SafeArea(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Flexible(
+                    child: MainButton(
+                      text: loc.termsOfServiceBtnAgree,
+                      onPressed: () {},
+                    ),
                   ),
-                ),
-                UIHelper.horizontalSpaceMedium,
-                Flexible(
-                  child: GradientBorderWidget(
-                    text: loc.termsOfServiceBtnDeny,
-                    onPressed: () {},
+                  UIHelper.horizontalSpaceMedium,
+                  Flexible(
+                    child: GradientBorderButton(
+                      text: loc.termsOfServiceBtnDeny,
+                      onPressed: () {},
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

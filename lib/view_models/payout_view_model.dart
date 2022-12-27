@@ -24,14 +24,14 @@ import '../models/user/user.dart';
 import '../service/payment_service/payment_config.dart';
 import '../ui/util/locale/localization.dart';
 
-class PayoutViewModel extends BaseModel{
+class PayoutViewModel extends BaseModel {
   ExpressAccount? _expressAccount;
   bool _payoutAvailable = true;
 
   ExpressAccount? get expressAccount => _expressAccount;
   bool get isPayoutAvailble => _payoutAvailable;
 
-  Future<void>initializeData() async {
+  Future<void> initializeData() async {
     setBusy(true);
     await createAccount();
     await getAccountDetails();
@@ -40,48 +40,50 @@ class PayoutViewModel extends BaseModel{
 
   Future<void> createAccount() async {
     CustomerCred? customerCred = locator<PaymentConfig>().getCustomerCred;
-    if( customerCred != null && locator<PaymentConfig>().getAccountId == null) {
+    if (customerCred != null && locator<PaymentConfig>().getAccountId == null) {
       String? countryCode = Utility.getCountryCode();
       if (countryCode != null) {
         Result<ErrorModel, ExpressAccount> result =
             await PayOut.createExpressAccount(countryCode: countryCode);
         result.when(
-            (errorModel) => handleError(errorModel),
-            (expressAccount) async => await updateAccountId(accountId: expressAccount.id),
-          );
+          (errorModel) => handleError(errorModel),
+          (expressAccount) async =>
+              await updateAccountId(accountId: expressAccount.id),
+        );
       }
     }
   }
 
   Future<void> getAccountDetails() async {
     String? accountId = locator<PaymentConfig>().getAccountId;
-    if(accountId != null) {
-     Result<ErrorModel, ExpressAccount> result = await PayOut.getAccount(accountId);
-     result.when((errorModel) => handleError(errorModel), 
-     (expressAccount) => _expressAccount = expressAccount,);
+    if (accountId != null) {
+      Result<ErrorModel, ExpressAccount> result =
+          await PayOut.getAccount(accountId);
+      result.when(
+        (errorModel) => handleError(errorModel),
+        (expressAccount) => _expressAccount = expressAccount,
+      );
     }
   }
 
   Future<bool> withdrawCoins({
     required String amountInDollars,
     required String payoutToken,
-    }) async {
+  }) async {
     bool success = false;
     User? user = preferenceHelper.getUser();
     CustomerCred? customerCred = locator<PaymentConfig>().getCustomerCred;
     if (user != null && customerCred != null) {
-        success = await ApiService.postWoResponce(
-          url: AppUrl.addPaymentToken,
-          body: {
-          "payment": {
-            "user_id": user.id,
-            "payment_account_id": customerCred.id,
-            "payment_token": payoutToken,
-            "payment_type": "StripePayOut",
-            "amount": amountInDollars
-          }
+      success =
+          await ApiService.postWoResponce(url: AppUrl.addPaymentToken, body: {
+        "payment": {
+          "user_id": user.id,
+          "payment_account_id": customerCred.id,
+          "payment_token": payoutToken,
+          "payment_type": "StripePayOut",
+          "amount": amountInDollars
         }
-      );
+      });
     } else {
       ToastMessage.show(loc.somethingWentWrong, TOAST_TYPE.msg);
     }
@@ -92,10 +94,12 @@ class PayoutViewModel extends BaseModel{
     String? accountLink;
     await createAccount();
     String? accountId = locator<PaymentConfig>().getAccountId;
-    if(accountId != null) {
-      Result<ErrorModel , String> result = await PayOut.createAccountLink(accountId);
-      result.when((errorModel) =>  handleError(errorModel),
-      (link) =>  accountLink = link,
+    if (accountId != null) {
+      Result<ErrorModel, String> result =
+          await PayOut.createAccountLink(accountId);
+      result.when(
+        (errorModel) => handleError(errorModel),
+        (link) => accountLink = link,
       );
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
@@ -111,9 +115,7 @@ class PayoutViewModel extends BaseModel{
       CustomerCred? customerCred = await ApiService.callPutApi(
           url: completeUrl,
           body: {
-            "payment_account": {
-              "account_id": accountId
-            }
+            "payment_account": {"account_id": accountId}
           },
           modelName: ApiModels.paymentAccount);
       if (customerCred != null) {
@@ -122,17 +124,26 @@ class PayoutViewModel extends BaseModel{
     }
   }
 
-  Future<PayoutModel?> payoutMoney(String amount, String currency, String bankId,) async {
+  Future<PayoutModel?> payoutMoney(
+    String amount,
+    String currency,
+    String bankId,
+  ) async {
     PayoutModel? _payoutModel;
-    String? convertedAmount = await convertAmount(from: "usd", to: currency, withdrawlAmount: amount);
+    String? convertedAmount =
+        await convertAmount(from: "usd", to: currency, withdrawlAmount: amount);
     CustomerCred? savedCred = locator<PaymentConfig>().getCustomerCred;
-    if(savedCred != null && savedCred.accountId != null && convertedAmount != null) {
-      Result<ErrorModel, PayoutModel> result = await PayOut.payout(convertedAmount, currency, bankId, savedCred.accountId!);
-      result.when((errorModel) {
-        handleError(errorModel);
-        Loader.hideLoader();
-      }, (payoutModel) =>
-        _payoutModel = payoutModel,
+    if (savedCred != null &&
+        savedCred.accountId != null &&
+        convertedAmount != null) {
+      Result<ErrorModel, PayoutModel> result = await PayOut.payout(
+          convertedAmount, currency, bankId, savedCred.accountId!);
+      result.when(
+        (errorModel) {
+          handleError(errorModel);
+          Loader.hideLoader();
+        },
+        (payoutModel) => _payoutModel = payoutModel,
       );
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
@@ -148,32 +159,31 @@ class PayoutViewModel extends BaseModel{
     if (savedCred != null && savedCred.accountId != null) {
       Result<ErrorModel, Transfer> result =
           await PayOut.transfer(amount, savedCred.accountId!);
-      result.when(
-          (errorModel) {
-            Loader.hideLoader();
-            handleError(errorModel);
-          },
-          (_) => success = true
-        );
+      result.when((errorModel) {
+        Loader.hideLoader();
+        handleError(errorModel);
+      }, (_) => success = true);
     } else {
       ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.error);
     }
     return success;
   }
 
-  Future<String?> convertAmount({required String from, required String to, required String withdrawlAmount}) async {
+  Future<String?> convertAmount(
+      {required String from,
+      required String to,
+      required String withdrawlAmount}) async {
     String? amount;
     Currency? currency = await ApiService.callCurrencyConverter(
-      url: AppUrl.convert,
-      parameters: {
-        "format": "json",
-        "from" : from.toUpperCase(),
-        "to" : to.toUpperCase(),
-        "amount": withdrawlAmount
-      },
-      modelName: ApiModels.getCurrencyAmount
-    );
-    if(currency != null) {
+        url: AppUrl.convert,
+        parameters: {
+          "format": "json",
+          "from": from.toUpperCase(),
+          "to": to.toUpperCase(),
+          "amount": withdrawlAmount
+        },
+        modelName: ApiModels.getCurrencyAmount);
+    if (currency != null) {
       amount = currency.rates.values.toList().first["rate_for_amount"];
     }
     Loader.hideLoader();
@@ -199,17 +209,18 @@ class PayoutViewModel extends BaseModel{
   }
 
   clearData() => _expressAccount = null;
-  
+
   void showVerificationDialog(BuildContext context) {
-    if(_expressAccount != null  
-    && _expressAccount!.requirements  != null 
-    && _expressAccount!.requirements!.eventuallyDue.isNotEmpty) {
+    if (_expressAccount != null &&
+        _expressAccount!.requirements != null &&
+        _expressAccount!.requirements!.eventuallyDue.isNotEmpty) {
       VerificationAlertDialog.show(
-        context: context,
-        title: "Verification Required",
-        listOfRequirements: _expressAccount!.requirements!.eventuallyDue, 
-        negativeBtnTitle: "Later", 
-        positiveBtnTitle: "Upload Now", onPositiveBtnPressed: (dialogContext){});
+          context: context,
+          title: "Verification Required",
+          listOfRequirements: _expressAccount!.requirements!.eventuallyDue,
+          negativeBtnTitle: "Later",
+          positiveBtnTitle: "Upload Now",
+          onPositiveBtnPressed: (dialogContext) {});
     }
   }
 }

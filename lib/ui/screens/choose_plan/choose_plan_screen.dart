@@ -39,21 +39,28 @@ class ChoosePlanScreen extends StatelessWidget {
           child: Column(
             children: [
               ImageWidget(
-                imageUrl: leagueData.leagueImg,
-                placeholder: Assets.icPlayerAvatar
-              ),
+                  imageUrl: leagueData.leagueImg,
+                  placeholder: Assets.icPlayerAvatar),
               UIHelper.verticalSpace(8),
               TextWidget(text: leagueData.leagueTitle),
               UIHelper.verticalSpace(70),
               PlanListing(
                 isAdmin: true,
                 onItemPressed: (planId, price) {
-                  if(_userSummary != null && _userSummary!.coinEarned!.round() >= int.parse(price) ) {
-                    if(leagueData.isRedeeming == true) {
-                      showConfirmSubscriptionDialog(
-                          type: PaymentType.wallet,
-                          price: price,
-                          planId: planId);
+                  if (_userSummary != null &&
+                      _userSummary!.coinEarned!.round() >= int.parse(price)) {
+                    if (leagueData.isRedeeming == true) {
+                      if (leagueData.isUpgrading == true) {
+                        showUpgradeSubscriptionDialog(
+                            type: PaymentType.wallet,
+                            price: price,
+                            planId: planId);
+                      } else {
+                        showConfirmSubscriptionDialog(
+                            type: PaymentType.wallet,
+                            price: price,
+                            planId: planId);
+                      }
                     } else {
                       PaymentMethodDialog.show(
                           context: context,
@@ -64,23 +71,51 @@ class ChoosePlanScreen extends StatelessWidget {
                             Navigator.of(context).pop();
                             switch (paymentType) {
                               case PaymentType.wallet:
-                                showConfirmSubscriptionDialog(
-                                    type: PaymentType.wallet,
-                                    price: price,
-                                    planId: planId);
+                                if (leagueData.isUpgrading == true) {
+                                  showUpgradeSubscriptionDialog(
+                                      type: PaymentType.wallet,
+                                      price: price,
+                                      planId: planId);
+                                } else {
+                                  showConfirmSubscriptionDialog(
+                                      type: PaymentType.wallet,
+                                      price: price,
+                                      planId: planId);
+                                }
                                 break;
                               case PaymentType.card:
-                                showConfirmSubscriptionDialog(
-                                    type: PaymentType.card,
-                                    price: price,
-                                    planId: planId);
+                                if (leagueData.isUpgrading == true) {
+                                  showUpgradeSubscriptionDialog(
+                                      type: PaymentType.card,
+                                      price: price,
+                                      planId: planId);
+                                } else {
+                                  showConfirmSubscriptionDialog(
+                                      type: PaymentType.card,
+                                      price: price,
+                                      planId: planId);
+                                }
                                 break;
                             }
                           });
                     }
                   } else {
-                    showConfirmSubscriptionDialog(
-                        type: PaymentType.card, price: price, planId: planId);
+                    if (leagueData.isRedeeming == false) {
+                      if (leagueData.isUpgrading == true) {
+                        showUpgradeSubscriptionDialog(
+                            type: PaymentType.card,
+                            price: price,
+                            planId: planId);
+                      } else {
+                        showConfirmSubscriptionDialog(
+                            type: PaymentType.card,
+                            price: price,
+                            planId: planId);
+                      }
+                    } else {
+                      ToastMessage.show(
+                          loc.choosePlanTxtLessCoins, TOAST_TYPE.msg);
+                    }
                   }
                 },
               ),
@@ -91,19 +126,39 @@ class ChoosePlanScreen extends StatelessWidget {
     );
   }
 
-  _subscribeByCard(BuildContext context, int planId, String price, BuildContext dialogContext) async {
+  _subscribeByCard(BuildContext context, int planId, String price,
+      BuildContext dialogContext) async {
     bool isConnected = await InternetInfo.isConnected();
     if (isConnected == true) {
       if (StripeConfig().getSecretKey.isNotEmpty) {
-          Navigator.of(dialogContext).pop();
-          context.read<SubscriptionViewModel>().subscribeLeagueByCard(
-          context: _context,
-          planId: planId,
-          leagueId: leagueData.leagueId,
-          leagueImg: leagueData.leagueImg,
-          leagueTitle: leagueData.leagueTitle,
-          price: price
-        );
+        Navigator.of(dialogContext).pop();
+        context.read<SubscriptionViewModel>().subscribeLeagueByCard(
+            context: _context,
+            planId: planId,
+            leagueId: leagueData.leagueId,
+            leagueImg: leagueData.leagueImg,
+            leagueTitle: leagueData.leagueTitle,
+            price: price);
+      } else {
+        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.msg);
+        context.read<WalletViewModel>().setupStripeCredentials();
+      }
+    }
+  }
+
+  _upgradeByCard(BuildContext context, int planId, String price,
+      BuildContext dialogContext) async {
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected == true) {
+      if (StripeConfig().getSecretKey.isNotEmpty) {
+        Navigator.of(dialogContext).pop();
+        context.read<SubscriptionViewModel>().upgradeLeagueByCard(
+            context: _context,
+            planId: planId,
+            leagueId: leagueData.leagueId,
+            leagueImg: leagueData.leagueImg,
+            leagueTitle: leagueData.leagueTitle,
+            price: price);
       } else {
         ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.msg);
         context.read<WalletViewModel>().setupStripeCredentials();
@@ -131,11 +186,28 @@ class ChoosePlanScreen extends StatelessWidget {
     }
   }
 
-  
-  void showConfirmSubscriptionDialog({
-    required PaymentType type,
-    required int planId, 
-    required String price}) {
+  _upgradeByCoin(BuildContext context, int planId, String price,
+      BuildContext dialogContext) async {
+    bool isConnected = await InternetInfo.isConnected();
+    if (isConnected == true) {
+      if (StripeConfig().getSecretKey.isNotEmpty) {
+        Navigator.of(dialogContext).pop();
+        context.read<SubscriptionViewModel>().upgradeLeagueByCoin(
+            context: _context,
+            planId: planId,
+            leagueId: leagueData.leagueId,
+            leagueImg: leagueData.leagueImg,
+            leagueTitle: leagueData.leagueTitle,
+            price: price);
+      } else {
+        ToastMessage.show(loc.errorTryAgain, TOAST_TYPE.msg);
+        context.read<WalletViewModel>().setupStripeCredentials();
+      }
+    }
+  }
+
+  void showConfirmSubscriptionDialog(
+      {required PaymentType type, required int planId, required String price}) {
     ConfirmationDialog.show(
         context: _context,
         title: loc.subscribeConfirmTitle,
@@ -143,14 +215,34 @@ class ChoosePlanScreen extends StatelessWidget {
         negativeBtnTitle: loc.subscribeConfirmCancel,
         positiveBtnTitle: loc.subscribeConfirmSubscribe,
         onPositiveBtnPressed: (dialogContext) {
-          switch(type) {
+          switch (type) {
             case PaymentType.wallet:
-               _subscribeByCoin(_context, planId, price, dialogContext);
+              _subscribeByCoin(_context, planId, price, dialogContext);
               break;
             case PaymentType.card:
-             _subscribeByCard(_context, planId, price, dialogContext);
+              _subscribeByCard(_context, planId, price, dialogContext);
               break;
-          }}
-        );
+          }
+        });
+  }
+
+  void showUpgradeSubscriptionDialog(
+      {required PaymentType type, required int planId, required String price}) {
+    ConfirmationDialog.show(
+        context: _context,
+        title: loc.upgradeConfirmTitle,
+        body: loc.upgradeConfirmBody + "\$$price",
+        negativeBtnTitle: loc.upgradeConfirmCancel,
+        positiveBtnTitle: loc.upgradeConfirmUpgrade,
+        onPositiveBtnPressed: (dialogContext) {
+          switch (type) {
+            case PaymentType.wallet:
+              _upgradeByCoin(_context, planId, price, dialogContext);
+              break;
+            case PaymentType.card:
+              _upgradeByCard(_context, planId, price, dialogContext);
+              break;
+          }
+        });
   }
 }

@@ -12,6 +12,8 @@ class TextWidget extends StatelessWidget {
   final TextOverflow? overflow;
   final String? fontFamily;
   final int? maxLines;
+  final double? letterSpace;
+  final TextDirection? textDirection;
 
   const TextWidget({
     Key? key,
@@ -24,6 +26,8 @@ class TextWidget extends StatelessWidget {
     this.overflow = TextOverflow.visible,
     this.fontFamily,
     this.maxLines,
+    this.letterSpace,
+    this.textDirection,
   }) : super(key: key);
 
   @override
@@ -47,10 +51,14 @@ class TextWidget extends StatelessWidget {
         : Text(
             text,
             style: TextStyle(
-                color: color, fontSize: textSize, fontWeight: fontWeight),
+                color: color,
+                fontSize: textSize,
+                fontWeight: fontWeight,
+                letterSpacing: letterSpace),
             textAlign: textAlign,
             overflow: overflow,
             maxLines: maxLines,
+            textDirection: textDirection,
           );
   }
 }

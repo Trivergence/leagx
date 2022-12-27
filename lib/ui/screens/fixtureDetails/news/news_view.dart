@@ -17,23 +17,26 @@ class NewsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     leagueNews = context.read<DashBoardViewModel>().getNewsbyLeague(leagueId);
-    return leagueNews.isNotEmpty ? Expanded(
-      child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: leagueNews.length,
-          padding: const EdgeInsets.only(top: 20),
-          itemBuilder: (_, index) {
-            News newsItem = leagueNews[index];
-            return NewsTile(
-              imageUrl: newsItem.user.profileImg,
-              postedBy: newsItem.user.firstName!,
-              when: newsItem.createdAt,
-              desc: newsItem.description,
-            );
-          }),
-    ) : Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 200),
-      child: PlaceHolderTile(height: 50, msgText: loc.fixtureDetailsNewsTxtEmptyList),
-    );
+    return leagueNews.isNotEmpty
+        ? Expanded(
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: leagueNews.length,
+                padding: const EdgeInsets.only(top: 20),
+                itemBuilder: (_, index) {
+                  News newsItem = leagueNews[index];
+                  return NewsTile(
+                    imageUrl: newsItem.user.profileImg,
+                    postedBy: newsItem.user.firstName!,
+                    when: newsItem.createdAt,
+                    desc: newsItem.description,
+                  );
+                }),
+          )
+        : Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 200),
+            child: PlaceHolderTile(
+                height: 50, msgText: loc.fixtureDetailsNewsTxtEmptyList),
+          );
   }
 }

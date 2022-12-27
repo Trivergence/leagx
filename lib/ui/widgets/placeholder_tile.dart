@@ -24,8 +24,8 @@ class PlaceHolderTile extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8.0))),
       child: Center(
           child: TextWidget(
-          text: msgText,
-          textAlign: TextAlign.center,
+        text: msgText,
+        textAlign: TextAlign.center,
       )),
     );
   }

@@ -9,7 +9,8 @@ class ScoreChip extends StatelessWidget {
   const ScoreChip({
     Key? key,
     required this.firstScore,
-    required this.secondScore, this.hasGradient = true,
+    required this.secondScore,
+    this.hasGradient = true,
   }) : super(key: key);
 
   @override
@@ -17,27 +18,30 @@ class ScoreChip extends StatelessWidget {
     return Container(
       height: 25,
       width: 80,
-      decoration: hasGradient ? const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-          gradient: LinearGradient(colors: [
-            Color(0xFF2A3041),
-            Color(0xFF2B344D),
-            Color(0xFF2A3041),
-          ])) : null,
+      decoration: hasGradient
+          ? const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+              gradient: LinearGradient(colors: [
+                Color(0xFF2A3041),
+                Color(0xFF2B344D),
+                Color(0xFF2A3041),
+              ]))
+          : null,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextWidget(
             text: firstScore.isEmpty ? "0" : firstScore,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
           ),
           const TextWidget(
             text: "-",
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
           ),
           TextWidget(
             text: secondScore.isEmpty ? "0" : secondScore,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
           ),
         ],
       ),

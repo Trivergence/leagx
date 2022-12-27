@@ -29,8 +29,8 @@ class Team {
         teamKey: json["team_key"],
         teamName: json["team_name"],
         teamBadge: json["team_badge"],
-        players: List<Player>.from(
-            json["players"].map((x) => Player.fromJson(x))),
+        players:
+            List<Player>.from(json["players"].map((x) => Player.fromJson(x))),
         coaches:
             List<Coach>.from(json["coaches"].map((x) => Coach.fromJson(x))),
       );

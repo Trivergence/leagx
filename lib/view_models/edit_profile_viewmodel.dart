@@ -19,29 +19,32 @@ import '../ui/util/toast/toast.dart';
 import '../ui/util/validation/validation_utils.dart';
 
 class EditProfileViewModel extends BaseModel {
-  updateProfile({ required BuildContext context,
-    required File imgFile,
-    required String userName, 
-    required String userEmail, 
-    required String userPhone, 
-    required String userGender}) async {
+  updateProfile(
+      {required BuildContext context,
+      required File imgFile,
+      required String userName,
+      required String userEmail,
+      required String userPhone,
+      required String userGender}) async {
     User? user = preferenceHelper.getUser();
-    if(user != null) {
-    Loader.showLoader();
-    String fileName = imgFile.path.split('/').last;
+    if (user != null) {
+      Loader.showLoader();
+      String fileName = imgFile.path.split('/').last;
       String completeUrl = AppUrl.getUser + user.id.toString();
       FormData formData = FormData.fromMap({
-        "user[user_logo]": await MultipartFile.fromFile(imgFile.path, filename: fileName),
+        "user[user_logo]":
+            await MultipartFile.fromFile(imgFile.path, filename: fileName),
         "user[first_name]": userName,
         "user[email]": userEmail,
         "user[phone]": userPhone,
         "user[gender]": userGender,
       });
-      User? loginResponce = await ApiService.callPutApi(url: completeUrl,
-      body: formData,
-      modelName: ApiModels.user,
+      User? loginResponce = await ApiService.callPutApi(
+        url: completeUrl,
+        body: formData,
+        modelName: ApiModels.user,
       );
-      if(loginResponce != null) {
+      if (loginResponce != null) {
         if (ValidationUtils.isValid(loginResponce)) {
           preferenceHelper.saveUser(loginResponce);
           ToastMessage.show(
@@ -55,7 +58,7 @@ class EditProfileViewModel extends BaseModel {
     }
   }
 
-    updateProfileWoImage(
+  updateProfileWoImage(
       {required BuildContext context,
       required String userName,
       required String userEmail,
@@ -91,8 +94,8 @@ class EditProfileViewModel extends BaseModel {
   }
 
   Future<CroppedFile?> compressImage(XFile? image) async {
-      String type = getFileType(image!.path);
-     CroppedFile? croppedFile = await ImageCropper().cropImage(
+    String type = getFileType(image!.path);
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: image.path,
       compressQuality: 50,
       cropStyle: CropStyle.circle,
@@ -119,6 +122,7 @@ class EditProfileViewModel extends BaseModel {
     );
     return croppedFile;
   }
+
   static String getFileType(var file) {
     List<String> pathInList = file!.split(".");
     return pathInList[pathInList.length - 1];
@@ -137,8 +141,10 @@ class EditProfileViewModel extends BaseModel {
           borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
         ),
         builder: (context) {
-          return ImagePickerSheet(onCameraClick: onCameraClick, onGalleryClick: onGalleryClick,);
+          return ImagePickerSheet(
+            onCameraClick: onCameraClick,
+            onGalleryClick: onGalleryClick,
+          );
         });
   }
 }
-

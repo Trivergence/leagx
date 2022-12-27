@@ -1,6 +1,5 @@
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/font_family.dart';
 import 'package:leagx/ui/util/size/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -24,31 +23,29 @@ class GradientBorderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? SizeConfig.width * 100,
+      width: width ?? SizeConfig.width * 70,
       height: height ?? 48.0,
-      padding: const EdgeInsets.all(2.0),
-      decoration: const BoxDecoration(
-          gradient: AppColors.pinkishGradient,
-          borderRadius: BorderRadius.all(Radius.circular(5.0))),
-      child: Container(
-        color: AppColors.colorBackground,
-        child: ElevatedButton(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: AppColors.colorWhite,
-              fontSize: fontSize,
-              fontWeight: fontWeight,
-              fontFamily: FontFamily.raleway,
-            ),
+      decoration: BoxDecoration(
+          color: AppColors.colorBackground,
+          border: Border.all(
+            color: AppColors.colorPink,
           ),
-          style: ElevatedButton.styleFrom(
-            primary: Colors.transparent,
+          borderRadius: BorderRadius.circular(100)),
+      child: ElevatedButton(
+        child: Text(
+          text.toUpperCase(),
+          style: TextStyle(
+            color: AppColors.colorWhite,
+            fontSize: fontSize,
+            fontWeight: fontWeight,
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             elevation: 0.0,
-          ),
-          onPressed: onPressed,
-        ),
+            padding: const EdgeInsets.symmetric(horizontal: 3)),
+        onPressed: onPressed,
       ),
     );
   }

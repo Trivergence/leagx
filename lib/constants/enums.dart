@@ -1,8 +1,40 @@
 enum UserType { user, expert, admin }
-enum AuthType { apple, twitter, local}
+
+enum AuthType { apple, twitter, local }
+
 enum DialogType { payout, addCoins }
+
 enum PaymentType { wallet, card }
+
 enum WithdrawType { minimum, maximum, custom }
+
+enum RequestType { clientSideApi, selfHostedApi, footballApi }
+
+enum ScrollDirection { forward, backward }
+
+enum MatchStatus {
+  finished("Finished"),
+  afterExTime("After ET"),
+  cancelled("Cancelled"),
+  awarded("Awarded"),
+  postponed("Postponed"),
+  delayed("Delayed"),
+  halfTime("Half Time"),
+  empty(""),
+  afterPanalty("After Pen.");
+
+  final String value;
+  const MatchStatus(this.value);
+}
+
+enum FilterType {
+  finished("Finished"),
+  upcoming("Upcoming");
+
+  const FilterType(this.value);
+
+  final String value;
+}
 // enum ImageTpye { 
 //  profileMale,
 //  profileFemale, 

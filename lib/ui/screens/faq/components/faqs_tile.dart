@@ -1,5 +1,4 @@
 import 'package:leagx/constants/colors.dart';
-import 'package:leagx/ui/widgets/gradient/gradient_widget.dart';
 import 'package:leagx/ui/widgets/icon_widget.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -35,10 +34,9 @@ class _FaqTileState extends State<FaqTile> {
                 overflow: TextOverflow.ellipsis,
               ),
               isShow
-                  ? const GradientWidget(
-                      child: Icon(
-                        Icons.keyboard_arrow_down,
-                      ),
+                  ? const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AppColors.colorPink,
                     )
                   : const IconWidget(
                       iconData: Icons.keyboard_arrow_right,

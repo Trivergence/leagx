@@ -22,19 +22,19 @@ class ApiService {
       var dio = Dio(options);
       // bool isConnected = await InternetInfo.isConnected();
       // if (isConnected == true) {
-        Response _response = await dio.post(
-          url,
-          options: Options(headers: headers),
-          data: body,
-          queryParameters: parameters,
-        );
-        debugPrint('post response: ${_response.data}');
-        if (_response.statusCode == 200 || _response.statusCode == 201) {
-          dynamic modelObj =
-              await ApiModels.getModelObjects(modelName, _response.data);
-          return Success(modelObj);
-        }
-        return Error(ErrorModel(
+      Response _response = await dio.post(
+        url,
+        options: Options(headers: headers),
+        data: body,
+        queryParameters: parameters,
+      );
+      debugPrint('post response: ${_response.data}');
+      if (_response.statusCode == 200 || _response.statusCode == 201) {
+        dynamic modelObj =
+            await ApiModels.getModelObjects(modelName, _response.data);
+        return Success(modelObj);
+      }
+      return Error(ErrorModel(
           error:
               ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
       // }
@@ -45,17 +45,21 @@ class ApiService {
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
         return Error(errorModel);
       } else {
-        return Error(ErrorModel(error: ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
+        return Error(ErrorModel(
+            error:
+                ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
       }
-    } 
-    on Exception {
-      return Error(ErrorModel(error:
+    } on Exception {
+      return Error(ErrorModel(
+          error:
               ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
-      return Error(ErrorModel(error:ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
+      return Error(ErrorModel(
+          error:
+              ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
     }
   }
 
@@ -80,36 +84,41 @@ class ApiService {
       var dio = Dio(options);
       // bool isConnected = await InternetInfo.isConnected();
       // if (isConnected == true) {
-        Response _response = await dio.post(
-          url,
-          options: Options(headers: headers),
-          data: body,
-          queryParameters: parameters,
-        );
-        debugPrint('post response: ${_response.data}');
-        if (_response.statusCode == 200 || _response.statusCode == 201) {
-          return const Success(true);
-        }
-        return const Success(false);
+      Response _response = await dio.post(
+        url,
+        options: Options(headers: headers),
+        data: body,
+        queryParameters: parameters,
+      );
+      debugPrint('post response: ${_response.data}');
+      if (_response.statusCode == 200 || _response.statusCode == 201) {
+        return const Success(true);
+      }
+      return const Success(false);
       // }
       // return null;
     } on DioError catch (ex) {
       //Loader.hideLoader();
       if (ex.response != null) {
-          ErrorModel errorModel =
-              ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
-          return Error(errorModel);
+        ErrorModel errorModel =
+            ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
+        return Error(errorModel);
       } else {
-        return Error(ErrorModel(error: ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
+        return Error(ErrorModel(
+            error:
+                ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
       }
-    } 
-    on Exception {
-      return Error(ErrorModel(error: ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
+    } on Exception {
+      return Error(ErrorModel(
+          error:
+              ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
-      return Error(ErrorModel(error: ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
+      return Error(ErrorModel(
+          error:
+              ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
     }
   }
 
@@ -133,18 +142,18 @@ class ApiService {
       var dio = Dio(options);
       // bool isConnected = await InternetInfo.isConnected();
       // if (isConnected == true) {
-        Response _response = await dio.get(
-          url,
-          options: Options(headers: headers),
-          queryParameters: parameters,
-        );
-        debugPrint('get response: ${_response.data}');
-        if (_response.statusCode == 200 || _response.statusCode == 201) {
-          dynamic modelObj =
-              await ApiModels.getModelObjects(modelName, _response.data);
-          return Success(modelObj);
-        }
-        return Error(ErrorModel(
+      Response _response = await dio.get(
+        url,
+        options: Options(headers: headers),
+        queryParameters: parameters,
+      );
+      debugPrint('get response: ${_response.data}');
+      if (_response.statusCode == 200 || _response.statusCode == 201) {
+        dynamic modelObj =
+            await ApiModels.getModelObjects(modelName, _response.data);
+        return Success(modelObj);
+      }
+      return Error(ErrorModel(
           error:
               ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
       // }
@@ -155,18 +164,19 @@ class ApiService {
             ApiModels.getModelObjects(ApiModels.error, ex.response?.data);
         return Error(errorModel);
       } else {
-        return Error(ErrorModel(error:
+        return Error(ErrorModel(
+            error:
                 ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
       }
     } on Exception {
-        return Error(ErrorModel(
+      return Error(ErrorModel(
           error:
               ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
-        return Error(ErrorModel(
+      return Error(ErrorModel(
           error:
               ErrorData(code: PaymentConstants.somethingWentWrongErrorCode)));
     }

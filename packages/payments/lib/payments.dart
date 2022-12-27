@@ -16,12 +16,9 @@ import 'package:payments/network/payment_url.dart';
 import 'models/error_model.dart';
 import 'models/payment_intent.dart';
 
-
 part 'pay_in.dart';
 part 'network/api/api_service.dart';
 part 'models/cutomer.dart';
 part 'models/payment_methods.dart';
 part 'network/api/api_models.dart';
 part 'config/payment_config.dart';
-
-

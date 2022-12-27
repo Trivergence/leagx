@@ -1,5 +1,3 @@
-
-
 part of payments;
 
 class ApiModels {
@@ -31,7 +29,7 @@ class ApiModels {
       case createTransfer:
         return Transfer.fromJson(json);
       case createPayout:
-      return PayoutModel.fromJson(json);
+        return PayoutModel.fromJson(json);
       case createAccountLink:
         return AccountLink.fromJson(json);
     }

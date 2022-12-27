@@ -29,28 +29,29 @@ class FormDialog {
       required String positiveBtnTitle,
       required Function(String, WithdrawType) onPositiveBtnPressed}) {
     showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (ctx) {
-        return 
-        // type == DialogType.payout ? 
-        PayoutDialogWidget(
-            title: title, 
-            body: body, 
-            negativeBtnTitle: negativeBtnTitle,
-            positiveBtnTitle: positiveBtnTitle, 
-            onPositiveBtnPressed : onPositiveBtnPressed)
-          // : AddCoinsDialogWidget(
-          //   title: title,
-          //   body: body,
-          //   negativeBtnTitle: negativeBtnTitle,
-          //   positiveBtnTitle: positiveBtnTitle,
-          //   onPositiveBtnPressed: onPositiveBtnPressed)
-          ;
-      });
+        context: context,
+        barrierDismissible: false,
+        builder: (ctx) {
+          return
+              // type == DialogType.payout ?
+              PayoutDialogWidget(
+                  title: title,
+                  body: body,
+                  negativeBtnTitle: negativeBtnTitle,
+                  positiveBtnTitle: positiveBtnTitle,
+                  onPositiveBtnPressed: onPositiveBtnPressed)
+              // : AddCoinsDialogWidget(
+              //   title: title,
+              //   body: body,
+              //   negativeBtnTitle: negativeBtnTitle,
+              //   positiveBtnTitle: positiveBtnTitle,
+              //   onPositiveBtnPressed: onPositiveBtnPressed)
+              ;
+        });
   }
 }
 
+// ignore: must_be_immutable
 class PayoutDialogWidget extends StatelessWidget {
   final String title;
   final String body;
@@ -58,12 +59,12 @@ class PayoutDialogWidget extends StatelessWidget {
   final String positiveBtnTitle;
   final Function(String, WithdrawType) onPositiveBtnPressed;
   PayoutDialogWidget({
-    Key? key, 
-    required this.title, 
-    required this.body, 
-    required this.negativeBtnTitle, 
-    required this.positiveBtnTitle, 
-    required this.onPositiveBtnPressed, 
+    Key? key,
+    required this.title,
+    required this.body,
+    required this.negativeBtnTitle,
+    required this.positiveBtnTitle,
+    required this.onPositiveBtnPressed,
   }) : super(key: key);
 
   TextEditingController amountController = TextEditingController();
@@ -82,13 +83,18 @@ class PayoutDialogWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-          TextWidget(text: body, textSize: Dimens.textMedium,),
-          RadioGroup(
-            amountController: amountController,
-            onRadioChanged: (type) {
-              withdrawType == type;
-          },),
-        ],),
+            TextWidget(
+              text: body,
+              textSize: Dimens.textMedium,
+            ),
+            RadioGroup(
+              amountController: amountController,
+              onRadioChanged: (type) {
+                withdrawType = type;
+              },
+            ),
+          ],
+        ),
       ),
       backgroundColor: AppColors.colorBackground,
       actions: <Widget>[
@@ -105,7 +111,10 @@ class PayoutDialogWidget extends StatelessWidget {
   }
 
   void _withdraw() {
-    if(_formKey.currentState!.validate()) {
+    if (withdrawType != WithdrawType.custom) {
+      Navigator.of(_context).pop();
+      onPositiveBtnPressed(amountController.text, withdrawType);
+    } else if (_formKey.currentState!.validate()) {
       Navigator.of(_context).pop();
       onPositiveBtnPressed(amountController.text, withdrawType);
     }
@@ -236,7 +245,9 @@ class RadioGroup extends StatefulWidget {
   final ValueChanged onRadioChanged;
   final TextEditingController amountController;
 
-  const RadioGroup({Key? key, required this.onRadioChanged, required this.amountController}) : super(key: key);
+  const RadioGroup(
+      {Key? key, required this.onRadioChanged, required this.amountController})
+      : super(key: key);
 
   @override
   State<RadioGroup> createState() => _RadioGroupState();
@@ -247,11 +258,11 @@ class _RadioGroupState extends State<RadioGroup> {
   final FocusNode _fieldNode = FocusNode();
   late StreamSubscription<bool> keyboardSubscription;
 
-
-  List<WithdrawChoice> rList = [
+  List<WithdrawChoice> listOfMethods = [
     WithdrawChoice(
       type: WithdrawType.minimum,
-      name: loc.payoutDialogWithdrawTypeMinimum + "(${AppConstants.minimumWithdraw})",
+      name: loc.payoutDialogWithdrawTypeMinimum +
+          "(${AppConstants.minimumWithdraw})",
     ),
     WithdrawChoice(
       type: WithdrawType.maximum,
@@ -263,7 +274,7 @@ class _RadioGroupState extends State<RadioGroup> {
     ),
   ];
 
-    @override
+  @override
   void initState() {
     var keyboardVisibilityController = KeyboardVisibilityController();
     startNodeListener(keyboardVisibilityController);
@@ -281,42 +292,49 @@ class _RadioGroupState extends State<RadioGroup> {
 
   @override
   Widget build(BuildContext context) {
-    int maxAmount = context.read<DashBoardViewModel>().userSummary!.coinEarned!.round();
+    int maxAmount =
+        context.read<DashBoardViewModel>().userSummary!.coinEarned!.round();
     return Column(
       children: [
         Column(
-        children: rList
-          .map((data) => RadioListTile<WithdrawType>(
-                title: data.type == WithdrawType.maximum 
-                ? TextWidget(text: data.name + "($maxAmount)")
-                : TextWidget(text: data.name),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-                groupValue: type,
-                tileColor: Colors.transparent,
-                dense: true,
-                value: data.type,
-                onChanged: (val) {
-                  setState(() {
-                    type = data.type;
-                    widget.onRadioChanged(data.type);
-                  });
-                },
-              ))
-          .toList(),
+          children: listOfMethods
+              .map((data) => RadioListTile<WithdrawType>(
+                    title: data.type == WithdrawType.maximum
+                        ? TextWidget(
+                            text: data.name + "($maxAmount)",
+                            textAlign: TextAlign.start,
+                          )
+                        : TextWidget(
+                            text: data.name,
+                            textAlign: TextAlign.start,
+                          ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                    groupValue: type,
+                    tileColor: Colors.transparent,
+                    dense: true,
+                    value: data.type,
+                    onChanged: (val) {
+                      setState(() {
+                        type = data.type;
+                        widget.onRadioChanged(data.type);
+                      });
+                    },
+                  ))
+              .toList(),
         ),
         UIHelper.verticalSpaceSmall,
-        if (type == WithdrawType.custom)
-          TextFieldWidget(
-              inputType: TextInputType.number,
-              inputAction: TextInputAction.done,
-              textController: widget.amountController,
-              listOfFormaters: [FilteringTextInputFormatter.digitsOnly],
-              validator: (text) => ValidationHelper.validateAmount(text),
-              prefix: const TextWidget(
-                text: "\$",
-                fontWeight: FontWeight.bold,
-                textSize: Dimens.textMedium,
-              ))
+        TextFieldWidget(
+            readOnly: type != WithdrawType.custom,
+            inputType: TextInputType.number,
+            inputAction: TextInputAction.done,
+            textController: widget.amountController,
+            listOfFormaters: [FilteringTextInputFormatter.digitsOnly],
+            validator: (text) => ValidationHelper.validateAmount(text),
+            prefix: const TextWidget(
+              text: "\$",
+              fontWeight: FontWeight.bold,
+              textSize: Dimens.textMedium,
+            ))
       ],
     );
   }
@@ -336,6 +354,7 @@ class _RadioGroupState extends State<RadioGroup> {
       },
     );
   }
+
   void startkeyboardListener(
       KeyboardVisibilityController keyboardVisibilityController) {
     if (Platform.isIOS) {

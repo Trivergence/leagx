@@ -22,7 +22,7 @@ class Currency {
   String baseCurrencyName;
   String amount;
   DateTime updatedDate;
-  Map<String,dynamic> rates;
+  Map<String, dynamic> rates;
   String status;
 
   factory Currency.fromJson(Map<String, dynamic> json) => Currency(

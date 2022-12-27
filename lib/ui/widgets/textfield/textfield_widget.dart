@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:leagx/constants/colors.dart';
 import 'package:leagx/constants/dimens.dart';
-import 'package:leagx/constants/font_family.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
@@ -28,6 +27,7 @@ class TextFieldWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final int? maxLines;
   final List<TextInputFormatter>? listOfFormaters;
+  final String counterText;
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +57,9 @@ class TextFieldWidget extends StatelessWidget {
           hintText: hint,
           hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
                 color: hintColor,
-                fontFamily: FontFamily.openSans,
                 fontWeight: FontWeight.w400,
               ),
-          counterText: '',
+          counterText: counterText,
           icon: isIcon ? Icon(icon, color: iconColor) : null,
           floatingLabelBehavior: FloatingLabelBehavior.never,
           // labelText: hint,
@@ -119,8 +118,9 @@ class TextFieldWidget extends StatelessWidget {
     this.enabled = true,
     this.readOnly = false,
     this.onTap,
-    this.maxLines = 1, 
+    this.maxLines = 1,
     this.listOfFormaters,
+    this.counterText = "",
   }) : super(key: key);
 
   //Styles

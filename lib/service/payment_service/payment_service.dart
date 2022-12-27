@@ -1,3 +1,1 @@
-class PaymentService {
-  
-}
+class PaymentService {}

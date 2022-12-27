@@ -6,6 +6,7 @@ import 'package:leagx/view_models/fixture_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/colors.dart';
+import '../../../../core/utility.dart';
 import '../../../../models/dashboard/fixture.dart';
 import '../../../../models/players.dart';
 import '../../../util/size/size_config.dart';
@@ -21,7 +22,9 @@ class PlayersView extends StatelessWidget {
   final Fixture matchDetails;
   final Prediction? prediction;
   PlayersView({
-    Key? key, required this.matchDetails, required this.prediction,
+    Key? key,
+    required this.matchDetails,
+    required this.prediction,
   }) : super(key: key);
 
   BuildContext? _context;
@@ -41,36 +44,42 @@ class PlayersView extends StatelessWidget {
         child: Column(
           children: [
             FixtureVsWidget(matchDetails: matchDetails),
-            if (awayPlayer.isNotEmpty && homePlayer.isNotEmpty) Column(
-              children: [
-                IconContainer(
-                  height: SizeConfig.height * 7,
-                  title: loc.fixtureDetailsPlayersTxtTeamPlayers,
-                ),
-                Column(
-                  children:  [
-                    for(int i = 0; i < getLength(); i++) PlayerTile(
-                      tileColor: i % 2 == 0
-                              ? AppColors.colorBackground
-                              : AppColors.textFieldColor,
-                      playerOneName: homePlayer[i].playerName,
-                      playerOneImg: homePlayer[i].playerImage,
-                      playerTwoName: awayPlayer[i].playerName,
-                      playerTwoImg: awayPlayer[i].playerImage)
-                  ],
-                ),
-              ],
-            ),
+            if (awayPlayer.isNotEmpty && homePlayer.isNotEmpty)
+              Column(
+                children: [
+                  IconContainer(
+                    height: SizeConfig.height * 7,
+                    title: loc.fixtureDetailsPlayersTxtTeamPlayers,
+                  ),
+                  Column(
+                    children: [
+                      for (int i = 0; i < getLength(); i++)
+                        PlayerTile(
+                            tileColor: i % 2 == 0
+                                ? AppColors.colorBackground
+                                : AppColors.textFieldColor,
+                            playerOneName: homePlayer[i].playerName,
+                            playerOneImg: homePlayer[i].playerImage,
+                            playerTwoName: awayPlayer[i].playerName,
+                            playerTwoImg: awayPlayer[i].playerImage)
+                    ],
+                  ),
+                ],
+              ),
             UIHelper.verticalSpaceMedium,
-            if(ValidationUtils.isValid(prediction)) MatchPredictionTile(
-              homeTeamName: prediction!.match.firstTeamName,
-              awayTeamName: prediction!.match.secondTeamName,
-              homeScore: prediction!.firstTeamScore ?? 0,
-              awayScore: prediction!.secondTeamScore ?? 0,
-            ),
-            if (!ValidationUtils.isValid(prediction)) SizedBox(
-              width: SizeConfig.width * 90,
-              child: MainButton(text: loc.fixtureDetailsMatchBtnPredict, onPressed: _showSheet)),
+            if (ValidationUtils.isValid(prediction))
+              MatchPredictionTile(
+                homeTeamName: prediction!.match.firstTeamName,
+                awayTeamName: prediction!.match.secondTeamName,
+                homeScore: prediction!.firstTeamScore ?? 0,
+                awayScore: prediction!.secondTeamScore ?? 0,
+                isLocked: prediction!.expertId != null &&
+                    Utility.isPredictionPending(prediction!.status),
+              ),
+            if (!ValidationUtils.isValid(prediction))
+              MainButton(
+                  text: loc.fixtureDetailsMatchBtnPredict,
+                  onPressed: _showSheet),
           ],
         ),
       ),
@@ -78,11 +87,11 @@ class PlayersView extends StatelessWidget {
   }
 
   void _showSheet() {
-   _fixtureModel.predictMatch(context: _context!, matchDetails: matchDetails);
+    _fixtureModel.predictMatch(context: _context!, matchDetails: matchDetails);
   }
 
   int getLength() {
-    if(homePlayer.length <= awayPlayer.length) {
+    if (homePlayer.length <= awayPlayer.length) {
       return homePlayer.length >= 11 ? 11 : homePlayer.length;
     } else {
       return awayPlayer.length >= 11 ? 11 : awayPlayer.length;

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leagx/core/sharedpref/sharedpref.dart';
-import 'package:leagx/providers/localization_provider.dart';
-import 'package:leagx/ui/util/ui/ui_helper.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:leagx/ui/widgets/text_widget.dart';
 
 import '../../constants/colors.dart';
@@ -16,30 +14,20 @@ class AppBarChip extends StatelessWidget {
     required this.leadingIcon,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 2.0),
       child: Chip(
           side: const BorderSide(),
-          labelPadding: const EdgeInsets.only(right: 4),
+          labelPadding: const EdgeInsets.only(left: 4, right: 4),
           backgroundColor: AppColors.textFieldColor,
-          avatar: Image.asset(
-            leadingIcon
-          ),
-          label: Row(
-            children: [
-              const TextWidget(
-                text: "x",
-                textSize: 13,
-              ),
-              UIHelper.horizontalSpace(2),
-              TextWidget(
-                text: totalValue,
-                textSize: 13,
-              ),
-            ],
+          avatar: SvgPicture.asset(leadingIcon),
+          label: TextWidget(
+            text: totalValue,
+            textSize: 10,
+            textAlign: TextAlign.center,
+            fontWeight: FontWeight.w600,
           )),
     );
   }

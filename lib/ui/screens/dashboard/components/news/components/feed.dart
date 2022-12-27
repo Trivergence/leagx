@@ -24,22 +24,25 @@ class Feed extends StatelessWidget {
       onRefresh: _refreshData,
       child: SizedBox(
         height: double.infinity,
-        child: listOfNews.isNotEmpty ? ListView.builder(
-            shrinkWrap: true,
-            itemCount: listOfNews.length,
-            padding: const EdgeInsets.only(top: 20),
-            itemBuilder: (context, index) {
-              News news = listOfNews[index];
-              return NewsTile(
-                imageUrl: news.user.profileImg,
-                postedBy: news.user.firstName!,
-                when: news.createdAt,
-                desc: news.description
-              );
-            }) : Center(child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal : 8.0),
-              child: PlaceHolderTile(height: 80, msgText: loc.dashboardNewsTxtEmptyList),
-            )),
+        child: listOfNews.isNotEmpty
+            ? ListView.builder(
+                shrinkWrap: true,
+                itemCount: listOfNews.length,
+                padding: const EdgeInsets.only(top: 20),
+                itemBuilder: (context, index) {
+                  News news = listOfNews[index];
+                  return NewsTile(
+                      imageUrl: news.user.profileImg,
+                      postedBy: news.user.firstName!,
+                      when: news.createdAt,
+                      desc: news.description);
+                })
+            : Center(
+                child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: PlaceHolderTile(
+                    height: 80, msgText: loc.dashboardNewsTxtEmptyList),
+              )),
       ),
     );
   }

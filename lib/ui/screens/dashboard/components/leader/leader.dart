@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:leagx/view_models/dashboard_view_model.dart';
 import 'package:provider/provider.dart';
 import '../../../../../constants/colors.dart';
+import '../../../../util/locale/localization.dart';
+import '../../../../widgets/placeholder_tile.dart';
 import 'components/expanded_leader_tile.dart';
 
 // ignore: must_be_immutable
@@ -12,7 +14,7 @@ class LeaderScreen extends StatelessWidget {
 
   List<Leader> listOfLeader = [];
   late BuildContext _context;
-  
+
   @override
   Widget build(BuildContext context) {
     _context = context;
@@ -21,24 +23,34 @@ class LeaderScreen extends StatelessWidget {
     return RefreshIndicator(
       backgroundColor: AppColors.textFieldColor,
       onRefresh: _refreshData,
-      child: ListView.builder(
-          itemCount: listOfLeader.length,
-          itemBuilder: (context, index) {
-            Leader leader = listOfLeader[index];
-            return index != 0
-                ? LeaderBoardTile(
-                    number: index + 1,
-                    imageUrl: leader.profileImg!,
-                    title: leader.firstName!,
-                    numberOfPrediciton: leader.totalPredictions,
-                    successRate: leader.predictionSuccessRate!.toStringAsFixed(1))
-                : ExpandedLeaderTile(
-                    imageUrl: leader.profileImg!,
-                    title: leader.firstName!,
-                    numberOfPrediciton: leader.totalPredictions,
-                    successRate: leader.predictionSuccessRate!.toStringAsFixed(1),
-                  );
-          }),
+      child: listOfLeader.isNotEmpty
+          ? ListView.builder(
+              itemCount: listOfLeader.length,
+              itemBuilder: (context, index) {
+                Leader leader = listOfLeader[index];
+                return index != 0
+                    ? LeaderBoardTile(
+                        number: index + 1,
+                        imageUrl: leader.profileImg!,
+                        title: leader.firstName!,
+                        numberOfPrediciton: leader.totalPredictions,
+                        successRate:
+                            leader.predictionSuccessRate!.toStringAsFixed(1))
+                    : ExpandedLeaderTile(
+                        imageUrl: leader.profileImg!,
+                        title: leader.firstName!,
+                        numberOfPrediciton: leader.totalPredictions,
+                        successRate:
+                            leader.predictionSuccessRate!.toStringAsFixed(1),
+                      );
+              })
+          : Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: PlaceHolderTile(
+                    height: 80, msgText: loc.dashboardLeaderMsgEmpty),
+              ),
+            ),
     );
   }
 
